@@ -1,0 +1,32 @@
+# Visual Studio
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build outputs
+Debug/
+Release/
+x64/
+x86/
+
+# Solid Edge generated outputs
+OUT_DFT/
+OUT_DXF/
+OUT_DXF_FLAT/
+OUT_PDF/
+*.dft
+*.pdf
+*.dxf
+
+# Temporary files
+*.tmp
+*.log
+*.bak
+~$*
+
+# Cursor / local editor
+.cursor/

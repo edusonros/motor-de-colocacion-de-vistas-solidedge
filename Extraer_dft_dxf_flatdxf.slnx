@@ -1,0 +1,9 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+  </Configurations>
+  <Project Path="Extraer_dft_dxf_flatdxf.vbproj" Id="9ce2c5f6-fc4a-49f6-9e99-bfe2d6d058a6">
+    <Platform Solution="*|x64" Project="x64" />
+  </Project>
+</Solution>
