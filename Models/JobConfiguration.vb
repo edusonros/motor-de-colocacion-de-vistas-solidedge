@@ -1,6 +1,7 @@
 Option Strict Off
 
 Imports System
+Imports Extraer_dft_dxf_flatdxf.Services.Dimensioning.Labs
 
 Public Enum SourceFileKind
     Unknown = 0
@@ -61,6 +62,24 @@ Public Class JobConfiguration
     Public Property EnableSlotBBoxViewLayout As Boolean = True
     ''' <summary>Habilita el único motor de acotado automático DV*2d durante la generación del DFT.</summary>
     Public Property EnableAutoDimensioning As Boolean = True
+    ''' <summary>Laboratorio DIMLAB: DVLine2d.Reference + AddDistanceBetweenObjects (exclusivo; no ejecuta el motor principal de acotación).</summary>
+    Public Property EnableDrawingViewDimensioningLab As Boolean = False
+    ''' <summary>Modo forense: VIS0 en Hoja1, pausa MsgBox, sin cerrar DFT ni exportar PDF/DXF, validación por Range+DisplayData.</summary>
+    Public Property EnableDimLabInteractivePause As Boolean = True
+    ''' <summary>Solo True si el usuario pulsó el botón dedicado [LAB] DIMLAB (validar que Effective_runLab coincide).</summary>
+    Public Property RequestedDimLabFromDedicatedButton As Boolean = False
+    ''' <summary>Escenario del laboratorio DIMLAB (horizontal, vertical, completo o forense).</summary>
+    Public Property DimLabMode As DimLabMode = DimLabMode.Full
+    ''' <summary>Si True, ejecuta la sonda VIS0 (línea en hoja + AddLength 60 mm).</summary>
+    Public Property EnableDimLabVisibleProbe As Boolean = False
+    ''' <summary>Si True, solo registra [PLACE][NOTE] si el carril superior es estrecho (no cambia TrackDistance salvo lógica futura).</summary>
+    Public Property EnableDimLabAlternativePlacement As Boolean = False
+    ''' <summary>En DimLabMode.VerticalOnly, crear antes la horizontal DVRef como control (una cadena exclusiva).</summary>
+    Public Property EnableDimLabHorizontalControlInVerticalOnly As Boolean = True
+    ''' <summary>Si False, borra cotas DIMLAB fallidas (WRONG/NOT_VISIBLE/FAIL/GHOST) tras inspeccionarlas.</summary>
+    Public Property DimLabKeepFailedDimensions As Boolean = False
+    ''' <summary>Si True, limpia cotas previas de la hoja activa al arrancar DIMLAB.</summary>
+    Public Property DimLabCleanPreviousLabDimensions As Boolean = True
     ''' <summary>Parámetros ISO 129 (primera iteración). Nothing = <see cref="DimensioningNormConfig.DefaultConfig"/> en tiempo de ejecución.</summary>
     Public Property DimensioningNormConfig As DimensioningNormConfig
     ''' <summary>Prueba aislada: cota horizontal exterior (vista superior), sin el motor de acotado automático.</summary>
@@ -164,6 +183,15 @@ Public Class JobConfiguration
             .IncludeFlatInDraftWhenPsm = IncludeFlatInDraftWhenPsm,
             .EnableSlotBBoxViewLayout = EnableSlotBBoxViewLayout,
             .EnableAutoDimensioning = EnableAutoDimensioning,
+            .EnableDrawingViewDimensioningLab = EnableDrawingViewDimensioningLab,
+            .EnableDimLabInteractivePause = EnableDimLabInteractivePause,
+            .RequestedDimLabFromDedicatedButton = RequestedDimLabFromDedicatedButton,
+            .DimLabMode = DimLabMode,
+            .EnableDimLabVisibleProbe = EnableDimLabVisibleProbe,
+            .EnableDimLabAlternativePlacement = EnableDimLabAlternativePlacement,
+            .EnableDimLabHorizontalControlInVerticalOnly = EnableDimLabHorizontalControlInVerticalOnly,
+            .DimLabKeepFailedDimensions = DimLabKeepFailedDimensions,
+            .DimLabCleanPreviousLabDimensions = DimLabCleanPreviousLabDimensions,
             .DimensioningNormConfig = If(DimensioningNormConfig Is Nothing, Nothing, DimensioningNormConfig.Clone()),
             .RunUnitHorizontalExteriorDimensionTest = RunUnitHorizontalExteriorDimensionTest,
             .EnablePmiRetrievalProbe = EnablePmiRetrievalProbe,

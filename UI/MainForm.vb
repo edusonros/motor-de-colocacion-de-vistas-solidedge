@@ -2,9 +2,11 @@ Option Strict Off
 
 Imports System.Collections.Generic
 Imports System.IO
+Imports System.Reflection
 Imports System.Diagnostics
 Imports System.Text
 Imports System.Text.RegularExpressions
+Imports System.Threading
 Imports System.Threading.Tasks
 Imports System.Drawing
 Imports System.Windows.Forms
@@ -12,6 +14,7 @@ Imports System.Data
 Imports System.Runtime.InteropServices
 Imports Microsoft.Win32
 Imports SolidEdgeDraft
+Imports Extraer_dft_dxf_flatdxf.Services.Dimensioning.Labs
 
 Partial Public Class MainForm
     Private ReadOnly _logger As Logger
@@ -35,6 +38,8 @@ Partial Public Class MainForm
     Private _lastPieceElapsed As TimeSpan = TimeSpan.Zero
     Private _currentPieceKey As String = ""
     Private _lastUiPulseTick As Integer = Environment.TickCount
+    ''' <summary>Evita aplicar metadatos obsoletos si cambió rápido el archivo de entrada (carga COM en segundo plano).</summary>
+    Private _metadataLoadGeneration As Long
     Private Shared ReadOnly DefaultTemplateFolder As String = "C:\Program Files\Siemens\Solid Edge 2026\Template\Conrad"
     Private _asmComponents As New List(Of AssemblyComponentItem)()
     Private ReadOnly _componentMetadataStates As New Dictionary(Of String, ComponentMetadataState)(StringComparer.OrdinalIgnoreCase)
@@ -43,6 +48,7 @@ Partial Public Class MainForm
     Private _loadedAsmComponentPath As String = ""
     Private _asmUiToolTip As ToolTip
     Private _templatesEmbedded As Boolean = False
+    Private _requestedDimLabFromDedicatedButton As Boolean
     Private ReadOnly _dgvTraceability As New DataGridView()
     Private _btnAnalyzeDft As Button
     Private _btnDimRelinkLab As Button
@@ -178,6 +184,7 @@ Partial Public Class MainForm
         _progressUiTimer.Start()
         ResetProgressTelemetry()
         SetProgressDeterminateDefaults()
+        LogBootPathsBanner()
     End Sub
 
     Private Sub MainForm_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
@@ -263,6 +270,7 @@ Partial Public Class MainForm
         chkKeepSolidEdgeVisible.Text = "Mostrar Solid Edge mientras se genera"
         chkAutoDimensioning.Text = "Generar acotado automático"
         chkUnitHorizontalExteriorTest.Text = "Prueba aislada cota horizontal exterior"
+        chkDrawingViewDimensioningLab.Text = "Laboratorio DIMLAB (exclusivo; bloquea motor principal)"
         chkIncludeIso.Text = "Incluir vista isométrica"
         chkIncludeProjected.Text = "Incluir vistas proyectadas"
     End Sub
@@ -415,6 +423,22 @@ Partial Public Class MainForm
         BrowseTemplate(txtTemplateDxf)
     End Sub
 
+    Private Sub btnDimLabRun_Click(sender As Object, e As EventArgs) Handles btnDimLabRun.Click
+        _requestedDimLabFromDedicatedButton = True
+        chkDrawingViewDimensioningLab.Checked = True
+        chkAutoDimensioning.Checked = False
+        chkUnitHorizontalExteriorTest.Checked = False
+        chkCreatePdf.Checked = False
+        chkCreateDxfDraft.Checked = False
+        chkCreateFlatDxf.Checked = False
+        chkCreateDft.Checked = True
+        If cmbDimLabMode IsNot Nothing Then cmbDimLabMode.SelectedIndex = CInt(DimLabMode.CleanFullStrict)
+        If chkDimLabVisibleProbe IsNot Nothing Then chkDimLabVisibleProbe.Checked = False
+        If chkDimLabInteractivePause IsNot Nothing Then chkDimLabInteractivePause.Checked = False
+        DimensionInsertionConfig.EnableDrawingViewDimensioningLab = True
+        btnGenerate.PerformClick()
+    End Sub
+
     Private Sub btnGenerate_Click(sender As Object, e As EventArgs) Handles btnGenerate.Click
         If _isRunning Then Return
         EnsureAutoOutputFolderForInput()
@@ -467,7 +491,22 @@ Partial Public Class MainForm
             Dim engine As New DraftGenerationEngine(_logger, AddressOf HandleEngineProgress)
             Dim result As EngineRunResult = engine.Run(config)
 
-            If result.Success Then
+            If Not String.IsNullOrWhiteSpace(result.DimLabReferenceDftFullPath) Then
+                _logger.Log("[DIMLAB][DONE] DFT referencia guardado")
+                MessageBox.Show(
+                    "Abre/revisa este archivo:" & Environment.NewLine & result.DimLabReferenceDftFullPath,
+                    "DIMLAB",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information)
+            ElseIf result.DimLabRunAbortedMisconfigured Then
+                _logger.Log("[DIMLAB][UI] Sin MsgBox de ruta: abort por flags")
+                MessageBox.Show(
+                    "DIMLAB no se ejecutó: el botón [LAB] exigía laboratorio pero Effective_runLab quedó en False." & Environment.NewLine &
+                    "Revise el log con [DIMLAB][ABORT].",
+                    "DIMLAB",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning)
+            ElseIf result.Success Then
                 _logger.Log($"Proceso finalizado OK. Procesados={result.ProcessedCount}, Errores={result.ErrorCount}")
                 MessageBox.Show("Proceso completado.", "Generacion", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Else
@@ -479,6 +518,7 @@ Partial Public Class MainForm
             _logger.LogException("btnGenerate_Click", ex)
             MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
+            _requestedDimLabFromDedicatedButton = False
             _isRunning = False
             ToggleUi(True)
             StopProgressTelemetry()
@@ -860,16 +900,55 @@ Partial Public Class MainForm
 
         ClearPartListMetadataUiOnly()
 
-        Dim compData As DrawingMetadataInput = Nothing
-        If Not DrawingMetadataService.TryLoadMetadataFromModelFile(path, chkKeepSolidEdgeVisible.Checked, _logger, compData) OrElse compData Is Nothing Then
-            SetAsmComponentRowStatus(idx, ComponentMetadataStatus.PartialComplete)
-            MessageBox.Show(
-                "No se pudieron leer metadatos desde:" & Environment.NewLine & path & Environment.NewLine & "Revisa el log.",
-                "Datos de plano (error)",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning)
-            Return
-        End If
+        Dim pathSnap As String = path
+        Dim idxSnap As Integer = idx
+        Dim showSe As Boolean = chkKeepSolidEdgeVisible.Checked
+        SetBusy(True, "Leyendo metadatos del componente...", True)
+        StaComInvoker.Run(Function() As Tuple(Of Boolean, DrawingMetadataInput)
+                               Dim data As DrawingMetadataInput = Nothing
+                               Dim ok = DrawingMetadataService.TryLoadMetadataFromModelFile(pathSnap, showSe, _logger, data)
+                               Return Tuple.Create(ok, data)
+                           End Function).
+            ContinueWith(Sub(t As Task(Of Tuple(Of Boolean, DrawingMetadataInput)))
+                               BeginInvoke(New Action(Sub() FinishAsmComponentMetadataTask(t, pathSnap, idxSnap)))
+                           End Sub)
+    End Sub
+
+    Private Sub FinishAsmComponentMetadataTask(t As Task(Of Tuple(Of Boolean, DrawingMetadataInput)), pathSnap As String, idxSnap As Integer)
+        Try
+            SetBusy(False, "Preparado", False)
+
+            If dgvAsmComponents Is Nothing Then Return
+            If idxSnap < 0 OrElse idxSnap >= _asmComponents.Count Then Return
+            If Not String.Equals(_asmComponents(idxSnap).FullPath, pathSnap, StringComparison.OrdinalIgnoreCase) Then Return
+
+            Dim compData As DrawingMetadataInput = Nothing
+            If t.IsFaulted Then
+                Dim ex As Exception = t.Exception
+                Dim agg As AggregateException = TryCast(ex, AggregateException)
+                If agg IsNot Nothing Then ex = agg.GetBaseException()
+                _logger.LogException("AsmComponentReviewForMetadata", ex)
+                SetAsmComponentRowStatus(idxSnap, ComponentMetadataStatus.PartialComplete)
+                MessageBox.Show(
+                    "Error al leer metadatos:" & Environment.NewLine & ex.Message,
+                    "Datos de plano (error)",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning)
+                Return
+            End If
+
+            Dim tup = t.Result
+            If Not tup.Item1 OrElse tup.Item2 Is Nothing Then
+                SetAsmComponentRowStatus(idxSnap, ComponentMetadataStatus.PartialComplete)
+                MessageBox.Show(
+                    "No se pudieron leer metadatos desde:" & Environment.NewLine & pathSnap & Environment.NewLine & "Revisa el log.",
+                    "Datos de plano (error)",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning)
+                Return
+            End If
+
+            compData = tup.Item2
 
         DrawingMetadataService.ApplyToUi(Me, compData, applyCajetin:=False, applyPartList:=True)
 
@@ -899,13 +978,13 @@ Partial Public Class MainForm
             _loadingMetadataProgrammatically = False
         End Try
 
-        _loadedAsmComponentPath = path
+        _loadedAsmComponentPath = pathSnap
 
         Dim snapshot As DrawingMetadataInput = DrawingMetadataService.BuildFromUi(Me)
         Dim strict As Boolean = If(chkStrictMetadata Is Nothing, False, chkStrictMetadata.Checked)
-        Dim vr As MetadataValidationResult = DrawingMetadataService.ValidateMetadataForComponent(path, snapshot, strict, _logger)
+        Dim vr As MetadataValidationResult = DrawingMetadataService.ValidateMetadataForComponent(pathSnap, snapshot, strict, _logger)
         Dim st As New ComponentMetadataState With {
-            .ComponentPath = path,
+            .ComponentPath = pathSnap,
             .Metadata = snapshot,
             .MissingRequiredFields = vr.MissingRequiredFields,
             .MissingWarningFields = vr.MissingWarningFields,
@@ -916,13 +995,20 @@ Partial Public Class MainForm
         Else
             st.Status = ComponentMetadataStatus.PartialComplete
         End If
-        _componentMetadataStates(path) = st
-        SetAsmComponentRowStatus(idx, st.Status)
-        HighlightAsmComponentRow(idx)
+        _componentMetadataStates(pathSnap) = st
+        SetAsmComponentRowStatus(idxSnap, st.Status)
+        HighlightAsmComponentRow(idxSnap)
 
         If st.Status = ComponentMetadataStatus.Complete Then
-            _logger.Log("[UI][COMPONENT][DATA_BUTTON_DISABLED] reason=metadata_complete path=" & path)
+            _logger.Log("[UI][COMPONENT][DATA_BUTTON_DISABLED] reason=metadata_complete path=" & pathSnap)
         End If
+        Catch ex As Exception
+            _logger.LogException("FinishAsmComponentMetadataTask", ex)
+            Try
+                SetBusy(False, "Preparado", False)
+            Catch
+            End Try
+        End Try
     End Sub
 
     Private Sub SetAsmComponentRowStatus(componentIndex As Integer, status As ComponentMetadataStatus)
@@ -1020,17 +1106,51 @@ Partial Public Class MainForm
         If Not File.Exists(txtInputFile.Text) Then Return
         If Not forceReload AndAlso _asmComponents.Count > 0 Then Return
 
+        Dim asmPathSnap As String = txtInputFile.Text.Trim()
+        Dim uniqueSnap As Boolean = chkUniqueComponents.Checked
+        Dim showSeSnap As Boolean = chkKeepSolidEdgeVisible.Checked
+        Dim capture As SynchronizationContext = SynchronizationContext.Current
+
         Try
             SetBusy(True, "Leyendo ensamblaje para selección...", True)
-            _logger.Log("[ASM] Inicio lectura ensamblaje")
+            _logger.Log("[ASM] Inicio lectura ensamblaje (subproceso STA COM)")
             _componentMetadataStates.Clear()
             _loadedAsmComponentPath = ""
-            _asmComponents = AssemblyComponentService.LoadAssemblyComponentItems(
-                txtInputFile.Text,
-                chkUniqueComponents.Checked,
-                chkKeepSolidEdgeVisible.Checked,
-                _logger,
-                AddressOf HandleAsmReadProgress)
+
+            StaComInvoker.Run(Function() AssemblyComponentService.LoadAssemblyComponentItems(
+                                  asmPathSnap, uniqueSnap, showSeSnap, _logger,
+                                  Sub(phase As String, current As Integer, total As Integer)
+                                      If capture IsNot Nothing Then
+                                          capture.Post(Sub() HandleAsmReadProgress(phase, current, total), Nothing)
+                                      Else
+                                          BeginInvoke(Sub() HandleAsmReadProgress(phase, current, total))
+                                      End If
+                                  End Sub)).
+                ContinueWith(Sub(t As Task(Of List(Of AssemblyComponentItem)))
+                                  BeginInvoke(Sub() FinishAsmComponentsLoadTask(t, asmPathSnap))
+                              End Sub)
+        Catch ex As Exception
+            _logger.LogException("RefreshAsmComponentsIfNeeded", ex)
+            SetBusy(False, "Preparado", False)
+        End Try
+    End Sub
+
+    Private Sub FinishAsmComponentsLoadTask(task As Task(Of List(Of AssemblyComponentItem)), asmPathSnap As String)
+        Try
+            If Not String.Equals(asmPathSnap, If(txtInputFile?.Text, "").Trim(), StringComparison.OrdinalIgnoreCase) Then
+                _logger.Log("[ASM][SKIP] El archivo de entrada cambió antes de aplicar la lista de componentes.")
+                Return
+            End If
+
+            If task.IsFaulted Then
+                Dim ex As Exception = task.Exception
+                Dim agg As AggregateException = TryCast(ex, AggregateException)
+                If agg IsNot Nothing Then ex = agg.GetBaseException()
+                _logger.LogException("RefreshAsmComponentsIfNeeded", ex)
+                Return
+            End If
+
+            _asmComponents = If(task.Result, New List(Of AssemblyComponentItem)())
             RebuildAsmComponentListUi()
             _logger.Log("[ASM][COMPONENTS][LOADED] count=" & _asmComponents.Count.ToString(Globalization.CultureInfo.InvariantCulture))
             Dim autoUnchecked As Integer = 0
@@ -1046,8 +1166,6 @@ Partial Public Class MainForm
                 If it.Kind = "PSM" Then totalPsm += 1
             Next
             lblAsmComponentHint.Text = $"Total: {_asmComponents.Count} (ASM={totalAsm}, PAR={totalPar}, PSM={totalPsm}) | Auto desmarcados={autoUnchecked}"
-        Catch ex As Exception
-            _logger.LogException("RefreshAsmComponentsIfNeeded", ex)
         Finally
             SetBusy(False, "Preparado", False)
         End Try
@@ -1071,9 +1189,17 @@ Partial Public Class MainForm
         Return False
     End Function
 
+    Private Function ResolveDimLabModeFromCombo() As DimLabMode
+        If cmbDimLabMode Is Nothing OrElse cmbDimLabMode.SelectedIndex < 0 OrElse cmbDimLabMode.SelectedIndex > 5 Then
+            Return DimLabMode.Full
+        End If
+        Return CType(cmbDimLabMode.SelectedIndex, DimLabMode)
+    End Function
+
     Private Function BuildConfigurationFromUi() As JobConfiguration
         EnsureAutoOutputFolderForInput()
         Dim runUnitHorizontalTest As Boolean = chkUnitHorizontalExteriorTest.Checked
+        Dim runDrawingViewLab As Boolean = chkDrawingViewDimensioningLab.Checked
         Dim scaleValue As Double = 1.0
         Double.TryParse(txtManualScale.Text.Replace(",", "."), Globalization.NumberStyles.Any, Globalization.CultureInfo.InvariantCulture, scaleValue)
 
@@ -1111,6 +1237,8 @@ Partial Public Class MainForm
             .IncludeProjectedViews = chkIncludeProjected.Checked,
             .IncludeFlatInDraftWhenPsm = chkIncludeFlatInDraft.Checked,
             .EnableAutoDimensioning = If(runUnitHorizontalTest, False, chkAutoDimensioning.Checked),
+            .EnableDrawingViewDimensioningLab = runDrawingViewLab,
+            .EnableDimLabInteractivePause = If(chkDimLabInteractivePause Is Nothing, True, chkDimLabInteractivePause.Checked),
             .RunUnitHorizontalExteriorDimensionTest = runUnitHorizontalTest,
             .EnablePmiRetrievalProbe = False,
             .ExperimentalCreatePMIModelViewIfMissing = False,
@@ -1135,8 +1263,24 @@ Partial Public Class MainForm
             .PartListD = MetadataD.Trim(),
             .PartListNombreArchivo = MetadataNombreArchivo.Trim(),
             .PartListCantidad = If(String.IsNullOrWhiteSpace(MetadataCantidad), "1", MetadataCantidad.Trim()),
-            .StrictMetadataValidation = If(chkStrictMetadata Is Nothing, False, chkStrictMetadata.Checked)
+            .StrictMetadataValidation = If(chkStrictMetadata Is Nothing, False, chkStrictMetadata.Checked),
+            .DimLabMode = ResolveDimLabModeFromCombo(),
+            .EnableDimLabVisibleProbe = If(chkDimLabVisibleProbe Is Nothing, False, chkDimLabVisibleProbe.Checked),
+            .EnableDimLabAlternativePlacement = If(chkDimLabAlternativePlacement Is Nothing, False, chkDimLabAlternativePlacement.Checked),
+            .EnableDimLabHorizontalControlInVerticalOnly = True,
+            .DimLabKeepFailedDimensions = False,
+            .DimLabCleanPreviousLabDimensions = True
         }
+
+        If cfg.DimLabMode = DimLabMode.CleanFull Then
+            cfg.EnableAutoDimensioning = False
+            cfg.EnableDimLabVisibleProbe = False
+            cfg.DimLabKeepFailedDimensions = False
+            cfg.DimLabCleanPreviousLabDimensions = True
+            cfg.CreatePdf = False
+            cfg.CreateDxfFromDraft = False
+            cfg.CreateFlatDxf = False
+        End If
 
         Dim kind As SourceFileKind = cfg.DetectInputKind()
         If kind = SourceFileKind.AssemblyFile AndAlso _asmComponents.Count > 0 AndAlso dgvAsmComponents IsNot Nothing AndAlso dgvAsmComponents.Rows.Count = _asmComponents.Count Then
@@ -1152,11 +1296,41 @@ Partial Public Class MainForm
             cfg.UseSelectedComponents = (cfg.SelectedComponentPaths.Count > 0)
             _logger.Log($"Selección manual ASM: {cfg.SelectedComponentPaths.Count} componentes marcados para procesar.")
         End If
+        If _requestedDimLabFromDedicatedButton Then
+            cfg.CreateDraft = True
+            cfg.EnableDrawingViewDimensioningLab = True
+            cfg.EnableAutoDimensioning = False
+            cfg.CreatePdf = False
+            cfg.CreateDxfFromDraft = False
+            cfg.CreateFlatDxf = False
+            cfg.DimLabMode = DimLabMode.CleanFullStrict
+            cfg.EnableDimLabVisibleProbe = False
+            cfg.EnableDimLabInteractivePause = False
+            cfg.DimLabKeepFailedDimensions = False
+            cfg.DimLabCleanPreviousLabDimensions = True
+            cfg.RequestedDimLabFromDedicatedButton = True
+            DimensionInsertionConfig.EnableDrawingViewDimensioningLab = True
+            _logger.Log("[DIMLAB][UI_FORCE] desde botón [LAB]: mode=CleanFullStrict CreateDraft=True EnableDrawingViewDimensioningLab=True DimensionInsertionConfig=True EnableAutoDimensioning=False CreatePdf/DxfDraft/FlatDxf=False VisibleProbe=False InteractivePause=False")
+        End If
+
+        DimensionInsertionConfig.EnableDrawingViewDimensioningLab = cfg.EnableDrawingViewDimensioningLab
         _logger.Log("[DIM] Config desde UI: EnableAutoDimensioning=" & cfg.EnableAutoDimensioning.ToString() &
-                     " (chkAutoDimensioning=" & chkAutoDimensioning.Checked.ToString() & ", RunUnitHorizontalExterior=" & cfg.RunUnitHorizontalExteriorDimensionTest.ToString() & ")")
+                     " (chkAutoDimensioning=" & chkAutoDimensioning.Checked.ToString() & ", RunUnitHorizontalExterior=" & cfg.RunUnitHorizontalExteriorDimensionTest.ToString() & ")" &
+                     ", EnableDrawingViewDimensioningLab=" & cfg.EnableDrawingViewDimensioningLab.ToString())
         _logger.Log("[PROPS][UI] Título modo=" & cfg.TitleSourceMode.ToString() & ", plantillas diagnóstico=" & cfg.DebugTemplatesInspection.ToString())
         Return cfg
     End Function
+
+    Private Sub LogBootPathsBanner()
+        Try
+            _logger.Log("[BOOT][EXE_PATH] " & Assembly.GetExecutingAssembly().Location)
+            _logger.Log("[BOOT][CURRENT_DIR] " & Environment.CurrentDirectory)
+            _logger.Log("[BOOT][STARTUP_PATH] " & Application.StartupPath)
+            _logger.Log("[BOOT][OUTPUT_ROOT] " & If(txtOutputFolder?.Text, "").Trim())
+        Catch ex As Exception
+            _logger.Log("[BOOT][WARN] " & ex.Message)
+        End Try
+    End Sub
 
     Private Function ResolveManualDftPath(cfg As JobConfiguration) As String
         If cfg Is Nothing Then Return ""
@@ -1330,6 +1504,10 @@ Partial Public Class MainForm
     End Sub
 
     Private Sub HandleAsmReadProgress(phase As String, current As Integer, total As Integer)
+        If InvokeRequired Then
+            BeginInvoke(New Action(Sub() HandleAsmReadProgress(phase, current, total)))
+            Return
+        End If
         Dim msg As String = $"[ASM] {phase}"
         If total > 0 Then
             SetProgressDeterminateDefaults()
@@ -1570,6 +1748,14 @@ Partial Public Class MainForm
             .IncludeProjectedViews = cfg.IncludeProjectedViews,
             .IncludeFlatInDraftWhenPsm = cfg.IncludeFlatInDraftWhenPsm,
             .EnableAutoDimensioning = cfg.EnableAutoDimensioning,
+            .EnableDrawingViewDimensioningLab = cfg.EnableDrawingViewDimensioningLab,
+            .EnableDimLabInteractivePause = cfg.EnableDimLabInteractivePause,
+            .DimLabMode = CInt(cfg.DimLabMode),
+            .EnableDimLabVisibleProbe = cfg.EnableDimLabVisibleProbe,
+            .EnableDimLabAlternativePlacement = cfg.EnableDimLabAlternativePlacement,
+            .EnableDimLabHorizontalControlInVerticalOnly = cfg.EnableDimLabHorizontalControlInVerticalOnly,
+            .DimLabKeepFailedDimensions = cfg.DimLabKeepFailedDimensions,
+            .DimLabCleanPreviousLabDimensions = cfg.DimLabCleanPreviousLabDimensions,
             .EnablePmiRetrievalProbe = cfg.EnablePmiRetrievalProbe,
             .ExperimentalCreatePMIModelViewIfMissing = cfg.ExperimentalCreatePMIModelViewIfMissing,
             .ExperimentalDraftGeometryDiagnostics = cfg.ExperimentalDraftGeometryDiagnostics,
@@ -1634,6 +1820,16 @@ Partial Public Class MainForm
         chkIncludeProjected.Checked = settings.IncludeProjectedViews
         chkIncludeFlatInDraft.Checked = settings.IncludeFlatInDraftWhenPsm
         chkAutoDimensioning.Checked = settings.EnableAutoDimensioning
+        chkDrawingViewDimensioningLab.Checked = settings.EnableDrawingViewDimensioningLab
+        If chkDimLabInteractivePause IsNot Nothing Then chkDimLabInteractivePause.Checked = settings.EnableDimLabInteractivePause
+        If cmbDimLabMode IsNot Nothing Then
+            Dim imx = settings.DimLabMode
+            If imx < 0 OrElse imx > 5 Then imx = CInt(DimLabMode.Full)
+            cmbDimLabMode.SelectedIndex = imx
+        End If
+        If chkDimLabVisibleProbe IsNot Nothing Then chkDimLabVisibleProbe.Checked = settings.EnableDimLabVisibleProbe
+        If chkDimLabAlternativePlacement IsNot Nothing Then chkDimLabAlternativePlacement.Checked = settings.EnableDimLabAlternativePlacement
+        DimensionInsertionConfig.EnableDrawingViewDimensioningLab = settings.EnableDrawingViewDimensioningLab
         chkPmiRetrievalProbe.Checked = False
         chkExperimentalPmiModelView.Checked = False
         chkExperimentalDraftGeometryDiagnostics.Checked = False
@@ -1697,28 +1893,72 @@ Partial Public Class MainForm
             _logger.Log("[INFO] No hay archivo válido para cargar propiedades.")
             Return
         End If
+
+        Dim inputSnap As String = txtInputFile.Text.Trim()
+        Dim myGen As Long = Interlocked.Increment(_metadataLoadGeneration)
+        Dim showSe As Boolean = chkKeepSolidEdgeVisible.Checked
+
         Try
             _logger.Log("[UI][METADATA][CLEAR_BEFORE_LOAD] scope=ALL")
             ClearPlanMetadataUi()
             _loadedAsmComponentPath = ""
-            Dim data As DrawingMetadataInput = Nothing
-            If Not DrawingMetadataService.TryLoadMetadataFromModelFile(txtInputFile.Text, chkKeepSolidEdgeVisible.Checked, _logger, data) OrElse data Is Nothing Then
+            SetBusy(True, "Leyendo metadatos del modelo...", True)
+
+            StaComInvoker.Run(Function() As Tuple(Of Boolean, DrawingMetadataInput)
+                                   Dim data As DrawingMetadataInput = Nothing
+                                   Dim ok = DrawingMetadataService.TryLoadMetadataFromModelFile(inputSnap, showSe, _logger, data)
+                                   Return Tuple.Create(ok, data)
+                               End Function).
+                ContinueWith(Sub(t As Task(Of Tuple(Of Boolean, DrawingMetadataInput)))
+                                  BeginInvoke(New Action(Sub() FinishLoadSourceMetadataTask(t, inputSnap, myGen)))
+                              End Sub)
+        Catch ex As Exception
+            _logger.LogException("LoadSourcePropertiesToUi", ex)
+            SetBusy(False, "Preparado", False)
+        End Try
+    End Sub
+
+    Private Sub FinishLoadSourceMetadataTask(t As Task(Of Tuple(Of Boolean, DrawingMetadataInput)), inputSnap As String, myGen As Long)
+        Try
+            SetBusy(False, "Preparado", False)
+
+            If Interlocked.Read(_metadataLoadGeneration) <> myGen Then Return
+
+            Dim pathNow As String = If(txtInputFile?.Text, "").Trim()
+            If Not String.Equals(inputSnap, pathNow, StringComparison.OrdinalIgnoreCase) Then Return
+
+            If t.IsFaulted Then
+                Dim ex As Exception = t.Exception
+                Dim agg As AggregateException = TryCast(ex, AggregateException)
+                If agg IsNot Nothing Then ex = agg.GetBaseException()
+                _logger.LogException("LoadSourcePropertiesToUi", ex)
+                RefreshTraceabilityDataGridSafe()
+                RefreshTitleModeUi()
+                UpdateTitleBlockOriginHints()
+                Return
+            End If
+
+            Dim tup = t.Result
+            If Not tup.Item1 OrElse tup.Item2 Is Nothing Then
                 _logger.Log("[WARN] No se pudieron leer metadatos del archivo de entrada.")
                 RefreshTraceabilityDataGridSafe()
                 RefreshTitleModeUi()
                 UpdateTitleBlockOriginHints()
                 Return
             End If
-            DrawingMetadataService.ApplyToUi(Me, data, applyCajetin:=True, applyPartList:=True)
+
+            DrawingMetadataService.ApplyToUi(Me, tup.Item2, applyCajetin:=True, applyPartList:=True)
             _logger.Log("[UI][METADATA] Metadatos aplicados desde modelo de entrada.")
-            If (New JobConfiguration With {.InputFile = txtInputFile.Text}).DetectInputKind() = SourceFileKind.AssemblyFile Then
+
+            Dim kindNow As SourceFileKind = (New JobConfiguration With {.InputFile = pathNow}).DetectInputKind()
+            If kindNow = SourceFileKind.AssemblyFile Then
                 RefreshAsmComponentsIfNeeded(forceReload:=True)
             End If
             RefreshTraceabilityDataGridSafe()
             RefreshTitleModeUi()
             UpdateTitleBlockOriginHints()
         Catch ex As Exception
-            _logger.LogException("LoadSourcePropertiesToUi", ex)
+            _logger.LogException("FinishLoadSourceMetadataTask", ex)
         End Try
     End Sub
 

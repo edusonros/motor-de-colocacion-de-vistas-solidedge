@@ -34,6 +34,15 @@ Public Class PersistedAppSettings
     <DataMember> Public Property IncludeProjectedViews As Boolean = True
     <DataMember> Public Property IncludeFlatInDraftWhenPsm As Boolean = True
     <DataMember> Public Property EnableAutoDimensioning As Boolean = True
+    <DataMember> Public Property EnableDrawingViewDimensioningLab As Boolean = False
+    <DataMember> Public Property EnableDimLabInteractivePause As Boolean = True
+    ''' <summary>Modo DIMLAB serializado como entero (enum DimLabMode). Por defecto Full (=2).</summary>
+    <DataMember> Public Property DimLabMode As Integer = 2
+    <DataMember> Public Property EnableDimLabVisibleProbe As Boolean = False
+    <DataMember> Public Property EnableDimLabAlternativePlacement As Boolean = False
+    <DataMember> Public Property EnableDimLabHorizontalControlInVerticalOnly As Boolean = True
+    <DataMember> Public Property DimLabKeepFailedDimensions As Boolean = False
+    <DataMember> Public Property DimLabCleanPreviousLabDimensions As Boolean = True
     <DataMember> Public Property EnablePmiRetrievalProbe As Boolean = False
     <DataMember> Public Property ExperimentalCreatePMIModelViewIfMissing As Boolean = False
     <DataMember> Public Property ExperimentalDraftGeometryDiagnostics As Boolean = False

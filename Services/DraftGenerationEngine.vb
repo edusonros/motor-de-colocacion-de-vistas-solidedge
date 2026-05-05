@@ -1,9 +1,12 @@
 Option Strict Off
 
 Imports System.Collections.Generic
+Imports System.Reflection
 Imports System.Runtime.InteropServices
 Imports SolidEdgeAssembly
 Imports SolidEdgeDraft
+Imports SolidEdgeFramework
+Imports Extraer_dft_dxf_flatdxf.Services.Dimensioning.Labs
 Imports IO = System.IO
 Imports IOPath = System.IO.Path
 
@@ -21,6 +24,12 @@ Public Class EngineRunResult
     Public Property DxfCreatedCount As Integer
     Public Property FlatDxfCreatedCount As Integer
     Public Property SkippedCount As Integer
+    ''' <summary>Ruta guardada del DFT de referencia DIMLAB (*_DIMLAB_REF_TEST.dft).</summary>
+    Public Property DimLabReferenceDftFullPath As String
+    ''' <summary>Botón LAB pulsado pero flags efectivos impidieron ejecutar DIMLAB.</summary>
+    Public Property DimLabRunAbortedMisconfigured As Boolean
+    ''' <summary>Si true, no se llama app.Quit al final para no cerrar el DFT DIMLAB abierto en revisión.</summary>
+    Public Property KeepSolidEdgeOpenForDimLab As Boolean
 End Class
 
 Public Class DraftGenerationEngine
@@ -55,6 +64,16 @@ Public Class DraftGenerationEngine
 
         Try
             OleMessageFilter.Register()
+
+            Try
+                _logger.Log("[BOOT][EXE_PATH] " & Assembly.GetExecutingAssembly().Location)
+                _logger.Log("[BOOT][CURRENT_DIR] " & System.Environment.CurrentDirectory)
+                _logger.Log("[BOOT][STARTUP_PATH] " & System.Windows.Forms.Application.StartupPath)
+            Catch bootEx As Exception
+                _logger.Log("[BOOT][WARN] " & bootEx.Message)
+            End Try
+            _logger.Log("[BOOT][OUTPUT_ROOT] " & If(config?.OutputFolder, ""))
+
             Report(1, "Conectando a Solid Edge...")
             If Not ConnectSolidEdge(config, app, appCreatedByUs) Then
                 Throw New Exception("No fue posible conectar con Solid Edge.")
@@ -153,8 +172,12 @@ Public Class DraftGenerationEngine
         Finally
             Try
                 If app IsNot Nothing AndAlso appCreatedByUs Then
-                    app.Quit()
-                    _logger.Log("Solid Edge cerrado (instancia creada por la aplicación).")
+                    If result.KeepSolidEdgeOpenForDimLab Then
+                        _logger.Log("[DIMLAB][KEEP_SE] Omitiendo Quit(): instancia creada por la app pero se deja abierta para revisar el DFT DIMLAB.")
+                    Else
+                        app.Quit()
+                        _logger.Log("Solid Edge cerrado (instancia creada por la aplicación).")
+                    End If
                 ElseIf app IsNot Nothing Then
                     _logger.Log("Solid Edge permanece abierto (instancia preexistente).")
                 End If
@@ -185,6 +208,7 @@ Public Class DraftGenerationEngine
 
         Dim ext As String = IOPath.GetExtension(modelPath).ToLowerInvariant()
         Dim baseName As String = IOPath.GetFileNameWithoutExtension(modelPath)
+        Dim runLab As Boolean = config.EnableDrawingViewDimensioningLab OrElse DimensionInsertionConfig.EnableDrawingViewDimensioningLab
 
         _logger.Log($"[{itemIndex}/{totalItems}] Procesando: {IOPath.GetFileName(modelPath)}")
 
@@ -194,7 +218,10 @@ Public Class DraftGenerationEngine
         End If
 
         If config.CreateDraft OrElse config.CreatePdf OrElse config.CreateDxfFromDraft Then
-            Dim outDft As String = GetOutputPath(outDftDir, baseName, ".dft", config.OverwriteExisting)
+            Dim dftStem As String = If(runLab, GetDimLabDraftStemPiece(baseName, config.DimLabMode), baseName)
+            Dim outDft As String = GetOutputPath(outDftDir, dftStem, ".dft", config.OverwriteExisting)
+            _logger.Log("[DFT][FULLPATH] " & outDft)
+            If runLab Then _logger.Log("[DIMLAB][DFT][TARGET_FULLPATH] " & outDft)
             Dim dftDoc As DraftDocument = Nothing
             Try
                 _logger.Log("Creando draft...")
@@ -251,25 +278,71 @@ Public Class DraftGenerationEngine
                         End Try
                     End If
 
-                    ' Acotado automático: ruta única, controlado por EnableAutoDimensioning.
-                    _logger.Log("[DIM][GATE] EnableAutoDimensioning = " & config.EnableAutoDimensioning.ToString())
-                    Dim willRunAutoDim As Boolean = (dftDoc IsNot Nothing AndAlso config.EnableAutoDimensioning)
-                    _logger.Log("[DIM][GATE] Motor único DV*2d; ejecutar = " & willRunAutoDim.ToString())
-
-                    If willRunAutoDim Then
+                    Dim dimLabForensicInteractive As Boolean = runLab AndAlso config.EnableDimLabInteractivePause
+                    If runLab Then
                         Try
-                            ' Ruta de producción: UniqueDvAutoDimensioningEngine → DrawingViewDimensionCreator
-                            ' (AddLength / Reference sobre DV*2d; AddDistanceBetweenObjects no se usa en cotas lineales planificadas).
+                            app.Visible = True
+                            app.DisplayAlerts = True
+                        Catch exVis As Exception
+                            _logger.Log("[DIMLAB][INTERACTIVE] WARN set Visible/DisplayAlerts: " & exVis.Message)
+                        End Try
+                        _logger.Log("[DIMLAB][INTERACTIVE] app.Visible=True DisplayAlerts=True")
+                        _logger.Log("[DIMLAB][EXPORT_POLICY] skip_pdf_dxf_flat=True keep_dft_open_until_review=True")
+                        _logger.Log("[DIMLAB][LOG_ROOT_HINT] texto DimLab=" & IO.Path.Combine(config.OutputFolder, "OUT_DIMLAB"))
+                    End If
+                    If dimLabForensicInteractive Then
+                        _logger.Log("[DIMLAB][INTERACTIVE] forensic_MsgBox_PAUSE=True")
+                        _logger.Log("[DIMLAB][INTERACTIVE] skipExportClose=True")
+                    End If
+                    Dim runMainDimensioning As Boolean = (dftDoc IsNot Nothing AndAlso config.EnableAutoDimensioning AndAlso Not runLab)
+                    _logger.Log("[DIM][FLAGS] Config_EnableAutoDimensioning=" & config.EnableAutoDimensioning.ToString())
+                    _logger.Log("[DIM][FLAGS] Config_EnableDrawingViewDimensioningLab=" & config.EnableDrawingViewDimensioningLab.ToString())
+                    _logger.Log("[DIM][FLAGS] DimensionInsertionConfig_EnableDrawingViewDimensioningLab=" & DimensionInsertionConfig.EnableDrawingViewDimensioningLab.ToString())
+                    _logger.Log("[DIM][FLAGS] Effective_runLab=" & runLab.ToString())
+                    _logger.Log("[DIM][FLAGS] Effective_runMainDimensioning=" & runMainDimensioning.ToString())
+                    Dim decisionReason As String = If(runLab, "lab_mode_exclusive", "normal")
+                    _logger.Log("[DIM][DECISION] runLab=" & runLab.ToString() & " runMainDimensioning=" & runMainDimensioning.ToString() & " reason=" & decisionReason)
+
+                    If config.RequestedDimLabFromDedicatedButton AndAlso Not runLab Then
+                        _logger.Log("[DIMLAB][ABORT] requested_lab_button_but_effective_runLab_false")
+                        runResult.DimLabRunAbortedMisconfigured = True
+                        runResult.ErrorCount += 1
+                        Try
+                            If dftDoc IsNot Nothing Then dftDoc.Close(False)
+                        Catch
+                        End Try
+                        TryReleaseComObject(dftDoc)
+                        dftDoc = Nothing
+                        Return
+                    End If
+
+                    If runLab AndAlso dftDoc IsNot Nothing Then
+                        _logger.Log("[DIMLAB][RUN] exclusive=True")
+                        Try
+                            Dim outLab As String = IO.Path.Combine(config.OutputFolder, "OUT_DIMLAB")
+                            DrawingViewDimensioningLab.Run(
+                                app, dftDoc, Nothing, False, Sub(m) _logger.Log(m), outLab, dimLabForensicInteractive,
+                                config.DimLabMode, config.EnableDimLabVisibleProbe, config.EnableDimLabAlternativePlacement,
+                                config.EnableDimLabHorizontalControlInVerticalOnly,
+                                config.DimLabKeepFailedDimensions,
+                                config.DimLabCleanPreviousLabDimensions)
+                        Catch exLab As Exception
+                            _logger.Log("[DIMLAB][FATAL] " & exLab.ToString())
+                        End Try
+                        _logger.Log("[DIMLAB][EXIT_BEFORE_MAIN_ENGINE] true exclusive_block_main_dimensioning=True")
+                        _logger.Log("[DIM][GATE_SKIPPED] main_engine_blocked reason=lab_mode_exclusive")
+                    ElseIf runMainDimensioning Then
+                        Try
                             _logger.Log("[DIM][PIPE] DimensioningEngine.RunAutoDimensioning → motor DV*2d + UNE/ISO 129")
                             DimensioningEngine.RunAutoDimensioning(dftDoc, mainDrawingView, _logger, normCfg, protectedZones)
                         Catch exDim As Exception
                             _logger.Log("[DIM][FATAL] " & exDim.ToString())
                         End Try
                     Else
-                        _logger.Log("[DIM][GATE] Acotado automático no ejecutado (deshabilitado o sin DFT).")
+                        _logger.Log("[DIM][GATE] Acotado automático no ejecutado (deshabilitado, sin DFT o laboratorio sin documento).")
                     End If
 
-                    If config.RunUnitHorizontalExteriorDimensionTest AndAlso dftDoc IsNot Nothing Then
+                    If Not runLab AndAlso config.RunUnitHorizontalExteriorDimensionTest AndAlso dftDoc IsNot Nothing Then
                         Try
                             UnitHorizontalExteriorDimensionTest.Run(
                                 dftDoc,
@@ -286,7 +359,7 @@ Public Class DraftGenerationEngine
                         savedDraftReady = IO.File.Exists(outDft)
 
                         ' Asegurar persistencia/refresco de propiedades en el DFT ya guardado cuando aplica.
-                        If config.InsertPropertiesInTitleBlock AndAlso savedDraftReady Then
+                        If config.InsertPropertiesInTitleBlock AndAlso savedDraftReady AndAlso Not runLab Then
                             Try
                                 dftDoc.Close(False)
                             Catch
@@ -297,6 +370,10 @@ Public Class DraftGenerationEngine
                         End If
                         _logger.Log($"DFT: {IOPath.GetFileName(outDft)}")
                         runResult.DraftCreatedCount += 1
+                        If runLab AndAlso savedDraftReady Then
+                            runResult.DimLabReferenceDftFullPath = outDft
+                            runResult.KeepSolidEdgeOpenForDimLab = True
+                        End If
                     End If
 
                     Dim exportDoc As DraftDocument = dftDoc
@@ -304,12 +381,12 @@ Public Class DraftGenerationEngine
                     Try
                         ' Tras SaveAs, algunos RCW de Draft pueden quedar desconectados.
                         ' Reabrimos el DFT guardado para exportaciones PDF/DXF cuando exista.
-                        If config.CreateDraft AndAlso (config.CreatePdf OrElse config.CreateDxfFromDraft) AndAlso IO.File.Exists(outDft) Then
+                        If Not runLab AndAlso config.CreateDraft AndAlso (config.CreatePdf OrElse config.CreateDxfFromDraft) AndAlso IO.File.Exists(outDft) Then
                             exportDoc = ExecuteComWithRetry(Function() CType(app.Documents.Open(outDft), DraftDocument), "Open saved DFT for export")
                             exportDocOpened = True
                         End If
 
-                        If config.CreatePdf Then
+                        If Not runLab AndAlso config.CreatePdf Then
                             SolidEdgePropertyService.ApplyDirectSummaryInfoToDraft(exportDoc, config, _logger)
                             Dim outPdf As String = GetOutputPath(outPdfDir, baseName, ".pdf", config.OverwriteExisting)
                             _logger.Log("Exportando PDF...")
@@ -318,7 +395,7 @@ Public Class DraftGenerationEngine
                             runResult.PdfCreatedCount += 1
                         End If
 
-                        If config.CreateDxfFromDraft Then
+                        If Not runLab AndAlso config.CreateDxfFromDraft Then
                             Dim outDxfDraft As String = GetOutputPath(outDxfDir, baseName, ".dxf", config.OverwriteExisting)
                             _logger.Log("Exportando DXF desde DFT...")
                             ExecuteComWithRetry(Sub() ExportDraftToDxf(exportDoc, outDxfDraft), "Export DXF Draft")
@@ -337,16 +414,20 @@ Public Class DraftGenerationEngine
             Catch ex As Exception
                 _logger.LogException("DFT/PDF/DXF Draft", ex)
             Finally
-                Try
-                    If dftDoc IsNot Nothing Then dftDoc.Close(False)
-                    _logger.Log($"Documento DFT cerrado para: {IOPath.GetFileName(modelPath)}")
-                Catch
-                End Try
-                TryReleaseComObject(dftDoc)
+                If Not runLab Then
+                    Try
+                        If dftDoc IsNot Nothing Then dftDoc.Close(False)
+                        _logger.Log($"Documento DFT cerrado para: {IOPath.GetFileName(modelPath)}")
+                    Catch
+                    End Try
+                    TryReleaseComObject(dftDoc)
+                Else
+                    _logger.Log("[DIMLAB][KEEP_OPEN] No se cierra el DFT automáticamente; revisar/grabar en Solid Edge.")
+                End If
             End Try
         End If
 
-        If ext = ".psm" AndAlso config.CreateFlatDxf Then
+        If ext = ".psm" AndAlso config.CreateFlatDxf AndAlso Not runLab Then
             Dim outFlat As String = GetOutputPath(outDxfDir, baseName & "_FLAT", ".dxf", config.OverwriteExisting)
             Try
                 Dim errMsg As String = ""
@@ -623,4 +704,19 @@ Public Class DraftGenerationEngine
         Catch
         End Try
     End Sub
+
+    Private Shared Function GetDimLabDraftStemPiece(baseStem As String, mode As DimLabMode) As String
+        Select Case mode
+            Case DimLabMode.VerticalOnly
+                Return baseStem & "_DIMLAB_REF_VERTICAL"
+            Case DimLabMode.Full
+                Return baseStem & "_DIMLAB_REF_FULL"
+            Case DimLabMode.CleanFull
+                Return baseStem & "_DIMLAB_REF_CLEANFULL"
+            Case DimLabMode.CleanFullStrict
+                Return baseStem & "_DIMLAB_REF_CLEANFULLSTRICT"
+            Case Else
+                Return baseStem & "_DIMLAB_REF_HORIZONTAL"
+        End Select
+    End Function
 End Class

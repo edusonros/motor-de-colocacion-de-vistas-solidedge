@@ -130,6 +130,9 @@
     <Compile Include="Services\Dimensioning\DimensionLogger.vb" />
     <Compile Include="Services\Dimensioning\DimensionExtremePoint.vb" />
     <Compile Include="Services\Dimensioning\DimensionInsertionConfig.vb" />
+    <Compile Include="Services\Dimensioning\Labs\DimLabLogger.vb" />
+    <Compile Include="Services\Dimensioning\Labs\DimLabMode.vb" />
+    <Compile Include="Services\Dimensioning\Labs\DrawingViewDimensioningLab.vb" />
     <Compile Include="Services\Dimensioning\ViewGeometryReader.vb" />
     <Compile Include="Services\Dimensioning\SolidEdgeContext.vb" />
     <Compile Include="Services\Dimensioning\DraftViewCollector.vb" />
@@ -152,6 +155,7 @@
     <Compile Include="Services\TraceabilityFieldCatalog.vb" />
     <Compile Include="Services\TraceabilityInspectionService.vb" />
     <Compile Include="Services\Logger.vb" />
+    <Compile Include="Services\StaComInvoker.vb" />
     <Compile Include="Services\AssemblyComponentService.vb" />
     <Compile Include="Services\SolidEdgePropertyService.vb" />
     <Compile Include="Services\DrawingMetadataService.vb" />

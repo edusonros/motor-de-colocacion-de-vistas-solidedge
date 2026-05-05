@@ -45,7 +45,9 @@ Public Class AssemblyComponentService
 
             logger.Log("[ASM] Obteniendo ocurrencias")
             If progress IsNot Nothing Then progress.Invoke("Obteniendo ocurrencias", 0, -1)
+            logger.Log("[ASM][STEP] Documents.Open ASM: " & asmPath)
             asmDoc = CType(app.Documents.Open(asmPath), AssemblyDocument)
+            logger.Log("[ASM][STEP] Documents.Open ASM OK — recorriendo ocurrencias")
             logger.Log("[ASM] Recorriendo componentes")
             If progress IsNot Nothing Then progress.Invoke("Recorriendo componentes", 0, -1)
             RecurseOccurrences(asmDoc.Occurrences, result, seen, uniqueOnly, 0, processedCount, progress)

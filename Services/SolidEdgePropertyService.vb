@@ -267,10 +267,7 @@ Public Class SolidEdgePropertyService
             If logger IsNot Nothing Then logger.LogException("ApplyDirectSummaryInfoToDraftFile", ex)
             Return False
         Finally
-            Try
-                If dftDoc IsNot Nothing Then CallByName(dftDoc, "Close", CallType.Method, False)
-            Catch
-            End Try
+            TryCloseComDocument(dftDoc, False)
             Try
                 If app IsNot Nothing AndAlso createdByUs Then app.Quit()
             Catch
@@ -382,12 +379,7 @@ Public Class SolidEdgePropertyService
         Catch ex As Exception
             If logger IsNot Nothing Then logger.LogException("ApplyPropertiesToSavedDraft", ex)
         Finally
-            Try
-                If dftDoc IsNot Nothing Then
-                    CallByName(dftDoc, "Close", CallType.Method, False)
-                End If
-            Catch
-            End Try
+            TryCloseComDocument(dftDoc, False)
         End Try
     End Sub
 
@@ -440,9 +432,7 @@ Public Class SolidEdgePropertyService
         Catch ex As Exception
             If logger IsNot Nothing Then logger.LogException("ApplyPropertiesToOpenModelDocument", ex)
         Finally
-            If openedByUs AndAlso doc IsNot Nothing Then
-                Try : CallByName(doc, "Close", CallType.Method, False) : Catch : End Try
-            End If
+            If openedByUs Then TryCloseComDocument(doc, False)
         End Try
         Return written
     End Function
@@ -1969,6 +1959,30 @@ Public Class SolidEdgePropertyService
 
         Return Nothing
     End Function
+
+    ''' <summary>
+    ''' Cierra documentos devueltos como <c>Object</c> (p. ej. <c>Documents.Open</c>) sin <c>CallByName</c> en <c>Close</c>:
+    ''' el enlace en retardado a <c>Close</c> suele disparar <see cref="MissingMemberException"/> o <c>TargetParameterCountException</c> según el TLB de Solid Edge.
+    ''' </summary>
+    Friend Shared Sub TryCloseComDocument(doc As Object, Optional saveChanges As Boolean = False)
+        If doc Is Nothing Then Return
+        Dim typed = TryCast(doc, SolidEdgeDocument)
+        If typed IsNot Nothing Then
+            Try
+                typed.Close(saveChanges)
+                Return
+            Catch
+            End Try
+        End If
+        Try
+            CallByName(doc, "Close", CallType.Method, saveChanges)
+        Catch
+            Try
+                CallByName(doc, "Close", CallType.Method)
+            Catch
+            End Try
+        End Try
+    End Sub
 
     Private Shared Function GetCollectionItem(collection As Object, key As Object) As Object
         If collection Is Nothing Then Return Nothing

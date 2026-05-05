@@ -802,8 +802,7 @@ Partial Public Class MainForm
                     Return
                 End If
                 Try
-                    If doc IsNot Nothing Then CallByName(doc, "Close", CallType.Method, False)
-                Catch
+                    SolidEdgePropertyService.TryCloseComDocument(doc, False)
                 Finally
                     doc = Nothing
                 End Try
@@ -838,10 +837,7 @@ Partial Public Class MainForm
             _logger.LogException("btnMetaCalcLhd_Click", ex)
             MessageBox.Show(ex.Message, "L/H/D", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
-            Try
-                If doc IsNot Nothing Then CallByName(doc, "Close", CallType.Method, False)
-            Catch
-            End Try
+            SolidEdgePropertyService.TryCloseComDocument(doc, False)
             Try
                 If app IsNot Nothing AndAlso created Then app.Quit()
             Catch
@@ -1018,14 +1014,8 @@ Partial Public Class MainForm
                 End Try
                 MessageBox.Show("Propiedades aplicadas. Revise el log y la PartsList.", "Aplicar", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Finally
-                Try
-                    If modelDoc IsNot Nothing Then CallByName(modelDoc, "Close", CallType.Method, True)
-                Catch
-                End Try
-                Try
-                    If dftDoc IsNot Nothing Then CallByName(dftDoc, "Close", CallType.Method, False)
-                Catch
-                End Try
+                SolidEdgePropertyService.TryCloseComDocument(modelDoc, True)
+                SolidEdgePropertyService.TryCloseComDocument(dftDoc, False)
                 Try
                     If app IsNot Nothing AndAlso created Then app.Quit()
                 Catch

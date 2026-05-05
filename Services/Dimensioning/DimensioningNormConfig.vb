@@ -25,13 +25,13 @@ Public Class DimensioningNormConfig
     Public Property MaxDimensionsPerViewInitial As Integer = 4
 
     ''' <summary>Si True, el postproceso puede intentar fusionar/eliminar cotas duplicadas (desaconsejado si se editan keypoints a mano).</summary>
-    Public Property EnableDuplicateDimensionCleanup As Boolean = False
+    Public Property EnableDuplicateDimensionCleanup As Boolean = True
 
     ''' <summary>Si True, permitir borrar duplicados “inseguros” en postproceso. Por defecto False: no se borran por ser duplicados.</summary>
-    Public Property EnableDeleteUnsafeDuplicates As Boolean = False
+    Public Property EnableDeleteUnsafeDuplicates As Boolean = True
 
     ''' <summary>Si True (por defecto), se mantienen todas las cotas con el mismo valor nominal para flujo manual (p. ej. varias 340 y recolocar keypoints).</summary>
-    Public Property KeepIntentionalDuplicateDimensions As Boolean = True
+    Public Property KeepIntentionalDuplicateDimensions As Boolean = False
 
     ''' <summary>Si True, el paso UNE129 posterior solo ordena/recoloca/separa carriles; no simplifica el número de cotas ni las trata como error.</summary>
     Public Property OnlyArrangeExistingDimensions As Boolean = True
@@ -54,14 +54,14 @@ Public Class DimensioningNormConfig
     Public Property SweepAllDVArcs As Boolean = False
 
     ''' <summary>Equilibrio referencia vs. barrido: valores por defecto más permisivos para conservar rectas principales.</summary>
-    Public Property MaxTotalDimensionsTarget As Integer = 28
-    Public Property MaxLinearDimensionsTarget As Integer = 20
-    Public Property MaxRadialDimensionsTarget As Integer = 8
+    Public Property MaxTotalDimensionsTarget As Integer = 12
+    Public Property MaxLinearDimensionsTarget As Integer = 8
+    Public Property MaxRadialDimensionsTarget As Integer = 4
 
     Public Property AllowSomeDuplicate340 As Boolean = True
     Public Property AllowSomeDuplicate90 As Boolean = True
     Public Property AllowSomeDuplicate102 As Boolean = True
-    Public Property KeepManualEditableDuplicates As Boolean = True
+    Public Property KeepManualEditableDuplicates As Boolean = False
 
     Public Property PrepareExistingPartsListTop As Boolean = True
     Public Property PartsListMarginXm As Double = 0.006

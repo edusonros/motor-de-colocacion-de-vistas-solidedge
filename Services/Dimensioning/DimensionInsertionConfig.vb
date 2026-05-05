@@ -33,6 +33,9 @@ Friend Module DimensionInsertionConfig
     ''' </summary>
     Friend UseViewSpaceProximityForAddDistance As Boolean = True
 
+    ''' <summary>Activar laboratorio DIMLAB (OR con JobConfiguration.EnableDrawingViewDimensioningLab en el gate).</summary>
+    Friend EnableDrawingViewDimensioningLab As Boolean = False
+
 End Module
 
 ' --- Auto-ajuste de rango para que las dimensiones recién creadas sean visibles ---

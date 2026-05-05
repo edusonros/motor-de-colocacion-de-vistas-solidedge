@@ -93,6 +93,13 @@ Partial Class MainForm
         Me.chkCreateDxfDraft = New CheckBox()
         Me.chkAutoDimensioning = New CheckBox()
         Me.chkUnitHorizontalExteriorTest = New CheckBox()
+        Me.chkDrawingViewDimensioningLab = New CheckBox()
+        Me.chkDimLabInteractivePause = New CheckBox()
+        Me.lblDimLabMode = New Label()
+        Me.cmbDimLabMode = New ComboBox()
+        Me.chkDimLabVisibleProbe = New CheckBox()
+        Me.chkDimLabAlternativePlacement = New CheckBox()
+        Me.btnDimLabRun = New Button()
         Me.chkPmiRetrievalProbe = New CheckBox()
         Me.chkExperimentalPmiModelView = New CheckBox()
         Me.chkCreateFlatDxf = New CheckBox()
@@ -454,6 +461,34 @@ Partial Class MainForm
         Me.flowGeneration.Controls.Add(Me.lblTitleBlockSource)
         Me.flowGeneration.Controls.Add(Me.cmbTitleBlockSource)
         Me.flowGeneration.Controls.Add(Me.chkUnitHorizontalExteriorTest)
+        Me.chkDrawingViewDimensioningLab.AutoSize = True
+        Me.chkDrawingViewDimensioningLab.Text = "Laboratorio DIMLAB (exclusivo, no motor principal)"
+        Me.chkDrawingViewDimensioningLab.Checked = False
+        Me.flowGeneration.Controls.Add(Me.chkDrawingViewDimensioningLab)
+        Me.chkDimLabInteractivePause.AutoSize = True
+        Me.chkDimLabInteractivePause.Text = "DIMLAB: modo forense (VIS0, pausa, sin exportar/cerrar DFT)"
+        Me.chkDimLabInteractivePause.Checked = True
+        Me.flowGeneration.Controls.Add(Me.chkDimLabInteractivePause)
+        Me.lblDimLabMode.AutoSize = True
+        Me.lblDimLabMode.Text = "DIMLAB modo:"
+        Me.flowGeneration.Controls.Add(Me.lblDimLabMode)
+        Me.cmbDimLabMode.DropDownStyle = ComboBoxStyle.DropDownList
+        Me.cmbDimLabMode.Width = 280
+        Me.cmbDimLabMode.Items.AddRange(New Object() {"HorizontalOnly", "VerticalOnly", "Full", "ForensicHorizontal", "CleanFull", "CleanFullStrict"})
+        Me.cmbDimLabMode.SelectedIndex = 2
+        Me.flowGeneration.Controls.Add(Me.cmbDimLabMode)
+        Me.chkDimLabVisibleProbe.AutoSize = True
+        Me.chkDimLabVisibleProbe.Text = "DIMLAB: sonda VIS0 (linea + cota 60 mm)"
+        Me.chkDimLabVisibleProbe.Checked = False
+        Me.flowGeneration.Controls.Add(Me.chkDimLabVisibleProbe)
+        Me.chkDimLabAlternativePlacement.AutoSize = True
+        Me.chkDimLabAlternativePlacement.Text = "DIMLAB: nota carril horizontal alternativo (solo log)"
+        Me.chkDimLabAlternativePlacement.Checked = False
+        Me.flowGeneration.Controls.Add(Me.chkDimLabAlternativePlacement)
+        Me.btnDimLabRun.AutoSize = True
+        Me.btnDimLabRun.Text = "[LAB] DIMLAB"
+        Me.btnDimLabRun.Margin = New Padding(0, 4, 0, 0)
+        Me.flowGeneration.Controls.Add(Me.btnDimLabRun)
         Dim gc As CheckBox() = {Me.chkCreateDft, Me.chkCreatePdf, Me.chkCreateDxfDraft, Me.chkAutoDimensioning, Me.chkPmiRetrievalProbe, Me.chkExperimentalPmiModelView, Me.chkCreateFlatDxf, Me.chkOpenOutput, Me.chkOverwrite, Me.chkUniqueComponents, Me.chkDetailedLog, Me.chkDebugTemplates, Me.chkExperimentalDraftGeometryDiagnostics, Me.chkKeepSolidEdgeVisible, Me.chkInsertProperties}
         Dim gt As String() = {"Crear DFT", "Crear PDF", "Crear DXF del DFT", "Generar acotado automático", "Probar recuperación PMI en Draft (experimental)", "Experimental: crear PMIModelView si falta (sin guardar modelo)", "Crear DXF de chapa desarrollada", "Abrir carpeta de salida al finalizar", "Sobrescribir archivos existentes", "Procesar componentes repetidos solo una vez", "Registrar log detallado", "Diagnóstico: inspeccionar plantillas DFT (PropertySets, cajetín)", "Diagnóstico geométrico Draft (2D, vistas, motor acotado)", "Mantener visible Solid Edge durante el proceso", "Insertar propiedades en el cajetin del draft, si procede"}
         For i As Integer = 0 To gc.Length - 1
@@ -683,6 +718,13 @@ Partial Class MainForm
     Friend WithEvents chkCreateDxfDraft As CheckBox
     Friend WithEvents chkAutoDimensioning As CheckBox
     Friend WithEvents chkUnitHorizontalExteriorTest As CheckBox
+    Friend WithEvents chkDrawingViewDimensioningLab As CheckBox
+    Friend WithEvents chkDimLabInteractivePause As CheckBox
+    Friend WithEvents lblDimLabMode As Label
+    Friend WithEvents cmbDimLabMode As ComboBox
+    Friend WithEvents chkDimLabVisibleProbe As CheckBox
+    Friend WithEvents chkDimLabAlternativePlacement As CheckBox
+    Friend WithEvents btnDimLabRun As Button
         Friend WithEvents chkPmiRetrievalProbe As CheckBox
         Friend WithEvents chkExperimentalPmiModelView As CheckBox
         Friend WithEvents chkCreateFlatDxf As CheckBox

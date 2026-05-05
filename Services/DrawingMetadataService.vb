@@ -864,8 +864,11 @@ Public NotInheritable Class DrawingMetadataService
         Dim doc As Object = Nothing
         Try
             OleMessageFilter.Register()
+            If logger IsNot Nothing Then logger.Log("[UI][METADATA][STEP] Conectando a Solid Edge...")
             If Not TryConnectForMetadata(showSe, logger, app, created) Then Return False
+            If logger IsNot Nothing Then logger.Log("[UI][METADATA][STEP] Conexión lista (nueva_instancia=" & created.ToString() & "), abriendo: " & modelPath)
             doc = app.Documents.Open(modelPath)
+            If logger IsNot Nothing Then logger.Log("[UI][METADATA][STEP] Documents.Open terminado.")
             If isAsm Then
                 If logger IsNot Nothing Then logger.Log("[UI][METADATA][LOAD_ASM] path=" & modelPath)
                 LoadTitleBlockFromOpenModel(doc, modelPath, logger, data, fillPartList:=False, inferPedidoFromPath:=False, traceUiLog:=True, traceKind:="ASM_FIELD")
@@ -884,10 +887,7 @@ Public NotInheritable Class DrawingMetadataService
             If logger IsNot Nothing Then logger.LogException("TryLoadMetadataFromModelFile", ex)
             Return False
         Finally
-            Try
-                If doc IsNot Nothing Then CallByName(doc, "Close", CallType.Method, False)
-            Catch
-            End Try
+            SolidEdgePropertyService.TryCloseComDocument(doc, False)
             Try
                 If app IsNot Nothing AndAlso created Then app.Quit()
             Catch
