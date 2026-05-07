@@ -35,6 +35,9 @@ Friend Class DvLineSheetInfo
     Public Sx2 As Double
     Public Sy2 As Double
     Public Length As Double
+    ''' <summary><see cref="SolidEdgeConstants.GraphicMemberEdgeTypeConstants"/> cuando está disponible; -1 si no se leyó.</summary>
+    Public EdgeType As Integer = -1
+    Public KeyPointCount As Integer
     Public ReadOnly Property MidX As Double
         Get
             Return (Sx1 + Sx2) / 2.0
@@ -65,6 +68,21 @@ Friend Class DvLineSheetInfo
             Return Math.Max(Sy1, Sy2)
         End Get
     End Property
+End Class
+
+''' <summary>Filas DV cacheadas tras una única lectura COM por vista.</summary>
+Friend NotInheritable Class DvLineInfo
+    Public Index As Integer
+    Public StartX As Double
+    Public StartY As Double
+    Public EndX As Double
+    Public EndY As Double
+    Public Length As Double
+    Public IsHorizontal As Boolean
+    Public IsVertical As Boolean
+    Public Reference As DVLine2d
+    Public EdgeType As Integer
+    Public KeyPointCount As Integer
 End Class
 
 ''' <summary>Contadores de la cosecha de DVLines2d para el log de acotado.</summary>
@@ -136,33 +154,202 @@ Friend NotInheritable Class ViewGeometryReader
         Return True
     End Function
 
-    ''' <summary>Lee DVLines2d y elige líneas extremas para cotas horizontal/vertical totales.</summary>
-    Public Shared Function TryBuildExtremeLines(view As DrawingView, box As ViewSheetBoundingBox, log As DimensionLogger, ByRef result As ExtremeDvLinesResult) As Boolean
+    ''' <summary>Una sola pasada COM DVLines2d → lista en hoja (sin filtro de longitud ni de tipo de arista).</summary>
+    Public Shared Function EnumerateAllDvLinesSheet(view As DrawingView, log As DimensionLogger) As List(Of DvLineSheetInfo)
+        Dim out As New List(Of DvLineSheetInfo)()
+        If view Is Nothing Then Return out
+
+        Dim linesCol As DVLines2d = Nothing
+        Try
+            linesCol = view.DVLines2d
+        Catch ex As Exception
+            log?.ComFail("DrawingView.DVLines2d", "DrawingView", ex)
+            Return out
+        End Try
+        If linesCol Is Nothing Then Return out
+
+        Dim n As Integer = 0
+        Try
+            n = linesCol.Count
+        Catch ex As Exception
+            log?.ComFail("DVLines2d.Count", "DVLines2d", ex)
+            Return out
+        End Try
+
+        For i As Integer = 1 To n
+            Dim ln As DVLine2d = Nothing
+            Try
+                ln = CType(linesCol.Item(i), DVLine2d)
+            Catch ex As Exception
+                log?.Warn("DVLines2d ítem " & i.ToString(CultureInfo.InvariantCulture) & " no válido: " & ex.Message)
+                Continue For
+            End Try
+            If ln Is Nothing Then Continue For
+
+            Dim et As Integer = -1
+            Try : et = CInt(ln.EdgeType) : Catch : et = -1 : End Try
+
+            Dim kp As Integer = 0
+            Try : kp = CInt(ln.KeyPointCount) : Catch : kp = 0 : End Try
+
+            Dim vx1 As Double, vy1 As Double, vx2 As Double, vy2 As Double
+            Try
+                ln.GetStartPoint(vx1, vy1)
+                ln.GetEndPoint(vx2, vy2)
+            Catch ex As Exception
+                log?.Warn("DVLine2d ítem " & i.ToString(CultureInfo.InvariantCulture) & " puntos: " & ex.Message)
+                Continue For
+            End Try
+
+            Dim sx1 As Double, sy1 As Double, sx2 As Double, sy2 As Double
+            Try
+                view.ViewToSheet(vx1, vy1, sx1, sy1)
+                view.ViewToSheet(vx2, vy2, sx2, sy2)
+            Catch ex As Exception
+                log?.Warn("DVLine2d ítem " & i.ToString(CultureInfo.InvariantCulture) & " ViewToSheet: " & ex.Message)
+                Continue For
+            End Try
+
+            If Not AreFinite(sx1, sy1, sx2, sy2) Then Continue For
+
+            Dim dx As Double = sx2 - sx1
+            Dim dy As Double = sy2 - sy1
+            Dim len As Double = Math.Sqrt(dx * dx + dy * dy)
+            If len < 1.0E-12 Then Continue For
+
+            out.Add(New DvLineSheetInfo With {
+                .Line = ln,
+                .SourceIndex = i,
+                .Sx1 = sx1, .Sy1 = sy1, .Sx2 = sx2, .Sy2 = sy2,
+                .Length = len,
+                .EdgeType = et,
+                .KeyPointCount = kp
+            })
+        Next
+
+        Return out
+    End Function
+
+    ''' <summary>Vista ya enumerada → <see cref="DvLineInfo"/> (sin repetir COM).</summary>
+    Public Shared Function MapToDvLineInfo(rows As IList(Of DvLineSheetInfo), axisTolM As Double) As List(Of DvLineInfo)
+        Dim list As New List(Of DvLineInfo)()
+        If rows Is Nothing Then Return list
+        For Each si In rows
+            If si Is Nothing Then Continue For
+            Dim rowInfo = ToDvLineInfo(si, axisTolM)
+            If rowInfo IsNot Nothing Then list.Add(rowInfo)
+        Next
+        Return list
+    End Function
+
+    ''' <summary>Una llamada COM por vista si no existe caché; si <paramref name="cached"/> no es Nothing se reutiliza.</summary>
+    Public Shared Function ReadDvLines(view As DrawingView,
+                                       Optional cached As IList(Of DvLineSheetInfo) = Nothing,
+                                       Optional log As DimensionLogger = Nothing,
+                                       Optional axisTolM As Double = 1.0E-7R) As List(Of DvLineInfo)
+        Dim sheetRows As IList(Of DvLineSheetInfo)
+        If cached IsNot Nothing Then
+            sheetRows = cached
+        Else
+            sheetRows = EnumerateAllDvLinesSheet(view, log)
+        End If
+        Return MapToDvLineInfo(sheetRows, axisTolM)
+    End Function
+
+    Private Shared Function ToDvLineInfo(si As DvLineSheetInfo, axisTolM As Double) As DvLineInfo
+        If si Is Nothing Then Return Nothing
+        Dim tol As Double = Math.Max(axisTolM, 1.0E-12R)
+        Return New DvLineInfo With {
+            .Index = si.SourceIndex,
+            .StartX = si.Sx1,
+            .StartY = si.Sy1,
+            .EndX = si.Sx2,
+            .EndY = si.Sy2,
+            .Length = si.Length,
+            .IsHorizontal = IsHorizontalForExtremes(si, tol),
+            .IsVertical = IsVerticalForExtremes(si, tol),
+            .Reference = si.Line,
+            .EdgeType = si.EdgeType,
+            .KeyPointCount = si.KeyPointCount
+        }
+    End Function
+
+    Private Shared Function FilterEnumerateForExtremes(all As IList(Of DvLineSheetInfo),
+                                                       relevanceThreshold As Double,
+                                                       modelEdgesOnly As Boolean,
+                                                       stats As ExtremeLineBuildStats) As List(Of DvLineSheetInfo)
+        Dim outList As New List(Of DvLineSheetInfo)()
+        If all Is Nothing OrElse stats Is Nothing Then Return outList
+        stats.TotalDvLines2d = all.Count
+        stats.DiscardedTooShort = 0
+        stats.DiscardedOther = 0
+
+        Dim modelEdge As Integer = CInt(SolidEdgeConstants.GraphicMemberEdgeTypeConstants.seModelEdgeType)
+
+        For Each row In all
+            If row Is Nothing Then Continue For
+            If row.Length < relevanceThreshold Then
+                stats.DiscardedTooShort += 1
+                Continue For
+            End If
+            If modelEdgesOnly Then
+                If row.EdgeType >= 0 AndAlso row.EdgeType <> modelEdge Then
+                    stats.DiscardedOther += 1
+                    Continue For
+                End If
+            End If
+            outList.Add(row)
+        Next
+        Return outList
+    End Function
+
+    ''' <param name="fullDvLinesEnumeration">Salida: todas las aristas DV leídas (una enumeración COM o reutilizada).</param>
+    ''' <param name="preEnumeratedDvLines">Si no es Nothing, evita nueva lectura COM.</param>
+    Public Shared Function TryBuildExtremeLines(
+        view As DrawingView,
+        box As ViewSheetBoundingBox,
+        log As DimensionLogger,
+        ByRef result As ExtremeDvLinesResult,
+        Optional ByRef fullDvLinesEnumeration As List(Of DvLineSheetInfo) = Nothing,
+        Optional preEnumeratedDvLines As List(Of DvLineSheetInfo) = Nothing) As Boolean
+        fullDvLinesEnumeration = Nothing
         result = Nothing
         If view Is Nothing OrElse Not box.Width > 0 Then Return False
 
         Dim relevanceThreshold As Double = Math.Max(box.Width * RelevanceWidthFraction, 1.0E-9)
         Dim axisTol As Double = Math.Max(box.Width * AxisToleranceWidthFraction, 1.0E-7)
 
-        Dim strictList As New List(Of DvLineSheetInfo)()
+        Dim enumerated As List(Of DvLineSheetInfo)
+        If preEnumeratedDvLines IsNot Nothing Then
+            enumerated = preEnumeratedDvLines
+        Else
+            enumerated = EnumerateAllDvLinesSheet(view, log)
+        End If
+
+        fullDvLinesEnumeration = enumerated
+
+        If enumerated Is Nothing OrElse enumerated.Count = 0 Then
+            log?.Err("DVLines2d: enumeración vacía.")
+            Return False
+        End If
+
         Dim stStrict As New ExtremeLineBuildStats With {
             .RelevanceThresholdM = relevanceThreshold,
             .AxisToleranceM = axisTol,
             .UsedLooseEdgePass = False
         }
-        CollectInner(view, box, log, strictList, relevanceThreshold, modelEdgesOnly:=True, stStrict)
+        Dim strictList = FilterEnumerateForExtremes(enumerated, relevanceThreshold, modelEdgesOnly:=True, stStrict)
 
         Dim finalList As List(Of DvLineSheetInfo) = strictList
         Dim finalStats As ExtremeLineBuildStats = stStrict
 
         If strictList.Count < 4 Then
-            Dim looseList As New List(Of DvLineSheetInfo)()
             Dim stLoose As New ExtremeLineBuildStats With {
                 .RelevanceThresholdM = relevanceThreshold,
                 .AxisToleranceM = axisTol,
                 .UsedLooseEdgePass = True
             }
-            CollectInner(view, box, log, looseList, relevanceThreshold, modelEdgesOnly:=False, stLoose)
+            Dim looseList = FilterEnumerateForExtremes(enumerated, relevanceThreshold, modelEdgesOnly:=False, stLoose)
 
             If looseList.Count > strictList.Count Then
                 If strictList.Count < 4 Then
@@ -183,122 +370,30 @@ Friend NotInheritable Class ViewGeometryReader
 
         Dim nH As Integer = finalList.Where(Function(L) IsHorizontalForExtremes(L, finalStats.AxisToleranceM)).Count()
         Dim nV As Integer = finalList.Where(Function(L) IsVerticalForExtremes(L, finalStats.AxisToleranceM)).Count()
-        log?.Info(String.Format(CultureInfo.InvariantCulture,
-            "Filtrado DVLines2d: totales={0}, umbral longitud={1:0.######}m (5% ancho={2:0.######}m), descartadas cortas={3}, otras descartadas={4}, válidas={5}, tolerancia eje={6:0.######}m, horiz={7}, vert={8}, paso suelto={9}",
-            finalStats.TotalDvLines2d,
-            finalStats.RelevanceThresholdM,
-            box.Width,
-            finalStats.DiscardedTooShort,
-            finalStats.DiscardedOther,
-            finalList.Count,
-            finalStats.AxisToleranceM,
-            nH,
-            nV,
-            finalStats.UsedLooseEdgePass.ToString()))
 
-        log?.Info("Extremos elegidos — izq: " & FormatLineLog(res.LeftVertical) &
-                  " | der: " & FormatLineLog(res.RightVertical) &
-                  " | inf: " & FormatLineLog(res.BottomHorizontal) &
-                  " | sup: " & FormatLineLog(res.TopHorizontal))
+        Dim logDv As Boolean = GenerationEngineRuntime.DebugDiagnosticsMode OrElse Not GenerationEngineRuntime.ProductionMode
+        If logDv Then
+            log?.Info(String.Format(CultureInfo.InvariantCulture,
+                "Filtrado DVLines2d: enumeradas={0}, umbral longitud={1:0.######}m (5% ancho={2:0.######}m), descartadas cortas={3}, otras descartadas={4}, válidas={5}, tolerancia eje={6:0.######}m, horiz={7}, vert={8}, paso suelto={9}",
+                finalStats.TotalDvLines2d,
+                finalStats.RelevanceThresholdM,
+                box.Width,
+                finalStats.DiscardedTooShort,
+                finalStats.DiscardedOther,
+                finalList.Count,
+                finalStats.AxisToleranceM,
+                nH,
+                nV,
+                finalStats.UsedLooseEdgePass.ToString()))
+            log?.Info("Extremos elegidos — izq: " & FormatLineLog(res.LeftVertical) &
+                      " | der: " & FormatLineLog(res.RightVertical) &
+                      " | inf: " & FormatLineLog(res.BottomHorizontal) &
+                      " | sup: " & FormatLineLog(res.TopHorizontal))
+        End If
 
         result = res
         Return True
     End Function
-
-    Private Shared Sub CollectInner(view As DrawingView, box As ViewSheetBoundingBox, log As DimensionLogger,
-                                    outList As List(Of DvLineSheetInfo), relevanceThreshold As Double, modelEdgesOnly As Boolean,
-                                    stats As ExtremeLineBuildStats)
-        Dim linesCol As DVLines2d = Nothing
-        Try
-            linesCol = view.DVLines2d
-        Catch ex As Exception
-            log?.ComFail("DrawingView.DVLines2d", "DrawingView", ex)
-            Return
-        End Try
-        If linesCol Is Nothing Then Return
-
-        Dim n As Integer = 0
-        Try
-            n = linesCol.Count
-        Catch ex As Exception
-            log?.ComFail("DVLines2d.Count", "DVLines2d", ex)
-            Return
-        End Try
-
-        If stats IsNot Nothing Then stats.TotalDvLines2d = n
-
-        Dim modelEdge As Integer = CInt(SolidEdgeConstants.GraphicMemberEdgeTypeConstants.seModelEdgeType)
-
-        For i As Integer = 1 To n
-            Dim ln As DVLine2d = Nothing
-            Try
-                ln = CType(linesCol.Item(i), DVLine2d)
-            Catch ex As Exception
-                log?.Warn("Línea descartada por no ser válida para acotar (Item " & i.ToString(CultureInfo.InvariantCulture) & "): " & ex.Message)
-                If stats IsNot Nothing Then stats.DiscardedOther += 1
-                Continue For
-            End Try
-            If ln Is Nothing Then
-                log?.Warn("Línea descartada por no ser válida para acotar (Item " & i.ToString(CultureInfo.InvariantCulture) & "): referencia Nothing")
-                If stats IsNot Nothing Then stats.DiscardedOther += 1
-                Continue For
-            End If
-
-            If modelEdgesOnly Then
-                Dim et As Integer = -1
-                Try
-                    et = CInt(ln.EdgeType)
-                Catch
-                    et = -1
-                End Try
-                If et >= 0 AndAlso et <> modelEdge Then
-                    If stats IsNot Nothing Then stats.DiscardedOther += 1
-                    Continue For
-                End If
-            End If
-
-            Dim vx1 As Double, vy1 As Double, vx2 As Double, vy2 As Double
-            Try
-                ln.GetStartPoint(vx1, vy1)
-                ln.GetEndPoint(vx2, vy2)
-            Catch ex As Exception
-                log?.Warn("Línea descartada por no ser válida para acotar (Item " & i.ToString(CultureInfo.InvariantCulture) & " GetStart/EndPoint): " & ex.Message)
-                If stats IsNot Nothing Then stats.DiscardedOther += 1
-                Continue For
-            End Try
-
-            Dim sx1 As Double, sy1 As Double, sx2 As Double, sy2 As Double
-            Try
-                view.ViewToSheet(vx1, vy1, sx1, sy1)
-                view.ViewToSheet(vx2, vy2, sx2, sy2)
-            Catch ex As Exception
-                log?.Warn("Línea descartada por no ser válida para acotar (Item " & i.ToString(CultureInfo.InvariantCulture) & " ViewToSheet): " & ex.Message)
-                If stats IsNot Nothing Then stats.DiscardedOther += 1
-                Continue For
-            End Try
-
-            If Not AreFinite(sx1, sy1, sx2, sy2) Then
-                log?.Warn("Línea descartada por no ser válida para acotar (Item " & i.ToString(CultureInfo.InvariantCulture) & "): coordenadas no finitas")
-                If stats IsNot Nothing Then stats.DiscardedOther += 1
-                Continue For
-            End If
-
-            Dim dx As Double = sx2 - sx1
-            Dim dy As Double = sy2 - sy1
-            Dim len As Double = Math.Sqrt(dx * dx + dy * dy)
-            If len < relevanceThreshold Then
-                If stats IsNot Nothing Then stats.DiscardedTooShort += 1
-                Continue For
-            End If
-
-            outList.Add(New DvLineSheetInfo With {
-                .Line = ln,
-                .SourceIndex = i,
-                .Sx1 = sx1, .Sy1 = sy1, .Sx2 = sx2, .Sy2 = sy2,
-                .Length = len
-            })
-        Next
-    End Sub
 
     Private Shared Sub PickExtremeLines(lines As List(Of DvLineSheetInfo), res As ExtremeDvLinesResult, axisTol As Double)
         Dim vert = lines.Where(Function(L) IsVerticalForExtremes(L, axisTol)).ToList()

@@ -30,6 +30,7 @@ Public Module DimensionKeypointRelinkLabV2
         Dim createdForCleanup As New List(Of Object)()
         Dim existingRelink As TriStateLab = TriStateLab.Unknown
         Dim adboConnected As TriStateLab = TriStateLab.Unknown
+        Dim adboBehaviorConnected As TriStateLab = TriStateLab.Unknown
         Dim auxDeleteKeeps As TriStateLab = TriStateLab.Unknown
         Dim auxHiddenViable As TriStateLab = TriStateLab.Unknown
 
@@ -43,10 +44,17 @@ Public Module DimensionKeypointRelinkLabV2
             Try : CallByName(sheet, "Activate", CallType.Method) : Catch : End Try
 
             Dim dims As Dimensions = CType(sheet.Dimensions, Dimensions)
+            ForensicAnalyzeAllDimensions(dims, sheet, log)
             Dim targetDim As Object = FindTargetDimension(dims, log)
-            If targetDim Is Nothing Then Exit Sub
-
-            IntrospectDimension(targetDim, log)
+            If targetDim Is Nothing Then
+                log("[DIMLAB][TARGET_DIM] exact_match=False -> fallback=nearest")
+                targetDim = FindNearestDimensionByValue(dims, TargetValueM, log)
+            End If
+            If targetDim IsNot Nothing Then
+                IntrospectDimension(targetDim, log)
+            Else
+                log("[DIMLAB][TARGET_DIM] fallback_not_found=True (se omite TEST_A y se continúa)")
+            End If
 
             Dim dv As DrawingView = FindPrimaryOrthogonalView(sheet, log)
             If dv Is Nothing Then
@@ -61,8 +69,14 @@ Public Module DimensionKeypointRelinkLabV2
                 Exit Sub
             End If
 
-            existingRelink = If(RunTestA(targetDim, leftLine, rightLine, leftStart, leftEnd, rightStart, rightEnd, leftMid, rightMid, draftDoc, log), TriStateLab.Yes, TriStateLab.No)
+            If targetDim IsNot Nothing Then
+                existingRelink = If(RunTestA(targetDim, leftLine, rightLine, leftStart, leftEnd, rightStart, rightEnd, leftMid, rightMid, draftDoc, log), TriStateLab.Yes, TriStateLab.No)
+            Else
+                existingRelink = TriStateLab.Unknown
+                log("[DIMLAB][TEST_A][SKIP] reason=no_target_dimension")
+            End If
             adboConnected = RunTestB(dims, dv, leftLine, rightLine, leftMid, rightMid, draftDoc, createdForCleanup, log)
+            adboBehaviorConnected = RunTestB_AssociativityByBehavior(dims, dv, leftLine, rightLine, leftMid, rightMid, draftDoc, createdForCleanup, log)
             auxDeleteKeeps = RunTestC(dims, sheet, draftDoc, leftMid, rightMid, createdForCleanup, log)
             auxHiddenViable = RunTestD(dims, sheet, draftDoc, leftMid, rightMid, createdForCleanup, log)
 
@@ -82,6 +96,7 @@ Public Module DimensionKeypointRelinkLabV2
             log("[DIMLAB][SUMMARY]")
             log("existing_dimension_relink_possible=" & ToSummary(existingRelink))
             log("adbo_to_dv_connected=" & ToSummary(adboConnected))
+            log("adbo_behavior_connected=" & ToSummary(adboBehaviorConnected))
             log("aux_line_delete_keeps_dimension=" & ToSummary(auxDeleteKeeps))
             log("aux_line_hidden_viable=" & ToSummary(auxHiddenViable))
             log("recommended_strategy=" & recommended)
@@ -112,6 +127,101 @@ Public Module DimensionKeypointRelinkLabV2
         Next
         Return Nothing
     End Function
+
+    Private Function FindNearestDimensionByValue(ByVal dims As Dimensions, ByVal target As Double, ByVal log As Action(Of String)) As Object
+        Dim best As Object = Nothing
+        Dim bestDelta As Double = Double.PositiveInfinity
+        For i As Integer = 1 To dims.Count
+            Dim d As Object = Nothing
+            Try : d = dims.Item(i) : Catch : d = Nothing : End Try
+            If d Is Nothing Then Continue For
+            Dim v As Double = ReadDimensionValueSafe(d)
+            If Double.IsNaN(v) Then Continue For
+            Dim delta As Double = Math.Abs(v - target)
+            If delta < bestDelta Then
+                bestDelta = delta
+                best = d
+            End If
+        Next
+        If best IsNot Nothing Then
+            log("[DIMLAB][TARGET_DIM][FALLBACK] value=" & ReadDimensionValueSafe(best).ToString("G17", CultureInfo.InvariantCulture) &
+                " delta=" & bestDelta.ToString("G17", CultureInfo.InvariantCulture) &
+                " type=" & SafeTypeName(best))
+        End If
+        Return best
+    End Function
+
+    Private Sub ForensicAnalyzeAllDimensions(ByVal dims As Dimensions, ByVal sheet As Sheet, ByVal log As Action(Of String))
+        If dims Is Nothing Then Return
+        log("[DIMLAB][FORENSIC][START] dims=" & dims.Count.ToString(CultureInfo.InvariantCulture))
+        For i As Integer = 1 To dims.Count
+            Dim d As Object = Nothing
+            Try : d = dims.Item(i) : Catch : d = Nothing : End Try
+            If d Is Nothing Then Continue For
+
+            log("[DIMLAB][FORENSIC][DIM] idx=" & i.ToString(CultureInfo.InvariantCulture) &
+                " type=" & FormatOne(SafeGet(d, "Type")) &
+                " value=" & FormatOne(SafeGet(d, "Value")) &
+                " style=" & SafeStyleName(d) &
+                " status=" & FormatOne(SafeGet(d, "StatusOfDimension")) &
+                " trackDistance=" & FormatOne(SafeGet(d, "TrackDistance")) &
+                " trackAngle=" & FormatOne(SafeGet(d, "TrackAngle")) &
+                " parentType=" & SafeTypeName(SafeGet(d, "Parent")) &
+                " layer=" & FormatOne(SafeGet(SafeGet(d, "Layer"), "Name")))
+
+            Dim relCount As Integer = ReadRelatedCount(d)
+            Dim gmHits As Integer = 0
+            Dim dvHits As Integer = 0
+            Dim refHits As Integer = 0
+            Dim dvName As String = ""
+            log("[DIMLAB][FORENSIC][RELATED_COUNT] idx=" & i.ToString(CultureInfo.InvariantCulture) & " count=" & relCount.ToString(CultureInfo.InvariantCulture))
+
+            For r As Integer = 0 To relCount + 2
+                Try
+                    Dim o As Object = CallByName(d, "GetRelated", CallType.Method, r)
+                    If o Is Nothing Then Continue For
+                    Dim tn As String = SafeTypeName(o)
+                    If tn.IndexOf("GraphicMember", StringComparison.OrdinalIgnoreCase) >= 0 Then gmHits += 1
+                    If tn.IndexOf("Reference", StringComparison.OrdinalIgnoreCase) >= 0 Then refHits += 1
+                    If tn.IndexOf("DrawingView", StringComparison.OrdinalIgnoreCase) >= 0 Then
+                        dvHits += 1
+                        If String.IsNullOrWhiteSpace(dvName) Then dvName = SafeText(SafeGet(o, "Name"))
+                    End If
+                    If String.IsNullOrWhiteSpace(dvName) Then
+                        Dim odv As Object = SafeGet(o, "DrawingView")
+                        If odv IsNot Nothing Then
+                            dvName = SafeText(SafeGet(odv, "Name"))
+                            dvHits += 1
+                        End If
+                    End If
+                    log("[DIMLAB][FORENSIC][RELATED] idx=" & i.ToString(CultureInfo.InvariantCulture) &
+                        " relIdx=" & r.ToString(CultureInfo.InvariantCulture) &
+                        " type=" & tn)
+                Catch
+                End Try
+            Next
+
+            Dim relSig As String = BuildRelatedSignature(d)
+            Dim floating As Boolean = (relCount = 0)
+            log("[DIMLAB][FORENSIC][LINK] idx=" & i.ToString(CultureInfo.InvariantCulture) &
+                " drawingView=" & If(String.IsNullOrWhiteSpace(dvName), "?", dvName) &
+                " dvHits=" & dvHits.ToString(CultureInfo.InvariantCulture) &
+                " graphicMemberHits=" & gmHits.ToString(CultureInfo.InvariantCulture) &
+                " referenceHits=" & refHits.ToString(CultureInfo.InvariantCulture) &
+                " floating=" & floating.ToString(CultureInfo.InvariantCulture) &
+                " relSig=" & relSig)
+
+            Try
+                Dim dd As Object = CallByName(d, "GetDisplayData", CallType.Method)
+                log("[DIMLAB][FORENSIC][DISPLAY] idx=" & i.ToString(CultureInfo.InvariantCulture) &
+                    " lineCount=" & ReadCountMethod(dd, "GetLineCount").ToString(CultureInfo.InvariantCulture) &
+                    " arcCount=" & ReadCountMethod(dd, "GetArcCount").ToString(CultureInfo.InvariantCulture))
+            Catch ex As Exception
+                log("[DIMLAB][FORENSIC][DISPLAY] idx=" & i.ToString(CultureInfo.InvariantCulture) & " error=" & ex.Message)
+            End Try
+        Next
+        log("[DIMLAB][FORENSIC][END]")
+    End Sub
 
     Private Sub IntrospectDimension(ByVal d As Object, ByVal log As Action(Of String))
         Dim methods As String() = {"GetValueEx", "UpdateStatus", "Range", "RangeBox", "GetRelatedCount", "GetRelated", "GetDisplayData", "GetTextOffsets", "SetTextOffsets", "GetKeyPoint", "SetKeyPoint", "SetConnect"}
@@ -252,6 +362,155 @@ Public Module DimensionKeypointRelinkLabV2
         Dim rc As Integer = ReadRelatedCount(d)
         If rc >= 2 AndAlso IsDimensionConnectedToView(dv, d) Then Return TriStateLab.Yes
         If rc > 0 Then Return TriStateLab.Unknown
+        Return TriStateLab.No
+    End Function
+
+    Private Function RunTestB_AssociativityByBehavior(
+        ByVal dims As Dimensions,
+        ByVal dv As DrawingView,
+        ByVal leftLine As Object,
+        ByVal rightLine As Object,
+        ByVal leftMid As Pt2,
+        ByVal rightMid As Pt2,
+        ByVal draftDoc As DraftDocument,
+        ByVal created As List(Of Object),
+        ByVal log As Action(Of String)) As TriStateLab
+
+        Dim best As TriStateLab = TriStateLab.No
+
+        ' Intento 1: ADBO sobre DVLine2d.
+        Dim d As Object = Nothing
+        log("[DIMLAB][ASSOC_BEHAVIOR][TRY] method=ADBO source=DVLINE flags=False")
+        Try
+            d = dims.AddDistanceBetweenObjects(leftLine, leftMid.X, leftMid.Y, 0.0R, False, rightLine, rightMid.X, rightMid.Y, 0.0R, False)
+            If d IsNot Nothing Then
+                created.Add(d)
+                Dim r = EvaluateAssociativityBehavior(d, dv, draftDoc, log, "ADBO_DVLINE_FFalse")
+                If r = TriStateLab.Yes Then Return TriStateLab.Yes
+                If r = TriStateLab.Unknown Then best = TriStateLab.Unknown
+            End If
+        Catch ex As Exception
+            log("[DIMLAB][ASSOC_BEHAVIOR][FAIL] method=ADBO source=DVLINE flags=False error=" & ex.Message)
+        End Try
+
+        ' Intento 2: ADBO sobre DVLine2d con flags=True y puntos de extremo.
+        Dim dFlags As Object = Nothing
+        log("[DIMLAB][ASSOC_BEHAVIOR][TRY] method=ADBO source=DVLINE flags=True")
+        Try
+            dFlags = dims.AddDistanceBetweenObjects(leftLine, leftMid.X, leftMid.Y, 0.0R, True, rightLine, rightMid.X, rightMid.Y, 0.0R, True)
+            If dFlags IsNot Nothing Then
+                created.Add(dFlags)
+                Dim r = EvaluateAssociativityBehavior(dFlags, dv, draftDoc, log, "ADBO_DVLINE_FTrue")
+                If r = TriStateLab.Yes Then Return TriStateLab.Yes
+                If r = TriStateLab.Unknown Then best = TriStateLab.Unknown
+            End If
+        Catch ex As Exception
+            log("[DIMLAB][ASSOC_BEHAVIOR][FAIL] method=ADBO source=DVLINE flags=True error=" & ex.Message)
+        End Try
+
+        ' Intento 2: ADBO sobre Reference.
+        Dim lref As Object = SafeGet(leftLine, "Reference")
+        Dim rref As Object = SafeGet(rightLine, "Reference")
+        If lref IsNot Nothing AndAlso rref IsNot Nothing Then
+            Dim dRef As Object = Nothing
+            log("[DIMLAB][ASSOC_BEHAVIOR][TRY] method=ADBO source=REFERENCE flags=False")
+            Try
+                dRef = dims.AddDistanceBetweenObjects(lref, leftMid.X, leftMid.Y, 0.0R, False, rref, rightMid.X, rightMid.Y, 0.0R, False)
+                If dRef IsNot Nothing Then
+                    created.Add(dRef)
+                    Dim r = EvaluateAssociativityBehavior(dRef, dv, draftDoc, log, "ADBO_REFERENCE_FFalse")
+                    If r = TriStateLab.Yes Then Return TriStateLab.Yes
+                    If r = TriStateLab.Unknown Then best = TriStateLab.Unknown
+                End If
+            Catch ex As Exception
+                log("[DIMLAB][ASSOC_BEHAVIOR][FAIL] method=ADBO source=REFERENCE flags=False error=" & ex.Message)
+            End Try
+
+            Dim dRefFlags As Object = Nothing
+            log("[DIMLAB][ASSOC_BEHAVIOR][TRY] method=ADBO source=REFERENCE flags=True")
+            Try
+                dRefFlags = dims.AddDistanceBetweenObjects(lref, leftMid.X, leftMid.Y, 0.0R, True, rref, rightMid.X, rightMid.Y, 0.0R, True)
+                If dRefFlags IsNot Nothing Then
+                    created.Add(dRefFlags)
+                    Dim r = EvaluateAssociativityBehavior(dRefFlags, dv, draftDoc, log, "ADBO_REFERENCE_FTrue")
+                    If r = TriStateLab.Yes Then Return TriStateLab.Yes
+                    If r = TriStateLab.Unknown Then best = TriStateLab.Unknown
+                End If
+            Catch ex As Exception
+                log("[DIMLAB][ASSOC_BEHAVIOR][FAIL] method=ADBO source=REFERENCE flags=True error=" & ex.Message)
+            End Try
+
+            ' Intento 3: ADBOEX sobre Reference.
+            Dim dRefEx As Object = Nothing
+            log("[DIMLAB][ASSOC_BEHAVIOR][TRY] method=ADBOEX source=REFERENCE")
+            Try
+                dRefEx = CallByName(dims, "AddDistanceBetweenObjectsEX", CallType.Method, lref, rref, leftMid.X, leftMid.Y, rightMid.X, rightMid.Y)
+                If dRefEx IsNot Nothing Then
+                    created.Add(dRefEx)
+                    Dim r = EvaluateAssociativityBehavior(dRefEx, dv, draftDoc, log, "ADBOEX_REFERENCE")
+                    If r = TriStateLab.Yes Then Return TriStateLab.Yes
+                    If r = TriStateLab.Unknown Then best = TriStateLab.Unknown
+                End If
+            Catch ex As Exception
+                log("[DIMLAB][ASSOC_BEHAVIOR][FAIL] method=ADBOEX source=REFERENCE error=" & ex.Message)
+            End Try
+        Else
+            log("[DIMLAB][ASSOC_BEHAVIOR][SKIP] source=REFERENCE reason=missing_reference")
+        End If
+
+        Return best
+    End Function
+
+    Private Function EvaluateAssociativityBehavior(ByVal d As Object, ByVal dv As DrawingView, ByVal draftDoc As DraftDocument, ByVal log As Action(Of String), ByVal tag As String) As TriStateLab
+        Dim beforeVal As Double = ReadDimensionValueSafe(d)
+        Dim beforeTrack As Double = ReadTrackDistanceSafe(d)
+        Dim beforeRange As String = ReadDimensionRangeSignature(d)
+        log("[DIMLAB][ASSOC_BEHAVIOR][BEFORE] tag=" & tag & " value=" & beforeVal.ToString("G17", CultureInfo.InvariantCulture) &
+            " trackDistance=" & beforeTrack.ToString("G17", CultureInfo.InvariantCulture) &
+            " range=" & beforeRange)
+
+        Dim ox As Double = 0.0R, oy As Double = 0.0R
+        Dim originReadOk As Boolean = TryReadViewOrigin(dv, ox, oy)
+        Dim moved As Boolean = False
+        Dim dx As Double = 0.003R
+        Dim dy As Double = 0.0R
+        moved = TryMoveViewOrigin(dv, ox + dx, oy + dy)
+        If moved Then
+            log("[DIMLAB][ASSOC_BEHAVIOR][MOVE_VIEW] tag=" & tag & " applied=True dx=" & dx.ToString("G17", CultureInfo.InvariantCulture) & " dy=" & dy.ToString("G17", CultureInfo.InvariantCulture))
+        Else
+            log("[DIMLAB][ASSOC_BEHAVIOR][MOVE_VIEW] tag=" & tag & " applied=False error=no_supported_origin_signature")
+        End If
+
+        Try : CallByName(draftDoc, "UpdateAll", CallType.Method, True) : Catch : End Try
+
+        Dim afterVal As Double = ReadDimensionValueSafe(d)
+        Dim afterTrack As Double = ReadTrackDistanceSafe(d)
+        Dim afterRange As String = ReadDimensionRangeSignature(d)
+        log("[DIMLAB][ASSOC_BEHAVIOR][AFTER] tag=" & tag & " value=" & afterVal.ToString("G17", CultureInfo.InvariantCulture) &
+            " trackDistance=" & afterTrack.ToString("G17", CultureInfo.InvariantCulture) &
+            " range=" & afterRange)
+
+        If moved AndAlso originReadOk Then
+            If TryMoveViewOrigin(dv, ox, oy) Then
+                Try : CallByName(draftDoc, "UpdateAll", CallType.Method, True) : Catch : End Try
+                log("[DIMLAB][ASSOC_BEHAVIOR][MOVE_VIEW_RESTORE] tag=" & tag & " ok=True")
+            Else
+                log("[DIMLAB][ASSOC_BEHAVIOR][MOVE_VIEW_RESTORE] tag=" & tag & " ok=False error=no_supported_origin_signature")
+            End If
+        End If
+
+        Dim changedGeom As Boolean =
+            (Not String.Equals(beforeRange, afterRange, StringComparison.Ordinal)) OrElse
+            Math.Abs(beforeTrack - afterTrack) > 0.0000001R
+        Dim valueStable As Boolean = (Not Double.IsNaN(beforeVal) AndAlso Not Double.IsNaN(afterVal) AndAlso Math.Abs(beforeVal - afterVal) < 0.00001R)
+        Dim connectedFunctional As Boolean = moved AndAlso changedGeom AndAlso valueStable
+
+        log("[DIMLAB][ASSOC_BEHAVIOR][RESULT] tag=" & tag & " connected_functional=" & connectedFunctional.ToString(CultureInfo.InvariantCulture) &
+            " changedGeom=" & changedGeom.ToString(CultureInfo.InvariantCulture) &
+            " valueStable=" & valueStable.ToString(CultureInfo.InvariantCulture))
+
+        If connectedFunctional Then Return TriStateLab.Yes
+        If moved Then Return TriStateLab.Unknown
         Return TriStateLab.No
     End Function
 
@@ -418,6 +677,25 @@ Public Module DimensionKeypointRelinkLabV2
         Return Double.NaN
     End Function
 
+    Private Function ReadTrackDistanceSafe(ByVal dimObj As Object) As Double
+        Try : Return Convert.ToDouble(CallByName(dimObj, "TrackDistance", CallType.Get), CultureInfo.InvariantCulture) : Catch : End Try
+        Try : Return Convert.ToDouble(CallByName(dimObj, "AbsoluteTrackDistance", CallType.Get), CultureInfo.InvariantCulture) : Catch : End Try
+        Return Double.NaN
+    End Function
+
+    Private Function ReadDimensionRangeSignature(ByVal dimObj As Object) As String
+        Try
+            Dim x1 As Double = 0, y1 As Double = 0, x2 As Double = 0, y2 As Double = 0
+            CallByName(dimObj, "Range", CallType.Method, x1, y1, x2, y2)
+            Return x1.ToString("G17", CultureInfo.InvariantCulture) & "," &
+                   y1.ToString("G17", CultureInfo.InvariantCulture) & "," &
+                   x2.ToString("G17", CultureInfo.InvariantCulture) & "," &
+                   y2.ToString("G17", CultureInfo.InvariantCulture)
+        Catch
+            Return "NA"
+        End Try
+    End Function
+
     Private Function IsDimensionComAlive(ByVal dimObj As Object) As Boolean
         Try : Dim _x = CallByName(dimObj, "StatusOfDimension", CallType.Get) : Return True : Catch : End Try
         Try : Dim _y = CallByName(dimObj, "UpdateStatus", CallType.Method) : Return True : Catch : End Try
@@ -485,6 +763,91 @@ Public Module DimensionKeypointRelinkLabV2
         If TypeOf value Is Double Then Return DirectCast(value, Double).ToString("G17", CultureInfo.InvariantCulture)
         If TypeOf value Is IFormattable Then Return DirectCast(value, IFormattable).ToString(Nothing, CultureInfo.InvariantCulture)
         Return Convert.ToString(value, CultureInfo.InvariantCulture)
+    End Function
+
+    Private Function SafeGet(ByVal obj As Object, ByVal member As String) As Object
+        If obj Is Nothing Then Return Nothing
+        Try
+            Return CallByName(obj, member, CallType.Get)
+        Catch
+            Return Nothing
+        End Try
+    End Function
+
+    Private Function SafeText(ByVal value As Object) As String
+        If value Is Nothing Then Return ""
+        Try
+            Return Convert.ToString(value, CultureInfo.InvariantCulture)
+        Catch
+            Return ""
+        End Try
+    End Function
+
+    Private Function SafeToDouble(ByVal value As Object) As Double
+        If value Is Nothing Then Return 0.0R
+        Try
+            Return Convert.ToDouble(value, CultureInfo.InvariantCulture)
+        Catch
+            Return 0.0R
+        End Try
+    End Function
+
+    Private Function TryReadViewOrigin(ByVal dv As DrawingView, ByRef x As Double, ByRef y As Double) As Boolean
+        x = 0.0R : y = 0.0R
+        If dv Is Nothing Then Return False
+        Try
+            x = Convert.ToDouble(CallByName(dv, "OriginX", CallType.Get), CultureInfo.InvariantCulture)
+            y = Convert.ToDouble(CallByName(dv, "OriginY", CallType.Get), CultureInfo.InvariantCulture)
+            Return True
+        Catch
+        End Try
+        Try
+            Dim p As Object = CallByName(dv, "Origin", CallType.Get)
+            x = SafeToDouble(SafeGet(p, "X"))
+            y = SafeToDouble(SafeGet(p, "Y"))
+            Return True
+        Catch
+        End Try
+        Try
+            Dim args As Object() = {0.0R, 0.0R}
+            dv.GetType().InvokeMember("GetOrigin", Reflection.BindingFlags.InvokeMethod Or Reflection.BindingFlags.Public Or Reflection.BindingFlags.Instance, Nothing, dv, args)
+            x = SafeToDouble(args(0))
+            y = SafeToDouble(args(1))
+            Return True
+        Catch
+        End Try
+        Return False
+    End Function
+
+    Private Function TryMoveViewOrigin(ByVal dv As DrawingView, ByVal x As Double, ByVal y As Double) As Boolean
+        If dv Is Nothing Then Return False
+        Try
+            CallByName(dv, "OriginX", CallType.Let, x)
+            CallByName(dv, "OriginY", CallType.Let, y)
+            Return True
+        Catch
+        End Try
+        Try
+            Dim p As Object = CallByName(dv, "Origin", CallType.Get)
+            If p IsNot Nothing Then
+                CallByName(p, "X", CallType.Let, x)
+                CallByName(p, "Y", CallType.Let, y)
+                Return True
+            End If
+        Catch
+        End Try
+        Try
+            CallByName(dv, "SetOrigin", CallType.Method, x, y)
+            Return True
+        Catch
+        End Try
+        Try
+            Dim args As Object() = {x, y}
+            dv.GetType().InvokeMember("SetOrigin", Reflection.BindingFlags.InvokeMethod Or Reflection.BindingFlags.Public Or Reflection.BindingFlags.Instance, Nothing, dv, args)
+            Return True
+        Catch
+        End Try
+        Return False
     End Function
 
     Private Function ToSummary(ByVal v As TriStateLab) As String

@@ -462,15 +462,15 @@ Partial Class MainForm
         Me.flowGeneration.Controls.Add(Me.cmbTitleBlockSource)
         Me.flowGeneration.Controls.Add(Me.chkUnitHorizontalExteriorTest)
         Me.chkDrawingViewDimensioningLab.AutoSize = True
-        Me.chkDrawingViewDimensioningLab.Text = "Laboratorio DIMLAB (exclusivo, no motor principal)"
+        Me.chkDrawingViewDimensioningLab.Text = ""
         Me.chkDrawingViewDimensioningLab.Checked = False
         Me.flowGeneration.Controls.Add(Me.chkDrawingViewDimensioningLab)
         Me.chkDimLabInteractivePause.AutoSize = True
-        Me.chkDimLabInteractivePause.Text = "DIMLAB: modo forense (VIS0, pausa, sin exportar/cerrar DFT)"
+        Me.chkDimLabInteractivePause.Text = ""
         Me.chkDimLabInteractivePause.Checked = True
         Me.flowGeneration.Controls.Add(Me.chkDimLabInteractivePause)
         Me.lblDimLabMode.AutoSize = True
-        Me.lblDimLabMode.Text = "DIMLAB modo:"
+        Me.lblDimLabMode.Text = ""
         Me.flowGeneration.Controls.Add(Me.lblDimLabMode)
         Me.cmbDimLabMode.DropDownStyle = ComboBoxStyle.DropDownList
         Me.cmbDimLabMode.Width = 280
@@ -478,15 +478,15 @@ Partial Class MainForm
         Me.cmbDimLabMode.SelectedIndex = 2
         Me.flowGeneration.Controls.Add(Me.cmbDimLabMode)
         Me.chkDimLabVisibleProbe.AutoSize = True
-        Me.chkDimLabVisibleProbe.Text = "DIMLAB: sonda VIS0 (linea + cota 60 mm)"
+        Me.chkDimLabVisibleProbe.Text = ""
         Me.chkDimLabVisibleProbe.Checked = False
         Me.flowGeneration.Controls.Add(Me.chkDimLabVisibleProbe)
         Me.chkDimLabAlternativePlacement.AutoSize = True
-        Me.chkDimLabAlternativePlacement.Text = "DIMLAB: nota carril horizontal alternativo (solo log)"
+        Me.chkDimLabAlternativePlacement.Text = ""
         Me.chkDimLabAlternativePlacement.Checked = False
         Me.flowGeneration.Controls.Add(Me.chkDimLabAlternativePlacement)
         Me.btnDimLabRun.AutoSize = True
-        Me.btnDimLabRun.Text = "[LAB] DIMLAB"
+        Me.btnDimLabRun.Text = ""
         Me.btnDimLabRun.Margin = New Padding(0, 4, 0, 0)
         Me.flowGeneration.Controls.Add(Me.btnDimLabRun)
         Dim gc As CheckBox() = {Me.chkCreateDft, Me.chkCreatePdf, Me.chkCreateDxfDraft, Me.chkAutoDimensioning, Me.chkPmiRetrievalProbe, Me.chkExperimentalPmiModelView, Me.chkCreateFlatDxf, Me.chkOpenOutput, Me.chkOverwrite, Me.chkUniqueComponents, Me.chkDetailedLog, Me.chkDebugTemplates, Me.chkExperimentalDraftGeometryDiagnostics, Me.chkKeepSolidEdgeVisible, Me.chkInsertProperties}

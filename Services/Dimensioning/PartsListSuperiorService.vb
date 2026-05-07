@@ -154,11 +154,11 @@ Public NotInheritable Class PartsListSuperiorService
             Lg("[PARTSLIST][SET][WARN] property=ShowColumnHeader error=" & ex.Message)
         End Try
 
-        ApplyPartsListTableStyleAndSavedSettings(pl, config, Lg)
+        ApplyPartsListTableStyleAndSavedSettings(pl, config, Lg, performUpdate:=False)
 
         Dim oxT As Double = config.PartsListOriginX
         Dim oyT As Double = config.PartsListOriginY
-        Lg("[PARTSLIST][ORIGIN][SET] x=" & FormatInv(oxT) & " y=" & FormatInv(oyT))
+        Lg("[PARTSLIST][ORIGIN][TRY] x=" & FormatInv(oxT) & " y=" & FormatInv(oyT))
         TryEnsurePartsListOnActiveSheet(pl, sheet, Lg)
         Try
             CallByName(pl, "SetOrigin", CallType.Method, oxT, oyT)
@@ -176,10 +176,17 @@ Public NotInheritable Class PartsListSuperiorService
         Dim oxA As Double, oyA As Double
         TryGetOrigin(pl, oxA, oyA)
         Lg("[PARTSLIST][ORIGIN][AFTER] x=" & FormatInv(oxA) & " y=" & FormatInv(oyA))
+        Dim tolO As Double = 0.001R
+        If Math.Abs(oxA - oxT) > tolO OrElse Math.Abs(oyA - oyT) > tolO Then
+            Lg("[PARTSLIST][ORIGIN][WARN] requested=(" & FormatInv(oxT) & "," & FormatInv(oyT) & ") actual=(" & FormatInv(oxA) & "," & FormatInv(oyA) & ")")
+        End If
 
         LogGetListOfSavedSettingsAllVariants(pl, config, Lg)
 
+        Dim rowsP As Integer = SafeCount(CallByNameSafe(pl, "Rows"))
+        Dim colsP As Integer = SafeCount(CallByNameSafe(pl, "Columns"))
         LogPartsListAuditDetailed(pl, config, Lg)
+        DimensionProductionRunSummary.RecordPartsList(True, rowsP, colsP)
         LogPartsListCellSample(pl, Lg)
         RunPartsListTemplateRefcheck(pl, config, Lg)
 
@@ -230,7 +237,7 @@ Public NotInheritable Class PartsListSuperiorService
         End Try
     End Function
 
-    Private Shared Sub ApplyPartsListTableStyleAndSavedSettings(pl As Object, config As DimensioningNormConfig, log As Action(Of String))
+    Private Shared Sub ApplyPartsListTableStyleAndSavedSettings(pl As Object, config As DimensioningNormConfig, log As Action(Of String), Optional performUpdate As Boolean = True)
         If pl Is Nothing OrElse config Is Nothing Then Return
         Dim tsName = If(config.PartsListTableStyleName, "").Trim()
         Dim ssName = If(config.PartsListSavedSettingsName, "").Trim()
@@ -249,12 +256,14 @@ Public NotInheritable Class PartsListSuperiorService
         Catch ex As Exception
             log?.Invoke("[PARTSLIST][SAVEDSETTINGS][WARN] " & ex.Message)
         End Try
-        Try
-            CallByName(pl, "Update", CallType.Method)
-            log?.Invoke("[PARTSLIST][UPDATE][OK]")
-        Catch ex As Exception
-            log?.Invoke("[PARTSLIST][UPDATE][FAIL] " & ex.Message)
-        End Try
+        If performUpdate Then
+            Try
+                CallByName(pl, "Update", CallType.Method)
+                log?.Invoke("[PARTSLIST][UPDATE][OK]")
+            Catch ex As Exception
+                log?.Invoke("[PARTSLIST][UPDATE][FAIL] " & ex.Message)
+            End Try
+        End If
     End Sub
 
     Private Shared Function NormalizeDrawingViewList(sheet As Sheet, drawingViews As IList(Of DrawingView)) As List(Of DrawingView)
@@ -386,10 +395,10 @@ Public NotInheritable Class PartsListSuperiorService
             CallByName(pl, "ShowColumnHeader", CallType.Let, True)
         Catch
         End Try
-        ApplyPartsListTableStyleAndSavedSettings(pl, config, log)
+        ApplyPartsListTableStyleAndSavedSettings(pl, config, log, performUpdate:=False)
         Dim oxT = config.PartsListOriginX
         Dim oyT = config.PartsListOriginY
-        log?.Invoke("[PARTSLIST][ORIGIN][SET] x=" & FormatInv(oxT) & " y=" & FormatInv(oyT))
+        log?.Invoke("[PARTSLIST][ORIGIN][TRY] x=" & FormatInv(oxT) & " y=" & FormatInv(oyT))
         TryEnsurePartsListOnActiveSheet(pl, sheet, log)
         Try
             CallByName(pl, "SetOrigin", CallType.Method, oxT, oyT)
@@ -405,6 +414,10 @@ Public NotInheritable Class PartsListSuperiorService
         Dim oxA As Double, oyA As Double
         TryGetOrigin(pl, oxA, oyA)
         log?.Invoke("[PARTSLIST][ORIGIN][AFTER] x=" & FormatInv(oxA) & " y=" & FormatInv(oyA))
+        Dim tolO As Double = 0.001R
+        If Math.Abs(oxA - oxT) > tolO OrElse Math.Abs(oyA - oyT) > tolO Then
+            log?.Invoke("[PARTSLIST][ORIGIN][WARN] requested=(" & FormatInv(oxT) & "," & FormatInv(oyT) & ") actual=(" & FormatInv(oxA) & "," & FormatInv(oyA) & ")")
+        End If
         LogGetListOfSavedSettingsAllVariants(pl, config, log)
         LogPartsListAuditDetailed(pl, config, log)
         LogPartsListCellSample(pl, log)
@@ -413,6 +426,7 @@ Public NotInheritable Class PartsListSuperiorService
 
     Private Shared Sub LogGetListOfSavedSettingsAllVariants(pl As Object, config As DimensioningNormConfig, log As Action(Of String))
         If pl Is Nothing OrElse config Is Nothing Then Return
+        If GenerationEngineRuntime.ProductionMode AndAlso Not GenerationEngineRuntime.DebugDiagnosticsMode Then Return
         Dim marker = If(config.PartsListSavedSettingsName, "PART_LIST").Trim()
         If String.IsNullOrWhiteSpace(marker) Then marker = "PART_LIST"
 

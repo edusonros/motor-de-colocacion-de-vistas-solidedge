@@ -33,16 +33,23 @@ Public Class PersistedAppSettings
     <DataMember> Public Property IncludeIsometric As Boolean = True
     <DataMember> Public Property IncludeProjectedViews As Boolean = True
     <DataMember> Public Property IncludeFlatInDraftWhenPsm As Boolean = True
-    <DataMember> Public Property EnableAutoDimensioning As Boolean = True
+    <DataMember> Public Property EnableAutoDimensioning As Boolean = False
+
     <DataMember> Public Property EnableDrawingViewDimensioningLab As Boolean = False
-    <DataMember> Public Property EnableDimLabInteractivePause As Boolean = True
+    <DataMember> Public Property RunDropViewsTo2DModelLab As Boolean = False
+    <DataMember> Public Property RunDropCreatedSheetsDimensionLab As Boolean = False
+    <DataMember> Public Property DropCreatedSheetsDimensionLabDebugSave As Boolean = False
+    <DataMember> Public Property RunDVGeometryDimensionPlacementLab As Boolean = True
+    <DataMember> Public Property RunDVGeometryMethodDiscoveryLab As Boolean = False
+
+    <DataMember> Public Property EnableDimLabInteractivePause As Boolean = False
     ''' <summary>Modo DIMLAB serializado como entero (enum DimLabMode). Por defecto Full (=2).</summary>
     <DataMember> Public Property DimLabMode As Integer = 2
     <DataMember> Public Property EnableDimLabVisibleProbe As Boolean = False
     <DataMember> Public Property EnableDimLabAlternativePlacement As Boolean = False
-    <DataMember> Public Property EnableDimLabHorizontalControlInVerticalOnly As Boolean = True
+    <DataMember> Public Property EnableDimLabHorizontalControlInVerticalOnly As Boolean = False
     <DataMember> Public Property DimLabKeepFailedDimensions As Boolean = False
-    <DataMember> Public Property DimLabCleanPreviousLabDimensions As Boolean = True
+    <DataMember> Public Property DimLabCleanPreviousLabDimensions As Boolean = False
     <DataMember> Public Property EnablePmiRetrievalProbe As Boolean = False
     <DataMember> Public Property ExperimentalCreatePMIModelViewIfMissing As Boolean = False
     <DataMember> Public Property ExperimentalDraftGeometryDiagnostics As Boolean = False

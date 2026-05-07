@@ -86,6 +86,16 @@ Public Class JobConfiguration
     Public Property RunUnitHorizontalExteriorDimensionTest As Boolean = False
     ''' <summary>Prueba aislada: PMI del modelo + DrawingView.RetrieveDimensions (no sustituye acotación geométrica).</summary>
     Public Property EnablePmiRetrievalProbe As Boolean = False
+    ''' <summary>Laboratorio experimental independiente: Drop de DrawingViews a 2D Model para probar acotación sobre geometría 2D real.</summary>
+    Public Property RunDropViewsTo2DModelLab As Boolean = False
+    ''' <summary>Laboratorio Drop + detección de sheets creadas por SE y acotación sobre Lines2d reales (prefijo log [DROP_SHEETS]).</summary>
+    Public Property RunDropCreatedSheetsDimensionLab As Boolean = False
+    ''' <summary>Si True con el lab de sheets, ejecuta draft.Save() al final del laboratorio (solo diagnóstico).</summary>
+    Public Property DropCreatedSheetsDimensionLabDebugSave As Boolean = False
+    ''' <summary>Laboratorio exclusivo de acotación sobre DVGeometry (sin Drop, sin 2D Model), con log [DV_DIMLAB].</summary>
+    Public Property RunDVGeometryDimensionPlacementLab As Boolean = True
+    ''' <summary>Laboratorio de descubrimiento de métodos SESDK sobre DVGeometry (prefijo [DV_METHODLAB]).</summary>
+    Public Property RunDVGeometryMethodDiscoveryLab As Boolean = False
     ''' <summary>Si PMI.PMIModelViews.Count=0 y hay PMI.Dimensions, intenta crear un PMIModelView temporal en el modelo (sin guardar) y reintentar RetrieveDimensions.</summary>
     Public Property ExperimentalCreatePMIModelViewIfMissing As Boolean = False
     ''' <summary>Solo PMI: abrir modelo, ejecutar creación fuertemente tipada de PMIModelView y cerrar; sin Draft ni RetrieveDimensions.</summary>
@@ -138,6 +148,9 @@ Public Class JobConfiguration
     Public Property PartListCantidad As String = "1"
     ''' <summary>Si es True, ValidateConfiguration bloquea con campos de metadatos incompletos.</summary>
     Public Property StrictMetadataValidation As Boolean = False
+
+    ''' <summary>Tras guardar el DFT en modo normal no cerrar documento hasta revisión manual en Solid Edge (no es laboratorio).</summary>
+    Public Property KeepDftOpenAfterRun As Boolean = False
 
     Public Property LastDetectedSourceKind As SourceFileKind = SourceFileKind.Unknown
     Public Property UseSelectedComponents As Boolean = False
@@ -195,6 +208,11 @@ Public Class JobConfiguration
             .DimensioningNormConfig = If(DimensioningNormConfig Is Nothing, Nothing, DimensioningNormConfig.Clone()),
             .RunUnitHorizontalExteriorDimensionTest = RunUnitHorizontalExteriorDimensionTest,
             .EnablePmiRetrievalProbe = EnablePmiRetrievalProbe,
+            .RunDropViewsTo2DModelLab = RunDropViewsTo2DModelLab,
+            .RunDropCreatedSheetsDimensionLab = RunDropCreatedSheetsDimensionLab,
+            .DropCreatedSheetsDimensionLabDebugSave = DropCreatedSheetsDimensionLabDebugSave,
+            .RunDVGeometryDimensionPlacementLab = RunDVGeometryDimensionPlacementLab,
+            .RunDVGeometryMethodDiscoveryLab = RunDVGeometryMethodDiscoveryLab,
             .ExperimentalCreatePMIModelViewIfMissing = ExperimentalCreatePMIModelViewIfMissing,
             .ExperimentalProbeCreatePMIModelViewOnly = ExperimentalProbeCreatePMIModelViewOnly,
             .ExperimentalPmiTryAddPMIModelViewView = ExperimentalPmiTryAddPMIModelViewView,
@@ -227,6 +245,7 @@ Public Class JobConfiguration
             .PartListNombreArchivo = PartListNombreArchivo,
             .PartListCantidad = PartListCantidad,
             .StrictMetadataValidation = StrictMetadataValidation,
+            .KeepDftOpenAfterRun = KeepDftOpenAfterRun,
             .LastDetectedSourceKind = LastDetectedSourceKind,
             .UseSelectedComponents = UseSelectedComponents,
             .SelectedComponentPaths = If(SelectedComponentPaths Is Nothing, New List(Of String)(), New List(Of String)(SelectedComponentPaths))

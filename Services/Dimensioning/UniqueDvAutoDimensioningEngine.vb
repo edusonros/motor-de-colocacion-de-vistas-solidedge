@@ -27,10 +27,11 @@ Friend NotInheritable Class UniqueDvAutoDimensioningEngine
         log?.LogLine("[DIM][DOC] name=" & SafeToString(CallByNameSafe(ctx.Draft, "Name")))
         log?.LogLine("[DIM][SHEET] name=" & SafeToString(CallByNameSafe(ctx.Sheet, "Name")))
 
-        Dim styleObj As Object = DimensionStyleResolver.ResolvePreferredStyle(ctx.Draft, ctx.Sheet, RequiredStyleName, log)
+        Dim styleObj As Object = DimensionStyleResolver.ResolveDimensionStyle(ctx.Draft, RequiredStyleName, log)
         Dim resolvedStyleName As String = ReadStyleName(styleObj)
+        If Not String.IsNullOrWhiteSpace(resolvedStyleName) Then DimensionProductionRunSummary.StyleAppliedName = resolvedStyleName
 
-        Dim views As List(Of DrawingView) = DraftViewCollector.CollectOrthogonalViews(ctx.Sheet, log)
+        Dim views As List(Of DrawingView) = DraftViewCollector.CollectOrthogonalViews(ctx.Sheet, log, norm.SkipIsometricViews)
         If views.Count = 0 Then
             log?.LogLine("[DIM][SUMMARY][DOC] views=0 processed=0 skipped=0 created=0 errors=0")
             Return

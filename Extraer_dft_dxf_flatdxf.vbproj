@@ -133,6 +133,10 @@
     <Compile Include="Services\Dimensioning\Labs\DimLabLogger.vb" />
     <Compile Include="Services\Dimensioning\Labs\DimLabMode.vb" />
     <Compile Include="Services\Dimensioning\Labs\DrawingViewDimensioningLab.vb" />
+    <Compile Include="Services\Dimensioning\Labs\DropViewsTo2DModelLab.vb" />
+    <Compile Include="Services\Dimensioning\Labs\DropCreatedSheetsDimensionLab.vb" />
+    <Compile Include="Services\Dimensioning\Labs\DVGeometryDimensionPlacementLab.vb" />
+    <Compile Include="Services\Dimensioning\Labs\DVGeometryMethodDiscoveryLab.vb" />
     <Compile Include="Services\Dimensioning\ViewGeometryReader.vb" />
     <Compile Include="Services\Dimensioning\SolidEdgeContext.vb" />
     <Compile Include="Services\Dimensioning\DraftViewCollector.vb" />
@@ -140,6 +144,8 @@
     <Compile Include="Services\Dimensioning\DrawingViewDimensionPlanner.vb" />
     <Compile Include="Services\Dimensioning\DrawingViewDimensionCreator.vb" />
     <Compile Include="Services\Dimensioning\DimensionStyleResolver.vb" />
+    <Compile Include="Services\Dimensioning\GenerationEngineRuntime.vb" />
+    <Compile Include="Services\Dimensioning\DimensionProductionDiagnostics.vb" />
     <Compile Include="Services\Dimensioning\UniqueDvAutoDimensioningEngine.vb" />
     <Compile Include="Services\Dimensioning\DimensionKeypointRelinkLab.vb" />
     <Compile Include="Services\Dimensioning\Une129ArrangeExistingDimensions.vb" />
@@ -150,6 +156,7 @@
     <Compile Include="Services\Dimensioning\DimensionCoordinateDiagnostics.vb" />
     <Compile Include="Services\Dimensioning\StableExteriorReferences.vb" />
     <Compile Include="Services\Dimensioning\DimensionManualCompare.vb" />
+    <Compile Include="Services\Dimensioning\ManualAdboGuidedLab.vb" />
     <Compile Include="Services\Dimensioning\ViewPlacementFrame.vb" />
     <Compile Include="Services\TemplateInspectionCache.vb" />
     <Compile Include="Services\TraceabilityFieldCatalog.vb" />

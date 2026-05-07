@@ -161,8 +161,7 @@ Partial Public Class MainForm
             txtPartNombreArchivo = New TextBox()
             SubAddFieldRowToPartTable(r, "Nombre archivo", txtPartNombreArchivo, lblOriNomArch) : r += 1
 
-            txtPartDenominacion = New TextBox()
-            SubAddFieldRowToPartTable(r, "Denominación", txtPartDenominacion, lblOriDenom) : r += 1
+            txtPartDenominacion = Nothing
 
             txtPartL = New TextBox()
             SubAddFieldRowToPartTable(r, "L (mm)", txtPartL, lblOriL) : r += 1
@@ -258,7 +257,7 @@ Partial Public Class MainForm
             tblTrace.ResumeLayout(True)
         End Try
 
-        AddHandler txtTitle.TextChanged, AddressOf SyncPartDenominacionFromTitle
+        ' Campo "Denominación" eliminado de la UI por solicitud.
     End Sub
 
     Private Sub ApplyCompactEditorsInTable(t As TableLayoutPanel)

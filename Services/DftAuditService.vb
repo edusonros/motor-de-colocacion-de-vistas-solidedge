@@ -55,6 +55,14 @@ Public NotInheritable Class DftAuditService
             Dim totalDvPoints As Integer = 0
             Dim totalDraftTables As Integer = 0
             Dim totalPartsLists As Integer = 0
+            Dim totalLines2d As Integer = 0
+            Dim totalArcs2d As Integer = 0
+            Dim totalCircles2d As Integer = 0
+            Dim totalLineStrings2d As Integer = 0
+            Dim totalBsplines2d As Integer = 0
+            Dim totalPoints2d As Integer = 0
+            Dim totalDropLabGeometry As Integer = 0
+            Dim totalDropLabDimensions As Integer = 0
 
             sb.AppendLine("Sheets=" & totalSheets.ToString(CultureInfo.InvariantCulture))
 
@@ -80,12 +88,45 @@ Public NotInheritable Class DftAuditService
                     views = Nothing
                 End Try
                 Dim viewCount As Integer = SafeCount(views)
+                Dim lines2dObj As Object = CallByNameSafe(sh, "Lines2d")
+                Dim arcs2dObj As Object = CallByNameSafe(sh, "Arcs2d")
+                Dim circles2dObj As Object = CallByNameSafe(sh, "Circles2d")
+                Dim lineStrings2dObj As Object = CallByNameSafe(sh, "LineStrings2d")
+                Dim bsplines2dObj As Object = CallByNameSafe(sh, "BSplineCurves2d")
+                Dim points2dObj As Object = CallByNameSafe(sh, "Points2d")
+                Dim lines2dCount As Integer = SafeCount(lines2dObj)
+                Dim arcs2dCount As Integer = SafeCount(arcs2dObj)
+                Dim circles2dCount As Integer = SafeCount(circles2dObj)
+                Dim lineStrings2dCount As Integer = SafeCount(lineStrings2dObj)
+                Dim bsplines2dCount As Integer = SafeCount(bsplines2dObj)
+                Dim points2dCount As Integer = SafeCount(points2dObj)
+                Dim dropLabGeomCount As Integer = CountByLayer(lines2dObj, "DROP_LAB_GEOMETRY") +
+                                                   CountByLayer(arcs2dObj, "DROP_LAB_GEOMETRY") +
+                                                   CountByLayer(circles2dObj, "DROP_LAB_GEOMETRY") +
+                                                   CountByLayer(lineStrings2dObj, "DROP_LAB_GEOMETRY") +
+                                                   CountByLayer(bsplines2dObj, "DROP_LAB_GEOMETRY") +
+                                                   CountByLayer(points2dObj, "DROP_LAB_GEOMETRY")
+                Dim dropLabDimCount As Integer = CountByLayer(dimsObj, "DROP_LAB_DIMENSIONS")
 
                 totalDims += dimsCount
                 totalViews += viewCount
+                totalLines2d += lines2dCount
+                totalArcs2d += arcs2dCount
+                totalCircles2d += circles2dCount
+                totalLineStrings2d += lineStrings2dCount
+                totalBsplines2d += bsplines2dCount
+                totalPoints2d += points2dCount
+                totalDropLabGeometry += dropLabGeomCount
+                totalDropLabDimensions += dropLabDimCount
 
                 sb.AppendLine("")
                 sb.AppendLine(String.Format(CultureInfo.InvariantCulture, "[SHEET] idx={0} name={1} views={2} dimensions={3}", i, shName, viewCount, dimsCount))
+                sb.AppendLine(String.Format(CultureInfo.InvariantCulture,
+                    "  [SHEET][2D] lines2d={0} arcs2d={1} circles2d={2} linestrings2d={3} bsplines2d={4} points2d={5}",
+                    lines2dCount, arcs2dCount, circles2dCount, lineStrings2dCount, bsplines2dCount, points2dCount))
+                sb.AppendLine(String.Format(CultureInfo.InvariantCulture,
+                    "  [SHEET][DROP_LAB] geometry={0} dimensions={1}",
+                    dropLabGeomCount, dropLabDimCount))
                 AppendDimensionDetails(sb, dimsObj)
 
                 For v As Integer = 1 To viewCount
@@ -133,6 +174,14 @@ Public NotInheritable Class DftAuditService
             sb.AppendLine("TotalDVPoints2d=" & totalDvPoints.ToString(CultureInfo.InvariantCulture))
             sb.AppendLine("TotalDraftTables=" & totalDraftTables.ToString(CultureInfo.InvariantCulture))
             sb.AppendLine("TotalPartsLists=" & totalPartsLists.ToString(CultureInfo.InvariantCulture))
+            sb.AppendLine("TotalLines2d=" & totalLines2d.ToString(CultureInfo.InvariantCulture))
+            sb.AppendLine("TotalArcs2d=" & totalArcs2d.ToString(CultureInfo.InvariantCulture))
+            sb.AppendLine("TotalCircles2d=" & totalCircles2d.ToString(CultureInfo.InvariantCulture))
+            sb.AppendLine("TotalLineStrings2d=" & totalLineStrings2d.ToString(CultureInfo.InvariantCulture))
+            sb.AppendLine("TotalBSplineCurves2d=" & totalBsplines2d.ToString(CultureInfo.InvariantCulture))
+            sb.AppendLine("TotalPoints2d=" & totalPoints2d.ToString(CultureInfo.InvariantCulture))
+            sb.AppendLine("TotalDropLabGeometry=" & totalDropLabGeometry.ToString(CultureInfo.InvariantCulture))
+            sb.AppendLine("TotalDropLabDimensions=" & totalDropLabDimensions.ToString(CultureInfo.InvariantCulture))
 
             Dim outRoot As String = If(String.IsNullOrWhiteSpace(outputFolder), Path.GetDirectoryName(dftPath), outputFolder)
             Dim outDir As String = Path.Combine(outRoot, "DFT_INSPECT")
@@ -558,6 +607,31 @@ Public NotInheritable Class DftAuditService
         Catch
             Return ""
         End Try
+    End Function
+
+    Private Shared Function CountByLayer(collectionObj As Object, layerName As String) As Integer
+        If collectionObj Is Nothing OrElse String.IsNullOrWhiteSpace(layerName) Then Return 0
+        Dim n As Integer = SafeCount(collectionObj)
+        If n <= 0 Then Return 0
+        Dim c As Integer = 0
+        For i As Integer = 1 To n
+            Dim it As Object = Nothing
+            Try
+                it = CallByName(collectionObj, "Item", CallType.Method, i)
+            Catch
+                it = Nothing
+            End Try
+            If it Is Nothing Then Continue For
+            Dim ln As String = ""
+            Try
+                Dim layerObj As Object = CallByNameSafe(it, "Layer")
+                ln = SafeToString(CallByNameSafe(layerObj, "Name"))
+            Catch
+                ln = ""
+            End Try
+            If String.Equals(ln, layerName, StringComparison.OrdinalIgnoreCase) Then c += 1
+        Next
+        Return c
     End Function
 
     Private Shared Sub TryReleaseComObject(obj As Object)

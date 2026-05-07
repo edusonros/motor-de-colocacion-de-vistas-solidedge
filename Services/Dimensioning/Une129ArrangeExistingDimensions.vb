@@ -275,15 +275,15 @@ Public NotInheritable Class Une129ArrangeExistingDimensions
 
         overlapsAvoided = 0
         If items Is Nothing OrElse items.Count < 2 Then Return
-        Dim margin As Double = Math.Max(config.MinFeatureSeparation, 0.0004R)
-        Dim trackStep As Double = Math.Max(config.GapBetweenDimensionRows * 0.35R, 0.001R)
+        Dim margin As Double = Math.Max(config.MinFeatureSeparation * 1.25R, 0.0006R)
+        Dim trackStep As Double = Math.Max(config.GapBetweenDimensionRows * 0.55R, 0.0015R)
         If sheetArea IsNot Nothing Then
             trackStep = Math.Max(trackStep, Math.Min(sheetArea.Width, sheetArea.Height) * 0.012R)
         End If
 
         Dim rounds As Integer = 0
         Dim total As Integer = 0
-        While rounds < 4
+        While rounds < 7
             rounds += 1
             Dim hit As Boolean = False
             Dim ordered = items.OrderBy(Function(x)

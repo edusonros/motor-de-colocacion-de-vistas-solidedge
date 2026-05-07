@@ -52,6 +52,22 @@ Partial Public Class MainForm
     Private ReadOnly _dgvTraceability As New DataGridView()
     Private _btnAnalyzeDft As Button
     Private _btnDimRelinkLab As Button
+    Private _btnAdboGuidedLab As Button
+    Private _btnBringSolidEdgeFront As Button
+    Private _runDropViewsTo2DModelLab As Boolean = False
+    Private _runDropCreatedSheetsDimensionLab As Boolean = False
+    Private _dropCreatedSheetsLabDebugSave As Boolean = False
+    Private _runDVGeometryDimensionPlacementLab As Boolean = True
+
+    <DllImport("user32.dll")>
+    Private Shared Function SetForegroundWindow(hWnd As IntPtr) As Boolean
+    End Function
+
+    <DllImport("user32.dll")>
+    Private Shared Function ShowWindow(hWnd As IntPtr, nCmdShow As Integer) As Boolean
+    End Function
+
+    Private Const SW_RESTORE As Integer = 9
     Private Shared ReadOnly _excludeKeywordsForSelection As String() = {
         "skf", "nut", "2026", "2026_02", "screw", "duin", "iso", "bolt", "whaser", "washer",
         "snl", "sleeve", "22210", "22211", "22212", "fnl", "motor", "prensa", "estopada", "tornillo",
@@ -143,6 +159,9 @@ Partial Public Class MainForm
             flowGeneration.Controls.Add(chkStrictMetadata)
         End If
         ApplySettingsToUi(_loadedSettings)
+        EnsureSolidEdgeForegroundButton()
+        RemoveLabControlsFromUi()
+        DimensionInsertionConfig.EnableDrawingViewDimensioningLab = False
         If ForceTitleBlockModeForDebug Then
             SetSelectedTitleBlockPropertySource(ForcedTitleBlockMode)
             cmbTitleBlockSource.Enabled = False
@@ -177,6 +196,7 @@ Partial Public Class MainForm
         chkExperimentalDraftGeometryDiagnostics.Visible = False : chkExperimentalDraftGeometryDiagnostics.Checked = False
         EnsureAnalyzeDftButton()
         EnsureDimRelinkLabButton()
+        EnsureAdboGuidedLabButton()
 
         _progressUiTimer = New Windows.Forms.Timer()
         _progressUiTimer.Interval = 1000
@@ -185,6 +205,101 @@ Partial Public Class MainForm
         ResetProgressTelemetry()
         SetProgressDeterminateDefaults()
         LogBootPathsBanner()
+    End Sub
+
+    Private Sub RemoveLabControlsFromUi()
+        If flowGeneration Is Nothing Then Return
+
+        Dim controlsToRemove As New List(Of Control)()
+        If chkUnitHorizontalExteriorTest IsNot Nothing Then controlsToRemove.Add(chkUnitHorizontalExteriorTest)
+        If chkDrawingViewDimensioningLab IsNot Nothing Then controlsToRemove.Add(chkDrawingViewDimensioningLab)
+        If chkDimLabInteractivePause IsNot Nothing Then controlsToRemove.Add(chkDimLabInteractivePause)
+        If lblDimLabMode IsNot Nothing Then controlsToRemove.Add(lblDimLabMode)
+        If cmbDimLabMode IsNot Nothing Then controlsToRemove.Add(cmbDimLabMode)
+        If chkDimLabVisibleProbe IsNot Nothing Then controlsToRemove.Add(chkDimLabVisibleProbe)
+        If chkDimLabAlternativePlacement IsNot Nothing Then controlsToRemove.Add(chkDimLabAlternativePlacement)
+        If btnDimLabRun IsNot Nothing Then controlsToRemove.Add(btnDimLabRun)
+
+        For Each ctl In controlsToRemove
+            If ctl Is Nothing Then Continue For
+            Try
+                ctl.Visible = False
+                ctl.Enabled = False
+                If ctl.Parent IsNot Nothing Then
+                    ctl.Parent.Controls.Remove(ctl)
+                End If
+            Catch
+            End Try
+        Next
+
+        Try
+            chkDrawingViewDimensioningLab.Checked = False
+        Catch
+        End Try
+        Try
+            chkDimLabInteractivePause.Checked = False
+        Catch
+        End Try
+        Try
+            chkDimLabVisibleProbe.Checked = False
+        Catch
+        End Try
+        Try
+            chkDimLabAlternativePlacement.Checked = False
+        Catch
+        End Try
+    End Sub
+
+    Private Sub EnsureSolidEdgeForegroundButton()
+        If flowGeneration Is Nothing Then Return
+        If _btnBringSolidEdgeFront IsNot Nothing Then Return
+
+        _btnBringSolidEdgeFront = New Button With {
+            .Name = "btnBringSolidEdgeFront",
+            .Text = "Abrir Solid Edge en primer plano",
+            .AutoSize = True,
+            .MinimumSize = New Size(220, 30)
+        }
+        AddHandler _btnBringSolidEdgeFront.Click, AddressOf btnBringSolidEdgeFront_Click
+        flowGeneration.Controls.Add(_btnBringSolidEdgeFront)
+    End Sub
+
+    Private Sub btnBringSolidEdgeFront_Click(sender As Object, e As EventArgs)
+        Dim app As SolidEdgeFramework.Application = Nothing
+        Dim created As Boolean = False
+        Try
+            Try
+                app = CType(Marshal.GetActiveObject("SolidEdge.Application"), SolidEdgeFramework.Application)
+            Catch
+                Dim t = Type.GetTypeFromProgID("SolidEdge.Application", throwOnError:=False)
+                If t IsNot Nothing Then
+                    app = CType(Activator.CreateInstance(t), SolidEdgeFramework.Application)
+                    created = True
+                End If
+            End Try
+
+            If app Is Nothing Then
+                MessageBox.Show("No se pudo abrir/conectar Solid Edge.", "Solid Edge", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+
+            Try : app.Visible = True : Catch : End Try
+            Dim hwnd As IntPtr = IntPtr.Zero
+            Try
+                hwnd = New IntPtr(Convert.ToInt64(CallByName(app, "hWnd", CallType.Get)))
+            Catch
+                hwnd = IntPtr.Zero
+            End Try
+            If hwnd <> IntPtr.Zero Then
+                Try : ShowWindow(hwnd, SW_RESTORE) : Catch : End Try
+                Try : SetForegroundWindow(hwnd) : Catch : End Try
+            End If
+
+            _logger.Log("[UI][SOLIDEDGE][FOREGROUND] ok created=" & created.ToString())
+        Catch ex As Exception
+            _logger.LogException("btnBringSolidEdgeFront_Click", ex)
+            MessageBox.Show(ex.Message, "Solid Edge", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub MainForm_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
@@ -270,7 +385,7 @@ Partial Public Class MainForm
         chkKeepSolidEdgeVisible.Text = "Mostrar Solid Edge mientras se genera"
         chkAutoDimensioning.Text = "Generar acotado automático"
         chkUnitHorizontalExteriorTest.Text = "Prueba aislada cota horizontal exterior"
-        chkDrawingViewDimensioningLab.Text = "Laboratorio DIMLAB (exclusivo; bloquea motor principal)"
+        chkDrawingViewDimensioningLab.Text = ""
         chkIncludeIso.Text = "Incluir vista isométrica"
         chkIncludeProjected.Text = "Incluir vistas proyectadas"
     End Sub
@@ -441,6 +556,12 @@ Partial Public Class MainForm
 
     Private Sub btnGenerate_Click(sender As Object, e As EventArgs) Handles btnGenerate.Click
         If _isRunning Then Return
+        Dim unused = GenerateWorkAsync()
+    End Sub
+
+    ''' <summary>Ejecuta el motor fuera del hilo UI para que ""Conectando a Solid Edge"" no congele la ventana durante el arranque COM.</summary>
+    Private Async Function GenerateWorkAsync() As Task
+        If _isRunning Then Return
         EnsureAutoOutputFolderForInput()
 
         Dim reviewMessage As String = "Quieres actualizar/revisar las propiedades antes de generar?" &
@@ -488,8 +609,7 @@ Partial Public Class MainForm
             StartProgressTelemetry()
             _logger.Log("Inicio de proceso.")
 
-            Dim engine As New DraftGenerationEngine(_logger, AddressOf HandleEngineProgress)
-            Dim result As EngineRunResult = engine.Run(config)
+            Dim result As EngineRunResult = Await RunDraftEngineOnBackgroundStaThreadAsync(config).ConfigureAwait(True)
 
             If Not String.IsNullOrWhiteSpace(result.DimLabReferenceDftFullPath) Then
                 _logger.Log("[DIMLAB][DONE] DFT referencia guardado")
@@ -515,7 +635,7 @@ Partial Public Class MainForm
             End If
 
         Catch ex As Exception
-            _logger.LogException("btnGenerate_Click", ex)
+            _logger.LogException("GenerateWorkAsync", ex)
             MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
             _requestedDimLabFromDedicatedButton = False
@@ -525,7 +645,33 @@ Partial Public Class MainForm
             ResetProgressBarsAfterJob()
             UpdateStatus("Proceso finalizado.")
         End Try
-    End Sub
+    End Function
+
+    ''' <summary>Solid Edge COM suele requerir apartamento STA; el arranque puede tardar minutos sin bloquear la ventana.</summary>
+    Private Async Function RunDraftEngineOnBackgroundStaThreadAsync(config As JobConfiguration) As Task(Of EngineRunResult)
+        Return Await Task.Run(Function() RunDraftEngineOnStaThread(config)).ConfigureAwait(False)
+    End Function
+
+    Private Function RunDraftEngineOnStaThread(config As JobConfiguration) As EngineRunResult
+        Dim result As EngineRunResult = Nothing
+        Dim fault As Exception = Nothing
+        Dim th As New Thread(
+            Sub()
+                Try
+                    Dim eng As New DraftGenerationEngine(_logger, AddressOf HandleEngineProgress)
+                    result = eng.Run(config)
+                Catch ex As Exception
+                    fault = ex
+                End Try
+            End Sub)
+        th.SetApartmentState(ApartmentState.STA)
+        th.IsBackground = False
+        th.Name = "DraftGenSolidEdgeSta"
+        th.Start()
+        th.Join()
+        If fault IsNot Nothing Then Throw fault
+        Return result
+    End Function
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
         txtInputFile.Clear()
@@ -703,6 +849,14 @@ Partial Public Class MainForm
         flowLogButtons.Controls.Add(_btnDimRelinkLab)
     End Sub
 
+    Private Sub EnsureAdboGuidedLabButton()
+        If flowLogButtons Is Nothing Then Return
+        If _btnAdboGuidedLab IsNot Nothing Then Return
+        _btnAdboGuidedLab = New Button With {.Text = "Lab ADBO guiado", .AutoSize = True}
+        AddHandler _btnAdboGuidedLab.Click, AddressOf btnAdboGuidedLab_Click
+        flowLogButtons.Controls.Add(_btnAdboGuidedLab)
+    End Sub
+
     Private Sub btnAnalyzeDft_Click(sender As Object, e As EventArgs)
         Try
             Using ofd As New OpenFileDialog()
@@ -797,6 +951,82 @@ Partial Public Class MainForm
             Catch
             End Try
             _logger.Log("[DIMRELINK][UI][END]")
+        End Try
+    End Sub
+
+    Private Sub btnAdboGuidedLab_Click(sender As Object, e As EventArgs)
+        Dim app As SolidEdgeFramework.Application = Nothing
+        Dim createdApp As Boolean = False
+        Dim dftDoc As DraftDocument = Nothing
+        Dim openedByLab As Boolean = False
+        Try
+            Try
+                app = CType(Marshal.GetActiveObject("SolidEdge.Application"), SolidEdgeFramework.Application)
+            Catch
+                Try
+                    Dim t As Type = Type.GetTypeFromProgID("SolidEdge.Application")
+                    If t IsNot Nothing Then
+                        app = CType(Activator.CreateInstance(t), SolidEdgeFramework.Application)
+                        createdApp = True
+                    End If
+                Catch
+                    app = Nothing
+                End Try
+            End Try
+            If app Is Nothing Then
+                MessageBox.Show("Abre Solid Edge y un DFT antes de ejecutar el lab guiado.", "Lab ADBO guiado", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+
+            Try
+                dftDoc = TryCast(app.ActiveDocument, DraftDocument)
+            Catch exActive As Exception
+                _logger.Log("[ADBO_GUIDED][ERR] ActiveDocument: " & exActive.Message)
+                dftDoc = Nothing
+            End Try
+            If dftDoc Is Nothing Then
+                Using ofd As New OpenFileDialog()
+                    ofd.Title = "Selecciona DFT para Lab ADBO guiado"
+                    ofd.Filter = "Draft (*.dft)|*.dft|Todos los archivos|*.*"
+                    ofd.Multiselect = False
+                    If ofd.ShowDialog() <> DialogResult.OK Then
+                        MessageBox.Show("El documento activo no es un DFT y no se seleccionó ninguno.", "Lab ADBO guiado", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        Return
+                    End If
+                    Try
+                        dftDoc = CType(app.Documents.Open(ofd.FileName), DraftDocument)
+                        openedByLab = (dftDoc IsNot Nothing)
+                        _logger.Log("[ADBO_GUIDED][OPEN_DFT] " & ofd.FileName)
+                    Catch exOpen As Exception
+                        _logger.Log("[ADBO_GUIDED][ERR] Open DFT: " & exOpen.Message)
+                        MessageBox.Show("No se pudo abrir el DFT seleccionado.", "Lab ADBO guiado", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Return
+                    End Try
+                End Using
+            End If
+
+            ManualAdboGuidedLab.RunInteractive(app, dftDoc, Sub(m As String) _logger.Log(m))
+            MessageBox.Show("Lab ADBO guiado finalizado. Revisa el log [ADBO_GUIDED].", "Lab ADBO guiado", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Catch ex As Exception
+            _logger.LogException("btnAdboGuidedLab_Click", ex)
+            MessageBox.Show("Error en Lab ADBO guiado: " & ex.Message, "Lab ADBO guiado", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            Try
+                If openedByLab AndAlso dftDoc IsNot Nothing Then dftDoc.Close(False)
+            Catch
+            End Try
+            Try
+                If dftDoc IsNot Nothing AndAlso Marshal.IsComObject(dftDoc) Then Marshal.ReleaseComObject(dftDoc)
+            Catch
+            End Try
+            Try
+                If createdApp AndAlso app IsNot Nothing Then app.Quit()
+            Catch
+            End Try
+            Try
+                If app IsNot Nothing AndAlso Marshal.IsComObject(app) Then Marshal.ReleaseComObject(app)
+            Catch
+            End Try
         End Try
     End Sub
 
@@ -1238,6 +1468,10 @@ Partial Public Class MainForm
             .IncludeFlatInDraftWhenPsm = chkIncludeFlatInDraft.Checked,
             .EnableAutoDimensioning = If(runUnitHorizontalTest, False, chkAutoDimensioning.Checked),
             .EnableDrawingViewDimensioningLab = runDrawingViewLab,
+            .RunDropViewsTo2DModelLab = _runDropViewsTo2DModelLab,
+            .RunDropCreatedSheetsDimensionLab = _runDropCreatedSheetsDimensionLab,
+            .DropCreatedSheetsDimensionLabDebugSave = _dropCreatedSheetsLabDebugSave,
+            .RunDVGeometryDimensionPlacementLab = _runDVGeometryDimensionPlacementLab,
             .EnableDimLabInteractivePause = If(chkDimLabInteractivePause Is Nothing, True, chkDimLabInteractivePause.Checked),
             .RunUnitHorizontalExteriorDimensionTest = runUnitHorizontalTest,
             .EnablePmiRetrievalProbe = False,
@@ -1500,6 +1734,7 @@ Partial Public Class MainForm
         grpAdvanced.Enabled = enabled
         If _btnAnalyzeDft IsNot Nothing Then _btnAnalyzeDft.Enabled = enabled
         If _btnDimRelinkLab IsNot Nothing Then _btnDimRelinkLab.Enabled = enabled
+        If _btnAdboGuidedLab IsNot Nothing Then _btnAdboGuidedLab.Enabled = enabled
         If chkStrictMetadata IsNot Nothing Then chkStrictMetadata.Enabled = enabled
     End Sub
 
@@ -1749,6 +1984,10 @@ Partial Public Class MainForm
             .IncludeFlatInDraftWhenPsm = cfg.IncludeFlatInDraftWhenPsm,
             .EnableAutoDimensioning = cfg.EnableAutoDimensioning,
             .EnableDrawingViewDimensioningLab = cfg.EnableDrawingViewDimensioningLab,
+            .RunDropViewsTo2DModelLab = cfg.RunDropViewsTo2DModelLab,
+            .RunDropCreatedSheetsDimensionLab = cfg.RunDropCreatedSheetsDimensionLab,
+            .DropCreatedSheetsDimensionLabDebugSave = cfg.DropCreatedSheetsDimensionLabDebugSave,
+            .RunDVGeometryDimensionPlacementLab = cfg.RunDVGeometryDimensionPlacementLab,
             .EnableDimLabInteractivePause = cfg.EnableDimLabInteractivePause,
             .DimLabMode = CInt(cfg.DimLabMode),
             .EnableDimLabVisibleProbe = cfg.EnableDimLabVisibleProbe,
@@ -1821,6 +2060,10 @@ Partial Public Class MainForm
         chkIncludeFlatInDraft.Checked = settings.IncludeFlatInDraftWhenPsm
         chkAutoDimensioning.Checked = settings.EnableAutoDimensioning
         chkDrawingViewDimensioningLab.Checked = settings.EnableDrawingViewDimensioningLab
+        _runDropViewsTo2DModelLab = settings.RunDropViewsTo2DModelLab
+        _runDropCreatedSheetsDimensionLab = settings.RunDropCreatedSheetsDimensionLab
+        _dropCreatedSheetsLabDebugSave = settings.DropCreatedSheetsDimensionLabDebugSave
+        _runDVGeometryDimensionPlacementLab = settings.RunDVGeometryDimensionPlacementLab
         If chkDimLabInteractivePause IsNot Nothing Then chkDimLabInteractivePause.Checked = settings.EnableDimLabInteractivePause
         If cmbDimLabMode IsNot Nothing Then
             Dim imx = settings.DimLabMode
@@ -1830,6 +2073,7 @@ Partial Public Class MainForm
         If chkDimLabVisibleProbe IsNot Nothing Then chkDimLabVisibleProbe.Checked = settings.EnableDimLabVisibleProbe
         If chkDimLabAlternativePlacement IsNot Nothing Then chkDimLabAlternativePlacement.Checked = settings.EnableDimLabAlternativePlacement
         DimensionInsertionConfig.EnableDrawingViewDimensioningLab = settings.EnableDrawingViewDimensioningLab
+        RemoveLabControlsFromUi()
         chkPmiRetrievalProbe.Checked = False
         chkExperimentalPmiModelView.Checked = False
         chkExperimentalDraftGeometryDiagnostics.Checked = False

@@ -402,12 +402,6 @@ Friend NotInheritable Class DimensionReposition
         Catch ex As Exception
             log.Repos("TrackDistance: no legible — " & FormatEx(ex))
         End Try
-        Try
-            Dim absTd As Double = d.AbsoluteTrackDistance
-            log.Repos("AbsoluteTrackDistance (lectura)=" & FormatDouble(absTd))
-        Catch ex As Exception
-            log.Repos("AbsoluteTrackDistance: no legible — " & ex.Message)
-        End Try
     End Sub
 
     Private Shared Sub LogWritableLocationPropertyDiagnostics(d As FrameworkDimension, log As DimensionLogger)

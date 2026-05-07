@@ -7,7 +7,7 @@ Friend NotInheritable Class DraftViewCollector
     Private Sub New()
     End Sub
 
-    Public Shared Function CollectOrthogonalViews(sheet As Sheet, log As DimensionLogger) As List(Of DrawingView)
+    Public Shared Function CollectOrthogonalViews(sheet As Sheet, log As DimensionLogger, Optional skipIsometric As Boolean = True) As List(Of DrawingView)
         Dim result As New List(Of DrawingView)()
         If sheet Is Nothing Then Return result
 
@@ -40,7 +40,7 @@ Friend NotInheritable Class DraftViewCollector
                 dvt.IndexOf("iso", StringComparison.OrdinalIgnoreCase) >= 0 OrElse
                 (dvtNum > 0 AndAlso dvtNum <> 1)
 
-            If isIso Then
+            If skipIsometric AndAlso isIso Then
                 log?.LogLine("[DIM][VIEW][SKIP] idx=" & i.ToString(CultureInfo.InvariantCulture) & " name=" & name & " reason=isometric_or_non_orthogonal type=" & dvtNum.ToString(CultureInfo.InvariantCulture))
                 Continue For
             End If

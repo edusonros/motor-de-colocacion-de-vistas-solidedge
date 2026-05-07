@@ -18,6 +18,9 @@ Public Class DimensioningNormConfig
     Public Property UseParallelDimensioning As Boolean = True
     Public Property UseChainDimensioningOnlyIfNeeded As Boolean = True
     Public Property UseRepeatedFeatureNotation As Boolean = True
+    Public Property SkipIsometricViews As Boolean = True
+    Public Property GroupEqualDiameterHolesPerView As Boolean = True
+    Public Property AnnotateRepeatedHoleCount As Boolean = True
 
     Public Property MinGapFromView As Double = 0.012
     Public Property GapBetweenDimensionRows As Double = 0.008
@@ -57,6 +60,7 @@ Public Class DimensioningNormConfig
     Public Property MaxTotalDimensionsTarget As Integer = 12
     Public Property MaxLinearDimensionsTarget As Integer = 8
     Public Property MaxRadialDimensionsTarget As Integer = 4
+    Public Property MinRadiusToDimensionMm As Double = 10.0R
 
     Public Property AllowSomeDuplicate340 As Boolean = True
     Public Property AllowSomeDuplicate90 As Boolean = True
@@ -108,6 +112,24 @@ Public Class DimensioningNormConfig
         Return New DimensioningNormConfig()
     End Function
 
+    Public Shared Function DefaultUneLegacyConfig() As DimensioningNormConfig
+        Dim cfg As New DimensioningNormConfig()
+        cfg.EnableISO129Rules = True
+        cfg.DimensionCreationMode = ModeTargetReference
+        cfg.SkipIsometricViews = True
+        cfg.UseRepeatedFeatureNotation = True
+        cfg.GroupEqualDiameterHolesPerView = True
+        cfg.AnnotateRepeatedHoleCount = True
+        cfg.MinRadiusToDimensionMm = 10.0R
+        cfg.MaxLinearDimensionsTarget = 10
+        cfg.MaxRadialDimensionsTarget = 4
+        cfg.EnableDuplicateDimensionCleanup = True
+        cfg.UneDedupeNominalAcrossOrthogonalViews = True
+        cfg.KeepIntentionalDuplicateDimensions = False
+        cfg.OnlyArrangeExistingDimensions = True
+        Return cfg
+    End Function
+
     Public Function Clone() As DimensioningNormConfig
         Return New DimensioningNormConfig With {
             .EnableISO129Rules = EnableISO129Rules,
@@ -123,6 +145,9 @@ Public Class DimensioningNormConfig
             .UseParallelDimensioning = UseParallelDimensioning,
             .UseChainDimensioningOnlyIfNeeded = UseChainDimensioningOnlyIfNeeded,
             .UseRepeatedFeatureNotation = UseRepeatedFeatureNotation,
+            .SkipIsometricViews = SkipIsometricViews,
+            .GroupEqualDiameterHolesPerView = GroupEqualDiameterHolesPerView,
+            .AnnotateRepeatedHoleCount = AnnotateRepeatedHoleCount,
             .MinGapFromView = MinGapFromView,
             .GapBetweenDimensionRows = GapBetweenDimensionRows,
             .MinFeatureSeparation = MinFeatureSeparation,
@@ -141,6 +166,7 @@ Public Class DimensioningNormConfig
             .MaxTotalDimensionsTarget = MaxTotalDimensionsTarget,
             .MaxLinearDimensionsTarget = MaxLinearDimensionsTarget,
             .MaxRadialDimensionsTarget = MaxRadialDimensionsTarget,
+            .MinRadiusToDimensionMm = MinRadiusToDimensionMm,
             .AllowSomeDuplicate340 = AllowSomeDuplicate340,
             .AllowSomeDuplicate90 = AllowSomeDuplicate90,
             .AllowSomeDuplicate102 = AllowSomeDuplicate102,

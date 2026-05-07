@@ -209,6 +209,25 @@ Public Class DraftGenerationEngine
         Dim ext As String = IOPath.GetExtension(modelPath).ToLowerInvariant()
         Dim baseName As String = IOPath.GetFileNameWithoutExtension(modelPath)
         Dim runLab As Boolean = config.EnableDrawingViewDimensioningLab OrElse DimensionInsertionConfig.EnableDrawingViewDimensioningLab
+        ' FORZADO TEMPORAL: ejecutar SIEMPRE DVGeometryMethodDiscoveryLab en modo exclusivo.
+        Dim forceDvMethodDiscoveryLabOnly As Boolean = True
+        If forceDvMethodDiscoveryLabOnly Then
+            config.RunDVGeometryMethodDiscoveryLab = True
+            config.RunDVGeometryDimensionPlacementLab = False
+            config.RunDropCreatedSheetsDimensionLab = False
+            config.RunDropViewsTo2DModelLab = False
+            config.EnableAutoDimensioning = False
+            config.EnableDrawingViewDimensioningLab = False
+            DimensionInsertionConfig.EnableDrawingViewDimensioningLab = False
+            runLab = False
+            _logger.Log("[DV_METHODLAB][FORCE] enabled=True source=temporary_hard_force")
+            _logger.Log("[DV_METHODLAB][FORCE] bypass_ui_config_gates=True")
+        End If
+
+        GenerationEngineRuntime.ResetForRun()
+        GenerationEngineRuntime.ApplyFromJob(config, runLab)
+        _logger.Log(GenerationEngineRuntime.FormatFlagsLog())
+        runResult.KeepSolidEdgeOpenForDimLab = False
 
         _logger.Log($"[{itemIndex}/{totalItems}] Procesando: {IOPath.GetFileName(modelPath)}")
 
@@ -224,6 +243,7 @@ Public Class DraftGenerationEngine
             If runLab Then _logger.Log("[DIMLAB][DFT][TARGET_FULLPATH] " & outDft)
             Dim dftDoc As DraftDocument = Nothing
             Try
+                If Not runLab Then DimensionProductionRunSummary.Reset()
                 _logger.Log("Creando draft...")
                 Dim flatInserted As Boolean = False
                 Dim mainDrawingView As DrawingView = Nothing
@@ -231,6 +251,14 @@ Public Class DraftGenerationEngine
                     Function() CojonudoBestFit_Bueno.CreateDraftAlzadoPrimerDiedro(app, modelPath, dftTemplates, config.TemplateDxf, flatInserted, mainDrawingView, config.EnableSlotBBoxViewLayout, Sub(m) _logger.Log(m)),
                     "CreateDraft")
                 If dftDoc IsNot Nothing Then
+                    If Not runLab Then
+                        Try
+                            Dim shv As Sheet = Nothing
+                            Try : shv = dftDoc.ActiveSheet : Catch : End Try
+                            If shv IsNot Nothing Then DimensionProductionRunSummary.ViewsPlanned = shv.DrawingViews.Count
+                        Catch
+                        End Try
+                    End If
                     Dim savedDraftReady As Boolean = False
                     If config.InsertPropertiesInTitleBlock Then
                         Dim needPreSaveSync As Boolean =
@@ -244,12 +272,10 @@ Public Class DraftGenerationEngine
                         End If
                     End If
 
-                    If config.KeepSolidEdgeVisible Then
-                        FitDraftView(app, dftDoc)
-                    End If
+                        If config.KeepSolidEdgeVisible Then FitDraftView(app, dftDoc)
 
                     Dim normCfg As DimensioningNormConfig = If(config.DimensioningNormConfig Is Nothing,
-                        DimensioningNormConfig.DefaultConfig(), config.DimensioningNormConfig)
+                        DimensioningNormConfig.DefaultUneLegacyConfig(), config.DimensioningNormConfig)
 
                     Dim protectedZones As IList(Of ProtectedZone2D) = Nothing
                     If dftDoc IsNot Nothing AndAlso normCfg.PrepareExistingPartsListTop Then
@@ -295,13 +321,15 @@ Public Class DraftGenerationEngine
                         _logger.Log("[DIMLAB][INTERACTIVE] skipExportClose=True")
                     End If
                     Dim runMainDimensioning As Boolean = (dftDoc IsNot Nothing AndAlso config.EnableAutoDimensioning AndAlso Not runLab)
-                    _logger.Log("[DIM][FLAGS] Config_EnableAutoDimensioning=" & config.EnableAutoDimensioning.ToString())
-                    _logger.Log("[DIM][FLAGS] Config_EnableDrawingViewDimensioningLab=" & config.EnableDrawingViewDimensioningLab.ToString())
-                    _logger.Log("[DIM][FLAGS] DimensionInsertionConfig_EnableDrawingViewDimensioningLab=" & DimensionInsertionConfig.EnableDrawingViewDimensioningLab.ToString())
-                    _logger.Log("[DIM][FLAGS] Effective_runLab=" & runLab.ToString())
-                    _logger.Log("[DIM][FLAGS] Effective_runMainDimensioning=" & runMainDimensioning.ToString())
-                    Dim decisionReason As String = If(runLab, "lab_mode_exclusive", "normal")
-                    _logger.Log("[DIM][DECISION] runLab=" & runLab.ToString() & " runMainDimensioning=" & runMainDimensioning.ToString() & " reason=" & decisionReason)
+                    If GenerationEngineRuntime.DebugDiagnosticsMode OrElse Not GenerationEngineRuntime.ProductionMode Then
+                        _logger.Log("[DIM][FLAGS] Config_EnableAutoDimensioning=" & config.EnableAutoDimensioning.ToString())
+                        _logger.Log("[DIM][FLAGS] Config_EnableDrawingViewDimensioningLab=" & config.EnableDrawingViewDimensioningLab.ToString())
+                        _logger.Log("[DIM][FLAGS] DimensionInsertionConfig_EnableDrawingViewDimensioningLab=" & DimensionInsertionConfig.EnableDrawingViewDimensioningLab.ToString())
+                        _logger.Log("[DIM][FLAGS] Effective_runLab=" & runLab.ToString())
+                        _logger.Log("[DIM][FLAGS] Effective_runMainDimensioning=" & runMainDimensioning.ToString())
+                        Dim decisionReason As String = If(runLab, "lab_mode_exclusive", "normal")
+                        _logger.Log("[DIM][DECISION] runLab=" & runLab.ToString() & " runMainDimensioning=" & runMainDimensioning.ToString() & " reason=" & decisionReason)
+                    End If
 
                     If config.RequestedDimLabFromDedicatedButton AndAlso Not runLab Then
                         _logger.Log("[DIMLAB][ABORT] requested_lab_button_but_effective_runLab_false")
@@ -342,6 +370,80 @@ Public Class DraftGenerationEngine
                         _logger.Log("[DIM][GATE] Acotado automático no ejecutado (deshabilitado, sin DFT o laboratorio sin documento).")
                     End If
 
+                    Dim envDrop2D As String = ""
+                    Try : envDrop2D = System.Environment.GetEnvironmentVariable("DROP2D_LAB") : Catch : envDrop2D = "" : End Try
+                    Dim runDvMethodLab As Boolean = config.RunDVGeometryMethodDiscoveryLab
+                    Dim runDvDimLab As Boolean = config.RunDVGeometryDimensionPlacementLab
+                    Dim runDropSheetsLab As Boolean = config.RunDropCreatedSheetsDimensionLab
+                    Dim runDrop2D As Boolean = Not runDvMethodLab AndAlso Not runDvDimLab AndAlso Not runDropSheetsLab AndAlso (
+                        config.RunDropViewsTo2DModelLab OrElse
+                        String.Equals(envDrop2D, "1", StringComparison.OrdinalIgnoreCase) OrElse
+                        String.Equals(envDrop2D, "true", StringComparison.OrdinalIgnoreCase))
+                    If runDrop2D OrElse runDropSheetsLab OrElse runDvDimLab OrElse runDvMethodLab Then
+                        runMainDimensioning = False
+                    End If
+
+                    If runDvMethodLab AndAlso dftDoc IsNot Nothing Then
+                        Try
+                            _logger.Log("[DV_METHODLAB][RUN] enabled=True source=config")
+                            Dim prevAlerts As Boolean = True
+                            Try : prevAlerts = app.DisplayAlerts : Catch : End Try
+                            Try
+                                app.DisplayAlerts = False
+                                _logger.Log("[DV_METHODLAB][ALERTS] DisplayAlerts=False (suppress interactive dialogs during probing)")
+                            Catch exSetAlerts As Exception
+                                _logger.Log("[DV_METHODLAB][ALERTS][WARN] " & exSetAlerts.Message)
+                            End Try
+                            Try
+                                DVGeometryMethodDiscoveryLab.Run(app, dftDoc, Sub(m) _logger.Log(m), False)
+                            Finally
+                                Try
+                                    app.DisplayAlerts = prevAlerts
+                                    _logger.Log("[DV_METHODLAB][ALERTS] DisplayAlerts restored=" & prevAlerts.ToString())
+                                Catch
+                                End Try
+                            End Try
+                        Catch exDvMethod As Exception
+                            _logger.Log("[DV_METHODLAB][FATAL] " & exDvMethod.ToString())
+                        End Try
+                    ElseIf runDvDimLab AndAlso dftDoc IsNot Nothing Then
+                        Try
+                            _logger.Log("[DV_DIMLAB][RUN] enabled=True source=config")
+                            DVGeometryDimensionPlacementLab.Run(app, dftDoc, Sub(m) _logger.Log(m), False)
+                        Catch exDv As Exception
+                            _logger.Log("[DV_DIMLAB][FATAL] " & exDv.ToString())
+                        End Try
+                    ElseIf runDropSheetsLab AndAlso dftDoc IsNot Nothing Then
+                        Try
+                            _logger.Log("[DROP_SHEETS][RUN] enabled=True source=config")
+                            If config.RunDropViewsTo2DModelLab OrElse
+                                String.Equals(envDrop2D, "1", StringComparison.OrdinalIgnoreCase) OrElse
+                                String.Equals(envDrop2D, "true", StringComparison.OrdinalIgnoreCase) Then
+                                _logger.Log("[DROP_SHEETS][NOTE] omitiendo DROP2D (RunDropCreatedSheetsDimensionLab tiene prioridad; no se usa hoja 2D Model)")
+                            End If
+                            DropCreatedSheetsDimensionLab.Run(app, dftDoc, Sub(m) _logger.Log(m), config.DropCreatedSheetsDimensionLabDebugSave)
+                        Catch exSheets As Exception
+                            _logger.Log("[DROP_SHEETS][FATAL] " & exSheets.ToString())
+                        End Try
+                    ElseIf runDrop2D AndAlso dftDoc IsNot Nothing Then
+                        Try
+                            _logger.Log("[DROP2D][RUN] enabled=True source=" &
+                                        If(config.RunDropViewsTo2DModelLab, "config", "env:DROP2D_LAB"))
+                            DropViewsTo2DModelLab.Run(app, dftDoc, Sub(m) _logger.Log(m), False)
+                        Catch exDrop As Exception
+                            _logger.Log("[DROP2D][FATAL] " & exDrop.ToString())
+                        End Try
+                    ElseIf GenerationEngineRuntime.DebugDiagnosticsMode Then
+                        _logger.Log("[DV_METHODLAB][RUN] enabled=False")
+                        _logger.Log("[DV_DIMLAB][RUN] enabled=False")
+                        _logger.Log("[DROP2D][RUN] enabled=False")
+                        _logger.Log("[DROP_SHEETS][RUN] enabled=False")
+                    End If
+
+                    If Not runLab AndAlso GenerationEngineRuntime.ProductionMode Then
+                        WriteProductionSummary(modelPath, outDft)
+                    End If
+
                     If Not runLab AndAlso config.RunUnitHorizontalExteriorDimensionTest AndAlso dftDoc IsNot Nothing Then
                         Try
                             UnitHorizontalExteriorDimensionTest.Run(
@@ -370,9 +472,11 @@ Public Class DraftGenerationEngine
                         End If
                         _logger.Log($"DFT: {IOPath.GetFileName(outDft)}")
                         runResult.DraftCreatedCount += 1
+                        If savedDraftReady AndAlso (runLab OrElse config.KeepDftOpenAfterRun) Then
+                            runResult.KeepSolidEdgeOpenForDimLab = True
+                        End If
                         If runLab AndAlso savedDraftReady Then
                             runResult.DimLabReferenceDftFullPath = outDft
-                            runResult.KeepSolidEdgeOpenForDimLab = True
                         End If
                     End If
 
@@ -414,15 +518,17 @@ Public Class DraftGenerationEngine
             Catch ex As Exception
                 _logger.LogException("DFT/PDF/DXF Draft", ex)
             Finally
-                If Not runLab Then
+                If Not runResult.KeepSolidEdgeOpenForDimLab Then
                     Try
                         If dftDoc IsNot Nothing Then dftDoc.Close(False)
                         _logger.Log($"Documento DFT cerrado para: {IOPath.GetFileName(modelPath)}")
                     Catch
                     End Try
                     TryReleaseComObject(dftDoc)
-                Else
+                ElseIf runLab Then
                     _logger.Log("[DIMLAB][KEEP_OPEN] No se cierra el DFT automáticamente; revisar/grabar en Solid Edge.")
+                Else
+                    _logger.Log("[ENG][KEEP_OPEN] KeepDftOpenAfterRun=true: DFT dejado abierto para revisión.")
                 End If
             End Try
         End If
@@ -641,26 +747,60 @@ Public Class DraftGenerationEngine
         End If
     End Sub
 
+    Private Sub WriteProductionSummary(modelFullPath As String, dftOutputPath As String)
+        _logger.Log("[SUMMARY][DOC] file=" & If(modelFullPath, ""))
+        _logger.Log("[SUMMARY][VIEWS] count=" & DimensionProductionRunSummary.ViewsPlanned.ToString() &
+                    " layout=" & If(DimensionProductionRunSummary.LayoutOk, "OK", "?"))
+        _logger.Log("[SUMMARY][PARTSLIST] created=" & DimensionProductionRunSummary.PartsListCreated.ToString() &
+                    " rows=" & DimensionProductionRunSummary.PartsListRows.ToString() &
+                    " cols=" & DimensionProductionRunSummary.PartsListCols.ToString())
+        _logger.Log("[SUMMARY][DIMS] created=" & DimensionProductionRunSummary.DimsCreated.ToString() &
+                    " connected=" & DimensionProductionRunSummary.DimsConnectedOk.ToString() &
+                    " visible=" & DimensionProductionRunSummary.DimsVisibleOk.ToString() &
+                    " failed=" & DimensionProductionRunSummary.DimsFailed.ToString())
+        Dim sty As String = If(String.IsNullOrWhiteSpace(DimensionProductionRunSummary.StyleAppliedName),
+            "U3,5", DimensionProductionRunSummary.StyleAppliedName)
+        _logger.Log("[SUMMARY][STYLE] " & sty)
+        _logger.Log("[SUMMARY][OUTPUT] dft=" & If(dftOutputPath, ""))
+        _logger.Log("[SUMMARY][RESULT] " & If(DimensionProductionRunSummary.ResultOk, "OK", "WARN"))
+    End Sub
+
     Private Function ConnectSolidEdge(config As JobConfiguration,
                                       ByRef app As SolidEdgeFramework.Application,
                                       ByRef createdByUs As Boolean) As Boolean
         app = Nothing
         createdByUs = False
+        _logger.Log("[SE][CONNECT] Reutilizar instancia activa (GetActiveObject)...")
         Try
             app = CType(Marshal.GetActiveObject("SolidEdge.Application"), SolidEdgeFramework.Application)
             _logger.Log("Solid Edge: instancia existente reutilizada.")
-        Catch
-            Dim t = Type.GetTypeFromProgID("SolidEdge.Application")
-            app = CType(Activator.CreateInstance(t), SolidEdgeFramework.Application)
-            createdByUs = True
-            _logger.Log("Solid Edge: nueva instancia creada por la aplicación.")
+        Catch exAttach As Exception
+            _logger.Log("[SE][CONNECT] Sin instancia activa (" & exAttach.GetType().Name & ": " & exAttach.Message & "). Creando proceso (puede tardar 30–90 s si Solid Edge no estaba abierto).")
+            Dim t = Type.GetTypeFromProgID("SolidEdge.Application", throwOnError:=False)
+            If t Is Nothing Then
+                _logger.Log("[SE][CONNECT] ERROR: ProgID ""SolidEdge.Application"" no encontrado. ¿Solid Edge instalado y registrado COM?")
+                Return False
+            End If
+            Try
+                app = CType(Activator.CreateInstance(t), SolidEdgeFramework.Application)
+                createdByUs = True
+                _logger.Log("Solid Edge: nueva instancia creada por la aplicación.")
+            Catch exNew As Exception
+                _logger.LogException("ConnectSolidEdge CreateInstance", exNew)
+                Return False
+            End Try
         End Try
         If app Is Nothing Then Return False
 
-        ' Background mode: evita dependencia de foco/ventanas durante automatización COM.
-        app.Visible = config.KeepSolidEdgeVisible
-        app.DisplayAlerts = False
-        _logger.Log($"Solid Edge modo oculto={Not config.KeepSolidEdgeVisible}, DisplayAlerts=False")
+        ' Producción estable: interfaz SIEMPRE visible (sin ocultar ni suprimir alertas).
+        Try
+            app.Visible = True
+            app.DisplayAlerts = True
+        Catch visEx As Exception
+            _logger.Log("[SE][VISIBLE] fallo al establecer visibilidad: " & visEx.Message)
+        End Try
+        _logger.Log("[SE][VISIBLE] True")
+        _logger.Log("[SE][DISPLAY_ALERTS] True")
         Return True
     End Function
 

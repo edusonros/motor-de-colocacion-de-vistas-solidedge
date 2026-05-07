@@ -1,5 +1,6 @@
 Option Strict Off
 
+Imports System.Collections.Generic
 Imports System.Globalization
 Imports SolidEdgeDraft
 
@@ -9,6 +10,8 @@ Friend NotInheritable Class DrawingViewGeometryInfo
     Public Property ViewName As String
     Public Property Box As ViewSheetBoundingBox
     Public Property Extreme As ExtremeDvLinesResult
+    ''' <summary>Líneas 2d DV leídas una sola vez por vista (<see cref="ViewGeometryReader.EnumerateAllDvLinesSheet"/>).</summary>
+    Public Property FullDvLines As List(Of DvLineSheetInfo)
     Public Property CountLines As Integer
     Public Property CountArcs As Integer
     Public Property CountCircles As Integer
@@ -33,7 +36,10 @@ Friend NotInheritable Class DrawingViewGeometryReader
         End If
 
         Dim exLines As ExtremeDvLinesResult = Nothing
-        ViewGeometryReader.TryBuildExtremeLines(view, box, log, exLines)
+        Dim fullDv As List(Of DvLineSheetInfo) = Nothing
+        ViewGeometryReader.TryBuildExtremeLines(view, box, log, exLines, fullDv, Nothing)
+
+        Dim lineCt As Integer = If(fullDv IsNot Nothing, fullDv.Count, SafeCount(CallByNameSafe(view, "DVLines2d")))
 
         Dim info As New DrawingViewGeometryInfo With {
             .View = view,
@@ -41,7 +47,8 @@ Friend NotInheritable Class DrawingViewGeometryReader
             .ViewName = SafeToString(CallByNameSafe(view, "Name")),
             .Box = box,
             .Extreme = exLines,
-            .CountLines = SafeCount(CallByNameSafe(view, "DVLines2d")),
+            .FullDvLines = fullDv,
+            .CountLines = lineCt,
             .CountArcs = SafeCount(CallByNameSafe(view, "DVArcs2d")),
             .CountCircles = SafeCount(CallByNameSafe(view, "DVCircles2d")),
             .CountLineStrings = SafeCount(CallByNameSafe(view, "DVLineStrings2d")),

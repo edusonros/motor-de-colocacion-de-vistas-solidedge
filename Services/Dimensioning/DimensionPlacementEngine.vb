@@ -649,6 +649,20 @@ Friend NotInheritable Class DimensionPlacementEngine
 
         createdDimensionOut = Nothing
         If o1 Is Nothing OrElse o2 Is Nothing Then Return False
+        Dim dx As Double = x2 - x1
+        Dim dy As Double = y2 - y1
+        Dim absDx As Double = Math.Abs(dx)
+        Dim absDy As Double = Math.Abs(dy)
+        Dim dist As Double = Math.Sqrt(dx * dx + dy * dy)
+        Dim tol As Double = 0.00015R ' 0.15 mm en hoja aprox.
+        Dim axisIsVertical As Boolean = String.Equals(axisLabel, "vertical", StringComparison.OrdinalIgnoreCase)
+        Dim axisSpan As Double = If(axisIsVertical, absDy, absDx)
+        If axisSpan <= tol OrElse dist <= tol Then
+            log?.Warn(String.Format(CultureInfo.InvariantCulture,
+                "[DIM][SKIP_DEGENERATE] axis={0} p1=({1:0.######},{2:0.######}) p2=({3:0.######},{4:0.######}) dAxis={5:0.######} d={6:0.######}",
+                axisLabel, x1, y1, x2, y2, axisSpan, dist))
+            Return False
+        End If
         If DimensionInsertionConfig.EnableDimensionInsertionDiagnostics AndAlso dv IsNot Nothing AndAlso log IsNot Nothing Then
             Dim tag As String = If(String.IsNullOrEmpty(contextLabel), axisLabel, contextLabel)
             DimensionCoordinateDiagnostics.LogViewAndSheetContext(dv, frame, log, tag)

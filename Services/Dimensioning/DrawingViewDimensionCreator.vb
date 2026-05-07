@@ -37,7 +37,7 @@ Friend NotInheritable Class DrawingViewDimensionCreator
         End Try
         If dims Is Nothing Then Return 0
 
-        Dim effectiveStyleObj As Object = ResolveForcedStyleObject(draft, sheet, styleObj)
+        Dim effectiveStyleObj As Object = ResolveForcedStyleObject(draft, sheet, styleObj, log)
 
         For Each p In plans
             If signatures.Contains(p.Signature) Then
@@ -136,7 +136,7 @@ Friend NotInheritable Class DrawingViewDimensionCreator
         End Try
         If dims Is Nothing Then Return 0
 
-        Dim effectiveStyleObj As Object = ResolveForcedStyleObject(draft, sheet, styleObj)
+        Dim effectiveStyleObj As Object = ResolveForcedStyleObject(draft, sheet, styleObj, log)
         TryActivateTargetSheet(draft, sheet, log)
         TryApplyStyleToDimensionsCollection(dims, effectiveStyleObj, log, "VIEW_SWEEP")
 
@@ -221,6 +221,18 @@ Friend NotInheritable Class DrawingViewDimensionCreator
                     Case "LINE"
                         dimObj = TryCreateByReferenceMethods(dims, it.Obj, New String() {"AddLength"}, log, "LINE")
                     Case "ARC", "CIRCLE"
+                        Dim rM As Double = 0.0R
+                        If TryDvArcOrCircleRadiusMeters(it.Obj, rM) Then
+                            Dim rMm As Double = rM * 1000.0R
+                            If rMm < uneNorm.MinRadiusToDimensionMm Then
+                                discarded += 1
+                                log?.LogLine("[DIM][SWEEP][SKIP] view=" & viewInfo.ViewIndex.ToString(CultureInfo.InvariantCulture) &
+                                             " kind=" & it.Kind &
+                                             " r_mm=" & rMm.ToString("0.###", CultureInfo.InvariantCulture) &
+                                             " reason=min_radius_threshold")
+                                Continue For
+                            End If
+                        End If
                         dimObj = TryCreateByReferenceMethods(dims, it.Obj, New String() {"AddRadius", "AddRadialDiameter", "AddCircularDiameter", "AddLength"}, log, it.Kind)
                     Case "ELLIPSE"
                         dimObj = TryCreateByReferenceMethods(dims, it.Obj, New String() {"AddLength"}, log, it.Kind)
@@ -478,6 +490,11 @@ Friend NotInheritable Class DrawingViewDimensionCreator
         Return TryCreateByReferenceMethods(dims, arcOrCircle, New String() {"AddRadius", "AddRadialDiameter", "AddCircularDiameter"}, log, "REF_RAD")
     End Function
 
+    Friend Shared Function TryCreateDiameterOnReference(dims As Dimensions, circleObj As Object, log As DimensionLogger) As Dimension
+        If dims Is Nothing OrElse circleObj Is Nothing Then Return Nothing
+        Return TryCreateByReferenceMethods(dims, circleObj, New String() {"AddDiameter", "AddRadialDiameter", "AddCircularDiameter", "AddRadius"}, log, "REF_DIA")
+    End Function
+
     Private Shared Function TryCreateByReferenceMethods(
         ByVal dims As Dimensions,
         ByVal srcObj As Object,
@@ -496,26 +513,35 @@ Friend NotInheritable Class DrawingViewDimensionCreator
         End Try
         If refObj Is Nothing Then Return Nothing
 
+        Dim lastEx As String = ""
         For Each methodName In methodPriority
             Try
                 Dim d As Dimension = TryCast(CallByName(dims, methodName, CallType.Method, refObj), Dimension)
                 If d IsNot Nothing Then
-                    If kind.StartsWith("REF_", StringComparison.OrdinalIgnoreCase) Then
-                        log?.LogLine("[DIM][CREATE][OK] kind=" & kind & " method=" & methodName)
-                    Else
-                        log?.LogLine("[DIM][SWEEP][CREATE][OK] kind=" & kind & " method=" & methodName)
+                    If GenerationEngineRuntime.DebugDiagnosticsMode OrElse Not GenerationEngineRuntime.ProductionMode Then
+                        If kind.StartsWith("REF_", StringComparison.OrdinalIgnoreCase) Then
+                            log?.LogLine("[DIM][CREATE][OK] kind=" & kind & " method=" & methodName)
+                        Else
+                            log?.LogLine("[DIM][SWEEP][CREATE][OK] kind=" & kind & " method=" & methodName)
+                        End If
                     End If
                     Return d
                 End If
             Catch ex As Exception
-                If kind.StartsWith("REF_", StringComparison.OrdinalIgnoreCase) Then
-                    log?.LogLine("[DIM][CREATE][FAIL] kind=" & kind & " method=" & methodName & " msg=" & ex.Message)
-                Else
-                    log?.LogLine("[DIM][SWEEP][CREATE][FAIL] kind=" & kind & " method=" & methodName & " msg=" & ex.Message)
+                lastEx = ex.Message
+                If GenerationEngineRuntime.DebugDiagnosticsMode OrElse Not GenerationEngineRuntime.ProductionMode Then
+                    If kind.StartsWith("REF_", StringComparison.OrdinalIgnoreCase) Then
+                        log?.LogLine("[DIM][CREATE][FAIL] kind=" & kind & " method=" & methodName & " msg=" & ex.Message)
+                    Else
+                        log?.LogLine("[DIM][SWEEP][CREATE][FAIL] kind=" & kind & " method=" & methodName & " msg=" & ex.Message)
+                    End If
                 End If
             End Try
         Next
 
+        If GenerationEngineRuntime.ProductionMode AndAlso Not String.IsNullOrEmpty(lastEx) Then
+            log?.LogLine("[DIM][CREATE][FAIL] kind=" & kind & " methods_exhausted msg=" & lastEx)
+        End If
         Return Nothing
     End Function
 
@@ -704,9 +730,9 @@ Friend NotInheritable Class DrawingViewDimensionCreator
         If dimObj Is Nothing OrElse unitLog Is Nothing Then Return
         unitLog("[DIM][UNIT][STYLE][REUSE_EXISTING]")
         unitLog("[DIM][UNIT][STYLE][TRY] name=U3,5")
-        Dim styleObj As Object = ResolveForcedStyleObject(draft, sheet, Nothing)
         Dim logger As New Logger(Sub(m As String) unitLog(m))
         Dim dimLog As New DimensionLogger(logger)
+        Dim styleObj As Object = ResolveForcedStyleObject(draft, sheet, Nothing, dimLog)
         Try
             TryApplyStyleToDimension(dimObj, styleObj, dimLog)
         Catch ex As Exception
@@ -717,33 +743,29 @@ Friend NotInheritable Class DrawingViewDimensionCreator
         unitLog("[DIM][UNIT][STYLE][READBACK] name=" & ReadDimensionStyleName(dimObj))
     End Sub
 
-    Friend Shared Function ResolveForcedStyleObject(draft As DraftDocument, sheet As Sheet, currentStyleObj As Object) As Object
+    Friend Shared Function ResolveForcedStyleObject(draft As DraftDocument, sheet As Sheet, currentStyleObj As Object, Optional log As DimensionLogger = Nothing) As Object
         If currentStyleObj IsNot Nothing Then Return currentStyleObj
-        Dim styles As Object = Nothing
-        Try
-            If draft IsNot Nothing Then styles = CallByName(draft, "DimensionStyles", CallType.Get)
-        Catch
-            styles = Nothing
-        End Try
-        If styles Is Nothing Then
-            Try
-                If sheet IsNot Nothing Then styles = CallByName(sheet, "DimensionStyles", CallType.Get)
-            Catch
-                styles = Nothing
-            End Try
+        If draft IsNot Nothing Then
+            Dim resolved As Object = DimensionStyleResolver.ResolveDimensionStyle(draft, ForcedStyleName, log)
+            If resolved IsNot Nothing Then Return resolved
         End If
-        If styles Is Nothing Then Return Nothing
-        Try
-            Dim n As Integer = CInt(CallByName(styles, "Count", CallType.Get))
-            For i As Integer = 1 To n
-                Dim it As Object = CallByName(styles, "Item", CallType.Method, i)
-                Dim nm As String = NormalizeStyleName(Convert.ToString(CallByName(it, "Name", CallType.Get), CultureInfo.InvariantCulture))
-                If String.Equals(nm, NormalizeStyleName(ForcedStyleName), StringComparison.OrdinalIgnoreCase) Then
-                    Return it
-                End If
-            Next
-        Catch
-        End Try
+        If Not GenerationEngineRuntime.ProductionMode AndAlso sheet IsNot Nothing Then
+            Dim styles As Object = Nothing
+            Try : styles = CallByName(sheet, "DimensionStyles", CallType.Get) : Catch : End Try
+            If styles IsNot Nothing Then
+                Try
+                    Dim n As Integer = CInt(CallByName(styles, "Count", CallType.Get))
+                    For i As Integer = 1 To n
+                        Dim it As Object = CallByName(styles, "Item", CallType.Method, i)
+                        Dim nm As String = NormalizeStyleName(Convert.ToString(CallByName(it, "Name", CallType.Get), CultureInfo.InvariantCulture))
+                        If String.Equals(nm, NormalizeStyleName(ForcedStyleName), StringComparison.OrdinalIgnoreCase) Then
+                            Return it
+                        End If
+                    Next
+                Catch
+                End Try
+            End If
+        End If
         Return Nothing
     End Function
 
@@ -900,6 +922,10 @@ Friend NotInheritable Class DrawingViewDimensionCreator
         End Try
     End Sub
 
+    Friend Shared Function IsDimensionConnectedToViewForDiagnostics(draft As DraftDocument, sheet As Sheet, dv As DrawingView, dimObj As Dimension) As Boolean
+        Return IsDimensionConnectedToView(draft, sheet, dv, dimObj)
+    End Function
+
     Private Shared Function IsDimensionConnectedToView(draft As DraftDocument, sheet As Sheet, dv As DrawingView, dimObj As Dimension) As Boolean
         If draft Is Nothing OrElse sheet Is Nothing OrElse dv Is Nothing OrElse dimObj Is Nothing Then Return False
         Dim ss As Object = Nothing
@@ -924,106 +950,11 @@ Friend NotInheritable Class DrawingViewDimensionCreator
 
     Friend Shared Sub TryApplyStyleToDimension(dimObj As Dimension, styleObj As Object, log As DimensionLogger)
         If dimObj Is Nothing Then Return
-
-        Dim preferredName As String = ""
-        Try
-            If styleObj IsNot Nothing Then
-                preferredName = Convert.ToString(CallByName(styleObj, "Name", CallType.Get), CultureInfo.InvariantCulture)
-            End If
-        Catch
-            preferredName = ""
-        End Try
-        If String.IsNullOrWhiteSpace(preferredName) Then preferredName = ForcedStyleName
-        Dim targetName As String = ForcedStyleName
-
-        Dim applied As Boolean = False
-
-        ' -2) Asignación directa COM (más fiable en algunos builds que CallByName).
-        If styleObj IsNot Nothing Then
-            Try
-                dimObj.Style = CType(styleObj, DimStyle)
-                If IsDimensionStyleApplied(dimObj, ForcedStyleName) OrElse IsDimensionStyleApplied(dimObj, preferredName) Then
-                    applied = True
-                End If
-            Catch
-            End Try
+        If styleObj Is Nothing Then
+            log?.LogLine("[DIM][STYLE][APPLY][SKIP] reason=resolved_style_nothing")
+            Return
         End If
-
-        ' -1) Forzado explícito solicitado por usuario.
-        If Not applied Then
-            For Each nameCandidate In BuildStyleNameCandidates(targetName)
-                Try
-                    CallByName(dimObj, "Style", CallType.Method, nameCandidate)
-                    If IsDimensionStyleApplied(dimObj, nameCandidate) Then
-                        applied = True
-                        Exit For
-                    End If
-                Catch
-                End Try
-            Next
-        End If
-
-        ' 0) Camino COM específico observado: Dimension.Style("U3,5")
-        If (Not applied) AndAlso (Not String.IsNullOrWhiteSpace(preferredName)) Then
-            For Each nameCandidate In BuildStyleNameCandidates(preferredName)
-                Try
-                    CallByName(dimObj, "Style", CallType.Method, nameCandidate)
-                    If IsDimensionStyleApplied(dimObj, preferredName) OrElse IsDimensionStyleApplied(dimObj, nameCandidate) Then
-                        applied = True
-                        Exit For
-                    End If
-                Catch
-                End Try
-            Next
-        End If
-
-        ' 1) Intento por objeto de estilo.
-        If Not applied Then
-            Try
-                CallByName(dimObj, "Style", CallType.Let, styleObj)
-                applied = IsDimensionStyleApplied(dimObj, preferredName)
-            Catch
-            End Try
-        End If
-
-        ' 2) Intentos por nombre (incluye variantes coma/punto).
-        If Not applied AndAlso Not String.IsNullOrWhiteSpace(preferredName) Then
-            For Each nameCandidate In BuildStyleNameCandidates(preferredName)
-                Try
-                    CallByName(dimObj, "Style", CallType.Let, nameCandidate)
-                    If IsDimensionStyleApplied(dimObj, preferredName) OrElse IsDimensionStyleApplied(dimObj, nameCandidate) Then
-                        applied = True
-                        Exit For
-                    End If
-                Catch
-                End Try
-            Next
-        End If
-
-        ' 3) Refuerzo final: repetir con valor exacto "U3,5" y luego por objeto.
-        If Not IsDimensionStyleApplied(dimObj, targetName) Then
-            Try
-                CallByName(dimObj, "Style", CallType.Method, targetName)
-            Catch
-            End Try
-            Try
-                CallByName(dimObj, "Style", CallType.Let, targetName)
-            Catch
-            End Try
-            If styleObj IsNot Nothing Then
-                Try
-                    CallByName(dimObj, "Style", CallType.Let, styleObj)
-                Catch
-                End Try
-            End If
-        End If
-
-        Dim finalStyleName As String = ReadDimensionStyleName(dimObj)
-        If IsDimensionStyleApplied(dimObj, targetName) Then
-            log?.LogLine("[DIM][STYLE] requested=" & targetName & " final=" & finalStyleName)
-        Else
-            log?.LogLine("[DIM][STYLE][WARN] requested=" & targetName & " final=" & finalStyleName)
-        End If
+        DimensionStyleResolver.ApplyDimensionStyle(dimObj, styleObj, log)
     End Sub
 
     Private Shared Function ReadDimensionStyleName(dimObj As Dimension) As String

@@ -11,6 +11,7 @@ Imports SolidEdgeDraft
 Imports SolidEdgeFramework
 Imports SolidEdgeFrameworkSupport
 Imports Dimension = SolidEdgeFrameworkSupport.Dimension
+Imports Extraer_dft_dxf_flatdxf
 
 Namespace Services.Dimensioning.Labs
 
@@ -20,6 +21,7 @@ Namespace Services.Dimensioning.Labs
         Private Const DimLabVerticalGap As Double = 0.03R
         Private Const DimLabMinGap As Double = 0.024R
         Private Const DimLabMaxGap As Double = 0.03R
+    Private Const DEBUG_FORENSIC As Boolean = False
 
         Private Sub New()
         End Sub
@@ -385,7 +387,8 @@ Namespace Services.Dimensioning.Labs
             lab.Log("MODE", mode.ToString(), "")
             lab.Log("PRECHECK", "effectiveRunMainDimensioning", effectiveRunMainDimensioning.ToString(CultureInfo.InvariantCulture))
             lab.Log("PRECHECK", "autoDimensioningDisabled", "True")
-            lab.Log("PRECHECK", "forensicInteractive", forensicInteractive.ToString(CultureInfo.InvariantCulture))
+            Dim forensicOn As Boolean = DEBUG_FORENSIC AndAlso forensicInteractive
+            lab.Log("PRECHECK", "forensicInteractive", forensicOn.ToString(CultureInfo.InvariantCulture))
             lab.Log("PRECHECK", "enableVisibleProbe", enableVisibleProbe.ToString(CultureInfo.InvariantCulture))
             lab.Log("PRECHECK", "enableAltPlacementLog", enableAltPlacementLog.ToString(CultureInfo.InvariantCulture))
 
@@ -417,7 +420,7 @@ Namespace Services.Dimensioning.Labs
                 Return
             End If
 
-            If forensicInteractive Then
+            If forensicOn Then
                 ApplyInteractiveActivation(app, draft, sh, lab)
             End If
 
@@ -445,7 +448,7 @@ Namespace Services.Dimensioning.Labs
 
                 labCtx = New LabRunContext With {
                     .App = app, .Draft = draft, .Sheet = sh,
-                    .ForensicInteractive = forensicInteractive,
+                    .ForensicInteractive = forensicOn,
                     .EnableAltPlacementLog = enableAltPlacementLog,
                     .SummaryHorizontalViewLabel = "",
                     .SummaryVerticalViewLabel = "",
@@ -471,11 +474,11 @@ Namespace Services.Dimensioning.Labs
                 If enableVisibleProbe AndAlso mode <> DimLabMode.CleanFull AndAlso mode <> DimLabMode.CleanFullStrict Then
                     If Not RunVisibleZeroProbe(sh, draft, app, dims, created, lab, labCtx) Then
                         abortedVis0 = True
-                        If forensicInteractive OrElse mode = DimLabMode.ForensicHorizontal Then
+                        If forensicOn OrElse mode = DimLabMode.ForensicHorizontal Then
                             lab.Log("ABORT", "reason", "plain_sheet_dimension_not_visible")
                             GoTo Summary
                         End If
-                    ElseIf forensicInteractive Then
+                    ElseIf forensicOn Then
                         TrySelectAddForensic(draft, labCtx, lab, "AFTER_VIS0")
                     End If
                 Else
@@ -493,13 +496,15 @@ Namespace Services.Dimensioning.Labs
                 labCtx.SummaryHorizontalViewLabel = "DrawingView " & horizIdx.ToString(CultureInfo.InvariantCulture)
 
                 Dim lineReadSession As New LabLineReadSession()
-                DumpDVLines(dv, lab, lineReadSession)
+                If forensicOn Then
+                    DumpDVLines(dv, lab, lineReadSession)
+                End If
 
-                Dim runFullRetrieve As Boolean = (mode = DimLabMode.Full) AndAlso Not forensicInteractive
+                Dim runFullRetrieve As Boolean = (mode = DimLabMode.Full) AndAlso Not forensicOn
                 If runFullRetrieve Then
                     sumRetrieve = RunRetrieveDimensionsTest(dv, draft, lab)
                 Else
-                    sumRetrieve = If(forensicInteractive, "SKIPPED_FORENSIC", "SKIPPED_MODE")
+                    sumRetrieve = If(forensicOn, "SKIPPED_FORENSIC", "SKIPPED_MODE")
                     lab.Log("RUN", "SKIP", "RetrieveDimensions mode=" & mode.ToString())
                 End If
 
@@ -567,7 +572,7 @@ Namespace Services.Dimensioning.Labs
                     End If
                 End If
 
-                Dim runGapAux As Boolean = (mode = DimLabMode.Full AndAlso Not forensicInteractive)
+                Dim runGapAux As Boolean = (mode = DimLabMode.Full AndAlso Not forensicOn)
                 If runGapAux Then
                     sumGap = RunSmallGapTest(dims, dv, draft, created, lab, lineReadSession, labCtx)
                     sumAux = RunAuxiliaryLine2dFallbackTest(dims, sh, draft, dv, created, lab, lineReadSession)
@@ -576,7 +581,13 @@ Namespace Services.Dimensioning.Labs
                     lab.Log("RUN", "SKIP", "gap_aux mode=" & mode.ToString())
                 End If
 
-                If forensicInteractive Then
+                Dim runSupplementalReferencePass As Boolean =
+                    (mode = DimLabMode.CleanFull OrElse mode = DimLabMode.CleanFullStrict OrElse mode = DimLabMode.Full)
+                If runSupplementalReferencePass Then
+                    RunSupplementalReferencePassFromDimLab(draft, dv, lab)
+                End If
+
+                If forensicOn Then
                     TrySelectAddForensic(draft, labCtx, lab, "AFTER_DVREF_HORIZONTAL")
                 End If
 
@@ -717,8 +728,11 @@ Summary:
                 End If
             End If
 
-            If (mode = DimLabMode.CleanFull OrElse mode = DimLabMode.CleanFullStrict) AndAlso sh IsNot Nothing AndAlso labCtx IsNot Nothing Then
+            Const KeepOnlyTwoFinalDimensions As Boolean = False
+            If KeepOnlyTwoFinalDimensions AndAlso (mode = DimLabMode.CleanFull OrElse mode = DimLabMode.CleanFullStrict) AndAlso sh IsNot Nothing AndAlso labCtx IsNot Nothing Then
                 CleanupIntermediateDimensionsKeepingPrimary(sh, labCtx, lab)
+            ElseIf mode = DimLabMode.CleanFull OrElse mode = DimLabMode.CleanFullStrict Then
+                lab.Log("CLEAN_FINAL", "SKIP", "reason=keep_more_functional_dimensions")
             End If
 
             If sh IsNot Nothing Then
@@ -727,11 +741,11 @@ Summary:
                 LogFinalDimensionPositionsCompact(sh, lab)
             End If
 
-            If forensicInteractive AndAlso abortedVis0 Then
+            If forensicOn AndAlso abortedVis0 Then
                 lab.Log("SUMMARY", "AbortNote", "ABORT_after_VIS0_plain_sheet_not_materialized")
             End If
 
-            If forensicInteractive Then
+            If forensicOn AndAlso GenerationEngineRuntime.DimLaboratoryMode Then
                 Try
                     System.Windows.Forms.MessageBox.Show(
                         "DIMLAB terminado. Revisa visualmente si aparecen: texto, línea y cota auxiliar. No cierres Solid Edge todavía.",
@@ -745,22 +759,45 @@ Summary:
 
             ' Pase final obligatorio: reaplicar estilo justo antes de terminar el laboratorio.
             If labCtx IsNot Nothing Then
-                lab.Log("STYLE", "LIST_AVAILABLE_NEAR_END", "start")
-                LogAvailableStylesNearEnd(draft, sh, lab)
-                lab.Log("STYLE", "FINAL_PASS_BEFORE_END", "start requested=" & labCtx.RequestedStyleName)
                 Dim finalPassOk = ApplyResolvedStyleToAllSheetDimensions(sh, labCtx, lab)
-                lab.Log("STYLE", "FINAL_PASS_BEFORE_END", "result=" & finalPassOk.ToString(CultureInfo.InvariantCulture))
+                lab.Log("STYLE", "FINAL_PASS", "ok=" & finalPassOk.ToString(CultureInfo.InvariantCulture))
                 If labCtx.IsCleanFullStrict AndAlso Not finalPassOk Then
-                    lab.Log("STYLE", "FINAL_PASS_BEFORE_END", "strict_fail=True")
+                    lab.Log("STYLE", "FINAL_PASS", "strict_fail=True")
                 End If
             End If
 
             ' No borrar lo creado al terminar: antes CleanupCreated() eliminaba todas las cotas de prueba en modo normal.
-            If forensicInteractive Then
+            If forensicOn Then
                 lab.Log("CLEANUP", "SKIP", "forensic_keep_all_objects")
             Else
                 lab.Log("CLEANUP", "SKIP", "keep_all_after_dimlab=true")
             End If
+        End Sub
+
+        Private Shared Sub RunSupplementalReferencePassFromDimLab(draft As DraftDocument, dv As DrawingView, lab As DimLabLogger)
+            If draft Is Nothing OrElse dv Is Nothing Then Return
+            Try
+                Dim normCfg As DimensioningNormConfig = DimensioningNormConfig.DefaultUneLegacyConfig()
+                normCfg.DimensionCreationMode = DimensioningNormConfig.ModeTargetReference
+                normCfg.MaxTotalDimensionsTarget = Math.Max(normCfg.MaxTotalDimensionsTarget, 22)
+                normCfg.MaxLinearDimensionsTarget = Math.Max(normCfg.MaxLinearDimensionsTarget, 16)
+                normCfg.MaxRadialDimensionsTarget = Math.Max(normCfg.MaxRadialDimensionsTarget, 6)
+                normCfg.UneDedupeNominalAcrossOrthogonalViews = True
+
+                Dim bridgeLogger As New Logger(
+                    Sub(m)
+                        Try
+                            lab.Log("REF_PASS", "LOG", m)
+                        Catch
+                        End Try
+                    End Sub)
+
+                lab.Log("REF_PASS", "START", "mode=TargetDrawingLikeReference from_DIMLAB")
+                DimensioningEngine.RunAutoDimensioning(draft, dv, bridgeLogger, normCfg, Nothing)
+                lab.Log("REF_PASS", "DONE", "ok=True")
+            Catch ex As Exception
+                lab.Log("REF_PASS", "FAIL", ex.Message)
+            End Try
         End Sub
 
         Private Shared Function BuildRecommended(h As String, v As String, g As String, r As String) As String
@@ -1129,33 +1166,32 @@ Summary:
         Private Shared Function ResolveDimStyleForDimension(draft As DraftDocument, sheet As Sheet, preferredName As String, lab As DimLabLogger, ByRef styleObj As Object, ByRef styleName As String) As Boolean
             styleObj = Nothing
             styleName = ""
-            Dim found As Boolean = False
-            Dim foundObj As Object = Nothing
-            Dim foundName As String = ""
-            Dim foundSource As String = ""
+            If draft Is Nothing Then Return False
+            Dim styles As Object = Nothing
+            Dim count As Integer = 0
+            Try
+                styles = draft.DimensionStyles
+                count = CInt(CallByName(styles, "Count", CallType.Get))
+            Catch ex As Exception
+                lab.Log("STYLE", "RESOLVE", "requested=" & preferredName & " found=False source=draft.DimensionStyles error=" & ex.Message)
+                Return False
+            End Try
 
-            Dim collectionNames = New String() {"DimensionStyles", "DimStyles", "LinearStyles", "Styles"}
+            Dim preferredNorm = NormalizeStyleNameForCompare(preferredName)
+            For i As Integer = 1 To count
+                Try
+                    Dim it = CallByName(styles, "Item", CallType.Method, i)
+                    Dim nm = Convert.ToString(CallByName(it, "Name", CallType.Get), CultureInfo.InvariantCulture)
+                    If String.Equals(NormalizeStyleNameForCompare(nm), preferredNorm, StringComparison.OrdinalIgnoreCase) Then
+                        styleObj = it
+                        styleName = nm
+                        lab.Log("STYLE", "RESOLVE", "requested=" & preferredName & " found=True resolvedName=" & styleName)
+                        Return True
+                    End If
+                Catch
+                End Try
+            Next
 
-            If draft IsNot Nothing Then
-                For Each coll In collectionNames
-                    ScanStyleCollectionForMatch(draft, "draft", coll, preferredName, lab, found, foundObj, foundName, foundSource)
-                Next
-            End If
-            If sheet IsNot Nothing Then
-                For Each coll In collectionNames
-                    ScanStyleCollectionForMatch(sheet, "sheet", coll, preferredName, lab, found, foundObj, foundName, foundSource)
-                Next
-            End If
-
-            If found AndAlso foundObj IsNot Nothing Then
-                styleObj = foundObj
-                styleName = foundName
-                lab.Log("STYLE_RESOLVE_MATCH", "FOUND", "requested=" & preferredName & " resolved=" & styleName & " source=" & foundSource)
-                lab.Log("STYLE", "RESOLVE", "requested=" & preferredName & " found=True resolvedName=" & styleName)
-                Return True
-            End If
-
-            lab.Log("STYLE_RESOLVE_FAIL", "NOT_FOUND", "requested=" & preferredName)
             lab.Log("STYLE", "RESOLVE", "requested=" & preferredName & " found=False resolvedName=")
             Return False
         End Function
@@ -1169,156 +1205,36 @@ Summary:
                                                         ByRef foundObj As Object,
                                                         ByRef foundName As String,
                                                         ByRef foundSource As String)
-            Dim styles As Object = Nothing
-            Dim count As Integer = -1
-            Try
-                styles = CallByName(owner, collectionName, CallType.Get)
-                If styles IsNot Nothing Then
-                    count = CInt(CallByName(styles, "Count", CallType.Get))
-                    lab.Log("STYLE_SCAN_COLLECTION", "OPEN", "name=" & collectionName & " ok=True count=" & count.ToString(CultureInfo.InvariantCulture) & " source=" & ownerLabel)
-                    lab.Log("SCREEN", "STYLE_SEARCH", "source=" & ownerLabel & " collection=" & collectionName & " ok=True count=" & count.ToString(CultureInfo.InvariantCulture))
-                Else
-                    lab.Log("STYLE_SCAN_COLLECTION", "OPEN", "name=" & collectionName & " ok=False count=0 source=" & ownerLabel)
-                    lab.Log("SCREEN", "STYLE_SEARCH", "source=" & ownerLabel & " collection=" & collectionName & " ok=False")
-                    Return
-                End If
-            Catch ex As Exception
-                lab.Log("STYLE_SCAN_COLLECTION", "OPEN", "name=" & collectionName & " ok=False source=" & ownerLabel & " error=" & ex.Message)
-                lab.Log("SCREEN", "STYLE_SEARCH", "source=" & ownerLabel & " collection=" & collectionName & " ok=False")
-                Return
-            End Try
-
-            For i As Integer = 1 To count
-                Dim it As Object = Nothing
-                Try
-                    it = CallByName(styles, "Item", CallType.Method, i)
-                Catch
-                    Continue For
-                End Try
-                If it Is Nothing Then Continue For
-
-                Dim nm As String = ""
-                Try
-                    nm = Convert.ToString(CallByName(it, "Name", CallType.Get), CultureInfo.InvariantCulture)
-                Catch
-                    nm = ""
-                End Try
-                lab.Log("STYLE_SCAN", "ITEM", "collection=" & collectionName & " idx=" & i.ToString(CultureInfo.InvariantCulture) & " name=" & nm & " source=" & ownerLabel)
-                lab.Log("SCREEN", "STYLE_SEARCH", "source=" & ownerLabel & " collection=" & collectionName & " idx=" & i.ToString(CultureInfo.InvariantCulture) & " name=" & nm)
-                lab.Log("STYLE_RESOLVE_TRY", "MATCH", "requested=" & preferredName & " collection=" & collectionName & " candidate=" & nm)
-
-                If Not found AndAlso String.Equals(NormalizeStyleNameForCompare(nm), NormalizeStyleNameForCompare(preferredName), StringComparison.OrdinalIgnoreCase) Then
-                    found = True
-                    foundObj = it
-                    foundName = nm
-                    foundSource = ownerLabel & "." & collectionName
-                    lab.Log("STYLE_RESOLVE_MATCH", "CANDIDATE", "requested=" & preferredName & " resolved=" & nm & " source=" & foundSource)
-                End If
-            Next
+            ' Ruta heredada desactivada: ahora solo se usa draft.DimensionStyles.
         End Sub
 
         Private Shared Function ApplyDimensionStyleStrict(dimObj As Object, styleObj As Object, styleName As String, lab As DimLabLogger, dimLabel As String, cleanFullStrict As Boolean) As Boolean
-            If dimObj Is Nothing Then Return False
-            Dim finalName = ""
-
+            If dimObj Is Nothing OrElse styleObj Is Nothing Then Return False
             Try
-                lab.Log("STYLE_APPLY_TRY", "ROUTE", "dim=" & dimLabel & " route=Style_method_string value=" & styleName)
-                CallByName(dimObj, "Style", CallType.Method, styleName)
-                finalName = ReadDimensionStyleName(dimObj, lab)
-                If String.Equals(NormalizeStyleNameForCompare(finalName), NormalizeStyleNameForCompare(styleName), StringComparison.OrdinalIgnoreCase) Then
-                    lab.Log("STYLE_APPLY_OK", "ROUTE", "dim=" & dimLabel & " route=Style_method_string final=" & finalName)
-                    lab.Log("STYLE_FINAL", "DIM", "dim=" & dimLabel & " final=" & finalName)
-                    Return True
-                End If
+                CallByName(dimObj, "Style", CallType.Let, styleObj)
             Catch ex As Exception
-                lab.Log("STYLE_APPLY_FAIL", "ROUTE", "dim=" & dimLabel & " route=Style_method_string error=" & ex.Message)
+                lab.Log("STYLE", "FINAL_FAIL", "name=" & dimLabel & " requested=" & styleName & " error=" & ex.Message)
+                Return False
             End Try
 
-            Dim routes = New String() {"StyleName", "DimensionStyleName", "DimStyleName", "Style"}
-            For Each route In routes
-                Try
-                    lab.Log("STYLE_APPLY_TRY", "ROUTE", "dim=" & dimLabel & " route=" & route & "_string value=" & styleName)
-                    CallByName(dimObj, route, CallType.Let, styleName)
-                    finalName = ReadDimensionStyleName(dimObj, lab)
-                    If String.Equals(NormalizeStyleNameForCompare(finalName), NormalizeStyleNameForCompare(styleName), StringComparison.OrdinalIgnoreCase) Then
-                        lab.Log("STYLE_APPLY_OK", "ROUTE", "dim=" & dimLabel & " route=" & route & "_string final=" & finalName)
-                        lab.Log("STYLE_FINAL", "DIM", "dim=" & dimLabel & " final=" & finalName)
-                        Return True
-                    End If
-                Catch ex As Exception
-                    lab.Log("STYLE_APPLY_FAIL", "ROUTE", "dim=" & dimLabel & " route=" & route & "_string error=" & ex.Message)
-                End Try
-            Next
-
-            Try
-                lab.Log("STYLE_APPLY_TRY", "ROUTE", "dim=" & dimLabel & " route=SetStyle_method value=" & styleName)
-                CallByName(dimObj, "SetStyle", CallType.Method, styleName)
-                finalName = ReadDimensionStyleName(dimObj, lab)
-                If String.Equals(NormalizeStyleNameForCompare(finalName), NormalizeStyleNameForCompare(styleName), StringComparison.OrdinalIgnoreCase) Then
-                    lab.Log("STYLE_APPLY_OK", "ROUTE", "dim=" & dimLabel & " route=SetStyle_method final=" & finalName)
-                    lab.Log("STYLE_FINAL", "DIM", "dim=" & dimLabel & " final=" & finalName)
-                    Return True
-                End If
-            Catch ex As Exception
-                lab.Log("STYLE_APPLY_FAIL", "ROUTE", "dim=" & dimLabel & " route=SetStyle_method error=" & ex.Message)
-            End Try
-
-            If styleObj IsNot Nothing Then
-                lab.Log("STYLE_APPLY_TRY", "ROUTE", "dim=" & dimLabel & " route=Style_object")
-                Try
-                    CallByName(dimObj, "Style", CallType.Let, styleObj)
-                Catch ex As Exception
-                    lab.Log("STYLE_APPLY_FAIL", "ROUTE", "dim=" & dimLabel & " route=Style_object error=" & ex.Message)
-                End Try
-                Try
-                    CallByName(dimObj, "Style", CallType.Set, styleObj)
-                Catch ex As Exception
-                    lab.Log("STYLE_APPLY_FAIL", "ROUTE", "dim=" & dimLabel & " route=Style_object_set error=" & ex.Message)
-                End Try
-            End If
-
-            finalName = ReadDimensionStyleName(dimObj, lab)
-            If String.Equals(NormalizeStyleNameForCompare(finalName), NormalizeStyleNameForCompare(styleName), StringComparison.OrdinalIgnoreCase) Then
-                lab.Log("STYLE_APPLY_OK", "ROUTE", "dim=" & dimLabel & " route=Style_object final=" & finalName)
-                lab.Log("STYLE_FINAL", "DIM", "dim=" & dimLabel & " final=" & finalName)
-                Return True
-            End If
-
-            lab.Log("STYLE", "FINAL_FAIL", "name=" & dimLabel & " requested=" & styleName & " final=" & finalName)
-            If cleanFullStrict Then
-                lab.Log("STYLE", "FATAL", "CleanFullStrict requiere U3,5. No aceptar fallback.")
-            End If
+            Dim finalName = ReadDimensionStyleName(dimObj, lab)
+            Dim ok = String.Equals(NormalizeStyleNameForCompare(finalName), NormalizeStyleNameForCompare(styleName), StringComparison.OrdinalIgnoreCase)
             lab.Log("STYLE_FINAL", "DIM", "dim=" & dimLabel & " final=" & finalName)
-            Return False
+            If cleanFullStrict AndAlso Not ok Then
+                lab.Log("STYLE", "FATAL", "CleanFullStrict requiere estilo solicitado.")
+            End If
+            Return ok
         End Function
 
         Private Shared Sub TryApplyStyleToDimensionsCollectionLab(dims As Dimensions, styleName As String, styleObj As Object, lab As DimLabLogger, sourceTag As String)
-            If dims Is Nothing Then Return
+            If dims Is Nothing OrElse styleObj Is Nothing Then Return
             Try
-                lab.Log("STYLE_PRECREATE_TRY", "ROUTE", "route=Dimensions.Style(Method) value=" & styleName & " source=" & sourceTag)
-                CallByName(dims, "Style", CallType.Method, styleName)
-                lab.Log("STYLE_PRECREATE_RESULT", "ROUTE", "route=Dimensions.Style(Method) ok=True source=" & sourceTag)
-                Return
+                CallByName(dims, "Style", CallType.Let, styleObj)
             Catch ex As Exception
-                lab.Log("STYLE_PRECREATE_RESULT", "ROUTE", "route=Dimensions.Style(Method) ok=False source=" & sourceTag & " error=" & ex.Message)
+                If DEBUG_FORENSIC Then
+                    lab.Log("STYLE_PRECREATE", "FAIL", "source=" & sourceTag & " error=" & ex.Message)
+                End If
             End Try
-            Try
-                lab.Log("STYLE_PRECREATE_TRY", "ROUTE", "route=Dimensions.Style(Let) value=" & styleName & " source=" & sourceTag)
-                CallByName(dims, "Style", CallType.Let, styleName)
-                lab.Log("STYLE_PRECREATE_RESULT", "ROUTE", "route=Dimensions.Style(Let) ok=True source=" & sourceTag)
-                Return
-            Catch ex As Exception
-                lab.Log("STYLE_PRECREATE_RESULT", "ROUTE", "route=Dimensions.Style(Let) ok=False source=" & sourceTag & " error=" & ex.Message)
-            End Try
-            If styleObj IsNot Nothing Then
-                Try
-                    lab.Log("STYLE_PRECREATE_TRY", "ROUTE", "route=Dimensions.Style(object) source=" & sourceTag)
-                    CallByName(dims, "Style", CallType.Let, styleObj)
-                    lab.Log("STYLE_PRECREATE_RESULT", "ROUTE", "route=Dimensions.Style(object) ok=True source=" & sourceTag)
-                Catch ex As Exception
-                    lab.Log("STYLE_PRECREATE_RESULT", "ROUTE", "route=Dimensions.Style(object) ok=False source=" & sourceTag & " error=" & ex.Message)
-                End Try
-            End If
         End Sub
 
         Private Shared Function ApplyResolvedStyleToAllSheetDimensions(sh As Sheet, ctx As LabRunContext, lab As DimLabLogger) As Boolean
@@ -1362,20 +1278,14 @@ Summary:
         End Function
 
         Private Shared Sub LogAvailableStylesNearEnd(draft As DraftDocument, sheet As Sheet, lab As DimLabLogger)
-            Dim collectionNames = New String() {"DimensionStyles", "DimStyles", "LinearStyles", "Styles"}
+            If Not DEBUG_FORENSIC Then Return
             If draft IsNot Nothing Then
-                For Each coll In collectionNames
-                    LogStyleCollection(draft, "draft_near_end", coll, lab)
-                Next
-            End If
-            If sheet IsNot Nothing Then
-                For Each coll In collectionNames
-                    LogStyleCollection(sheet, "sheet_near_end", coll, lab)
-                Next
+                LogStyleCollection(draft, "draft_near_end", "DimensionStyles", lab)
             End If
         End Sub
 
         Private Shared Sub LogStyleCollection(owner As Object, ownerLabel As String, collectionName As String, lab As DimLabLogger)
+            If Not DEBUG_FORENSIC Then Return
             If owner Is Nothing Then Return
             Dim styles As Object = Nothing
             Dim count As Integer = -1
@@ -1408,6 +1318,7 @@ Summary:
         End Sub
 
         Private Shared Sub LogDimensionStyleDiagnostics(dimObj As Object, dimLabel As String, lab As DimLabLogger)
+            If Not DEBUG_FORENSIC Then Return
             If dimObj Is Nothing Then Return
             Try
                 Dim stObj = CallByName(dimObj, "Style", CallType.Get)
@@ -1420,65 +1331,16 @@ Summary:
             Catch ex As Exception
                 lab.Log("STYLE_DIAG", "DIM_STYLE_OBJECT", "name=" & dimLabel & " type=unreadable error=" & ex.Message)
             End Try
-
-            For Each p In New String() {"Style", "StyleName", "DimensionStyle", "DimensionStyleName", "DimStyle", "DimStyleName"}
-                Dim ok As Boolean = False
-                Dim val As String = ""
-                Try
-                    Dim v = CallByName(dimObj, p, CallType.Get)
-                    ok = True
-                    val = Convert.ToString(v, CultureInfo.InvariantCulture)
-                Catch ex As Exception
-                    ok = False
-                    val = ex.Message
-                End Try
-                lab.Log("STYLE_DIAG", "PROPERTY_EXISTS", "property=" & p & " ok=" & ok.ToString(CultureInfo.InvariantCulture) & " value=" & val)
-            Next
         End Sub
 
         Private Shared Function ReadDimensionStyleName(dimObj As Object, lab As DimLabLogger) As String
             If dimObj Is Nothing Then Return ""
-            Dim nm As String = ""
-
-            lab.Log("STYLE", "READ_TRY", "route=Style.Name")
             Try
                 Dim st = CallByName(dimObj, "Style", CallType.Get)
-                nm = Convert.ToString(CallByName(st, "Name", CallType.Get), CultureInfo.InvariantCulture)
-                lab.Log("STYLE", "READ_OK", "route=Style.Name name=" & nm)
-                Return nm
-            Catch ex As Exception
-                lab.Log("STYLE", "READ_FAIL", "route=Style.Name error=" & ex.Message)
+                Return Convert.ToString(CallByName(st, "Name", CallType.Get), CultureInfo.InvariantCulture)
+            Catch
+                Return ""
             End Try
-
-            lab.Log("STYLE", "READ_TRY", "route=DimensionStyle.Name")
-            Try
-                Dim st = CallByName(dimObj, "DimensionStyle", CallType.Get)
-                nm = Convert.ToString(CallByName(st, "Name", CallType.Get), CultureInfo.InvariantCulture)
-                lab.Log("STYLE", "READ_OK", "route=DimensionStyle.Name name=" & nm)
-                Return nm
-            Catch ex As Exception
-                lab.Log("STYLE", "READ_FAIL", "route=DimensionStyle.Name error=" & ex.Message)
-            End Try
-
-            lab.Log("STYLE", "READ_TRY", "route=StyleName")
-            Try
-                nm = Convert.ToString(CallByName(dimObj, "StyleName", CallType.Get), CultureInfo.InvariantCulture)
-                lab.Log("STYLE", "READ_OK", "route=StyleName name=" & nm)
-                Return nm
-            Catch ex As Exception
-                lab.Log("STYLE", "READ_FAIL", "route=StyleName error=" & ex.Message)
-            End Try
-
-            lab.Log("STYLE", "READ_TRY", "route=Style")
-            Try
-                nm = Convert.ToString(CallByName(dimObj, "Style", CallType.Get), CultureInfo.InvariantCulture)
-                lab.Log("STYLE", "READ_OK", "route=Style name=" & nm)
-                Return nm
-            Catch ex As Exception
-                lab.Log("STYLE", "READ_FAIL", "route=Style error=" & ex.Message)
-            End Try
-
-            Return nm
         End Function
 
         Private Shared Function NormalizeStyleNameForCompare(s As String) As String
@@ -1498,6 +1360,8 @@ Summary:
             If d Is Nothing Then Return "SKIP"
             Dim centered As Boolean = False
             Dim profileApplied As String = "none"
+            Dim aboveGap As Double = 0.004R
+
             For Each mn In New String() {"CenterText", "CenterDimensionText", "Center"}
                 Try
                     CallByName(d, mn, CallType.Method)
@@ -1507,278 +1371,47 @@ Summary:
                 Catch
                 End Try
             Next
+
             Try
-                Dim td = SafeGetTrackDistance(d)
-                If Not Double.IsNaN(td) AndAlso td > 0.006R Then
-                    Dim tdIn = 0.006R
-                    d.TrackDistance = tdIn
-                    Try : CallByName(d, "AbsoluteTrackDistance", CallType.Let, tdIn) : Catch : End Try
-                    centered = True
-                End If
-            Catch
-            End Try
-            Try
-                Dim offsets = CallByName(d, "GetTextOffsets", CallType.Method)
-                lab.Log("TEXT_CENTER", "OFFSETS_READ", "name=" & name & " value=" & Convert.ToString(offsets, CultureInfo.InvariantCulture))
-            Catch
-            End Try
-            Try
-                CallByName(d, "SetTextOffsets", CallType.Method, 0.0R, 0.0R)
+                CallByName(d, "SetTextOffsets", CallType.Method, 0.0R, aboveGap)
                 centered = True
-                If profileApplied = "none" Then profileApplied = "offsets_zero"
+                If profileApplied = "none" Then profileApplied = "offsets_above_gap"
             Catch
             End Try
-            ' Barrido de keypoints y posiciones objetivo para identificar qué handle controla el texto.
+
             Try
-                Dim rx1 As Double = 0.0R, ry1 As Double = 0.0R, rx2 As Double = 0.0R, ry2 As Double = 0.0R
-                If TryReadDimensionRange(d, rx1, ry1, rx2, ry2) Then
-                    Dim minX0 As Double = Math.Min(rx1, rx2)
-                    Dim maxX0 As Double = Math.Max(rx1, rx2)
-                    Dim minY0 As Double = Math.Min(ry1, ry2)
-                    Dim maxY0 As Double = Math.Max(ry1, ry2)
-                    Dim cx As Double = (minX0 + maxX0) * 0.5R
-                    Dim cy As Double = (minY0 + maxY0) * 0.5R
-                    Dim w0 As Double = Math.Abs(maxX0 - minX0)
-                    Dim h0 As Double = Math.Abs(maxY0 - minY0)
-                    Dim off As Double = Math.Max(0.0015R, Math.Min(0.006R, Math.Max(w0, h0) * 0.12R))
-                    Dim nKp As Integer = 0
-                    Try : nKp = CInt(CallByName(d, "KeyPointCount", CallType.Get)) : Catch : nKp = 0 : End Try
-                    If nKp > 0 Then
-                        lab.Log("TEXT_CENTER", "SWEEP_START", "name=" & name & " keyPoints=" & nKp.ToString(CultureInfo.InvariantCulture) &
-                                " baseCenter=(" & Gd(cx) & "," & Gd(cy) & ") offset=" & Gd(off))
-
-                        Dim targets = New List(Of Tuple(Of String, Double, Double)) From {
-                            New Tuple(Of String, Double, Double)("CENTER", cx, cy)
-                        }
-
-                        Dim bestScore As Double = Double.MaxValue
-                        Dim bestIdx As Integer = -1
-                        Dim bestTx As Double = cx
-                        Dim bestTy As Double = cy
-                        Dim bestTag As String = "CENTER"
-                        Dim maxKp As Integer = Math.Min(nKp - 1, 8)
-
-                        For kpIdx As Integer = 0 To maxKp
-                            Dim px As Double = 0.0R, py As Double = 0.0R, pz As Double = 0.0R
-                            Dim kpt As SolidEdgeConstants.KeyPointType
-                            Dim hdl As SolidEdgeConstants.HandleType
-                            Try
-                                d.GetKeyPoint(kpIdx, px, py, pz, kpt, hdl)
-                                lab.Log("TEXT_CENTER", "KP", "name=" & name & " idx=" & kpIdx.ToString(CultureInfo.InvariantCulture) &
-                                        " p=(" & Gd(px) & "," & Gd(py) & ") kpt=" & CInt(kpt).ToString(CultureInfo.InvariantCulture) &
-                                        " hdl=" & CInt(hdl).ToString(CultureInfo.InvariantCulture))
-                            Catch
-                            End Try
-
-                            For Each t In targets
-                                Try
-                                    d.SetKeyPoint(kpIdx, t.Item2, t.Item3, 0.0R)
-                                    Try
-                                        If draft IsNot Nothing Then
-                                            draft.UpdateAll(True)
-                                        End If
-                                    Catch
-                                    End Try
-                                    Try
-                                        If app IsNot Nothing Then
-                                            app.DoIdle()
-                                        End If
-                                    Catch
-                                    End Try
-
-                                    Dim ax1 As Double = 0.0R, ay1 As Double = 0.0R, ax2 As Double = 0.0R, ay2 As Double = 0.0R
-                                    Dim score As Double = Double.MaxValue
-                                    If TryReadDimensionRange(d, ax1, ay1, ax2, ay2) Then
-                                        Dim acx As Double = (Math.Min(ax1, ax2) + Math.Max(ax1, ax2)) * 0.5R
-                                        Dim acy As Double = (Math.Min(ay1, ay2) + Math.Max(ay1, ay2)) * 0.5R
-                                        score = Math.Sqrt((acx - cx) * (acx - cx) + (acy - cy) * (acy - cy))
-                                        lab.Log("TEXT_CENTER", "SWEEP_TRY", "name=" & name &
-                                                " kp=" & kpIdx.ToString(CultureInfo.InvariantCulture) &
-                                                " target=" & t.Item1 &
-                                                " targetP=(" & Gd(t.Item2) & "," & Gd(t.Item3) & ")" &
-                                                " centerAfter=(" & Gd(acx) & "," & Gd(acy) & ")" &
-                                                " score=" & Gd(score))
-                                    Else
-                                        lab.Log("TEXT_CENTER", "SWEEP_TRY", "name=" & name &
-                                                " kp=" & kpIdx.ToString(CultureInfo.InvariantCulture) &
-                                                " target=" & t.Item1 & " centerAfter=unreadable score=NaN")
-                                    End If
-
-                                    If score < bestScore Then
-                                        bestScore = score
-                                        bestIdx = kpIdx
-                                        bestTx = t.Item2
-                                        bestTy = t.Item3
-                                        bestTag = t.Item1
-                                    End If
-                                Catch ex As Exception
-                                    lab.Log("TEXT_CENTER", "SWEEP_FAIL", "name=" & name &
-                                            " kp=" & kpIdx.ToString(CultureInfo.InvariantCulture) &
-                                            " target=" & t.Item1 &
-                                            " error=" & ex.Message)
-                                End Try
-                            Next
-                        Next
-
-                        If bestIdx >= 0 Then
-                            Try
-                                d.SetKeyPoint(bestIdx, bestTx, bestTy, 0.0R)
-                                centered = True
-                                profileApplied = If(profileApplied = "none",
-                                                    "setkeypoint_sweep_best_" & bestTag,
-                                                    profileApplied & "+setkeypoint_sweep_best_" & bestTag)
-                                lab.Log("TEXT_CENTER", "SWEEP_BEST", "name=" & name &
-                                        " kp=" & bestIdx.ToString(CultureInfo.InvariantCulture) &
-                                        " target=" & bestTag &
-                                        " p=(" & Gd(bestTx) & "," & Gd(bestTy) & ")" &
-                                        " score=" & Gd(bestScore))
-                            Catch ex As Exception
-                                lab.Log("TEXT_CENTER", "SWEEP_BEST_FAIL", "name=" & name & " error=" & ex.Message)
-                            End Try
-                        End If
-                    End If
-                End If
-            Catch
-            End Try
-            ' Intentos directos sobre propiedades del objeto Dimension.
-            Try
-                CallByName(d, "CoordinateTextPosition", CallType.Let, 0) ' solicitado por usuario
-                centered = True
-                profileApplied = If(profileApplied = "none", "coord_text_above_dim_0", profileApplied & "+coord_text_above_dim_0")
-                lab.Log("TEXT_CENTER", "COORD_TEXT_POSITION", "name=" & name & " value=0 target=Dimension")
-            Catch
-                Try
-                    CallByName(d, "CoordinateTextPosition", CallType.Let, 1) ' fallback típico
-                    centered = True
-                    profileApplied = If(profileApplied = "none", "coord_text_above_dim_1", profileApplied & "+coord_text_above_dim_1")
-                    lab.Log("TEXT_CENTER", "COORD_TEXT_POSITION", "name=" & name & " value=1(igDimStyleCoordTextAbove) target=Dimension")
-                Catch
-                End Try
-            Catch
-            End Try
-            Try
-                CallByName(d, "CoordinateTextOrientation", CallType.Let, 1)
-                centered = True
-                profileApplied = If(profileApplied = "none", "coord_text_orientation_dim", profileApplied & "+coord_text_orientation_dim")
-                lab.Log("TEXT_CENTER", "COORD_TEXT_ORIENTATION", "name=" & name & " value=1 target=Dimension")
-            Catch
-            End Try
-            ' Perfil "internal centered": evitar texto "pulled out" + posición/orientación internas.
-            Try
-                CallByName(d, "OverridePulledOutText", CallType.Let, False)
-                centered = True
-                If profileApplied = "none" Then profileApplied = "override_pulled_out_false"
-            Catch
-            End Try
-            Try
-                CallByName(d, "OverridePulledOutText2", CallType.Let, False)
+                CallByName(d, "CoordinateTextPosition", CallType.Let, 1)
                 centered = True
             Catch
             End Try
+
             Try
-                CallByName(d, "TextPosition", CallType.Let, 1) ' igDimStyleTextAbove
+                CallByName(d, "TextPosition", CallType.Let, 1)
                 centered = True
-                lab.Log("TEXT_CENTER", "TEXT_POSITION", "name=" & name & " value=1(igDimStyleTextAbove)")
-                profileApplied = If(profileApplied = "none", "text_position_above_1", profileApplied & "+text_position_above_1")
             Catch
-                Try
-                    CallByName(d, "TextPosition", CallType.Let, 0) ' fallback
-                    centered = True
-                    lab.Log("TEXT_CENTER", "TEXT_POSITION", "name=" & name & " value=0")
-                    profileApplied = If(profileApplied = "none", "text_position_above_0", profileApplied & "+text_position_above_0")
-                Catch
-                End Try
             End Try
+
             Try
                 If name.IndexOf("Vertical", StringComparison.OrdinalIgnoreCase) >= 0 Then
-                    CallByName(d, "TextOrientation", CallType.Let, 2) ' vertical solicitado
-                    lab.Log("TEXT_CENTER", "TEXT_ORIENTATION", "name=" & name & " value=2(igDimStyleTextVertical)")
-                    profileApplied = If(profileApplied = "none", "text_orientation_vertical_2", profileApplied & "+text_orientation_vertical_2")
+                    CallByName(d, "TextOrientation", CallType.Let, 2)
                 Else
-                    CallByName(d, "TextOrientation", CallType.Let, 1) ' horizontal para cota horizontal
-                    lab.Log("TEXT_CENTER", "TEXT_ORIENTATION", "name=" & name & " value=1(igDimStyleTextHorizontal)")
-                    profileApplied = If(profileApplied = "none", "text_orientation_horizontal_1", profileApplied & "+text_orientation_horizontal_1")
+                    CallByName(d, "TextOrientation", CallType.Let, 1)
                 End If
                 centered = True
             Catch
-                Try
-                    CallByName(d, "TextOrientation", CallType.Let, 0)
-                    centered = True
-                    lab.Log("TEXT_CENTER", "TEXT_ORIENTATION", "name=" & name & " value=0(fallback)")
-                Catch
-                End Try
             End Try
-            ' Intentos sobre el DimStyle concreto de la cota (override por objeto).
+
             Try
                 Dim stObj = CallByName(d, "Style", CallType.Get)
                 If stObj IsNot Nothing Then
-                    Try
-                        CallByName(stObj, "TextPosition", CallType.Let, 1)
-                        centered = True
-                        profileApplied = If(profileApplied = "none", "style_text_position_above_1", profileApplied & "+style_text_position_above_1")
-                        lab.Log("TEXT_CENTER", "STYLE_TEXT_POSITION", "name=" & name & " value=1(igDimStyleTextAbove)")
-                    Catch
-                        Try
-                            CallByName(stObj, "TextPosition", CallType.Let, 0)
-                            centered = True
-                            profileApplied = If(profileApplied = "none", "style_text_position_above_0", profileApplied & "+style_text_position_above_0")
-                            lab.Log("TEXT_CENTER", "STYLE_TEXT_POSITION", "name=" & name & " value=0")
-                        Catch
-                        End Try
-                    Catch
-                    End Try
-                    Try
-                        If name.IndexOf("Vertical", StringComparison.OrdinalIgnoreCase) >= 0 Then
-                            CallByName(stObj, "TextOrientation", CallType.Let, 2)
-                            profileApplied = If(profileApplied = "none", "style_text_orientation_vertical_2", profileApplied & "+style_text_orientation_vertical_2")
-                            lab.Log("TEXT_CENTER", "STYLE_TEXT_ORIENTATION", "name=" & name & " value=2(igDimStyleTextVertical)")
-                        Else
-                            CallByName(stObj, "TextOrientation", CallType.Let, 1)
-                            profileApplied = If(profileApplied = "none", "style_text_orientation_horizontal_1", profileApplied & "+style_text_orientation_horizontal_1")
-                            lab.Log("TEXT_CENTER", "STYLE_TEXT_ORIENTATION", "name=" & name & " value=1(igDimStyleTextHorizontal)")
-                        End If
-                        centered = True
-                    Catch
-                    End Try
-                    Try
-                        CallByName(stObj, "CoordinateTextPosition", CallType.Let, 0)
-                        centered = True
-                        profileApplied = If(profileApplied = "none", "style_coord_text_above_0", profileApplied & "+style_coord_text_above_0")
-                        lab.Log("TEXT_CENTER", "STYLE_COORD_TEXT_POSITION", "name=" & name & " value=0")
-                    Catch
-                        Try
-                            CallByName(stObj, "CoordinateTextPosition", CallType.Let, 1)
-                            centered = True
-                            profileApplied = If(profileApplied = "none", "style_coord_text_above_1", profileApplied & "+style_coord_text_above_1")
-                            lab.Log("TEXT_CENTER", "STYLE_COORD_TEXT_POSITION", "name=" & name & " value=1(igDimStyleCoordTextAbove)")
-                        Catch
-                        End Try
-                    Catch
-                    End Try
-                    Try
-                        CallByName(stObj, "CoordinateTextOrientation", CallType.Let, 1)
-                        centered = True
-                        profileApplied = If(profileApplied = "none", "style_coord_text_orientation", profileApplied & "+style_coord_text_orientation")
-                        lab.Log("TEXT_CENTER", "STYLE_COORD_TEXT_ORIENTATION", "name=" & name & " value=1")
-                    Catch
-                    End Try
-                    Try
-                        CallByName(stObj, "TextClearanceGap", CallType.Let, 0.0R)
-                        centered = True
-                        profileApplied = If(profileApplied = "none", "style_text_clearance_0", profileApplied & "+style_text_clearance_0")
-                        lab.Log("TEXT_CENTER", "STYLE_TEXT_CLEARANCE_GAP", "name=" & name & " value=0")
-                    Catch
-                    End Try
-                    Try
-                        CallByName(stObj, "AboveGap", CallType.Let, 0.0R)
-                        centered = True
-                        profileApplied = If(profileApplied = "none", "style_above_gap_0", profileApplied & "+style_above_gap_0")
-                        lab.Log("TEXT_CENTER", "STYLE_ABOVE_GAP", "name=" & name & " value=0")
-                    Catch
-                    End Try
+                    Try : CallByName(stObj, "TextPosition", CallType.Let, 1) : centered = True : Catch : End Try
+                    Try : CallByName(stObj, "CoordinateTextPosition", CallType.Let, 1) : centered = True : Catch : End Try
+                    Try : CallByName(stObj, "AboveGap", CallType.Let, aboveGap) : centered = True : Catch : End Try
+                    Try : CallByName(stObj, "TextClearanceGap", CallType.Let, aboveGap) : centered = True : Catch : End Try
                 End If
             Catch
             End Try
+
             Try
                 If draft IsNot Nothing Then
                     draft.UpdateAll(True)
@@ -2099,7 +1732,7 @@ Summary:
             End If
 
             Dim outD As Dimension = Nothing
-            Dim p1 = PickClosestY(leftL, boundsLb.MaxY)
+            Dim p1 = PickClosestY(leftL, boundsLb.MinY)
             Dim p2 = PickClosestY(rightL, p1.Y)
             lab.Log("HORIZONTAL", "PAIR", "leftLine=" & p1.LineIndex.ToString(CultureInfo.InvariantCulture) &
                     " pLeft=(" & Gd(p1.X) & "," & Gd(p1.Y) & ") rightLine=" & p2.LineIndex.ToString(CultureInfo.InvariantCulture) &
@@ -2117,7 +1750,7 @@ Summary:
                 Return "SUCCESS_VALUE_VISIBLE_CONNECTION_UNCERTAIN"
             End If
 
-            p1 = PickClosestY(leftL, boundsLb.MinY)
+            p1 = PickClosestY(leftL, boundsLb.MaxY)
             p2 = PickClosestY(rightL, p1.Y)
             lab.Log("HORIZONTAL", "PAIR", "bottomPair leftLine=" & p1.LineIndex.ToString(CultureInfo.InvariantCulture) &
                     " pLeft=(" & Gd(p1.X) & "," & Gd(p1.Y) & ") rightLine=" & p2.LineIndex.ToString(CultureInfo.InvariantCulture) &
@@ -2724,34 +2357,19 @@ Summary:
 
             If used < MaxStrategies Then
                 used += 1
-                If scan.HasHorizTopBottomOverlap Then
-                    Dim rD = TryVerticalObjectBetweenHorizontalRefsLab(dims, verticalView, draft, boundsLb, lab, readSession, created, ctx, outD)
-                    If IsVerticalLabSuccess(outD, rD, dvBounds.ExpectedHeight, draft, verticalView, lab, ctx) Then
-                        lab.Log("VERTICAL", "RESULT", "SUCCESS_VALUE_VISIBLE_CONNECTION_UNCERTAIN")
-                        lab.Log("VERTICAL", "STOP", "reason=valid_value_visible_found")
-                        lab.Log("VERTICAL", "SELECTED_VIEW", "DrawingView " & scan.Idx.ToString(CultureInfo.InvariantCulture))
-                        ctx.SummaryVertCreate = "SUCCESS"
-                        ctx.SummaryVertValue = Gd(ReadDimValue(outD))
-                        ctx.SummaryVertConnected = CheckConnected(draft, verticalView, outD, lab, "Vertical_ObjectBetweenHorizontalRefs", ctx)
-                        ctx.SummaryVertVisible = LabVisibleOk(outD, ctx.Sheet, draft, ctx.App, lab, "Vertical_ObjectBetweenHorizontalRefs")
-                        ctx.SummaryVertValueClass = "OK"
-                        Return "SUCCESS_VERTICAL_HORIZ_REFS"
-                    End If
-                Else
-                    Dim pb2 = PickClosestX(bottomL, boundsLb.MinX)
-                    Dim pt2 = PickClosestX(topL, pb2.X)
-                    Dim rB = TryVerticalLabStep(dims, verticalView, draft, dvBounds, pb2, pt2, "Vertical_LeftSide_Keypoints", created, lab, ctx, outD)
-                    If IsVerticalLabSuccess(outD, rB, dvBounds.ExpectedHeight, draft, verticalView, lab, ctx) Then
-                        lab.Log("VERTICAL", "RESULT", "SUCCESS_VALUE_VISIBLE_CONNECTION_UNCERTAIN")
-                        lab.Log("VERTICAL", "STOP", "reason=valid_value_visible_found")
-                        lab.Log("VERTICAL", "SELECTED_VIEW", "DrawingView " & scan.Idx.ToString(CultureInfo.InvariantCulture))
-                        ctx.SummaryVertCreate = "SUCCESS"
-                        ctx.SummaryVertValue = Gd(ReadDimValue(outD))
-                        ctx.SummaryVertConnected = CheckConnected(draft, verticalView, outD, lab, "Vertical_LeftSide_Keypoints", ctx)
-                        ctx.SummaryVertVisible = LabVisibleOk(outD, ctx.Sheet, draft, ctx.App, lab, "Vertical_LeftSide_Keypoints")
-                        ctx.SummaryVertValueClass = "OK"
-                        Return "SUCCESS_VERTICAL_LEFT"
-                    End If
+                Dim pb2 = PickClosestX(bottomL, boundsLb.MinX)
+                Dim pt2 = PickClosestX(topL, pb2.X)
+                Dim rB = TryVerticalLabStep(dims, verticalView, draft, dvBounds, pb2, pt2, "Vertical_LeftSide_Keypoints", created, lab, ctx, outD)
+                If IsVerticalLabSuccess(outD, rB, dvBounds.ExpectedHeight, draft, verticalView, lab, ctx) Then
+                    lab.Log("VERTICAL", "RESULT", "SUCCESS_VALUE_VISIBLE_CONNECTION_UNCERTAIN")
+                    lab.Log("VERTICAL", "STOP", "reason=valid_value_visible_found")
+                    lab.Log("VERTICAL", "SELECTED_VIEW", "DrawingView " & scan.Idx.ToString(CultureInfo.InvariantCulture))
+                    ctx.SummaryVertCreate = "SUCCESS"
+                    ctx.SummaryVertValue = Gd(ReadDimValue(outD))
+                    ctx.SummaryVertConnected = CheckConnected(draft, verticalView, outD, lab, "Vertical_LeftSide_Keypoints", ctx)
+                    ctx.SummaryVertVisible = LabVisibleOk(outD, ctx.Sheet, draft, ctx.App, lab, "Vertical_LeftSide_Keypoints")
+                    ctx.SummaryVertValueClass = "OK"
+                    Return "SUCCESS_VERTICAL_LEFT"
                 End If
             End If
 
@@ -3138,13 +2756,6 @@ Summary:
                     lab.Log("PLACE", "TRACK_SET_FAIL", "name=" & testName & " " & ex.Message)
                 End Try
                 Try
-                    CallByName(dimObj, "AbsoluteTrackDistance", CallType.Let, desiredTrack)
-                    lab.Log("PLACE", "ABS_TRACK_SET", "name=" & testName & " AbsoluteTrackDistance=" & Gd(desiredTrack) & " OK")
-                Catch ex As Exception
-                    lab.Log("PLACE", "ABS_TRACK_SET_FAIL", "name=" & testName & " " & ex.Message)
-                End Try
-
-                Try
                     draft.UpdateAll(True)
                 Catch ex As Exception
                     lab.Log("PLACE", "UPDATE_FAIL", ex.Message)
@@ -3226,10 +2837,6 @@ Summary:
                 d.TrackDistance = 0.012R
             Catch ex As Exception
                 lab.Log("AUX_VISIBLE_DIAG", "TRACK_SKIP", ex.Message)
-            End Try
-            Try
-                CallByName(d, "AbsoluteTrackDistance", CallType.Let, 0.012R)
-            Catch
             End Try
             Try : draft.UpdateAll(True) : Catch : End Try
             Dim v = ReadDimValue(d)
@@ -3920,7 +3527,6 @@ Summary:
             Try : lab.Log("DIM", "INSPECT", tag & " StatusOfDimension=" & Convert.ToString(CallByName(d, "StatusOfDimension", CallType.Get), CultureInfo.InvariantCulture)) : Catch : End Try
             Try : lab.Log("DIM", "INSPECT", tag & " DimensionType=" & Convert.ToString(CallByName(d, "DimensionType", CallType.Get), CultureInfo.InvariantCulture)) : Catch : End Try
             Try : lab.Log("DIM", "INSPECT", tag & " TrackDistance=" & Convert.ToString(CallByName(d, "TrackDistance", CallType.Get), CultureInfo.InvariantCulture)) : Catch : End Try
-            Try : lab.Log("DIM", "INSPECT", tag & " AbsoluteTrackDistance=" & Convert.ToString(CallByName(d, "AbsoluteTrackDistance", CallType.Get), CultureInfo.InvariantCulture)) : Catch : End Try
             Try : lab.Log("DIM", "INSPECT", tag & " Layer=" & Convert.ToString(CallByName(d, "Layer", CallType.Get), CultureInfo.InvariantCulture)) : Catch : End Try
             Try
                 Dim x1 As Double, y1 As Double, x2 As Double, y2 As Double
