@@ -3,8 +3,10 @@ Imports System.IO
 Imports System.Runtime.InteropServices
 Imports SolidEdgeDraft
 Imports SolidEdgeFramework
+Imports SolidEdgeAssembly
 Imports SolidEdgePart
 Imports System.Linq
+Imports IOPath = System.IO.Path
 
 ''' <summary>Motor de generación automática de Drafts usando AddByFold.
 ''' Orquesta medición, selección de layout e inserción de vistas.</summary>
@@ -121,7 +123,8 @@ Public Module DraftGenerator
 
     ''' <summary>Mide Front, Top, Left, Right, Bottom a escala 1.</summary>
     Public Function MeasureAllViewSizes(app As SolidEdgeFramework.Application, modelPath As String,
-                                        templatePath As String, isSheetMetal As Boolean) As ViewSizesAt1
+                                        templatePath As String, isSheetMetal As Boolean,
+                                        Optional isAssembly As Boolean = False) As ViewSizesAt1
         Dim r As New ViewSizesAt1
         If Not File.Exists(modelPath) OrElse Not File.Exists(templatePath) Then Return r
 
@@ -142,7 +145,7 @@ Public Module DraftGenerator
 
         Dim modelFull As String = modelPath
         Try
-            modelFull = Path.GetFullPath(modelPath)
+            modelFull = IOPath.GetFullPath(modelPath)
         Catch
         End Try
 
@@ -212,7 +215,9 @@ Public Module DraftGenerator
 
                 Dim dv As DrawingView = Nothing
                 Dim x As Double = 0.15 : Dim y As Double = 0.2
-                If Not isSheetMetal Then
+                If isAssembly Then
+                    dv = dvs.AddAssemblyView(link, CType(ori, ViewOrientationConstants), 1.0, x, y, AssemblyDrawingViewTypeConstants.seAssemblyDesignedView)
+                ElseIf Not isSheetMetal Then
                     dv = dvs.AddPartView(link, ori, 1.0, x, y, PartDrawingViewTypeConstants.sePartDesignedView)
                 Else
                     Try
@@ -482,7 +487,7 @@ Public Module DraftGenerator
     ''' <summary>Inserta la vista base e la fija en (leftEdge, topEdge) usando Range real + MoveViewTopLeft.
     ''' NO usa fórmulas con scaleFactor: la posición final depende exclusivamente del target y del Range real de la vista.</summary>
     Private Function InsertBaseView(app As SolidEdgeFramework.Application, sheet As Sheet, modelLink As ModelLink,
-                                    isSheetMetal As Boolean, layout As ResolvedLayout,
+                                    isSheetMetal As Boolean, isAssembly As Boolean, layout As ResolvedLayout,
                                     leftEdge As Double, topEdge As Double,
                                     ByRef vBase As DrawingView) As Boolean
         vBase = Nothing
@@ -490,7 +495,9 @@ Public Module DraftGenerator
             Dim dvws As DrawingViews = sheet.DrawingViews
             ' Inserción provisional: posición inicial genérica (Solid Edge necesita un centro para AddPartView)
             Dim cxProv As Double = 0.15 : Dim cyProv As Double = 0.2
-            If Not isSheetMetal Then
+            If isAssembly Then
+                vBase = dvws.AddAssemblyView(modelLink, CType(layout.BaseOri, ViewOrientationConstants), layout.Scale, cxProv, cyProv, AssemblyDrawingViewTypeConstants.seAssemblyDesignedView)
+            ElseIf Not isSheetMetal Then
                 vBase = dvws.AddPartView(modelLink, layout.BaseOri, layout.Scale, cxProv, cyProv, PartDrawingViewTypeConstants.sePartDesignedView)
             Else
                 vBase = dvws.AddSheetMetalView(modelLink, layout.BaseOri, layout.Scale, cxProv, cyProv, SheetMetalDrawingViewTypeConstants.seSheetMetalDesignedView)
@@ -548,12 +555,14 @@ Public Module DraftGenerator
     End Function
 
     Private Function InsertIsoView(app As SolidEdgeFramework.Application, sheet As Sheet, modelLink As ModelLink,
-                                   isSheetMetal As Boolean, scale As Double, layout As ResolvedLayout,
+                                   isSheetMetal As Boolean, isAssembly As Boolean, scale As Double, layout As ResolvedLayout,
                                    ByRef vIso As DrawingView) As Boolean
         vIso = Nothing
         Try
             Dim dvws As DrawingViews = sheet.DrawingViews
-            If Not isSheetMetal Then
+            If isAssembly Then
+                vIso = dvws.AddAssemblyView(modelLink, ViewOrientationConstants.igTopFrontRightView, scale * ISO_FACTOR, layout.IsoTopLeftX, layout.IsoTopLeftY, AssemblyDrawingViewTypeConstants.seAssemblyDesignedView)
+            ElseIf Not isSheetMetal Then
                 vIso = dvws.AddPartView(modelLink, CInt(ViewOrientationConstants.igTopFrontRightView), scale * ISO_FACTOR, layout.IsoTopLeftX, layout.IsoTopLeftY, PartDrawingViewTypeConstants.sePartDesignedView)
             Else
                 vIso = dvws.AddSheetMetalView(modelLink, CInt(ViewOrientationConstants.igTopFrontRightView), scale * ISO_FACTOR, layout.IsoTopLeftX, layout.IsoTopLeftY, SheetMetalDrawingViewTypeConstants.seSheetMetalDesignedView)
@@ -574,7 +583,7 @@ Public Module DraftGenerator
 
 #Region "Función principal"
 
-    ''' <summary>Crea un Draft automático desde .par o .psm.
+    ''' <summary>Crea un Draft automático desde .par, .psm o .asm.
     ''' Sustituye a CreateDraftAlzadoPrimerDiedro.</summary>
     Public Function CreateAutomaticDraftFromModel(app As SolidEdgeFramework.Application,
                                                   modelPath As String,
@@ -590,11 +599,12 @@ Public Module DraftGenerator
         If templates Is Nothing OrElse templates.Length = 0 Then Return Nothing
         If String.IsNullOrWhiteSpace(cleanTemplatePath) OrElse Not File.Exists(cleanTemplatePath) Then Return Nothing
 
+        Dim isAssembly As Boolean = modelPath.EndsWith(".asm", StringComparison.OrdinalIgnoreCase)
         Dim isSheetMetal As Boolean = modelPath.EndsWith(".psm", StringComparison.OrdinalIgnoreCase)
-        Log($"CreateAutomaticDraft: {Path.GetFileName(modelPath)} isSheetMetal={isSheetMetal}")
+        Log($"CreateAutomaticDraft: {IOPath.GetFileName(modelPath)} isAssembly={isAssembly} isSheetMetal={isSheetMetal}")
 
         Dim usable As LayoutEngine.UsableArea = LayoutEngine.GetUsableAreaForTemplate(templates(0))
-        Dim sizes As ViewSizesAt1 = MeasureAllViewSizes(app, modelPath, cleanTemplatePath, isSheetMetal)
+        Dim sizes As ViewSizesAt1 = MeasureAllViewSizes(app, modelPath, cleanTemplatePath, isSheetMetal, isAssembly)
         Dim candidates As List(Of BaseViewCandidate) = GenerateBaseViewCandidates(sizes)
         Dim layout As ResolvedLayout = ResolveBestLayout(candidates, templates, usable, isSheetMetal)
 
@@ -603,7 +613,7 @@ Public Module DraftGenerator
             Return Nothing
         End If
 
-        Log($"Resolved: {Path.GetFileName(layout.TemplatePath)} Base={layout.BaseOri} Rot={If(layout.Rotated90, "90°", "0°")} Scale={layout.Scale}")
+        Log($"Resolved: {IOPath.GetFileName(layout.TemplatePath)} Base={layout.BaseOri} Rot={If(layout.Rotated90, "90°", "0°")} Scale={layout.Scale}")
 
         ' --- Variables y fórmulas para orígenes de cada vista (ver de dónde sale cada coordenada) ---
         Dim tplInfo As LayoutEngine.TemplateInfo = LayoutEngine.GetTemplateInfo(layout.TemplatePath)
@@ -656,7 +666,7 @@ Public Module DraftGenerator
             Log($"[FOLD] clamped base top-left = ({leftEdge * 1000:0},{topEdge * 1000:0})mm")
 
             Dim vBase As DrawingView = Nothing
-            If Not InsertBaseView(app, sheet, modelLink, isSheetMetal, layout, leftEdge, topEdge, vBase) Then Return Nothing
+            If Not InsertBaseView(app, sheet, modelLink, isSheetMetal, isAssembly, layout, leftEdge, topEdge, vBase) Then Return Nothing
 
             Dim vRight As DrawingView = Nothing
             Dim vBelow As DrawingView = Nothing
@@ -695,7 +705,7 @@ Public Module DraftGenerator
                 Log($"[FOLD] apply global layout only to iso/flat (already at fixed positions)")
 
                 If layout.IncludeIso Then
-                    InsertIsoView(app, sheet, modelLink, isSheetMetal, layout.Scale, layout, vIso)
+                    InsertIsoView(app, sheet, modelLink, isSheetMetal, isAssembly, layout.Scale, layout, vIso)
                 End If
 
                 If isSheetMetal AndAlso layout.IncludeFlat Then

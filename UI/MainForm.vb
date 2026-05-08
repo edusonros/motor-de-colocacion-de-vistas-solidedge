@@ -32,7 +32,7 @@ Partial Public Class MainForm
     Private _logLinesForCurrentPiece As Integer
     Private _accumulatePieceLogLines As Boolean
     Private _runIsAssemblyJob As Boolean
-    Private _progressUiTimer As Windows.Forms.Timer
+    Private _progressUiTimer As System.Windows.Forms.Timer
     Private ReadOnly _runStopwatch As New Stopwatch()
     Private ReadOnly _pieceStopwatch As New Stopwatch()
     Private _lastPieceElapsed As TimeSpan = TimeSpan.Zero
@@ -43,9 +43,14 @@ Partial Public Class MainForm
     Private Shared ReadOnly DefaultTemplateFolder As String = "C:\Program Files\Siemens\Solid Edge 2026\Template\Conrad"
     Private _asmComponents As New List(Of AssemblyComponentItem)()
     Private ReadOnly _componentMetadataStates As New Dictionary(Of String, ComponentMetadataState)(StringComparer.OrdinalIgnoreCase)
+    Private ReadOnly _flatAvailabilityByPath As New Dictionary(Of String, Boolean?)(StringComparer.OrdinalIgnoreCase)
+    Private ReadOnly _componentDirtyPaths As New HashSet(Of String)(StringComparer.OrdinalIgnoreCase)
+    Private ReadOnly _componentExecutedPaths As New HashSet(Of String)(StringComparer.OrdinalIgnoreCase)
     Private ReadOnly _manualCajetinFields As New HashSet(Of String)(StringComparer.OrdinalIgnoreCase)
     Private _cajetinManualHooksRegistered As Boolean
+    Private _componentDirtyHooksRegistered As Boolean
     Private _loadedAsmComponentPath As String = ""
+    Private _currentRunningComponentPath As String = ""
     Private _asmUiToolTip As ToolTip
     Private _templatesEmbedded As Boolean = False
     Private _requestedDimLabFromDedicatedButton As Boolean
@@ -54,6 +59,7 @@ Partial Public Class MainForm
     Private _btnDimRelinkLab As Button
     Private _btnAdboGuidedLab As Button
     Private _btnBringSolidEdgeFront As Button
+    Private _btnStopRun As Button
     Private _runDropViewsTo2DModelLab As Boolean = False
     Private _runDropCreatedSheetsDimensionLab As Boolean = False
     Private _dropCreatedSheetsLabDebugSave As Boolean = False
@@ -111,7 +117,33 @@ Partial Public Class MainForm
             .MinimumWidth = 60,
             .AutoSizeMode = DataGridViewAutoSizeColumnMode.None
         }
-        dgvAsmComponents.Columns.AddRange({colChk, colName, colDatos})
+        Dim colGuardar As New DataGridViewButtonColumn With {
+            .Name = "colGuardarDatos",
+            .HeaderText = "",
+            .Text = "Guardar",
+            .UseColumnTextForButtonValue = True,
+            .Width = 78,
+            .MinimumWidth = 62,
+            .AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+        }
+        Dim colFlat As New DataGridViewButtonColumn With {
+            .Name = "colFlat",
+            .HeaderText = "Flat",
+            .Text = "Flat?",
+            .UseColumnTextForButtonValue = True,
+            .Width = 60,
+            .MinimumWidth = 52,
+            .AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+        }
+        Dim colDone As New DataGridViewTextBoxColumn With {
+            .Name = "colDone",
+            .HeaderText = "✓",
+            .ReadOnly = True,
+            .Width = 34,
+            .MinimumWidth = 30,
+            .AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+        }
+        dgvAsmComponents.Columns.AddRange({colChk, colName, colDatos, colGuardar, colFlat, colDone})
         dgvAsmComponents.DefaultCellStyle.WrapMode = DataGridViewTriState.True
         dgvAsmComponents.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
         dgvAsmComponents.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -133,6 +165,29 @@ Partial Public Class MainForm
         AddHandler txtTitle.TextChanged, Sub(s, ev) MarkCajetinManual("Titulo")
         AddHandler txtRevision.TextChanged, Sub(s, ev) MarkCajetinManual("Revision")
         AddHandler txtAuthor.TextChanged, Sub(s, ev) MarkCajetinManual("Autor")
+    End Sub
+
+    Private Sub EnsureComponentDirtyHooks()
+        If _componentDirtyHooksRegistered Then Return
+        _componentDirtyHooksRegistered = True
+        Dim markDirty As EventHandler = Sub(sender As Object, e As EventArgs) MarkLoadedComponentDirty()
+        AddHandler txtMaterial.TextChanged, markDirty
+        AddHandler txtThickness.TextChanged, markDirty
+        AddHandler txtPartL.TextChanged, markDirty
+        AddHandler txtPartH.TextChanged, markDirty
+        AddHandler txtPartD.TextChanged, markDirty
+        AddHandler txtPartPeso.TextChanged, markDirty
+        AddHandler txtPartCant.TextChanged, markDirty
+        AddHandler txtPartNombreArchivo.TextChanged, markDirty
+        AddHandler txtTitle.TextChanged, markDirty
+        AddHandler txtDrawingNumber.TextChanged, markDirty
+    End Sub
+
+    Private Sub MarkLoadedComponentDirty()
+        If _loadingMetadataProgrammatically Then Return
+        If String.IsNullOrWhiteSpace(_loadedAsmComponentPath) Then Return
+        _componentDirtyPaths.Add(_loadedAsmComponentPath)
+        RefreshGuardarDatosButtonByPath(_loadedAsmComponentPath)
     End Sub
 
     Private Sub MarkCajetinManual(fieldKey As String)
@@ -184,6 +239,7 @@ Partial Public Class MainForm
         ApplyWindowsTheme()
         _logger.Log("[UI][GENERATE_BUTTON][VISIBLE]")
         EnsureCajetinManualHooks()
+        EnsureComponentDirtyHooks()
         ClearPlanMetadataUi("[UI][METADATA][CLEAR_ON_START]")
         If Not String.IsNullOrWhiteSpace(txtInputFile.Text) AndAlso File.Exists(txtInputFile.Text) Then
             LoadSourcePropertiesToUi()
@@ -197,8 +253,9 @@ Partial Public Class MainForm
         EnsureAnalyzeDftButton()
         EnsureDimRelinkLabButton()
         EnsureAdboGuidedLabButton()
+        EnsureStopRunButton()
 
-        _progressUiTimer = New Windows.Forms.Timer()
+        _progressUiTimer = New System.Windows.Forms.Timer()
         _progressUiTimer.Interval = 1000
         AddHandler _progressUiTimer.Tick, AddressOf RefreshProgressTelemetry
         _progressUiTimer.Start()
@@ -265,6 +322,10 @@ Partial Public Class MainForm
     End Sub
 
     Private Sub btnBringSolidEdgeFront_Click(sender As Object, e As EventArgs)
+        BringSolidEdgeToFront()
+    End Sub
+
+    Private Sub BringSolidEdgeToFront()
         Dim app As SolidEdgeFramework.Application = Nothing
         Dim created As Boolean = False
         Try
@@ -297,7 +358,7 @@ Partial Public Class MainForm
 
             _logger.Log("[UI][SOLIDEDGE][FOREGROUND] ok created=" & created.ToString())
         Catch ex As Exception
-            _logger.LogException("btnBringSolidEdgeFront_Click", ex)
+            _logger.LogException("BringSolidEdgeToFront", ex)
             MessageBox.Show(ex.Message, "Solid Edge", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
@@ -593,10 +654,14 @@ Partial Public Class MainForm
         Try
             _isRunning = True
             ToggleUi(False)
+            If _btnStopRun IsNot Nothing Then _btnStopRun.Enabled = True
             txtLog.Clear()
             _logger.Reset()
             _logLinesForCurrentPiece = 0
             _accumulatePieceLogLines = False
+            _componentExecutedPaths.Clear()
+            _currentRunningComponentPath = ""
+            ResetAsmExecutionTicks()
             _runIsAssemblyJob = (config.DetectInputKind() = SourceFileKind.AssemblyFile)
             If lblProgressAsm IsNot Nothing Then lblProgressAsm.Visible = _runIsAssemblyJob
             If progressBarAsm IsNot Nothing Then
@@ -604,6 +669,9 @@ Partial Public Class MainForm
                 progressBarAsm.Minimum = 0
                 progressBarAsm.Maximum = 100
                 progressBarAsm.Value = 0
+            End If
+            If _runIsAssemblyJob AndAlso lblProgressAsm IsNot Nothing Then
+                lblProgressAsm.Text = "Ensamblaje: 0 de 0"
             End If
             ConfigurePieceLogProgressBar()
             StartProgressTelemetry()
@@ -640,6 +708,7 @@ Partial Public Class MainForm
         Finally
             _requestedDimLabFromDedicatedButton = False
             _isRunning = False
+            If _btnStopRun IsNot Nothing Then _btnStopRun.Enabled = False
             ToggleUi(True)
             StopProgressTelemetry()
             ResetProgressBarsAfterJob()
@@ -783,10 +852,22 @@ Partial Public Class MainForm
 
     Private Sub dgvAsmComponents_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvAsmComponents.CellContentClick
         If dgvAsmComponents Is Nothing OrElse e.RowIndex < 0 OrElse e.ColumnIndex < 0 Then Return
-        If Not String.Equals(dgvAsmComponents.Columns(e.ColumnIndex).Name, "colDatos", StringComparison.Ordinal) Then Return
         Dim r As DataGridViewRow = dgvAsmComponents.Rows(e.RowIndex)
         If r.Tag Is Nothing Then Return
         Dim idx As Integer = CInt(r.Tag)
+        Dim colName As String = dgvAsmComponents.Columns(e.ColumnIndex).Name
+
+        If String.Equals(colName, "colFlat", StringComparison.Ordinal) Then
+            HandleAsmFlatButton(idx)
+            Return
+        End If
+
+        If String.Equals(colName, "colGuardarDatos", StringComparison.Ordinal) Then
+            HandleAsmGuardarDatosButton(idx)
+            Return
+        End If
+
+        If Not String.Equals(colName, "colDatos", StringComparison.Ordinal) Then Return
         If idx >= 0 AndAlso idx < _asmComponents.Count Then
             Dim fp As String = _asmComponents(idx).FullPath
             Dim st As ComponentMetadataState = Nothing
@@ -855,6 +936,44 @@ Partial Public Class MainForm
         _btnAdboGuidedLab = New Button With {.Text = "Lab ADBO guiado", .AutoSize = True}
         AddHandler _btnAdboGuidedLab.Click, AddressOf btnAdboGuidedLab_Click
         flowLogButtons.Controls.Add(_btnAdboGuidedLab)
+    End Sub
+
+    Private Sub EnsureStopRunButton()
+        If pnlGenerateBar Is Nothing Then Return
+        If _btnStopRun IsNot Nothing Then Return
+        _btnStopRun = New Button With {
+            .Text = "STOP",
+            .Dock = DockStyle.Right,
+            .Width = 120,
+            .Enabled = False,
+            .BackColor = Color.FromArgb(150, 35, 35),
+            .ForeColor = Color.White,
+            .FlatStyle = FlatStyle.Flat
+        }
+        AddHandler _btnStopRun.Click, AddressOf btnStopRun_Click
+        pnlGenerateBar.Controls.Add(_btnStopRun)
+    End Sub
+
+    Private Sub btnStopRun_Click(sender As Object, e As EventArgs)
+        If Not _isRunning Then Return
+        Dim msg As String = "¿Qué deseas hacer?" & System.Environment.NewLine &
+                            "Sí = Pausar/Reanudar" & System.Environment.NewLine &
+                            "No = Parar ejecución" & System.Environment.NewLine &
+                            "Cancelar = Seguir"
+        Dim ans = MessageBox.Show(msg, "Control de ejecución", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
+        If ans = DialogResult.Cancel Then Return
+        If ans = DialogResult.No Then
+            DraftGenerationEngine.RequestStop()
+            _logger.Log("[UI][STOP] requested=True")
+            Return
+        End If
+        If DraftGenerationEngine.IsPaused() Then
+            DraftGenerationEngine.RequestResume()
+            _logger.Log("[UI][PAUSE] resume=True")
+        Else
+            DraftGenerationEngine.RequestPause()
+            _logger.Log("[UI][PAUSE] requested=True")
+        End If
     End Sub
 
     Private Sub btnAnalyzeDft_Click(sender As Object, e As EventArgs)
@@ -1036,6 +1155,10 @@ Partial Public Class MainForm
         If String.IsNullOrWhiteSpace(p) OrElse Not File.Exists(p) Then
             ClearPlanMetadataUi()
             _componentMetadataStates.Clear()
+        _flatAvailabilityByPath.Clear()
+        _componentDirtyPaths.Clear()
+        _componentExecutedPaths.Clear()
+        _currentRunningComponentPath = ""
             _loadedAsmComponentPath = ""
         Else
             LoadSourcePropertiesToUi()
@@ -1099,14 +1222,17 @@ Partial Public Class MainForm
         For idx As Integer = 0 To _asmComponents.Count - 1
             Dim it As AssemblyComponentItem = _asmComponents(idx)
             Dim disp As String = If(it Is Nothing, "", it.DisplayName)
-            Dim n As Integer = dgvAsmComponents.Rows.Add(Not ShouldAutoUncheckByKeyword(it), disp, "Datos")
+            Dim n As Integer = dgvAsmComponents.Rows.Add(Not ShouldAutoUncheckByKeyword(it), disp, "Datos", "Guardar", "Flat?", "")
             dgvAsmComponents.Rows(n).Tag = idx
             SetAsmComponentRowStatus(idx, ComponentMetadataStatus.Pending)
+            ApplyFlatCellStyle(dgvAsmComponents.Rows(n), it, Nothing)
+            RefreshGuardarDatosButtonByPath(If(it Is Nothing, "", it.FullPath))
         Next
         If FORCE_DARK_THEME Then StyleAsmDataGridViewDark()
     End Sub
 
     Private Sub AsmComponentReviewForIndex(idx As Integer)
+        BringSolidEdgeToFront()
         If idx < 0 OrElse idx >= _asmComponents.Count Then Return
         Dim it As AssemblyComponentItem = _asmComponents(idx)
         If it Is Nothing Then Return
@@ -1209,6 +1335,7 @@ Partial Public Class MainForm
         End Try
 
         _loadedAsmComponentPath = pathSnap
+        _componentDirtyPaths.Remove(pathSnap)
 
         Dim snapshot As DrawingMetadataInput = DrawingMetadataService.BuildFromUi(Me)
         Dim strict As Boolean = If(chkStrictMetadata Is Nothing, False, chkStrictMetadata.Checked)
@@ -1267,8 +1394,267 @@ Partial Public Class MainForm
             Dim pathLog As String = ""
             If componentIndex >= 0 AndAlso componentIndex < _asmComponents.Count Then pathLog = _asmComponents(componentIndex).FullPath
             _logger.Log("[UI][COMPONENT][STATUS] path=" & pathLog & " status=" & status.ToString())
+            RefreshGuardarDatosButtonByPath(pathLog)
             Return
         Next
+    End Sub
+
+    Private Sub RefreshGuardarDatosButtonByPath(componentPath As String)
+        If dgvAsmComponents Is Nothing OrElse String.IsNullOrWhiteSpace(componentPath) Then Return
+        For Each r As DataGridViewRow In dgvAsmComponents.Rows
+            If r.IsNewRow OrElse r.Tag Is Nothing Then Continue For
+            Dim idx As Integer = CInt(r.Tag)
+            If idx < 0 OrElse idx >= _asmComponents.Count Then Continue For
+            Dim it = _asmComponents(idx)
+            If it Is Nothing OrElse Not String.Equals(it.FullPath, componentPath, StringComparison.OrdinalIgnoreCase) Then Continue For
+            Dim c As DataGridViewCell = r.Cells("colGuardarDatos")
+            Dim isLoaded As Boolean = _componentMetadataStates.ContainsKey(componentPath)
+            Dim isDirty As Boolean = _componentDirtyPaths.Contains(componentPath)
+            c.Value = If(isDirty, "Guardar*", "Guardar")
+            c.ReadOnly = Not (isLoaded AndAlso isDirty)
+            If Not isLoaded Then
+                c.Style.BackColor = dgvAsmComponents.DefaultCellStyle.BackColor
+                c.Style.ForeColor = dgvAsmComponents.DefaultCellStyle.ForeColor
+            ElseIf isDirty Then
+                c.Style.BackColor = Color.FromArgb(120, 180, 255)
+                c.Style.ForeColor = Color.Black
+            Else
+                c.Style.BackColor = Color.FromArgb(180, 230, 180)
+                c.Style.ForeColor = Color.Black
+            End If
+            Return
+        Next
+    End Sub
+
+    Private Sub ApplyFlatCellStyle(row As DataGridViewRow, item As AssemblyComponentItem, hasFlat As Boolean?)
+        If row Is Nothing OrElse item Is Nothing Then Return
+        Dim c As DataGridViewCell = row.Cells("colFlat")
+        If Not String.Equals(item.Kind, "PSM", StringComparison.OrdinalIgnoreCase) Then
+            c.Value = "-"
+            c.ReadOnly = True
+            c.Style.BackColor = dgvAsmComponents.DefaultCellStyle.BackColor
+            c.Style.ForeColor = dgvAsmComponents.DefaultCellStyle.ForeColor
+            Return
+        End If
+        If Not hasFlat.HasValue Then
+            c.Value = "Flat?"
+            c.ReadOnly = False
+            c.Style.BackColor = Color.FromArgb(255, 180, 0)
+            c.Style.ForeColor = Color.Black
+        ElseIf hasFlat.Value Then
+            c.Value = "Flat OK"
+            c.ReadOnly = False
+            c.Style.BackColor = Color.FromArgb(0, 140, 0)
+            c.Style.ForeColor = Color.White
+        Else
+            c.Value = "SIN FLAT"
+            c.ReadOnly = False
+            c.Style.BackColor = Color.FromArgb(190, 0, 0)
+            c.Style.ForeColor = Color.White
+        End If
+    End Sub
+
+    Private Sub BeginFlatAvailabilityScan()
+        If _asmComponents Is Nothing OrElse _asmComponents.Count = 0 Then Return
+        Dim psmPaths As List(Of String) = _asmComponents.
+            Where(Function(it) it IsNot Nothing AndAlso String.Equals(it.Kind, "PSM", StringComparison.OrdinalIgnoreCase)).
+            Select(Function(it) it.FullPath).
+            Where(Function(p) Not String.IsNullOrWhiteSpace(p) AndAlso File.Exists(p)).
+            Distinct(StringComparer.OrdinalIgnoreCase).
+            ToList()
+        If psmPaths.Count = 0 Then Return
+
+        Dim capture As SynchronizationContext = SynchronizationContext.Current
+        StaComInvoker.Run(Function() ScanFlatAvailability(psmPaths)).
+            ContinueWith(Sub(t As Task(Of Dictionary(Of String, Boolean?)))
+                             If capture IsNot Nothing Then
+                                 capture.Post(
+                                     Sub()
+                                         If t Is Nothing OrElse t.IsFaulted OrElse t.Result Is Nothing Then Return
+                                         For Each kv In t.Result
+                                             _flatAvailabilityByPath(kv.Key) = kv.Value
+                                         Next
+                                         RepaintFlatColumnFromCache()
+                                     End Sub, Nothing)
+                             Else
+                                 BeginInvoke(
+                                     Sub()
+                                         If t Is Nothing OrElse t.IsFaulted OrElse t.Result Is Nothing Then Return
+                                         For Each kv In t.Result
+                                             _flatAvailabilityByPath(kv.Key) = kv.Value
+                                         Next
+                                         RepaintFlatColumnFromCache()
+                                     End Sub)
+                             End If
+                         End Sub)
+    End Sub
+
+    Private Function ScanFlatAvailability(psmPaths As List(Of String)) As Dictionary(Of String, Boolean?)
+        Dim outMap As New Dictionary(Of String, Boolean?)(StringComparer.OrdinalIgnoreCase)
+        Dim app As SolidEdgeFramework.Application = Nothing
+        Dim created As Boolean = False
+        Try
+            OleMessageFilter.Register()
+            Try
+                app = CType(Marshal.GetActiveObject("SolidEdge.Application"), SolidEdgeFramework.Application)
+            Catch
+                Dim t = Type.GetTypeFromProgID("SolidEdge.Application", throwOnError:=False)
+                If t Is Nothing Then Return outMap
+                app = CType(Activator.CreateInstance(t), SolidEdgeFramework.Application)
+                created = True
+            End Try
+            If app Is Nothing Then Return outMap
+            app.DisplayAlerts = False
+            app.Visible = False
+
+            For Each p In psmPaths
+                Dim doc As SolidEdgePart.SheetMetalDocument = Nothing
+                Try
+                    doc = TryCast(app.Documents.Open(p), SolidEdgePart.SheetMetalDocument)
+                    Dim hasFlat As Boolean = False
+                    If doc IsNot Nothing Then
+                        Try
+                            hasFlat = (doc.FlatPatternModels.Count > 0)
+                        Catch
+                            hasFlat = False
+                        End Try
+                        outMap(p) = hasFlat
+                    Else
+                        outMap(p) = Nothing
+                    End If
+                Catch
+                    outMap(p) = Nothing
+                Finally
+                    Try
+                        If doc IsNot Nothing Then doc.Close(False)
+                    Catch
+                    End Try
+                    Try
+                        If doc IsNot Nothing AndAlso Marshal.IsComObject(doc) Then Marshal.ReleaseComObject(doc)
+                    Catch
+                    End Try
+                End Try
+            Next
+        Finally
+            Try
+                If app IsNot Nothing AndAlso created Then app.Quit()
+            Catch
+            End Try
+            Try : OleMessageFilter.Revoke() : Catch : End Try
+        End Try
+        Return outMap
+    End Function
+
+    Private Sub RepaintFlatColumnFromCache()
+        If dgvAsmComponents Is Nothing Then Return
+        For Each r As DataGridViewRow In dgvAsmComponents.Rows
+            If r.IsNewRow OrElse r.Tag Is Nothing Then Continue For
+            Dim idx As Integer = CInt(r.Tag)
+            If idx < 0 OrElse idx >= _asmComponents.Count Then Continue For
+            Dim it = _asmComponents(idx)
+            If it Is Nothing Then Continue For
+            Dim hasFlat As Boolean? = Nothing
+            If Not String.IsNullOrWhiteSpace(it.FullPath) AndAlso _flatAvailabilityByPath.ContainsKey(it.FullPath) Then
+                hasFlat = _flatAvailabilityByPath(it.FullPath)
+            End If
+            ApplyFlatCellStyle(r, it, hasFlat)
+        Next
+    End Sub
+
+    Private Sub HandleAsmFlatButton(componentIndex As Integer)
+        BringSolidEdgeToFront()
+        If componentIndex < 0 OrElse componentIndex >= _asmComponents.Count Then Return
+        Dim it = _asmComponents(componentIndex)
+        If it Is Nothing OrElse String.IsNullOrWhiteSpace(it.FullPath) Then Return
+        If Not String.Equals(it.Kind, "PSM", StringComparison.OrdinalIgnoreCase) Then Return
+
+        Dim hasFlat As Boolean? = Nothing
+        If _flatAvailabilityByPath.ContainsKey(it.FullPath) Then hasFlat = _flatAvailabilityByPath(it.FullPath)
+        If Not hasFlat.HasValue Then
+            Dim probe = ScanFlatAvailability(New List(Of String) From {it.FullPath})
+            If probe IsNot Nothing AndAlso probe.ContainsKey(it.FullPath) Then
+                hasFlat = probe(it.FullPath)
+                _flatAvailabilityByPath(it.FullPath) = hasFlat
+                RepaintFlatColumnFromCache()
+            End If
+        End If
+        If hasFlat.HasValue AndAlso hasFlat.Value Then
+            _logger.Log("[UI][FLAT] componente con desarrollo OK: " & it.FullPath)
+            MessageBox.Show("Este componente sí tiene chapa desarrollada.", "Flat", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Return
+        End If
+
+        _logger.Log("[UI][FLAT][OPEN] sin desarrollo detectado, abriendo en Solid Edge: " & it.FullPath)
+        OpenDocumentInSolidEdge(it.FullPath)
+    End Sub
+
+    Private Sub OpenDocumentInSolidEdge(filePath As String)
+        If String.IsNullOrWhiteSpace(filePath) OrElse Not File.Exists(filePath) Then Return
+        Try
+            Dim app As SolidEdgeFramework.Application = Nothing
+            Try
+                app = CType(Marshal.GetActiveObject("SolidEdge.Application"), SolidEdgeFramework.Application)
+            Catch
+                Dim t = Type.GetTypeFromProgID("SolidEdge.Application", throwOnError:=False)
+                If t Is Nothing Then Return
+                app = CType(Activator.CreateInstance(t), SolidEdgeFramework.Application)
+            End Try
+            If app Is Nothing Then Return
+            app.Visible = True
+            app.DisplayAlerts = True
+            app.Documents.Open(filePath)
+        Catch ex As Exception
+            _logger.LogException("OpenDocumentInSolidEdge", ex)
+        End Try
+    End Sub
+
+    Private Sub HandleAsmGuardarDatosButton(componentIndex As Integer)
+        BringSolidEdgeToFront()
+        If componentIndex < 0 OrElse componentIndex >= _asmComponents.Count Then Return
+        Dim it = _asmComponents(componentIndex)
+        If it Is Nothing OrElse String.IsNullOrWhiteSpace(it.FullPath) OrElse Not File.Exists(it.FullPath) Then Return
+        If Not _componentDirtyPaths.Contains(it.FullPath) Then
+            _logger.Log("[UI][COMPONENT][SAVE][SKIP] sin cambios: " & it.FullPath)
+            Return
+        End If
+        Dim app As SolidEdgeFramework.Application = Nothing
+        Dim created As Boolean = False
+        Dim modelDoc As Object = Nothing
+        Try
+            OleMessageFilter.Register()
+            Try
+                app = CType(Marshal.GetActiveObject("SolidEdge.Application"), SolidEdgeFramework.Application)
+            Catch
+                Dim t = Type.GetTypeFromProgID("SolidEdge.Application", throwOnError:=False)
+                If t Is Nothing Then Throw New Exception("No se pudo obtener Solid Edge.Application.")
+                app = CType(Activator.CreateInstance(t), SolidEdgeFramework.Application)
+                created = True
+            End Try
+            app.Visible = chkKeepSolidEdgeVisible.Checked
+            app.DisplayAlerts = False
+
+            modelDoc = app.Documents.Open(it.FullPath)
+            Dim data = DrawingMetadataService.BuildFromUi(Me)
+            DrawingMetadataService.ApplyPartListSourceProperties(modelDoc, Nothing, data, _logger)
+            Dim cfg As JobConfiguration = BuildConfigurationFromUi()
+            cfg.InputFile = it.FullPath
+            SolidEdgePropertyService.ApplyPropertiesToOpenModelDocument(app, it.FullPath, cfg, _logger)
+            Try : CallByName(modelDoc, "Save", CallType.Method) : Catch : End Try
+
+            _componentDirtyPaths.Remove(it.FullPath)
+            RefreshGuardarDatosButtonByPath(it.FullPath)
+            _logger.Log("[UI][COMPONENT][SAVE][OK] " & it.FullPath)
+        Catch ex As Exception
+            _logger.LogException("HandleAsmGuardarDatosButton", ex)
+            MessageBox.Show("No se pudieron guardar datos del componente." & Environment.NewLine & ex.Message, "Guardar datos", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        Finally
+            Try : SolidEdgePropertyService.TryCloseComDocument(modelDoc, False) : Catch : End Try
+            Try
+                If app IsNot Nothing AndAlso created Then app.Quit()
+            Catch
+            End Try
+            Try : OleMessageFilter.Revoke() : Catch : End Try
+        End Try
     End Sub
 
     Private Sub HighlightAsmComponentRow(componentIndex As Integer)
@@ -1382,6 +1768,7 @@ Partial Public Class MainForm
 
             _asmComponents = If(task.Result, New List(Of AssemblyComponentItem)())
             RebuildAsmComponentListUi()
+            BeginFlatAvailabilityScan()
             _logger.Log("[ASM][COMPONENTS][LOADED] count=" & _asmComponents.Count.ToString(Globalization.CultureInfo.InvariantCulture))
             Dim autoUnchecked As Integer = 0
             For Each it In _asmComponents
@@ -1525,10 +1912,16 @@ Partial Public Class MainForm
                 If idx < 0 OrElse idx >= _asmComponents.Count Then Continue For
                 Dim checkedObj = r.Cells("colSel").Value
                 Dim checked As Boolean = checkedObj IsNot Nothing AndAlso Convert.ToBoolean(checkedObj)
-                If checked Then cfg.SelectedComponentPaths.Add(_asmComponents(idx).FullPath)
+                If checked Then
+                    Dim it = _asmComponents(idx)
+                    If it IsNot Nothing AndAlso
+                       (String.Equals(it.Kind, "PAR", StringComparison.OrdinalIgnoreCase) OrElse String.Equals(it.Kind, "PSM", StringComparison.OrdinalIgnoreCase)) Then
+                        cfg.SelectedComponentPaths.Add(it.FullPath)
+                    End If
+                End If
             Next
-            cfg.UseSelectedComponents = (cfg.SelectedComponentPaths.Count > 0)
-            _logger.Log($"Selección manual ASM: {cfg.SelectedComponentPaths.Count} componentes marcados para procesar.")
+            cfg.UseSelectedComponents = True
+            _logger.Log($"Selección manual ASM (estricta): {cfg.SelectedComponentPaths.Count} componentes marcados para procesar; los desmarcados NO se procesan.")
         End If
         If _requestedDimLabFromDedicatedButton Then
             cfg.CreateDraft = True
@@ -1847,7 +2240,8 @@ Partial Public Class MainForm
 
         Dim processingMatch As Match = Regex.Match(status, "^Procesando\s+(\d+)/(\d+)\s+-\s+(.+)$", RegexOptions.IgnoreCase)
         If processingMatch.Success Then
-            Dim pieceKey As String = $"{processingMatch.Groups(1).Value}/{processingMatch.Groups(2).Value}:{processingMatch.Groups(3).Value.Trim()}"
+            Dim currentFileName As String = processingMatch.Groups(3).Value.Trim()
+            Dim pieceKey As String = $"{processingMatch.Groups(1).Value}/{processingMatch.Groups(2).Value}:{currentFileName}"
             If Not String.Equals(pieceKey, _currentPieceKey, StringComparison.OrdinalIgnoreCase) Then
                 _currentPieceKey = pieceKey
                 _logLinesForCurrentPiece = 0
@@ -1857,6 +2251,8 @@ Partial Public Class MainForm
                 _pieceStopwatch.Reset()
                 _pieceStopwatch.Start()
             End If
+            _currentRunningComponentPath = ResolveAsmComponentPathFromFileName(currentFileName)
+            MarkComponentExecutionState(_currentRunningComponentPath, inProgress:=True, completed:=False)
             Return
         End If
 
@@ -1870,7 +2266,45 @@ Partial Public Class MainForm
                 _lastPieceElapsed = _pieceStopwatch.Elapsed
                 _pieceStopwatch.Stop()
             End If
+            MarkComponentExecutionState(_currentRunningComponentPath, inProgress:=False, completed:=True)
+            _currentRunningComponentPath = ""
         End If
+    End Sub
+
+    Private Function ResolveAsmComponentPathFromFileName(fileName As String) As String
+        If String.IsNullOrWhiteSpace(fileName) OrElse _asmComponents Is Nothing OrElse _asmComponents.Count = 0 Then Return ""
+        Dim exact As String = _asmComponents.
+            Where(Function(it) it IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(it.FullPath)).
+            Select(Function(it) it.FullPath).
+            FirstOrDefault(Function(p) String.Equals(Path.GetFileName(p), fileName, StringComparison.OrdinalIgnoreCase) AndAlso Not _componentExecutedPaths.Contains(p))
+        If Not String.IsNullOrWhiteSpace(exact) Then Return exact
+        Return _asmComponents.
+            Where(Function(it) it IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(it.FullPath)).
+            Select(Function(it) it.FullPath).
+            FirstOrDefault(Function(p) String.Equals(Path.GetFileName(p), fileName, StringComparison.OrdinalIgnoreCase))
+    End Function
+
+    Private Sub MarkComponentExecutionState(componentPath As String, inProgress As Boolean, completed As Boolean)
+        If dgvAsmComponents Is Nothing OrElse String.IsNullOrWhiteSpace(componentPath) Then Return
+        If completed Then _componentExecutedPaths.Add(componentPath)
+        For Each r As DataGridViewRow In dgvAsmComponents.Rows
+            If r.IsNewRow OrElse r.Tag Is Nothing Then Continue For
+            Dim idx As Integer = CInt(r.Tag)
+            If idx < 0 OrElse idx >= _asmComponents.Count Then Continue For
+            Dim it = _asmComponents(idx)
+            If it Is Nothing OrElse Not String.Equals(it.FullPath, componentPath, StringComparison.OrdinalIgnoreCase) Then Continue For
+            Dim cDone As DataGridViewCell = r.Cells("colDone")
+            If completed Then
+                cDone.Value = "✔"
+                cDone.Style.ForeColor = Color.FromArgb(140, 220, 140)
+                cDone.Style.BackColor = dgvAsmComponents.DefaultCellStyle.BackColor
+            ElseIf inProgress Then
+                cDone.Value = "…"
+                cDone.Style.ForeColor = Color.FromArgb(245, 220, 100)
+                cDone.Style.BackColor = dgvAsmComponents.DefaultCellStyle.BackColor
+            End If
+            Return
+        Next
     End Sub
 
     Private Sub ConfigurePieceLogProgressBar()
@@ -1900,6 +2334,7 @@ Partial Public Class MainForm
             Dim i As Integer = Integer.Parse(proc.Groups(1).Value, Globalization.CultureInfo.InvariantCulture)
             Dim n As Integer = Integer.Parse(proc.Groups(2).Value, Globalization.CultureInfo.InvariantCulture)
             If n > 0 Then
+                If lblProgressAsm IsNot Nothing Then lblProgressAsm.Text = $"Ensamblaje: {Math.Max(0, i - 1)} de {n}"
                 progressBarAsm.Maximum = 100
                 Dim pct As Integer = CInt(Math.Floor(100.0 * (i - 1) / n))
                 progressBarAsm.Value = Math.Max(0, Math.Min(100, pct))
@@ -1912,6 +2347,7 @@ Partial Public Class MainForm
             Dim i As Integer = Integer.Parse(fin.Groups(1).Value, Globalization.CultureInfo.InvariantCulture)
             Dim n As Integer = Integer.Parse(fin.Groups(2).Value, Globalization.CultureInfo.InvariantCulture)
             If n > 0 Then
+                If lblProgressAsm IsNot Nothing Then lblProgressAsm.Text = $"Ensamblaje: {Math.Max(0, i)} de {n}"
                 progressBarAsm.Maximum = 100
                 Dim pct As Integer = CInt(Math.Ceiling(100.0 * i / n))
                 progressBarAsm.Value = Math.Max(0, Math.Min(100, pct))
@@ -1923,7 +2359,10 @@ Partial Public Class MainForm
         _accumulatePieceLogLines = False
         _logLinesForCurrentPiece = 0
         _runIsAssemblyJob = False
-        If lblProgressAsm IsNot Nothing Then lblProgressAsm.Visible = False
+        If lblProgressAsm IsNot Nothing Then
+            lblProgressAsm.Visible = False
+            lblProgressAsm.Text = "Ensamblaje (piezas marcadas)"
+        End If
         If progressBarAsm IsNot Nothing Then
             progressBarAsm.Visible = False
             progressBarAsm.Value = 0
@@ -1933,6 +2372,17 @@ Partial Public Class MainForm
             progressBar.Maximum = 100
             progressBar.Value = 0
         End If
+    End Sub
+
+    Private Sub ResetAsmExecutionTicks()
+        If dgvAsmComponents Is Nothing Then Return
+        For Each r As DataGridViewRow In dgvAsmComponents.Rows
+            If r.IsNewRow Then Continue For
+            Try
+                r.Cells("colDone").Value = ""
+            Catch
+            End Try
+        Next
     End Sub
 
     Private Sub RefreshProgressTelemetry(sender As Object, e As EventArgs)

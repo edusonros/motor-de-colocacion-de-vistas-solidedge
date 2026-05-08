@@ -33,6 +33,8 @@ Public Class EngineRunResult
 End Class
 
 Public Class DraftGenerationEngine
+    Private Shared _stopRequested As Boolean = False
+    Private Shared _pauseRequested As Boolean = False
     Private ReadOnly _logger As Logger
     Private ReadOnly _progress As Action(Of EngineProgressInfo)
 
@@ -53,7 +55,31 @@ Public Class DraftGenerationEngine
         _progress = progressReporter
     End Sub
 
+    Public Shared Sub RequestStop()
+        _stopRequested = True
+    End Sub
+
+    Public Shared Sub RequestPause()
+        _pauseRequested = True
+    End Sub
+
+    Public Shared Sub RequestResume()
+        _pauseRequested = False
+    End Sub
+
+    Public Shared Function IsPaused() As Boolean
+        Return _pauseRequested
+    End Function
+
+    Private Sub WaitIfPausedOrStopped()
+        Do While _pauseRequested AndAlso Not _stopRequested
+            Threading.Thread.Sleep(250)
+        Loop
+    End Sub
+
     Public Function Run(config As JobConfiguration) As EngineRunResult
+        _stopRequested = False
+        _pauseRequested = False
         Dim result As New EngineRunResult()
         Dim app As SolidEdgeFramework.Application = Nothing
         Dim appCreatedByUs As Boolean = False
@@ -114,11 +140,37 @@ Public Class DraftGenerationEngine
             Dim targets As New List(Of String)()
             If inputKind = SourceFileKind.AssemblyFile Then
                 Report(5, "Leyendo componentes del ASM...")
-                If config.UseSelectedComponents AndAlso config.SelectedComponentPaths IsNot Nothing AndAlso config.SelectedComponentPaths.Count > 0 Then
-                    targets = config.SelectedComponentPaths.Distinct(StringComparer.OrdinalIgnoreCase).ToList()
-                    _logger.Log($"Selección manual activa: {targets.Count} componentes elegidos por el usuario.")
+                If config.UseSelectedComponents Then
+                    targets = If(config.SelectedComponentPaths, New List(Of String)()).
+                        Distinct(StringComparer.OrdinalIgnoreCase).ToList()
+                    _logger.Log($"Selección manual ASM activa: {targets.Count} componentes elegidos por el usuario.")
                 Else
                     targets = ResolveAssemblyTargets(app, config.InputFile, config.ProcessRepeatedComponentsOnce)
+                    If targets Is Nothing Then targets = New List(Of String)()
+                    If targets.Count = 0 Then
+                        _logger.Log("[ASM][FALLBACK] ResolveAssemblyTargets devolvió 0; usando AssemblyComponentService.LoadAssemblyComponentItems")
+                        Try
+                            Dim items = AssemblyComponentService.LoadAssemblyComponentItems(
+                                config.InputFile,
+                                config.ProcessRepeatedComponentsOnce,
+                                showSolidEdge:=False,
+                                logger:=_logger,
+                                progress:=Nothing)
+                            If items IsNot Nothing AndAlso items.Count > 0 Then
+                                targets = items.
+                                    Where(Function(it) it IsNot Nothing AndAlso
+                                                         (String.Equals(it.Kind, "PAR", StringComparison.OrdinalIgnoreCase) OrElse
+                                                          String.Equals(it.Kind, "PSM", StringComparison.OrdinalIgnoreCase)) AndAlso
+                                                         Not String.IsNullOrWhiteSpace(it.FullPath)).
+                                    Select(Function(it) it.FullPath).
+                                    Distinct(StringComparer.OrdinalIgnoreCase).
+                                    ToList()
+                                _logger.Log($"[ASM][FALLBACK] Items={items.Count} -> targets(PAR/PSM)={targets.Count}")
+                            End If
+                        Catch exFallback As Exception
+                            _logger.LogException("[ASM][FALLBACK]", exFallback)
+                        End Try
+                    End If
                 End If
             Else
                 targets.Add(config.InputFile)
@@ -126,25 +178,56 @@ Public Class DraftGenerationEngine
 
             targets = ExpandSelectedTargets(app, targets, config.ProcessRepeatedComponentsOnce)
 
-            If targets.Count = 0 Then
+            Dim runAsmOverview As Boolean =
+                inputKind = SourceFileKind.AssemblyFile AndAlso
+                IO.File.Exists(config.InputFile) AndAlso
+                (config.CreateDraft OrElse config.CreatePdf OrElse config.CreateDxfFromDraft)
+
+            If targets.Count = 0 AndAlso Not runAsmOverview Then
                 _logger.Log("No hay modelos para procesar.")
                 result.Success = True
                 Return result
             End If
 
+            Dim totalJobs As Integer = targets.Count + If(runAsmOverview, 1, 0)
             Dim i As Integer = 0
+
+            If runAsmOverview Then
+                WaitIfPausedOrStopped()
+                If _stopRequested Then
+                    _logger.Log("[ENG][STOP] requested=True stage=before_asm_overview")
+                Else
+                    Report(0, $"Procesando 1/{totalJobs} - {IOPath.GetFileName(config.InputFile)}")
+                    _logger.Log("[ASM_OVERVIEW][START] path=" & config.InputFile)
+                    Try
+                        ProcessModel(app, config.InputFile, config, dftTemplates, outDftDir, outDxfDir, outPdfDir, flatErrors, result, 1, totalJobs)
+                        result.ProcessedCount += 1
+                    Catch exAsm As Exception
+                        result.ErrorCount += 1
+                        _logger.LogException("ASM overview", exAsm)
+                    End Try
+                    Report(CInt(100.0 / Math.Max(1, totalJobs)), $"Finalizado 1/{totalJobs}")
+                End If
+            End If
+
             For Each modelPath In targets
+                WaitIfPausedOrStopped()
+                If _stopRequested Then
+                    _logger.Log("[ENG][STOP] requested=True stage=before_process_model")
+                    Exit For
+                End If
                 i += 1
-                Dim progressBase As Integer = CInt((i - 1) * 100.0 / targets.Count)
-                Report(progressBase, $"Procesando {i}/{targets.Count} - {IOPath.GetFileName(modelPath)}")
+                Dim jobIndex As Integer = i + If(runAsmOverview, 1, 0)
+                Dim progressBase As Integer = CInt((jobIndex - 1) * 100.0 / Math.Max(1, totalJobs))
+                Report(progressBase, $"Procesando {jobIndex}/{totalJobs} - {IOPath.GetFileName(modelPath)}")
                 Try
-                    ProcessModel(app, modelPath, config, dftTemplates, outDftDir, outDxfDir, outPdfDir, flatErrors, result, i, targets.Count)
+                    ProcessModel(app, modelPath, config, dftTemplates, outDftDir, outDxfDir, outPdfDir, flatErrors, result, jobIndex, totalJobs)
                     result.ProcessedCount += 1
                 Catch exModel As Exception
                     result.ErrorCount += 1
                     _logger.LogException($"Modelo {IOPath.GetFileName(modelPath)}", exModel)
                 End Try
-                Report(CInt(i * 100.0 / targets.Count), $"Finalizado {i}/{targets.Count}")
+                Report(CInt(jobIndex * 100.0 / Math.Max(1, totalJobs)), $"Finalizado {jobIndex}/{totalJobs}")
             Next
 
             If flatErrors.Count > 0 Then
@@ -206,12 +289,19 @@ Public Class DraftGenerationEngine
             Return
         End If
 
+        WaitIfPausedOrStopped()
+        If _stopRequested Then
+            _logger.Log("[ENG][STOP] requested=True stage=process_model_enter")
+            Return
+        End If
+
         Dim ext As String = IOPath.GetExtension(modelPath).ToLowerInvariant()
+        Dim isAssemblyDraft As Boolean = (ext = ".asm")
         Dim baseName As String = IOPath.GetFileNameWithoutExtension(modelPath)
         Dim runLab As Boolean = config.EnableDrawingViewDimensioningLab OrElse DimensionInsertionConfig.EnableDrawingViewDimensioningLab
         ' FORZADO TEMPORAL: ejecutar SIEMPRE DVGeometryMethodDiscoveryLab en modo exclusivo.
-        Dim forceDvMethodDiscoveryLabOnly As Boolean = True
-        If forceDvMethodDiscoveryLabOnly Then
+        Dim forceDvMethodDiscoveryLabOnly As Boolean = False
+        If forceDvMethodDiscoveryLabOnly AndAlso Not isAssemblyDraft Then
             config.RunDVGeometryMethodDiscoveryLab = True
             config.RunDVGeometryDimensionPlacementLab = False
             config.RunDropCreatedSheetsDimensionLab = False
@@ -222,6 +312,10 @@ Public Class DraftGenerationEngine
             runLab = False
             _logger.Log("[DV_METHODLAB][FORCE] enabled=True source=temporary_hard_force")
             _logger.Log("[DV_METHODLAB][FORCE] bypass_ui_config_gates=True")
+        End If
+        If isAssemblyDraft Then
+            runLab = False
+            _logger.Log("[ASM_OVERVIEW][GATE] labs_off=True auto_dimension_off=True")
         End If
 
         GenerationEngineRuntime.ResetForRun()
@@ -320,7 +414,7 @@ Public Class DraftGenerationEngine
                         _logger.Log("[DIMLAB][INTERACTIVE] forensic_MsgBox_PAUSE=True")
                         _logger.Log("[DIMLAB][INTERACTIVE] skipExportClose=True")
                     End If
-                    Dim runMainDimensioning As Boolean = (dftDoc IsNot Nothing AndAlso config.EnableAutoDimensioning AndAlso Not runLab)
+                    Dim runMainDimensioning As Boolean = (dftDoc IsNot Nothing AndAlso config.EnableAutoDimensioning AndAlso Not runLab AndAlso Not isAssemblyDraft)
                     If GenerationEngineRuntime.DebugDiagnosticsMode OrElse Not GenerationEngineRuntime.ProductionMode Then
                         _logger.Log("[DIM][FLAGS] Config_EnableAutoDimensioning=" & config.EnableAutoDimensioning.ToString())
                         _logger.Log("[DIM][FLAGS] Config_EnableDrawingViewDimensioningLab=" & config.EnableDrawingViewDimensioningLab.ToString())
@@ -383,7 +477,7 @@ Public Class DraftGenerationEngine
                         runMainDimensioning = False
                     End If
 
-                    If runDvMethodLab AndAlso dftDoc IsNot Nothing Then
+                    If runDvMethodLab AndAlso Not isAssemblyDraft AndAlso dftDoc IsNot Nothing Then
                         Try
                             _logger.Log("[DV_METHODLAB][RUN] enabled=True source=config")
                             Dim prevAlerts As Boolean = True
@@ -406,14 +500,14 @@ Public Class DraftGenerationEngine
                         Catch exDvMethod As Exception
                             _logger.Log("[DV_METHODLAB][FATAL] " & exDvMethod.ToString())
                         End Try
-                    ElseIf runDvDimLab AndAlso dftDoc IsNot Nothing Then
+                    ElseIf runDvDimLab AndAlso Not isAssemblyDraft AndAlso dftDoc IsNot Nothing Then
                         Try
                             _logger.Log("[DV_DIMLAB][RUN] enabled=True source=config")
                             DVGeometryDimensionPlacementLab.Run(app, dftDoc, Sub(m) _logger.Log(m), False)
                         Catch exDv As Exception
                             _logger.Log("[DV_DIMLAB][FATAL] " & exDv.ToString())
                         End Try
-                    ElseIf runDropSheetsLab AndAlso dftDoc IsNot Nothing Then
+                    ElseIf runDropSheetsLab AndAlso Not isAssemblyDraft AndAlso dftDoc IsNot Nothing Then
                         Try
                             _logger.Log("[DROP_SHEETS][RUN] enabled=True source=config")
                             If config.RunDropViewsTo2DModelLab OrElse
@@ -425,7 +519,7 @@ Public Class DraftGenerationEngine
                         Catch exSheets As Exception
                             _logger.Log("[DROP_SHEETS][FATAL] " & exSheets.ToString())
                         End Try
-                    ElseIf runDrop2D AndAlso dftDoc IsNot Nothing Then
+                    ElseIf runDrop2D AndAlso Not isAssemblyDraft AndAlso dftDoc IsNot Nothing Then
                         Try
                             _logger.Log("[DROP2D][RUN] enabled=True source=" &
                                         If(config.RunDropViewsTo2DModelLab, "config", "env:DROP2D_LAB"))
@@ -444,7 +538,7 @@ Public Class DraftGenerationEngine
                         WriteProductionSummary(modelPath, outDft)
                     End If
 
-                    If Not runLab AndAlso config.RunUnitHorizontalExteriorDimensionTest AndAlso dftDoc IsNot Nothing Then
+                    If Not runLab AndAlso Not isAssemblyDraft AndAlso config.RunUnitHorizontalExteriorDimensionTest AndAlso dftDoc IsNot Nothing Then
                         Try
                             UnitHorizontalExteriorDimensionTest.Run(
                                 dftDoc,
