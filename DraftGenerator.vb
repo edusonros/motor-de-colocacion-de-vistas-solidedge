@@ -496,11 +496,27 @@ Public Module DraftGenerator
             ' Inserción provisional: posición inicial genérica (Solid Edge necesita un centro para AddPartView)
             Dim cxProv As Double = 0.15 : Dim cyProv As Double = 0.2
             If isAssembly Then
-                vBase = dvws.AddAssemblyView(modelLink, CType(layout.BaseOri, ViewOrientationConstants), layout.Scale, cxProv, cyProv, AssemblyDrawingViewTypeConstants.seAssemblyDesignedView)
+                Try
+                    Log($"[ASM] InsertBaseView: AddAssemblyView ori={layout.BaseOri} scale={layout.Scale}")
+                    vBase = dvws.AddAssemblyView(modelLink, CType(layout.BaseOri, ViewOrientationConstants), layout.Scale, cxProv, cyProv, AssemblyDrawingViewTypeConstants.seAssemblyDesignedView)
+                Catch exAsm As Exception
+                    LogEx("InsertBaseView AddAssemblyView (1er intento)", exAsm)
+                    DoIdle(app) : DoIdle(app)
+                    Try
+                        Log($"[ASM] InsertBaseView: reintento AddAssemblyView ori={layout.BaseOri}")
+                        vBase = dvws.AddAssemblyView(modelLink, CType(layout.BaseOri, ViewOrientationConstants), layout.Scale, cxProv, cyProv, AssemblyDrawingViewTypeConstants.seAssemblyDesignedView)
+                    Catch exAsm2 As Exception
+                        LogEx("InsertBaseView AddAssemblyView (2º intento)", exAsm2)
+                    End Try
+                End Try
             ElseIf Not isSheetMetal Then
                 vBase = dvws.AddPartView(modelLink, layout.BaseOri, layout.Scale, cxProv, cyProv, PartDrawingViewTypeConstants.sePartDesignedView)
             Else
                 vBase = dvws.AddSheetMetalView(modelLink, layout.BaseOri, layout.Scale, cxProv, cyProv, SheetMetalDrawingViewTypeConstants.seSheetMetalDesignedView)
+            End If
+            If vBase Is Nothing Then
+                Log($"[WARN] InsertBaseView: vista base nula tras la inserción (isAssembly={isAssembly} ori={layout.BaseOri} scale={layout.Scale}).")
+                Return False
             End If
             ForceViewOrientation(vBase, layout.BaseOri)
             SafeUpdateView(vBase)

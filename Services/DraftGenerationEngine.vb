@@ -176,15 +176,37 @@ Public Class DraftGenerationEngine
                 targets.Add(config.InputFile)
             End If
 
-            targets = ExpandSelectedTargets(app, targets, config.ProcessRepeatedComponentsOnce)
+            targets = ExpandSelectedTargets(app, targets, config.ProcessRepeatedComponentsOnce, config.UseSelectedComponents)
 
             Dim runAsmOverview As Boolean =
                 inputKind = SourceFileKind.AssemblyFile AndAlso
                 IO.File.Exists(config.InputFile) AndAlso
                 (config.CreateDraft OrElse config.CreatePdf OrElse config.CreateDxfFromDraft)
 
+            ' Respetar la selección manual de componentes:
+            '   - Si el usuario está usando selección manual (UseSelectedComponents=True), el "overview"
+            '     del ASM completo solo se ejecuta si el propio archivo ASM raíz fue marcado en la lista
+            '     (lo añade la UI a SelectedComponentPaths). En cualquier otro caso (ningún componente
+            '     marcado, o solo algunas piezas marcadas), NO se procesa el ASM completo.
+            If runAsmOverview AndAlso config.UseSelectedComponents Then
+                Dim asmRootMarked As Boolean = False
+                If config.SelectedComponentPaths IsNot Nothing Then
+                    asmRootMarked = config.SelectedComponentPaths.
+                        Any(Function(p) Not String.IsNullOrWhiteSpace(p) AndAlso
+                                          String.Equals(p, config.InputFile, StringComparison.OrdinalIgnoreCase))
+                End If
+                If Not asmRootMarked Then
+                    _logger.Log("[ASM_OVERVIEW][SKIP] reason=manual_selection_active asm_root_not_checked")
+                    runAsmOverview = False
+                End If
+            End If
+
             If targets.Count = 0 AndAlso Not runAsmOverview Then
-                _logger.Log("No hay modelos para procesar.")
+                If config.UseSelectedComponents Then
+                    _logger.Log("[ASM][SELECTION] 0 componentes marcados; nada que procesar (selección manual estricta).")
+                Else
+                    _logger.Log("No hay modelos para procesar.")
+                End If
                 result.Success = True
                 Return result
             End If
@@ -315,7 +337,9 @@ Public Class DraftGenerationEngine
         End If
         If isAssemblyDraft Then
             runLab = False
-            _logger.Log("[ASM_OVERVIEW][GATE] labs_off=True auto_dimension_off=True")
+            _logger.Log("[ASM_OVERVIEW][GATE] labs_off=True (los laboratorios DIMLAB siguen desactivados para .asm)")
+            _logger.Log("[ASM_OVERVIEW][ENGINE] Aplicando el mismo motor de vistas que para PAR/PSM (DraftGenerator.CreateAutomaticDraftFromModel + AddAssemblyView).")
+            _logger.Log("[ASM_OVERVIEW][DIM] Acotado automático ACTIVO para el ensamblaje (mismo motor DimensioningEngine que para PAR/PSM).")
         End If
 
         GenerationEngineRuntime.ResetForRun()
@@ -414,7 +438,8 @@ Public Class DraftGenerationEngine
                         _logger.Log("[DIMLAB][INTERACTIVE] forensic_MsgBox_PAUSE=True")
                         _logger.Log("[DIMLAB][INTERACTIVE] skipExportClose=True")
                     End If
-                    Dim runMainDimensioning As Boolean = (dftDoc IsNot Nothing AndAlso config.EnableAutoDimensioning AndAlso Not runLab AndAlso Not isAssemblyDraft)
+                    ' El acotado automático se aplica también a los ensamblajes (.asm): mismo motor que PAR/PSM.
+                    Dim runMainDimensioning As Boolean = (dftDoc IsNot Nothing AndAlso config.EnableAutoDimensioning AndAlso Not runLab)
                     If GenerationEngineRuntime.DebugDiagnosticsMode OrElse Not GenerationEngineRuntime.ProductionMode Then
                         _logger.Log("[DIM][FLAGS] Config_EnableAutoDimensioning=" & config.EnableAutoDimensioning.ToString())
                         _logger.Log("[DIM][FLAGS] Config_EnableDrawingViewDimensioningLab=" & config.EnableDrawingViewDimensioningLab.ToString())
@@ -607,7 +632,11 @@ Public Class DraftGenerationEngine
                         End If
                     End Try
                 Else
-                    _logger.Log("[WARN] CreateDraftAlzadoPrimerDiedro devolvió Nothing.")
+                    If isAssemblyDraft Then
+                        _logger.Log("[WARN][ASM_OVERVIEW] CreateAutomaticDraftFromModel devolvió Nothing para el ensamblaje. Posibles causas: AddAssemblyView falló (componentes no resueltos, sin geometría visible o configuración activa incompatible), no había vistas medibles, o el área útil de la plantilla es insuficiente. Revisa los mensajes [DRAFT] y [EX] previos.")
+                    Else
+                        _logger.Log("[WARN] CreateDraftAlzadoPrimerDiedro devolvió Nothing.")
+                    End If
                 End If
             Catch ex As Exception
                 _logger.LogException("DFT/PDF/DXF Draft", ex)
@@ -670,7 +699,7 @@ Public Class DraftGenerationEngine
         Return templates.ToArray()
     End Function
 
-    Private Function ExpandSelectedTargets(app As SolidEdgeFramework.Application, rawTargets As List(Of String), uniqueOnly As Boolean) As List(Of String)
+    Private Function ExpandSelectedTargets(app As SolidEdgeFramework.Application, rawTargets As List(Of String), uniqueOnly As Boolean, useManualSelection As Boolean) As List(Of String)
         Dim expanded As New List(Of String)()
         For Each p In rawTargets
             If String.IsNullOrWhiteSpace(p) Then Continue For
@@ -678,8 +707,15 @@ Public Class DraftGenerationEngine
             If ext = ".par" OrElse ext = ".psm" Then
                 expanded.Add(p)
             ElseIf ext = ".asm" Then
-                _logger.Log($"Expandiendo ASM seleccionado: {IOPath.GetFileName(p)}")
-                expanded.AddRange(ResolveAssemblyTargets(app, p, uniqueOnly))
+                If useManualSelection Then
+                    ' En selección manual los hijos del ASM ya aparecen aplanados en la UI;
+                    ' expandirlo aquí ignoraría los desmarcados que el usuario hizo a nivel de pieza.
+                    ' El ASM se trata aparte vía runAsmOverview cuando está marcado el ASM raíz.
+                    _logger.Log($"[ASM][SELECTION] No se expande subensamblaje en modo manual: {IOPath.GetFileName(p)} (se respetan los desmarcados de sus piezas)")
+                Else
+                    _logger.Log($"Expandiendo ASM seleccionado: {IOPath.GetFileName(p)}")
+                    expanded.AddRange(ResolveAssemblyTargets(app, p, uniqueOnly))
+                End If
             Else
                 _logger.Log($"[SKIP] Tipo no procesable en selección: {IOPath.GetFileName(p)}")
             End If

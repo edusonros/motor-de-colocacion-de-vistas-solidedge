@@ -850,6 +850,65 @@ Partial Public Class MainForm
         End If
     End Sub
 
+    ''' <summary>Evita reentrada cuando se aplica la cascada de marcado/desmarcado.</summary>
+    Private _suppressAsmCascade As Boolean = False
+
+    Private Sub dgvAsmComponents_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgvAsmComponents.CellValueChanged
+        If _suppressAsmCascade Then Return
+        If dgvAsmComponents Is Nothing OrElse e.RowIndex < 0 OrElse e.ColumnIndex < 0 Then Return
+        If dgvAsmComponents.Columns(e.ColumnIndex).Name <> "colSel" Then Return
+
+        Dim r As DataGridViewRow = dgvAsmComponents.Rows(e.RowIndex)
+        If r Is Nothing OrElse r.IsNewRow OrElse r.Tag Is Nothing Then Return
+        Dim idx As Integer = CInt(r.Tag)
+        If idx < 0 OrElse idx >= _asmComponents.Count Then Return
+        Dim it As AssemblyComponentItem = _asmComponents(idx)
+        If it Is Nothing Then Return
+
+        ' Solo cascada cuando se marca/desmarca un subensamblaje (ASM): se aplica a sus descendientes.
+        If Not String.Equals(it.Kind, "ASM", StringComparison.OrdinalIgnoreCase) Then Return
+
+        Dim newValue As Boolean
+        Try
+            newValue = Convert.ToBoolean(r.Cells("colSel").Value)
+        Catch
+            newValue = False
+        End Try
+
+        Dim parentLevel As Integer = it.Level
+        Dim affected As Integer = 0
+        _suppressAsmCascade = True
+        Try
+            For i As Integer = e.RowIndex + 1 To dgvAsmComponents.Rows.Count - 1
+                Dim child As DataGridViewRow = dgvAsmComponents.Rows(i)
+                If child Is Nothing OrElse child.IsNewRow OrElse child.Tag Is Nothing Then Continue For
+                Dim cIdx As Integer = CInt(child.Tag)
+                If cIdx < 0 OrElse cIdx >= _asmComponents.Count Then Continue For
+                Dim cItem As AssemblyComponentItem = _asmComponents(cIdx)
+                If cItem Is Nothing Then Continue For
+                ' Detener al volver a un nivel hermano o superior al del ASM modificado.
+                If cItem.Level <= parentLevel Then Exit For
+                Dim cell = child.Cells("colSel")
+                Dim current As Boolean
+                Try
+                    current = Convert.ToBoolean(cell.Value)
+                Catch
+                    current = False
+                End Try
+                If current <> newValue Then
+                    cell.Value = newValue
+                    affected += 1
+                End If
+            Next
+        Finally
+            _suppressAsmCascade = False
+        End Try
+
+        If affected > 0 Then
+            _logger.Log($"[ASM][CASCADE] {(If(newValue, "Marcadas", "Desmarcadas"))} {affected} piezas hijas de {IO.Path.GetFileName(it.FullPath)}")
+        End If
+    End Sub
+
     Private Sub dgvAsmComponents_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvAsmComponents.CellContentClick
         If dgvAsmComponents Is Nothing OrElse e.RowIndex < 0 OrElse e.ColumnIndex < 0 Then Return
         Dim r As DataGridViewRow = dgvAsmComponents.Rows(e.RowIndex)
@@ -1767,9 +1826,22 @@ Partial Public Class MainForm
             End If
 
             _asmComponents = If(task.Result, New List(Of AssemblyComponentItem)())
+
+            ' Insertar el ASM raíz como primera fila virtual del listado.
+            ' Si el usuario lo deja marcado, el motor genera el plano del ensamblaje completo (overview)
+            ' aplicando el mismo flujo de vistas que para PAR/PSM (CreateAutomaticDraftFromModel + AddAssemblyView).
+            ' Su Level=-1 hace que la cascada (al marcar/desmarcar) propague el cambio a TODOS los hijos.
+            Dim rootItem As New AssemblyComponentItem With {
+                .FullPath = asmPathSnap,
+                .Kind = "ASM",
+                .DisplayName = "[ASM RAÍZ] " & IO.Path.GetFileName(asmPathSnap),
+                .Level = -1
+            }
+            _asmComponents.Insert(0, rootItem)
+
             RebuildAsmComponentListUi()
             BeginFlatAvailabilityScan()
-            _logger.Log("[ASM][COMPONENTS][LOADED] count=" & _asmComponents.Count.ToString(Globalization.CultureInfo.InvariantCulture))
+            _logger.Log("[ASM][COMPONENTS][LOADED] count=" & _asmComponents.Count.ToString(Globalization.CultureInfo.InvariantCulture) & " (incluye fila virtual del ASM raíz)")
             Dim autoUnchecked As Integer = 0
             For Each it In _asmComponents
                 If ShouldAutoUncheckByKeyword(it) Then autoUnchecked += 1
@@ -1782,7 +1854,7 @@ Partial Public Class MainForm
                 If it.Kind = "PAR" Then totalPar += 1
                 If it.Kind = "PSM" Then totalPsm += 1
             Next
-            lblAsmComponentHint.Text = $"Total: {_asmComponents.Count} (ASM={totalAsm}, PAR={totalPar}, PSM={totalPsm}) | Auto desmarcados={autoUnchecked}"
+            lblAsmComponentHint.Text = $"Total: {_asmComponents.Count} (ASM={totalAsm}, PAR={totalPar}, PSM={totalPsm}) | Auto desmarcados={autoUnchecked} | El ASM raíz es la 1ª fila"
         Finally
             SetBusy(False, "Preparado", False)
         End Try
@@ -1790,6 +1862,8 @@ Partial Public Class MainForm
 
     Private Function ShouldAutoUncheckByKeyword(item As AssemblyComponentItem) As Boolean
         If item Is Nothing Then Return False
+        ' El ASM raíz (Level=-1) no se autodesmarca nunca: si el usuario lo desactiva, lo hace explícitamente.
+        If item.Level < 0 Then Return False
         Dim name As String = ""
         Try
             name = Path.GetFileNameWithoutExtension(item.FullPath)
@@ -1906,22 +1980,55 @@ Partial Public Class MainForm
         Dim kind As SourceFileKind = cfg.DetectInputKind()
         If kind = SourceFileKind.AssemblyFile AndAlso _asmComponents.Count > 0 AndAlso dgvAsmComponents IsNot Nothing AndAlso dgvAsmComponents.Rows.Count = _asmComponents.Count Then
             cfg.SelectedComponentPaths = New List(Of String)()
+            Dim totalRows As Integer = 0
+            Dim totalChecked As Integer = 0
+            Dim partsChecked As Integer = 0
+            Dim subAsmsChecked As Integer = 0
+            Dim asmRootChecked As Boolean = False
+            Dim partsUnchecked As Integer = 0
+            Dim subAsmsUnchecked As Integer = 0
             For Each r As DataGridViewRow In dgvAsmComponents.Rows
                 If r.IsNewRow OrElse r.Tag Is Nothing Then Continue For
                 Dim idx As Integer = CInt(r.Tag)
                 If idx < 0 OrElse idx >= _asmComponents.Count Then Continue For
+                Dim it = _asmComponents(idx)
+                If it Is Nothing Then Continue For
+                totalRows += 1
                 Dim checkedObj = r.Cells("colSel").Value
                 Dim checked As Boolean = checkedObj IsNot Nothing AndAlso Convert.ToBoolean(checkedObj)
+                Dim isPart As Boolean = String.Equals(it.Kind, "PAR", StringComparison.OrdinalIgnoreCase) OrElse String.Equals(it.Kind, "PSM", StringComparison.OrdinalIgnoreCase)
+                Dim isAsm As Boolean = String.Equals(it.Kind, "ASM", StringComparison.OrdinalIgnoreCase)
+                Dim isAsmRoot As Boolean = isAsm AndAlso it.Level < 0 AndAlso String.Equals(it.FullPath, cfg.InputFile, StringComparison.OrdinalIgnoreCase)
                 If checked Then
-                    Dim it = _asmComponents(idx)
-                    If it IsNot Nothing AndAlso
-                       (String.Equals(it.Kind, "PAR", StringComparison.OrdinalIgnoreCase) OrElse String.Equals(it.Kind, "PSM", StringComparison.OrdinalIgnoreCase)) Then
+                    totalChecked += 1
+                    If isAsmRoot Then
+                        ' El ASM raíz va al target list para que el engine genere el plano del ensamblaje
+                        ' completo aplicando el mismo motor de vistas que para PAR/PSM (CreateAutomaticDraftFromModel).
+                        asmRootChecked = True
                         cfg.SelectedComponentPaths.Add(it.FullPath)
+                    ElseIf isPart Then
+                        partsChecked += 1
+                        cfg.SelectedComponentPaths.Add(it.FullPath)
+                    ElseIf isAsm Then
+                        subAsmsChecked += 1
+                        ' Los hijos del subensamblaje se procesan vía sus propias filas marcadas;
+                        ' aquí no añadimos el .asm al target list para no expandirlo en el motor.
+                    End If
+                Else
+                    If isPart Then
+                        partsUnchecked += 1
+                    ElseIf isAsm AndAlso Not isAsmRoot Then
+                        subAsmsUnchecked += 1
                     End If
                 End If
             Next
             cfg.UseSelectedComponents = True
-            _logger.Log($"Selección manual ASM (estricta): {cfg.SelectedComponentPaths.Count} componentes marcados para procesar; los desmarcados NO se procesan.")
+            _logger.Log($"Selección manual ASM (estricta): marcados={totalChecked} (ASM raíz={If(asmRootChecked, "Sí", "No")}, PAR/PSM={partsChecked}, sub-ASM={subAsmsChecked}); desmarcados PAR/PSM={partsUnchecked}, sub-ASM={subAsmsUnchecked}; total componentes={totalRows}. Las piezas desmarcadas NO se procesan.")
+            If totalChecked = 0 Then
+                _logger.Log("[ASM][SELECTION] Ningún componente marcado: no se generará nada (ni el plano del ensamblaje completo).")
+            ElseIf asmRootChecked Then
+                _logger.Log("[ASM][SELECTION] ASM raíz marcado: se generará también el plano del ensamblaje completo con el motor de vistas (vista base + AddByFold + ISO).")
+            End If
         End If
         If _requestedDimLabFromDedicatedButton Then
             cfg.CreateDraft = True
