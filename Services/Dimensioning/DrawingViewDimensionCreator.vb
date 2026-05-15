@@ -145,9 +145,12 @@ Friend NotInheritable Class DrawingViewDimensionCreator
 
         Dim entities As New List(Of SweepEntity)()
         AddSweepEntities(entities, viewInfo.View, "DVLines2d", "LINE", centerX, centerY)
+        AddSweepEntities(entities, viewInfo.View, "DVLineStrings2d", "LINESTRING", centerX, centerY)
+        AddSweepEntities(entities, viewInfo.View, "DVBSplineCurves2d", "SPLINE", centerX, centerY)
         AddSweepEntities(entities, viewInfo.View, "DVArcs2d", "ARC", centerX, centerY)
         AddSweepEntities(entities, viewInfo.View, "DVCircles2d", "CIRCLE", centerX, centerY)
         AddSweepEntities(entities, viewInfo.View, "DVEllipses2d", "ELLIPSE", centerX, centerY)
+        AddSweepEntities(entities, viewInfo.View, "DVPoints2d", "POINT", centerX, centerY)
 
         Dim ordered = entities.OrderBy(Function(e) e.DistanceToCenter).ToList()
         If UneStrictMode Then
@@ -167,15 +170,25 @@ Friend NotInheritable Class DrawingViewDimensionCreator
         Dim gapStep As Double = If(UneStrictMode, 0.00035R, 0.00045R) * layoutScale
         Dim dedupe As New HashSet(Of String)(StringComparer.OrdinalIgnoreCase)
         Dim bandCounters As New Dictionary(Of String, Integer)(StringComparer.OrdinalIgnoreCase)
-        Dim hLim As Integer = If(uneNorm.KeepIntentionalDuplicateDimensions, 80, 3)
-        Dim vLim As Integer = If(uneNorm.KeepIntentionalDuplicateDimensions, 80, 3)
-        Dim rLim As Integer = If(uneNorm.KeepIntentionalDuplicateDimensions, 40, 2)
+        Dim isSweepAllMode As Boolean = String.Equals(uneNorm.DimensionCreationMode, DimensioningNormConfig.ModeSweepAll, StringComparison.OrdinalIgnoreCase)
+        Dim hLim As Integer
+        Dim vLim As Integer
+        Dim rLim As Integer
+        Dim lineBandLim As Integer
+        Dim genLim As Integer
+        If uneNorm.KeepIntentionalDuplicateDimensions Then
+            hLim = 80 : vLim = 80 : rLim = 40 : lineBandLim = 40 : genLim = 40
+        ElseIf isSweepAllMode Then
+            hLim = 8 : vLim = 8 : rLim = 4 : lineBandLim = 6 : genLim = 6
+        Else
+            hLim = 3 : vLim = 3 : rLim = 2 : lineBandLim = 2 : genLim = 0
+        End If
         Dim bandMax As New Dictionary(Of String, Integer)(StringComparer.OrdinalIgnoreCase) From {
             {"H", hLim},
             {"V", vLim},
             {"R", rLim},
-            {"GEN", 0},
-            {"LINE", If(uneNorm.KeepIntentionalDuplicateDimensions, 40, 2)}
+            {"GEN", genLim},
+            {"LINE", lineBandLim}
         }
 
         For i As Integer = 0 To ordered.Count - 1
@@ -234,7 +247,7 @@ Friend NotInheritable Class DrawingViewDimensionCreator
                             End If
                         End If
                         dimObj = TryCreateByReferenceMethods(dims, it.Obj, New String() {"AddRadius", "AddRadialDiameter", "AddCircularDiameter", "AddLength"}, log, it.Kind)
-                    Case "ELLIPSE"
+                    Case "ELLIPSE", "LINESTRING", "SPLINE", "POINT"
                         dimObj = TryCreateByReferenceMethods(dims, it.Obj, New String() {"AddLength"}, log, it.Kind)
                 End Select
 
@@ -253,7 +266,8 @@ Friend NotInheritable Class DrawingViewDimensionCreator
                     CallByName(dimObj, "TrackDistance", CallType.Let, td)
                 Catch
                 End Try
-                If String.Equals(it.Kind, "LINE", StringComparison.OrdinalIgnoreCase) Then
+                If String.Equals(it.Kind, "LINE", StringComparison.OrdinalIgnoreCase) OrElse
+                   String.Equals(it.Kind, "LINESTRING", StringComparison.OrdinalIgnoreCase) Then
                     Try
                         CallByName(dimObj, "ProjectionLineDirection", CallType.Let, True)
                     Catch
@@ -281,7 +295,10 @@ Friend NotInheritable Class DrawingViewDimensionCreator
                 End If
 
                 created += 1
-                If String.Equals(it.Kind, "LINE", StringComparison.OrdinalIgnoreCase) Then
+                If String.Equals(it.Kind, "LINE", StringComparison.OrdinalIgnoreCase) OrElse
+                   String.Equals(it.Kind, "LINESTRING", StringComparison.OrdinalIgnoreCase) OrElse
+                   String.Equals(it.Kind, "SPLINE", StringComparison.OrdinalIgnoreCase) OrElse
+                   String.Equals(it.Kind, "POINT", StringComparison.OrdinalIgnoreCase) Then
                     createdLinear += 1
                 Else
                     createdRadial += 1
@@ -343,6 +360,9 @@ Friend NotInheritable Class DrawingViewDimensionCreator
         If String.Equals(kind, "ARC", StringComparison.OrdinalIgnoreCase) Then Return 2
         If String.Equals(kind, "CIRCLE", StringComparison.OrdinalIgnoreCase) Then Return 2
         If String.Equals(kind, "ELLIPSE", StringComparison.OrdinalIgnoreCase) Then Return 3
+        If String.Equals(kind, "LINESTRING", StringComparison.OrdinalIgnoreCase) Then Return 4
+        If String.Equals(kind, "SPLINE", StringComparison.OrdinalIgnoreCase) Then Return 5
+        If String.Equals(kind, "POINT", StringComparison.OrdinalIgnoreCase) Then Return 6
         Return 9
     End Function
 
@@ -370,16 +390,25 @@ Friend NotInheritable Class DrawingViewDimensionCreator
 
     Private Shared Function InferSweepBand(ByVal kind As String, ByVal obj As Object) As String
         If obj Is Nothing Then Return "GEN"
-        If String.Equals(kind, "LINE", StringComparison.OrdinalIgnoreCase) Then
+        If String.Equals(kind, "LINE", StringComparison.OrdinalIgnoreCase) OrElse
+           String.Equals(kind, "LINESTRING", StringComparison.OrdinalIgnoreCase) OrElse
+           String.Equals(kind, "SPLINE", StringComparison.OrdinalIgnoreCase) Then
             Try
                 Dim x1 As Double = 0, y1 As Double = 0, x2 As Double = 0, y2 As Double = 0
                 CallByName(obj, "Range", CallType.Method, x1, y1, x2, y2)
                 Dim dx As Double = Math.Abs(x2 - x1)
                 Dim dy As Double = Math.Abs(y2 - y1)
+                If String.Equals(kind, "LINE", StringComparison.OrdinalIgnoreCase) OrElse
+                   String.Equals(kind, "LINESTRING", StringComparison.OrdinalIgnoreCase) Then
+                    If dx >= dy Then Return "H"
+                    Return "V"
+                End If
+                If dx < 1.0E-12R AndAlso dy < 1.0E-12R Then Return "GEN"
                 If dx >= dy Then Return "H"
                 Return "V"
             Catch
-                Return "LINE"
+                If String.Equals(kind, "LINE", StringComparison.OrdinalIgnoreCase) Then Return "LINE"
+                Return "GEN"
             End Try
         End If
         If String.Equals(kind, "ARC", StringComparison.OrdinalIgnoreCase) OrElse String.Equals(kind, "CIRCLE", StringComparison.OrdinalIgnoreCase) Then
@@ -999,7 +1028,7 @@ Friend NotInheritable Class DrawingViewDimensionCreator
     End Function
 
     Private Shared Function CallByNameSafe(obj As Object, member As String, isMethod As Boolean) As Object
-        If obj Is Nothing Then Return Nothing
+        If obj Is Nothing OrElse String.IsNullOrWhiteSpace(member) Then Return Nothing
         Try
             If isMethod Then
                 Return CallByName(obj, member, CallType.Method)

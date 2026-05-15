@@ -108,6 +108,7 @@ Public NotInheritable Class DimensioningEngine
         Dim log As New DimensionLogger(appLogger)
         Try
             RunInternal(draft, mainView, log, appLogger, norm, protectedZones)
+            SesdkDraftGeometryDimensionIntrospection.RunIfRequested(draft, norm, appLogger)
         Catch ex As Exception
             log.ComFail("RunAutoDimensioning (global)", "DimensioningEngine", ex)
         Finally
@@ -116,8 +117,9 @@ Public NotInheritable Class DimensioningEngine
     End Sub
 
     Private Shared Sub RunInternal(draft As DraftDocument, mainView As DrawingView, log As DimensionLogger, baseLogger As Logger, norm As DimensioningNormConfig, Optional protectedZones As IList(Of ProtectedZone2D) = Nothing)
-        ' Motor único de acotado: se elimina cualquier flujo alternativo/experimental.
-        UniqueDvAutoDimensioningEngine.Run(draft, log, baseLogger, norm, protectedZones)
+        Dim motor As IDrawingViewAutoDimensioningMotor =
+            DrawingViewAutoDimensioningMotorFactory.Create(GenerationEngineRuntime.ActiveAutoDimensioningMotor)
+        motor.Run(draft, mainView, log, baseLogger, norm, protectedZones)
         Return
 #If False Then
         ' Colocación respecto al marco de la vista que se acota (GeoFrame): evita cotas de una vista

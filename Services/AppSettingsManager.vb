@@ -34,6 +34,12 @@ Public Class PersistedAppSettings
     <DataMember> Public Property IncludeProjectedViews As Boolean = True
     <DataMember> Public Property IncludeFlatInDraftWhenPsm As Boolean = True
     <DataMember> Public Property EnableAutoDimensioning As Boolean = False
+    <DataMember> Public Property AutoDimensioningMotor As Integer = 0
+    <DataMember> Public Property EnableProductionDvRefCleanEngine As Boolean = False
+    <DataMember> Public Property EnableSesdkPostDimensionIntrospection As Boolean = False
+    <DataMember> Public Property PreferSweepAllDrawingDimensions As Boolean = False
+    <DataMember> Public Property SuppressDimensionTrackDistanceSpacing As Boolean = True
+    <DataMember> Public Property EnableKeypointValueDuplicateCleanup As Boolean = True
 
     <DataMember> Public Property EnableDrawingViewDimensioningLab As Boolean = False
     <DataMember> Public Property RunDropViewsTo2DModelLab As Boolean = False
@@ -97,13 +103,48 @@ Public Class AppSettingsManager
     End Function
 
     Public Shared Sub SaveSettings(settings As PersistedAppSettings)
-        If settings Is Nothing Then Return
-        If Not Directory.Exists(SettingsDirectory) Then Directory.CreateDirectory(SettingsDirectory)
-        Using fs As New FileStream(SettingsFilePath, FileMode.Create, FileAccess.Write, FileShare.None)
-            Dim ser As New DataContractJsonSerializer(GetType(PersistedAppSettings))
-            ser.WriteObject(fs, settings)
-        End Using
+        If Not TrySaveSettings(settings, Nothing) Then
+            Throw New IOException("No se pudo guardar la configuracion. Revise permisos y antivirus en: " & SettingsFilePath)
+        End If
     End Sub
+
+    ''' <summary>
+    ''' Escribe <c>settings.json</c> en un temporal y sustituye el destino (reduce fallos por archivo bloqueado).
+    ''' </summary>
+    ''' <param name="errorDetail">Si no es Nothing, recibe el mensaje de error (sin lanzar).</param>
+    Public Shared Function TrySaveSettings(settings As PersistedAppSettings, ByRef errorDetail As String) As Boolean
+        errorDetail = Nothing
+        If settings Is Nothing Then Return True
+        Try
+            If Not Directory.Exists(SettingsDirectory) Then Directory.CreateDirectory(SettingsDirectory)
+        Catch ex As Exception
+            errorDetail = ex.Message
+            Return False
+        End Try
+
+        Dim tmpPath As String = SettingsFilePath & ".tmp"
+        Try
+            Using fs As New FileStream(tmpPath, FileMode.Create, FileAccess.Write, FileShare.Read)
+                Dim ser As New DataContractJsonSerializer(GetType(PersistedAppSettings))
+                ser.WriteObject(fs, settings)
+                fs.Flush(True)
+            End Using
+
+            If File.Exists(SettingsFilePath) Then
+                File.Replace(tmpPath, SettingsFilePath, Nothing)
+            Else
+                File.Move(tmpPath, SettingsFilePath)
+            End If
+            Return True
+        Catch ex As Exception
+            errorDetail = ex.Message
+            Try
+                If File.Exists(tmpPath) Then File.Delete(tmpPath)
+            Catch
+            End Try
+            Return False
+        End Try
+    End Function
 
     Public Shared Function GetSettingsFilePath() As String
         Return SettingsFilePath

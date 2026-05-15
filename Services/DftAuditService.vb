@@ -12,6 +12,214 @@ Public NotInheritable Class DftAuditService
     Private Sub New()
     End Sub
 
+    ''' <summary>
+    ''' Versión sin I/O de Solid Edge: genera el audit directamente desde un <paramref name="dft"/> ya abierto
+    ''' (útil para invocar en mitad del proceso, antes de cerrar el DFT). Vuelca el resultado a <paramref name="outFilePath"/>.
+    ''' </summary>
+    Public Shared Sub ExportAuditFromOpenDocument(dft As DraftDocument, outFilePath As String, logger As Logger)
+        If dft Is Nothing Then
+            logger?.Log("[DFT][AUDIT][ERR] DraftDocument Nothing.")
+            Return
+        End If
+        If String.IsNullOrWhiteSpace(outFilePath) Then
+            logger?.Log("[DFT][AUDIT][ERR] outFilePath vacío.")
+            Return
+        End If
+        Try
+            Dim sb As StringBuilder = BuildAuditReport(dft)
+            Dim dir As String = Path.GetDirectoryName(outFilePath)
+            If Not String.IsNullOrWhiteSpace(dir) AndAlso Not Directory.Exists(dir) Then Directory.CreateDirectory(dir)
+            File.WriteAllText(outFilePath, sb.ToString(), Encoding.UTF8)
+            logger?.Log("[DFT][AUDIT][OK] " & outFilePath)
+        Catch ex As Exception
+            logger?.LogException("DftAuditService.ExportAuditFromOpenDocument", ex)
+        End Try
+    End Sub
+
+    ''' <summary>Recolecta toda la información del DFT abierto y devuelve un StringBuilder listo para volcar.</summary>
+    Public Shared Function BuildAuditReport(dft As DraftDocument) As StringBuilder
+        Dim sb As New StringBuilder()
+        If dft Is Nothing Then Return sb
+
+        Dim fullName As String = SafeToString(CallByNameSafe(dft, "FullName"))
+        sb.AppendLine("=== DFT AUDIT ===")
+        sb.AppendLine("File=" & fullName)
+        sb.AppendLine("GeneratedUtc=" & DateTime.UtcNow.ToString("o", CultureInfo.InvariantCulture))
+        sb.AppendLine("Name=" & SafeToString(CallByNameSafe(dft, "Name")))
+        sb.AppendLine("FullName=" & fullName)
+
+        Dim totalSheets As Integer = 0
+        Dim totalViews As Integer = 0
+        Dim totalDims As Integer = 0
+        Dim totalDvLines As Integer = 0
+        Dim totalDvArcs As Integer = 0
+        Dim totalDvCircles As Integer = 0
+        Dim totalDvSplines As Integer = 0
+        Dim totalDvLineStrings As Integer = 0
+        Dim totalDvPoints As Integer = 0
+        Dim totalDraftTables As Integer = 0
+        Dim totalPartsLists As Integer = 0
+        Dim totalLines2d As Integer = 0
+        Dim totalArcs2d As Integer = 0
+        Dim totalCircles2d As Integer = 0
+        Dim totalLineStrings2d As Integer = 0
+        Dim totalBsplines2d As Integer = 0
+        Dim totalPoints2d As Integer = 0
+        Dim totalDropLabGeometry As Integer = 0
+        Dim totalDropLabDimensions As Integer = 0
+
+        Dim sheets As Sheets = Nothing
+        Try
+            sheets = dft.Sheets
+        Catch
+        End Try
+        totalSheets = SafeCount(sheets)
+        sb.AppendLine("Sheets=" & totalSheets.ToString(CultureInfo.InvariantCulture))
+
+        totalDraftTables = AppendDraftDocumentTablesSection(sb, dft)
+        totalPartsLists = AppendDraftDocumentPartsListsSection(sb, dft)
+
+        For i As Integer = 1 To totalSheets
+            Dim sh As Sheet = Nothing
+            Try
+                sh = CType(sheets.Item(i), Sheet)
+            Catch
+                sh = Nothing
+            End Try
+            If sh Is Nothing Then Continue For
+
+            Dim shName As String = SafeToString(CallByNameSafe(sh, "Name"))
+            Dim dimsObj As Object = CallByNameSafe(sh, "Dimensions")
+            Dim dimsCount As Integer = SafeCount(dimsObj)
+            Dim views As DrawingViews = Nothing
+            Try
+                views = sh.DrawingViews
+            Catch
+                views = Nothing
+            End Try
+            Dim viewCount As Integer = SafeCount(views)
+            Dim lines2dObj As Object = CallByNameSafe(sh, "Lines2d")
+            Dim arcs2dObj As Object = CallByNameSafe(sh, "Arcs2d")
+            Dim circles2dObj As Object = CallByNameSafe(sh, "Circles2d")
+            Dim lineStrings2dObj As Object = CallByNameSafe(sh, "LineStrings2d")
+            Dim bsplines2dObj As Object = CallByNameSafe(sh, "BSplineCurves2d")
+            Dim points2dObj As Object = CallByNameSafe(sh, "Points2d")
+            Dim lines2dCount As Integer = SafeCount(lines2dObj)
+            Dim arcs2dCount As Integer = SafeCount(arcs2dObj)
+            Dim circles2dCount As Integer = SafeCount(circles2dObj)
+            Dim lineStrings2dCount As Integer = SafeCount(lineStrings2dObj)
+            Dim bsplines2dCount As Integer = SafeCount(bsplines2dObj)
+            Dim points2dCount As Integer = SafeCount(points2dObj)
+            Dim dropLabGeomCount As Integer = CountByLayer(lines2dObj, "DROP_LAB_GEOMETRY") +
+                                               CountByLayer(arcs2dObj, "DROP_LAB_GEOMETRY") +
+                                               CountByLayer(circles2dObj, "DROP_LAB_GEOMETRY") +
+                                               CountByLayer(lineStrings2dObj, "DROP_LAB_GEOMETRY") +
+                                               CountByLayer(bsplines2dObj, "DROP_LAB_GEOMETRY") +
+                                               CountByLayer(points2dObj, "DROP_LAB_GEOMETRY")
+            Dim dropLabDimCount As Integer = CountByLayer(dimsObj, "DROP_LAB_DIMENSIONS")
+
+            totalDims += dimsCount
+            totalViews += viewCount
+            totalLines2d += lines2dCount
+            totalArcs2d += arcs2dCount
+            totalCircles2d += circles2dCount
+            totalLineStrings2d += lineStrings2dCount
+            totalBsplines2d += bsplines2dCount
+            totalPoints2d += points2dCount
+            totalDropLabGeometry += dropLabGeomCount
+            totalDropLabDimensions += dropLabDimCount
+
+            sb.AppendLine("")
+            sb.AppendLine(String.Format(CultureInfo.InvariantCulture, "[SHEET] idx={0} name={1} views={2} dimensions={3}", i, shName, viewCount, dimsCount))
+            sb.AppendLine(String.Format(CultureInfo.InvariantCulture,
+                "  [SHEET][2D] lines2d={0} arcs2d={1} circles2d={2} linestrings2d={3} bsplines2d={4} points2d={5}",
+                lines2dCount, arcs2dCount, circles2dCount, lineStrings2dCount, bsplines2dCount, points2dCount))
+            sb.AppendLine(String.Format(CultureInfo.InvariantCulture,
+                "  [SHEET][DROP_LAB] geometry={0} dimensions={1}",
+                dropLabGeomCount, dropLabDimCount))
+            AppendDimensionDetails(sb, dimsObj)
+
+            For v As Integer = 1 To viewCount
+                Dim dv As DrawingView = Nothing
+                Try
+                    dv = CType(views.Item(v), DrawingView)
+                Catch
+                    dv = Nothing
+                End Try
+                If dv Is Nothing Then Continue For
+
+                Dim dvName As String = SafeToString(CallByNameSafe(dv, "Name"))
+                Dim dvType As String = SafeToString(CallByNameSafe(dv, "DrawingViewType"))
+                Dim dvOri As String = SafeToString(CallByNameSafe(dv, "ViewOrientation"))
+                Dim dvScale As String = SafeToString(CallByNameSafe(dv, "ScaleFactor"))
+                Dim dvRange As String = TryGetViewRangeString(dv)
+                Dim nLines As Integer = SafeCount(CallByNameSafe(dv, "DVLines2d"))
+                Dim nArcs As Integer = SafeCount(CallByNameSafe(dv, "DVArcs2d"))
+                Dim nCircles As Integer = SafeCount(CallByNameSafe(dv, "DVCircles2d"))
+                Dim nSplines As Integer = SafeCount(CallByNameSafe(dv, "DVBSplineCurves2d"))
+                Dim nLineStrings As Integer = SafeCount(CallByNameSafe(dv, "DVLineStrings2d"))
+                Dim nPoints As Integer = SafeCount(CallByNameSafe(dv, "DVPoints2d"))
+
+                totalDvLines += nLines
+                totalDvArcs += nArcs
+                totalDvCircles += nCircles
+                totalDvSplines += nSplines
+                totalDvLineStrings += nLineStrings
+                totalDvPoints += nPoints
+
+                sb.AppendLine(String.Format(CultureInfo.InvariantCulture,
+                    "  [VIEW] idx={0} name={1} type={2} orientation={3} scaleFactor={4} range={5} lines={6} arcs={7} circles={8} splines={9} linestrings={10} points={11}",
+                    v, dvName, dvType, dvOri, dvScale, dvRange, nLines, nArcs, nCircles, nSplines, nLineStrings, nPoints))
+            Next
+        Next
+
+        Try
+            Dim dftObj As Object = dft
+            SolidEdgePropertyService.AppendPropertySetsAuditToStringBuilder(dftObj, sb)
+            SolidEdgePropertyService.AppendTitleBlockSourcesAuditToStringBuilder(dftObj, sb)
+        Catch ex As Exception
+            sb.AppendLine("")
+            sb.AppendLine("[DOC_PROPERTIES_TITLEBLOCK][ERR] " & ex.Message)
+        End Try
+
+        sb.AppendLine("")
+        sb.AppendLine("=== SUMMARY ===")
+        sb.AppendLine("TotalSheets=" & totalSheets.ToString(CultureInfo.InvariantCulture))
+        sb.AppendLine("TotalViews=" & totalViews.ToString(CultureInfo.InvariantCulture))
+        sb.AppendLine("TotalDimensions=" & totalDims.ToString(CultureInfo.InvariantCulture))
+        sb.AppendLine("TotalDVLines2d=" & totalDvLines.ToString(CultureInfo.InvariantCulture))
+        sb.AppendLine("TotalDVArcs2d=" & totalDvArcs.ToString(CultureInfo.InvariantCulture))
+        sb.AppendLine("TotalDVCircles2d=" & totalDvCircles.ToString(CultureInfo.InvariantCulture))
+        sb.AppendLine("TotalDVBSplineCurves2d=" & totalDvSplines.ToString(CultureInfo.InvariantCulture))
+        sb.AppendLine("TotalDVLineStrings2d=" & totalDvLineStrings.ToString(CultureInfo.InvariantCulture))
+        sb.AppendLine("TotalDVPoints2d=" & totalDvPoints.ToString(CultureInfo.InvariantCulture))
+        sb.AppendLine("TotalDraftTables=" & totalDraftTables.ToString(CultureInfo.InvariantCulture))
+        sb.AppendLine("TotalPartsLists=" & totalPartsLists.ToString(CultureInfo.InvariantCulture))
+        sb.AppendLine("TotalLines2d=" & totalLines2d.ToString(CultureInfo.InvariantCulture))
+        sb.AppendLine("TotalArcs2d=" & totalArcs2d.ToString(CultureInfo.InvariantCulture))
+        sb.AppendLine("TotalCircles2d=" & totalCircles2d.ToString(CultureInfo.InvariantCulture))
+        sb.AppendLine("TotalLineStrings2d=" & totalLineStrings2d.ToString(CultureInfo.InvariantCulture))
+        sb.AppendLine("TotalBSplineCurves2d=" & totalBsplines2d.ToString(CultureInfo.InvariantCulture))
+        sb.AppendLine("TotalPoints2d=" & totalPoints2d.ToString(CultureInfo.InvariantCulture))
+        sb.AppendLine("TotalDropLabGeometry=" & totalDropLabGeometry.ToString(CultureInfo.InvariantCulture))
+        sb.AppendLine("TotalDropLabDimensions=" & totalDropLabDimensions.ToString(CultureInfo.InvariantCulture))
+
+        Return sb
+    End Function
+
+    Private Shared Function TryGetViewRangeString(dv As DrawingView) As String
+        If dv Is Nothing Then Return ""
+        Try
+            Dim x1 As Double = 0R, y1 As Double = 0R, x2 As Double = 0R, y2 As Double = 0R
+            dv.Range(x1, y1, x2, y2)
+            Return String.Format(CultureInfo.InvariantCulture,
+                "({0:0.######},{1:0.######})-({2:0.######},{3:0.######})",
+                x1, y1, x2, y2)
+        Catch
+            Return ""
+        End Try
+    End Function
+
     Public Shared Function AnalyzeDft(dftPath As String, logger As Logger, keepSolidEdgeVisible As Boolean, outputFolder As String) As Boolean
         If String.IsNullOrWhiteSpace(dftPath) OrElse Not File.Exists(dftPath) Then
             logger?.Log("[DFT][AUDIT][ERR] Ruta DFT inválida.")
@@ -21,7 +229,6 @@ Public NotInheritable Class DftAuditService
         Dim app As Application = Nothing
         Dim createdApp As Boolean = False
         Dim dft As DraftDocument = Nothing
-        Dim sb As New StringBuilder()
 
         Try
             OleMessageFilter.Register()
@@ -37,151 +244,24 @@ Public NotInheritable Class DftAuditService
                 Return False
             End If
 
-            sb.AppendLine("=== DFT AUDIT ===")
-            sb.AppendLine("File=" & dftPath)
-            sb.AppendLine("GeneratedUtc=" & DateTime.UtcNow.ToString("o", CultureInfo.InvariantCulture))
-            sb.AppendLine("Name=" & SafeToString(CallByNameSafe(dft, "Name")))
-            sb.AppendLine("FullName=" & SafeToString(CallByNameSafe(dft, "FullName")))
+            Dim sb As StringBuilder = BuildAuditReport(dft)
 
-            Dim sheets As Sheets = dft.Sheets
-            Dim totalSheets As Integer = SafeCount(sheets)
-            Dim totalViews As Integer = 0
-            Dim totalDims As Integer = 0
-            Dim totalDvLines As Integer = 0
-            Dim totalDvArcs As Integer = 0
-            Dim totalDvCircles As Integer = 0
-            Dim totalDvSplines As Integer = 0
-            Dim totalDvLineStrings As Integer = 0
-            Dim totalDvPoints As Integer = 0
-            Dim totalDraftTables As Integer = 0
-            Dim totalPartsLists As Integer = 0
-            Dim totalLines2d As Integer = 0
-            Dim totalArcs2d As Integer = 0
-            Dim totalCircles2d As Integer = 0
-            Dim totalLineStrings2d As Integer = 0
-            Dim totalBsplines2d As Integer = 0
-            Dim totalPoints2d As Integer = 0
-            Dim totalDropLabGeometry As Integer = 0
-            Dim totalDropLabDimensions As Integer = 0
+            Dim logsRoot As String = DiagnosticsLogPaths.GetRepositoryDocsLogsDirectory()
+            Directory.CreateDirectory(logsRoot)
+            Dim tsSnap As String = DateTime.Now.ToString("yyyyMMdd_HHmmss", CultureInfo.InvariantCulture)
+            Dim safeBase As String = RunDiagnosticsContext.SanitizeBaseName(Path.GetFileNameWithoutExtension(dftPath))
 
-            sb.AppendLine("Sheets=" & totalSheets.ToString(CultureInfo.InvariantCulture))
+            Dim auditLog As String = Path.Combine(logsRoot, "audit_" & safeBase & "_" & tsSnap & ".txt")
+            File.WriteAllText(auditLog, sb.ToString(), Encoding.UTF8)
+            logger?.Log("[DFT][AUDIT][OK] docs\logs (obligatorio): " & auditLog)
 
-            totalDraftTables = AppendDraftDocumentTablesSection(sb, dft)
-            totalPartsLists = AppendDraftDocumentPartsListsSection(sb, dft)
-
-            For i As Integer = 1 To totalSheets
-                Dim sh As Sheet = Nothing
-                Try
-                    sh = CType(sheets.Item(i), Sheet)
-                Catch
-                    sh = Nothing
-                End Try
-                If sh Is Nothing Then Continue For
-
-                Dim shName As String = SafeToString(CallByNameSafe(sh, "Name"))
-                Dim dimsObj As Object = CallByNameSafe(sh, "Dimensions")
-                Dim dimsCount As Integer = SafeCount(dimsObj)
-                Dim views As DrawingViews = Nothing
-                Try
-                    views = sh.DrawingViews
-                Catch
-                    views = Nothing
-                End Try
-                Dim viewCount As Integer = SafeCount(views)
-                Dim lines2dObj As Object = CallByNameSafe(sh, "Lines2d")
-                Dim arcs2dObj As Object = CallByNameSafe(sh, "Arcs2d")
-                Dim circles2dObj As Object = CallByNameSafe(sh, "Circles2d")
-                Dim lineStrings2dObj As Object = CallByNameSafe(sh, "LineStrings2d")
-                Dim bsplines2dObj As Object = CallByNameSafe(sh, "BSplineCurves2d")
-                Dim points2dObj As Object = CallByNameSafe(sh, "Points2d")
-                Dim lines2dCount As Integer = SafeCount(lines2dObj)
-                Dim arcs2dCount As Integer = SafeCount(arcs2dObj)
-                Dim circles2dCount As Integer = SafeCount(circles2dObj)
-                Dim lineStrings2dCount As Integer = SafeCount(lineStrings2dObj)
-                Dim bsplines2dCount As Integer = SafeCount(bsplines2dObj)
-                Dim points2dCount As Integer = SafeCount(points2dObj)
-                Dim dropLabGeomCount As Integer = CountByLayer(lines2dObj, "DROP_LAB_GEOMETRY") +
-                                                   CountByLayer(arcs2dObj, "DROP_LAB_GEOMETRY") +
-                                                   CountByLayer(circles2dObj, "DROP_LAB_GEOMETRY") +
-                                                   CountByLayer(lineStrings2dObj, "DROP_LAB_GEOMETRY") +
-                                                   CountByLayer(bsplines2dObj, "DROP_LAB_GEOMETRY") +
-                                                   CountByLayer(points2dObj, "DROP_LAB_GEOMETRY")
-                Dim dropLabDimCount As Integer = CountByLayer(dimsObj, "DROP_LAB_DIMENSIONS")
-
-                totalDims += dimsCount
-                totalViews += viewCount
-                totalLines2d += lines2dCount
-                totalArcs2d += arcs2dCount
-                totalCircles2d += circles2dCount
-                totalLineStrings2d += lineStrings2dCount
-                totalBsplines2d += bsplines2dCount
-                totalPoints2d += points2dCount
-                totalDropLabGeometry += dropLabGeomCount
-                totalDropLabDimensions += dropLabDimCount
-
-                sb.AppendLine("")
-                sb.AppendLine(String.Format(CultureInfo.InvariantCulture, "[SHEET] idx={0} name={1} views={2} dimensions={3}", i, shName, viewCount, dimsCount))
-                sb.AppendLine(String.Format(CultureInfo.InvariantCulture,
-                    "  [SHEET][2D] lines2d={0} arcs2d={1} circles2d={2} linestrings2d={3} bsplines2d={4} points2d={5}",
-                    lines2dCount, arcs2dCount, circles2dCount, lineStrings2dCount, bsplines2dCount, points2dCount))
-                sb.AppendLine(String.Format(CultureInfo.InvariantCulture,
-                    "  [SHEET][DROP_LAB] geometry={0} dimensions={1}",
-                    dropLabGeomCount, dropLabDimCount))
-                AppendDimensionDetails(sb, dimsObj)
-
-                For v As Integer = 1 To viewCount
-                    Dim dv As DrawingView = Nothing
-                    Try
-                        dv = CType(views.Item(v), DrawingView)
-                    Catch
-                        dv = Nothing
-                    End Try
-                    If dv Is Nothing Then Continue For
-
-                    Dim dvName As String = SafeToString(CallByNameSafe(dv, "Name"))
-                    Dim dvType As String = SafeToString(CallByNameSafe(dv, "DrawingViewType"))
-                    Dim dvOri As String = SafeToString(CallByNameSafe(dv, "ViewOrientation"))
-                    Dim nLines As Integer = SafeCount(CallByNameSafe(dv, "DVLines2d"))
-                    Dim nArcs As Integer = SafeCount(CallByNameSafe(dv, "DVArcs2d"))
-                    Dim nCircles As Integer = SafeCount(CallByNameSafe(dv, "DVCircles2d"))
-                    Dim nSplines As Integer = SafeCount(CallByNameSafe(dv, "DVBSplineCurves2d"))
-                    Dim nLineStrings As Integer = SafeCount(CallByNameSafe(dv, "DVLineStrings2d"))
-                    Dim nPoints As Integer = SafeCount(CallByNameSafe(dv, "DVPoints2d"))
-
-                    totalDvLines += nLines
-                    totalDvArcs += nArcs
-                    totalDvCircles += nCircles
-                    totalDvSplines += nSplines
-                    totalDvLineStrings += nLineStrings
-                    totalDvPoints += nPoints
-
-                    sb.AppendLine(String.Format(CultureInfo.InvariantCulture,
-                        "  [VIEW] idx={0} name={1} type={2} orientation={3} lines={4} arcs={5} circles={6} splines={7} linestrings={8} points={9}",
-                        v, dvName, dvType, dvOri, nLines, nArcs, nCircles, nSplines, nLineStrings, nPoints))
-                Next
-            Next
-
-            sb.AppendLine("")
-            sb.AppendLine("=== SUMMARY ===")
-            sb.AppendLine("TotalSheets=" & totalSheets.ToString(CultureInfo.InvariantCulture))
-            sb.AppendLine("TotalViews=" & totalViews.ToString(CultureInfo.InvariantCulture))
-            sb.AppendLine("TotalDimensions=" & totalDims.ToString(CultureInfo.InvariantCulture))
-            sb.AppendLine("TotalDVLines2d=" & totalDvLines.ToString(CultureInfo.InvariantCulture))
-            sb.AppendLine("TotalDVArcs2d=" & totalDvArcs.ToString(CultureInfo.InvariantCulture))
-            sb.AppendLine("TotalDVCircles2d=" & totalDvCircles.ToString(CultureInfo.InvariantCulture))
-            sb.AppendLine("TotalDVBSplineCurves2d=" & totalDvSplines.ToString(CultureInfo.InvariantCulture))
-            sb.AppendLine("TotalDVLineStrings2d=" & totalDvLineStrings.ToString(CultureInfo.InvariantCulture))
-            sb.AppendLine("TotalDVPoints2d=" & totalDvPoints.ToString(CultureInfo.InvariantCulture))
-            sb.AppendLine("TotalDraftTables=" & totalDraftTables.ToString(CultureInfo.InvariantCulture))
-            sb.AppendLine("TotalPartsLists=" & totalPartsLists.ToString(CultureInfo.InvariantCulture))
-            sb.AppendLine("TotalLines2d=" & totalLines2d.ToString(CultureInfo.InvariantCulture))
-            sb.AppendLine("TotalArcs2d=" & totalArcs2d.ToString(CultureInfo.InvariantCulture))
-            sb.AppendLine("TotalCircles2d=" & totalCircles2d.ToString(CultureInfo.InvariantCulture))
-            sb.AppendLine("TotalLineStrings2d=" & totalLineStrings2d.ToString(CultureInfo.InvariantCulture))
-            sb.AppendLine("TotalBSplineCurves2d=" & totalBsplines2d.ToString(CultureInfo.InvariantCulture))
-            sb.AppendLine("TotalPoints2d=" & totalPoints2d.ToString(CultureInfo.InvariantCulture))
-            sb.AppendLine("TotalDropLabGeometry=" & totalDropLabGeometry.ToString(CultureInfo.InvariantCulture))
-            sb.AppendLine("TotalDropLabDimensions=" & totalDropLabDimensions.ToString(CultureInfo.InvariantCulture))
+            Try
+                Dim geomLog As String = Path.Combine(logsRoot, "geometry_" & safeBase & "_" & tsSnap & ".txt")
+                DraftGeometryReporter.ExportDraftGeometryLog(dft, geomLog, logger)
+                logger?.Log("[DFT][GEOM][OK] docs\logs (obligatorio): " & geomLog)
+            Catch exGeom As Exception
+                logger?.LogException("DraftGeometryReporter.ExportDraftGeometryLog (AnalyzeDft)", exGeom)
+            End Try
 
             Dim outRoot As String = If(String.IsNullOrWhiteSpace(outputFolder), Path.GetDirectoryName(dftPath), outputFolder)
             Dim outDir As String = Path.Combine(outRoot, "DFT_INSPECT")
@@ -189,7 +269,7 @@ Public NotInheritable Class DftAuditService
             Dim outFile As String = Path.Combine(outDir, Path.GetFileNameWithoutExtension(dftPath) & "_AUDIT.txt")
             File.WriteAllText(outFile, sb.ToString(), Encoding.UTF8)
 
-            logger?.Log("[DFT][AUDIT][OK] Informe generado: " & outFile)
+            logger?.Log("[DFT][AUDIT][OK] Copia histórica DFT_INSPECT: " & outFile)
             Return True
         Catch ex As Exception
             logger?.LogException("DftAuditService.AnalyzeDft", ex)
@@ -381,9 +461,55 @@ Public NotInheritable Class DftAuditService
 
             AppendPartsListSettingsLine(sb, pl, pi)
             AppendPartsListCellPeek(sb, pl, pi, nRows, nCols)
+            AppendPartsListColumnDefinitions(sb, pl, pi)
         Next
         Return n
     End Function
+
+    ''' <summary>Intenta enumerar columnas BOM y miembros COM útiles (fórmula / propiedad) según revisión instalada.</summary>
+    Private Shared Sub AppendPartsListColumnDefinitions(sb As StringBuilder, pl As Object, partsListIdx As Integer)
+        If sb Is Nothing OrElse pl Is Nothing Then Return
+        Dim colsObj As Object = Nothing
+        Try : colsObj = CallByName(pl, "Columns", CallType.Get) : Catch : End Try
+        If colsObj Is Nothing Then
+            sb.AppendLine(String.Format(CultureInfo.InvariantCulture,
+                "    [PARTSLIST][COLUMNS] idx={0} (colección Columns no disponible en esta API/interop)",
+                partsListIdx))
+            Return
+        End If
+        Dim nCols As Integer = SafeCount(colsObj)
+        sb.AppendLine(String.Format(CultureInfo.InvariantCulture,
+            "    [PARTSLIST][COLUMNS] idx={0} count={1}",
+            partsListIdx, nCols))
+        Dim memberNames As String() = {
+            "Name", "DisplayName", "Title", "Header", "HeaderText", "ColumnHeader", "Heading",
+            "PropertyName", "Property", "Formula", "Expression", "Definition", "FieldName",
+            "Width", "Visible", "ColumnType"
+        }
+        For ci As Integer = 1 To nCols
+            Dim col As Object = Nothing
+            Try : col = CallByName(colsObj, "Item", CallType.Method, ci) : Catch : End Try
+            If col Is Nothing Then Continue For
+            Dim parts As New List(Of String)()
+            Dim comType As String = ""
+            Try : comType = TypeName(col) : Catch : comType = "" : End Try
+            parts.Add("comType=" & TruncateOneLine(comType, 40))
+            For Each mn In memberNames
+                Dim raw As String = ""
+                Try
+                    Dim v As Object = CallByName(col, mn, CallType.Get)
+                    If v IsNot Nothing Then raw = v.ToString()
+                Catch
+                    raw = ""
+                End Try
+                raw = If(raw, "").Replace(vbCr, " ").Replace(vbLf, " ")
+                If Not String.IsNullOrWhiteSpace(raw) Then parts.Add(mn & "=" & TruncateOneLine(raw, 140))
+            Next
+            sb.AppendLine(String.Format(CultureInfo.InvariantCulture,
+                "      [PARTSLIST][COL] listIdx={0} colIdx={1} {2}",
+                partsListIdx, ci, String.Join(" | ", parts)))
+        Next
+    End Sub
 
     Private Shared Function TryModelLinkAuditHint(pl As Object) As String
         If pl Is Nothing Then Return ""
@@ -446,7 +572,7 @@ Public NotInheritable Class DftAuditService
     Private Shared Sub AppendPartsListCellPeek(sb As StringBuilder, pl As Object, partsListIdx As Integer, nRows As Integer, nCols As Integer)
         If sb Is Nothing OrElse pl Is Nothing Then Return
         Dim maxRows As Integer = Math.Min(Math.Max(nRows, 0), 4)
-        Dim maxCols As Integer = Math.Min(Math.Max(nCols, 0), 8)
+        Dim maxCols As Integer = Math.Min(Math.Max(nCols, 0), 16)
         If maxRows <= 0 OrElse maxCols <= 0 Then Return
 
         For r As Integer = 1 To maxRows
@@ -573,7 +699,8 @@ Public NotInheritable Class DftAuditService
                 End Try
                 Dim parentName As String = ""
                 Try
-                    parentName = SafeToString(CallByNameSafe(CallByNameSafe(dimObj, "Parent"), "Name"))
+                    Dim par As Object = CallByNameSafe(dimObj, "Parent")
+                    If par IsNot Nothing Then parentName = SafeToString(CallByNameSafe(par, "Name"))
                 Catch
                     parentName = ""
                 End Try
@@ -593,6 +720,7 @@ Public NotInheritable Class DftAuditService
     End Sub
 
     Private Shared Function CallByNameSafe(obj As Object, member As String) As Object
+        If obj Is Nothing OrElse String.IsNullOrWhiteSpace(member) Then Return Nothing
         Try
             Return CallByName(obj, member, CallType.Get)
         Catch

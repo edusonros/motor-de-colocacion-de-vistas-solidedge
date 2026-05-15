@@ -5,6 +5,7 @@ Imports System.Collections.Generic
 Imports System.Globalization
 Imports System.IO
 Imports System.Linq
+Imports System.Runtime.InteropServices
 Imports SolidEdgeDraft
 
 ''' <summary>Colocación de PartsList nativa en la parte superior (convención usuario: margen desde esquina superior izquierda útil; COM Solid Edge: origen hoja inferior izquierda, Y hacia arriba).</summary>
@@ -424,83 +425,62 @@ Public NotInheritable Class PartsListSuperiorService
         RunPartsListTemplateRefcheck(pl, config, log)
     End Sub
 
+    ''' <remarks>
+    ''' Firma oficial (SDK HTML: SolidEdgeDraft~PartsList~GetListOfSavedSettings):
+    ''' ByRef NumSavedSettings As Long, ByRef ListOfSavedSettings() As String.
+    ''' El ejemplo del SDK dimensiona el array (p. ej. <c>Dim ListOfSavedSettings(10) As String</c>) antes de la llamada;
+    ''' pasar <c>Nothing</c> en el ByRef array provoca <see cref="NullReferenceException"/> en el marshalling COM.
+    ''' Se intenta primero <c>Integer</c> para el contador (ejemplo SDK VB) y luego <c>Long</c> (firma HTML), siempre con buffer preasignado.
+    ''' </remarks>
     Private Shared Sub LogGetListOfSavedSettingsAllVariants(pl As Object, config As DimensioningNormConfig, log As Action(Of String))
         If pl Is Nothing OrElse config Is Nothing Then Return
         If GenerationEngineRuntime.ProductionMode AndAlso Not GenerationEngineRuntime.DebugDiagnosticsMode Then Return
         Dim marker = If(config.PartsListSavedSettingsName, "PART_LIST").Trim()
         If String.IsNullOrWhiteSpace(marker) Then marker = "PART_LIST"
 
-        Dim foundAny As Boolean = False
+        Dim pList = TryCast(pl, PartsList)
+        If pList Is Nothing Then
+            log?.Invoke("[PARTSLIST][SETTINGS][SKIP] PartsList=CType falló (GetListOfSavedSettings sólo conforme SDK en PartsList tipado)")
+            Return
+        End If
 
-        log?.Invoke("[PARTSLIST][SETTINGS][TRY_A]")
+        Const settingsBufferUpperBound As Integer = 127
+        Dim cntI As Integer = 0
+        Dim arrStr(settingsBufferUpperBound) As String
         Try
-            Dim cntA As Long = 0
-            Dim arrA As String() = Nothing
-            pl.GetListOfSavedSettings(cntA, arrA)
-            log?.Invoke("[PARTSLIST][SETTINGS][COUNT] try=A count=" & cntA.ToString(CultureInfo.InvariantCulture))
-            If LogSavedSettingsArrayItems(arrA, marker, log) Then foundAny = True
-        Catch ex As Exception
-            log?.Invoke("[PARTSLIST][SETTINGS][TRY_A][ERR] " & ex.Message)
+            log?.Invoke("[PARTSLIST][SETTINGS][CALL] GetListOfSavedSettings ByRef(Int32,count) ByRef(String(0.." & settingsBufferUpperBound.ToString(CultureInfo.InvariantCulture) & ")) buffer (SDK: no Nothing)")
+            pList.GetListOfSavedSettings(cntI, arrStr)
+            log?.Invoke("[PARTSLIST][SETTINGS][COUNT] count=" & cntI.ToString(CultureInfo.InvariantCulture))
+            Dim foundAny = LogSavedSettingsArrayItems(arrStr, marker, log)
+            log?.Invoke("[PARTSLIST][SETTINGS][FOUND_PART_LIST] " & foundAny.ToString(CultureInfo.InvariantCulture))
+            Return
+        Catch exI As Exception
+            Dim hrI As String = ""
+            Dim cxi = TryCast(exI, COMException)
+            If cxi IsNot Nothing Then hrI = " HRESULT=0x" & cxi.ErrorCode.ToString("X8", CultureInfo.InvariantCulture)
+            log?.Invoke("[PARTSLIST][SETTINGS][WARN] Integer/count falló (" & exI.Message & ")" & hrI & " → reintento Long (SDK HTML: As Long)")
         End Try
 
-        log?.Invoke("[PARTSLIST][SETTINGS][TRY_B]")
+        Dim cntL As Long = 0
+        Dim arrL(settingsBufferUpperBound) As String
         Try
-            Dim cntB As Object = CLng(0)
-            Dim arrB As Object = Nothing
-            CallByName(pl, "GetListOfSavedSettings", CallType.Method, cntB, arrB)
-            Dim cLong As Long = Convert.ToInt64(cntB, CultureInfo.InvariantCulture)
-            log?.Invoke("[PARTSLIST][SETTINGS][COUNT] try=B count=" & cLong.ToString(CultureInfo.InvariantCulture))
-            If LogSavedSettingsObjectAsArray(arrB, marker, log) Then foundAny = True
-        Catch ex As Exception
-            log?.Invoke("[PARTSLIST][SETTINGS][TRY_B][ERR] " & ex.Message)
+            log?.Invoke("[PARTSLIST][SETTINGS][CALL] GetListOfSavedSettings ByRef(Long,count) ByRef(String(0.." & settingsBufferUpperBound.ToString(CultureInfo.InvariantCulture) & ")) buffer")
+            pList.GetListOfSavedSettings(cntL, arrL)
+            log?.Invoke("[PARTSLIST][SETTINGS][COUNT] count=" & cntL.ToString(CultureInfo.InvariantCulture))
+            Dim foundAnyL = LogSavedSettingsArrayItems(arrL, marker, log)
+            log?.Invoke("[PARTSLIST][SETTINGS][FOUND_PART_LIST] " & foundAnyL.ToString(CultureInfo.InvariantCulture))
+        Catch exL As Exception
+            Dim hr As String = ""
+            Dim cx = TryCast(exL, COMException)
+            If cx IsNot Nothing Then hr = " HRESULT=0x" & cx.ErrorCode.ToString("X8", CultureInfo.InvariantCulture)
+            log?.Invoke("[PARTSLIST][SETTINGS][ERR] GetListOfSavedSettings " & exL.Message & hr)
         End Try
-
-        log?.Invoke("[PARTSLIST][SETTINGS][TRY_C]")
-        Try
-            Dim cntC As Long = 0
-            Dim arrC(100) As String
-            pl.GetListOfSavedSettings(cntC, arrC)
-            log?.Invoke("[PARTSLIST][SETTINGS][COUNT] try=C count=" & cntC.ToString(CultureInfo.InvariantCulture))
-            If LogSavedSettingsFixedStringArray(arrC, cntC, marker, log) Then foundAny = True
-        Catch ex As Exception
-            log?.Invoke("[PARTSLIST][SETTINGS][TRY_C][ERR] " & ex.Message)
-        End Try
-
-        log?.Invoke("[PARTSLIST][SETTINGS][FOUND_PART_LIST] " & foundAny.ToString(CultureInfo.InvariantCulture))
     End Sub
 
     Private Shared Function LogSavedSettingsArrayItems(arr As String(), marker As String, log As Action(Of String)) As Boolean
         Dim found As Boolean = False
         If arr Is Nothing Then Return False
         For i As Integer = 0 To arr.Length - 1
-            Dim nm = If(arr(i), "").Trim()
-            If String.IsNullOrEmpty(nm) Then Continue For
-            log?.Invoke("[PARTSLIST][SETTINGS][ITEM] name=" & nm)
-            If String.Equals(nm, marker, StringComparison.OrdinalIgnoreCase) Then found = True
-        Next
-        Return found
-    End Function
-
-    Private Shared Function LogSavedSettingsObjectAsArray(arrObj As Object, marker As String, log As Action(Of String)) As Boolean
-        If arrObj Is Nothing Then Return False
-        Dim a = TryCast(arrObj, Array)
-        If a Is Nothing Then Return False
-        Dim found As Boolean = False
-        For Each o In a
-            Dim nm = Convert.ToString(o, CultureInfo.InvariantCulture).Trim()
-            If String.IsNullOrEmpty(nm) Then Continue For
-            log?.Invoke("[PARTSLIST][SETTINGS][ITEM] name=" & nm)
-            If String.Equals(nm, marker, StringComparison.OrdinalIgnoreCase) Then found = True
-        Next
-        Return found
-    End Function
-
-    Private Shared Function LogSavedSettingsFixedStringArray(arr As String(), count As Long, marker As String, log As Action(Of String)) As Boolean
-        If arr Is Nothing Then Return False
-        Dim n As Integer = CInt(Math.Min(count, arr.Length))
-        If n < 0 Then n = 0
-        Dim found As Boolean = False
-        For i As Integer = 0 To n - 1
             Dim nm = If(arr(i), "").Trim()
             If String.IsNullOrEmpty(nm) Then Continue For
             log?.Invoke("[PARTSLIST][SETTINGS][ITEM] name=" & nm)
@@ -632,6 +612,10 @@ Public NotInheritable Class PartsListSuperiorService
 
     Private Shared Sub LogAssemblyLinkAudit(pl As Object, modelPath As String, log As Action(Of String))
         If pl Is Nothing OrElse String.IsNullOrWhiteSpace(modelPath) Then Return
+        If String.Equals(Path.GetExtension(modelPath), ".dft", StringComparison.OrdinalIgnoreCase) Then
+            log?.Invoke("[PARTSLIST][REF][INFO] audit_skipped_reason=entrada_dft_no_es_ruta_modelo")
+            Return
+        End If
         Dim asm As String = SafeProp(pl, "AssemblyFileName")
         If String.IsNullOrWhiteSpace(asm) Then
             log?.Invoke("[PARTSLIST][REF][WARN] assembly_empty")

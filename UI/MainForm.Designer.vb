@@ -25,19 +25,41 @@ Partial Class MainForm
         Me.lblTitle = New Label()
         Me.lblSubTitle = New Label()
         Me.bodyHost = New TableLayoutPanel()
-        Me.threeColumnLayout = New TableLayoutPanel()
+        Me.twoColumnBodyLayout = New TableLayoutPanel()
+        Me.pnlSharedSidebar = New TableLayoutPanel()
+        Me.tabMotors = New TabControl()
+        Me.tabPageMotorViews = New TabPage()
+        Me.tabPageMotorMetadata = New TabPage()
+        Me.tabPageMotorDimensions = New TabPage()
+        Me.tblMetadataTabHost = New TableLayoutPanel()
+        Me.tblMetadataTabRightColumn = New TableLayoutPanel()
+        Me.tblMetadataPlanTwoCols = New TableLayoutPanel()
+        Me.tblDimensionTabHost = New TableLayoutPanel()
+        Me.tblDimensionTabRightColumn = New TableLayoutPanel()
+        Me.tblMotorTab1Host = New TableLayoutPanel()
+        Me.tblMotorTab1LeftColumn = New TableLayoutPanel()
+        Me.tblMotorTab1RightColumn = New TableLayoutPanel()
+        Me.tblMotorRightTemplatesFormat = New TableLayoutPanel()
+        Me.pnlMotorViewsAdvancedHost = New Panel()
+        Me.grpPdfPreview = New GroupBox()
+        Me.tblPdfPreviewInner = New TableLayoutPanel()
+        Me.flowPdfPreviewBar = New FlowLayoutPanel()
+        Me.btnRefreshPdfPreview = New Button()
+        Me.btnOpenLastPdfExternal = New Button()
+        Me.wbPdfPreview = New WebBrowser()
         Me.pnlGenerateBar = New Panel()
-        Me.rightLayout = New TableLayoutPanel()
+        Me.flowGenerateBar = New FlowLayoutPanel()
+        Me.btnMotorViews = New Button()
+        Me.btnMotorMetadata = New Button()
+        Me.btnMotorDimensioning = New Button()
+        Me.btnOpenVariableTable = New Button()
         Me.tblRightLogProgress = New TableLayoutPanel()
-        Me.topInputOptionsLayout = New TableLayoutPanel()
         Me.grpInput = New GroupBox()
         Me.grpAsmComponents = New GroupBox()
         Me.grpTemplates = New GroupBox()
         Me.grpTraceability = New GroupBox()
         Me.grpGeneration = New GroupBox()
         Me.grpAdvanced = New GroupBox()
-        Me.pnlHiddenLegacyGeneration = New Panel()
-        Me.pnlHiddenProcessing = New Panel()
         Me.grpProgress = New GroupBox()
         Me.grpLog = New GroupBox()
 
@@ -85,13 +107,24 @@ Partial Class MainForm
         Me.flowTraceButtons = New FlowLayoutPanel()
         Me.btnApplyTraceability = New Button()
 
-        Me.flowGeneration = New FlowLayoutPanel()
+        Me.tblGenerationTwoCols = New TableLayoutPanel()
+        Me.flowGenerationLeft = New FlowLayoutPanel()
+        Me.flowGenerationRight = New FlowLayoutPanel()
         Me.lblTitleBlockSource = New Label()
         Me.cmbTitleBlockSource = New ComboBox()
         Me.chkCreateDft = New CheckBox()
         Me.chkCreatePdf = New CheckBox()
         Me.chkCreateDxfDraft = New CheckBox()
         Me.chkAutoDimensioning = New CheckBox()
+        Me.pnlAutoDimensionMotorChoice = New FlowLayoutPanel()
+        Me.lblAutoDimensionMotor = New Label()
+        Me.radAutoDimMotorMain = New RadioButton()
+        Me.radAutoDimMotorLegacyV02 = New RadioButton()
+        Me.radAutoDimMotorAlternatePlugIn = New RadioButton()
+        Me.chkSesdkPostDimensionIntrospection = New CheckBox()
+        Me.chkPreferSweepAllDrawingDimensions = New CheckBox()
+        Me.chkSuppressDimTrackSpacing = New CheckBox()
+        Me.chkDedupDimensionsByKeypoints = New CheckBox()
         Me.chkUnitHorizontalExteriorTest = New CheckBox()
         Me.chkDrawingViewDimensioningLab = New CheckBox()
         Me.chkDimLabInteractivePause = New CheckBox()
@@ -161,10 +194,9 @@ Partial Class MainForm
         Me.mainLayout.ColumnCount = 1
         Me.mainLayout.ColumnStyles.Clear()
         Me.mainLayout.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 100.0!))
-        Me.mainLayout.RowCount = 3
+        Me.mainLayout.RowCount = 2
         Me.mainLayout.RowStyles.Clear()
         Me.mainLayout.RowStyles.Add(New RowStyle(SizeType.Absolute, 70.0!))
-        Me.mainLayout.RowStyles.Add(New RowStyle(SizeType.Absolute, 160.0!))
         Me.mainLayout.RowStyles.Add(New RowStyle(SizeType.Percent, 100.0!))
 
         Me.pnlHeader.Dock = DockStyle.Fill
@@ -188,34 +220,219 @@ Partial Class MainForm
         Me.bodyHost.RowCount = 2
         Me.bodyHost.RowStyles.Clear()
         Me.bodyHost.RowStyles.Add(New RowStyle(SizeType.Percent, 100.0!))
-        Me.bodyHost.RowStyles.Add(New RowStyle(SizeType.Absolute, 58.0!))
-        Me.bodyHost.Controls.Add(Me.threeColumnLayout, 0, 0)
+        Me.bodyHost.RowStyles.Add(New RowStyle(SizeType.Absolute, 74.0!))
+        Me.bodyHost.Controls.Add(Me.twoColumnBodyLayout, 0, 0)
         Me.bodyHost.Controls.Add(Me.pnlGenerateBar, 0, 1)
 
-        Me.threeColumnLayout.Dock = DockStyle.Fill
-        Me.threeColumnLayout.ColumnCount = 3
-        Me.threeColumnLayout.ColumnStyles.Clear()
-        Me.threeColumnLayout.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 40.0!))
-        Me.threeColumnLayout.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 30.0!))
-        Me.threeColumnLayout.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 30.0!))
-        Me.threeColumnLayout.RowCount = 1
-        Me.threeColumnLayout.RowStyles.Clear()
-        Me.threeColumnLayout.RowStyles.Add(New RowStyle(SizeType.Percent, 100.0!))
-        Me.threeColumnLayout.Controls.Add(Me.grpAsmComponents, 0, 0)
-        Me.threeColumnLayout.Controls.Add(Me.grpTraceability, 1, 0)
-        Me.threeColumnLayout.Controls.Add(Me.rightLayout, 2, 0)
+        Me.twoColumnBodyLayout.Dock = DockStyle.Fill
+        Me.twoColumnBodyLayout.ColumnCount = 2
+        Me.twoColumnBodyLayout.ColumnStyles.Clear()
+        Me.twoColumnBodyLayout.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 46.0!))
+        Me.twoColumnBodyLayout.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 54.0!))
+        Me.twoColumnBodyLayout.RowCount = 1
+        Me.twoColumnBodyLayout.RowStyles.Clear()
+        Me.twoColumnBodyLayout.RowStyles.Add(New RowStyle(SizeType.Percent, 100.0!))
+        Me.twoColumnBodyLayout.Margin = New Padding(0)
+        Me.twoColumnBodyLayout.Controls.Add(Me.tabMotors, 0, 0)
+        Me.twoColumnBodyLayout.Controls.Add(Me.pnlSharedSidebar, 1, 0)
+
+        Me.tabMotors.Dock = DockStyle.Fill
+        Me.tabMotors.Margin = New Padding(4, 4, 2, 4)
+        Me.tabPageMotorViews.Text = "Motor de vistas"
+        Me.tabPageMotorMetadata.Text = "Motor de metadatos"
+        Me.tabPageMotorDimensions.Text = "Motor de acotación"
+        Me.tabMotors.Controls.Add(Me.tabPageMotorViews)
+        Me.tabMotors.Controls.Add(Me.tabPageMotorMetadata)
+        Me.tabMotors.Controls.Add(Me.tabPageMotorDimensions)
+
+        Me.tblMotorTab1LeftColumn.Dock = DockStyle.Fill
+        Me.tblMotorTab1LeftColumn.Margin = New Padding(0, 0, 4, 0)
+        Me.tblMotorTab1LeftColumn.ColumnCount = 1
+        Me.tblMotorTab1LeftColumn.ColumnStyles.Clear()
+        Me.tblMotorTab1LeftColumn.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 100.0!))
+        Me.tblMotorTab1LeftColumn.RowCount = 3
+        Me.tblMotorTab1LeftColumn.RowStyles.Clear()
+        Me.tblMotorTab1LeftColumn.RowStyles.Add(New RowStyle(SizeType.Absolute, 148.0!))
+        Me.tblMotorTab1LeftColumn.RowStyles.Add(New RowStyle(SizeType.Percent, 50.0!))
+        Me.tblMotorTab1LeftColumn.RowStyles.Add(New RowStyle(SizeType.Percent, 50.0!))
+
+        Me.pnlMotorViewsAdvancedHost.Dock = DockStyle.Fill
+        Me.pnlMotorViewsAdvancedHost.Padding = New Padding(2, 0, 0, 0)
+        Me.pnlMotorViewsAdvancedHost.Margin = New Padding(0)
+
+        Me.grpPdfPreview.Dock = DockStyle.Fill
+        Me.grpPdfPreview.Text = "Vista previa del último PDF generado"
+        Me.grpPdfPreview.Padding = New Padding(6, 8, 6, 6)
+        Me.grpPdfPreview.Margin = New Padding(0, 4, 0, 0)
+        Me.tblPdfPreviewInner.Dock = DockStyle.Fill
+        Me.tblPdfPreviewInner.ColumnCount = 1
+        Me.tblPdfPreviewInner.ColumnStyles.Clear()
+        Me.tblPdfPreviewInner.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 100.0!))
+        Me.tblPdfPreviewInner.RowCount = 2
+        Me.tblPdfPreviewInner.RowStyles.Clear()
+        Me.tblPdfPreviewInner.RowStyles.Add(New RowStyle(SizeType.Absolute, 36.0!))
+        Me.tblPdfPreviewInner.RowStyles.Add(New RowStyle(SizeType.Percent, 100.0!))
+        Me.tblPdfPreviewInner.Margin = New Padding(0)
+        Me.flowPdfPreviewBar.Dock = DockStyle.Fill
+        Me.flowPdfPreviewBar.FlowDirection = FlowDirection.LeftToRight
+        Me.flowPdfPreviewBar.WrapContents = False
+        Me.btnRefreshPdfPreview.Text = "Actualizar vista previa"
+        Me.btnRefreshPdfPreview.AutoSize = True
+        Me.btnRefreshPdfPreview.Margin = New Padding(0, 4, 12, 4)
+        Me.btnOpenLastPdfExternal.Text = "Abrir PDF en el visor del sistema"
+        Me.btnOpenLastPdfExternal.AutoSize = True
+        Me.btnOpenLastPdfExternal.Margin = New Padding(0, 4, 0, 4)
+        Me.flowPdfPreviewBar.Controls.Add(Me.btnRefreshPdfPreview)
+        Me.flowPdfPreviewBar.Controls.Add(Me.btnOpenLastPdfExternal)
+        Me.wbPdfPreview.Dock = DockStyle.Fill
+        Me.wbPdfPreview.Margin = New Padding(0)
+        Me.wbPdfPreview.ScriptErrorsSuppressed = True
+        Me.tblPdfPreviewInner.Controls.Add(Me.flowPdfPreviewBar, 0, 0)
+        Me.tblPdfPreviewInner.Controls.Add(Me.wbPdfPreview, 0, 1)
+        Me.grpPdfPreview.Controls.Add(Me.tblPdfPreviewInner)
+
+        Me.tblMotorTab1LeftColumn.Controls.Add(Me.grpPdfPreview, 0, 2)
+
+        Me.tblMotorRightTemplatesFormat.Dock = DockStyle.Fill
+        Me.tblMotorRightTemplatesFormat.Margin = New Padding(0)
+        Me.tblMotorRightTemplatesFormat.ColumnCount = 2
+        Me.tblMotorRightTemplatesFormat.ColumnStyles.Clear()
+        Me.tblMotorRightTemplatesFormat.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 50.0!))
+        Me.tblMotorRightTemplatesFormat.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 50.0!))
+        Me.tblMotorRightTemplatesFormat.RowCount = 1
+        Me.tblMotorRightTemplatesFormat.RowStyles.Clear()
+        Me.tblMotorRightTemplatesFormat.RowStyles.Add(New RowStyle(SizeType.Percent, 100.0!))
+        Me.tblMotorRightTemplatesFormat.Controls.Add(Me.grpTemplates, 0, 0)
+        Me.tblMotorRightTemplatesFormat.Controls.Add(Me.pnlMotorViewsAdvancedHost, 1, 0)
+
+        Me.tblMotorTab1Host.Dock = DockStyle.Fill
+        Me.tblMotorTab1Host.Margin = New Padding(0)
+        Me.tblMotorTab1Host.ColumnCount = 2
+        Me.tblMotorTab1Host.ColumnStyles.Clear()
+        Me.tblMotorTab1Host.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 50.0!))
+        Me.tblMotorTab1Host.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 50.0!))
+        Me.tblMotorTab1Host.RowCount = 1
+        Me.tblMotorTab1Host.RowStyles.Clear()
+        Me.tblMotorTab1Host.RowStyles.Add(New RowStyle(SizeType.Percent, 100.0!))
+        Me.tblMotorTab1Host.Controls.Add(Me.tblMotorTab1LeftColumn, 0, 0)
+        Me.tblMotorTab1Host.Controls.Add(Me.tblMotorTab1RightColumn, 1, 0)
+
+        Me.tblMotorTab1RightColumn.Dock = DockStyle.Fill
+        Me.tblMotorTab1RightColumn.Margin = New Padding(4, 0, 0, 0)
+        Me.tblMotorTab1RightColumn.ColumnCount = 1
+        Me.tblMotorTab1RightColumn.ColumnStyles.Clear()
+        Me.tblMotorTab1RightColumn.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 100.0!))
+        Me.tblMotorTab1RightColumn.RowCount = 2
+        Me.tblMotorTab1RightColumn.RowStyles.Clear()
+        Me.tblMotorTab1RightColumn.RowStyles.Add(New RowStyle(SizeType.Absolute, 204.0!))
+        Me.tblMotorTab1RightColumn.RowStyles.Add(New RowStyle(SizeType.Percent, 100.0!))
+        Me.tblMotorTab1RightColumn.Controls.Add(Me.tblMotorRightTemplatesFormat, 0, 0)
+
+        Me.tabPageMotorViews.Controls.Add(Me.tblMotorTab1Host)
+
+        Me.tblMetadataTabHost.Dock = DockStyle.Fill
+        Me.tblMetadataTabHost.Margin = New Padding(0)
+        Me.tblMetadataTabHost.ColumnCount = 2
+        Me.tblMetadataTabHost.ColumnStyles.Clear()
+        Me.tblMetadataTabHost.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 50.0!))
+        Me.tblMetadataTabHost.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 50.0!))
+        Me.tblMetadataTabHost.RowCount = 1
+        Me.tblMetadataTabHost.RowStyles.Clear()
+        Me.tblMetadataTabHost.RowStyles.Add(New RowStyle(SizeType.Percent, 100.0!))
+
+        Me.tblMetadataTabRightColumn.Dock = DockStyle.Fill
+        Me.tblMetadataTabRightColumn.Margin = New Padding(4, 0, 0, 0)
+        Me.tblMetadataTabRightColumn.ColumnCount = 1
+        Me.tblMetadataTabRightColumn.ColumnStyles.Clear()
+        Me.tblMetadataTabRightColumn.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 100.0!))
+        Me.tblMetadataTabRightColumn.RowCount = 2
+        Me.tblMetadataTabRightColumn.RowStyles.Clear()
+        Me.tblMetadataTabRightColumn.RowStyles.Add(New RowStyle(SizeType.Percent, 36.0!))
+        Me.tblMetadataTabRightColumn.RowStyles.Add(New RowStyle(SizeType.Percent, 64.0!))
+
+        Me.tblMetadataPlanTwoCols.Dock = DockStyle.Fill
+        Me.tblMetadataPlanTwoCols.Margin = New Padding(0)
+        Me.tblMetadataPlanTwoCols.ColumnCount = 2
+        Me.tblMetadataPlanTwoCols.ColumnStyles.Clear()
+        Me.tblMetadataPlanTwoCols.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 50.0!))
+        Me.tblMetadataPlanTwoCols.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 50.0!))
+        Me.tblMetadataPlanTwoCols.RowCount = 1
+        Me.tblMetadataPlanTwoCols.RowStyles.Clear()
+        Me.tblMetadataPlanTwoCols.RowStyles.Add(New RowStyle(SizeType.Percent, 100.0!))
+        Me.tblMetadataTabRightColumn.Controls.Add(Me.tblMetadataPlanTwoCols, 0, 0)
+
+        Me.tblMetadataTabHost.Controls.Add(Me.tblMetadataTabRightColumn, 1, 0)
+        Me.tabPageMotorMetadata.Controls.Add(Me.tblMetadataTabHost)
+        Me.tabPageMotorMetadata.Controls.Add(Me.grpTraceability)
+        Me.grpTraceability.Visible = False
+
+        Me.tblDimensionTabHost.Dock = DockStyle.Fill
+        Me.tblDimensionTabHost.Margin = New Padding(0)
+        Me.tblDimensionTabHost.ColumnCount = 2
+        Me.tblDimensionTabHost.ColumnStyles.Clear()
+        Me.tblDimensionTabHost.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 50.0!))
+        Me.tblDimensionTabHost.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 50.0!))
+        Me.tblDimensionTabHost.RowCount = 1
+        Me.tblDimensionTabHost.RowStyles.Clear()
+        Me.tblDimensionTabHost.RowStyles.Add(New RowStyle(SizeType.Percent, 100.0!))
+
+        Me.tblDimensionTabRightColumn.Dock = DockStyle.Fill
+        Me.tblDimensionTabRightColumn.Margin = New Padding(4, 0, 0, 0)
+        Me.tblDimensionTabRightColumn.ColumnCount = 1
+        Me.tblDimensionTabRightColumn.ColumnStyles.Clear()
+        Me.tblDimensionTabRightColumn.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 100.0!))
+        Me.tblDimensionTabRightColumn.RowCount = 2
+        Me.tblDimensionTabRightColumn.RowStyles.Clear()
+        Me.tblDimensionTabRightColumn.RowStyles.Add(New RowStyle(SizeType.Percent, 36.0!))
+        Me.tblDimensionTabRightColumn.RowStyles.Add(New RowStyle(SizeType.Percent, 64.0!))
+        Me.grpGeneration.Dock = DockStyle.Fill
+        Me.tblDimensionTabRightColumn.Controls.Add(Me.grpGeneration, 0, 0)
+        Me.tblDimensionTabHost.Controls.Add(Me.tblDimensionTabRightColumn, 1, 0)
+        Me.tabPageMotorDimensions.Controls.Add(Me.tblDimensionTabHost)
+
+        Me.pnlSharedSidebar.Dock = DockStyle.Fill
+        Me.pnlSharedSidebar.ColumnCount = 1
+        Me.pnlSharedSidebar.ColumnStyles.Clear()
+        Me.pnlSharedSidebar.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 100.0!))
+        Me.pnlSharedSidebar.RowCount = 3
+        Me.pnlSharedSidebar.RowStyles.Clear()
+        Me.pnlSharedSidebar.RowStyles.Add(New RowStyle(SizeType.Absolute, 148.0!))
+        Me.pnlSharedSidebar.RowStyles.Add(New RowStyle(SizeType.Percent, 38.0!))
+        Me.pnlSharedSidebar.RowStyles.Add(New RowStyle(SizeType.Percent, 62.0!))
+        Me.pnlSharedSidebar.Margin = New Padding(0, 4, 6, 4)
+        Me.pnlSharedSidebar.Controls.Add(Me.grpInput, 0, 0)
+        Me.pnlSharedSidebar.Controls.Add(Me.grpAsmComponents, 0, 1)
+        Me.pnlSharedSidebar.Controls.Add(Me.tblRightLogProgress, 0, 2)
 
         Me.pnlGenerateBar.Dock = DockStyle.Fill
         Me.pnlGenerateBar.Padding = New Padding(8, 6, 8, 6)
-        Me.pnlGenerateBar.Controls.Add(Me.btnGenerate)
-
-        Me.rightLayout.Dock = DockStyle.Fill
-        Me.rightLayout.ColumnCount = 1
-        Me.rightLayout.ColumnStyles.Clear()
-        Me.rightLayout.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 100.0!))
-        Me.rightLayout.RowCount = 1
-        Me.rightLayout.RowStyles.Clear()
-        Me.rightLayout.RowStyles.Add(New RowStyle(SizeType.Percent, 100.0!))
+        Me.flowGenerateBar.Dock = DockStyle.Fill
+        Me.flowGenerateBar.FlowDirection = FlowDirection.LeftToRight
+        Me.flowGenerateBar.WrapContents = True
+        Me.flowGenerateBar.AutoScroll = True
+        Me.flowGenerateBar.Padding = New Padding(0, 2, 0, 2)
+        Me.btnMotorViews.Text = "Generador de vistas"
+        Me.btnMotorViews.AutoSize = True
+        Me.btnMotorViews.MinimumSize = New Size(160, 44)
+        Me.btnMotorViews.Margin = New Padding(0, 0, 8, 6)
+        Me.btnMotorMetadata.Text = "Gestor Metadatos DFT"
+        Me.btnMotorMetadata.AutoSize = True
+        Me.btnMotorMetadata.MinimumSize = New Size(180, 44)
+        Me.btnMotorMetadata.Margin = New Padding(0, 0, 8, 6)
+        Me.btnMotorDimensioning.Text = "Motor Acotación"
+        Me.btnMotorDimensioning.AutoSize = True
+        Me.btnMotorDimensioning.MinimumSize = New Size(150, 44)
+        Me.btnMotorDimensioning.Margin = New Padding(0, 0, 8, 6)
+        Me.btnOpenVariableTable.Text = "Tabla de variables (SE)"
+        Me.btnOpenVariableTable.AutoSize = True
+        Me.btnOpenVariableTable.MinimumSize = New Size(170, 44)
+        Me.btnOpenVariableTable.Margin = New Padding(0, 0, 8, 6)
+        Me.flowGenerateBar.Controls.Add(Me.btnMotorViews)
+        Me.flowGenerateBar.Controls.Add(Me.btnMotorMetadata)
+        Me.flowGenerateBar.Controls.Add(Me.btnMotorDimensioning)
+        Me.flowGenerateBar.Controls.Add(Me.btnOpenVariableTable)
+        Me.flowGenerateBar.Controls.Add(Me.btnGenerate)
+        Me.pnlGenerateBar.Controls.Add(Me.flowGenerateBar)
 
         Me.tblRightLogProgress.Dock = DockStyle.Fill
         Me.tblRightLogProgress.ColumnCount = 1
@@ -223,46 +440,32 @@ Partial Class MainForm
         Me.tblRightLogProgress.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 100.0!))
         Me.tblRightLogProgress.RowCount = 2
         Me.tblRightLogProgress.RowStyles.Clear()
-        Me.tblRightLogProgress.RowStyles.Add(New RowStyle(SizeType.Percent, 65.0!))
-        Me.tblRightLogProgress.RowStyles.Add(New RowStyle(SizeType.Percent, 35.0!))
+        Me.tblRightLogProgress.RowStyles.Add(New RowStyle(SizeType.Percent, 57.0!))
+        Me.tblRightLogProgress.RowStyles.Add(New RowStyle(SizeType.Percent, 43.0!))
         Me.tblRightLogProgress.Margin = New Padding(0)
         Me.tblRightLogProgress.Padding = New Padding(0)
         Me.tblRightLogProgress.Controls.Add(Me.grpLog, 0, 0)
         Me.tblRightLogProgress.Controls.Add(Me.grpProgress, 0, 1)
 
-        For Each gb In New GroupBox() {Me.grpInput, Me.grpAsmComponents, Me.grpTemplates, Me.grpTraceability, Me.grpGeneration, Me.grpAdvanced, Me.grpProgress, Me.grpLog}
+        For Each gb In New GroupBox() {Me.grpInput, Me.grpAsmComponents, Me.grpTemplates, Me.grpTraceability, Me.grpGeneration, Me.grpAdvanced, Me.grpProgress, Me.grpLog, Me.grpPdfPreview}
             gb.Dock = DockStyle.Fill
             gb.Font = New Font("Segoe UI", 9.0!)
             gb.Margin = New Padding(8)
         Next
         Me.grpGeneration.Margin = New Padding(4, 6, 2, 6)
         Me.grpTemplates.Margin = New Padding(2, 6, 4, 6)
-        Me.grpLog.Margin = New Padding(8, 2, 8, 4)
-        Me.grpProgress.Margin = New Padding(8, 2, 8, 8)
+        Me.grpInput.Margin = New Padding(4, 4, 6, 4)
+        Me.grpAsmComponents.Margin = New Padding(4, 4, 6, 4)
+        Me.grpLog.Margin = New Padding(4, 2, 6, 4)
+        Me.grpProgress.Margin = New Padding(4, 2, 6, 6)
         Me.grpInput.Text = "Archivo de entrada"
         Me.grpAsmComponents.Text = "Componentes detectados del ASM (marcar los que deseas procesar)"
         Me.grpTemplates.Text = "Templates"
         Me.grpTraceability.Text = "Metadatos (plano y pieza)"
         Me.grpGeneration.Text = "Opciones de generación"
         Me.grpAdvanced.Text = "Opciones de procesado"
-        Me.grpProgress.Text = "Progreso y estado"
+        Me.grpProgress.Text = "Progreso, estado y metadatos DFT"
         Me.grpLog.Text = "Log"
-
-        Me.rightLayout.Controls.Add(Me.tblRightLogProgress, 0, 0)
-
-        Me.topInputOptionsLayout.Dock = DockStyle.Fill
-        Me.topInputOptionsLayout.ColumnCount = 3
-        Me.topInputOptionsLayout.ColumnStyles.Clear()
-        Me.topInputOptionsLayout.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 78.0!))
-        Me.topInputOptionsLayout.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 11.0!))
-        Me.topInputOptionsLayout.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 11.0!))
-        Me.topInputOptionsLayout.RowCount = 1
-        Me.topInputOptionsLayout.RowStyles.Clear()
-        Me.topInputOptionsLayout.RowStyles.Add(New RowStyle(SizeType.Percent, 100.0!))
-        Me.topInputOptionsLayout.Margin = New Padding(0)
-        Me.topInputOptionsLayout.Controls.Add(Me.grpInput, 0, 0)
-        Me.topInputOptionsLayout.Controls.Add(Me.grpGeneration, 1, 0)
-        Me.topInputOptionsLayout.Controls.Add(Me.grpTemplates, 2, 0)
 
         Me.tblInput.Dock = DockStyle.Fill
         Me.tblInput.ColumnCount = 3
@@ -440,7 +643,7 @@ Partial Class MainForm
         Me.flowTraceButtons.FlowDirection = FlowDirection.RightToLeft
         Me.flowTraceButtons.WrapContents = False
         Me.flowTraceButtons.Padding = New Padding(0, 4, 0, 0)
-        Me.btnApplyTraceability.Text = "Aplicar propiedades al DFT"
+        Me.btnApplyTraceability.Text = "Aplicar cajetín + PART_LIST al DFT"
         Me.btnApplyTraceability.Size = New Size(220, 30)
         Me.flowTraceButtons.Controls.Add(Me.btnApplyTraceability)
         Me.tblTrace.Controls.Add(Me.flowTraceButtons, 0, 9)
@@ -448,59 +651,116 @@ Partial Class MainForm
 
         Me.grpTraceability.Controls.Add(Me.tblTrace)
 
-        Me.flowGeneration.Dock = DockStyle.Fill : Me.flowGeneration.Padding = New Padding(5)
+        Me.tblGenerationTwoCols.Dock = DockStyle.Fill
+        Me.tblGenerationTwoCols.Margin = New Padding(0)
+        Me.tblGenerationTwoCols.ColumnCount = 2
+        Me.tblGenerationTwoCols.ColumnStyles.Clear()
+        Me.tblGenerationTwoCols.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 50.0!))
+        Me.tblGenerationTwoCols.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 50.0!))
+        Me.tblGenerationTwoCols.RowCount = 1
+        Me.tblGenerationTwoCols.RowStyles.Clear()
+        Me.tblGenerationTwoCols.RowStyles.Add(New RowStyle(SizeType.Percent, 100.0!))
+        Me.flowGenerationLeft.Dock = DockStyle.Fill
+        Me.flowGenerationLeft.Padding = New Padding(5, 4, 4, 4)
+        Me.flowGenerationRight.Dock = DockStyle.Fill
+        Me.flowGenerationRight.Padding = New Padding(4, 4, 5, 4)
         Me.grpGeneration.Padding = New Padding(5, 8, 5, 5)
         Me.grpTemplates.Padding = New Padding(5, 8, 5, 5)
-        Me.flowGeneration.FlowDirection = FlowDirection.TopDown
-        Me.flowGeneration.WrapContents = False
-        Me.flowGeneration.AutoScroll = True
-        Me.lblTitleBlockSource.Text = "Origen propiedades cajetín"
-        Me.lblTitleBlockSource.AutoSize = True
-        Me.cmbTitleBlockSource.DropDownStyle = ComboBoxStyle.DropDownList
-        Me.cmbTitleBlockSource.Width = 220
-        Me.flowGeneration.Controls.Add(Me.lblTitleBlockSource)
-        Me.flowGeneration.Controls.Add(Me.cmbTitleBlockSource)
-        Me.flowGeneration.Controls.Add(Me.chkUnitHorizontalExteriorTest)
-        Me.chkDrawingViewDimensioningLab.AutoSize = True
-        Me.chkDrawingViewDimensioningLab.Text = ""
-        Me.chkDrawingViewDimensioningLab.Checked = False
-        Me.flowGeneration.Controls.Add(Me.chkDrawingViewDimensioningLab)
-        Me.chkDimLabInteractivePause.AutoSize = True
-        Me.chkDimLabInteractivePause.Text = ""
-        Me.chkDimLabInteractivePause.Checked = True
-        Me.flowGeneration.Controls.Add(Me.chkDimLabInteractivePause)
-        Me.lblDimLabMode.AutoSize = True
-        Me.lblDimLabMode.Text = ""
-        Me.flowGeneration.Controls.Add(Me.lblDimLabMode)
-        Me.cmbDimLabMode.DropDownStyle = ComboBoxStyle.DropDownList
-        Me.cmbDimLabMode.Width = 280
-        Me.cmbDimLabMode.Items.AddRange(New Object() {"HorizontalOnly", "VerticalOnly", "Full", "ForensicHorizontal", "CleanFull", "CleanFullStrict"})
-        Me.cmbDimLabMode.SelectedIndex = 2
-        Me.flowGeneration.Controls.Add(Me.cmbDimLabMode)
-        Me.chkDimLabVisibleProbe.AutoSize = True
-        Me.chkDimLabVisibleProbe.Text = ""
-        Me.chkDimLabVisibleProbe.Checked = False
-        Me.flowGeneration.Controls.Add(Me.chkDimLabVisibleProbe)
-        Me.chkDimLabAlternativePlacement.AutoSize = True
-        Me.chkDimLabAlternativePlacement.Text = ""
-        Me.chkDimLabAlternativePlacement.Checked = False
-        Me.flowGeneration.Controls.Add(Me.chkDimLabAlternativePlacement)
-        Me.btnDimLabRun.AutoSize = True
-        Me.btnDimLabRun.Text = ""
-        Me.btnDimLabRun.Margin = New Padding(0, 4, 0, 0)
-        Me.flowGeneration.Controls.Add(Me.btnDimLabRun)
+        Me.flowGenerationLeft.FlowDirection = FlowDirection.TopDown
+        Me.flowGenerationLeft.WrapContents = False
+        Me.flowGenerationLeft.AutoScroll = True
+        Me.flowGenerationRight.FlowDirection = FlowDirection.TopDown
+        Me.flowGenerationRight.WrapContents = False
+        Me.flowGenerationRight.AutoScroll = True
         Dim gc As CheckBox() = {Me.chkCreateDft, Me.chkCreatePdf, Me.chkCreateDxfDraft, Me.chkAutoDimensioning, Me.chkPmiRetrievalProbe, Me.chkExperimentalPmiModelView, Me.chkCreateFlatDxf, Me.chkOpenOutput, Me.chkOverwrite, Me.chkUniqueComponents, Me.chkDetailedLog, Me.chkDebugTemplates, Me.chkExperimentalDraftGeometryDiagnostics, Me.chkKeepSolidEdgeVisible, Me.chkInsertProperties}
         Dim gt As String() = {"Crear DFT", "Crear PDF", "Crear DXF del DFT", "Generar acotado automático", "Probar recuperación PMI en Draft (experimental)", "Experimental: crear PMIModelView si falta (sin guardar modelo)", "Crear DXF de chapa desarrollada", "Abrir carpeta de salida al finalizar", "Sobrescribir archivos existentes", "Procesar componentes repetidos solo una vez", "Registrar log detallado", "Diagnóstico: inspeccionar plantillas DFT (PropertySets, cajetín)", "Diagnóstico geométrico Draft (2D, vistas, motor acotado)", "Mantener visible Solid Edge durante el proceso", "Insertar propiedades en el cajetin del draft, si procede"}
         For i As Integer = 0 To gc.Length - 1
             gc(i).Text = gt(i) : gc(i).AutoSize = True
             If i <> 4 AndAlso i <> 5 AndAlso i <> 8 AndAlso i <> 11 AndAlso i <> 12 AndAlso i <> 14 Then gc(i).Checked = True
-            Me.pnlHiddenLegacyGeneration.Controls.Add(gc(i))
+            If i <= 7 Then
+                Me.flowGenerationLeft.Controls.Add(gc(i))
+            Else
+                Me.flowGenerationRight.Controls.Add(gc(i))
+            End If
         Next
-        Me.grpGeneration.Controls.Add(Me.flowGeneration)
-        Me.pnlHiddenLegacyGeneration.Visible = False
-        Me.pnlHiddenLegacyGeneration.Size = New Size(1, 1)
-        Me.pnlHiddenLegacyGeneration.Location = New Point(-8000, -8000)
-        Me.pnlHiddenLegacyGeneration.TabStop = False
+        Me.lblTitleBlockSource.Text = "Origen propiedades cajetín"
+        Me.lblTitleBlockSource.AutoSize = True
+        Me.cmbTitleBlockSource.DropDownStyle = ComboBoxStyle.DropDownList
+        Me.cmbTitleBlockSource.Width = 220
+        Me.flowGenerationLeft.Controls.Add(Me.lblTitleBlockSource)
+        Me.flowGenerationLeft.Controls.Add(Me.cmbTitleBlockSource)
+        Me.pnlAutoDimensionMotorChoice.FlowDirection = FlowDirection.TopDown
+        Me.pnlAutoDimensionMotorChoice.WrapContents = False
+        Me.pnlAutoDimensionMotorChoice.AutoSize = True
+        Me.pnlAutoDimensionMotorChoice.AutoSizeMode = AutoSizeMode.GrowAndShrink
+        Me.pnlAutoDimensionMotorChoice.Margin = New Padding(0, 2, 0, 0)
+        Me.lblAutoDimensionMotor.AutoSize = True
+        Me.lblAutoDimensionMotor.Margin = New Padding(0, 0, 0, 2)
+        Me.lblAutoDimensionMotor.Text = "Motor DV (solo uno activo):"
+        Me.radAutoDimMotorMain.AutoSize = True
+        Me.radAutoDimMotorMain.Text = "Principal (UniqueDv + UNE/ISO 129)"
+        Me.radAutoDimMotorMain.Checked = True
+        Me.radAutoDimMotorLegacyV02.AutoSize = True
+        Me.radAutoDimMotorLegacyV02.Text = "Copia V02 aislada (LegacyV02Dimensioning)"
+        Me.radAutoDimMotorAlternatePlugIn.AutoSize = True
+        Me.radAutoDimMotorAlternatePlugIn.Text = "Plugin alternativo (enganche propio, sin motor principal)"
+        Me.pnlAutoDimensionMotorChoice.Controls.Add(Me.lblAutoDimensionMotor)
+        Me.pnlAutoDimensionMotorChoice.Controls.Add(Me.radAutoDimMotorMain)
+        Me.pnlAutoDimensionMotorChoice.Controls.Add(Me.radAutoDimMotorLegacyV02)
+        Me.pnlAutoDimensionMotorChoice.Controls.Add(Me.radAutoDimMotorAlternatePlugIn)
+        Me.flowGenerationLeft.Controls.Add(Me.pnlAutoDimensionMotorChoice)
+        Me.chkSesdkPostDimensionIntrospection.AutoSize = True
+        Me.chkSesdkPostDimensionIntrospection.Text = "Tras acotado: volcar introspección SDK (DV + cotas, log [SESDK_PROBE])"
+        Me.chkSesdkPostDimensionIntrospection.Checked = False
+        Me.chkSesdkPostDimensionIntrospection.Margin = New Padding(18, 0, 0, 0)
+        Me.flowGenerationLeft.Controls.Add(Me.chkSesdkPostDimensionIntrospection)
+        Me.chkPreferSweepAllDrawingDimensions.AutoSize = True
+        Me.chkPreferSweepAllDrawingDimensions.Text = "Más cotas DV: barrer líneas, arcos y círculos (modo SweepAll; puede saturar el pliego)"
+        Me.chkPreferSweepAllDrawingDimensions.Checked = False
+        Me.chkPreferSweepAllDrawingDimensions.Margin = New Padding(18, 0, 0, 0)
+        Me.flowGenerationLeft.Controls.Add(Me.chkPreferSweepAllDrawingDimensions)
+        Me.chkSuppressDimTrackSpacing.AutoSize = True
+        Me.chkSuppressDimTrackSpacing.Text = "Prueba: sin espaciado TrackDistance (cotas pegadas a la pieza)"
+        Me.chkSuppressDimTrackSpacing.Checked = True
+        Me.chkSuppressDimTrackSpacing.Margin = New Padding(18, 0, 0, 0)
+        Me.flowGenerationLeft.Controls.Add(Me.chkSuppressDimTrackSpacing)
+        Me.chkDedupDimensionsByKeypoints.AutoSize = True
+        Me.chkDedupDimensionsByKeypoints.Text = "Quitar cotas duplicadas (mismo valor y keypoints)"
+        Me.chkDedupDimensionsByKeypoints.Checked = True
+        Me.chkDedupDimensionsByKeypoints.Margin = New Padding(18, 0, 0, 0)
+        Me.flowGenerationLeft.Controls.Add(Me.chkDedupDimensionsByKeypoints)
+        Me.flowGenerationLeft.Controls.Add(Me.chkUnitHorizontalExteriorTest)
+        Me.chkDrawingViewDimensioningLab.AutoSize = True
+        Me.chkDrawingViewDimensioningLab.Text = ""
+        Me.chkDrawingViewDimensioningLab.Checked = False
+        Me.flowGenerationRight.Controls.Add(Me.chkDrawingViewDimensioningLab)
+        Me.chkDimLabInteractivePause.AutoSize = True
+        Me.chkDimLabInteractivePause.Text = ""
+        Me.chkDimLabInteractivePause.Checked = True
+        Me.flowGenerationRight.Controls.Add(Me.chkDimLabInteractivePause)
+        Me.lblDimLabMode.AutoSize = True
+        Me.lblDimLabMode.Text = ""
+        Me.flowGenerationRight.Controls.Add(Me.lblDimLabMode)
+        Me.cmbDimLabMode.DropDownStyle = ComboBoxStyle.DropDownList
+        Me.cmbDimLabMode.Width = 280
+        Me.cmbDimLabMode.Items.AddRange(New Object() {"HorizontalOnly", "VerticalOnly", "Full", "ForensicHorizontal", "CleanFull", "CleanFullStrict"})
+        Me.cmbDimLabMode.SelectedIndex = 2
+        Me.flowGenerationRight.Controls.Add(Me.cmbDimLabMode)
+        Me.chkDimLabVisibleProbe.AutoSize = True
+        Me.chkDimLabVisibleProbe.Text = ""
+        Me.chkDimLabVisibleProbe.Checked = False
+        Me.flowGenerationRight.Controls.Add(Me.chkDimLabVisibleProbe)
+        Me.chkDimLabAlternativePlacement.AutoSize = True
+        Me.chkDimLabAlternativePlacement.Text = ""
+        Me.chkDimLabAlternativePlacement.Checked = False
+        Me.flowGenerationRight.Controls.Add(Me.chkDimLabAlternativePlacement)
+        Me.btnDimLabRun.AutoSize = True
+        Me.btnDimLabRun.Text = ""
+        Me.btnDimLabRun.Margin = New Padding(0, 4, 0, 0)
+        Me.flowGenerationRight.Controls.Add(Me.btnDimLabRun)
+        Me.tblGenerationTwoCols.Controls.Add(Me.flowGenerationLeft, 0, 0)
+        Me.tblGenerationTwoCols.Controls.Add(Me.flowGenerationRight, 1, 0)
+        Me.grpGeneration.Controls.Add(Me.tblGenerationTwoCols)
 
         Me.tblAdvanced.Dock = DockStyle.Fill
         Me.tblAdvanced.ColumnCount = 3
@@ -530,18 +790,15 @@ Partial Class MainForm
         Me.tblAdvanced.Controls.Add(Me.lblNotes, 0, 5)
         Me.tblAdvanced.Controls.Add(Me.txtNotes, 1, 5)
         Me.tblAdvanced.SetColumnSpan(Me.txtNotes, 2)
-        Me.pnlHiddenProcessing.Controls.Add(Me.tblAdvanced)
-        Me.pnlHiddenProcessing.Visible = False
-        Me.pnlHiddenProcessing.Size = New Size(1, 1)
-        Me.pnlHiddenProcessing.Location = New Point(-8000, -8000)
-        Me.pnlHiddenProcessing.TabStop = False
+        Me.pnlMotorViewsAdvancedHost.Controls.Add(Me.tblAdvanced)
         Me.grpAdvanced.Visible = False
         Me.grpAdvanced.Size = New Size(1, 1)
 
         Me.btnGenerate.Text = "GENERAR"
-        Me.btnGenerate.Dock = DockStyle.Fill
-        Me.btnGenerate.MinimumSize = New Size(280, 50)
+        Me.btnGenerate.AutoSize = True
+        Me.btnGenerate.MinimumSize = New Size(200, 50)
         Me.btnGenerate.Height = 50
+        Me.btnGenerate.Margin = New Padding(0, 0, 8, 6)
         Me.btnGenerate.Font = New Font("Segoe UI", 12.0!, FontStyle.Bold)
         Me.btnGenerate.BackColor = Color.FromArgb(39, 116, 57) : Me.btnGenerate.ForeColor = Color.White : Me.btnGenerate.FlatStyle = FlatStyle.Flat
         Me.btnGenerate.Margin = New Padding(0)
@@ -614,11 +871,8 @@ Partial Class MainForm
         Me.grpLog.Controls.Add(Me.tblLog)
 
         Me.mainLayout.Controls.Add(Me.pnlHeader, 0, 0)
-        Me.mainLayout.Controls.Add(Me.topInputOptionsLayout, 0, 1)
-        Me.mainLayout.Controls.Add(Me.bodyHost, 0, 2)
+        Me.mainLayout.Controls.Add(Me.bodyHost, 0, 1)
         Me.Controls.Add(Me.mainLayout)
-        Me.Controls.Add(Me.pnlHiddenLegacyGeneration)
-        Me.Controls.Add(Me.pnlHiddenProcessing)
 
         Me.AutoScaleMode = AutoScaleMode.Font
         Me.ClientSize = New Size(1400, 900)
@@ -636,19 +890,41 @@ Partial Class MainForm
     Friend WithEvents lblTitle As Label
     Friend WithEvents lblSubTitle As Label
     Friend WithEvents bodyHost As TableLayoutPanel
-    Friend WithEvents threeColumnLayout As TableLayoutPanel
+    Friend WithEvents twoColumnBodyLayout As TableLayoutPanel
+    Friend WithEvents pnlSharedSidebar As TableLayoutPanel
+    Friend WithEvents tabMotors As TabControl
+    Friend WithEvents tabPageMotorViews As TabPage
+    Friend WithEvents tabPageMotorMetadata As TabPage
+    Friend WithEvents tabPageMotorDimensions As TabPage
+    Friend WithEvents tblMetadataTabHost As TableLayoutPanel
+    Friend WithEvents tblMetadataTabRightColumn As TableLayoutPanel
+    Friend WithEvents tblMetadataPlanTwoCols As TableLayoutPanel
+    Friend WithEvents tblDimensionTabHost As TableLayoutPanel
+    Friend WithEvents tblDimensionTabRightColumn As TableLayoutPanel
+    Friend WithEvents tblMotorTab1Host As TableLayoutPanel
+    Friend WithEvents tblMotorTab1LeftColumn As TableLayoutPanel
+    Friend WithEvents tblMotorTab1RightColumn As TableLayoutPanel
+    Friend WithEvents tblMotorRightTemplatesFormat As TableLayoutPanel
+    Friend WithEvents pnlMotorViewsAdvancedHost As Panel
+    Friend WithEvents grpPdfPreview As GroupBox
+    Friend WithEvents tblPdfPreviewInner As TableLayoutPanel
+    Friend WithEvents flowPdfPreviewBar As FlowLayoutPanel
+    Friend WithEvents btnRefreshPdfPreview As Button
+    Friend WithEvents btnOpenLastPdfExternal As Button
+    Friend WithEvents wbPdfPreview As WebBrowser
     Friend WithEvents pnlGenerateBar As Panel
-    Friend WithEvents rightLayout As TableLayoutPanel
+    Friend WithEvents flowGenerateBar As FlowLayoutPanel
+    Friend WithEvents btnMotorViews As Button
+    Friend WithEvents btnMotorMetadata As Button
+    Friend WithEvents btnMotorDimensioning As Button
+    Friend WithEvents btnOpenVariableTable As Button
     Friend WithEvents tblRightLogProgress As TableLayoutPanel
-    Friend WithEvents topInputOptionsLayout As TableLayoutPanel
     Friend WithEvents grpInput As GroupBox
     Friend WithEvents grpAsmComponents As GroupBox
     Friend WithEvents grpTemplates As GroupBox
     Friend WithEvents grpTraceability As GroupBox
     Friend WithEvents grpGeneration As GroupBox
     Friend WithEvents grpAdvanced As GroupBox
-    Friend WithEvents pnlHiddenLegacyGeneration As Panel
-    Friend WithEvents pnlHiddenProcessing As Panel
     Friend WithEvents grpProgress As GroupBox
     Friend WithEvents grpLog As GroupBox
     Friend WithEvents tblInput As TableLayoutPanel
@@ -710,13 +986,24 @@ Partial Class MainForm
         Friend WithEvents txtNotes As TextBox
     Friend WithEvents flowTraceButtons As FlowLayoutPanel
     Friend WithEvents btnApplyTraceability As Button
-    Friend WithEvents flowGeneration As FlowLayoutPanel
+    Friend WithEvents tblGenerationTwoCols As TableLayoutPanel
+    Friend WithEvents flowGenerationLeft As FlowLayoutPanel
+    Friend WithEvents flowGenerationRight As FlowLayoutPanel
     Friend WithEvents lblTitleBlockSource As Label
     Friend WithEvents cmbTitleBlockSource As ComboBox
     Friend WithEvents chkCreateDft As CheckBox
     Friend WithEvents chkCreatePdf As CheckBox
     Friend WithEvents chkCreateDxfDraft As CheckBox
     Friend WithEvents chkAutoDimensioning As CheckBox
+    Friend WithEvents pnlAutoDimensionMotorChoice As FlowLayoutPanel
+    Friend WithEvents lblAutoDimensionMotor As Label
+    Friend WithEvents radAutoDimMotorMain As RadioButton
+    Friend WithEvents radAutoDimMotorLegacyV02 As RadioButton
+    Friend WithEvents radAutoDimMotorAlternatePlugIn As RadioButton
+    Friend WithEvents chkSesdkPostDimensionIntrospection As CheckBox
+    Friend WithEvents chkPreferSweepAllDrawingDimensions As CheckBox
+    Friend WithEvents chkSuppressDimTrackSpacing As CheckBox
+    Friend WithEvents chkDedupDimensionsByKeypoints As CheckBox
     Friend WithEvents chkUnitHorizontalExteriorTest As CheckBox
     Friend WithEvents chkDrawingViewDimensioningLab As CheckBox
     Friend WithEvents chkDimLabInteractivePause As CheckBox

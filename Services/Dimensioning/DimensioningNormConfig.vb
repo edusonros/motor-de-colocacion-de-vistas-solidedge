@@ -108,6 +108,19 @@ Public Class DimensioningNormConfig
     ''' <summary>Cotas lineales “genéricas” (prioridad alta no tabulada): máximo por mismo nominal mm.</summary>
     Public Property ReferenceGenericLineDupCap As Integer = 2
 
+    ''' <summary>
+    ''' Tras el acotado automático, registra en el log propiedades (y algunos métodos CLR) de muestras de
+    ''' <c>DrawingView</c>, geometría DV y <c>Dimension</c>. Útil junto a la ayuda SDK (p. ej. <c>F:\sesdk_extraido\sesdk.chm</c>).
+    ''' También se activa con la variable de entorno <c>SE_SESDK_INTROSPECT=1</c>.
+    ''' </summary>
+    Public Property EnableSesdkPostDimensionIntrospection As Boolean = False
+
+    ''' <summary>Prueba: no aplicar TrackDistance escalonado que aleja cotas de la pieza.</summary>
+    Public Property SuppressDimensionTrackDistanceSpacing As Boolean = True
+
+    ''' <summary>Tras crear cotas, eliminar duplicadas con mismo valor y mismos keypoints.</summary>
+    Public Property EnableKeypointValueDuplicateCleanup As Boolean = True
+
     Public Shared Function DefaultConfig() As DimensioningNormConfig
         Return New DimensioningNormConfig()
     End Function
@@ -192,7 +205,10 @@ Public Class DimensioningNormConfig
             .ReferenceAxisToleranceFraction = ReferenceAxisToleranceFraction,
             .ReferenceObliqueAsAxisMaxRatio = ReferenceObliqueAsAxisMaxRatio,
             .ReferenceMinLineLengthFraction = ReferenceMinLineLengthFraction,
-            .ReferenceGenericLineDupCap = ReferenceGenericLineDupCap
+            .ReferenceGenericLineDupCap = ReferenceGenericLineDupCap,
+            .EnableSesdkPostDimensionIntrospection = EnableSesdkPostDimensionIntrospection,
+            .SuppressDimensionTrackDistanceSpacing = SuppressDimensionTrackDistanceSpacing,
+            .EnableKeypointValueDuplicateCleanup = EnableKeypointValueDuplicateCleanup
         }
     End Function
 End Class

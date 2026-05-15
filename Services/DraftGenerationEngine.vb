@@ -9,6 +9,7 @@ Imports SolidEdgeFramework
 Imports Extraer_dft_dxf_flatdxf.Services.Dimensioning.Labs
 Imports IO = System.IO
 Imports IOPath = System.IO.Path
+Imports Microsoft.VisualBasic
 
 Public Class EngineProgressInfo
     Public Property Percent As Integer
@@ -30,6 +31,8 @@ Public Class EngineRunResult
     Public Property DimLabRunAbortedMisconfigured As Boolean
     ''' <summary>Si true, no se llama app.Quit al final para no cerrar el DFT DIMLAB abierto en revisión.</summary>
     Public Property KeepSolidEdgeOpenForDimLab As Boolean
+    ''' <summary>Última ruta absoluta de PDF exportado correctamente en la corrida (p. ej. vista previa en UI).</summary>
+    Public Property LastExportedPdfFullPath As String
 End Class
 
 Public Class DraftGenerationEngine
@@ -37,6 +40,7 @@ Public Class DraftGenerationEngine
     Private Shared _pauseRequested As Boolean = False
     Private ReadOnly _logger As Logger
     Private ReadOnly _progress As Action(Of EngineProgressInfo)
+    Private _diagnostics As RunDiagnosticsContext = Nothing
 
     Private ReadOnly _excludeKeywords As String() = {
         "skf", "nut", "2026", "2026_02", "screw", "duin", "iso", "bolt", "whaser", "washer",
@@ -100,6 +104,9 @@ Public Class DraftGenerationEngine
             End Try
             _logger.Log("[BOOT][OUTPUT_ROOT] " & If(config?.OutputFolder, ""))
 
+            ' Diagnósticos siempre en repositorio\docs\logs (run_log, com_errors; audit/geometry por DFT en ProcessModel).
+            _diagnostics = RunDiagnosticsContext.Initialize(If(config?.OutputFolder, ""), _logger)
+
             Report(1, "Conectando a Solid Edge...")
             If Not ConnectSolidEdge(config, app, appCreatedByUs) Then
                 Throw New Exception("No fue posible conectar con Solid Edge.")
@@ -112,6 +119,7 @@ Public Class DraftGenerationEngine
             _logger.Log($"Opciones -> DFT={config.CreateDraft}, PDF={config.CreatePdf}, DXF_DRAFT={config.CreateDxfFromDraft}, DXF_FLAT={config.CreateFlatDxf}")
             _logger.Log($"Opciones -> InsertProps={config.InsertPropertiesInTitleBlock}, SourceMode={config.TitleBlockPropertySourceMode}")
             _logger.Log($"[TITLEBLOCK] Mode={config.TitleBlockPropertySourceMode}")
+            _logger.Log($"[MOTOR][CONFIG] MotorPhase={config.MotorPhase}")
 
             Dim outDftDir As String = IOPath.Combine(config.OutputFolder, "DFT")
             Dim outDxfDir As String = IOPath.Combine(config.OutputFolder, "DXF")
@@ -121,7 +129,10 @@ Public Class DraftGenerationEngine
             EnsureDir(outPdfDir)
 
             Dim dftTemplates As String() = BuildTemplateList(config)
-            If config.CreateDraft OrElse config.CreatePdf OrElse config.CreateDxfFromDraft Then
+            Dim needsDftTemplatesForNewDraft As Boolean =
+                (config.MotorPhase = DraftMotorPhase.FullSequence OrElse config.MotorPhase = DraftMotorPhase.ViewGeneration) AndAlso
+                (config.CreateDraft OrElse config.CreatePdf OrElse config.CreateDxfFromDraft)
+            If needsDftTemplatesForNewDraft Then
                 If dftTemplates Is Nothing OrElse dftTemplates.Length = 0 Then
                     Throw New Exception("No hay templates A4/A3/A2 válidos para crear DFT/PDF/DXF.")
                 End If
@@ -129,7 +140,7 @@ Public Class DraftGenerationEngine
                 If config.DebugTemplatesInspection Then
                     Dim templateList = dftTemplates.Distinct(StringComparer.OrdinalIgnoreCase).ToList()
                     For Each tpl In templateList
-                        SolidEdgePropertyService.LogAllPropertySetsFromFile(tpl, _logger)
+                        TemplateInspectionCache.LogTemplatePropertyInspectWithDiskCache(tpl, _logger)
                     Next
                 End If
             End If
@@ -181,7 +192,11 @@ Public Class DraftGenerationEngine
             Dim runAsmOverview As Boolean =
                 inputKind = SourceFileKind.AssemblyFile AndAlso
                 IO.File.Exists(config.InputFile) AndAlso
-                (config.CreateDraft OrElse config.CreatePdf OrElse config.CreateDxfFromDraft)
+                (
+                    config.CreateDraft OrElse config.CreatePdf OrElse config.CreateDxfFromDraft OrElse
+                    config.MotorPhase = DraftMotorPhase.MetadataManagement OrElse
+                    config.MotorPhase = DraftMotorPhase.Dimensioning
+                )
 
             ' Respetar la selección manual de componentes:
             '   - Si el usuario está usando selección manual (UseSelectedComponents=True), el "overview"
@@ -275,6 +290,13 @@ Public Class DraftGenerationEngine
             Return result
 
         Finally
+            ' Volcado final del log + resumen de rutas de diagnósticos (run_log/audit/geometry/com_errors).
+            Try
+                If _diagnostics IsNot Nothing Then _diagnostics.Finish()
+            Catch exDiag As Exception
+                Try : _logger.LogException("RunDiagnosticsContext.Finish", exDiag) : Catch : End Try
+            End Try
+
             Try
                 If app IsNot Nothing AndAlso appCreatedByUs Then
                     If result.KeepSolidEdgeOpenForDimLab Then
@@ -293,6 +315,567 @@ Public Class DraftGenerationEngine
             Try : OleMessageFilter.Revoke() : Catch : End Try
         End Try
     End Function
+
+    ''' <summary>Acotación automática principal, DIMLAB exclusivo y laboratorios auxiliares (mismo comportamiento que en la rama CREATE DFT).</summary>
+    ''' <returns>False si el flujo debe abortarse (ej. DIMLAB solicitado desde UI pero runLab efectivo fue False).</returns>
+    Private Function ApplyDimensioningAndLabsBlock(
+        app As SolidEdgeFramework.Application,
+        dftDoc As DraftDocument,
+        modelPath As String,
+        baseName As String,
+        outDft As String,
+        config As JobConfiguration,
+        runLab As Boolean,
+        isAssemblyDraft As Boolean,
+        mainDrawingView As DrawingView,
+        runResult As EngineRunResult) As Boolean
+
+        Dim normCfg As DimensioningNormConfig = If(config.DimensioningNormConfig Is Nothing,
+            DimensioningNormConfig.DefaultUneLegacyConfig(), config.DimensioningNormConfig)
+        normCfg.EnableSesdkPostDimensionIntrospection =
+            normCfg.EnableSesdkPostDimensionIntrospection OrElse config.EnableSesdkPostDimensionIntrospection
+        If config.PreferSweepAllDrawingDimensions Then
+            normCfg.DimensionCreationMode = DimensioningNormConfig.ModeSweepAll
+            normCfg.KeepIntentionalDuplicateDimensions = False
+            normCfg.MaxTotalDimensionsTarget = Math.Max(normCfg.MaxTotalDimensionsTarget, 24)
+            normCfg.MaxLinearDimensionsTarget = Math.Max(normCfg.MaxLinearDimensionsTarget, 18)
+            normCfg.MaxRadialDimensionsTarget = Math.Max(normCfg.MaxRadialDimensionsTarget, 8)
+            _logger.Log("[DIM][NORM] PreferSweepAllDrawingDimensions=True → SweepAllEntities keep_intentional_dupes=False caps>=24/18/8 bandas moderadas (~mitad densidad)")
+        End If
+        normCfg.SuppressDimensionTrackDistanceSpacing = config.SuppressDimensionTrackDistanceSpacing
+        normCfg.EnableKeypointValueDuplicateCleanup = config.EnableKeypointValueDuplicateCleanup
+        _logger.Log("[DIM][NORM] suppress_track_spacing=" & normCfg.SuppressDimensionTrackDistanceSpacing.ToString() &
+                    " keypoint_value_dedup=" & normCfg.EnableKeypointValueDuplicateCleanup.ToString())
+
+        Dim protectedZones As IList(Of ProtectedZone2D) = Nothing
+        If dftDoc IsNot Nothing AndAlso normCfg.PrepareExistingPartsListTop Then
+            Try
+                Dim shPl As Sheet = Nothing
+                Try : shPl = dftDoc.ActiveSheet : Catch : End Try
+                If shPl IsNot Nothing Then
+                    Dim sheetViews As New List(Of DrawingView)()
+                    Try
+                        Dim nDv As Integer = shPl.DrawingViews.Count
+                        For idv As Integer = 1 To nDv
+                            Try
+                                sheetViews.Add(CType(shPl.DrawingViews.Item(idv), DrawingView))
+                            Catch
+                            End Try
+                        Next
+                    Catch
+                    End Try
+                    Dim plZone As ProtectedZone2D = PartsListSuperiorService.PrepararPartsListSuperiorExistente(
+                        dftDoc, shPl, modelPath, normCfg, Sub(m) _logger.Log(m), sheetViews)
+                    protectedZones = PartsListSuperiorService.DetectarZonasProtegidas(shPl, plZone, normCfg, Sub(m) _logger.Log(m))
+                    PartsListSuperiorService.TryNudgeViewsOutsideZone(shPl, plZone, Sub(m) _logger.Log(m))
+                End If
+            Catch exPl As Exception
+                _logger.Log("[PARTSLIST][ERR] " & exPl.Message)
+            End Try
+        End If
+
+        Dim dimLabForensicInteractive As Boolean = runLab AndAlso config.EnableDimLabInteractivePause
+        If runLab Then
+            Try
+                app.Visible = True
+                app.DisplayAlerts = True
+            Catch exVis As Exception
+                _logger.Log("[DIMLAB][INTERACTIVE] WARN set Visible/DisplayAlerts: " & exVis.Message)
+            End Try
+            _logger.Log("[DIMLAB][INTERACTIVE] app.Visible=True DisplayAlerts=True")
+            _logger.Log("[DIMLAB][EXPORT_POLICY] skip_pdf_dxf_flat=True keep_dft_open_until_review=True")
+            Dim outLabHint As String = config.OutputFolder.Trim().TrimEnd(IO.Path.DirectorySeparatorChar, IO.Path.AltDirectorySeparatorChar)
+            Dim outLeaf As String = ""
+            Try
+                outLeaf = IOPath.GetFileName(outLabHint)
+            Catch
+                outLeaf = ""
+            End Try
+            If Not String.Equals(outLeaf, "OUT_DIMLAB", StringComparison.OrdinalIgnoreCase) Then
+                outLabHint = IO.Path.Combine(config.OutputFolder.Trim(), "OUT_DIMLAB")
+            End If
+            _logger.Log("[DIMLAB][LOG_ROOT_HINT] texto DimLab=" & outLabHint)
+        End If
+        If dimLabForensicInteractive Then
+            _logger.Log("[DIMLAB][INTERACTIVE] forensic_MsgBox_PAUSE=True")
+            _logger.Log("[DIMLAB][INTERACTIVE] skipExportClose=True")
+        End If
+        Dim runProductionDvRefClean As Boolean = (dftDoc IsNot Nothing AndAlso config.EnableProductionDvRefCleanEngine AndAlso Not runLab)
+        Dim runMainDimensioning As Boolean = (dftDoc IsNot Nothing AndAlso config.EnableAutoDimensioning AndAlso Not runLab AndAlso Not runProductionDvRefClean)
+        ' Siempre en run_log: evita confundir corridas sin DIMLAB vs con laboratorio (no depender de ProductionMode).
+        _logger.Log("[DIM][FLAGS] Config_EnableAutoDimensioning=" & config.EnableAutoDimensioning.ToString())
+        _logger.Log("[DIM][FLAGS] Config_AutoDimensioningMotor=" & config.AutoDimensioningMotor.ToString())
+        _logger.Log("[DIM][FLAGS] Config_EnableProductionDvRefCleanEngine=" & config.EnableProductionDvRefCleanEngine.ToString())
+        _logger.Log("[DIM][FLAGS] Config_EnableDrawingViewDimensioningLab=" & config.EnableDrawingViewDimensioningLab.ToString())
+        _logger.Log("[DIM][FLAGS] DimensionInsertionConfig_EnableDrawingViewDimensioningLab=" & DimensionInsertionConfig.EnableDrawingViewDimensioningLab.ToString())
+        _logger.Log("[DIM][FLAGS] Effective_runLab=" & runLab.ToString())
+        _logger.Log("[DIM][FLAGS] Effective_runProductionDvRefClean=" & runProductionDvRefClean.ToString())
+        _logger.Log("[DIM][FLAGS] Effective_runMainDimensioning=" & runMainDimensioning.ToString())
+        Dim decisionReason As String = If(runLab, "lab_mode_exclusive", If(runProductionDvRefClean, "production_dvref_clean_exclusive", "normal"))
+        _logger.Log("[DIM][DECISION] runLab=" & runLab.ToString() & " runProductionDvRefClean=" & runProductionDvRefClean.ToString() & " runMainDimensioning=" & runMainDimensioning.ToString() & " reason=" & decisionReason)
+
+        If config.RequestedDimLabFromDedicatedButton AndAlso Not runLab Then
+            _logger.Log("[DIMLAB][ABORT] requested_lab_button_but_effective_runLab_false")
+            runResult.DimLabRunAbortedMisconfigured = True
+            runResult.ErrorCount += 1
+            Return False
+        End If
+
+        If runLab Then
+            _logger.Log("[DIMLAB][RUN] exclusive=True")
+        End If
+
+        If runLab AndAlso dftDoc IsNot Nothing Then
+            Try
+                Dim outLab As String = config.OutputFolder.Trim().TrimEnd(IO.Path.DirectorySeparatorChar, IO.Path.AltDirectorySeparatorChar)
+                Dim leaf As String = ""
+                Try
+                    leaf = IOPath.GetFileName(outLab)
+                Catch
+                    leaf = ""
+                End Try
+                If Not String.Equals(leaf, "OUT_DIMLAB", StringComparison.OrdinalIgnoreCase) Then
+                    outLab = IO.Path.Combine(config.OutputFolder.Trim(), "OUT_DIMLAB")
+                End If
+                Try
+                    IO.Directory.CreateDirectory(outLab)
+                Catch
+                End Try
+                DrawingViewDimensioningLab.Run(
+                    app, dftDoc, Nothing, False, Sub(m) _logger.Log(m), outLab, dimLabForensicInteractive,
+                    config.DimLabMode, config.EnableDimLabVisibleProbe, config.EnableDimLabAlternativePlacement,
+                    config.EnableDimLabHorizontalControlInVerticalOnly,
+                    config.DimLabKeepFailedDimensions,
+                    config.DimLabCleanPreviousLabDimensions)
+            Catch exLab As Exception
+                _logger.Log("[DIMLAB][FATAL] " & exLab.ToString())
+            End Try
+            _logger.Log("[DIMLAB][EXIT_BEFORE_MAIN_ENGINE] true exclusive_block_main_dimensioning=True")
+            _logger.Log("[DIM][GATE_SKIPPED] main_engine_blocked reason=lab_mode_exclusive")
+        ElseIf runProductionDvRefClean Then
+            _logger.Log("[DIM][PIPE] ProductionDvRefCleanDimensionEngine.Run exclusive=True")
+            Try
+                Dim dimProd As New DimensionLogger(_logger)
+                ProductionDvRefCleanDimensionEngine.Run(app, dftDoc, dimProd)
+            Catch exProd As Exception
+                _logger.Log("[PRODDIM][FATAL] " & exProd.ToString())
+            End Try
+            _logger.Log("[DIM][GATE_SKIPPED] labs_and_secondary dimensioning_blocked reason=production_dvref_clean_exclusive")
+        ElseIf runMainDimensioning Then
+            Try
+                Dim pipe As String
+                Select Case config.AutoDimensioningMotor
+                    Case AutoDimensioningMotorKind.LegacyV02IsolatedCopy
+                        pipe = "[DIM][PIPE] DimensioningEngine → motor LegacyV02IsolatedCopy (LegacyV02DimensionMotorBridge)"
+                    Case AutoDimensioningMotorKind.AlternatePlugIn
+                        pipe = "[DIM][PIPE] DimensioningEngine → motor AlternatePlugIn (plugin alternativo, sin UniqueDv principal)"
+                    Case Else
+                        pipe = "[DIM][PIPE] DimensioningEngine → motor CurrentMainPipeline (UniqueDv + UNE/ISO 129)"
+                End Select
+                _logger.Log(pipe)
+                DimensioningEngine.RunAutoDimensioning(dftDoc, mainDrawingView, _logger, normCfg, protectedZones)
+            Catch exDim As Exception
+                _logger.Log("[DIM][FATAL] " & exDim.ToString())
+            End Try
+        Else
+            _logger.Log("[DIM][GATE] Acotado automático no ejecutado (deshabilitado, sin DFT o laboratorio sin documento).")
+        End If
+
+        Dim envDrop2D As String = ""
+        Try : envDrop2D = System.Environment.GetEnvironmentVariable("DROP2D_LAB") : Catch : envDrop2D = "" : End Try
+        Dim runDvMethodLab As Boolean = config.RunDVGeometryMethodDiscoveryLab
+        Dim runDvDimLab As Boolean = config.RunDVGeometryDimensionPlacementLab
+        Dim runDropSheetsLab As Boolean = config.RunDropCreatedSheetsDimensionLab
+        Dim runDrop2D As Boolean = Not runDvMethodLab AndAlso Not runDvDimLab AndAlso Not runDropSheetsLab AndAlso (
+            config.RunDropViewsTo2DModelLab OrElse
+            String.Equals(envDrop2D, "1", StringComparison.OrdinalIgnoreCase) OrElse
+            String.Equals(envDrop2D, "true", StringComparison.OrdinalIgnoreCase))
+        If runDrop2D OrElse runDropSheetsLab OrElse runDvDimLab OrElse runDvMethodLab Then
+            runMainDimensioning = False
+        End If
+
+        If runProductionDvRefClean Then
+            If GenerationEngineRuntime.DebugDiagnosticsMode OrElse Not GenerationEngineRuntime.ProductionMode Then
+                _logger.Log("[PRODDIM][SKIP] DV_METHODLAB / DV_DIMLAB / DROP labs — production exclusive")
+            End If
+            GoTo AfterDimensionLabs
+        End If
+
+        If runDvMethodLab AndAlso Not isAssemblyDraft AndAlso dftDoc IsNot Nothing Then
+            Try
+                _logger.Log("[DV_METHODLAB][RUN] enabled=True source=config")
+                Dim prevAlerts As Boolean = True
+                Try : prevAlerts = app.DisplayAlerts : Catch : End Try
+                Try
+                    app.DisplayAlerts = False
+                    _logger.Log("[DV_METHODLAB][ALERTS] DisplayAlerts=False (suppress interactive dialogs during probing)")
+                Catch exSetAlerts As Exception
+                    _logger.Log("[DV_METHODLAB][ALERTS][WARN] " & exSetAlerts.Message)
+                End Try
+                Try
+                    DVGeometryMethodDiscoveryLab.Run(app, dftDoc, Sub(m) _logger.Log(m), False)
+                Finally
+                    Try
+                        app.DisplayAlerts = prevAlerts
+                        _logger.Log("[DV_METHODLAB][ALERTS] DisplayAlerts restored=" & prevAlerts.ToString())
+                    Catch
+                    End Try
+                End Try
+            Catch exDvMethod As Exception
+                _logger.Log("[DV_METHODLAB][FATAL] " & exDvMethod.ToString())
+            End Try
+        ElseIf runDvDimLab AndAlso Not isAssemblyDraft AndAlso dftDoc IsNot Nothing Then
+            Try
+                _logger.Log("[DV_DIMLAB][RUN] enabled=True source=config")
+                DVGeometryDimensionPlacementLab.Run(app, dftDoc, Sub(m) _logger.Log(m), False)
+            Catch exDv As Exception
+                _logger.Log("[DV_DIMLAB][FATAL] " & exDv.ToString())
+            End Try
+        ElseIf runDropSheetsLab AndAlso Not isAssemblyDraft AndAlso dftDoc IsNot Nothing Then
+            Try
+                _logger.Log("[DROP_SHEETS][RUN] enabled=True source=config")
+                If config.RunDropViewsTo2DModelLab OrElse
+                    String.Equals(envDrop2D, "1", StringComparison.OrdinalIgnoreCase) OrElse
+                    String.Equals(envDrop2D, "true", StringComparison.OrdinalIgnoreCase) Then
+                    _logger.Log("[DROP_SHEETS][NOTE] omitiendo DROP2D (RunDropCreatedSheetsDimensionLab tiene prioridad; no se usa hoja 2D Model)")
+                End If
+                DropCreatedSheetsDimensionLab.Run(app, dftDoc, Sub(m) _logger.Log(m), config.DropCreatedSheetsDimensionLabDebugSave)
+            Catch exSheets As Exception
+                _logger.Log("[DROP_SHEETS][FATAL] " & exSheets.ToString())
+            End Try
+        ElseIf runDrop2D AndAlso Not isAssemblyDraft AndAlso dftDoc IsNot Nothing Then
+            Try
+                _logger.Log("[DROP2D][RUN] enabled=True source=" &
+                            If(config.RunDropViewsTo2DModelLab, "config", "env:DROP2D_LAB"))
+                DropViewsTo2DModelLab.Run(app, dftDoc, Sub(m) _logger.Log(m), False)
+            Catch exDrop As Exception
+                _logger.Log("[DROP2D][FATAL] " & exDrop.ToString())
+            End Try
+        ElseIf GenerationEngineRuntime.DebugDiagnosticsMode Then
+            _logger.Log("[DV_METHODLAB][RUN] enabled=False")
+            _logger.Log("[DV_DIMLAB][RUN] enabled=False")
+            _logger.Log("[DROP2D][RUN] enabled=False")
+            _logger.Log("[DROP_SHEETS][RUN] enabled=False")
+        End If
+
+AfterDimensionLabs:
+        If Not runLab AndAlso GenerationEngineRuntime.ProductionMode Then
+            WriteProductionSummary(modelPath, outDft)
+        End If
+
+        If Not runLab AndAlso Not isAssemblyDraft AndAlso config.RunUnitHorizontalExteriorDimensionTest AndAlso dftDoc IsNot Nothing Then
+            Try
+                UnitHorizontalExteriorDimensionTest.Run(
+                    dftDoc,
+                    Sub(m As String) _logger.Log(m)
+                )
+            Catch exUnit As Exception
+                _logger.Log("[DIM][UNIT][ERR] " & exUnit.Message)
+            End Try
+        End If
+
+        Return True
+    End Function
+
+    ''' <summary>
+    ''' Escribe Material/L/H/D y fuentes PART_LIST desde el job sobre el DFT abierto.
+    ''' Independiente de <see cref="JobConfiguration.InsertPropertiesInTitleBlock"/> (cajetín).
+    ''' </summary>
+    Private Sub TryApplyPartListMetadataAfterDraftDimensioning(
+        app As SolidEdgeFramework.Application,
+        dftDoc As DraftDocument,
+        modelPath As String,
+        config As JobConfiguration,
+        runLab As Boolean)
+
+        If runLab OrElse dftDoc Is Nothing Then Return
+        Dim extLc As String = IOPath.GetExtension(modelPath).ToLowerInvariant()
+        If extLc <> ".par" AndAlso extLc <> ".psm" Then Return
+
+        Dim partSnap As DrawingMetadataInput = DrawingMetadataService.BuildFromJobConfiguration(config)
+        Dim modelDoc As Object = Nothing
+        Try
+            modelDoc = ExecuteComWithRetry(Function() app.Documents.Open(modelPath), "[ENGINE][PARTLIST] Open modelo")
+            If String.IsNullOrWhiteSpace(partSnap.LargoL) OrElse String.IsNullOrWhiteSpace(partSnap.AltoH) OrElse String.IsNullOrWhiteSpace(partSnap.DatoD) Then
+                Dim lV As String = "", hV As String = "", dV As String = "", lhdSrc As String = ""
+                If DrawingMetadataService.TryComputeLhdSameAsCalcButton(dftDoc, modelDoc, _logger, lV, hV, dV, lhdSrc) Then
+                    If String.IsNullOrWhiteSpace(partSnap.LargoL) Then partSnap.LargoL = lV
+                    If String.IsNullOrWhiteSpace(partSnap.AltoH) Then partSnap.AltoH = hV
+                    If String.IsNullOrWhiteSpace(partSnap.DatoD) Then partSnap.DatoD = dV
+                    _logger.Log("[ENGINE][PARTLIST][LHD] " & lhdSrc & " → L=" & lV & " H=" & hV & " D=" & dV)
+                End If
+            End If
+            _logger.Log("[ENGINE][PARTLIST] Actualizando PART_LIST desde configuración del job (no depende de Insertar propiedades en cajetín).")
+            DrawingMetadataService.ApplyPartListSourceProperties(modelDoc, dftDoc, partSnap, _logger)
+        Catch ex As Exception
+            _logger.LogException("[ENGINE][PARTLIST]", ex)
+        Finally
+            If modelDoc IsNot Nothing Then
+                SolidEdgePropertyService.TryCloseComDocument(modelDoc, False)
+                TryReleaseComObject(modelDoc)
+            End If
+        End Try
+    End Sub
+
+    Private Sub ProcessMetadataMotorOnly(
+        app As SolidEdgeFramework.Application,
+        modelPath As String,
+        config As JobConfiguration,
+        baseName As String,
+        runLab As Boolean,
+        outDftDir As String,
+        runResult As EngineRunResult,
+        itemIndex As Integer,
+        totalItems As Integer)
+
+        WaitIfPausedOrStopped()
+        If _stopRequested Then Return
+
+        Dim outDft As String = DraftStandaloneMotorPaths.ResolveStandaloneDraftFullPath(config, modelPath)
+        _logger.Log("[DFT][FULLPATH] " & outDft)
+        _logger.Log($"[MOTOR][GESTOR_META][{itemIndex}/{totalItems}] DFT esperado={outDft}")
+
+        If Not IO.File.Exists(outDft) Then
+            _logger.Log("[MOTOR][GESTOR_META][ERR] No existe DFT previo en carpeta DFT. " &
+                        "Genere el DFT con ""Generador de vistas"" o ""GENERAR"" (misma salida y pieza).")
+            runResult.ErrorCount += 1
+            Return
+        End If
+
+        If Not config.InsertPropertiesInTitleBlock Then
+            _logger.Log("[MOTOR][GESTOR_META][SKIP_CAJETIN] InsertPropertiesInTitleBlock=False (cajetín y ApplyPropertiesToSavedDraft omitidos; PART_LIST sí se actualiza si aplica).")
+        End If
+
+        If config.InsertPropertiesInTitleBlock AndAlso config.TitleBlockPropertySourceMode = TitleBlockPropertySource.FromModelLink Then
+            Dim extIn As String = IOPath.GetExtension(modelPath).ToLowerInvariant()
+            If extIn = ".dft" Then
+                _logger.Log("[MOTOR][GESTOR_META][SKIP] Entrada .dft: no se abre ""modelo"" por ruta de entrada (solo DFT).")
+            Else
+                Dim modelPreUpdates As Integer = SolidEdgePropertyService.ApplyPropertiesToOpenModelDocument(app, modelPath, config, _logger)
+                _logger.Log($"[PROPS][MODEL] Escritura previa al draft completada (motor metadatos). Campos={modelPreUpdates}")
+            End If
+        End If
+
+        Dim partListSnap As DrawingMetadataInput = DrawingMetadataService.BuildFromJobConfiguration(config)
+
+        Dim dftDoc As DraftDocument = Nothing
+        Dim modelDoc As Object = Nothing
+        Try
+            dftDoc = ExecuteComWithRetry(Function() CType(app.Documents.Open(outDft), DraftDocument), "[GESTOR_META] Open DFT")
+            If dftDoc Is Nothing Then
+                runResult.ErrorCount += 1
+                Return
+            End If
+
+            If IO.File.Exists(modelPath) Then
+                Dim extLc As String = IOPath.GetExtension(modelPath).ToLowerInvariant()
+                If extLc = ".par" OrElse extLc = ".psm" OrElse extLc = ".asm" Then
+                    Try
+                        modelDoc = ExecuteComWithRetry(Function() app.Documents.Open(modelPath), "[GESTOR_META] Open modelo (PART_LIST)")
+                        _logger.Log("[MOTOR][GESTOR_META][PARTSLIST] Documento modelo abierto para Custom.* coherentes con el enlace.")
+                    Catch exMo As Exception
+                        _logger.Log("[MOTOR][GESTOR_META][PARTSLIST][WARN] Modelo no abierto; se aplicará PART_LIST sólo sobre DFT: " & exMo.Message)
+                        modelDoc = Nothing
+                    End Try
+                End If
+            End If
+
+            If String.IsNullOrWhiteSpace(partListSnap.LargoL) OrElse String.IsNullOrWhiteSpace(partListSnap.AltoH) OrElse String.IsNullOrWhiteSpace(partListSnap.DatoD) Then
+                Dim lV As String = "", hV As String = "", dV As String = "", lhdSrc As String = ""
+                If DrawingMetadataService.TryComputeLhdSameAsCalcButton(dftDoc, modelDoc, _logger, lV, hV, dV, lhdSrc) Then
+                    If String.IsNullOrWhiteSpace(partListSnap.LargoL) Then partListSnap.LargoL = lV
+                    If String.IsNullOrWhiteSpace(partListSnap.AltoH) Then partListSnap.AltoH = hV
+                    If String.IsNullOrWhiteSpace(partListSnap.DatoD) Then partListSnap.DatoD = dV
+                    _logger.Log("[MOTOR][GESTOR_META][LHD] " & lhdSrc & " → L=" & lV & " H=" & hV & " D=" & dV)
+                End If
+            End If
+
+            _logger.Log("[MOTOR][GESTOR_META][PARTSLIST] Actualizando fuentes PART_LIST + Refresh Native PartsLists (misma ruta que la UI).")
+            DrawingMetadataService.ApplyPartListSourceProperties(modelDoc, dftDoc, partListSnap, _logger)
+
+            If modelDoc IsNot Nothing Then
+                Try
+                    ExecuteComWithRetry(Sub() CallByName(modelDoc, "Save", CallType.Method), "[GESTOR_META] Save modelo")
+                Catch exSaveM As Exception
+                    _logger.Log("[GESTOR_META][MODEL][SAVE][WARN] " & exSaveM.Message)
+                End Try
+                SolidEdgePropertyService.TryCloseComDocument(modelDoc, False)
+                TryReleaseComObject(modelDoc)
+                modelDoc = Nothing
+            End If
+
+            If config.InsertPropertiesInTitleBlock Then
+                Dim syncCount As Integer = SolidEdgePropertyService.ApplyTitleBlockPropertyStrategy(dftDoc, modelPath, config, _logger)
+                _logger.Log($"[MOTOR][GESTOR_META] Sincronización cajetín aplicada. Campos escritos~={syncCount}")
+            Else
+                _logger.Log("[MOTOR][GESTOR_META][SKIP_CAJETIN] Sin ApplyTitleBlockPropertyStrategy.")
+            End If
+            ExecuteComWithRetry(Sub() dftDoc.Save(), "[GESTOR_META] Save DFT")
+            Try : dftDoc.Close(False) : Catch : End Try
+            TryReleaseComObject(dftDoc)
+            dftDoc = Nothing
+            If config.InsertPropertiesInTitleBlock Then
+                ExecuteComWithRetry(Sub() SolidEdgePropertyService.ApplyPropertiesToSavedDraft(app, outDft, config, _logger), "[GESTOR_META] Apply props saved DFT")
+            End If
+        Catch ex As Exception
+            _logger.LogException("[MOTOR][GESTOR_META]", ex)
+            runResult.ErrorCount += 1
+        Finally
+            If modelDoc IsNot Nothing Then
+                SolidEdgePropertyService.TryCloseComDocument(modelDoc, False)
+                TryReleaseComObject(modelDoc)
+            End If
+            If dftDoc IsNot Nothing Then
+                Try : dftDoc.Close(False) : Catch : End Try
+                TryReleaseComObject(dftDoc)
+            End If
+        End Try
+    End Sub
+
+    Private Sub ProcessDimensioningMotorOnly(
+        app As SolidEdgeFramework.Application,
+        modelPath As String,
+        config As JobConfiguration,
+        baseName As String,
+        isAssemblyDraft As Boolean,
+        outDftDir As String,
+        outPdfDir As String,
+        outDxfDir As String,
+        runLab As Boolean,
+        runResult As EngineRunResult,
+        itemIndex As Integer,
+        totalItems As Integer)
+
+        WaitIfPausedOrStopped()
+        If _stopRequested Then Return
+
+        Dim outDft As String = DraftStandaloneMotorPaths.ResolveStandaloneDraftFullPath(config, modelPath)
+        _logger.Log("[DFT][FULLPATH] " & outDft)
+        _logger.Log($"[MOTOR][ACOTACION][{itemIndex}/{totalItems}] DFT esperado={outDft}")
+
+        If Not IO.File.Exists(outDft) Then
+            _logger.Log("[MOTOR][ACOTACION][ERR] No existe DFT previo en carpeta DFT. " &
+                        "Genere el DFT con ""Generador de vistas"" o ""GENERAR"" (misma salida y pieza).")
+            runResult.ErrorCount += 1
+            Return
+        End If
+
+        Dim dftDoc As DraftDocument = Nothing
+        Try
+            If Not runLab Then DimensionProductionRunSummary.Reset()
+            dftDoc = ExecuteComWithRetry(Function() CType(app.Documents.Open(outDft), DraftDocument), "[ACOTACION] Open DFT")
+            If dftDoc Is Nothing Then
+                runResult.ErrorCount += 1
+                Return
+            End If
+            If Not runLab Then
+                Try
+                    Dim shv As Sheet = Nothing
+                    Try : shv = dftDoc.ActiveSheet : Catch : End Try
+                    If shv IsNot Nothing Then DimensionProductionRunSummary.ViewsPlanned = shv.DrawingViews.Count
+                Catch
+                End Try
+            End If
+
+            Dim mainDrawingView As DrawingView = Nothing
+            If config.KeepSolidEdgeVisible Then FitDraftView(app, dftDoc)
+
+            If Not ApplyDimensioningAndLabsBlock(app, dftDoc, modelPath, baseName, outDft, config, runLab, isAssemblyDraft, mainDrawingView, runResult) Then
+                Try
+                    If dftDoc IsNot Nothing Then dftDoc.Close(False)
+                Catch
+                End Try
+                TryReleaseComObject(dftDoc)
+                Return
+            End If
+
+            TryApplyPartListMetadataAfterDraftDimensioning(app, dftDoc, modelPath, config, runLab)
+
+            Dim savedDraftReady As Boolean = False
+            Dim diagCapturedForOpenDft As Boolean = False
+            _logger.Log("[MOTOR][ACOTACION] Guardando DFT...")
+            ExecuteComWithRetry(Sub() dftDoc.SaveAs(outDft), "[ACOTACION] Save DFT")
+            savedDraftReady = IO.File.Exists(outDft)
+
+            If _diagnostics IsNot Nothing AndAlso dftDoc IsNot Nothing Then
+                Try
+                    diagCapturedForOpenDft = _diagnostics.CaptureDiagnosticsForDft(dftDoc, baseName)
+                Catch exDiagCapture As Exception
+                    _logger.LogException("RunDiagnosticsContext.CaptureDiagnosticsForDft (motor acotación)", exDiagCapture)
+                End Try
+            End If
+
+            If config.InsertPropertiesInTitleBlock AndAlso savedDraftReady AndAlso Not runLab Then
+                Try : dftDoc.Close(False) : Catch : End Try
+                TryReleaseComObject(dftDoc)
+                dftDoc = Nothing
+                ExecuteComWithRetry(Sub() SolidEdgePropertyService.ApplyPropertiesToSavedDraft(app, outDft, config, _logger), "[ACOTACION] Apply props saved DFT")
+            End If
+
+            If savedDraftReady Then runResult.DraftCreatedCount += 1
+            If savedDraftReady AndAlso (runLab OrElse config.KeepDftOpenAfterRun) Then runResult.KeepSolidEdgeOpenForDimLab = True
+            If runLab AndAlso savedDraftReady Then runResult.DimLabReferenceDftFullPath = outDft
+
+            If Not diagCapturedForOpenDft AndAlso _diagnostics IsNot Nothing AndAlso dftDoc IsNot Nothing Then
+                Try
+                    diagCapturedForOpenDft = _diagnostics.CaptureDiagnosticsForDft(dftDoc, baseName)
+                    If diagCapturedForOpenDft Then
+                        _logger.Log("[DIAG][FALLBACK] audit+geometry (motor acotación, DFT abierto).")
+                    End If
+                Catch exDiagLate As Exception
+                    _logger.LogException("RunDiagnosticsContext.CaptureDiagnosticsForDft (abierto)", exDiagLate)
+                End Try
+            End If
+
+            Dim exportDoc As DraftDocument = dftDoc
+            Dim exportDocOpened As Boolean = False
+            Try
+                If Not runLab AndAlso (config.CreatePdf OrElse config.CreateDxfFromDraft) AndAlso IO.File.Exists(outDft) Then
+                    exportDoc = ExecuteComWithRetry(Function() CType(app.Documents.Open(outDft), DraftDocument), "[ACOTACION] Open saved DFT for export")
+                    exportDocOpened = True
+                End If
+
+                If Not runLab AndAlso config.CreatePdf Then
+                    SolidEdgePropertyService.ApplyDirectSummaryInfoToDraft(exportDoc, config, _logger)
+                    Dim outPdf As String = GetOutputPath(outPdfDir, baseName, ".pdf", config.OverwriteExisting)
+                    _logger.Log("Exportando PDF...")
+                    ExecuteComWithRetry(Sub() ExportDraftToPdf(app, exportDoc, outPdf), "Export PDF")
+                    _logger.Log($"PDF: {IOPath.GetFileName(outPdf)}")
+                    runResult.PdfCreatedCount += 1
+                    runResult.LastExportedPdfFullPath = outPdf
+                End If
+
+                If Not runLab AndAlso config.CreateDxfFromDraft Then
+                    Dim outDxfDraft As String = GetOutputPath(outDxfDir, baseName, ".dxf", config.OverwriteExisting)
+                    _logger.Log("Exportando DXF desde DFT...")
+                    ExecuteComWithRetry(Sub() ExportDraftToDxf(exportDoc, outDxfDraft), "Export DXF Draft")
+                    _logger.Log($"DXF(Draft): {IOPath.GetFileName(outDxfDraft)}")
+                    runResult.DxfCreatedCount += 1
+                End If
+            Finally
+                If exportDocOpened AndAlso exportDoc IsNot Nothing Then
+                    Try : exportDoc.Close(False) : Catch : End Try
+                    TryReleaseComObject(exportDoc)
+                End If
+            End Try
+
+        Catch ex As Exception
+            _logger.LogException("[MOTOR][ACOTACION]", ex)
+            runResult.ErrorCount += 1
+        Finally
+            If Not runResult.KeepSolidEdgeOpenForDimLab Then
+                Try
+                    If dftDoc IsNot Nothing Then dftDoc.Close(False)
+                Catch
+                End Try
+                TryReleaseComObject(dftDoc)
+            ElseIf runLab Then
+                _logger.Log("[DIMLAB][KEEP_OPEN] No se cierra el DFT automáticamente (motor acotación).")
+            Else
+                _logger.Log("[ENG][KEEP_OPEN] KeepDftOpenAfterRun=true (motor acotación).")
+            End If
+        End Try
+    End Sub
 
     Private Sub ProcessModel(app As SolidEdgeFramework.Application,
                              modelPath As String,
@@ -318,6 +901,12 @@ Public Class DraftGenerationEngine
         End If
 
         Dim ext As String = IOPath.GetExtension(modelPath).ToLowerInvariant()
+        If ext = ".dft" AndAlso config.MotorPhase <> DraftMotorPhase.MetadataManagement AndAlso config.MotorPhase <> DraftMotorPhase.Dimensioning Then
+            _logger.Log("[SKIP] Entrada .dft solo es valida con ""Gestor Metadatos DFT"" o ""Motor Acotación"". Use PAR/PSM/ASM para generar vistas.")
+            runResult.SkippedCount += 1
+            Return
+        End If
+
         Dim isAssemblyDraft As Boolean = (ext = ".asm")
         Dim baseName As String = IOPath.GetFileNameWithoutExtension(modelPath)
         Dim runLab As Boolean = config.EnableDrawingViewDimensioningLab OrElse DimensionInsertionConfig.EnableDrawingViewDimensioningLab
@@ -348,14 +937,31 @@ Public Class DraftGenerationEngine
         runResult.KeepSolidEdgeOpenForDimLab = False
 
         _logger.Log($"[{itemIndex}/{totalItems}] Procesando: {IOPath.GetFileName(modelPath)}")
+        _logger.Log($"[MOTOR][PHASE] {config.MotorPhase}")
+        Dim viewMotorOnly As Boolean = (config.MotorPhase = DraftMotorPhase.ViewGeneration)
+
+        If config.MotorPhase = DraftMotorPhase.MetadataManagement Then
+            ProcessMetadataMotorOnly(app, modelPath, config, baseName, runLab, outDftDir, runResult, itemIndex, totalItems)
+            Return
+        End If
+
+        If config.MotorPhase = DraftMotorPhase.Dimensioning Then
+            ProcessDimensioningMotorOnly(app, modelPath, config, baseName, isAssemblyDraft, outDftDir, outPdfDir, outDxfDir, runLab, runResult, itemIndex, totalItems)
+            Return
+        End If
 
         If config.InsertPropertiesInTitleBlock AndAlso config.TitleBlockPropertySourceMode = TitleBlockPropertySource.FromModelLink Then
             Dim modelPreUpdates As Integer = SolidEdgePropertyService.ApplyPropertiesToOpenModelDocument(app, modelPath, config, _logger)
             _logger.Log($"[PROPS][MODEL] Escritura previa al draft completada. Campos={modelPreUpdates}")
         End If
 
-        If config.CreateDraft OrElse config.CreatePdf OrElse config.CreateDxfFromDraft Then
-            Dim dftStem As String = If(runLab, GetDimLabDraftStemPiece(baseName, config.DimLabMode), baseName)
+        Dim runDraftOutputBranch As Boolean =
+            config.MotorPhase <> DraftMotorPhase.MetadataManagement AndAlso
+            config.MotorPhase <> DraftMotorPhase.Dimensioning AndAlso
+            (config.CreateDraft OrElse config.CreatePdf OrElse config.CreateDxfFromDraft)
+
+        If runDraftOutputBranch Then
+            Dim dftStem As String = If(runLab, DraftStandaloneMotorPaths.DimLabStemForDraft(baseName, config.DimLabMode), baseName)
             Dim outDft As String = GetOutputPath(outDftDir, dftStem, ".dft", config.OverwriteExisting)
             _logger.Log("[DFT][FULLPATH] " & outDft)
             If runLab Then _logger.Log("[DIMLAB][DFT][TARGET_FULLPATH] " & outDft)
@@ -378,209 +984,57 @@ Public Class DraftGenerationEngine
                         End Try
                     End If
                     Dim savedDraftReady As Boolean = False
+                    Dim diagCapturedForOpenDft As Boolean = False
                     If config.InsertPropertiesInTitleBlock Then
-                        Dim needPreSaveSync As Boolean =
-                            (config.TitleBlockPropertySourceMode = TitleBlockPropertySource.FromModelLink) OrElse
-                            (config.TitleBlockPropertySourceMode = TitleBlockPropertySource.FromDraft AndAlso Not config.CreateDraft)
-                        If needPreSaveSync Then
-                            Dim syncCount As Integer = SolidEdgePropertyService.ApplyTitleBlockPropertyStrategy(dftDoc, modelPath, config, _logger)
-                            _logger.Log($"[PROPS] Sincronización pre-guardado completada. Campos escritos={syncCount}")
+                        If Not viewMotorOnly Then
+                            Dim needPreSaveSync As Boolean =
+                                (config.TitleBlockPropertySourceMode = TitleBlockPropertySource.FromModelLink) OrElse
+                                (config.TitleBlockPropertySourceMode = TitleBlockPropertySource.FromDraft AndAlso Not config.CreateDraft)
+                            If needPreSaveSync Then
+                                Dim syncCount As Integer = SolidEdgePropertyService.ApplyTitleBlockPropertyStrategy(dftDoc, modelPath, config, _logger)
+                                _logger.Log($"[PROPS] Sincronización pre-guardado completada. Campos escritos={syncCount}")
+                            Else
+                                _logger.Log("[PROPS] Modo FromDraft: se aplicará sobre DFT guardado (FileProperties) y fallback a documento abierto.")
+                            End If
                         Else
-                            _logger.Log("[PROPS] Modo FromDraft: se aplicará sobre DFT guardado (FileProperties) y fallback a documento abierto.")
+                            _logger.Log("[MOTOR][VISTAS] Metadatos de cajetín omitidos (ejecutar ""Gestor Metadatos DFT"" si aplica).")
                         End If
                     End If
 
                         If config.KeepSolidEdgeVisible Then FitDraftView(app, dftDoc)
 
-                    Dim normCfg As DimensioningNormConfig = If(config.DimensioningNormConfig Is Nothing,
-                        DimensioningNormConfig.DefaultUneLegacyConfig(), config.DimensioningNormConfig)
-
-                    Dim protectedZones As IList(Of ProtectedZone2D) = Nothing
-                    If dftDoc IsNot Nothing AndAlso normCfg.PrepareExistingPartsListTop Then
-                        Try
-                            Dim shPl As Sheet = Nothing
-                            Try : shPl = dftDoc.ActiveSheet : Catch : End Try
-                            If shPl IsNot Nothing Then
-                                Dim sheetViews As New List(Of DrawingView)()
-                                Try
-                                    Dim nDv As Integer = shPl.DrawingViews.Count
-                                    For idv As Integer = 1 To nDv
-                                        Try
-                                            sheetViews.Add(CType(shPl.DrawingViews.Item(idv), DrawingView))
-                                        Catch
-                                        End Try
-                                    Next
-                                Catch
-                                End Try
-                                Dim plZone As ProtectedZone2D = PartsListSuperiorService.PrepararPartsListSuperiorExistente(
-                                    dftDoc, shPl, modelPath, normCfg, Sub(m) _logger.Log(m), sheetViews)
-                                protectedZones = PartsListSuperiorService.DetectarZonasProtegidas(shPl, plZone, normCfg, Sub(m) _logger.Log(m))
-                                PartsListSuperiorService.TryNudgeViewsOutsideZone(shPl, plZone, Sub(m) _logger.Log(m))
-                            End If
-                        Catch exPl As Exception
-                            _logger.Log("[PARTSLIST][ERR] " & exPl.Message)
-                        End Try
-                    End If
-
-                    Dim dimLabForensicInteractive As Boolean = runLab AndAlso config.EnableDimLabInteractivePause
-                    If runLab Then
-                        Try
-                            app.Visible = True
-                            app.DisplayAlerts = True
-                        Catch exVis As Exception
-                            _logger.Log("[DIMLAB][INTERACTIVE] WARN set Visible/DisplayAlerts: " & exVis.Message)
-                        End Try
-                        _logger.Log("[DIMLAB][INTERACTIVE] app.Visible=True DisplayAlerts=True")
-                        _logger.Log("[DIMLAB][EXPORT_POLICY] skip_pdf_dxf_flat=True keep_dft_open_until_review=True")
-                        _logger.Log("[DIMLAB][LOG_ROOT_HINT] texto DimLab=" & IO.Path.Combine(config.OutputFolder, "OUT_DIMLAB"))
-                    End If
-                    If dimLabForensicInteractive Then
-                        _logger.Log("[DIMLAB][INTERACTIVE] forensic_MsgBox_PAUSE=True")
-                        _logger.Log("[DIMLAB][INTERACTIVE] skipExportClose=True")
-                    End If
-                    ' El acotado automático se aplica también a los ensamblajes (.asm): mismo motor que PAR/PSM.
-                    Dim runMainDimensioning As Boolean = (dftDoc IsNot Nothing AndAlso config.EnableAutoDimensioning AndAlso Not runLab)
-                    If GenerationEngineRuntime.DebugDiagnosticsMode OrElse Not GenerationEngineRuntime.ProductionMode Then
-                        _logger.Log("[DIM][FLAGS] Config_EnableAutoDimensioning=" & config.EnableAutoDimensioning.ToString())
-                        _logger.Log("[DIM][FLAGS] Config_EnableDrawingViewDimensioningLab=" & config.EnableDrawingViewDimensioningLab.ToString())
-                        _logger.Log("[DIM][FLAGS] DimensionInsertionConfig_EnableDrawingViewDimensioningLab=" & DimensionInsertionConfig.EnableDrawingViewDimensioningLab.ToString())
-                        _logger.Log("[DIM][FLAGS] Effective_runLab=" & runLab.ToString())
-                        _logger.Log("[DIM][FLAGS] Effective_runMainDimensioning=" & runMainDimensioning.ToString())
-                        Dim decisionReason As String = If(runLab, "lab_mode_exclusive", "normal")
-                        _logger.Log("[DIM][DECISION] runLab=" & runLab.ToString() & " runMainDimensioning=" & runMainDimensioning.ToString() & " reason=" & decisionReason)
-                    End If
-
-                    If config.RequestedDimLabFromDedicatedButton AndAlso Not runLab Then
-                        _logger.Log("[DIMLAB][ABORT] requested_lab_button_but_effective_runLab_false")
-                        runResult.DimLabRunAbortedMisconfigured = True
-                        runResult.ErrorCount += 1
-                        Try
-                            If dftDoc IsNot Nothing Then dftDoc.Close(False)
-                        Catch
-                        End Try
-                        TryReleaseComObject(dftDoc)
-                        dftDoc = Nothing
-                        Return
-                    End If
-
-                    If runLab AndAlso dftDoc IsNot Nothing Then
-                        _logger.Log("[DIMLAB][RUN] exclusive=True")
-                        Try
-                            Dim outLab As String = IO.Path.Combine(config.OutputFolder, "OUT_DIMLAB")
-                            DrawingViewDimensioningLab.Run(
-                                app, dftDoc, Nothing, False, Sub(m) _logger.Log(m), outLab, dimLabForensicInteractive,
-                                config.DimLabMode, config.EnableDimLabVisibleProbe, config.EnableDimLabAlternativePlacement,
-                                config.EnableDimLabHorizontalControlInVerticalOnly,
-                                config.DimLabKeepFailedDimensions,
-                                config.DimLabCleanPreviousLabDimensions)
-                        Catch exLab As Exception
-                            _logger.Log("[DIMLAB][FATAL] " & exLab.ToString())
-                        End Try
-                        _logger.Log("[DIMLAB][EXIT_BEFORE_MAIN_ENGINE] true exclusive_block_main_dimensioning=True")
-                        _logger.Log("[DIM][GATE_SKIPPED] main_engine_blocked reason=lab_mode_exclusive")
-                    ElseIf runMainDimensioning Then
-                        Try
-                            _logger.Log("[DIM][PIPE] DimensioningEngine.RunAutoDimensioning → motor DV*2d + UNE/ISO 129")
-                            DimensioningEngine.RunAutoDimensioning(dftDoc, mainDrawingView, _logger, normCfg, protectedZones)
-                        Catch exDim As Exception
-                            _logger.Log("[DIM][FATAL] " & exDim.ToString())
-                        End Try
+                    If Not viewMotorOnly Then
+                        If Not ApplyDimensioningAndLabsBlock(app, dftDoc, modelPath, baseName, outDft, config, runLab, isAssemblyDraft, mainDrawingView, runResult) Then
+                            Try
+                                If dftDoc IsNot Nothing Then dftDoc.Close(False)
+                            Catch
+                            End Try
+                            TryReleaseComObject(dftDoc)
+                            Return
+                        End If
                     Else
-                        _logger.Log("[DIM][GATE] Acotado automático no ejecutado (deshabilitado, sin DFT o laboratorio sin documento).")
+                        _logger.Log("[MOTOR][VISTAS] Acotación y laboratorios omitidos.")
                     End If
 
-                    Dim envDrop2D As String = ""
-                    Try : envDrop2D = System.Environment.GetEnvironmentVariable("DROP2D_LAB") : Catch : envDrop2D = "" : End Try
-                    Dim runDvMethodLab As Boolean = config.RunDVGeometryMethodDiscoveryLab
-                    Dim runDvDimLab As Boolean = config.RunDVGeometryDimensionPlacementLab
-                    Dim runDropSheetsLab As Boolean = config.RunDropCreatedSheetsDimensionLab
-                    Dim runDrop2D As Boolean = Not runDvMethodLab AndAlso Not runDvDimLab AndAlso Not runDropSheetsLab AndAlso (
-                        config.RunDropViewsTo2DModelLab OrElse
-                        String.Equals(envDrop2D, "1", StringComparison.OrdinalIgnoreCase) OrElse
-                        String.Equals(envDrop2D, "true", StringComparison.OrdinalIgnoreCase))
-                    If runDrop2D OrElse runDropSheetsLab OrElse runDvDimLab OrElse runDvMethodLab Then
-                        runMainDimensioning = False
-                    End If
-
-                    If runDvMethodLab AndAlso Not isAssemblyDraft AndAlso dftDoc IsNot Nothing Then
-                        Try
-                            _logger.Log("[DV_METHODLAB][RUN] enabled=True source=config")
-                            Dim prevAlerts As Boolean = True
-                            Try : prevAlerts = app.DisplayAlerts : Catch : End Try
-                            Try
-                                app.DisplayAlerts = False
-                                _logger.Log("[DV_METHODLAB][ALERTS] DisplayAlerts=False (suppress interactive dialogs during probing)")
-                            Catch exSetAlerts As Exception
-                                _logger.Log("[DV_METHODLAB][ALERTS][WARN] " & exSetAlerts.Message)
-                            End Try
-                            Try
-                                DVGeometryMethodDiscoveryLab.Run(app, dftDoc, Sub(m) _logger.Log(m), False)
-                            Finally
-                                Try
-                                    app.DisplayAlerts = prevAlerts
-                                    _logger.Log("[DV_METHODLAB][ALERTS] DisplayAlerts restored=" & prevAlerts.ToString())
-                                Catch
-                                End Try
-                            End Try
-                        Catch exDvMethod As Exception
-                            _logger.Log("[DV_METHODLAB][FATAL] " & exDvMethod.ToString())
-                        End Try
-                    ElseIf runDvDimLab AndAlso Not isAssemblyDraft AndAlso dftDoc IsNot Nothing Then
-                        Try
-                            _logger.Log("[DV_DIMLAB][RUN] enabled=True source=config")
-                            DVGeometryDimensionPlacementLab.Run(app, dftDoc, Sub(m) _logger.Log(m), False)
-                        Catch exDv As Exception
-                            _logger.Log("[DV_DIMLAB][FATAL] " & exDv.ToString())
-                        End Try
-                    ElseIf runDropSheetsLab AndAlso Not isAssemblyDraft AndAlso dftDoc IsNot Nothing Then
-                        Try
-                            _logger.Log("[DROP_SHEETS][RUN] enabled=True source=config")
-                            If config.RunDropViewsTo2DModelLab OrElse
-                                String.Equals(envDrop2D, "1", StringComparison.OrdinalIgnoreCase) OrElse
-                                String.Equals(envDrop2D, "true", StringComparison.OrdinalIgnoreCase) Then
-                                _logger.Log("[DROP_SHEETS][NOTE] omitiendo DROP2D (RunDropCreatedSheetsDimensionLab tiene prioridad; no se usa hoja 2D Model)")
-                            End If
-                            DropCreatedSheetsDimensionLab.Run(app, dftDoc, Sub(m) _logger.Log(m), config.DropCreatedSheetsDimensionLabDebugSave)
-                        Catch exSheets As Exception
-                            _logger.Log("[DROP_SHEETS][FATAL] " & exSheets.ToString())
-                        End Try
-                    ElseIf runDrop2D AndAlso Not isAssemblyDraft AndAlso dftDoc IsNot Nothing Then
-                        Try
-                            _logger.Log("[DROP2D][RUN] enabled=True source=" &
-                                        If(config.RunDropViewsTo2DModelLab, "config", "env:DROP2D_LAB"))
-                            DropViewsTo2DModelLab.Run(app, dftDoc, Sub(m) _logger.Log(m), False)
-                        Catch exDrop As Exception
-                            _logger.Log("[DROP2D][FATAL] " & exDrop.ToString())
-                        End Try
-                    ElseIf GenerationEngineRuntime.DebugDiagnosticsMode Then
-                        _logger.Log("[DV_METHODLAB][RUN] enabled=False")
-                        _logger.Log("[DV_DIMLAB][RUN] enabled=False")
-                        _logger.Log("[DROP2D][RUN] enabled=False")
-                        _logger.Log("[DROP_SHEETS][RUN] enabled=False")
-                    End If
-
-                    If Not runLab AndAlso GenerationEngineRuntime.ProductionMode Then
-                        WriteProductionSummary(modelPath, outDft)
-                    End If
-
-                    If Not runLab AndAlso Not isAssemblyDraft AndAlso config.RunUnitHorizontalExteriorDimensionTest AndAlso dftDoc IsNot Nothing Then
-                        Try
-                            UnitHorizontalExteriorDimensionTest.Run(
-                                dftDoc,
-                                Sub(m As String) _logger.Log(m)
-                            )
-                        Catch exUnit As Exception
-                            _logger.Log("[DIM][UNIT][ERR] " & exUnit.Message)
-                        End Try
-                    End If
+                    TryApplyPartListMetadataAfterDraftDimensioning(app, dftDoc, modelPath, config, runLab)
 
                     If config.CreateDraft Then
                         _logger.Log("Guardando DFT...")
                         ExecuteComWithRetry(Sub() dftDoc.SaveAs(outDft), "Save DFT")
                         savedDraftReady = IO.File.Exists(outDft)
 
+                        ' DIAGNÓSTICOS AUTOMÁTICOS: audit + geometry del DFT ANTES de cualquier cierre/reapertura.
+                        ' El DFT NO se debe cerrar antes de generar estos dos archivos.
+                        If _diagnostics IsNot Nothing AndAlso dftDoc IsNot Nothing Then
+                            Try
+                                diagCapturedForOpenDft = _diagnostics.CaptureDiagnosticsForDft(dftDoc, baseName)
+                            Catch exDiagCapture As Exception
+                                _logger.LogException("RunDiagnosticsContext.CaptureDiagnosticsForDft", exDiagCapture)
+                            End Try
+                        End If
+
                         ' Asegurar persistencia/refresco de propiedades en el DFT ya guardado cuando aplica.
-                        If config.InsertPropertiesInTitleBlock AndAlso savedDraftReady AndAlso Not runLab Then
+                        If Not viewMotorOnly AndAlso config.InsertPropertiesInTitleBlock AndAlso savedDraftReady AndAlso Not runLab Then
                             Try
                                 dftDoc.Close(False)
                             Catch
@@ -597,6 +1051,17 @@ Public Class DraftGenerationEngine
                         If runLab AndAlso savedDraftReady Then
                             runResult.DimLabReferenceDftFullPath = outDft
                         End If
+                    End If
+
+                    If Not diagCapturedForOpenDft AndAlso _diagnostics IsNot Nothing AndAlso dftDoc IsNot Nothing Then
+                        Try
+                            diagCapturedForOpenDft = _diagnostics.CaptureDiagnosticsForDft(dftDoc, baseName)
+                            If diagCapturedForOpenDft Then
+                                _logger.Log("[DIAG][FALLBACK] audit+geometry capturados sobre DFT abierto (sin SaveAs previo o captura omitida).")
+                            End If
+                        Catch exDiagLate As Exception
+                            _logger.LogException("RunDiagnosticsContext.CaptureDiagnosticsForDft (DFT abierto)", exDiagLate)
+                        End Try
                     End If
 
                     Dim exportDoc As DraftDocument = dftDoc
@@ -616,6 +1081,7 @@ Public Class DraftGenerationEngine
                             ExecuteComWithRetry(Sub() ExportDraftToPdf(app, exportDoc, outPdf), "Export PDF")
                             _logger.Log($"PDF: {IOPath.GetFileName(outPdf)}")
                             runResult.PdfCreatedCount += 1
+                            runResult.LastExportedPdfFullPath = outPdf
                         End If
 
                         If Not runLab AndAlso config.CreateDxfFromDraft Then
@@ -660,7 +1126,9 @@ Public Class DraftGenerationEngine
             Dim outFlat As String = GetOutputPath(outDxfDir, baseName & "_FLAT", ".dxf", config.OverwriteExisting)
             Try
                 Dim errMsg As String = ""
-                Dim ok As Boolean = ExecuteComWithRetry(Function() FlatDxfExporter.ExportFlatDxf(app, modelPath, outFlat, errMsg), "Export Flat DXF")
+                Dim ok As Boolean = ExecuteComWithRetry(
+                    Function() FlatDxfExporter.ExportFlatDxf(app, modelPath, outFlat, errMsg, Sub(m) _logger.Log(m)),
+                    "Export Flat DXF")
                 If ok Then
                     _logger.Log($"DXF(Flat): {IOPath.GetFileName(outFlat)}")
                     runResult.FlatDxfCreatedCount += 1
@@ -705,6 +1173,8 @@ Public Class DraftGenerationEngine
             If String.IsNullOrWhiteSpace(p) Then Continue For
             Dim ext As String = IOPath.GetExtension(p).ToLowerInvariant()
             If ext = ".par" OrElse ext = ".psm" Then
+                expanded.Add(p)
+            ElseIf ext = ".dft" Then
                 expanded.Add(p)
             ElseIf ext = ".asm" Then
                 If useManualSelection Then
@@ -975,18 +1445,4 @@ Public Class DraftGenerationEngine
         End Try
     End Sub
 
-    Private Shared Function GetDimLabDraftStemPiece(baseStem As String, mode As DimLabMode) As String
-        Select Case mode
-            Case DimLabMode.VerticalOnly
-                Return baseStem & "_DIMLAB_REF_VERTICAL"
-            Case DimLabMode.Full
-                Return baseStem & "_DIMLAB_REF_FULL"
-            Case DimLabMode.CleanFull
-                Return baseStem & "_DIMLAB_REF_CLEANFULL"
-            Case DimLabMode.CleanFullStrict
-                Return baseStem & "_DIMLAB_REF_CLEANFULLSTRICT"
-            Case Else
-                Return baseStem & "_DIMLAB_REF_HORIZONTAL"
-        End Select
-    End Function
 End Class

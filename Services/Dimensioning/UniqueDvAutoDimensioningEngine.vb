@@ -146,6 +146,7 @@ Friend NotInheritable Class UniqueDvAutoDimensioningEngine
     End Function
 
     Private Shared Function CallByNameSafe(obj As Object, member As String) As Object
+        If obj Is Nothing OrElse String.IsNullOrWhiteSpace(member) Then Return Nothing
         Try
             Return CallByName(obj, member, CallType.Get)
         Catch

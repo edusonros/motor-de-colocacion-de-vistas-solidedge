@@ -60,6 +60,46 @@ Public NotInheritable Class DrawingMetadataService
         Return m
     End Function
 
+    ''' <summary>Metadatos de cajetín y fuente PART_LIST a partir del mismo snapshot que llega del motor (<see cref="JobConfiguration"/> en ejecución).</summary>
+    Public Shared Function BuildFromJobConfiguration(job As JobConfiguration) As DrawingMetadataInput
+        If job Is Nothing Then Return New DrawingMetadataInput()
+        Dim fechaVal As DateTime = DateTime.Today
+        If Not String.IsNullOrWhiteSpace(job.FechaPlano) Then
+            Dim d As DateTime
+            If DateTime.TryParse(job.FechaPlano, CultureInfo.InvariantCulture, DateTimeStyles.None, d) Then
+                fechaVal = d.Date
+            ElseIf DateTime.TryParse(job.FechaPlano, d) Then
+                fechaVal = d.Date
+            End If
+        End If
+        Dim nombreArchivo As String = If(String.IsNullOrWhiteSpace(job.PartListNombreArchivo), "", job.PartListNombreArchivo.Trim())
+        If nombreArchivo = "" AndAlso Not String.IsNullOrWhiteSpace(job.InputFile) Then
+            nombreArchivo = Path.GetFileName(job.InputFile)
+        End If
+        Dim numPartList As String = job.DrawingNumber
+        If String.IsNullOrWhiteSpace(numPartList) Then numPartList = "1"
+        Return New DrawingMetadataInput With {
+            .Cliente = job.ClientName,
+            .Proyecto = job.ProjectName,
+            .Pedido = job.Pedido,
+            .Plano = job.DrawingNumber,
+            .Titulo = job.DrawingTitle,
+            .Revision = job.Revision,
+            .Autor = job.AuthorName,
+            .Fecha = fechaVal,
+            .Numero = numPartList.Trim(),
+            .Cantidad = If(String.IsNullOrWhiteSpace(job.PartListCantidad), "1", job.PartListCantidad.Trim()),
+            .NombreArchivo = nombreArchivo,
+            .Denominacion = job.DrawingTitle,
+            .Material = job.Material,
+            .Espesor = job.Thickness,
+            .LargoL = job.PartListL,
+            .AltoH = job.PartListH,
+            .DatoD = job.PartListD,
+            .Peso = job.Weight
+        }
+    End Function
+
     Public Shared Sub ApplyToUi(main As MainForm, data As DrawingMetadataInput,
                                 Optional applyCajetin As Boolean = True,
                                 Optional applyPartList As Boolean = True)
@@ -205,25 +245,28 @@ Public NotInheritable Class DrawingMetadataService
         UiMetadataFieldTrace(logger, traceUiLog, traceKind, "Pedido", data.Pedido)
 
         data.Plano = FirstNonEmpty(
-            SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "SummaryInformation", {"Title", "Document Title", "Titulo", "Título"}),
-            SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "Custom", {"Plano"}))
+            SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "ProjectInformation", {"Document Number", "Número de documento", "Part Number", "Número de pieza"}),
+            SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "Custom", {"Plano", "plan", "CODIGO", "Numero de plano", "Número de plano"}))
         data.PlanoSource = If(String.IsNullOrWhiteSpace(data.Plano), "vacío", "modelo")
         UiMetadataFieldTrace(logger, traceUiLog, traceKind, "Plano", data.Plano)
 
+        ' En español Summary «Título» / COM Title suele guardar denominación (no confundir con número de plano).
         data.Titulo = FirstNonEmpty(
-            SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "SummaryInformation", {"Subject"}),
+            SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "SummaryInformation", {"Subject", "Title", "Document Title", "Título", "Titulo"}),
             SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "Custom", {"Titulo", "Título"}))
         data.TituloSource = If(String.IsNullOrWhiteSpace(data.Titulo), "vacío", "modelo")
         UiMetadataFieldTrace(logger, traceUiLog, traceKind, "Titulo", data.Titulo)
 
         If fillPartList Then
             data.Denominacion = FirstNonEmpty(
-                SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "Custom", {"Denominacion", "Denominación"}))
+                SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "Custom", {"Denominacion", "Denominación"}),
+                If(String.IsNullOrWhiteSpace(data.Titulo), "", data.Titulo))
             data.DenominacionSource = If(String.IsNullOrWhiteSpace(data.Denominacion), "vacío", "modelo")
             UiMetadataFieldTrace(logger, traceUiLog, traceKind, "Denominacion", data.Denominacion)
         End If
 
         data.Revision = FirstNonEmpty(
+            SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "SummaryInformation", {"Número de revisión", "Revision Number", "Revision", "Revisión"}),
             SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "ProjectInformation", {"Revision", "Revision Number", "Revisión"}),
             SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "Custom", {"Revision"}))
         data.RevisionSource = If(String.IsNullOrWhiteSpace(data.Revision), "vacío", "modelo")
@@ -248,9 +291,12 @@ Public NotInheritable Class DrawingMetadataService
         End If
 
         If fillPartList Then
+            ' Propiedades personalizadas L/H/D/Material… en la pieza o DFT (prioridad sobre caja 3D / cotas).
+            TryFillPartListFieldsFromDocumentCustomIfEmpty(doc, data, logger, "modelo")
+
             TryDetectMaterial(doc, logger, data)
             UiMetadataFieldTrace(logger, traceUiLog, traceKind, "Material", data.Material)
-            TryDetectEspesor(doc, Nothing, logger, data)
+            TryDetectEspesor(doc, doc, logger, data)
             If String.IsNullOrWhiteSpace(data.Espesor) Then data.EspesorSource = "Missing"
             UiMetadataFieldTrace(logger, traceUiLog, traceKind, "Espesor", data.Espesor)
             TryDetectPeso(doc, logger, data)
@@ -260,6 +306,31 @@ Public NotInheritable Class DrawingMetadataService
             Else
                 UiMetadataFieldTrace(logger, traceUiLog, traceKind, "Peso", data.Peso)
             End If
+
+            ' L/H/D con la misma prioridad que en carga de metadatos (DFT: cotas/vistas; PAR/PSM: caja 3D).
+            Try
+                Dim safePath = If(inputPath, "").Trim()
+                Dim extOpen = If(safePath.Length > 0, Path.GetExtension(safePath).ToLowerInvariant(), "")
+                Dim lGeom As String = "", hGeom As String = "", dGeom As String = "", lhdSrcGeom As String = ""
+                If extOpen = ".dft" Then
+                    If TryComputeLhdSameAsCalcButton(doc, Nothing, logger, lGeom, hGeom, dGeom, lhdSrcGeom) Then
+                        If String.IsNullOrWhiteSpace(data.LargoL) Then data.LargoL = lGeom
+                        If String.IsNullOrWhiteSpace(data.AltoH) Then data.AltoH = hGeom
+                        If String.IsNullOrWhiteSpace(data.DatoD) Then data.DatoD = dGeom
+                        If Not String.IsNullOrWhiteSpace(lhdSrcGeom) Then data.LHDSource = lhdSrcGeom
+                    End If
+                ElseIf extOpen = ".par" OrElse extOpen = ".psm" Then
+                    If TryComputeLhdSameAsCalcButton(Nothing, doc, logger, lGeom, hGeom, dGeom, lhdSrcGeom) Then
+                        If String.IsNullOrWhiteSpace(data.LargoL) Then data.LargoL = lGeom
+                        If String.IsNullOrWhiteSpace(data.AltoH) Then data.AltoH = hGeom
+                        If String.IsNullOrWhiteSpace(data.DatoD) Then data.DatoD = dGeom
+                        If Not String.IsNullOrWhiteSpace(lhdSrcGeom) Then data.LHDSource = lhdSrcGeom
+                    End If
+                End If
+            Catch ex As Exception
+                If logger IsNot Nothing Then logger.Log("[PARTLISTDATA][LHD][LOAD_TITLEBLOCK][ERR] " & ex.Message)
+            End Try
+
             Try
                 If Not String.IsNullOrWhiteSpace(inputPath) Then
                     data.NombreArchivo = Path.GetFileName(inputPath)
@@ -333,6 +404,24 @@ Public NotInheritable Class DrawingMetadataService
             End If
         Next
 
+        ' Parte del cajetín enlaza contra Project / Summary cuando no hay entrada en Personalizado (nombres se recortan al leer desde COM).
+        For Each ck In customKeys
+            Dim vProj = SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "ProjectInformation", {ck})
+            If Not String.IsNullOrWhiteSpace(vProj) Then
+                data.Pedido = vProj.Trim()
+                data.PedidoSource = "ProjectInformation." & ck
+                If logger IsNot Nothing Then logger.Log("[METADATA][PEDIDO][FROM] " & data.PedidoSource & " = " & data.Pedido)
+                Return
+            End If
+            Dim vSum = SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "SummaryInformation", {ck})
+            If Not String.IsNullOrWhiteSpace(vSum) Then
+                data.Pedido = vSum.Trim()
+                data.PedidoSource = "SummaryInformation." & ck
+                If logger IsNot Nothing Then logger.Log("[METADATA][PEDIDO][FROM] " & data.PedidoSource & " = " & data.Pedido)
+                Return
+            End If
+        Next
+
         ' Algunas plantillas enlazan «pedido» al nº de existencias / stock (convención ERP).
         Dim stockKeys As String() = {"Stock Number", "Número de existencias"}
         Dim stock = SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "ProjectInformation", stockKeys)
@@ -342,6 +431,17 @@ Public NotInheritable Class DrawingMetadataService
             If logger IsNot Nothing Then logger.Log("[METADATA][PEDIDO][FROM] " & data.PedidoSource & " = " & data.Pedido)
             Return
         End If
+
+        Dim looseNeedles As String() = {"pedido", "Purchase Order", "OrdenCompra", "orden de compra", "número de pedido"}
+        For Each nd In looseNeedles
+            Dim pv = SolidEdgePropertyService.TryFindDocumentPropertyValueByLoosePropertyName(doc, nd)
+            If Not String.IsNullOrWhiteSpace(pv) Then
+                data.Pedido = pv.Trim()
+                data.PedidoSource = "propiedad (nombre contiene «" & nd & "»)"
+                If logger IsNot Nothing Then logger.Log("[METADATA][PEDIDO][FROM_LOOSE] " & data.PedidoSource & " = " & data.Pedido)
+                Return
+            End If
+        Next
 
         If Not inferFromPath Then Return
         data.Pedido = InferPedidoFromPath(inputPath, logger)
@@ -716,6 +816,29 @@ Public NotInheritable Class DrawingMetadataService
         End Try
     End Function
 
+    ''' <summary>Misma prioridad que el cálculo L/H/D al cargar metadatos: DFT (<see cref="TryComputeLhdFromDraft"/>), si falla el modelo (<see cref="TryComputeLhdFromModelDoc"/>).</summary>
+    Public Shared Function TryComputeLhdSameAsCalcButton(draftDoc As Object, modelDoc As Object, logger As Logger,
+                                                         ByRef L As String, ByRef H As String, ByRef D As String,
+                                                         ByRef lhdSourceLabel As String) As Boolean
+        L = ""
+        H = ""
+        D = ""
+        lhdSourceLabel = ""
+        If draftDoc IsNot Nothing Then
+            If TryComputeLhdFromDraft(draftDoc, logger, L, H, D) Then
+                lhdSourceLabel = "Calculado (DFT)"
+                Return True
+            End If
+        End If
+        If modelDoc IsNot Nothing Then
+            If TryComputeLhdFromModelDoc(modelDoc, logger, L, H, D) Then
+                lhdSourceLabel = "Caja 3D (modelo)"
+                Return True
+            End If
+        End If
+        Return False
+    End Function
+
     Private Shared Function TryCollectDistinctLengthsFromDimensions(draftDoc As Object, logger As Logger, ByRef mmValues As List(Of Double)) As Boolean
         mmValues = New List(Of Double)()
         Try
@@ -813,11 +936,291 @@ Public NotInheritable Class DrawingMetadataService
         Return out
     End Function
 
+    ''' <summary>Rellena huecos del snapshot PART_LIST desde <c>Custom.*</c> del documento (pieza o DFT); no pisa valores ya informados por job/UI.</summary>
+    Private Shared Sub TryFillPartListFieldsFromDocumentCustomIfEmpty(doc As Object, data As DrawingMetadataInput, logger As Logger, sourceShort As String)
+        If doc Is Nothing OrElse data Is Nothing Then Return
+        Dim tagBase As String = If(String.IsNullOrWhiteSpace(sourceShort), "doc", sourceShort.Trim())
+
+        Dim v As String
+        If String.IsNullOrWhiteSpace(data.LargoL) Then
+            v = SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "Custom", {"L"})
+            If Not String.IsNullOrWhiteSpace(v) Then
+                data.LargoL = v.Trim()
+                data.LHDSource = tagBase & " (Custom.L)"
+                If logger IsNot Nothing Then logger.Log("[PARTLISTDATA][ENRICH][" & tagBase & "] Custom.L=" & data.LargoL)
+            End If
+        End If
+        If String.IsNullOrWhiteSpace(data.AltoH) Then
+            v = SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "Custom", {"H"})
+            If Not String.IsNullOrWhiteSpace(v) Then
+                data.AltoH = v.Trim()
+                data.LHDSource = tagBase & " (Custom.L/H/D)"
+                If logger IsNot Nothing Then logger.Log("[PARTLISTDATA][ENRICH][" & tagBase & "] Custom.H=" & data.AltoH)
+            End If
+        End If
+        If String.IsNullOrWhiteSpace(data.DatoD) Then
+            v = SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "Custom", {"D"})
+            If Not String.IsNullOrWhiteSpace(v) Then
+                data.DatoD = v.Trim()
+                data.LHDSource = tagBase & " (Custom.L/H/D)"
+                If logger IsNot Nothing Then logger.Log("[PARTLISTDATA][ENRICH][" & tagBase & "] Custom.D=" & data.DatoD)
+            End If
+        End If
+
+        If String.IsNullOrWhiteSpace(data.Material) Then
+            v = SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "Custom", {"Material", "MATERIAL", "MAT", "MATERIA"})
+            If Not String.IsNullOrWhiteSpace(v) Then
+                data.Material = v.Trim()
+                data.MaterialSource = tagBase & " (Custom.Material)"
+                If logger IsNot Nothing Then logger.Log("[PARTLISTDATA][ENRICH][" & tagBase & "] Custom.Material=" & data.Material)
+            End If
+        End If
+
+        If String.IsNullOrWhiteSpace(data.Espesor) OrElse String.Equals(data.EspesorSource, "Missing", StringComparison.OrdinalIgnoreCase) Then
+            v = SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "Custom", {"Espesor", "ESPESOR", "Thickness", "THICKNESS", "Thick", "Calib"})
+            If Not String.IsNullOrWhiteSpace(v) Then
+                data.Espesor = NormalizeThicknessDisplay(v)
+                data.EspesorSource = tagBase & " (Custom.Espesor)"
+                If logger IsNot Nothing Then logger.Log("[PARTLISTDATA][ENRICH][" & tagBase & "] Custom.Espesor=" & data.Espesor)
+            End If
+        End If
+
+        If String.IsNullOrWhiteSpace(data.Peso) Then
+            v = SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "Custom", {"Peso", "Weight", "WEIGHT", "Mass"})
+            If Not String.IsNullOrWhiteSpace(v) Then
+                data.Peso = FormatWeightForUi(v)
+                data.PesoSource = tagBase & " (Custom.Peso)"
+                If logger IsNot Nothing Then logger.Log("[PARTLISTDATA][ENRICH][" & tagBase & "] Custom.Peso=" & data.Peso)
+            End If
+        End If
+
+        If String.IsNullOrWhiteSpace(data.Denominacion) Then
+            v = SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "Custom", {"Denominacion", "Denominación"})
+            If Not String.IsNullOrWhiteSpace(v) Then
+                data.Denominacion = v.Trim()
+                data.DenominacionSource = tagBase & " (Custom.Denominacion)"
+            End If
+        End If
+
+        If String.IsNullOrWhiteSpace(data.Plano) Then
+            v = SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "Custom", {"CODIGO", "Codigo", "Código"})
+            If Not String.IsNullOrWhiteSpace(v) Then
+                data.Plano = v.Trim()
+                data.PlanoSource = tagBase & " (Custom.CODIGO)"
+            End If
+        End If
+    End Sub
+
+    ''' <summary>Antes de escribir Custom en pieza/DFT: metadatos de la pieza (Custom + detectores) y refuerzo desde DFT; L/H/D geométricos si siguen vacíos.</summary>
+    Private Shared Sub TryEnrichPartListSnapshotFromLinkedDocuments(modelDoc As Object, draftDoc As Object, data As DrawingMetadataInput, logger As Logger)
+        If data Is Nothing Then Return
+
+        If modelDoc IsNot Nothing Then
+            TryFillPartListFieldsFromDocumentCustomIfEmpty(modelDoc, data, logger, "pieza")
+        End If
+        If draftDoc IsNot Nothing Then
+            TryFillPartListFieldsFromDocumentCustomIfEmpty(draftDoc, data, logger, "DFT")
+        End If
+
+        If String.IsNullOrWhiteSpace(data.Material) Then
+            If modelDoc IsNot Nothing Then TryDetectMaterial(modelDoc, logger, data)
+            If String.IsNullOrWhiteSpace(data.Material) AndAlso draftDoc IsNot Nothing Then TryDetectMaterial(draftDoc, logger, data)
+        End If
+
+        If String.IsNullOrWhiteSpace(data.Espesor) OrElse String.Equals(data.EspesorSource, "Missing", StringComparison.OrdinalIgnoreCase) Then
+            TryDetectEspesor(modelDoc, draftDoc, logger, data)
+        End If
+
+        If String.IsNullOrWhiteSpace(data.Peso) Then
+            If modelDoc IsNot Nothing Then TryDetectPeso(modelDoc, logger, data)
+            If String.IsNullOrWhiteSpace(data.Peso) AndAlso draftDoc IsNot Nothing Then TryDetectPeso(draftDoc, logger, data)
+        End If
+
+        If String.IsNullOrWhiteSpace(data.LargoL) OrElse String.IsNullOrWhiteSpace(data.AltoH) OrElse String.IsNullOrWhiteSpace(data.DatoD) Then
+            Dim lV As String = "", hV As String = "", dV As String = "", lhdSrc As String = ""
+            If TryComputeLhdSameAsCalcButton(draftDoc, modelDoc, logger, lV, hV, dV, lhdSrc) Then
+                If String.IsNullOrWhiteSpace(data.LargoL) AndAlso Not String.IsNullOrWhiteSpace(lV) Then data.LargoL = lV
+                If String.IsNullOrWhiteSpace(data.AltoH) AndAlso Not String.IsNullOrWhiteSpace(hV) Then data.AltoH = hV
+                If String.IsNullOrWhiteSpace(data.DatoD) AndAlso Not String.IsNullOrWhiteSpace(dV) Then data.DatoD = dV
+                If Not String.IsNullOrWhiteSpace(lhdSrc) AndAlso String.IsNullOrWhiteSpace(data.LHDSource) Then data.LHDSource = lhdSrc
+                If logger IsNot Nothing Then
+                    logger.Log("[PARTLISTDATA][ENRICH][LHD_GEOM] " & lhdSrc & " → L=" & If(data.LargoL, "") & " H=" & If(data.AltoH, "") & " D=" & If(data.DatoD, ""))
+                End If
+            End If
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Sesión COM única: SummaryInfo del cajetín + Custom/PART_LIST (mismos datos que la UI de metadatos).
+    ''' Escribe en log <c>[PARTLISTDATA][SNAPSHOT]</c> y <c>[PARTSLIST][COL_DIAG]</c> para alinear nombres con la plantilla.
+    ''' </summary>
+    Public Shared Function ApplyCajetinSummaryAndPartListToFiles(
+        dftPath As String,
+        modelPath As String,
+        showSolidEdge As Boolean,
+        config As JobConfiguration,
+        metadata As DrawingMetadataInput,
+        logger As Logger) As ApplyMetadataToDraftFilesResult
+
+        Dim result As New ApplyMetadataToDraftFilesResult()
+        If String.IsNullOrWhiteSpace(dftPath) OrElse Not File.Exists(dftPath) Then
+            If logger IsNot Nothing Then logger.Log("[UI][DFT][ERR] DFT no encontrado: " & If(dftPath, ""))
+            Return result
+        End If
+        If metadata Is Nothing Then metadata = New DrawingMetadataInput()
+        If config Is Nothing Then config = New JobConfiguration()
+
+        Dim app As Application = Nothing
+        Dim created As Boolean = False
+        Dim dftDoc As Object = Nothing
+        Dim modelDoc As Object = Nothing
+        Dim openedModel As Boolean = False
+        Dim openedDft As Boolean = False
+
+        Try
+            OleMessageFilter.Register()
+            If Not TryConnectForMetadata(showSolidEdge, logger, app, created) Then Return result
+
+            If logger IsNot Nothing Then
+                logger.Log("[UI][DFT][APPLY] Abriendo DFT: " & dftPath)
+                If Not String.IsNullOrWhiteSpace(modelPath) AndAlso File.Exists(modelPath) Then
+                    logger.Log("[UI][DFT][APPLY] Modelo enlazado: " & modelPath)
+                End If
+            End If
+
+            dftDoc = SolidEdgePropertyService.TryGetOrOpenDraftDocumentByPath(app, dftPath, logger, openedDft)
+            If dftDoc IsNot Nothing Then
+                dftDoc = SolidEdgePropertyService.TryEnsureDraftWithPartsLists(dftDoc, logger)
+            End If
+            If logger IsNot Nothing AndAlso Not openedDft Then
+                logger.Log("[UI][DFT][APPLY] DFT ya estaba abierto en Solid Edge; se reutiliza esa ventana (no una copia COM).")
+            End If
+
+            If String.IsNullOrWhiteSpace(modelPath) OrElse Not File.Exists(modelPath) Then
+                Dim linkOnly As String = SolidEdgePropertyService.TryGetPrimaryLinkedModelFullPath(dftDoc)
+                If Not String.IsNullOrWhiteSpace(linkOnly) AndAlso File.Exists(linkOnly) Then
+                    modelPath = linkOnly
+                    If logger IsNot Nothing Then logger.Log("[UI][DFT][APPLY] Modelo desde enlace DFT: " & modelPath)
+                End If
+            End If
+
+            If Not String.IsNullOrWhiteSpace(modelPath) AndAlso File.Exists(modelPath) Then
+                Dim ext As String = Path.GetExtension(modelPath).ToLowerInvariant()
+                If ext = ".par" OrElse ext = ".psm" Then
+                    Try
+                        modelDoc = SolidEdgePropertyService.TryGetOrOpenModelDocumentByPath(app, modelPath, logger, openedModel)
+                    Catch exMo As Exception
+                        If logger IsNot Nothing Then logger.Log("[UI][DFT][APPLY][WARN] No se abrió modelo: " & exMo.Message)
+                    End Try
+                End If
+            End If
+
+            NormalizeMetadataPlaceholders(metadata)
+            If PartsListPropertyTextWriter.IsMetadataPlaceholder(metadata.LargoL) OrElse
+               PartsListPropertyTextWriter.IsMetadataPlaceholder(metadata.AltoH) OrElse
+               PartsListPropertyTextWriter.IsMetadataPlaceholder(metadata.DatoD) Then
+                Dim lV As String = "", hV As String = "", dV As String = "", lhdSrc As String = ""
+                If TryComputeLhdSameAsCalcButton(dftDoc, modelDoc, logger, lV, hV, dV, lhdSrc) Then
+                    If String.IsNullOrWhiteSpace(metadata.LargoL) Then metadata.LargoL = lV
+                    If String.IsNullOrWhiteSpace(metadata.AltoH) Then metadata.AltoH = hV
+                    If String.IsNullOrWhiteSpace(metadata.DatoD) Then metadata.DatoD = dV
+                    If Not String.IsNullOrWhiteSpace(lhdSrc) AndAlso String.IsNullOrWhiteSpace(metadata.LHDSource) Then metadata.LHDSource = lhdSrc
+                    If logger IsNot Nothing Then
+                        logger.Log("[UI][DFT][APPLY][LHD] " & lhdSrc & " → L=" & lV & " H=" & hV & " D=" & dV)
+                    End If
+                End If
+            End If
+
+            result.SummaryInfoOk = SolidEdgePropertyService.ApplyDirectSummaryInfoToDraft(dftDoc, config, logger)
+            If logger IsNot Nothing Then logger.Log("[UI][DFT][APPLY] SummaryInfo=" & result.SummaryInfoOk.ToString(CultureInfo.InvariantCulture))
+
+            LogPartListSnapshotBeforeApply(metadata, logger)
+            ApplyPartListSourceProperties(modelDoc, dftDoc, metadata, logger)
+            result.PartListPipelineRan = True
+
+            If modelDoc IsNot Nothing Then
+                Try
+                    CallByName(modelDoc, "Save", CallType.Method)
+                    result.ModelSaved = True
+                    If logger IsNot Nothing Then
+                        logger.Log("[UI][DFT][APPLY] Modelo guardado." & If(Not openedModel, " (documento ya abierto en SE)", ""))
+                    End If
+                Catch exMs As Exception
+                    If logger IsNot Nothing Then logger.Log("[UI][DFT][APPLY][WARN] Save modelo: " & exMs.Message)
+                End Try
+            End If
+
+            Try
+                CallByName(dftDoc, "Save", CallType.Method)
+                result.DftSaved = True
+                If logger IsNot Nothing Then
+                    logger.Log("[UI][DFT][APPLY] DFT guardado." & If(Not openedDft, " (ventana que tenía abierta)", ""))
+                End If
+            Catch exDs As Exception
+                If logger IsNot Nothing Then logger.Log("[UI][DFT][APPLY][WARN] Save DFT: " & exDs.Message)
+            End Try
+
+            If logger IsNot Nothing Then
+                logger.Log("[UI][DFT][APPLY] Fin SummaryInfo=" & result.SummaryInfoOk.ToString(CultureInfo.InvariantCulture) &
+                           " PartList=" & result.PartListPipelineRan.ToString(CultureInfo.InvariantCulture) &
+                           " Revise [PARTSLIST][COL_DIAG] para ver PropertyText de cada columna.")
+            End If
+        Catch ex As Exception
+            If logger IsNot Nothing Then logger.LogException("ApplyCajetinSummaryAndPartListToFiles", ex)
+        Finally
+            ' No cerrar documentos que el usuario ya tenía abiertos en Solid Edge.
+            If openedModel Then SolidEdgePropertyService.TryCloseComDocument(modelDoc, False)
+            If openedDft Then SolidEdgePropertyService.TryCloseComDocument(dftDoc, False)
+            Try
+                If app IsNot Nothing AndAlso created Then app.Quit()
+            Catch
+            End Try
+            Try : OleMessageFilter.Revoke() : Catch : End Try
+        End Try
+
+        Return result
+    End Function
+
+    Private Shared Sub LogPartListSnapshotBeforeApply(data As DrawingMetadataInput, logger As Logger)
+        If logger Is Nothing OrElse data Is Nothing Then Return
+        logger.Log("[PARTLISTDATA][SNAPSHOT] --- Valores UI → Custom.* (pieza + DFT) y fila PART_LIST ---")
+        For Each line As String In FormatMetadataSnapshotLines(data).Split(New String() {vbCrLf, vbLf}, StringSplitOptions.RemoveEmptyEntries)
+            logger.Log("[PARTLISTDATA][SNAPSHOT] " & line.Trim())
+        Next
+        logger.Log("[PARTLISTDATA][SNAPSHOT] Claves Custom escritas: CODIGO, Material, Espesor, L, H, D, Peso, Denominacion, NombreArchivo, Nombre, Cantidad, Numero")
+        logger.Log("[PARTLISTDATA][SNAPSHOT] Tras aplicar: busque [PARTSLIST][COL_DIAG] (header + PropertyText); deben coincidir nombres con Custom.")
+    End Sub
+
     Public Shared Sub ApplyPartListSourceProperties(modelDoc As Object, draftDoc As Object, data As DrawingMetadataInput, logger As Logger)
         If data Is Nothing Then Return
         If logger IsNot Nothing Then logger.Log("[PARTLISTDATA][WRITE] Inicio ApplyPartListSourceProperties")
 
+        NormalizeMetadataPlaceholders(data)
+        If draftDoc IsNot Nothing Then
+            draftDoc = SolidEdgePropertyService.TryEnsureDraftWithPartsLists(draftDoc, logger)
+        End If
+        TryEnrichPartListSnapshotFromLinkedDocuments(modelDoc, draftDoc, data, logger)
+
+        Dim openedLinkedModel As Boolean = False
+        If modelDoc Is Nothing AndAlso draftDoc IsNot Nothing Then
+            modelDoc = PartsListPropertyTextWriter.TryOpenLinkedPartDocument(draftDoc, logger)
+            openedLinkedModel = (modelDoc IsNot Nothing)
+        End If
+
+        Dim propTextWrites As Integer = 0
+        If modelDoc IsNot Nothing AndAlso draftDoc IsNot Nothing Then
+            If logger IsNot Nothing Then logger.Log("[PARTLISTDATA][WRITE] Ruta PropertyText → documento de pieza (columnas %{…|G} / %{…/CP|G}).")
+            SolidEdgePropertyService.TryActivateDraftDocument(draftDoc, logger)
+            propTextWrites = PartsListPropertyTextWriter.ApplyAllPartsListsOnDraft(modelDoc, draftDoc, data, logger)
+            If logger IsNot Nothing Then
+                logger.Log("[PARTLISTDATA][PROP_TEXT_WRITE] total=" & propTextWrites.ToString(CultureInfo.InvariantCulture))
+            End If
+        ElseIf logger IsNot Nothing Then
+            logger.Log("[PARTLISTDATA][WRITE][WARN] Sin modelo .par/.psm: PropertyText no se puede propagar; solo Custom en DFT.")
+        End If
+
         Dim pairs As New List(Of KeyValuePair(Of String, String))()
+        SubAdd(pairs, "CODIGO", data.Plano)
         SubAdd(pairs, "Material", data.Material)
         SubAdd(pairs, "Espesor", data.Espesor)
         SubAdd(pairs, "L", data.LargoL)
@@ -826,7 +1229,10 @@ Public NotInheritable Class DrawingMetadataService
         SubAdd(pairs, "Peso", data.Peso)
         SubAdd(pairs, "Denominacion", If(String.IsNullOrWhiteSpace(data.Denominacion), data.Titulo, data.Denominacion))
         SubAdd(pairs, "NombreArchivo", data.NombreArchivo)
+        ' Columna tipo «Nombre» en plantillas enlazadas a Custom distinto del nombre de archivo.
+        SubAdd(pairs, "Nombre", data.NombreArchivo)
         SubAdd(pairs, "Cantidad", data.Cantidad)
+        SubAdd(pairs, "Numero", data.Numero)
 
         For Each kv In pairs
             If String.IsNullOrWhiteSpace(kv.Value) Then Continue For
@@ -842,15 +1248,61 @@ Public NotInheritable Class DrawingMetadataService
             End If
         Next
 
+        If modelDoc IsNot Nothing Then
+            Dim mmN = SolidEdgePropertyService.TryMirrorPartListOntoMechanicalModel(modelDoc, data.Material, data.Espesor, data.Peso, logger, mirrorMaterialToMechanical:=False)
+            If logger IsNot Nothing AndAlso mmN > 0 Then
+                logger.Log("[PARTLISTDATA][WRITE_MODEL_MM] escritas=" & mmN.ToString(CultureInfo.InvariantCulture))
+            End If
+            Try
+                CallByName(modelDoc, "Save", CallType.Method)
+            Catch ex As Exception
+                If logger IsNot Nothing Then logger.Log("[PARTLISTDATA][WRITE_MODEL_MM][SAVE][WARN] " & ex.Message)
+            End Try
+        End If
+
+        If openedLinkedModel AndAlso modelDoc IsNot Nothing Then
+            Try
+                CallByName(modelDoc, "Save", CallType.Method)
+            Catch ex As Exception
+                If logger IsNot Nothing Then logger.Log("[PARTLISTDATA][MODEL_SAVE][WARN] " & ex.Message)
+            End Try
+        End If
+
         If draftDoc IsNot Nothing Then
             SolidEdgePropertyService.RefreshDraftFromModelLinks(draftDoc, logger, False)
             SolidEdgePropertyService.RefreshNativePartsListsAndUpdateAll(draftDoc, logger)
+            SolidEdgePropertyService.RefreshDraftPropertyTextOnly(draftDoc, logger)
+            Dim needConv As Boolean = False
+            TryPushNativePartsListCellsFromMetadata(draftDoc, data, logger, needConv, accumulateNeedConv:=False)
+            If Not needConv Then
+                needConv = Not TryVerifyPartsListCriticalFieldsVisible(draftDoc, data, logger)
+            End If
+            If needConv Then
+                If logger IsNot Nothing Then
+                    logger.Log("[PARTLISTDATA][CONVERT_TABLE] Enlaces/override no muestran Espesor o L/H/D; convirtiendo a tabla y escribiendo celdas.")
+                End If
+                TryPushPartListFieldsThroughConvertedTable(draftDoc, data, logger)
+            End If
+            If SolidEdgePropertyService.TryGetDraftPartsListCount(draftDoc) <= 0 Then
+                TryPushPartListFieldsToExistingDraftTables(draftDoc, data, logger)
+            End If
         End If
         If logger IsNot Nothing Then logger.Log("[PARTLISTDATA][WRITE] Fin")
     End Sub
 
+    ''' <summary>Convierte «--» y similares en vacío para no escribirlos en Comentarios/L/H/D de la pieza.</summary>
+    Friend Shared Sub NormalizeMetadataPlaceholders(data As DrawingMetadataInput)
+        If data Is Nothing Then Return
+        If PartsListPropertyTextWriter.IsMetadataPlaceholder(data.Espesor) Then data.Espesor = ""
+        If PartsListPropertyTextWriter.IsMetadataPlaceholder(data.AltoH) Then data.AltoH = ""
+        If PartsListPropertyTextWriter.IsMetadataPlaceholder(data.LargoL) Then data.LargoL = ""
+        If PartsListPropertyTextWriter.IsMetadataPlaceholder(data.DatoD) Then data.DatoD = ""
+        If PartsListPropertyTextWriter.IsMetadataPlaceholder(data.Material) Then data.Material = ""
+        If PartsListPropertyTextWriter.IsMetadataPlaceholder(data.Peso) Then data.Peso = ""
+    End Sub
+
     Private Shared Sub SubAdd(list As List(Of KeyValuePair(Of String, String)), k As String, v As String)
-        If list Is Nothing OrElse String.IsNullOrWhiteSpace(v) Then Return
+        If list Is Nothing OrElse PartsListPropertyTextWriter.IsMetadataPlaceholder(v) Then Return
         list.Add(New KeyValuePair(Of String, String)(k, v.Trim()))
     End Sub
 
@@ -895,6 +1347,723 @@ Public NotInheritable Class DrawingMetadataService
             Try : OleMessageFilter.Revoke() : Catch : End Try
         End Try
     End Function
+
+    ''' <summary>Si hay pieza enlazada al DFT, rellena Material/Espesor/Peso/LHD y corrige nombre de archivo cuando el DFT no aporta pieza.</summary>
+    Private Shared Sub TryEnrichDraftMetadataFromLinkedModel(app As Application, draftDoc As Object, dftPath As String, data As DrawingMetadataInput, logger As Logger,
+                                                             Optional traceKind As String = "DFT_FIELD")
+        If app Is Nothing OrElse draftDoc Is Nothing OrElse data Is Nothing Then Return
+        Dim rawLink As String = SolidEdgePropertyService.TryGetPrimaryLinkedModelFullPath(draftDoc)
+        If String.IsNullOrWhiteSpace(rawLink) Then
+            If logger IsNot Nothing Then logger.Log("[UI][METADATA][DFT][LINK] Sin vínculo a modelo (.par/.psm/.asm) en el plano.")
+            Return
+        End If
+
+        Dim candidates As New List(Of String)()
+        Dim primary As String = rawLink.Trim()
+        candidates.Add(primary)
+        Try
+            Dim bn As String = Path.GetFileName(primary)
+            If bn.Length > 0 AndAlso Not String.IsNullOrWhiteSpace(dftPath) Then
+                Dim dn As String = Path.GetDirectoryName(dftPath)
+                If Not String.IsNullOrWhiteSpace(dn) Then
+                    Dim alt As String = Path.Combine(dn, bn)
+                    If Not candidates.Contains(alt, StringComparer.OrdinalIgnoreCase) Then candidates.Add(alt)
+                End If
+            End If
+        Catch
+        End Try
+
+        Dim mdoc As Object = Nothing
+        Dim linkPath As String = ""
+        For Each cand As String In candidates
+            If String.IsNullOrWhiteSpace(cand) Then Continue For
+            Try
+                mdoc = app.Documents.Open(cand.Trim())
+                linkPath = cand.Trim()
+                Exit For
+            Catch ex As Exception
+                If logger IsNot Nothing Then logger.Log("[UI][METADATA][DFT][LINK][OPEN_TRY] " & cand & " -> " & ex.Message)
+            End Try
+        Next
+
+        If mdoc Is Nothing Then
+            If logger IsNot Nothing Then logger.Log("[UI][METADATA][DFT][LINK] No se pudo abrir el modelo enlazado (intentos=" & candidates.Count.ToString(CultureInfo.InvariantCulture) & ").")
+            Return
+        End If
+        If logger IsNot Nothing Then logger.Log("[UI][METADATA][DFT][LINK] Enriqueciendo desde: " & linkPath)
+
+        Try
+            Dim ext = Path.GetExtension(linkPath).ToLowerInvariant()
+            Dim isPart As Boolean = ext = ".par" OrElse ext = ".psm"
+
+            Dim needsNameFix As Boolean = String.IsNullOrWhiteSpace(data.NombreArchivo) OrElse
+                Path.GetExtension(data.NombreArchivo).Equals(".dft", StringComparison.OrdinalIgnoreCase)
+            If needsNameFix AndAlso isPart Then
+                data.NombreArchivo = Path.GetFileName(linkPath)
+                data.NombreArchivoSource = "modelo enlazado"
+                UiMetadataFieldTrace(logger, True, traceKind, "NombreArchivo", data.NombreArchivo)
+            End If
+
+            If String.IsNullOrWhiteSpace(data.Material) Then
+                TryDetectMaterial(mdoc, logger, data)
+                If Not String.IsNullOrWhiteSpace(data.Material) Then data.MaterialSource = "modelo enlazado"
+                UiMetadataFieldTrace(logger, True, traceKind, "Material", data.Material)
+            End If
+
+            If String.IsNullOrWhiteSpace(data.Espesor) OrElse String.Equals(data.EspesorSource, "Missing", StringComparison.OrdinalIgnoreCase) Then
+                TryDetectEspesor(mdoc, draftDoc, logger, data)
+                UiMetadataFieldTrace(logger, True, traceKind, "Espesor", data.Espesor)
+            End If
+
+            If String.IsNullOrWhiteSpace(data.Peso) Then
+                TryDetectPeso(mdoc, logger, data)
+                If String.IsNullOrWhiteSpace(data.Peso) Then
+                    UiMetadataFieldEmpty(logger, True, traceKind, "Peso")
+                Else
+                    UiMetadataFieldTrace(logger, True, traceKind, "Peso", data.Peso)
+                End If
+            End If
+
+            If String.IsNullOrWhiteSpace(data.Titulo) AndAlso isPart Then
+                Dim tAlt = FirstNonEmpty(
+                    SolidEdgePropertyService.GetDocumentPropertyForMetadata(mdoc, "SummaryInformation", {"Subject", "Title", "Document Title", "Título", "Titulo"}),
+                    SolidEdgePropertyService.GetDocumentPropertyForMetadata(mdoc, "Custom", {"Titulo", "Título"}))
+                If Not String.IsNullOrWhiteSpace(tAlt) Then
+                    data.Titulo = tAlt.Trim()
+                    data.TituloSource = "modelo enlazado"
+                    UiMetadataFieldTrace(logger, True, traceKind, "Titulo", data.Titulo)
+                    If String.IsNullOrWhiteSpace(data.Denominacion) Then
+                        data.Denominacion = data.Titulo
+                        data.DenominacionSource = "modelo enlazado"
+                        UiMetadataFieldTrace(logger, True, traceKind, "Denominacion", data.Denominacion)
+                    End If
+                End If
+            End If
+
+            If isPart Then
+                Dim L As String = "", Hh As String = "", D As String = "", lhdSrc As String = ""
+                If TryComputeLhdSameAsCalcButton(draftDoc, mdoc, logger, L, Hh, D, lhdSrc) Then
+                    If String.IsNullOrWhiteSpace(data.LargoL) Then data.LargoL = L
+                    If String.IsNullOrWhiteSpace(data.AltoH) Then data.AltoH = Hh
+                    If String.IsNullOrWhiteSpace(data.DatoD) Then data.DatoD = D
+                    If Not (String.IsNullOrWhiteSpace(data.LargoL) AndAlso String.IsNullOrWhiteSpace(data.AltoH) AndAlso String.IsNullOrWhiteSpace(data.DatoD)) Then
+                        If Not String.IsNullOrWhiteSpace(lhdSrc) Then data.LHDSource = lhdSrc
+                        UiMetadataFieldTrace(logger, True, traceKind, "L", data.LargoL)
+                        UiMetadataFieldTrace(logger, True, traceKind, "H", data.AltoH)
+                        UiMetadataFieldTrace(logger, True, traceKind, "D", data.DatoD)
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+            If logger IsNot Nothing Then logger.LogException("TryEnrichDraftMetadataFromLinkedModel", ex)
+        Finally
+            SolidEdgePropertyService.TryCloseComDocument(mdoc, False)
+        End Try
+    End Sub
+
+    ''' <summary>Lee cajetín y campos de PART_LIST desde un <c>.dft</c> (mismos PropertySets que <see cref="LoadTitleBlockFromOpenModel"/> + claves <c>Custom.*</c> que escribe <see cref="ApplyPartListSourceProperties"/>).</summary>
+    Public Shared Function TryLoadMetadataFromDraftPath(dftPath As String, showSe As Boolean, logger As Logger, ByRef data As DrawingMetadataInput) As Boolean
+        data = Nothing
+        If String.IsNullOrWhiteSpace(dftPath) OrElse Not File.Exists(dftPath) Then Return False
+        If Not String.Equals(Path.GetExtension(dftPath), ".dft", StringComparison.OrdinalIgnoreCase) Then Return False
+
+        Dim app As Application = Nothing
+        Dim created As Boolean = False
+        Dim doc As Object = Nothing
+        Try
+            OleMessageFilter.Register()
+            If logger IsNot Nothing Then logger.Log("[UI][METADATA][DFT][STEP] Conectando y abriendo: " & dftPath)
+            If Not TryConnectForMetadata(showSe, logger, app, created) Then Return False
+            doc = app.Documents.Open(dftPath)
+            data = New DrawingMetadataInput()
+            LoadTitleBlockFromOpenModel(doc, dftPath, logger, data, fillPartList:=True, inferPedidoFromPath:=False, traceUiLog:=True, traceKind:="DFT_FIELD")
+            OverlayDraftPartListCustomKeys(doc, data, logger)
+            OverlayDraftNativePartsListFirstDataRow(doc, data, logger)
+            TryEnrichDraftMetadataFromLinkedModel(app, doc, dftPath, data, logger)
+            RetagMetadataSourcesDraftFile(data)
+            If String.IsNullOrWhiteSpace(data.Pedido) Then
+                data.Pedido = InferPedidoFromPath(dftPath, logger)
+                If Not String.IsNullOrWhiteSpace(data.Pedido) Then
+                    data.PedidoSource = "Inferido (carpeta o nombre de archivo)"
+                End If
+            End If
+            Return True
+        Catch ex As Exception
+            If logger IsNot Nothing Then logger.LogException("TryLoadMetadataFromDraftPath", ex)
+            data = Nothing
+            Return False
+        Finally
+            SolidEdgePropertyService.TryCloseComDocument(doc, False)
+            Try
+                If app IsNot Nothing AndAlso created Then app.Quit()
+            Catch
+            End Try
+            Try : OleMessageFilter.Revoke() : Catch : End Try
+        End Try
+    End Function
+
+    Private Shared Function PartsListHeaderLooksLikeMaterial(header As String) As Boolean
+        Dim u As String = If(header, "").Trim().ToUpperInvariant()
+        Return u.Length > 0 AndAlso (u.Contains("MATERIAL") OrElse u.Contains("MATERIA"))
+    End Function
+
+    Private Shared Function PartsListHeaderLooksLikeEspesor(header As String) As Boolean
+        Dim u As String = If(header, "").Trim().ToUpperInvariant()
+        If u.Length = 0 Then Return False
+        Return u.Contains("ESPESOR") OrElse u.Contains("THICK") OrElse u.Contains("CALIBRE") OrElse u.Contains("GAUGE")
+    End Function
+
+    Private Shared Function PartsListHeaderLooksLikeCodigo(header As String) As Boolean
+        Dim h As String = If(header, "").Trim()
+        If h.Length = 0 Then Return False
+        If h.StartsWith("Nº", StringComparison.Ordinal) OrElse h.StartsWith("N°", StringComparison.Ordinal) Then Return False
+        If h.IndexOf("codig", StringComparison.OrdinalIgnoreCase) >= 0 Then Return True
+        Return String.Equals(h, "CODE", StringComparison.OrdinalIgnoreCase)
+    End Function
+
+    Private Shared Function PartsListHeaderLooksLikeDenominacion(header As String) As Boolean
+        Dim u As String = If(header, "").Trim().ToUpperInvariant()
+        If u.Length = 0 Then Return False
+        Return u.Contains("DENOMINAC") OrElse u.Contains("DESIGNATION") OrElse u.Contains("DESIGNACI") OrElse u.StartsWith("DESCRIP")
+    End Function
+
+    Private Shared Function PartsListHeaderLooksLikePeso(header As String) As Boolean
+        Dim u As String = If(header, "").Trim().ToUpperInvariant()
+        If u.Length = 0 Then Return False
+        Return u.StartsWith("PESO", StringComparison.Ordinal) OrElse u.Contains("WEIGHT") OrElse u.StartsWith("MASS", StringComparison.Ordinal)
+    End Function
+
+    ''' <summary>Después de propiedades y Update, escribe valores en la fila de datos de <b>cada</b> PartsList (plantillas con enlaces que no propagan Custom/MM).</summary>
+    ''' <param name="needsConvertToTableForLhd">True si en alguna lista hay columna Material/Espesor/L/H/D con dato en metadatos pero la escritura en PartsList falló (entonces <c>ConvertToTable</c>).</param>
+    Private Shared Sub TryPushNativePartsListCellsFromMetadata(draftDoc As Object, data As DrawingMetadataInput, logger As Logger,
+                                                                ByRef needsConvertToTableForLhd As Boolean,
+                                                                Optional accumulateNeedConv As Boolean = False)
+        If Not accumulateNeedConv Then needsConvertToTableForLhd = False
+        If draftDoc Is Nothing OrElse data Is Nothing Then Return
+        Dim lists As Object = Nothing
+        Try
+            lists = CallByName(draftDoc, "PartsLists", CallType.Get)
+        Catch
+            lists = Nothing
+        End Try
+        If lists Is Nothing Then Return
+        Dim nLists As Integer = SafeInt(CallByName(lists, "Count", CallType.Get), 0)
+        If nLists < 1 Then Return
+
+        For li As Integer = 1 To nLists
+            Dim pl As Object = GetItem(lists, li)
+            If pl Is Nothing Then Continue For
+            TryPushNativePartsListCellsOneList(draftDoc, pl, li, data, logger, needsConvertToTableForLhd)
+        Next
+    End Sub
+
+    Private Shared Function TryVerifyPartsListCriticalFieldsVisible(draftDoc As Object, data As DrawingMetadataInput, logger As Logger) As Boolean
+        If draftDoc Is Nothing OrElse data Is Nothing Then Return True
+        Dim lists As Object = Nothing
+        Try : lists = CallByName(draftDoc, "PartsLists", CallType.Get) : Catch : End Try
+        If lists Is Nothing Then Return True
+        Dim nLists As Integer = SafeInt(CallByName(lists, "Count", CallType.Get), 0)
+        If nLists < 1 Then Return True
+        Dim pl As Object = GetItem(lists, 1)
+        If pl Is Nothing Then Return True
+        Dim rowCount As Integer = SolidEdgePropertyService.TryGetPartsListRowCount(pl)
+        Dim hdrRows As Integer = SolidEdgePropertyService.TryGetPartsListHeaderRowCount(pl)
+        Dim dataRow As Integer = SolidEdgePropertyService.ResolvePartsListDataRowIndex(hdrRows, rowCount)
+        Dim colCount As Integer = SolidEdgePropertyService.TryGetPartsListColumnCount(pl)
+        Dim iEsp As Integer = 0, iL As Integer = 0, iH As Integer = 0, iD As Integer = 0
+        For c As Integer = 1 To colCount
+            Dim h As String = SolidEdgePropertyService.TryReadPartsListColumnHeader(pl, c)
+            If iEsp = 0 AndAlso PartsListHeaderLooksLikeEspesor(h) Then iEsp = c
+            If iL = 0 AndAlso PartsListHeaderMatchesDimLetter(h, "L"c) Then iL = c
+            If iH = 0 AndAlso PartsListHeaderMatchesDimLetter(h, "H"c) Then iH = c
+            If iD = 0 AndAlso PartsListHeaderMatchesDimLetter(h, "D"c) Then iD = c
+        Next
+        Dim missing As New List(Of String)()
+        If iEsp > 0 AndAlso Not PartsListPropertyTextWriter.IsMetadataPlaceholder(data.Espesor) AndAlso
+            Not SolidEdgePropertyService.TryPartsListCellDisplaysValue(pl, dataRow, iEsp, data.Espesor) Then missing.Add("Espesor")
+        If iL > 0 AndAlso Not PartsListPropertyTextWriter.IsMetadataPlaceholder(data.LargoL) AndAlso
+            Not SolidEdgePropertyService.TryPartsListCellDisplaysValue(pl, dataRow, iL, data.LargoL) Then missing.Add("L")
+        If iH > 0 AndAlso Not PartsListPropertyTextWriter.IsMetadataPlaceholder(data.AltoH) AndAlso
+            Not SolidEdgePropertyService.TryPartsListCellDisplaysValue(pl, dataRow, iH, data.AltoH) Then missing.Add("H")
+        If iD > 0 AndAlso Not PartsListPropertyTextWriter.IsMetadataPlaceholder(data.DatoD) AndAlso
+            Not SolidEdgePropertyService.TryPartsListCellDisplaysValue(pl, dataRow, iD, data.DatoD) Then missing.Add("D")
+        If missing.Count = 0 Then Return True
+        If logger IsNot Nothing Then
+            logger.Log("[PARTLISTDATA][VERIFY][FAIL] fila=" & dataRow.ToString(CultureInfo.InvariantCulture) &
+                       " sin valor visible en tabla: " & String.Join(", ", missing))
+        End If
+        Return False
+    End Function
+
+    Private Shared Sub TryPushNativePartsListCellsOneList(draftDoc As Object, pl As Object, listIdx As Integer, data As DrawingMetadataInput, logger As Logger,
+                                                          ByRef needsConvertToTableForLhd As Boolean)
+        If pl Is Nothing OrElse data Is Nothing Then Return
+        Try
+            CallByName(pl, "Active", CallType.Set, True)
+        Catch
+        End Try
+        SolidEdgePropertyService.TryActivatePartsListParentSheet(pl, draftDoc, logger)
+        Try
+            CallByName(pl, "Update", CallType.Method)
+        Catch ex As Exception
+            If logger IsNot Nothing Then logger.Log("[PARTSLIST][UPDATE][PRE_WRITE] " & ex.Message)
+        End Try
+
+        Dim colCount As Integer = SolidEdgePropertyService.TryGetPartsListColumnCount(pl)
+        Dim rowCount As Integer = SolidEdgePropertyService.TryGetPartsListRowCount(pl)
+        If colCount <= 0 OrElse rowCount <= 0 Then Return
+
+        If logger IsNot Nothing Then
+            SolidEdgePropertyService.TryLogPartsListColumnDefinitions(pl, listIdx, logger)
+        End If
+
+        Dim hdrRows As Integer = SolidEdgePropertyService.TryGetPartsListHeaderRowCount(pl)
+        If hdrRows <= 0 Then hdrRows = 1
+        Dim dataRow As Integer = SolidEdgePropertyService.ResolvePartsListDataRowIndex(hdrRows, rowCount)
+        Dim dataRowCandidates As Integer() = SolidEdgePropertyService.ResolvePartsListDataRowCandidates(hdrRows, rowCount)
+        If logger IsNot Nothing Then
+            logger.Log("[PARTLISTDATA][CELLS] list=" & listIdx.ToString(CultureInfo.InvariantCulture) &
+                       " rows=" & rowCount.ToString(CultureInfo.InvariantCulture) &
+                       " hdrRows=" & hdrRows.ToString(CultureInfo.InvariantCulture) &
+                       " dataRow=" & dataRow.ToString(CultureInfo.InvariantCulture) &
+                       " candidates=" & String.Join(",", dataRowCandidates.Select(Function(r) r.ToString(CultureInfo.InvariantCulture))))
+        End If
+        If dataRow < 1 Then Return
+
+        Dim iCod As Integer = 0, iDen As Integer = 0, iMat As Integer = 0, iEsp As Integer = 0
+        Dim iL As Integer = 0, iH As Integer = 0, iD As Integer = 0, iPeso As Integer = 0
+        For c As Integer = 1 To colCount
+            Dim h As String = SolidEdgePropertyService.TryReadPartsListColumnHeader(pl, c)
+            If iCod = 0 AndAlso PartsListHeaderLooksLikeCodigo(h) Then iCod = c
+            If iDen = 0 AndAlso PartsListHeaderLooksLikeDenominacion(h) Then iDen = c
+            If iMat = 0 AndAlso PartsListHeaderLooksLikeMaterial(h) Then iMat = c
+            If iEsp = 0 AndAlso PartsListHeaderLooksLikeEspesor(h) Then iEsp = c
+            If iL = 0 AndAlso PartsListHeaderMatchesDimLetter(h, "L"c) Then iL = c
+            If iH = 0 AndAlso PartsListHeaderMatchesDimLetter(h, "H"c) Then iH = c
+            If iD = 0 AndAlso PartsListHeaderMatchesDimLetter(h, "D"c) Then iD = c
+            If iPeso = 0 AndAlso PartsListHeaderLooksLikePeso(h) Then iPeso = c
+        Next
+
+        Dim filled As New List(Of String)()
+        Dim okMat As Boolean = False, okEsp As Boolean = False
+        Dim okL As Boolean = False, okH As Boolean = False, okD As Boolean = False
+
+        Dim pushCols As New List(Of Tuple(Of Integer, String, String))()
+        SubAddPush(pushCols, iCod, If(data.Plano, "").Trim(), "CODIGO")
+        Dim denom As String = If(String.IsNullOrWhiteSpace(data.Denominacion), If(data.Titulo, "").Trim(), data.Denominacion.Trim())
+        SubAddPush(pushCols, iDen, denom, "DENOMINACION")
+        SubAddPush(pushCols, iMat, MetadataValueOrEmpty(data.Material), "Material")
+        SubAddPush(pushCols, iEsp, MetadataValueOrEmpty(data.Espesor), "Espesor")
+        SubAddPush(pushCols, iL, MetadataValueOrEmpty(data.LargoL), "L")
+        SubAddPush(pushCols, iH, MetadataValueOrEmpty(data.AltoH), "H")
+        SubAddPush(pushCols, iD, MetadataValueOrEmpty(data.DatoD), "D")
+        SubAddPush(pushCols, iPeso, If(data.Peso, "").Trim(), "Peso")
+
+        Dim writeRowUsed As Integer = dataRow
+        For Each writeRow In dataRowCandidates
+            writeRowUsed = writeRow
+            For Each t In pushCols
+                If PartsListPropertyTextWriter.ColumnUsesLinkedPropertyText(pl, t.Item1) Then Continue For
+                If SolidEdgePropertyService.TryWritePartsListCellText(pl, writeRow, t.Item1, t.Item2, logger) Then
+                    If Not filled.Contains(t.Item3) Then filled.Add(t.Item3)
+                End If
+            Next
+
+            For Each t In pushCols
+                If Not PartsListPropertyTextWriter.ColumnUsesLinkedPropertyText(pl, t.Item1) Then Continue For
+                If String.IsNullOrWhiteSpace(t.Item2) Then Continue For
+                If SolidEdgePropertyService.TryWriteTableCellDataTabOverride(pl, writeRow, t.Item1, t.Item2, logger, "[PARTSLIST][DATA_TAB]") Then
+                    If Not filled.Contains(t.Item3) Then filled.Add(t.Item3)
+                ElseIf writeRow = dataRow AndAlso logger IsNot Nothing Then
+                    logger.Log("[PARTLISTDATA][DATA_TAB][WARN] col=" & t.Item1.ToString(CultureInfo.InvariantCulture) &
+                               " " & t.Item3 & " (PropertyText en modelo OK; sobrescritura de celda falló).")
+                End If
+            Next
+        Next
+
+        okMat = iMat <= 0 OrElse PartsListPropertyTextWriter.IsMetadataPlaceholder(data.Material) OrElse
+            SolidEdgePropertyService.TryPartsListCellDisplaysValue(pl, writeRowUsed, iMat, data.Material)
+        okEsp = iEsp <= 0 OrElse PartsListPropertyTextWriter.IsMetadataPlaceholder(data.Espesor) OrElse
+            SolidEdgePropertyService.TryPartsListCellDisplaysValue(pl, writeRowUsed, iEsp, data.Espesor)
+        okL = iL <= 0 OrElse PartsListPropertyTextWriter.IsMetadataPlaceholder(data.LargoL) OrElse
+            SolidEdgePropertyService.TryPartsListCellDisplaysValue(pl, writeRowUsed, iL, data.LargoL)
+        okH = iH <= 0 OrElse PartsListPropertyTextWriter.IsMetadataPlaceholder(data.AltoH) OrElse
+            SolidEdgePropertyService.TryPartsListCellDisplaysValue(pl, writeRowUsed, iH, data.AltoH)
+        okD = iD <= 0 OrElse PartsListPropertyTextWriter.IsMetadataPlaceholder(data.DatoD) OrElse
+            SolidEdgePropertyService.TryPartsListCellDisplaysValue(pl, writeRowUsed, iD, data.DatoD)
+
+        If iMat > 0 AndAlso Not PartsListPropertyTextWriter.IsMetadataPlaceholder(data.Material) AndAlso Not okMat Then needsConvertToTableForLhd = True
+        If iEsp > 0 AndAlso Not PartsListPropertyTextWriter.IsMetadataPlaceholder(data.Espesor) AndAlso Not okEsp Then needsConvertToTableForLhd = True
+        If iL > 0 AndAlso Not PartsListPropertyTextWriter.IsMetadataPlaceholder(data.LargoL) AndAlso Not okL Then needsConvertToTableForLhd = True
+        If iH > 0 AndAlso Not PartsListPropertyTextWriter.IsMetadataPlaceholder(data.AltoH) AndAlso Not okH Then needsConvertToTableForLhd = True
+        If iD > 0 AndAlso Not PartsListPropertyTextWriter.IsMetadataPlaceholder(data.DatoD) AndAlso Not okD Then needsConvertToTableForLhd = True
+
+        If logger IsNot Nothing AndAlso filled.Count > 0 Then
+            logger.Log("[PARTLISTDATA][CELLS_PUSH] list=" & listIdx.ToString(CultureInfo.InvariantCulture) &
+                       " fila=" & writeRowUsed.ToString(CultureInfo.InvariantCulture) & " " & String.Join(", ", filled) &
+                       " visibleEsp=" & okEsp.ToString(CultureInfo.InvariantCulture) &
+                       " visibleLHD=" & okL.ToString(CultureInfo.InvariantCulture) & okH.ToString(CultureInfo.InvariantCulture) & okD.ToString(CultureInfo.InvariantCulture))
+        End If
+
+        Dim readbackCols As New List(Of Integer)()
+        For Each c In New Integer() {iCod, iDen, iMat, iEsp, iL, iH, iD, iPeso}
+            If c > 0 Then readbackCols.Add(c)
+        Next
+        SolidEdgePropertyService.TryLogPartsListCellReadback(pl, listIdx, readbackCols, logger)
+    End Sub
+
+    ''' <summary>Si PartsList nativa no acepta escritura (enlaces), <c>ConvertToTable</c> y rellena Material, Espesor y L/H/D en la <c>Table</c>.</summary>
+    Private Shared Sub TryPushPartListFieldsThroughConvertedTable(draftDoc As Object, data As DrawingMetadataInput, logger As Logger)
+        If draftDoc Is Nothing OrElse data Is Nothing Then Return
+        If String.IsNullOrWhiteSpace(data.Material) AndAlso String.IsNullOrWhiteSpace(data.Espesor) AndAlso
+            String.IsNullOrWhiteSpace(data.LargoL) AndAlso String.IsNullOrWhiteSpace(data.AltoH) AndAlso String.IsNullOrWhiteSpace(data.DatoD) Then Return
+
+        SolidEdgePropertyService.TryActivateWorkingDrawingSheet(draftDoc, logger)
+        Dim tbl As Object = SolidEdgePropertyService.TryConvertFirstPartsListToTable(draftDoc, logger)
+        If tbl Is Nothing Then Return
+        SolidEdgePropertyService.TryActivatePartsListParentSheet(tbl, draftDoc, logger)
+        TryPushPartListFieldsToDraftTable(tbl, data, logger, "ConvertToTable")
+    End Sub
+
+    ''' <summary>Cuando <c>PartsLists.Count=0</c>, busca tablas en <c>Tables</c>/<c>DraftTables</c> (PART_LIST como tabla de usuario) y escribe celdas.</summary>
+    Friend Shared Sub TryPushPartListFieldsToExistingDraftTables(draftDoc As Object, data As DrawingMetadataInput, logger As Logger)
+        If draftDoc Is Nothing OrElse data Is Nothing Then Return
+        If String.IsNullOrWhiteSpace(data.Material) AndAlso String.IsNullOrWhiteSpace(data.Espesor) AndAlso
+            String.IsNullOrWhiteSpace(data.LargoL) AndAlso String.IsNullOrWhiteSpace(data.AltoH) AndAlso String.IsNullOrWhiteSpace(data.DatoD) Then Return
+
+        SolidEdgePropertyService.TryActivateWorkingDrawingSheet(draftDoc, logger)
+        Dim workingSheet As Object = SolidEdgePropertyService.TryGetResolvedWorkingDrawingSheet(draftDoc, logger)
+        Dim workingName As String = ""
+        If workingSheet IsNot Nothing Then
+            Try
+                workingName = Convert.ToString(CallByName(workingSheet, "Name", CallType.Get)).Trim()
+            Catch
+                workingName = ""
+            End Try
+        End If
+
+        SolidEdgePropertyService.LogDraftTableInventory(draftDoc, logger)
+
+        Dim bestTbl As Object = Nothing
+        Dim bestScore As Integer = 0
+        For Each tbl As Object In SolidEdgePropertyService.TryEnumerateAllDraftTables(draftDoc)
+            Dim score As Integer = SolidEdgePropertyService.TryScoreDraftTableAsPartList(tbl)
+            If score <= 0 Then Continue For
+            Dim sheetName As String = SolidEdgePropertyService.TryGetDraftTableSheetName(tbl)
+            If workingName.Length > 0 AndAlso sheetName.Length > 0 AndAlso
+                String.Equals(sheetName, workingName, StringComparison.OrdinalIgnoreCase) Then
+                score += 50
+            End If
+            If score > bestScore Then
+                bestScore = score
+                bestTbl = tbl
+            End If
+        Next
+
+        If bestTbl Is Nothing OrElse bestScore < 3 Then
+            If logger IsNot Nothing Then
+                logger.Log("[PARTLISTDATA][TABLE_FALLBACK][WARN] Sin tabla PART_LIST en Tables/DraftTables (score máx=" &
+                           bestScore.ToString(CultureInfo.InvariantCulture) &
+                           "). Los datos están en el .par; en SE use Actualizar lista de piezas o inserte PartsList nativa.")
+            End If
+            Return
+        End If
+
+        If logger IsNot Nothing Then
+            logger.Log("[PARTLISTDATA][TABLE_FALLBACK] Tabla candidata sheet='" &
+                       SolidEdgePropertyService.TryGetDraftTableSheetName(bestTbl).Replace("'", "") &
+                       "' score=" & bestScore.ToString(CultureInfo.InvariantCulture) &
+                       " (pestaña «Datos» de Propiedades de tabla)")
+            SolidEdgePropertyService.TryLogDraftTableColumnDefinitions(bestTbl, logger)
+        End If
+        TryPushPartListFieldsToDraftTable(bestTbl, data, logger, "TABLE_FALLBACK")
+        SolidEdgePropertyService.TryRefreshDraftTable(bestTbl, logger)
+        Dim pl As PartsList = TryCast(bestTbl, PartsList)
+        If pl IsNot Nothing Then
+            Try
+                CallByName(pl, "Update", CallType.Method)
+                If logger IsNot Nothing Then logger.Log("[PARTSLIST][UPDATE][OK] TABLE_FALLBACK PartsList")
+            Catch ex As Exception
+                If logger IsNot Nothing Then logger.Log("[PARTSLIST][UPDATE][WARN] TABLE_FALLBACK " & ex.Message)
+            End Try
+        End If
+    End Sub
+
+    Private Shared Sub TryPushPartListFieldsToDraftTable(tbl As Object, data As DrawingMetadataInput, logger As Logger, logTag As String)
+        If tbl Is Nothing OrElse data Is Nothing Then Return
+
+        Dim colCount As Integer = SolidEdgePropertyService.TryGetDraftTableColumnCount(tbl)
+        Dim rowCount As Integer = SolidEdgePropertyService.TryGetDraftTableRowCount(tbl)
+        If colCount <= 0 OrElse rowCount <= 0 Then
+            If logger IsNot Nothing Then logger.Log("[PARTLISTDATA][" & logTag & "][WARN] tabla sin filas/columnas.")
+            Return
+        End If
+
+        Dim hdrRows As Integer = SolidEdgePropertyService.TryGetDraftTableHeaderRowCount(tbl)
+        If hdrRows <= 0 Then hdrRows = 1
+        Dim dataRow As Integer = SolidEdgePropertyService.ResolvePartsListDataRowIndex(hdrRows, rowCount)
+        If dataRow < 1 Then Return
+
+        Dim iMat As Integer = 0, iEsp As Integer = 0
+        Dim iL As Integer = 0, iH As Integer = 0, iD As Integer = 0
+        For c As Integer = 1 To colCount
+            Dim h As String = SolidEdgePropertyService.TryReadDraftTableColumnHeader(tbl, c)
+            If iMat = 0 AndAlso PartsListHeaderLooksLikeMaterial(h) Then iMat = c
+            If iEsp = 0 AndAlso PartsListHeaderLooksLikeEspesor(h) Then iEsp = c
+            If iL = 0 AndAlso PartsListHeaderMatchesDimLetter(h, "L"c) Then iL = c
+            If iH = 0 AndAlso PartsListHeaderMatchesDimLetter(h, "H"c) Then iH = c
+            If iD = 0 AndAlso PartsListHeaderMatchesDimLetter(h, "D"c) Then iD = c
+        Next
+
+        Dim iDen As Integer = 0, iPeso As Integer = 0
+        For c As Integer = 1 To colCount
+            Dim h As String = SolidEdgePropertyService.TryReadDraftTableColumnHeader(tbl, c)
+            If iDen = 0 AndAlso PartsListHeaderLooksLikeDenominacion(h) Then iDen = c
+            If iPeso = 0 AndAlso PartsListHeaderLooksLikePeso(h) Then iPeso = c
+        Next
+        Dim denom As String = If(String.IsNullOrWhiteSpace(data.Denominacion), If(data.Titulo, "").Trim(), data.Denominacion.Trim())
+
+        Dim filled As New List(Of String)()
+        If iMat > 0 AndAlso SolidEdgePropertyService.TryWriteDraftTableCellValue(tbl, dataRow, iMat, MetadataValueOrEmpty(data.Material), logger) Then filled.Add("Material")
+        If iEsp > 0 AndAlso SolidEdgePropertyService.TryWriteDraftTableCellValue(tbl, dataRow, iEsp, MetadataValueOrEmpty(data.Espesor), logger) Then filled.Add("Espesor")
+        If iL > 0 AndAlso SolidEdgePropertyService.TryWriteDraftTableCellValue(tbl, dataRow, iL, MetadataValueOrEmpty(data.LargoL), logger) Then filled.Add("L")
+        If iH > 0 AndAlso SolidEdgePropertyService.TryWriteDraftTableCellValue(tbl, dataRow, iH, MetadataValueOrEmpty(data.AltoH), logger) Then filled.Add("H")
+        If iD > 0 AndAlso SolidEdgePropertyService.TryWriteDraftTableCellValue(tbl, dataRow, iD, MetadataValueOrEmpty(data.DatoD), logger) Then filled.Add("D")
+        If iDen > 0 AndAlso Not String.IsNullOrWhiteSpace(denom) AndAlso
+            SolidEdgePropertyService.TryWriteDraftTableCellValue(tbl, dataRow, iDen, denom, logger) Then filled.Add("DENOMINACION")
+        If iPeso > 0 AndAlso Not String.IsNullOrWhiteSpace(data.Peso) AndAlso
+            SolidEdgePropertyService.TryWriteDraftTableCellValue(tbl, dataRow, iPeso, data.Peso.Trim(), logger) Then filled.Add("Peso")
+
+        If logger IsNot Nothing Then
+            If filled.Count > 0 Then
+                logger.Log("[PARTLISTDATA][" & logTag & "] fila=" & dataRow.ToString(CultureInfo.InvariantCulture) & " " & String.Join(", ", filled))
+            Else
+                logger.Log("[PARTLISTDATA][" & logTag & "][WARN] Sin columnas coincidentes o escritura sin efecto (celdas enlazadas).")
+            End If
+        End If
+    End Sub
+
+    Private Shared Function MetadataValueOrEmpty(value As String) As String
+        If PartsListPropertyTextWriter.IsMetadataPlaceholder(value) Then Return ""
+        Return If(value, "").Trim()
+    End Function
+
+    Private Shared Sub SubAddPush(list As List(Of Tuple(Of Integer, String, String)), colIdx As Integer, val As String, label As String)
+        If list Is Nothing OrElse colIdx <= 0 OrElse String.IsNullOrWhiteSpace(val) Then Return
+        list.Add(New Tuple(Of Integer, String, String)(colIdx, val.Trim(), label))
+    End Sub
+
+    ''' <summary>Reconoce cabeceras «L», «L (mm)», «Largo»… sin confundir con «Documento» (D + letra).</summary>
+    Private Shared Function PartsListHeaderMatchesDimLetter(header As String, letter As Char) As Boolean
+        Dim t As String = If(header, "").Trim()
+        If t.Length = 0 Then Return False
+        Dim c0 As Char = Char.ToUpperInvariant(t(0))
+        If c0 = Char.ToUpperInvariant(letter) AndAlso (t.Length = 1 OrElse Not Char.IsLetter(t(1))) Then Return True
+        Dim u As String = t.ToUpperInvariant()
+        If letter = "L"c AndAlso (u.StartsWith("LARGO") OrElse u.StartsWith("LONG") OrElse u.StartsWith("LONGITUD")) Then Return True
+        If letter = "H"c AndAlso (u.StartsWith("ALTO") OrElse u.StartsWith("ALTURA") OrElse u.StartsWith("HEIGHT")) Then Return True
+        If letter = "D"c AndAlso (u.StartsWith("PROF") OrElse u.StartsWith("FONDO") OrElse u.StartsWith("DEPTH")) Then Return True
+        Return False
+    End Function
+
+    ''' <summary>Primera fila de datos nativa «PartsList» cuando Custom no trae MATERIAL/ESP/L/H/D.</summary>
+    Private Shared Sub OverlayDraftNativePartsListFirstDataRow(draftDoc As Object, data As DrawingMetadataInput, logger As Logger)
+        If draftDoc Is Nothing OrElse data Is Nothing Then Return
+        Dim lists As Object = Nothing
+        Try
+            lists = CallByName(draftDoc, "PartsLists", CallType.Get)
+        Catch
+            lists = Nothing
+        End Try
+        If lists Is Nothing Then Return
+        Dim nLists As Integer = 0
+        Try
+            nLists = CInt(CallByName(lists, "Count", CallType.Get))
+        Catch
+            nLists = 0
+        End Try
+        If nLists < 1 Then Return
+        Dim pl As Object = Nothing
+        Try
+            pl = CallByName(lists, "Item", CallType.Get, 1)
+        Catch
+            pl = Nothing
+        End Try
+        If pl Is Nothing Then
+            Try
+                pl = CallByName(lists, "Item", CallType.Method, 1)
+            Catch
+                pl = Nothing
+            End Try
+        End If
+        If pl Is Nothing Then Return
+        Try
+            CallByName(pl, "Update", CallType.Method)
+        Catch ex As Exception
+            If logger IsNot Nothing Then logger.Log("[PARTSLIST][UPDATE][DFT_LOAD] " & ex.Message)
+        End Try
+
+        Dim colCount As Integer = SolidEdgePropertyService.TryGetPartsListColumnCount(pl)
+        Dim rowCount As Integer = SolidEdgePropertyService.TryGetPartsListRowCount(pl)
+        If colCount <= 0 OrElse rowCount <= 0 Then Return
+
+        Dim hdrRows As Integer = SolidEdgePropertyService.TryGetPartsListHeaderRowCount(pl)
+        If hdrRows <= 0 Then hdrRows = 1
+        Dim dataRow As Integer = SolidEdgePropertyService.ResolvePartsListDataRowIndex(hdrRows, rowCount)
+        If dataRow < 1 Then Return
+
+        Dim iMat As Integer = 0, iEsp As Integer = 0, iL As Integer = 0, iH As Integer = 0, iD As Integer = 0
+        For c As Integer = 1 To colCount
+            Dim h As String = SolidEdgePropertyService.TryReadPartsListColumnHeader(pl, c)
+            If iMat = 0 AndAlso PartsListHeaderLooksLikeMaterial(h) Then iMat = c
+            If iEsp = 0 AndAlso PartsListHeaderLooksLikeEspesor(h) Then iEsp = c
+            If iL = 0 AndAlso PartsListHeaderMatchesDimLetter(h, "L"c) Then iL = c
+            If iH = 0 AndAlso PartsListHeaderMatchesDimLetter(h, "H"c) Then iH = c
+            If iD = 0 AndAlso PartsListHeaderMatchesDimLetter(h, "D"c) Then iD = c
+        Next
+
+        Dim filled As New List(Of String)()
+        If iMat > 0 AndAlso String.IsNullOrWhiteSpace(data.Material) Then
+            Dim cellV As String = SolidEdgePropertyService.TryReadPartsListCellText(pl, dataRow, iMat)
+            If Not String.IsNullOrWhiteSpace(cellV) Then
+                data.Material = cellV.Trim()
+                data.MaterialSource = "DFT (PartsList)"
+                filled.Add("Material")
+            End If
+        End If
+        If iEsp > 0 AndAlso (String.IsNullOrWhiteSpace(data.Espesor) OrElse String.Equals(data.EspesorSource, "Missing", StringComparison.OrdinalIgnoreCase)) Then
+            Dim cellV As String = SolidEdgePropertyService.TryReadPartsListCellText(pl, dataRow, iEsp)
+            If Not String.IsNullOrWhiteSpace(cellV) Then
+                data.Espesor = cellV.Trim()
+                data.EspesorSource = "DFT (PartsList)"
+                filled.Add("Espesor")
+            End If
+        End If
+        If iL > 0 AndAlso String.IsNullOrWhiteSpace(data.LargoL) Then
+            Dim cellV As String = SolidEdgePropertyService.TryReadPartsListCellText(pl, dataRow, iL)
+            If Not String.IsNullOrWhiteSpace(cellV) Then
+                data.LargoL = cellV.Trim()
+                data.LHDSource = "DFT (PartsList)"
+                filled.Add("L")
+            End If
+        End If
+        If iH > 0 AndAlso String.IsNullOrWhiteSpace(data.AltoH) Then
+            Dim cellV As String = SolidEdgePropertyService.TryReadPartsListCellText(pl, dataRow, iH)
+            If Not String.IsNullOrWhiteSpace(cellV) Then
+                data.AltoH = cellV.Trim()
+                data.LHDSource = "DFT (PartsList)"
+                filled.Add("H")
+            End If
+        End If
+        If iD > 0 AndAlso String.IsNullOrWhiteSpace(data.DatoD) Then
+            Dim cellV As String = SolidEdgePropertyService.TryReadPartsListCellText(pl, dataRow, iD)
+            If Not String.IsNullOrWhiteSpace(cellV) Then
+                data.DatoD = cellV.Trim()
+                data.LHDSource = "DFT (PartsList)"
+                filled.Add("D")
+            End If
+        End If
+
+        If logger IsNot Nothing AndAlso filled.Count > 0 Then
+            logger.Log("[UI][METADATA][DFT][PARTSLIST_ROW] " & String.Join(", ", filled))
+        End If
+    End Sub
+
+    ''' <summary>Refuerza L/H/D, cantidad, nº pieza y nombre de archivo desde propiedades personalizadas del DFT (convención de esta aplicación).</summary>
+    Private Shared Sub OverlayDraftPartListCustomKeys(doc As Object, data As DrawingMetadataInput, logger As Logger)
+        If doc Is Nothing OrElse data Is Nothing Then Return
+
+        Dim v As String = SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "Custom", {"L"})
+        If Not String.IsNullOrWhiteSpace(v) Then
+            data.LargoL = v.Trim()
+            data.LHDSource = "DFT (Custom.L)"
+        End If
+        v = SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "Custom", {"H"})
+        If Not String.IsNullOrWhiteSpace(v) Then
+            data.AltoH = v.Trim()
+            data.LHDSource = "DFT (Custom.L/H/D)"
+        End If
+        v = SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "Custom", {"D"})
+        If Not String.IsNullOrWhiteSpace(v) Then
+            data.DatoD = v.Trim()
+            data.LHDSource = "DFT (Custom.L/H/D)"
+        End If
+
+        If String.IsNullOrWhiteSpace(data.Material) Then
+            v = SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "Custom", {"Material", "MATERIAL", "MAT", "MATERIA"})
+            If Not String.IsNullOrWhiteSpace(v) Then
+                data.Material = v.Trim()
+                data.MaterialSource = "DFT (Custom.Material)"
+            End If
+        End If
+        If String.IsNullOrWhiteSpace(data.Espesor) OrElse String.Equals(data.EspesorSource, "Missing", StringComparison.OrdinalIgnoreCase) Then
+            v = SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "Custom", {"Espesor", "ESPESOR", "Thickness", "THICKNESS", "Thick", "Calib"})
+            If Not String.IsNullOrWhiteSpace(v) Then
+                data.Espesor = v.Trim()
+                data.EspesorSource = "DFT (Custom.Espesor)"
+            End If
+        End If
+
+        v = SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "Custom", {"Cantidad"})
+        If Not String.IsNullOrWhiteSpace(v) Then
+            data.Cantidad = v.Trim()
+            data.CantidadSource = "DFT (Custom.Cantidad)"
+        End If
+
+        v = SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "Custom", {"CODIGO"})
+        If Not String.IsNullOrWhiteSpace(v) AndAlso String.IsNullOrWhiteSpace(data.Plano) Then
+            data.Plano = v.Trim()
+            data.PlanoSource = "DFT (Custom.CODIGO)"
+        End If
+
+        v = SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "Custom", {"NombreArchivo"})
+        If Not String.IsNullOrWhiteSpace(v) Then
+            data.NombreArchivo = v.Trim()
+            data.NombreArchivoSource = "DFT (Custom.NombreArchivo)"
+        End If
+        If String.IsNullOrWhiteSpace(data.NombreArchivo) Then
+            v = SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "Custom", {"Nombre"})
+            If Not String.IsNullOrWhiteSpace(v) Then
+                data.NombreArchivo = v.Trim()
+                data.NombreArchivoSource = "DFT (Custom.Nombre)"
+            End If
+        End If
+
+        v = SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "Custom", {"Numero", "Número", "NumeroPieza"})
+        If String.IsNullOrWhiteSpace(v) Then
+            v = SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "ProjectInformation", {"Document Number", "Part Number", "Número de pieza"})
+        End If
+        If Not String.IsNullOrWhiteSpace(v) Then
+            data.Numero = v.Trim()
+            data.NumeroSource = "DFT"
+        End If
+
+        v = SolidEdgePropertyService.GetDocumentPropertyForMetadata(doc, "Custom", {"Denominacion", "Denominación"})
+        If Not String.IsNullOrWhiteSpace(v) Then
+            data.Denominacion = v.Trim()
+            data.DenominacionSource = "DFT (Custom.Denominacion)"
+        End If
+        If logger IsNot Nothing Then logger.Log("[UI][METADATA][DFT][OVERLAY] Custom PART_LIST aplicado si existía en DFT.")
+    End Sub
+
+    Private Shared Sub RetagMetadataSourcesDraftFile(data As DrawingMetadataInput)
+        If data Is Nothing Then Return
+        If String.Equals(data.ClienteSource, "modelo", StringComparison.OrdinalIgnoreCase) Then data.ClienteSource = "DFT"
+        If String.Equals(data.ProyectoSource, "modelo", StringComparison.OrdinalIgnoreCase) Then data.ProyectoSource = "DFT"
+        If String.Equals(data.PlanoSource, "modelo", StringComparison.OrdinalIgnoreCase) Then data.PlanoSource = "DFT"
+        If String.Equals(data.TituloSource, "modelo", StringComparison.OrdinalIgnoreCase) Then data.TituloSource = "DFT"
+        If String.Equals(data.RevisionSource, "modelo", StringComparison.OrdinalIgnoreCase) Then data.RevisionSource = "DFT"
+        If String.Equals(data.AutorSource, "modelo", StringComparison.OrdinalIgnoreCase) Then data.AutorSource = "DFT"
+        If String.Equals(data.FechaSource, "modelo", StringComparison.OrdinalIgnoreCase) Then data.FechaSource = "DFT"
+        If String.Equals(data.MaterialSource, "modelo", StringComparison.OrdinalIgnoreCase) Then data.MaterialSource = "DFT"
+        If String.Equals(data.EspesorSource, "modelo", StringComparison.OrdinalIgnoreCase) Then data.EspesorSource = "DFT"
+        If String.Equals(data.PesoSource, "modelo", StringComparison.OrdinalIgnoreCase) Then data.PesoSource = "DFT"
+        If String.Equals(data.DenominacionSource, "modelo", StringComparison.OrdinalIgnoreCase) Then data.DenominacionSource = "DFT"
+        If String.Equals(data.NombreArchivoSource, "modelo", StringComparison.OrdinalIgnoreCase) Then data.NombreArchivoSource = "DFT"
+        If String.Equals(data.CantidadSource, "modelo", StringComparison.OrdinalIgnoreCase) Then data.CantidadSource = "DFT"
+        If String.Equals(data.NumeroSource, "modelo", StringComparison.OrdinalIgnoreCase) Then data.NumeroSource = "DFT"
+        If String.Equals(data.PedidoSource, "modelo", StringComparison.OrdinalIgnoreCase) Then data.PedidoSource = "DFT"
+    End Sub
 
     Private Shared Function TryConnectForMetadata(showSe As Boolean, logger As Logger, ByRef app As Application, ByRef created As Boolean) As Boolean
         app = Nothing

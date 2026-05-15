@@ -8,6 +8,8 @@ Public Enum SourceFileKind
     AssemblyFile = 1   ' .asm
     PartFile = 2       ' .par
     SheetMetalFile = 3 ' .psm
+    ''' <summary>Borrador Solid Edge (.dft) como archivo de entrada (solo motores que operan sobre DFT existente).</summary>
+    DraftFile = 4
 End Enum
 
 Public Enum PreferredSheetFormat
@@ -28,9 +30,35 @@ Public Enum TitleSourceMode
     AutoFromFileName = 1
 End Enum
 
+''' <summary>
+''' Desacopla la ejecución en tres motores lógicos (misma implementación interna en <c>DraftGenerationEngine</c>, distinto encadenamiento).
+''' </summary>
+Public Enum DraftMotorPhase
+    ''' <summary>Secuencia histórica: vistas → metadatos (según flags) → acotación (según flags).</summary>
+    FullSequence = 0
+    ''' <summary>Sólo creación de DFT, vistas, layout y piezas anexas (p.ej. PartsList); sin escritura de metadatos ni acotación.</summary>
+    ViewGeneration = 1
+    ''' <summary>Abre el DFT ya generado en la carpeta de salida y aplica metadatos/cajetín (requiere DFT previo).</summary>
+    MetadataManagement = 2
+    ''' <summary>Abre el DFT existente y ejecuta acotación / laboratorios según la UI (requiere DFT previo).</summary>
+    Dimensioning = 3
+End Enum
+
+''' <summary>Implementación del acotado automático DV 2D: pipeline actual vs copia aislada vs enganche alternativo.</summary>
+Public Enum AutoDimensioningMotorKind
+    ''' <summary>Motor en <c>Services\Dimensioning</c> (UniqueDv + UNE129) vigente en este repositorio.</summary>
+    CurrentMainPipeline = 0
+    ''' <summary>Copia bajo <c>LegacyV02Dimensioning</c> (carpeta LegacyV02IsolatedMotor); tipos distintos del motor principal.</summary>
+    LegacyV02IsolatedCopy = 1
+    ''' <summary>Segundo motor propio (COM/cotas) vía factoría <c>DrawingViewAutoDimensioningMotorFactory</c>; no usa <c>UniqueDvAutoDimensioningEngine</c> del pipeline principal.</summary>
+    AlternatePlugIn = 2
+End Enum
+
 Public Class JobConfiguration
     Public Property InputFile As String = ""
     Public Property OutputFolder As String = ""
+    ''' <summary>Motor activo para esta ejecución (UI: GENERAR = <see cref="DraftMotorPhase.FullSequence"/>).</summary>
+    Public Property MotorPhase As DraftMotorPhase = DraftMotorPhase.FullSequence
 
     Public Property TemplateA4 As String = ""
     Public Property TemplateA3 As String = ""
@@ -62,6 +90,18 @@ Public Class JobConfiguration
     Public Property EnableSlotBBoxViewLayout As Boolean = True
     ''' <summary>Habilita el único motor de acotado automático DV*2d durante la generación del DFT.</summary>
     Public Property EnableAutoDimensioning As Boolean = True
+    ''' <summary>Motor exclusivo DVRef minimalista (prefijo log [PRODDIM]); si está activo no se ejecuta el motor principal ni laboratorios de acotación secundarios.</summary>
+    Public Property EnableProductionDvRefCleanEngine As Boolean = False
+    ''' <summary>Solo si <see cref="EnableAutoDimensioning"/> y no hay laboratorio exclusivo: elige entre motor principal, copia V02 aislada o plugin alternativo.</summary>
+    Public Property AutoDimensioningMotor As AutoDimensioningMotorKind = AutoDimensioningMotorKind.CurrentMainPipeline
+    ''' <summary>Tras el acotado automático, volcar en el log introspección SDK sobre geometría DV y cotas (prefijo [SESDK_PROBE]). También <c>SE_SESDK_INTROSPECT</c>.</summary>
+    Public Property EnableSesdkPostDimensionIntrospection As Boolean = False
+    ''' <summary>Si True (y acotado activo): fuerza modo barrido completo de entidades DV (<c>SweepAllEntities</c>) para crear cotas sobre muchas líneas, arcos, círculos y elipses por vista, con límites de banda amplios.</summary>
+    Public Property PreferSweepAllDrawingDimensions As Boolean = False
+    ''' <summary>Prueba: no alejar cotas con TrackDistance escalonado (motor LegacyV02).</summary>
+    Public Property SuppressDimensionTrackDistanceSpacing As Boolean = True
+    ''' <summary>Eliminar cotas duplicadas (mismo valor y keypoints) tras el barrido.</summary>
+    Public Property EnableKeypointValueDuplicateCleanup As Boolean = True
     ''' <summary>Laboratorio DIMLAB: DVLine2d.Reference + AddDistanceBetweenObjects (exclusivo; no ejecuta el motor principal de acotación).</summary>
     Public Property EnableDrawingViewDimensioningLab As Boolean = False
     ''' <summary>Modo forense: VIS0 en Hoja1, pausa MsgBox, sin cerrar DFT ni exportar PDF/DXF, validación por Range+DisplayData.</summary>
@@ -163,6 +203,7 @@ Public Class JobConfiguration
             Case ".asm" : Return SourceFileKind.AssemblyFile
             Case ".par" : Return SourceFileKind.PartFile
             Case ".psm" : Return SourceFileKind.SheetMetalFile
+            Case ".dft" : Return SourceFileKind.DraftFile
             Case Else : Return SourceFileKind.Unknown
         End Select
     End Function
@@ -172,6 +213,7 @@ Public Class JobConfiguration
         Return New JobConfiguration With {
             .InputFile = InputFile,
             .OutputFolder = OutputFolder,
+            .MotorPhase = MotorPhase,
             .TemplateA4 = TemplateA4,
             .TemplateA3 = TemplateA3,
             .TemplateA2 = TemplateA2,
@@ -196,6 +238,12 @@ Public Class JobConfiguration
             .IncludeFlatInDraftWhenPsm = IncludeFlatInDraftWhenPsm,
             .EnableSlotBBoxViewLayout = EnableSlotBBoxViewLayout,
             .EnableAutoDimensioning = EnableAutoDimensioning,
+            .AutoDimensioningMotor = AutoDimensioningMotor,
+            .EnableSesdkPostDimensionIntrospection = EnableSesdkPostDimensionIntrospection,
+            .PreferSweepAllDrawingDimensions = PreferSweepAllDrawingDimensions,
+            .SuppressDimensionTrackDistanceSpacing = SuppressDimensionTrackDistanceSpacing,
+            .EnableKeypointValueDuplicateCleanup = EnableKeypointValueDuplicateCleanup,
+            .EnableProductionDvRefCleanEngine = EnableProductionDvRefCleanEngine,
             .EnableDrawingViewDimensioningLab = EnableDrawingViewDimensioningLab,
             .EnableDimLabInteractivePause = EnableDimLabInteractivePause,
             .RequestedDimLabFromDedicatedButton = RequestedDimLabFromDedicatedButton,

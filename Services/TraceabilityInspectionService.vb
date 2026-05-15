@@ -95,6 +95,7 @@ Public NotInheritable Class TraceabilityInspectionService
             Case SourceFileKind.PartFile : Return "PAR"
             Case SourceFileKind.SheetMetalFile : Return "PSM"
             Case SourceFileKind.AssemblyFile : Return "ASM"
+            Case SourceFileKind.DraftFile : Return "DFT"
             Case Else : Return "Desconocido"
         End Select
     End Function

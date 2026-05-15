@@ -14,6 +14,7 @@ Imports System.Data
 Imports System.Runtime.InteropServices
 Imports Microsoft.Win32
 Imports SolidEdgeDraft
+Imports SolidEdgeConstants
 Imports Extraer_dft_dxf_flatdxf.Services.Dimensioning.Labs
 
 Partial Public Class MainForm
@@ -53,12 +54,16 @@ Partial Public Class MainForm
     Private _currentRunningComponentPath As String = ""
     Private _asmUiToolTip As ToolTip
     Private _templatesEmbedded As Boolean = False
+    Private _lastAppliedMotorChromeTabIndex As Integer = -1
     Private _requestedDimLabFromDedicatedButton As Boolean
+    Private _lastPdfPreviewPath As String = ""
     Private ReadOnly _dgvTraceability As New DataGridView()
     Private _btnAnalyzeDft As Button
     Private _btnDimRelinkLab As Button
     Private _btnAdboGuidedLab As Button
     Private _btnBringSolidEdgeFront As Button
+    Private _btnToggleSolidEdgeVisible As Button
+    Private chkProductionDvRefClean As CheckBox
     Private _btnStopRun As Button
     Private _runDropViewsTo2DModelLab As Boolean = False
     Private _runDropCreatedSheetsDimensionLab As Boolean = False
@@ -83,6 +88,10 @@ Partial Public Class MainForm
     Public Sub New()
         InitializeComponent()
         _logger = New Logger(AddressOf AppendLogLine)
+        Try
+            RunDiagnosticsContext.Initialize("", _logger)
+        Catch
+        End Try
         Me.Text = "Solid Edge - Generador Automatico de DFT / PDF / DXF"
         SetupAsmDataGridView()
         SetupTraceabilityDataGridView()
@@ -211,10 +220,19 @@ Partial Public Class MainForm
         EnsureDrawingPlanMetadataPanel()
         If chkStrictMetadata Is Nothing Then
             chkStrictMetadata = New CheckBox With {.Text = "Validación estricta de metadatos (bloquea generar si falta dato obligatorio)", .AutoSize = True, .Checked = False}
-            flowGeneration.Controls.Add(chkStrictMetadata)
+            flowGenerationLeft.Controls.Add(chkStrictMetadata)
+        End If
+        If chkProductionDvRefClean Is Nothing Then
+            chkProductionDvRefClean = New CheckBox With {
+                .Text = "Motor PRODDIM (DVRef limpio, exclusivo)",
+                .AutoSize = True,
+                .Checked = False
+            }
+            flowGenerationLeft.Controls.Add(chkProductionDvRefClean)
         End If
         ApplySettingsToUi(_loadedSettings)
         EnsureSolidEdgeForegroundButton()
+        EnsureSolidEdgeToggleVisibleButton()
         RemoveLabControlsFromUi()
         DimensionInsertionConfig.EnableDrawingViewDimensioningLab = False
         If ForceTitleBlockModeForDebug Then
@@ -232,6 +250,7 @@ Partial Public Class MainForm
         RenameUiOptionTexts()
         UpdateAsmComponentPanelVisibility()
         EmbedTemplatesInAdvancedPanel()
+        ApplySharedSidebarDockingForActiveTab()
 
         ' Forzar layout inicial robusto (evita paneles apilados por splitter).
         AddHandler Me.Resize, Sub() EnsureMainLayoutGeometry()
@@ -265,7 +284,7 @@ Partial Public Class MainForm
     End Sub
 
     Private Sub RemoveLabControlsFromUi()
-        If flowGeneration Is Nothing Then Return
+        If flowGenerationLeft Is Nothing OrElse flowGenerationRight Is Nothing Then Return
 
         Dim controlsToRemove As New List(Of Control)()
         If chkUnitHorizontalExteriorTest IsNot Nothing Then controlsToRemove.Add(chkUnitHorizontalExteriorTest)
@@ -308,7 +327,7 @@ Partial Public Class MainForm
     End Sub
 
     Private Sub EnsureSolidEdgeForegroundButton()
-        If flowGeneration Is Nothing Then Return
+        If flowGenerationRight Is Nothing Then Return
         If _btnBringSolidEdgeFront IsNot Nothing Then Return
 
         _btnBringSolidEdgeFront = New Button With {
@@ -318,11 +337,153 @@ Partial Public Class MainForm
             .MinimumSize = New Size(220, 30)
         }
         AddHandler _btnBringSolidEdgeFront.Click, AddressOf btnBringSolidEdgeFront_Click
-        flowGeneration.Controls.Add(_btnBringSolidEdgeFront)
+        flowGenerationRight.Controls.Add(_btnBringSolidEdgeFront)
+    End Sub
+
+    Private Sub EnsureSolidEdgeToggleVisibleButton()
+        If flowGenerationRight Is Nothing Then Return
+        If _btnToggleSolidEdgeVisible IsNot Nothing Then Return
+
+        _btnToggleSolidEdgeVisible = New Button With {
+            .Name = "btnToggleSolidEdgeVisible",
+            .Text = "Mostrar / ocultar Solid Edge",
+            .AutoSize = True,
+            .MinimumSize = New Size(210, 30)
+        }
+        AddHandler _btnToggleSolidEdgeVisible.Click, AddressOf btnToggleSolidEdgeVisible_Click
+        flowGenerationRight.Controls.Add(_btnToggleSolidEdgeVisible)
+    End Sub
+
+    Private Sub btnToggleSolidEdgeVisible_Click(sender As Object, e As EventArgs)
+        Dim app As SolidEdgeFramework.Application = Nothing
+        Try
+            OleMessageFilter.Register()
+            Try
+                app = CType(Marshal.GetActiveObject("SolidEdge.Application"), SolidEdgeFramework.Application)
+            Catch
+                app = Nothing
+            End Try
+
+            If app Is Nothing Then
+                MessageBox.Show(
+                    "Solid Edge no está en ejecución. Inicie Solid Edge o use «Abrir Solid Edge en primer plano».",
+                    "Mostrar / ocultar Solid Edge",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information)
+                Return
+            End If
+
+            Dim vis As Boolean = True
+            Try
+                vis = app.Visible
+            Catch
+                vis = True
+            End Try
+
+            Dim newVis As Boolean = Not vis
+            Try
+                app.Visible = newVis
+            Catch ex As Exception
+                MessageBox.Show(ex.Message, "Mostrar / ocultar Solid Edge", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End Try
+
+            If chkKeepSolidEdgeVisible IsNot Nothing Then
+                chkKeepSolidEdgeVisible.Checked = newVis
+            End If
+
+            _logger.Log("[UI][SOLIDEDGE][VISIBLE_TOGGLE] visible=" & newVis.ToString())
+        Catch ex As Exception
+            _logger.LogException("btnToggleSolidEdgeVisible_Click", ex)
+            MessageBox.Show(ex.Message, "Mostrar / ocultar Solid Edge", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            Try
+                OleMessageFilter.Revoke()
+            Catch
+            End Try
+        End Try
     End Sub
 
     Private Sub btnBringSolidEdgeFront_Click(sender As Object, e As EventArgs)
         BringSolidEdgeToFront()
+    End Sub
+
+    Private Sub btnOpenVariableTable_Click(sender As Object, e As EventArgs) Handles btnOpenVariableTable.Click
+        TryOpenSolidEdgeVariableTable()
+    End Sub
+
+    ''' <summary>Abre la tabla de variables nativa de Solid Edge según el tipo de documento activo (SDK: <c>Application.StartCommand</c> + <c>DetailCommandConstants.DetailToolVariables</c> / <c>PartCommandConstants.PartToolsVariables</c> / <c>AssemblyCommandConstants.AssemblyAssemblyToolsVariables</c>).</summary>
+    Private Sub TryOpenSolidEdgeVariableTable()
+        Dim app As SolidEdgeFramework.Application = Nothing
+        Try
+            OleMessageFilter.Register()
+            Try
+                app = CType(Marshal.GetActiveObject("SolidEdge.Application"), SolidEdgeFramework.Application)
+            Catch
+                Dim t = Type.GetTypeFromProgID("SolidEdge.Application", throwOnError:=False)
+                If t IsNot Nothing Then
+                    app = CType(Activator.CreateInstance(t), SolidEdgeFramework.Application)
+                End If
+            End Try
+
+            If app Is Nothing Then
+                MessageBox.Show("No se pudo conectar a Solid Edge.", "Tabla de variables", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+
+            Try : app.Visible = True : Catch : End Try
+            Try : app.DisplayAlerts = False : Catch : End Try
+
+            Dim active As Object = Nothing
+            Try
+                active = app.ActiveDocument
+            Catch
+                active = Nothing
+            End Try
+            If active Is Nothing Then
+                MessageBox.Show("No hay documento activo en Solid Edge. Abra un DFT, PAR, PSM o ASM y vuelva a intentarlo.", "Tabla de variables", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Return
+            End If
+
+            Dim sed As SolidEdgeFramework.SolidEdgeDocument = TryCast(active, SolidEdgeFramework.SolidEdgeDocument)
+            If sed Is Nothing Then
+                MessageBox.Show("El documento activo no es compatible con la tabla de variables desde esta acción.", "Tabla de variables", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Return
+            End If
+
+            Dim docTypeVal As Integer = 0
+            Try
+                docTypeVal = CInt(CallByName(sed, "Type", CallType.Get))
+            Catch
+                docTypeVal = 0
+            End Try
+            Dim docType As DocumentTypeConstants = CType(docTypeVal, DocumentTypeConstants)
+
+            Dim cmdVal As Integer
+            Select Case docType
+                Case DocumentTypeConstants.igDraftDocument
+                    cmdVal = CInt(DetailCommandConstants.DetailToolVariables)
+                Case DocumentTypeConstants.igAssemblyDocument,
+                     DocumentTypeConstants.igAssemblyViewerDocument,
+                     DocumentTypeConstants.igSyncAssemblyDocument,
+                     DocumentTypeConstants.igWeldmentAssemblyDocument
+                    cmdVal = CInt(AssemblyCommandConstants.AssemblyAssemblyToolsVariables)
+                Case DocumentTypeConstants.igUnknownDocument
+                    MessageBox.Show("Solid Edge informa tipo de documento desconocido; no se puede elegir el comando de tabla de variables.", "Tabla de variables", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Return
+                Case Else
+                    cmdVal = CInt(PartCommandConstants.PartToolsVariables)
+            End Select
+
+            app.StartCommand(CType(cmdVal, SolidEdgeFramework.SolidEdgeCommandConstants))
+            BringSolidEdgeToFront()
+            _logger.Log("[UI][SOLIDEDGE][VAR_TABLE] docType=" & docType.ToString() & " cmd=" & cmdVal.ToString())
+        Catch ex As Exception
+            _logger.LogException("TryOpenSolidEdgeVariableTable", ex)
+            MessageBox.Show(ex.Message, "Tabla de variables", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            Try : OleMessageFilter.Revoke() : Catch : End Try
+        End Try
     End Sub
 
     Private Sub BringSolidEdgeToFront()
@@ -368,6 +529,7 @@ Partial Public Class MainForm
         BeginInvoke(New Action(Sub()
                                    EnsureMainLayoutGeometry()
                                    EnsureMainLayoutGeometry()
+                                   ApplySharedSidebarDockingForActiveTab()
                                End Sub))
     End Sub
 
@@ -384,20 +546,37 @@ Partial Public Class MainForm
             settings.WindowWidth = Me.Width
             settings.WindowHeight = Me.Height
             settings.WindowStateValue = CInt(Me.WindowState)
-            AppSettingsManager.SaveSettings(settings)
-        Catch
+            Dim errDetail As String = Nothing
+            If Not AppSettingsManager.TrySaveSettings(settings, errDetail) Then
+                Dim p As String = AppSettingsManager.GetSettingsFilePath()
+                Try
+                    _logger?.Log("[UI][SETTINGS][CLOSE_SAVE_FAIL] " & If(errDetail, ""))
+                Catch
+                End Try
+                MessageBox.Show(
+                    "No se pudieron guardar las preferencias al cerrar." & Environment.NewLine &
+                    If(String.IsNullOrWhiteSpace(errDetail), "", errDetail & Environment.NewLine) &
+                    "Archivo: " & p & Environment.NewLine &
+                    "Compruebe permisos en %AppData%, antivirus o sincronizacion de carpetas.",
+                    "Guardar configuracion",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning)
+            End If
+        Catch ex As Exception
+            Try
+                _logger?.LogException("MainForm_FormClosing", ex)
+            Catch
+            End Try
         End Try
     End Sub
 
     Private Sub EnsureMainLayoutGeometry()
         Try
-            If mainLayout Is Nothing OrElse mainLayout.RowStyles.Count < 3 Then Return
+            If mainLayout Is Nothing OrElse mainLayout.RowStyles.Count < 2 Then Return
             mainLayout.RowStyles(0).SizeType = SizeType.Absolute
             mainLayout.RowStyles(0).Height = 70.0F
-            mainLayout.RowStyles(1).SizeType = SizeType.Absolute
-            mainLayout.RowStyles(1).Height = 160.0F
-            mainLayout.RowStyles(2).SizeType = SizeType.Percent
-            mainLayout.RowStyles(2).Height = 100.0F
+            mainLayout.RowStyles(1).SizeType = SizeType.Percent
+            mainLayout.RowStyles(1).Height = 100.0F
             If bodyHost IsNot Nothing AndAlso bodyHost.RowStyles.Count >= 2 Then
                 bodyHost.RowStyles(1).SizeType = SizeType.Absolute
                 bodyHost.RowStyles(1).Height = 58.0F
@@ -408,28 +587,172 @@ Partial Public Class MainForm
     End Sub
 
     Private Sub RebalanceMainLayoutHeights()
-        Try
-            If mainLayout Is Nothing OrElse mainLayout.RowStyles.Count < 3 Then Return
-            mainLayout.RowStyles(1).SizeType = SizeType.Absolute
-            mainLayout.RowStyles(1).Height = 160.0F
-        Catch
-        End Try
+        ' Reservado por si en el futuro se ajustan proporciones según DPI o tamaño mínimo.
     End Sub
 
     Private Sub EmbedTemplatesInAdvancedPanel()
         If _templatesEmbedded Then Return
         Try
-            ' Opciones de procesado (tblAdvanced) solo existen como controles ocultos; templates ya están en rightLayout (Designer).
-            If tblAdvanced.Parent IsNot Nothing AndAlso Not ReferenceEquals(tblAdvanced.Parent, pnlHiddenProcessing) Then
-                tblAdvanced.Parent.Controls.Remove(tblAdvanced)
-            End If
-            If pnlHiddenProcessing IsNot Nothing AndAlso Not pnlHiddenProcessing.Controls.Contains(tblAdvanced) Then
-                pnlHiddenProcessing.Controls.Add(tblAdvanced)
+            If pnlMotorViewsAdvancedHost IsNot Nothing AndAlso tblAdvanced IsNot Nothing Then
+                If tblAdvanced.Parent IsNot Nothing AndAlso Not ReferenceEquals(tblAdvanced.Parent, pnlMotorViewsAdvancedHost) Then
+                    tblAdvanced.Parent.Controls.Remove(tblAdvanced)
+                End If
+                If Not pnlMotorViewsAdvancedHost.Controls.Contains(tblAdvanced) Then
+                    tblAdvanced.Dock = DockStyle.Fill
+                    pnlMotorViewsAdvancedHost.Controls.Add(tblAdvanced)
+                End If
             End If
             _templatesEmbedded = True
-            RebalanceMainLayoutHeights()
         Catch ex As Exception
             _logger.LogException("EmbedTemplatesInAdvancedPanel", ex)
+        End Try
+    End Sub
+
+    Private Sub tabMotors_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabMotors.SelectedIndexChanged
+        ApplySharedSidebarDockingForActiveTab()
+    End Sub
+
+    ''' <summary>
+    ''' Reparte la UI entre pestañas: columna izquierda compartida (entrada, piezas, PDF); derecha según pestaña
+    ''' (vistas / metadatos plano+pieza / opciones de acotación + log).
+    ''' </summary>
+    Private Sub ApplySharedSidebarDockingForActiveTab()
+        Try
+            If tabMotors Is Nothing OrElse twoColumnBodyLayout Is Nothing OrElse pnlSharedSidebar Is Nothing Then Return
+            If tblMotorTab1LeftColumn Is Nothing OrElse tblMotorTab1RightColumn Is Nothing Then Return
+            If tblMetadataTabHost Is Nothing OrElse tblMetadataTabRightColumn Is Nothing OrElse tblMetadataPlanTwoCols Is Nothing Then Return
+            If tblDimensionTabHost Is Nothing OrElse tblDimensionTabRightColumn Is Nothing Then Return
+
+            Dim idx As Integer = tabMotors.SelectedIndex
+            If idx = _lastAppliedMotorChromeTabIndex Then Return
+
+            EnsureSharedLeftColumnChildrenPopulated()
+
+            Select Case idx
+                Case 0
+                    MovePlanDataBoxesToTraceTableLayout()
+                    AttachSharedLeftColumnToHost(tblMotorTab1Host, 0, 0)
+                    AttachLogProgressToHost(tblMotorTab1RightColumn, 0, 1)
+                    ApplyRightLogProgressSplitMode(0)
+                Case 1
+                    MovePlanDataBoxesToMetadataTwoColumnLayout()
+                    AttachSharedLeftColumnToHost(tblMetadataTabHost, 0, 0)
+                    AttachLogProgressToHost(tblMetadataTabRightColumn, 0, 1)
+                    ApplyRightLogProgressSplitMode(1)
+                Case 2
+                    MovePlanDataBoxesToTraceTableLayout()
+                    AttachSharedLeftColumnToHost(tblDimensionTabHost, 0, 0)
+                    AttachLogProgressToHost(tblDimensionTabRightColumn, 0, 1)
+                    ApplyRightLogProgressSplitMode(2)
+                Case Else
+                    Return
+            End Select
+
+            If grpTraceability IsNot Nothing Then grpTraceability.Visible = False
+
+            pnlSharedSidebar.Visible = False
+            If twoColumnBodyLayout.ColumnStyles.Count >= 2 Then
+                twoColumnBodyLayout.ColumnStyles(0) = New ColumnStyle(SizeType.Percent, 100.0F)
+                twoColumnBodyLayout.ColumnStyles(1) = New ColumnStyle(SizeType.Absolute, 0.0F)
+            End If
+            twoColumnBodyLayout.PerformLayout()
+            _lastAppliedMotorChromeTabIndex = idx
+        Catch ex As Exception
+            Try
+                _logger?.LogException("ApplySharedSidebarDockingForActiveTab", ex)
+            Catch
+            End Try
+        End Try
+    End Sub
+
+    Private Sub EnsureSharedLeftColumnChildrenPopulated()
+        If tblMotorTab1LeftColumn Is Nothing Then Return
+        If grpInput IsNot Nothing AndAlso Not ReferenceEquals(grpInput.Parent, tblMotorTab1LeftColumn) Then
+            Dim p As Control = grpInput.Parent
+            If p IsNot Nothing Then p.Controls.Remove(grpInput)
+            tblMotorTab1LeftColumn.Controls.Add(grpInput, 0, 0)
+            grpInput.Dock = DockStyle.Fill
+        End If
+        If grpAsmComponents IsNot Nothing AndAlso Not ReferenceEquals(grpAsmComponents.Parent, tblMotorTab1LeftColumn) Then
+            Dim p2 As Control = grpAsmComponents.Parent
+            If p2 IsNot Nothing Then p2.Controls.Remove(grpAsmComponents)
+            tblMotorTab1LeftColumn.Controls.Add(grpAsmComponents, 0, 1)
+            grpAsmComponents.Dock = DockStyle.Fill
+        End If
+    End Sub
+
+    Private Sub AttachSharedLeftColumnToHost(host As TableLayoutPanel, col As Integer, row As Integer)
+        If tblMotorTab1LeftColumn Is Nothing OrElse host Is Nothing Then Return
+        If ReferenceEquals(tblMotorTab1LeftColumn.Parent, host) Then Return
+        If tblMotorTab1LeftColumn.Parent IsNot Nothing Then tblMotorTab1LeftColumn.Parent.Controls.Remove(tblMotorTab1LeftColumn)
+        host.Controls.Add(tblMotorTab1LeftColumn, col, row)
+        tblMotorTab1LeftColumn.Dock = DockStyle.Fill
+    End Sub
+
+    Private Sub AttachLogProgressToHost(host As TableLayoutPanel, col As Integer, row As Integer)
+        If tblRightLogProgress Is Nothing OrElse host Is Nothing Then Return
+        If ReferenceEquals(tblRightLogProgress.Parent, host) Then Return
+        If tblRightLogProgress.Parent IsNot Nothing Then tblRightLogProgress.Parent.Controls.Remove(tblRightLogProgress)
+        host.Controls.Add(tblRightLogProgress, col, row)
+        tblRightLogProgress.Dock = DockStyle.Fill
+    End Sub
+
+    Private Sub MovePlanDataBoxesToMetadataTwoColumnLayout()
+        If tblMetadataPlanTwoCols Is Nothing Then Return
+        If grpPlanCajetinBox Is Nothing OrElse grpPlanPartListBox Is Nothing Then Return
+        If tblTrace IsNot Nothing Then
+            If tblTrace.Controls.Contains(grpPlanCajetinBox) Then tblTrace.Controls.Remove(grpPlanCajetinBox)
+            If tblTrace.Controls.Contains(grpPlanPartListBox) Then tblTrace.Controls.Remove(grpPlanPartListBox)
+        End If
+        If Not tblMetadataPlanTwoCols.Controls.Contains(grpPlanCajetinBox) Then
+            tblMetadataPlanTwoCols.Controls.Add(grpPlanCajetinBox, 0, 0)
+        End If
+        grpPlanCajetinBox.Dock = DockStyle.Fill
+        grpPlanCajetinBox.Margin = New Padding(0, 0, 4, 0)
+        If Not tblMetadataPlanTwoCols.Controls.Contains(grpPlanPartListBox) Then
+            tblMetadataPlanTwoCols.Controls.Add(grpPlanPartListBox, 1, 0)
+        End If
+        grpPlanPartListBox.Dock = DockStyle.Fill
+        grpPlanPartListBox.Margin = New Padding(4, 0, 0, 0)
+    End Sub
+
+    Private Sub MovePlanDataBoxesToTraceTableLayout()
+        If grpPlanCajetinBox Is Nothing OrElse grpPlanPartListBox Is Nothing OrElse tblTrace Is Nothing Then Return
+        If tblMetadataPlanTwoCols IsNot Nothing Then
+            If tblMetadataPlanTwoCols.Controls.Contains(grpPlanCajetinBox) Then tblMetadataPlanTwoCols.Controls.Remove(grpPlanCajetinBox)
+            If tblMetadataPlanTwoCols.Controls.Contains(grpPlanPartListBox) Then tblMetadataPlanTwoCols.Controls.Remove(grpPlanPartListBox)
+        End If
+        If Not tblTrace.Controls.Contains(grpPlanCajetinBox) Then
+            tblTrace.Controls.Add(grpPlanCajetinBox, 0, 0)
+        End If
+        grpPlanCajetinBox.Dock = DockStyle.Fill
+        grpPlanCajetinBox.Margin = New Padding(0)
+        If Not tblTrace.Controls.Contains(grpPlanPartListBox) Then
+            tblTrace.Controls.Add(grpPlanPartListBox, 0, 1)
+        End If
+        grpPlanPartListBox.Dock = DockStyle.Fill
+        grpPlanPartListBox.Margin = New Padding(0, 10, 0, 0)
+    End Sub
+
+    ''' <param name="mode">0=Motor vistas, 1=Metadatos, 2=Acotación</param>
+    Private Sub ApplyRightLogProgressSplitMode(mode As Integer)
+        Try
+            If tblRightLogProgress Is Nothing OrElse tblRightLogProgress.RowStyles.Count < 2 Then Return
+            Dim logPct As Single
+            Dim progPct As Single
+            Select Case mode
+                Case 0
+                    logPct = 74.0F : progPct = 26.0F
+                Case 1
+                    logPct = 54.0F : progPct = 46.0F
+                Case Else
+                    logPct = 57.0F : progPct = 43.0F
+            End Select
+            tblRightLogProgress.RowStyles(0).SizeType = SizeType.Percent
+            tblRightLogProgress.RowStyles(0).Height = logPct
+            tblRightLogProgress.RowStyles(1).SizeType = SizeType.Percent
+            tblRightLogProgress.RowStyles(1).Height = progPct
+        Catch
         End Try
     End Sub
 
@@ -444,11 +767,45 @@ Partial Public Class MainForm
 
     Private Sub RenameUiOptionTexts()
         chkKeepSolidEdgeVisible.Text = "Mostrar Solid Edge mientras se genera"
+        If _btnToggleSolidEdgeVisible IsNot Nothing Then
+            _btnToggleSolidEdgeVisible.Text = "Mostrar / ocultar Solid Edge"
+        End If
         chkAutoDimensioning.Text = "Generar acotado automático"
+        If chkProductionDvRefClean IsNot Nothing Then
+            chkProductionDvRefClean.Text = "Motor PRODDIM (DVRef limpio, exclusivo)"
+        End If
         chkUnitHorizontalExteriorTest.Text = "Prueba aislada cota horizontal exterior"
         chkDrawingViewDimensioningLab.Text = ""
         chkIncludeIso.Text = "Incluir vista isométrica"
         chkIncludeProjected.Text = "Incluir vistas proyectadas"
+        If chkSesdkPostDimensionIntrospection IsNot Nothing Then
+            chkSesdkPostDimensionIntrospection.Text = "Tras acotado: volcar introspección SDK (DV + cotas, log [SESDK_PROBE])"
+        End If
+        If chkPreferSweepAllDrawingDimensions IsNot Nothing Then
+            chkPreferSweepAllDrawingDimensions.Text = "Más cotas DV: barrer líneas, arcos y círculos (modo SweepAll; puede saturar el pliego)"
+        End If
+    End Sub
+
+    Private Sub UpdateAutoDimensionMotorChoiceEnabledFromAutoDimCheckbox()
+        If pnlAutoDimensionMotorChoice Is Nothing Then Return
+        Dim autoDimOn As Boolean = chkAutoDimensioning.Checked
+        pnlAutoDimensionMotorChoice.Enabled = autoDimOn
+        If chkSesdkPostDimensionIntrospection IsNot Nothing Then
+            chkSesdkPostDimensionIntrospection.Enabled = autoDimOn
+        End If
+        If chkPreferSweepAllDrawingDimensions IsNot Nothing Then
+            chkPreferSweepAllDrawingDimensions.Enabled = autoDimOn
+        End If
+        If chkSuppressDimTrackSpacing IsNot Nothing Then
+            chkSuppressDimTrackSpacing.Enabled = autoDimOn
+        End If
+        If chkDedupDimensionsByKeypoints IsNot Nothing Then
+            chkDedupDimensionsByKeypoints.Enabled = autoDimOn
+        End If
+    End Sub
+
+    Private Sub chkAutoDimensioning_CheckedChanged(sender As Object, e As EventArgs) Handles chkAutoDimensioning.CheckedChanged
+        UpdateAutoDimensionMotorChoiceEnabledFromAutoDimCheckbox()
     End Sub
 
     Private Function IsWindowsDarkMode() As Boolean
@@ -484,7 +841,7 @@ Partial Public Class MainForm
         lblTitle.ForeColor = Drawing.Color.White
         lblSubTitle.ForeColor = Drawing.Color.LightGray
 
-        For Each gb As GroupBox In New GroupBox() {grpInput, grpAsmComponents, grpTemplates, grpTraceability, grpGeneration, grpAdvanced, grpProgress, grpLog}
+        For Each gb As GroupBox In New GroupBox() {grpInput, grpAsmComponents, grpTemplates, grpTraceability, grpGeneration, grpAdvanced, grpProgress, grpLog, grpPdfPreview}
             gb.BackColor = panel
             gb.ForeColor = fore
         Next
@@ -550,7 +907,7 @@ Partial Public Class MainForm
     Private Sub btnBrowseInput_Click(sender As Object, e As EventArgs) Handles btnBrowseInput.Click
         Using ofd As New OpenFileDialog()
             ofd.Title = "Selecciona archivo de entrada"
-            ofd.Filter = "Solid Edge (*.asm;*.par;*.psm)|*.asm;*.par;*.psm|ASM (*.asm)|*.asm|PAR (*.par)|*.par|PSM (*.psm)|*.psm"
+            ofd.Filter = "Solid Edge (*.asm;*.par;*.psm;*.dft)|*.asm;*.par;*.psm;*.dft|Borrador (*.dft)|*.dft|ASM (*.asm)|*.asm|PAR (*.par)|*.par|PSM (*.psm)|*.psm|Todos los archivos|*.*"
             ofd.Multiselect = False
             If ofd.ShowDialog() = DialogResult.OK Then
                 txtInputFile.Text = ofd.FileName
@@ -603,6 +960,7 @@ Partial Public Class MainForm
         _requestedDimLabFromDedicatedButton = True
         chkDrawingViewDimensioningLab.Checked = True
         chkAutoDimensioning.Checked = False
+        If chkProductionDvRefClean IsNot Nothing Then chkProductionDvRefClean.Checked = False
         chkUnitHorizontalExteriorTest.Checked = False
         chkCreatePdf.Checked = False
         chkCreateDxfDraft.Checked = False
@@ -620,8 +978,101 @@ Partial Public Class MainForm
         Dim unused = GenerateWorkAsync()
     End Sub
 
+    Private Sub btnMotorViews_Click(sender As Object, e As EventArgs) Handles btnMotorViews.Click
+        If _isRunning Then Return
+        If tabMotors IsNot Nothing Then tabMotors.SelectedIndex = 0
+        Dim unused = GenerateWorkAsync(AddressOf DraftViewGenerationMotor.PrepareCopy)
+    End Sub
+
+    Private Sub btnMotorMetadata_Click(sender As Object, e As EventArgs) Handles btnMotorMetadata.Click
+        If _isRunning Then Return
+        If tabMotors IsNot Nothing Then tabMotors.SelectedIndex = 1
+        Dim unused = GenerateWorkAsync(AddressOf DraftMetadataMotor.PrepareCopy)
+    End Sub
+
+    Private Sub btnMotorDimensioning_Click(sender As Object, e As EventArgs) Handles btnMotorDimensioning.Click
+        If _isRunning Then Return
+        If tabMotors IsNot Nothing Then tabMotors.SelectedIndex = 2
+        Dim unused = GenerateWorkAsync(AddressOf DraftDimensioningMotor.PrepareCopy)
+    End Sub
+
+    Private Sub TryUpdatePdfPreviewFromEngineResult(result As EngineRunResult)
+        Try
+            If result Is Nothing Then Return
+            If String.IsNullOrWhiteSpace(result.LastExportedPdfFullPath) Then Return
+            If Not File.Exists(result.LastExportedPdfFullPath) Then Return
+            _lastPdfPreviewPath = result.LastExportedPdfFullPath
+            NavigateWebBrowserToPdf(_lastPdfPreviewPath)
+        Catch
+        End Try
+    End Sub
+
+    Private Sub NavigateWebBrowserToPdf(fullPath As String)
+        Try
+            If wbPdfPreview Is Nothing OrElse String.IsNullOrWhiteSpace(fullPath) Then Return
+            If Not File.Exists(fullPath) Then Return
+            wbPdfPreview.Navigate(New Uri(fullPath).AbsoluteUri)
+        Catch
+        End Try
+    End Sub
+
+    Private Function TryFindLatestPdfInStandardOutputFolder() As String
+        Try
+            Dim root As String = txtOutputFolder.Text.Trim()
+            If String.IsNullOrWhiteSpace(root) Then Return ""
+            Dim pdfDir As String = Path.Combine(root, "PDF de DFT")
+            If Not Directory.Exists(pdfDir) Then Return ""
+            Dim latest As String = ""
+            Dim latestTicks As Long = 0
+            For Each f As String In Directory.GetFiles(pdfDir, "*.pdf")
+                Dim t As Long = File.GetLastWriteTimeUtc(f).Ticks
+                If t >= latestTicks Then
+                    latestTicks = t
+                    latest = f
+                End If
+            Next
+            Return latest
+        Catch
+            Return ""
+        End Try
+    End Function
+
+    Private Sub btnRefreshPdfPreview_Click(sender As Object, e As EventArgs) Handles btnRefreshPdfPreview.Click
+        Try
+            If Not String.IsNullOrWhiteSpace(_lastPdfPreviewPath) AndAlso File.Exists(_lastPdfPreviewPath) Then
+                NavigateWebBrowserToPdf(_lastPdfPreviewPath)
+                Return
+            End If
+            Dim found As String = TryFindLatestPdfInStandardOutputFolder()
+            If Not String.IsNullOrWhiteSpace(found) AndAlso File.Exists(found) Then
+                _lastPdfPreviewPath = found
+                NavigateWebBrowserToPdf(found)
+            Else
+                MessageBox.Show("No se encontró ningún PDF en la carpeta ""PDF de DFT"" bajo la salida configurada.", "Vista previa PDF", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, "Vista previa PDF", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        End Try
+    End Sub
+
+    Private Sub btnOpenLastPdfExternal_Click(sender As Object, e As EventArgs) Handles btnOpenLastPdfExternal.Click
+        Try
+            Dim path As String = _lastPdfPreviewPath
+            If String.IsNullOrWhiteSpace(path) OrElse Not File.Exists(path) Then
+                path = TryFindLatestPdfInStandardOutputFolder()
+            End If
+            If String.IsNullOrWhiteSpace(path) OrElse Not File.Exists(path) Then
+                MessageBox.Show("No hay PDF reciente para abrir.", "PDF", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Return
+            End If
+            Process.Start(New ProcessStartInfo(path) With {.UseShellExecute = True})
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, "PDF", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
     ''' <summary>Ejecuta el motor fuera del hilo UI para que ""Conectando a Solid Edge"" no congele la ventana durante el arranque COM.</summary>
-    Private Async Function GenerateWorkAsync() As Task
+    Private Async Function GenerateWorkAsync(Optional executionPrepare As Func(Of JobConfiguration, JobConfiguration) = Nothing) As Task
         If _isRunning Then Return
         EnsureAutoOutputFolderForInput()
 
@@ -641,7 +1092,9 @@ Partial Public Class MainForm
             Return
         End If
 
-        Dim config As JobConfiguration = BuildConfigurationFromUi()
+        Dim cfgUi As JobConfiguration = BuildConfigurationFromUi()
+        Dim config As JobConfiguration = If(executionPrepare Is Nothing, cfgUi, executionPrepare(cfgUi))
+        _logger.Log($"[UI][GENERATE][MOTOR_PHASE] MotorPhase={config.MotorPhase}")
         _logger.Log("[UI][GENERATE][VALIDATE_METADATA]")
         If Not ValidateMetadataBeforeGenerate(config) Then Return
 
@@ -676,13 +1129,16 @@ Partial Public Class MainForm
             ConfigurePieceLogProgressBar()
             StartProgressTelemetry()
             _logger.Log("Inicio de proceso.")
+            LogBootPathsBanner()
 
             Dim result As EngineRunResult = Await RunDraftEngineOnBackgroundStaThreadAsync(config).ConfigureAwait(True)
+
+            TryUpdatePdfPreviewFromEngineResult(result)
 
             If Not String.IsNullOrWhiteSpace(result.DimLabReferenceDftFullPath) Then
                 _logger.Log("[DIMLAB][DONE] DFT referencia guardado")
                 MessageBox.Show(
-                    "Abre/revisa este archivo:" & Environment.NewLine & result.DimLabReferenceDftFullPath,
+                    "Abre/revisa este archivo: " & result.DimLabReferenceDftFullPath,
                     "DIMLAB",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information)
@@ -764,10 +1220,22 @@ Partial Public Class MainForm
     Private Sub btnSaveConfig_Click(sender As Object, e As EventArgs) Handles btnSaveConfig.Click
         Try
             Dim settings As PersistedAppSettings = BuildSettingsFromUi()
-            AppSettingsManager.SaveSettings(settings)
-            _loadedSettings = settings
-            _logger.Log("Configuracion guardada.")
-            MessageBox.Show("Configuracion guardada.", "Configuracion", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Dim errDetail As String = Nothing
+            If AppSettingsManager.TrySaveSettings(settings, errDetail) Then
+                _loadedSettings = settings
+                _logger.Log("Configuracion guardada.")
+                MessageBox.Show("Configuracion guardada.", "Configuracion", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Else
+                Dim p As String = AppSettingsManager.GetSettingsFilePath()
+                _logger.Log("[UI][SETTINGS][SAVE_FAIL] " & If(errDetail, ""))
+                MessageBox.Show(
+                    "No se pudo guardar la configuracion." & Environment.NewLine &
+                    If(String.IsNullOrWhiteSpace(errDetail), "", errDetail & Environment.NewLine) &
+                    "Archivo: " & p,
+                    "Guardar configuracion",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error)
+            End If
         Catch ex As Exception
             MessageBox.Show(ex.Message, "Guardar configuracion", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -795,26 +1263,42 @@ Partial Public Class MainForm
             Dim cfg As JobConfiguration = BuildConfigurationFromUi()
             _logger.Log($"[UI][DFT] Aplicación manual iniciada para: {cfg.InputFile}")
 
-            Dim dftPath As String = ResolveManualDftPath(cfg)
+            Dim dftPath As String = ResolveDftPathForPlanMetadata(cfg)
             If String.IsNullOrWhiteSpace(dftPath) Then
                 _logger.Log("[UI][DFT][WARN] No se encontró DFT para el archivo actual.")
-                MessageBox.Show("No se encontró el DFT correspondiente al archivo seleccionado.", "Aplicar propiedades al DFT", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                MessageBox.Show("No se encontró el DFT correspondiente al archivo seleccionado." & Environment.NewLine &
+                    "Use «Elegir DFT y cargar cajetín / PART_LIST…» en metadatos para fijar un DFT concreto.",
+                    "Aplicar al DFT", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return
             End If
 
             _logger.Log($"[UI][DFT] DFT encontrado: {dftPath}")
-            Dim ok As Boolean = SolidEdgePropertyService.ApplyDirectSummaryInfoToDraftFile(dftPath, chkKeepSolidEdgeVisible.Checked, cfg, _logger)
-            _logger.Log($"[UI][DFT] Resultado={ok}")
-            UpdateStatus(If(ok, "Propiedades SummaryInfo aplicadas al DFT.", "No se pudieron aplicar propiedades al DFT."))
+            Dim metadata As DrawingMetadataInput = DrawingMetadataService.BuildFromUi(Me)
+            Dim applyResult As ApplyMetadataToDraftFilesResult = DrawingMetadataService.ApplyCajetinSummaryAndPartListToFiles(
+                dftPath, cfg.InputFile, chkKeepSolidEdgeVisible.Checked, cfg, metadata, _logger)
+
+            _logger.Log($"[UI][DFT] Resultado SummaryInfo={applyResult.SummaryInfoOk} PartList={applyResult.PartListPipelineRan} DftSaved={applyResult.DftSaved}")
+
+            Dim ok As Boolean = applyResult.OverallOk
+            UpdateStatus(If(ok,
+                "Cajetín + PART_LIST aplicados. Revise el log [PARTSLIST][COL_DIAG].",
+                "No se pudieron aplicar propiedades al DFT."))
 
             If ok Then
-                MessageBox.Show("Propiedades aplicadas correctamente al DFT.", "Aplicar propiedades al DFT", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBox.Show(
+                    "Cajetín (SummaryInfo) y lista de piezas (Custom + Update) aplicados." & Environment.NewLine & Environment.NewLine &
+                    "En el log busque:" & Environment.NewLine &
+                    "• [PARTLISTDATA][SNAPSHOT] — valores enviados" & Environment.NewLine &
+                    "• [PARTSLIST][COL_DIAG] — PropertyText de cada columna (debe coincidir con Custom en la pieza)",
+                    "Aplicar al DFT",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information)
             Else
-                MessageBox.Show("No se pudieron aplicar propiedades al DFT. Revisa el log para más detalle.", "Aplicar propiedades al DFT", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                MessageBox.Show("No se pudieron aplicar propiedades al DFT. Revisa el log para más detalle.", "Aplicar al DFT", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             End If
         Catch ex As Exception
             _logger.LogException("btnApplyTraceability_Click", ex)
-            MessageBox.Show(ex.Message, "Aplicar propiedades al DFT", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show(ex.Message, "Aplicar al DFT", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
@@ -998,19 +1482,20 @@ Partial Public Class MainForm
     End Sub
 
     Private Sub EnsureStopRunButton()
-        If pnlGenerateBar Is Nothing Then Return
+        If flowGenerateBar Is Nothing Then Return
         If _btnStopRun IsNot Nothing Then Return
         _btnStopRun = New Button With {
             .Text = "STOP",
-            .Dock = DockStyle.Right,
-            .Width = 120,
+            .AutoSize = True,
+            .MinimumSize = New Size(96, 44),
             .Enabled = False,
             .BackColor = Color.FromArgb(150, 35, 35),
             .ForeColor = Color.White,
-            .FlatStyle = FlatStyle.Flat
+            .FlatStyle = FlatStyle.Flat,
+            .Margin = New Padding(0, 0, 0, 6)
         }
         AddHandler _btnStopRun.Click, AddressOf btnStopRun_Click
-        pnlGenerateBar.Controls.Add(_btnStopRun)
+        flowGenerateBar.Controls.Add(_btnStopRun)
     End Sub
 
     Private Sub btnStopRun_Click(sender As Object, e As EventArgs)
@@ -1250,6 +1735,7 @@ Partial Public Class MainForm
             Case SourceFileKind.AssemblyFile : lblDetectedTypeValue.Text = ".asm (Ensamblaje)"
             Case SourceFileKind.PartFile : lblDetectedTypeValue.Text = ".par (Pieza)"
             Case SourceFileKind.SheetMetalFile : lblDetectedTypeValue.Text = ".psm (Chapa)"
+            Case SourceFileKind.DraftFile : lblDetectedTypeValue.Text = ".dft (Borrador — metadatos o acotación)"
             Case Else : lblDetectedTypeValue.Text = "-"
         End Select
     End Sub
@@ -1887,6 +2373,13 @@ Partial Public Class MainForm
         Return CType(cmbDimLabMode.SelectedIndex, DimLabMode)
     End Function
 
+    Private Function ResolveAutoDimensioningMotorFromUi(runUnitHorizontalTest As Boolean, runDrawingViewLab As Boolean) As AutoDimensioningMotorKind
+        If runUnitHorizontalTest OrElse runDrawingViewLab Then Return AutoDimensioningMotorKind.CurrentMainPipeline
+        If radAutoDimMotorLegacyV02 IsNot Nothing AndAlso radAutoDimMotorLegacyV02.Checked Then Return AutoDimensioningMotorKind.LegacyV02IsolatedCopy
+        If radAutoDimMotorAlternatePlugIn IsNot Nothing AndAlso radAutoDimMotorAlternatePlugIn.Checked Then Return AutoDimensioningMotorKind.AlternatePlugIn
+        Return AutoDimensioningMotorKind.CurrentMainPipeline
+    End Function
+
     Private Function BuildConfigurationFromUi() As JobConfiguration
         EnsureAutoOutputFolderForInput()
         Dim runUnitHorizontalTest As Boolean = chkUnitHorizontalExteriorTest.Checked
@@ -1928,6 +2421,12 @@ Partial Public Class MainForm
             .IncludeProjectedViews = chkIncludeProjected.Checked,
             .IncludeFlatInDraftWhenPsm = chkIncludeFlatInDraft.Checked,
             .EnableAutoDimensioning = If(runUnitHorizontalTest, False, chkAutoDimensioning.Checked),
+            .AutoDimensioningMotor = ResolveAutoDimensioningMotorFromUi(runUnitHorizontalTest, runDrawingViewLab),
+            .EnableSesdkPostDimensionIntrospection = If(chkSesdkPostDimensionIntrospection Is Nothing, False, chkSesdkPostDimensionIntrospection.Checked),
+            .PreferSweepAllDrawingDimensions = If(chkPreferSweepAllDrawingDimensions Is Nothing, False, chkPreferSweepAllDrawingDimensions.Checked),
+            .SuppressDimensionTrackDistanceSpacing = If(chkSuppressDimTrackSpacing Is Nothing, True, chkSuppressDimTrackSpacing.Checked),
+            .EnableKeypointValueDuplicateCleanup = If(chkDedupDimensionsByKeypoints Is Nothing, True, chkDedupDimensionsByKeypoints.Checked),
+            .EnableProductionDvRefCleanEngine = If(chkProductionDvRefClean Is Nothing, False, chkProductionDvRefClean.Checked),
             .EnableDrawingViewDimensioningLab = runDrawingViewLab,
             .RunDropViewsTo2DModelLab = _runDropViewsTo2DModelLab,
             .RunDropCreatedSheetsDimensionLab = _runDropCreatedSheetsDimensionLab,
@@ -2031,9 +2530,11 @@ Partial Public Class MainForm
             End If
         End If
         If _requestedDimLabFromDedicatedButton Then
+            cfg.MotorPhase = DraftMotorPhase.FullSequence
             cfg.CreateDraft = True
             cfg.EnableDrawingViewDimensioningLab = True
             cfg.EnableAutoDimensioning = False
+            cfg.EnableProductionDvRefCleanEngine = False
             cfg.CreatePdf = False
             cfg.CreateDxfFromDraft = False
             cfg.CreateFlatDxf = False
@@ -2044,12 +2545,25 @@ Partial Public Class MainForm
             cfg.DimLabCleanPreviousLabDimensions = True
             cfg.RequestedDimLabFromDedicatedButton = True
             DimensionInsertionConfig.EnableDrawingViewDimensioningLab = True
-            _logger.Log("[DIMLAB][UI_FORCE] desde botón [LAB]: mode=CleanFullStrict CreateDraft=True EnableDrawingViewDimensioningLab=True DimensionInsertionConfig=True EnableAutoDimensioning=False CreatePdf/DxfDraft/FlatDxf=False VisibleProbe=False InteractivePause=False")
+            Dim userOutRoot As String = cfg.OutputFolder.Trim()
+            If Not String.IsNullOrWhiteSpace(userOutRoot) Then
+                Dim labFolder As String = Path.Combine(userOutRoot, "OUT_DIMLAB")
+                Try
+                    If Not Directory.Exists(labFolder) Then Directory.CreateDirectory(labFolder)
+                Catch exLabDir As Exception
+                    _logger.Log("[DIMLAB][OUTPUT_ROOT_REDIRECT][WARN] " & exLabDir.Message)
+                End Try
+                cfg.OutputFolder = labFolder
+            End If
+            _logger.Log("[DIMLAB][UI_FORCE] desde botón [LAB]: MotorPhase=FullSequence mode=CleanFullStrict outputRoot=OUT_DIMLAB bajo carpeta usuario CreateDraft=True EnableDrawingViewDimensioningLab=True DimensionInsertionConfig=True EnableAutoDimensioning=False PRODDIM=False CreatePdf/DxfDraft/FlatDxf=False VisibleProbe=False InteractivePause=False effectiveOutputFolder=" & cfg.OutputFolder)
         End If
 
         DimensionInsertionConfig.EnableDrawingViewDimensioningLab = cfg.EnableDrawingViewDimensioningLab
         _logger.Log("[DIM] Config desde UI: EnableAutoDimensioning=" & cfg.EnableAutoDimensioning.ToString() &
                      " (chkAutoDimensioning=" & chkAutoDimensioning.Checked.ToString() & ", RunUnitHorizontalExterior=" & cfg.RunUnitHorizontalExteriorDimensionTest.ToString() & ")" &
+                     ", AutoDimensioningMotor=" & cfg.AutoDimensioningMotor.ToString() &
+                     ", EnableSesdkPostDimensionIntrospection=" & cfg.EnableSesdkPostDimensionIntrospection.ToString() &
+                     ", PreferSweepAllDrawingDimensions=" & cfg.PreferSweepAllDrawingDimensions.ToString() &
                      ", EnableDrawingViewDimensioningLab=" & cfg.EnableDrawingViewDimensioningLab.ToString())
         _logger.Log("[PROPS][UI] Título modo=" & cfg.TitleSourceMode.ToString() & ", plantillas diagnóstico=" & cfg.DebugTemplatesInspection.ToString())
         Return cfg
@@ -2108,6 +2622,14 @@ Partial Public Class MainForm
         Return best
     End Function
 
+    ''' <summary>Si el usuario cargó un DFT con «Elegir DFT y cargar…», las acciones de metadatos usan esa ruta en lugar del DFT inferido por nombre.</summary>
+    Private Function ResolveDftPathForPlanMetadata(cfg As JobConfiguration) As String
+        If Not String.IsNullOrWhiteSpace(_externalManualDftEditPath) AndAlso File.Exists(_externalManualDftEditPath) Then
+            Return _externalManualDftEditPath
+        End If
+        Return ResolveManualDftPath(cfg)
+    End Function
+
     Private Function SafeFindFiles(folder As String, pattern As String) As IEnumerable(Of String)
         Try
             Return Directory.GetFiles(folder, pattern, SearchOption.TopDirectoryOnly)
@@ -2132,7 +2654,13 @@ Partial Public Class MainForm
         End If
 
         If config.DetectInputKind() = SourceFileKind.Unknown Then
-            errors.Add("- Extension no valida. Debe ser .asm, .par o .psm.")
+            errors.Add("- Extensión no válida. Debe ser .asm, .par, .psm o .dft (este último solo con Gestor Metadatos DFT o Motor Acotación).")
+        End If
+
+        If config.DetectInputKind() = SourceFileKind.DraftFile AndAlso
+            config.MotorPhase <> DraftMotorPhase.MetadataManagement AndAlso
+            config.MotorPhase <> DraftMotorPhase.Dimensioning Then
+            errors.Add("- Con archivo .dft como entrada use el botón Gestor Metadatos DFT o Motor Acotación (no GENERAR ni generador de vistas).")
         End If
 
         If String.IsNullOrWhiteSpace(config.OutputFolder) Then
@@ -2145,15 +2673,43 @@ Partial Public Class MainForm
             End Try
         End If
 
-        If config.CreateDraft OrElse config.CreatePdf OrElse config.CreateDxfFromDraft Then
-            If String.IsNullOrWhiteSpace(config.TemplateA4) AndAlso String.IsNullOrWhiteSpace(config.TemplateA3) AndAlso String.IsNullOrWhiteSpace(config.TemplateA2) Then
-                errors.Add("- Debes informar al menos un template A4/A3/A2 para generar Draft/PDF/DXF.")
+        Dim standaloneDftMotor As Boolean =
+            config.MotorPhase = DraftMotorPhase.MetadataManagement OrElse
+            config.MotorPhase = DraftMotorPhase.Dimensioning
+
+        If config.MotorPhase = DraftMotorPhase.ViewGeneration Then
+            If Not (config.CreateDraft OrElse config.CreatePdf OrElse config.CreateDxfFromDraft) Then
+                errors.Add("- Generador de vistas: active al menos ""Crear DFT"" o PDF o DXF desde DFT para generar vistas.")
             End If
         End If
-        Dim dftTplPaths As String() = {config.TemplateA4, config.TemplateA3, config.TemplateA2}
-        Dim anyDftTemplateExisting As Boolean = dftTplPaths.Any(Function(p) Not String.IsNullOrWhiteSpace(p) AndAlso File.Exists(p))
-        If (config.CreateDraft OrElse config.CreatePdf OrElse config.CreateDxfFromDraft) AndAlso Not anyDftTemplateExisting Then
-            errors.Add("- Debes tener al menos un template A4/A3/A2 existente en disco.")
+
+        If standaloneDftMotor AndAlso config.MotorPhase = DraftMotorPhase.MetadataManagement Then
+            If Not config.InsertPropertiesInTitleBlock Then
+                errors.Add("- Gestor Metadatos: activa la opción de insertar propiedades en el cajetín sobre el DFT ya generado.")
+            End If
+        End If
+
+        If standaloneDftMotor AndAlso Not String.IsNullOrWhiteSpace(config.InputFile) AndAlso File.Exists(config.InputFile) AndAlso
+            Not String.IsNullOrWhiteSpace(config.OutputFolder) Then
+            Dim resolvedDft As String = DraftStandaloneMotorPaths.ResolveStandaloneDraftFullPath(config, config.InputFile)
+            If String.IsNullOrWhiteSpace(resolvedDft) OrElse Not File.Exists(resolvedDft) Then
+                Dim hintPath As String = DraftStandaloneMotorPaths.GetExpectedStandaloneDraftPath(config, config.InputFile)
+                errors.Add("- " & DraftStandaloneMotorPaths.FormatMissingDraftHint(hintPath))
+            End If
+        End If
+
+        If Not standaloneDftMotor Then
+            If config.CreateDraft OrElse config.CreatePdf OrElse config.CreateDxfFromDraft Then
+                If String.IsNullOrWhiteSpace(config.TemplateA4) AndAlso String.IsNullOrWhiteSpace(config.TemplateA3) AndAlso String.IsNullOrWhiteSpace(config.TemplateA2) Then
+                    errors.Add("- Debes informar al menos un template A4/A3/A2 para generar Draft/PDF/DXF.")
+                End If
+            End If
+
+            Dim dftTplPaths As String() = {config.TemplateA4, config.TemplateA3, config.TemplateA2}
+            Dim anyDftTemplateExisting As Boolean = dftTplPaths.Any(Function(p) Not String.IsNullOrWhiteSpace(p) AndAlso File.Exists(p))
+            If (config.CreateDraft OrElse config.CreatePdf OrElse config.CreateDxfFromDraft) AndAlso Not anyDftTemplateExisting Then
+                errors.Add("- Debes tener al menos un template A4/A3/A2 existente en disco.")
+            End If
         End If
 
         If config.CreateDxfFromDraft AndAlso String.IsNullOrWhiteSpace(config.TemplateDxf) Then
@@ -2222,9 +2778,14 @@ Partial Public Class MainForm
 
     Private Sub ToggleUi(enabled As Boolean)
         btnGenerate.Enabled = enabled
+        If btnMotorViews IsNot Nothing Then btnMotorViews.Enabled = enabled
+        If btnMotorMetadata IsNot Nothing Then btnMotorMetadata.Enabled = enabled
+        If btnMotorDimensioning IsNot Nothing Then btnMotorDimensioning.Enabled = enabled
+        If btnOpenVariableTable IsNot Nothing Then btnOpenVariableTable.Enabled = enabled
         btnClear.Enabled = enabled
         btnOpenOutput.Enabled = enabled
-        btnSaveConfig.Enabled = enabled
+        ' Guardar configuracion debe seguir disponible durante una generacion larga (COM bloqueaba el resto de la UI).
+        btnSaveConfig.Enabled = True
         btnLoadConfig.Enabled = enabled
         grpInput.Enabled = enabled
         grpAsmComponents.Enabled = enabled
@@ -2232,6 +2793,16 @@ Partial Public Class MainForm
         grpTraceability.Enabled = enabled
         grpGeneration.Enabled = enabled
         grpAdvanced.Enabled = enabled
+        If grpPdfPreview IsNot Nothing Then grpPdfPreview.Enabled = enabled
+        If tabMotors IsNot Nothing Then tabMotors.Enabled = enabled
+        If btnRefreshPdfPreview IsNot Nothing Then btnRefreshPdfPreview.Enabled = enabled
+        If btnOpenLastPdfExternal IsNot Nothing Then btnOpenLastPdfExternal.Enabled = enabled
+        If tblMotorTab1LeftColumn IsNot Nothing Then tblMotorTab1LeftColumn.Enabled = enabled
+        If tblMotorTab1RightColumn IsNot Nothing Then tblMotorTab1RightColumn.Enabled = enabled
+        If tblMetadataTabHost IsNot Nothing Then tblMetadataTabHost.Enabled = enabled
+        If tblMetadataPlanTwoCols IsNot Nothing Then tblMetadataPlanTwoCols.Enabled = enabled
+        If tblDimensionTabHost IsNot Nothing Then tblDimensionTabHost.Enabled = enabled
+        If tblDimensionTabRightColumn IsNot Nothing Then tblDimensionTabRightColumn.Enabled = enabled
         If _btnAnalyzeDft IsNot Nothing Then _btnAnalyzeDft.Enabled = enabled
         If _btnDimRelinkLab IsNot Nothing Then _btnDimRelinkLab.Enabled = enabled
         If _btnAdboGuidedLab IsNot Nothing Then _btnAdboGuidedLab.Enabled = enabled
@@ -2303,6 +2874,7 @@ Partial Public Class MainForm
 
     Private Sub ResetTransientUiForNewInput()
         If _isRunning Then Return
+        _externalManualDftEditPath = ""
         ResetProgressBarsAfterJob()
         ResetProgressTelemetry()
         _currentPieceKey = ""
@@ -2540,6 +3112,12 @@ Partial Public Class MainForm
             .IncludeProjectedViews = cfg.IncludeProjectedViews,
             .IncludeFlatInDraftWhenPsm = cfg.IncludeFlatInDraftWhenPsm,
             .EnableAutoDimensioning = cfg.EnableAutoDimensioning,
+            .AutoDimensioningMotor = CInt(cfg.AutoDimensioningMotor),
+            .EnableSesdkPostDimensionIntrospection = cfg.EnableSesdkPostDimensionIntrospection,
+            .PreferSweepAllDrawingDimensions = cfg.PreferSweepAllDrawingDimensions,
+            .SuppressDimensionTrackDistanceSpacing = cfg.SuppressDimensionTrackDistanceSpacing,
+            .EnableKeypointValueDuplicateCleanup = cfg.EnableKeypointValueDuplicateCleanup,
+            .EnableProductionDvRefCleanEngine = cfg.EnableProductionDvRefCleanEngine,
             .EnableDrawingViewDimensioningLab = cfg.EnableDrawingViewDimensioningLab,
             .RunDropViewsTo2DModelLab = cfg.RunDropViewsTo2DModelLab,
             .RunDropCreatedSheetsDimensionLab = cfg.RunDropCreatedSheetsDimensionLab,
@@ -2616,6 +3194,27 @@ Partial Public Class MainForm
         chkIncludeProjected.Checked = settings.IncludeProjectedViews
         chkIncludeFlatInDraft.Checked = settings.IncludeFlatInDraftWhenPsm
         chkAutoDimensioning.Checked = settings.EnableAutoDimensioning
+        If radAutoDimMotorMain IsNot Nothing AndAlso radAutoDimMotorLegacyV02 IsNot Nothing AndAlso radAutoDimMotorAlternatePlugIn IsNot Nothing Then
+            Dim am As Integer = settings.AutoDimensioningMotor
+            If am < 0 OrElse am > 2 Then am = 0
+            radAutoDimMotorMain.Checked = (am = CInt(AutoDimensioningMotorKind.CurrentMainPipeline))
+            radAutoDimMotorLegacyV02.Checked = (am = CInt(AutoDimensioningMotorKind.LegacyV02IsolatedCopy))
+            radAutoDimMotorAlternatePlugIn.Checked = (am = CInt(AutoDimensioningMotorKind.AlternatePlugIn))
+        End If
+        If chkSesdkPostDimensionIntrospection IsNot Nothing Then
+            chkSesdkPostDimensionIntrospection.Checked = settings.EnableSesdkPostDimensionIntrospection
+        End If
+        If chkPreferSweepAllDrawingDimensions IsNot Nothing Then
+            chkPreferSweepAllDrawingDimensions.Checked = settings.PreferSweepAllDrawingDimensions
+        End If
+        If chkSuppressDimTrackSpacing IsNot Nothing Then
+            chkSuppressDimTrackSpacing.Checked = settings.SuppressDimensionTrackDistanceSpacing
+        End If
+        If chkDedupDimensionsByKeypoints IsNot Nothing Then
+            chkDedupDimensionsByKeypoints.Checked = settings.EnableKeypointValueDuplicateCleanup
+        End If
+        UpdateAutoDimensionMotorChoiceEnabledFromAutoDimCheckbox()
+        If chkProductionDvRefClean IsNot Nothing Then chkProductionDvRefClean.Checked = settings.EnableProductionDvRefCleanEngine
         chkDrawingViewDimensioningLab.Checked = settings.EnableDrawingViewDimensioningLab
         _runDropViewsTo2DModelLab = settings.RunDropViewsTo2DModelLab
         _runDropCreatedSheetsDimensionLab = settings.RunDropCreatedSheetsDimensionLab
@@ -2857,7 +3456,7 @@ Partial Public Class MainForm
             Dim cfgProbe As New JobConfiguration With {.InputFile = txtInputFile.Text, .OutputFolder = txtOutputFolder.Text.Trim()}
             Dim kind As SourceFileKind = cfgProbe.DetectInputKind()
             Dim cfgFull As JobConfiguration = BuildConfigurationFromUi()
-            Dim dftPath As String = ResolveManualDftPath(cfgFull)
+            Dim dftPath As String = ResolveDftPathForPlanMetadata(cfgFull)
 
             Dim dt As DataTable = TraceabilityInspectionService.BuildTraceabilityDataTable(
                 txtInputFile.Text, dftPath, kind, _logger, onlyCajetinFields:=True)

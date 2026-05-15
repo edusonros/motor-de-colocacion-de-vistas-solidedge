@@ -1,5 +1,6 @@
 Option Strict Off
 
+Imports System
 Imports SolidEdgeFramework
 Imports SolidEdgePart
 Imports System.Runtime.InteropServices
@@ -11,25 +12,27 @@ Module FlatDxfExporter
     Public Const SkipReasonNoFlatPattern As String = "NO_FLAT_PATTERN"
 
     ''' <summary>Exporta DXF flat reutilizando el desarrollo existente. Sin Face/Edge arbitrarios.</summary>
+    ''' <param name="logLine">Si se proporciona (p.ej. <c>logger.Log</c>), el número de línea sigue la secuencia del <see cref="Logger"/> del motor sin reiniciar en [001].</param>
     Public Function ExportFlatDxf(app As Application,
                                   modelPath As String,
                                   outPathDxf As String,
-                                  ByRef errorMessage As String) As Boolean
+                                  ByRef errorMessage As String,
+                                  Optional logLine As Action(Of String) = Nothing) As Boolean
 
         errorMessage = ""
         Dim psmDoc As SheetMetalDocument = Nothing
         Dim models As Models = Nothing
 
         Try
-            StepLog("[FLAT] Analizando pieza de chapa: " & modelPath)
+            FLog(logLine, "[FLAT] Analizando pieza de chapa: " & modelPath)
             Dim obj = app.Documents.Open(modelPath)
             psmDoc = TryCast(obj, SheetMetalDocument)
 
             Dim isSheetMetal As Boolean = (psmDoc IsNot Nothing)
-            StepLog("[FLAT] Es documento SheetMetal: " & isSheetMetal.ToString())
+            FLog(logLine, "[FLAT] Es documento SheetMetal: " & isSheetMetal.ToString())
             If Not isSheetMetal Then
                 errorMessage = "No se pudo convertir a SheetMetalDocument (E_NOINTERFACE)."
-                StepLog("[FLAT][ERR] " & errorMessage)
+                FLog(logLine, "[FLAT][ERR] " & errorMessage)
                 Return False
             End If
 
@@ -39,30 +42,30 @@ Module FlatDxfExporter
             Catch
                 hasFlat = False
             End Try
-            StepLog("[FLAT] Tiene flat existente: " & hasFlat.ToString())
+            FLog(logLine, "[FLAT] Tiene flat existente: " & hasFlat.ToString())
 
             If Not hasFlat Then
                 errorMessage = SkipReasonNoFlatPattern
-                StepLog("[FLAT][WARN] El fichero .psm NO tiene la chapa desarrollada: " & modelPath & ". Tendrías que desarrollarla.")
-                StepLog("[FLAT] Exportación omitida por falta de desarrollo")
+                FLog(logLine, "[FLAT][WARN] El fichero .psm NO tiene la chapa desarrollada: " & modelPath & ". Tendrías que desarrollarla.")
+                FLog(logLine, "[FLAT] Exportación omitida por falta de desarrollo")
                 Return False
             End If
 
-            StepLog("[FLAT] Se reutilizará flat existente")
-            StepLog("[FLAT] No se intentará regenerar flat")
+            FLog(logLine, "[FLAT] Se reutilizará flat existente")
+            FLog(logLine, "[FLAT] No se intentará regenerar flat")
 
             Try
                 models = psmDoc.Models
                 If models Is Nothing Then
                     errorMessage = "Models del PSM es Nothing."
-                    StepLog("[FLAT][ERR] " & errorMessage)
+                    FLog(logLine, "[FLAT][ERR] " & errorMessage)
                     Return False
                 End If
 
-                StepLog("[FLAT] Método de exportación utilizado: Models.SaveAsFlatDXFEx (sin referencias Face/Edge forzadas)")
+                FLog(logLine, "[FLAT] Método de exportación utilizado: Models.SaveAsFlatDXFEx (sin referencias Face/Edge forzadas)")
                 ' Parámetros Nothing: Solid Edge usa el flat pattern existente (mismo criterio estable que reutilizar desarrollo).
                 models.SaveAsFlatDXFEx(outPathDxf, Nothing, Nothing, Nothing, True)
-                StepLog("[FLAT] DXF Flat exportado correctamente: " & outPathDxf)
+                FLog(logLine, "[FLAT] DXF Flat exportado correctamente: " & outPathDxf)
                 Return True
 
             Catch ex As Exception
@@ -72,7 +75,7 @@ Module FlatDxfExporter
                 Else
                     errorMessage = ex.Message
                 End If
-                StepLog("[FLAT][ERR] Error real: " & errorMessage)
+                FLog(logLine, "[FLAT][ERR] Error real: " & errorMessage)
                 Return False
             End Try
 
@@ -86,6 +89,14 @@ Module FlatDxfExporter
         End Try
 
     End Function
+
+    Private Sub FLog(logLine As Action(Of String), msg As String)
+        If logLine IsNot Nothing Then
+            logLine.Invoke(msg)
+        Else
+            LogUtil.EmitUnnumbered(msg)
+        End If
+    End Sub
 
     Private Sub TryReleaseComObject(obj As Object)
         If obj Is Nothing Then Return

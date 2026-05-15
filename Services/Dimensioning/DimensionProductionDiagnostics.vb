@@ -25,6 +25,18 @@ Friend NotInheritable Class DimensionProductionRunSummary
         PartsListCols = cols
     End Sub
 
+    ''' <summary>
+    ''' Tras <c>ProductionDvRefCleanDimensionEngine.Run</c>: alinea <c>[SUMMARY][DIMS]</c> con el resumen interno <c>[PRODDIM][SUMMARY]</c>.
+    ''' </summary>
+    Friend Shared Sub RecordProddimRun(created As Integer, kept As Integer, deleted As Integer, bothAxesSuccess As Boolean, Optional resolvedStyleName As String = Nothing)
+        DimsCreated = Math.Max(0, kept)
+        DimsConnectedOk = Math.Max(0, kept)
+        DimsVisibleOk = Math.Max(0, kept)
+        DimsFailed = Math.Max(0, deleted)
+        If Not bothAxesSuccess Then ResultOk = False
+        If Not String.IsNullOrWhiteSpace(resolvedStyleName) Then StyleAppliedName = resolvedStyleName
+    End Sub
+
     Friend Shared Sub Reset()
         ViewsPlanned = 0
         LayoutOk = True

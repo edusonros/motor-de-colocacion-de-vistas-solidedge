@@ -17,10 +17,10 @@ Namespace Services.Dimensioning.Labs
 
     ''' <summary>Laboratorio aislado DIMLAB: DVLine2d.Reference + AddDistanceBetweenObjects (no sustituye el motor principal).</summary>
     Public NotInheritable Class DrawingViewDimensioningLab
-        Private Const DimLabHorizontalGap As Double = 0.024R
-        Private Const DimLabVerticalGap As Double = 0.03R
-        Private Const DimLabMinGap As Double = 0.024R
-        Private Const DimLabMaxGap As Double = 0.03R
+        Private Const DimLabHorizontalGap As Double = 0.012R
+        Private Const DimLabVerticalGap As Double = 0.014R
+        Private Const DimLabMinGap As Double = 0.006R
+        Private Const DimLabMaxGap As Double = 0.02R
     Private Const DEBUG_FORENSIC As Boolean = False
 
         Private Sub New()
@@ -2564,11 +2564,17 @@ Summary:
         End Function
 
         Private Shared Function ComputeDesiredTrackHorizontal(availableTop As Double) As Double
-            Return DimLabHorizontalGap
+            Dim a As Double = Math.Max(0R, availableTop)
+            Dim scaled As Double = a * 0.2R
+            Dim g As Double = Math.Max(DimLabMinGap, Math.Min(DimLabHorizontalGap, scaled))
+            Return Math.Min(DimLabMaxGap, g)
         End Function
 
         Private Shared Function ComputeDesiredTrackVertical(availableRight As Double) As Double
-            Return DimLabVerticalGap
+            Dim a As Double = Math.Max(0R, availableRight)
+            Dim scaled As Double = a * 0.2R
+            Dim g As Double = Math.Max(DimLabMinGap, Math.Min(DimLabVerticalGap, scaled))
+            Return Math.Min(DimLabMaxGap, g)
         End Function
 
         Private Shared Function TryReadDimensionRange(d As Dimension, ByRef rx1 As Double, ByRef ry1 As Double, ByRef rx2 As Double, ByRef ry2 As Double) As Boolean

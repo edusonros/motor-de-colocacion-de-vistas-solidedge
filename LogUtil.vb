@@ -25,6 +25,20 @@ Public Module LogUtil
             Console.WriteLine(line)
         End Try
     End Sub
+
+    ''' <summary>Envía texto al mismo sink configurado (<see cref="SetLogSink"/>) sin número de paso ni contador propio.</summary>
+    Public Sub EmitUnnumbered(msg As String)
+        Dim line As String = If(msg, "")
+        Try
+            If _sink IsNot Nothing Then
+                _sink.Invoke(line)
+            Else
+                Console.WriteLine(line)
+            End If
+        Catch
+            Console.WriteLine(line)
+        End Try
+    End Sub
 End Module
 
 'Module LogUtil

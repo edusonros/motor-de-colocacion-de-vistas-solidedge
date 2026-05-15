@@ -43,13 +43,64 @@ Partial Public Class MainForm
     Friend chkStrictMetadata As CheckBox
 
     Private btnMetaReadModel As Button
-    Private btnMetaCalcLhd As Button
     Private btnMetaFillEmpty As Button
     Private btnMetaApplyDocs As Button
     Private btnMetaPreview As Button
+    Private btnMetaPickDftLoad As Button
+    ''' <summary>DFT elegido explícitamente para cargar/aplicar metadatos (cajetín + PART_LIST) sin depender del archivo de entrada.</summary>
+    Private _externalManualDftEditPath As String = ""
+
+    ''' <summary>Ya se insertó la tabla de botones metadatos bajo «Progreso».</summary>
+    Private _planMetadataActionsUnderProgressDone As Boolean
 
     ''' <summary>Evita marcar campos como «manuales» durante limpieza o carga programática.</summary>
     Private _loadingMetadataProgrammatically As Boolean
+
+    Private Function PartListFieldsPreferredHeightPx() As Integer
+        Dim rows As Integer = 40 + (9 * 28)
+        If tblTracePartInner Is Nothing Then Return rows + 16
+        Return rows + tblTracePartInner.Padding.Top + tblTracePartInner.Padding.Bottom + 8
+    End Function
+
+    ''' <summary>Ubica los botones de cajetín/PART LIST bajo los indicadores de progreso (más hueco estable que dentro del grupo PART LIST).</summary>
+    Private Sub EnsurePlanMetadataButtonsUnderProgressPanel(metaActions As TableLayoutPanel)
+        If grpProgress Is Nothing OrElse metaActions Is Nothing Then Return
+        If _planMetadataActionsUnderProgressDone Then Return
+
+        grpProgress.SuspendLayout()
+        Try
+            Dim innerProgress As TableLayoutPanel = Nothing
+            For Each c As Control In grpProgress.Controls
+                If TypeOf c Is TableLayoutPanel Then
+                    innerProgress = DirectCast(c, TableLayoutPanel)
+                    Exit For
+                End If
+            Next
+            If innerProgress Is Nothing Then Return
+
+            grpProgress.Controls.Clear()
+
+            Dim outer As New TableLayoutPanel With {
+                .Dock = DockStyle.Fill,
+                .ColumnCount = 1,
+                .RowCount = 2,
+                .Padding = New Padding(2, 2, 2, 4)
+            }
+            outer.RowStyles.Add(New RowStyle(SizeType.Percent, 100.0!))
+            outer.RowStyles.Add(New RowStyle(SizeType.AutoSize))
+
+            innerProgress.Dock = DockStyle.Fill
+            outer.Controls.Add(innerProgress, 0, 0)
+
+            metaActions.Dock = DockStyle.Fill
+            outer.Controls.Add(metaActions, 0, 1)
+
+            grpProgress.Controls.Add(outer)
+            _planMetadataActionsUnderProgressDone = True
+        Finally
+            grpProgress.ResumeLayout(True)
+        End Try
+    End Sub
 
     Private Sub EnsureDrawingPlanMetadataPanel()
         If _unifiedPlanMetadataDone Then Return
@@ -109,21 +160,22 @@ Partial Public Class MainForm
             lblClient.Text = "Cliente"
 
             tblTracePartInner = New TableLayoutPanel With {
-                .Dock = DockStyle.Fill,
-                .AutoScroll = True,
+                .Dock = DockStyle.Top,
+                .AutoScroll = False,
+                .AutoSize = False,
                 .ColumnCount = 3,
-                .Padding = New Padding(2, 2, 2, 2)
+                .Padding = New Padding(2, 2, 2, 4)
             }
             tblTracePartInner.ColumnStyles.Add(New ColumnStyle(SizeType.Absolute, CSng(MetaLabelColWidthPx)))
             tblTracePartInner.ColumnStyles.Add(New ColumnStyle(SizeType.Absolute, CSng(MetaEditorWidthPx)))
             tblTracePartInner.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 100.0!))
-            tblTracePartInner.RowCount = 12
+            ' Una fila aviso + 9 filas de campos (Material…Peso). Los botones están en «Progreso, estado y metadatos DFT».
+            tblTracePartInner.RowCount = 10
             tblTracePartInner.RowStyles.Clear()
             tblTracePartInner.RowStyles.Add(New RowStyle(SizeType.Absolute, 40.0!))
-            For j As Integer = 1 To 10
+            For j As Integer = 1 To 9
                 tblTracePartInner.RowStyles.Add(New RowStyle(SizeType.Absolute, 28.0!))
             Next
-            tblTracePartInner.RowStyles.Add(New RowStyle(SizeType.Absolute, 118.0!))
 
             Dim r As Integer = 0
             Dim lblPartListAviso As New Label With {
@@ -178,28 +230,35 @@ Partial Public Class MainForm
             Dim pnlMetaActions As New TableLayoutPanel With {
                 .Dock = DockStyle.Fill,
                 .ColumnCount = 1,
-                .RowCount = 3,
+                .RowCount = 2,
                 .Padding = New Padding(0, 4, 0, 0)
             }
-            pnlMetaActions.RowStyles.Add(New RowStyle(SizeType.Absolute, 34.0!))
-            pnlMetaActions.RowStyles.Add(New RowStyle(SizeType.Absolute, 38.0!))
+            pnlMetaActions.RowStyles.Add(New RowStyle(SizeType.Absolute, 72.0!))
             pnlMetaActions.RowStyles.Add(New RowStyle(SizeType.Absolute, 34.0!))
 
-            Dim tblBtn3 As New TableLayoutPanel With {.Dock = DockStyle.Fill, .ColumnCount = 3, .RowCount = 1, .Margin = New Padding(0)}
-            tblBtn3.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 33.33333!))
-            tblBtn3.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 33.33333!))
-            tblBtn3.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 33.33333!))
-            btnMetaReadModel = New Button With {.Text = "Leer del modelo", .Dock = DockStyle.Fill, .Margin = New Padding(0, 0, 4, 0), .Height = 30}
-            btnMetaCalcLhd = New Button With {.Text = "Calcular L/H/D", .Dock = DockStyle.Fill, .Margin = New Padding(2, 0, 2, 0), .Height = 30}
-            btnMetaFillEmpty = New Button With {.Text = "Rellenar vacíos", .Dock = DockStyle.Fill, .Margin = New Padding(4, 0, 0, 0), .Height = 30}
-            tblBtn3.Controls.Add(btnMetaReadModel, 0, 0)
-            tblBtn3.Controls.Add(btnMetaCalcLhd, 1, 0)
-            tblBtn3.Controls.Add(btnMetaFillEmpty, 2, 0)
+            Dim tblMetaPrimary As New TableLayoutPanel With {.Dock = DockStyle.Fill, .ColumnCount = 2, .RowCount = 2, .Margin = New Padding(0)}
+            tblMetaPrimary.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 50.0!))
+            tblMetaPrimary.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 50.0!))
+            tblMetaPrimary.RowStyles.Add(New RowStyle(SizeType.Percent, 50.0!))
+            tblMetaPrimary.RowStyles.Add(New RowStyle(SizeType.Percent, 50.0!))
 
-            btnApplyTraceability.Text = "Aplicar propiedades al DFT"
+            btnMetaReadModel = New Button With {.Text = "Leer del modelo", .Dock = DockStyle.Fill, .Margin = New Padding(0, 0, 3, 3), .MinimumSize = New Size(0, 30)}
+            btnMetaFillEmpty = New Button With {.Text = "Rellenar vacíos", .Dock = DockStyle.Fill, .Margin = New Padding(3, 0, 0, 3), .MinimumSize = New Size(0, 30)}
+            btnMetaPickDftLoad = New Button With {
+                .Text = "Elegir DFT y cargar cajetín / PART_LIST…",
+                .Dock = DockStyle.Fill,
+                .Margin = New Padding(0, 3, 3, 0),
+                .MinimumSize = New Size(0, 30)
+            }
+            btnApplyTraceability.Text = "Aplicar cajetín + PART_LIST al DFT"
             btnApplyTraceability.Dock = DockStyle.Fill
-            btnApplyTraceability.Margin = New Padding(0, 4, 0, 4)
-            btnApplyTraceability.Height = 32
+            btnApplyTraceability.Margin = New Padding(3, 3, 0, 0)
+            btnApplyTraceability.MinimumSize = New Size(0, 30)
+
+            tblMetaPrimary.Controls.Add(btnMetaReadModel, 0, 0)
+            tblMetaPrimary.Controls.Add(btnMetaFillEmpty, 1, 0)
+            tblMetaPrimary.Controls.Add(btnMetaPickDftLoad, 0, 1)
+            tblMetaPrimary.Controls.Add(btnApplyTraceability, 1, 1)
 
             Dim tblBtnSec As New TableLayoutPanel With {.Dock = DockStyle.Fill, .ColumnCount = 2, .RowCount = 1, .Margin = New Padding(0)}
             tblBtnSec.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 50.0!))
@@ -209,18 +268,41 @@ Partial Public Class MainForm
             tblBtnSec.Controls.Add(btnMetaApplyDocs, 0, 0)
             tblBtnSec.Controls.Add(btnMetaPreview, 1, 0)
 
-            pnlMetaActions.Controls.Add(tblBtn3, 0, 0)
-            pnlMetaActions.Controls.Add(btnApplyTraceability, 0, 1)
-            pnlMetaActions.Controls.Add(tblBtnSec, 0, 2)
+            pnlMetaActions.Controls.Add(tblMetaPrimary, 0, 0)
+            pnlMetaActions.Controls.Add(tblBtnSec, 0, 1)
 
             AddHandler btnMetaReadModel.Click, AddressOf btnMetaReadModel_Click
-            AddHandler btnMetaCalcLhd.Click, AddressOf btnMetaCalcLhd_Click
             AddHandler btnMetaFillEmpty.Click, AddressOf btnMetaFillEmpty_Click
+            AddHandler btnMetaPickDftLoad.Click, AddressOf btnMetaPickDftLoad_Click
             AddHandler btnMetaApplyDocs.Click, AddressOf btnMetaApplyDocs_Click
             AddHandler btnMetaPreview.Click, AddressOf btnMetaPreview_Click
 
-            tblTracePartInner.SetColumnSpan(pnlMetaActions, 3)
-            tblTracePartInner.Controls.Add(pnlMetaActions, 0, 11)
+            Dim pnlPartListScrollHost As New Panel With {
+                .Dock = DockStyle.Fill,
+                .AutoScroll = True,
+                .Padding = Padding.Empty,
+                .Margin = Padding.Empty,
+                .BackColor = Color.Transparent
+            }
+            pnlPartListScrollHost.Controls.Add(tblTracePartInner)
+
+            Dim SubSyncPartListScrollExtents =
+                Sub()
+                    If tblTracePartInner Is Nothing OrElse pnlPartListScrollHost Is Nothing Then Return
+                    Dim w As Integer = pnlPartListScrollHost.ClientSize.Width - 6
+                    If w < MetaLabelColWidthPx + MetaEditorWidthPx + 40 Then w = MetaLabelColWidthPx + MetaEditorWidthPx + 40
+                    tblTracePartInner.SuspendLayout()
+                    Try
+                        tblTracePartInner.Width = w
+                        tblTracePartInner.Height = PartListFieldsPreferredHeightPx()
+                    Finally
+                        tblTracePartInner.ResumeLayout(False)
+                    End Try
+                End Sub
+            AddHandler pnlPartListScrollHost.SizeChanged,
+                Sub(s, ev)
+                    SubSyncPartListScrollExtents()
+                End Sub
 
             ApplyCompactEditorsInTable(tblCaj)
 
@@ -238,8 +320,13 @@ Partial Public Class MainForm
             }
             tblCaj.Dock = DockStyle.Fill
             grpPlanCajetinBox.Controls.Add(tblCaj)
-            tblTracePartInner.Dock = DockStyle.Fill
-            grpPlanPartListBox.Controls.Add(tblTracePartInner)
+            grpPlanPartListBox.Controls.Add(pnlPartListScrollHost)
+
+            EnsurePlanMetadataButtonsUnderProgressPanel(pnlMetaActions)
+
+            tblTrace.BeginInvoke(Sub()
+                                     SubSyncPartListScrollExtents()
+                                 End Sub)
 
             While tblTrace.Controls.Count > 0
                 tblTrace.Controls.RemoveAt(0)
@@ -249,8 +336,8 @@ Partial Public Class MainForm
             tblTrace.ColumnCount = 1
             tblTrace.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 100.0!))
             tblTrace.RowCount = 2
-            tblTrace.RowStyles.Add(New RowStyle(SizeType.Percent, 50.0!))
-            tblTrace.RowStyles.Add(New RowStyle(SizeType.Percent, 50.0!))
+            tblTrace.RowStyles.Add(New RowStyle(SizeType.Percent, 40.0!))
+            tblTrace.RowStyles.Add(New RowStyle(SizeType.Percent, 60.0!))
             tblTrace.Controls.Add(grpPlanCajetinBox, 0, 0)
             tblTrace.Controls.Add(grpPlanPartListBox, 0, 1)
         Finally
@@ -769,82 +856,6 @@ Partial Public Class MainForm
         MessageBox.Show("Tipo de archivo no soportado para leer metadatos.", "Metadatos", MessageBoxButtons.OK, MessageBoxIcon.Information)
     End Sub
 
-    Private Sub btnMetaCalcLhd_Click(sender As Object, e As EventArgs)
-        Dim dftPath As String = ResolveManualDftPath(BuildConfigurationFromUi())
-        Dim modelPath As String = If(txtInputFile?.Text, "").Trim()
-        Dim haveDft As Boolean = Not String.IsNullOrWhiteSpace(dftPath) AndAlso File.Exists(dftPath)
-        If Not haveDft AndAlso (String.IsNullOrWhiteSpace(modelPath) OrElse Not File.Exists(modelPath)) Then
-            MessageBox.Show(
-                "No hay DFT guardado ni archivo de entrada PAR/PSM." & Environment.NewLine &
-                "Opciones: genere o guarde un DFT, o seleccione un modelo .par/.psm como archivo de entrada.",
-                "L/H/D", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
-
-        Dim app As SolidEdgeFramework.Application = Nothing
-        Dim created As Boolean = False
-        Dim doc As Object = Nothing
-        Try
-            OleMessageFilter.Register()
-            If Not ConnectSeForLhd(chkKeepSolidEdgeVisible.Checked, app, created) Then Return
-
-            Dim L As String = "", H As String = "", D As String = ""
-
-            If haveDft Then
-                doc = app.Documents.Open(dftPath)
-                If DrawingMetadataService.TryComputeLhdFromDraft(doc, _logger, L, H, D) Then
-                    MetadataL = L
-                    MetadataH = H
-                    MetadataD = D
-                    MetadataLhdSourceLabel = "Calculado (DFT)"
-                    _logger.Log("[PARTLISTDATA][LHD][UI] Valores aplicados desde DFT.")
-                    Return
-                End If
-                Try
-                    SolidEdgePropertyService.TryCloseComDocument(doc, False)
-                Finally
-                    doc = Nothing
-                End Try
-                _logger.Log("[PARTLISTDATA][LHD][UI] DFT sin cotas/bbox útiles; se intenta modelo 3D.")
-            End If
-
-            If String.IsNullOrWhiteSpace(modelPath) OrElse Not File.Exists(modelPath) Then
-                MessageBox.Show("No hay archivo PAR/PSM de entrada para calcular la caja 3D.", "L/H/D", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                Return
-            End If
-
-            Dim cfg As New JobConfiguration With {.InputFile = modelPath}
-            If cfg.DetectInputKind() = SourceFileKind.AssemblyFile Then
-                MessageBox.Show("Para ensamblajes (.asm) calcule L/H/D desde un DFT o elija un componente PAR/PSM.", "L/H/D", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Return
-            End If
-
-            doc = app.Documents.Open(modelPath)
-            If DrawingMetadataService.TryComputeLhdFromModelDoc(doc, _logger, L, H, D) Then
-                MetadataL = L
-                MetadataH = H
-                MetadataD = D
-                MetadataLhdSourceLabel = "Caja 3D (modelo)"
-                _logger.Log("[PARTLISTDATA][LHD][UI] Valores aplicados desde rango del modelo.")
-            Else
-                MessageBox.Show(
-                    "No se pudieron calcular L/H/D." & Environment.NewLine &
-                    If(haveDft, "El DFT no aportó cotas ni contornos de vista; el modelo no devolvió rango 3D legible.", "No se pudo leer la caja 3D del modelo."),
-                    "L/H/D", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            End If
-        Catch ex As Exception
-            _logger.LogException("btnMetaCalcLhd_Click", ex)
-            MessageBox.Show(ex.Message, "L/H/D", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            SolidEdgePropertyService.TryCloseComDocument(doc, False)
-            Try
-                If app IsNot Nothing AndAlso created Then app.Quit()
-            Catch
-            End Try
-            Try : OleMessageFilter.Revoke() : Catch : End Try
-        End Try
-    End Sub
-
     Private Function ConnectSeForLhd(visible As Boolean, ByRef app As SolidEdgeFramework.Application, ByRef created As Boolean) As Boolean
         app = Nothing
         created = False
@@ -988,9 +999,11 @@ Partial Public Class MainForm
     Private Sub btnMetaApplyDocs_Click(sender As Object, e As EventArgs)
         Try
             Dim cfg As JobConfiguration = BuildConfigurationFromUi()
-            Dim dftPath As String = ResolveManualDftPath(cfg)
+            Dim dftPath As String = ResolveDftPathForPlanMetadata(cfg)
             If String.IsNullOrWhiteSpace(dftPath) OrElse Not File.Exists(dftPath) Then
-                MessageBox.Show("No se encontró DFT para aplicar propiedades.", "Aplicar", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                MessageBox.Show("No se encontró DFT para aplicar propiedades." & Environment.NewLine &
+                    "Use «Elegir DFT y cargar cajetín / PART_LIST…» o genere/guarde un DFT junto al modelo.",
+                    "Aplicar", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return
             End If
             Dim data = DrawingMetadataService.BuildFromUi(Me)
@@ -998,23 +1011,32 @@ Partial Public Class MainForm
             Dim created As Boolean = False
             Dim dftDoc As Object = Nothing
             Dim modelDoc As Object = Nothing
+            Dim openedDftByUs As Boolean = False
+            Dim openedModelByUs As Boolean = False
             Try
                 OleMessageFilter.Register()
                 If Not ConnectSeForLhd(chkKeepSolidEdgeVisible.Checked, app, created) Then Return
-                dftDoc = app.Documents.Open(dftPath)
+                dftDoc = SolidEdgePropertyService.TryGetOrOpenDraftDocumentByPath(app, dftPath, _logger, openedDftByUs)
+                If Not openedDftByUs Then _logger.Log("[UI][DFT][APPLY] DFT ya abierto en SE; se reutiliza esa ventana.")
                 Dim modelPath As String = cfg.InputFile
                 If File.Exists(modelPath) AndAlso cfg.DetectInputKind() <> SourceFileKind.AssemblyFile Then
-                    modelDoc = app.Documents.Open(modelPath)
+                    modelDoc = SolidEdgePropertyService.TryGetOrOpenModelDocumentByPath(app, modelPath, _logger, openedModelByUs)
                 End If
+                If modelDoc IsNot Nothing Then
+                    SolidEdgePropertyService.ApplyPropertiesToExistingOpenModelDocument(modelDoc, cfg, _logger, saveAfter:=True)
+                End If
+                SolidEdgePropertyService.ApplyPropertiesToDraftDocument(dftDoc, cfg, _logger)
+                SolidEdgePropertyService.RefreshDraftPropertyTextOnly(dftDoc, _logger)
                 DrawingMetadataService.ApplyPartListSourceProperties(modelDoc, dftDoc, data, _logger)
                 Try
                     CallByName(dftDoc, "Save", CallType.Method)
                 Catch
                 End Try
-                MessageBox.Show("Propiedades aplicadas. Revise el log y la PartsList.", "Aplicar", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBox.Show("Propiedades aplicadas al modelo (si existe), al DFT (PropertySets estándar + Custom con alias proy/plan/nom/…) " &
+                    "y fuentes PART_LIST (incluye Nº y Nombre cuando proceda). Revise el log.", "Aplicar", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Finally
-                SolidEdgePropertyService.TryCloseComDocument(modelDoc, True)
-                SolidEdgePropertyService.TryCloseComDocument(dftDoc, False)
+                If openedModelByUs Then SolidEdgePropertyService.TryCloseComDocument(modelDoc, True)
+                If openedDftByUs Then SolidEdgePropertyService.TryCloseComDocument(dftDoc, False)
                 Try
                     If app IsNot Nothing AndAlso created Then app.Quit()
                 Catch
@@ -1025,6 +1047,36 @@ Partial Public Class MainForm
             _logger.LogException("btnMetaApplyDocs_Click", ex)
             MessageBox.Show(ex.Message, "Aplicar", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+    End Sub
+
+    Private Sub btnMetaPickDftLoad_Click(sender As Object, e As EventArgs)
+        Using ofd As New OpenFileDialog()
+            ofd.Title = "Selecciona un DFT para cargar cajetín y PART_LIST"
+            ofd.Filter = "Draft Solid Edge (*.dft)|*.dft|Todos los archivos|*.*"
+            If ofd.ShowDialog() <> DialogResult.OK Then Return
+            Dim p As String = ofd.FileName
+            If String.IsNullOrWhiteSpace(p) OrElse Not File.Exists(p) Then Return
+            EnsureDrawingPlanMetadataPanel()
+            Dim data As DrawingMetadataInput = Nothing
+            If Not DrawingMetadataService.TryLoadMetadataFromDraftPath(p, chkKeepSolidEdgeVisible.Checked, _logger, data) OrElse data Is Nothing Then
+                MessageBox.Show("No se pudieron leer metadatos del DFT. Revise el log (COM, rutas).", "DFT", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+            _externalManualDftEditPath = p
+            _loadingMetadataProgrammatically = True
+            Try
+                DrawingMetadataService.ApplyToUi(Me, data, applyCajetin:=True, applyPartList:=True)
+            Finally
+                _loadingMetadataProgrammatically = False
+            End Try
+            _logger.Log("[UI][METADATA][DFT_LOAD] path=" & p)
+            MessageBox.Show(
+                "Metadatos cargados desde:" & Environment.NewLine & p & Environment.NewLine & Environment.NewLine &
+                "Edite los campos y pulse «Aplicar a modelo/DFT» o «Aplicar cajetín + PART_LIST al DFT» (cajetín SummaryInfo + Custom/PART_LIST).",
+                "DFT",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information)
+        End Using
     End Sub
 
     Private Sub btnMetaPreview_Click(sender As Object, e As EventArgs)
