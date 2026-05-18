@@ -19,9 +19,10 @@ Public Class DimensioningNormConfig
     Public Property UseParallelDimensioning As Boolean = True
     Public Property UseChainDimensioningOnlyIfNeeded As Boolean = True
     Public Property UseRepeatedFeatureNotation As Boolean = True
+    Public Property EnableInteriorHoleCenterDimensions As Boolean = True
 
     Public Property MinGapFromView As Double = 0.012
-    Public Property GapBetweenDimensionRows As Double = 0.008
+    Public Property GapBetweenDimensionRows As Double = 0.01
     Public Property MinFeatureSeparation As Double = 0.001
     Public Property MaxDimensionsPerViewInitial As Integer = 4
 
@@ -105,8 +106,8 @@ Public Class DimensioningNormConfig
     ''' <summary>Cotas lineales “genéricas” (prioridad alta no tabulada): máximo por mismo nominal mm.</summary>
     Public Property ReferenceGenericLineDupCap As Integer = 2
 
-    ''' <summary>Prueba: no aplicar TrackDistance escalonado que aleja cotas de la pieza (código conservado).</summary>
-    Public Property SuppressDimensionTrackDistanceSpacing As Boolean = True
+    ''' <summary>Si True, no aplicar TrackDistance ni el postproceso de carriles 12 mm / 10 mm.</summary>
+    Public Property SuppressDimensionTrackDistanceSpacing As Boolean = False
 
     ''' <summary>Tras crear cotas, eliminar duplicadas con mismo valor y mismos keypoints.</summary>
     Public Property EnableKeypointValueDuplicateCleanup As Boolean = True

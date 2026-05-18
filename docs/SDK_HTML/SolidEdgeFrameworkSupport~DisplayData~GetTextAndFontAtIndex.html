@@ -1,0 +1,398 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--DXMETADATA start type="MetaCharset" --><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><!--DXMETADATA end-->
+    <meta http-equiv="X-UA-Compatible" value="IE=9" />
+
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Literal" condition="helpversion:value=3" value="<meta name=""Microsoft.Help.SelfBranded"" content=""true"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="PageItemTitle" format="<title>%%PageItemTitle%%</title>" --><title>GetTextAndFontAtIndex Method</title><!--DXMETADATA end-->
+    <!--DXMETADATA start type="ItemTitleNoQuotes" format="<meta name=""Title"" content=""%%ItemTitleNoQuotes%%""/>" --><!--DXMETADATA end-->    
+    
+
+    <!--DXMETADATA start type="PackageLink" packagename="jquery" filetype="script" firstlinkattributes="id=""mshs_support_script"""--><script src="template/packages/jquery/script/chm.mshc/jquery-1.7.2.min.js" type="text/javascript" id="mshs_support_script"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="script"--><script src="template/packages/jquery-ui/script/chm.mshc/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/jquery-ui/css/chm.mshc/jquery-ui-1.8.18.custom.css"></link><!--DXMETADATA end-->
+	
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/plugins-ax/css/chm.mshc/jquery-plugins.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="css" firstlinkattributes=" data-mshv2-stylesheet=""/template/packages/core-ax/dx.com.mshv2.css"" data-mshv1-stylesheet=""/template/packages/core-ax/dx.com.mshv1.css"" data-responsive-mobile=""template/packages/core-ax/dx.com.mobile.css"" data-responsive-tablet=""template/packages/core-ax/dx.com.tablet.css"""--><link rel="stylesheet" type="text/css" href="template/packages/core-ax/css/dx.com.css"  data-mshv2-stylesheet="/template/packages/core-ax/dx.com.mshv2.css" data-mshv1-stylesheet="/template/packages/core-ax/dx.com.mshv1.css" data-responsive-mobile="template/packages/core-ax/dx.com.mobile.css" data-responsive-tablet="template/packages/core-ax/dx.com.tablet.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="script"--><script src="template/packages/plugins-ax/script/chm.mshc/jquery-plugins.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="script"--><script src="template/packages/core-ax/script/dx.com.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="TopicId" format="<meta name=""Microsoft.Help.Id"" content=""%%TopicId%%""/>" --><meta name="Microsoft.Help.Id" content="SolidEdgeFrameworkSupport~DisplayData~GetTextAndFontAtIndex"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Synopsis" StripHtmlTags="True" MaxLength="250" format="<meta name=""Description"" content=""%%Synopsis%%"" />"--><meta name="Description" content=" " /><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocParentId" format="<meta name=""Microsoft.Help.TocParent"" content=""%%TocParentId%%""/>" --><meta name="Microsoft.Help.TocParent" content="SolidEdgeFrameworkSupport~DisplayData_methods"/><!--DXMETADATA end-->
+    <meta name="Microsoft.Help.ContentType" content="Reference" />
+    <!--DXMETADATA start type="MshvKeywords" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="MshvMetaTags" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.Locale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.TopicLocale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="Stylesheets" --><link rel="stylesheet" type="text/css" href="stylesheets/customstyles.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Scripts" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="DesignTime"--><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_PROPERTIES" --><!--DXMETADATA end -->
+
+    <!--DXMETADATA start type="CustomHeadContent" --><!--DXMETADATA end-->
+</head>
+
+<body>
+    <div id="i-before-header-content" class="i-before-header-content">
+        
+    </div>
+    <div id="i-header-content" class="i-header-content">
+        <!--DXMETADATA start type="LogoImage" --><img class="logoimage" src="images/sesdk_header.jpg" border="0"></img><!--DXMETADATA end-->
+            <div class="i-project-title"><!--DXMETADATA start type="ProjectTitle" -->Solid Edge FrameworkSupport Type Library<!--DXMETADATA end--></div>
+        <div class="i-page-title"><div class="i-page-title-text"><!--DXMETADATA start type="PageItemTitle" -->GetTextAndFontAtIndex Method<!--DXMETADATA end--></div></div>
+    </div>
+    <div id="i-after-header-content" class="i-after-header-content">
+        <!-- Spacing --> <span class="i-toggle-all-sections i-function-link">
+                <label class="i-collapse-all"><!--DXMETADATA start type="Phrase" name="COLLAPSE_ALL" -->Collapse All<!--DXMETADATA end--></label>
+                <label class="i-expand-all" style="display: none;"><!--DXMETADATA start type="Phrase" name="EXPAND_ALL" -->Expand All<!--DXMETADATA end--></label>
+            </span><!--DXMETADATA start type="Literal" condition="communityenabled" value="%%scrap:name=_COMMUNITY_DROPDOWN%%" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="IsWebOutputRootPageLinkEnabled" format="<a href='#' class="i-page-link" class="i-view-in-frame-link" title='$$VIEW_WITH_NAVIGATION_TOOLS_TIP$$' style='display: none' data-root-page='%%WebOutputRootPage%%%%OutputFileExtension%%' target='_top'>$$VIEW_WITH_NAVIGATION_TOOLS_TEXT$$</a>" --><a href='#' class="i-page-link" class="i-view-in-frame-link" title='Open this Topic in a view that includes Navigation tools (Table of Contents, Index, Search)' style='display: none' data-root-page='webframe.html' target='_top'>View with Navigation Tools</a><!--DXMETADATA end-->
+    </div>
+    <!--DXMETADATA start type="Breadcrumbs" scrap="_BREADCRUMBS" --><div class="i-breadcrumbs-container"><table><tr><td>
+<a href="SolidEdgeFrameworkSupport_P.html">Solid Edge FrameworkSupport Type Library</a>
+ > <a href="SolidEdgeFrameworkSupport~DisplayData.html">DisplayData Object</a>
+ : GetTextAndFontAtIndex Method</td></tr></table></div><!--DXMETADATA end -->
+    
+    <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_BUBBLES" namespace="parameter" source="Item" -->
+<div id="IndexPopupContent" class="i-popup-content">
+The index of the text component.&nbsp; The main dimension value is index 0 and others, like tolerance, prefix, etc. are the other text components.&nbsp; Use GetTextCount to find the number of text components.&nbsp; A simple dimension will only have a value component.
+</div>
+<div id="TextStringPopupContent" class="i-popup-content">
+The displayed text of that text component.
+</div>
+<div id="FontNamePopupContent" class="i-popup-content">
+The name of the font used for that text component.
+</div>
+<div id="OriginXPopupContent" class="i-popup-content">
+The X-component of the origin of the text component.
+</div>
+<div id="OriginYPopupContent" class="i-popup-content">
+The Y-component of the origin of the text component.
+</div>
+<div id="OriginZPopupContent" class="i-popup-content">
+The Z-component of the origin of the text component.
+</div>
+<div id="X_DirXPopupContent" class="i-popup-content">
+The X-component of the X-direction vector of the text component.
+</div>
+<div id="X_DirYPopupContent" class="i-popup-content">
+The Y-component of the X-direction vector of the text component.
+</div>
+<div id="X_DirZPopupContent" class="i-popup-content">
+The Z-component of the X-direction vector of the text component.
+</div>
+<div id="Z_DirXPopupContent" class="i-popup-content">
+The X-component of the Z-direction vector of the text component.
+</div>
+<div id="Z_DirYPopupContent" class="i-popup-content">
+The X-component of the Z-direction vector of the text component.
+</div>
+<div id="Z_DirZPopupContent" class="i-popup-content">
+The X-component of the Z-direction vector of the text component.
+</div>
+<!--DXMETADATA end -->
+    <div id="i-body-content" class="i-body-content">
+        <!--DXMETADATA start type="Description" source="Item" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=description,caption=$$Description$$%%<div class=""i-description-content"">%%description%%</div></div>" --><div class="i-section-heading" id="i-description-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Description</span></div><div id="i-description-section-content" class="i-section-content"><div class="i-description-content"> </div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="Syntax" lang="VB" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=syntax,caption=$$Syntax$$%%<div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>%%Syntax%%</pre></tr></table></div></div>" --><div class="i-section-heading" id="i-syntax-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Syntax</span></div><div id="i-syntax-section-content" class="i-section-content"><div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>Public Sub GetTextAndFontAtIndex( _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="IndexPopupLink" data-popup-contentsource="#IndexPopupContent" data-popup-showevent="click mouseenter">Index</a></i> As Long, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="TextStringPopupLink" data-popup-contentsource="#TextStringPopupContent" data-popup-showevent="click mouseenter">TextString</a></i> As String, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="FontNamePopupLink" data-popup-contentsource="#FontNamePopupContent" data-popup-showevent="click mouseenter">FontName</a></i> As String, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="OriginXPopupLink" data-popup-contentsource="#OriginXPopupContent" data-popup-showevent="click mouseenter">OriginX</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="OriginYPopupLink" data-popup-contentsource="#OriginYPopupContent" data-popup-showevent="click mouseenter">OriginY</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="OriginZPopupLink" data-popup-contentsource="#OriginZPopupContent" data-popup-showevent="click mouseenter">OriginZ</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="X_DirXPopupLink" data-popup-contentsource="#X_DirXPopupContent" data-popup-showevent="click mouseenter">X_DirX</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="X_DirYPopupLink" data-popup-contentsource="#X_DirYPopupContent" data-popup-showevent="click mouseenter">X_DirY</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="X_DirZPopupLink" data-popup-contentsource="#X_DirZPopupContent" data-popup-showevent="click mouseenter">X_DirZ</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="Z_DirXPopupLink" data-popup-contentsource="#Z_DirXPopupContent" data-popup-showevent="click mouseenter">Z_DirX</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="Z_DirYPopupLink" data-popup-contentsource="#Z_DirYPopupContent" data-popup-showevent="click mouseenter">Z_DirY</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="Z_DirZPopupLink" data-popup-contentsource="#Z_DirZPopupContent" data-popup-showevent="click mouseenter">Z_DirZ</a></i> As Double _
+) </pre></tr></table></div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_LIST" namespace="parameter" source="Item" filter="" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=parameters,caption=$$ParameterList$$%%%%filtereditemlist%%</div>" --><div class="i-section-heading" id="i-parameters-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Parameters</span></div><div id="i-parameters-section-content" class="i-section-content"><dl>
+<dt><I>Index</I></dt>
+<dd>The index of the text component.&nbsp; The main dimension value is index 0 and others, like tolerance, prefix, etc. are the other text components.&nbsp; Use GetTextCount to find the number of text components.&nbsp; A simple dimension will only have a value component.</dd>
+<dt><I>TextString</I></dt>
+<dd>The displayed text of that text component.</dd>
+<dt><I>FontName</I></dt>
+<dd>The name of the font used for that text component.</dd>
+<dt><I>OriginX</I></dt>
+<dd>The X-component of the origin of the text component.</dd>
+<dt><I>OriginY</I></dt>
+<dd>The Y-component of the origin of the text component.</dd>
+<dt><I>OriginZ</I></dt>
+<dd>The Z-component of the origin of the text component.</dd>
+<dt><I>X_DirX</I></dt>
+<dd>The X-component of the X-direction vector of the text component.</dd>
+<dt><I>X_DirY</I></dt>
+<dd>The Y-component of the X-direction vector of the text component.</dd>
+<dt><I>X_DirZ</I></dt>
+<dd>The Z-component of the X-direction vector of the text component.</dd>
+<dt><I>Z_DirX</I></dt>
+<dd>The X-component of the Z-direction vector of the text component.</dd>
+<dt><I>Z_DirY</I></dt>
+<dd>The X-component of the Z-direction vector of the text component.</dd>
+<dt><I>Z_DirZ</I></dt>
+<dd>The X-component of the Z-direction vector of the text component.</dd>
+</dl></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##RETURNS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=returns,caption=$$Return_Type$$%%<div class=""i-returns-content"">%%comment%%</div></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##REMARKS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=remarks,caption=$$Remarks$$%%%%comment%%</div>" --><div class="i-section-heading" id="i-remarks-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Remarks</span></div><div id="i-remarks-section-content" class="i-section-content">Both the X and Z direction vectors are normalized to be unit vectors.&nbsp; The Y direction vector can be computed by taking the cross product of the Z and X direction vectors, i.e. Y = Z CROSS X.</div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="sourcecode" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=source,caption=$$Source_Code$$%%<table border=0 cellpadding=0 cellspacing=0 class=sourcecode><tr><td nowrap>%%sourcecode%%</td></tr></table></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##EXAMPLEINTRO" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=""$$Example$$%%designlist:tagidentifier=##EXAMPLECODE,itemtype=Example%%""%%%%comment%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="EXAMPLEGROUP_LIST" namespace="ExampleGroup" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""="",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><div class="i-section-heading" id="i-example-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Example</span></div><div id="i-example-section-content" class="i-section-content">
+<div class="i-tab-container">
+    <ul>
+        <li class="i-filtered-content-VB.NET">
+			<a href="#i-tab-content-710a04f5-359a-47bb-8f4e-346ad6fdad37">Example (VB.NET)</a>
+		</li>
+        <li class="i-filtered-content-CS">
+			<a href="#i-tab-content-be7ef52f-4207-411a-a462-727f9903669a">Example (C#)</a>
+		</li>
+
+    </ul>
+	<div id="i-tab-content-710a04f5-359a-47bb-8f4e-346ad6fdad37" class="i-filtered-content-VB.NET">
+		<pre><span style="color: #0000FF; ">Imports</span> System.IO
+<span style="color: #0000FF; ">Imports</span> System.Runtime.InteropServices
+<span style="color: #0000FF; ">Public</span> <span style="color: #0000FF; ">Class</span> Form1
+
+
+    <span style="color: #0000FF; ">Private</span> <span style="color: #0000FF; ">Sub</span> GetTextAndFontAtIndex_Click(sender <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Object</span>, e <span style="color: #0000FF; ">As</span> EventArgs) <span style="color: #0000FF; ">Handles</span> GetTextAndFontAtIndex.Click
+        <span style="color: #0000FF; ">Dim</span> objApplication <span style="color: #0000FF; ">As</span> SolidEdgeFramework.Application = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> SEInstallDir <span style="color: #0000FF; ">As</span> DirectoryInfo
+        <span style="color: #0000FF; ">Dim</span> PartDoc <span style="color: #0000FF; ">As</span> SolidEdgePart.PartDocument = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> DraftDoc <span style="color: #0000FF; ">As</span> SolidEdgeDraft.DraftDocument = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> Dimensions <span style="color: #0000FF; ">As</span> SolidEdgeFrameworkSupport.Dimensions = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> PMIcoll <span style="color: #0000FF; ">As</span> SolidEdgeFrameworkSupport.PMI = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> Csys <span style="color: #0000FF; ">As</span> SolidEdgePart.CoordinateSystem = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> CsysS <span style="color: #0000FF; ">As</span> SolidEdgePart.CoordinateSystems = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> oDim <span style="color: #0000FF; ">As</span> SolidEdgeFrameworkSupport.Dimension = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> DimData <span style="color: #0000FF; ">As</span> SolidEdgeFrameworkSupport.DisplayData = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> x <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+        <span style="color: #0000FF; ">Dim</span> y <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+        <span style="color: #0000FF; ">Dim</span> z <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+        <span style="color: #0000FF; ">Dim</span> Xdirx <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+        <span style="color: #0000FF; ">Dim</span> Xdiry <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+        <span style="color: #0000FF; ">Dim</span> Xdirz <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+        <span style="color: #0000FF; ">Dim</span> Zdirx <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+        <span style="color: #0000FF; ">Dim</span> Zdiry <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+        <span style="color: #0000FF; ">Dim</span> Zdirz <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+        <span style="color: #0000FF; ">Dim</span> x2 <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+        <span style="color: #0000FF; ">Dim</span> y2 <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+        <span style="color: #0000FF; ">Dim</span> z2 <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+        <span style="color: #0000FF; ">Dim</span> i <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Integer</span>
+        <span style="color: #0000FF; ">Dim</span> iCnt <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Integer</span>
+        <span style="color: #0000FF; ">Dim</span> FontName <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">String</span> = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> Str1 <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">String</span> = <span style="color: #0000FF; ">Nothing</span>
+
+        <span style="color: #0000FF; ">Try</span>
+            objApplication = Marshal.GetActiveObject(<span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>)
+            SEInstallDir = GetTrainingFolder()
+            PartDoc = objApplication.Documents.Open(SEInstallDir.FullName + <span style="color: #800000; ">&quot;\Spindle1.par&quot;</span>)
+            <span style="color: #0000FF; ">Call</span> PartDoc.PMI_ByModelState(PMIcoll, SolidEdgePart.PMIModelStateConstants.seDesignModelState)
+
+            Dimensions = PMIcoll.Dimensions
+            CsysS = PartDoc.CoordinateSystems
+
+            <span style="color: #0000FF; ">For</span> <span style="color: #0000FF; ">Each</span> oDim <span style="color: #0000FF; ">In</span> Dimensions
+                DimData = oDim.GetDisplayData
+                iCnt = DimData.GetTextCount
+                <span style="color: #0000FF; ">For</span> i = 0 <span style="color: #0000FF; ">To</span> (iCnt - 1)
+
+                    DimData.GetTextAndFontAtIndex(i, Str1, FontName, x, y, z, Xdirx, Xdiry, Xdirz, Zdirx, Zdiry, Zdirz)
+                    x2 = x + Xdirx
+                    y2 = y + Xdiry
+                    z2 = z + Xdirz
+                    <span style="color: #008000; ">'Add Coordinate System to identify the exact point on screen
+</span>                    Csys = CsysS.Add(x, y, z)
+                    Csys = CsysS.Add(x2, y2, z2)
+                    x2 = x + Zdirx
+                    y2 = y + Zdiry
+                    z2 = z + Zdirz
+                    Csys = CsysS.Add(x2, y2, z2)
+                <span style="color: #0000FF; ">Next</span> i
+            <span style="color: #0000FF; ">Next</span>
+        <span style="color: #0000FF; ">Catch</span> ex <span style="color: #0000FF; ">As</span> Exception
+            <span style="color: #0000FF; ">MsgBox</span>(ex.ToString)
+            Clipboard.SetText(ex.ToString)
+        <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">Try</span>
+    <span style="color: #0000FF; ">End Sub</span>
+
+    <span style="color: #0000FF; ">Function</span> GetTrainingFolder() <span style="color: #0000FF; ">As</span> DirectoryInfo
+        <span style="color: #0000FF; ">Dim</span> objInstallData <span style="color: #0000FF; ">As</span> SEInstallDataLib.SEInstallData = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objInstallFolder <span style="color: #0000FF; ">As</span> DirectoryInfo = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objTrainingFolder <span style="color: #0000FF; ">As</span> DirectoryInfo = <span style="color: #0000FF; ">Nothing</span>
+
+        <span style="color: #0000FF; ">Try</span>
+            objInstallData = <span style="color: #0000FF; ">New</span> SEInstallDataLib.SEInstallData
+            objInstallFolder = <span style="color: #0000FF; ">New</span> DirectoryInfo(objInstallData.GetInstalledPath())
+            objTrainingFolder = <span style="color: #0000FF; ">New</span> DirectoryInfo(Path.Combine(objInstallFolder.Parent.FullName, <span style="color: #800000; ">&quot;Training&quot;</span>))
+        <span style="color: #0000FF; ">Catch</span>
+        <span style="color: #0000FF; ">Finally</span>
+            <span style="color: #0000FF; ">If</span> <span style="color: #0000FF; ">Not</span> (objInstallData <span style="color: #0000FF; ">Is</span> <span style="color: #0000FF; ">Nothing</span>) <span style="color: #0000FF; ">Then</span>
+                Marshal.FinalReleaseComObject(objInstallData)
+                objInstallData = <span style="color: #0000FF; ">Nothing</span>
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+        <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">Try</span>
+
+        <span style="color: #0000FF; ">Return</span> objTrainingFolder
+    <span style="color: #0000FF; ">End Function</span>
+<span style="color: #0000FF; ">End Class</span>
+</pre>
+	</div>
+	<div id="i-tab-content-be7ef52f-4207-411a-a462-727f9903669a" class="i-filtered-content-CS">
+		<pre><span style="color: #0000FF; ">using</span> System.Windows.Forms;
+<span style="color: #0000FF; ">using</span> System.IO;
+<span style="color: #0000FF; ">using</span> System.Runtime.InteropServices;
+<span style="color: #0000FF; ">public</span> <span style="color: #0000FF; ">class</span> Form1
+{
+
+
+    <span style="color: #0000FF; ">private</span> <span style="color: #0000FF; ">void</span> GetTextAndFontAtIndex_Click(<span style="color: #0000FF; ">object</span> sender, EventArgs e)
+    {
+        SolidEdgeFramework.Application objApplication = <span style="color: #0000FF; ">null</span>;
+        DirectoryInfo SEInstallDir = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.PartDocument PartDoc = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeDraft.DraftDocument DraftDoc = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeFrameworkSupport.Dimensions Dimensions = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeFrameworkSupport.PMI PMIcoll = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.CoordinateSystem Csys = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.CoordinateSystems CsysS = <span style="color: #0000FF; ">null</span>;
+<span style="color: #008000; ">//        SolidEdgeFrameworkSupport.Dimension oDim = null;
+</span>        SolidEdgeFrameworkSupport.DisplayData DimData = <span style="color: #0000FF; ">null</span>;
+        <span style="color: #0000FF; ">double</span> x = 0;
+        <span style="color: #0000FF; ">double</span> y = 0;
+        <span style="color: #0000FF; ">double</span> z = 0;
+        <span style="color: #0000FF; ">double</span> Xdirx = 0;
+        <span style="color: #0000FF; ">double</span> Xdiry = 0;
+        <span style="color: #0000FF; ">double</span> Xdirz = 0;
+        <span style="color: #0000FF; ">double</span> Zdirx = 0;
+        <span style="color: #0000FF; ">double</span> Zdiry = 0;
+        <span style="color: #0000FF; ">double</span> Zdirz = 0;
+        <span style="color: #0000FF; ">double</span> x2 = 0;
+        <span style="color: #0000FF; ">double</span> y2 = 0;
+        <span style="color: #0000FF; ">double</span> z2 = 0;
+        <span style="color: #0000FF; ">int</span> i = 0;
+        <span style="color: #0000FF; ">int</span> iCnt = 0;
+        <span style="color: #0000FF; ">string</span> FontName = <span style="color: #0000FF; ">null</span>;
+        <span style="color: #0000FF; ">string</span> Str1 = <span style="color: #0000FF; ">null</span>;
+
+        <span style="color: #0000FF; ">try</span>
+        {
+            objApplication = (SolidEdgeFramework.Application)Marshal.GetActiveObject(<span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>);
+            SEInstallDir = GetTrainingFolder();
+            PartDoc = objApplication.Documents.Open(SEInstallDir.FullName + <span style="color: #800000; ">&quot;\\Spindle1.par&quot;</span>);
+            PartDoc.PMI_ByModelState(PMIcoll, SolidEdgePart.PMIModelStateConstants.seDesignModelState);
+
+            Dimensions = PMIcoll.Dimensions;
+            CsysS = PartDoc.CoordinateSystems;
+
+            <span style="color: #0000FF; ">foreach</span> (SolidEdgeFrameworkSupport.Dimension oDim <span style="color: #0000FF; ">in</span> Dimensions)
+            {
+                DimData = oDim.GetDisplayData;
+                iCnt = DimData.GetTextCount;
+                <span style="color: #0000FF; ">int</span> tempVar = iCnt - 1;
+                <span style="color: #0000FF; ">for</span> (i = 0; i &lt;= tempVar; i++)
+                {
+
+                    DimData.GetTextAndFontAtIndex(i, Str1, FontName, x, y, z, Xdirx, Xdiry, Xdirz, Zdirx, Zdiry, Zdirz);
+                    x2 = x + Xdirx;
+                    y2 = y + Xdiry;
+                    z2 = z + Xdirz;
+                    <span style="color: #008000; ">//Add Coordinate System to identify the exact point on screen
+</span>                    Csys = CsysS.Add(x, y, z);
+                    Csys = CsysS.Add(x2, y2, z2);
+                    x2 = x + Zdirx;
+                    y2 = y + Zdiry;
+                    z2 = z + Zdirz;
+                    Csys = CsysS.Add(x2, y2, z2);
+                }
+            }
+        }
+        <span style="color: #0000FF; ">catch</span> (Exception ex)
+        {
+            MessageBox.Show(ex.ToString());
+            Clipboard.SetText(ex.ToString());
+        }
+    }
+
+    <span style="color: #0000FF; ">public</span> DirectoryInfo GetTrainingFolder()
+    {
+        SEInstallDataLib.SEInstallData objInstallData = <span style="color: #0000FF; ">null</span>;
+        DirectoryInfo objInstallFolder = <span style="color: #0000FF; ">null</span>;
+        DirectoryInfo objTrainingFolder = <span style="color: #0000FF; ">null</span>;
+
+        <span style="color: #0000FF; ">try</span>
+        {
+            objInstallData = <span style="color: #0000FF; ">new</span> SEInstallDataLib.SEInstallData();
+            objInstallFolder = <span style="color: #0000FF; ">new</span> DirectoryInfo(objInstallData.GetInstalledPath());
+            objTrainingFolder = <span style="color: #0000FF; ">new</span> DirectoryInfo(Path.Combine(objInstallFolder.Parent.FullName, <span style="color: #800000; ">&quot;Training&quot;</span>));
+        }
+        <span style="color: #0000FF; ">catch</span>
+        {
+        }
+        <span style="color: #0000FF; ">finally</span>
+        {
+            <span style="color: #0000FF; ">if</span> (objInstallData != <span style="color: #0000FF; ">null</span>)
+            {
+                Marshal.FinalReleaseComObject(objInstallData);
+                objInstallData = <span style="color: #0000FF; ">null</span>;
+            }
+        }
+
+        <span style="color: #0000FF; ">return</span> objTrainingFolder;
+    }
+
+    <span style="color: #0000FF; ">public</span> Form1()
+    {
+        SubscribeToEvents();
+    }
+
+    <span style="color: #0000FF; ">private</span> <span style="color: #0000FF; ">bool</span> EventsSubscribed = <span style="color: #0000FF; ">false</span>;
+    <span style="color: #0000FF; ">private</span> <span style="color: #0000FF; ">void</span> SubscribeToEvents()
+    {
+        <span style="color: #0000FF; ">if</span> (EventsSubscribed)
+            <span style="color: #0000FF; ">return</span>;
+        <span style="color: #0000FF; ">else</span>
+            EventsSubscribed = <span style="color: #0000FF; ">true</span>;
+
+        GetTextAndFontAtIndex.Click += GetTextAndFontAtIndex_Click;
+    }
+
+}</pre>
+	</div>
+	
+</div>
+</div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="INLINE_EXAMPLE" namespace="Example" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""<>"",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="MENU_LINK" namespace="example" source="Item" filter="type=linked" NoHeader="True" NoFooter="True" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=examplelinks,caption=$$Example$$%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="FilteredItemList" scrap="CATEGORIZED_LINKS" namespace="linkcategory" source="Item" filter="" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=seealso,caption=""$$See_Also$$%%designlist:tagidentifier=##SEEALSO,itemtype=See Also%%""%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><div class="i-section-heading" id="i-seealso-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">See Also</span></div><div id="i-seealso-section-content" class="i-section-content"><p id=dxseealsocontent><a href="SolidEdgeFrameworkSupport~DisplayData.html">DisplayData Object</a>
+&nbsp;|&nbsp;<a href="SolidEdgeFrameworkSupport~DisplayData_members.html">DisplayData Members</a>
+&nbsp;|&nbsp;<a href="ST4-WhatsNew.html">Solid Edge ST4 - What's New</a>
+</p>
+</p></div><!--DXMETADATA end -->
+    </div>
+    <div id="i-footer-content" class="i-footer-content">
+        <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_FOOTER" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="CopyrightNotice" format="<p>&nbsp;</p><p>&nbsp;</p><hr style=""height: 1px"" /><p>%%variable%%</p>" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="FeedbackLink" format="" --><!--DXMETADATA end-->
+    </div>
+    
+
+    <!--DXMETADATA start type="IsNew" format="<script type=""text/javascript"">setIsNew = true;</script>" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<script type=""text/javascript"">setIsResponsiveEnabled = true;</script>" --><!--DXMETADATA end-->
+    <script type="text/javascript">
+        $(function() {
+            var documentInstance = new Innovasys.Content.Document(document.body);
+            documentInstance.isNew = !(typeof setIsNew === "undefined");
+            documentInstance.isResponsiveEnabled = !(typeof setIsResponsiveEnabled === "undefined");
+            documentInstance.load();
+        });
+    </script>
+</body>
+</html>

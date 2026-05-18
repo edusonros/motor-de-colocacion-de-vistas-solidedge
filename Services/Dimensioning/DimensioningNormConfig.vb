@@ -21,9 +21,11 @@ Public Class DimensioningNormConfig
     Public Property SkipIsometricViews As Boolean = True
     Public Property GroupEqualDiameterHolesPerView As Boolean = True
     Public Property AnnotateRepeatedHoleCount As Boolean = True
+    ''' <summary>Centro de agujeros interiores a dos lados perpendiculares y pasos entre centros (sin duplicar valor en el mismo lado de la vista).</summary>
+    Public Property EnableInteriorHoleCenterDimensions As Boolean = True
 
     Public Property MinGapFromView As Double = 0.012
-    Public Property GapBetweenDimensionRows As Double = 0.008
+    Public Property GapBetweenDimensionRows As Double = 0.01
     Public Property MinFeatureSeparation As Double = 0.001
     Public Property MaxDimensionsPerViewInitial As Integer = 4
 
@@ -115,8 +117,8 @@ Public Class DimensioningNormConfig
     ''' </summary>
     Public Property EnableSesdkPostDimensionIntrospection As Boolean = False
 
-    ''' <summary>Prueba: no aplicar TrackDistance escalonado que aleja cotas de la pieza.</summary>
-    Public Property SuppressDimensionTrackDistanceSpacing As Boolean = True
+    ''' <summary>Si True, no aplicar TrackDistance ni carriles 12 mm / 10 mm.</summary>
+    Public Property SuppressDimensionTrackDistanceSpacing As Boolean = False
 
     ''' <summary>Tras crear cotas, eliminar duplicadas con mismo valor y mismos keypoints.</summary>
     Public Property EnableKeypointValueDuplicateCleanup As Boolean = True
@@ -133,6 +135,7 @@ Public Class DimensioningNormConfig
         cfg.UseRepeatedFeatureNotation = True
         cfg.GroupEqualDiameterHolesPerView = True
         cfg.AnnotateRepeatedHoleCount = True
+        cfg.EnableInteriorHoleCenterDimensions = True
         cfg.MinRadiusToDimensionMm = 10.0R
         cfg.MaxLinearDimensionsTarget = 10
         cfg.MaxRadialDimensionsTarget = 4
@@ -161,6 +164,7 @@ Public Class DimensioningNormConfig
             .SkipIsometricViews = SkipIsometricViews,
             .GroupEqualDiameterHolesPerView = GroupEqualDiameterHolesPerView,
             .AnnotateRepeatedHoleCount = AnnotateRepeatedHoleCount,
+            .EnableInteriorHoleCenterDimensions = EnableInteriorHoleCenterDimensions,
             .MinGapFromView = MinGapFromView,
             .GapBetweenDimensionRows = GapBetweenDimensionRows,
             .MinFeatureSeparation = MinFeatureSeparation,

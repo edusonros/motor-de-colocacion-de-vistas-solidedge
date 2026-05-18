@@ -1,0 +1,1335 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--DXMETADATA start type="MetaCharset" --><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><!--DXMETADATA end-->
+    <meta http-equiv="X-UA-Compatible" value="IE=9" />
+
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Literal" condition="helpversion:value=3" value="<meta name=""Microsoft.Help.SelfBranded"" content=""true"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="ItemTitle" format="<title>%%ItemTitle%%</title>" --><title>Solid Edge V17 - What's New</title><!--DXMETADATA end-->
+    <!--DXMETADATA start type="ItemTitle" format="<meta name=""Title"" content=""%%ItemTitleNoQuotes%%""/>" --><meta name="Title" content="Solid Edge V17 - What's New"/><!--DXMETADATA end-->    
+    
+
+    <!--DXMETADATA start type="PackageLink" packagename="jquery" filetype="script" firstlinkattributes="id=""mshs_support_script"""--><script src="template/packages/jquery/script/chm.mshc/jquery-1.7.2.min.js" type="text/javascript" id="mshs_support_script"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="script"--><script src="template/packages/jquery-ui/script/chm.mshc/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/jquery-ui/css/chm.mshc/jquery-ui-1.8.18.custom.css"></link><!--DXMETADATA end-->
+	
+    <!--DXMETADATA start type="Synopsis" StripHtmlTags="True" MaxLength="250" format="<meta name=""Description"" content=""%%Synopsis%%"" />"--><meta name="Description" content=" New APIs 
+
+ SolidEdgeAssembly 
+
+
+AssemblyDocument.CreateOrEditSimplifiedAssembly Method 
+AssemblyDocument.DeleteSimplifiedAssembly Method 
+AssemblyDocument.GetCapturedRelationshipInformation Method 
+AssemblyDocument.GetSimplifiedAssemblyInpu" /><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-topics" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/plugins-topics/css/chm.mshc/jquery-plugins.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-topics" filetype="css" firstlinkattributes=" data-mshv2-stylesheet=""/template/packages/core-topics/topics.mshv2.css"" data-mshv1-stylesheet=""/template/packages/core-topics/topics.mshv1.css"" data-responsive-mobile=""template/packages/core-topics/topics.mobile.css"" data-responsive-tablet=""template/packages/core-topics/topics.tablet.css"""--><link rel="stylesheet" type="text/css" href="template/packages/core-topics/css/topics.css"  data-mshv2-stylesheet="/template/packages/core-topics/topics.mshv2.css" data-mshv1-stylesheet="/template/packages/core-topics/topics.mshv1.css" data-responsive-mobile="template/packages/core-topics/topics.mobile.css" data-responsive-tablet="template/packages/core-topics/topics.tablet.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-topics" filetype="script"--><script src="template/packages/plugins-topics/script/chm.mshc/jquery-plugins.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-topics" filetype="script"--><script src="template/packages/core-topics/script/topics.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="TopicId" format="<meta name=""Microsoft.Help.Id"" content=""%%TopicId%%""/>" --><meta name="Microsoft.Help.Id" content="7958a48d-3222-44cc-abc8-c03befb01fd6"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocParentId" format="<meta name=""Microsoft.Help.TocParent"" content=""%%TocParentId%%""/>" --><meta name="Microsoft.Help.TocParent" content="7d9d9936-62c1-4718-a852-d74a2116b7de"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocOrdinal" format="<meta name=""Microsoft.Help.TocOrder"" content=""%%TocOrdinal%%""/>" --><meta name="Microsoft.Help.TocOrder" content="15"/><!--DXMETADATA end-->
+    <meta name="Microsoft.Help.F1" content=""/>
+    <meta name="Microsoft.Help.ContentType" content="Concepts" />
+    <!--DXMETADATA start type="MshvKeywords" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="MshvMetaTags" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.Locale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.TopicLocale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="Stylesheets" --><link rel="stylesheet" type="text/css" href="stylesheets/customstyles.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Scripts" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="DesignTime"--><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_PROPERTIES" --><!--DXMETADATA end -->
+
+    <!--DXMETADATA start type="CustomHeadContent" --><!--DXMETADATA end-->
+</head>
+
+<body>
+    <div id="i-before-header-content" class="i-before-header-content">
+        
+    </div>
+    <div id="i-header-content" class="i-header-content">
+        <!--DXMETADATA start type="LogoImage" --><img class="logoimage" src="images/sesdk_header.jpg" border="0"></img><!--DXMETADATA end-->
+            <div class="i-project-title"><!--DXMETADATA start type="ProjectTitle" -->Solid Edge 2019 SDK<!--DXMETADATA end--></div>
+        <div class="i-page-title"><div class="i-page-title-text"><!--DXMETADATA start type="ItemTitle" -->Solid Edge V17 - What's New<!--DXMETADATA end--></div></div>
+    </div>
+    <div id="i-after-header-content" class="i-after-header-content">
+        <!-- Spacing --> <span class="i-toggle-all-sections i-function-link">
+                <label class="i-collapse-all"><!--DXMETADATA start type="Phrase" name="COLLAPSE_ALL" -->Collapse All<!--DXMETADATA end--></label>
+                <label class="i-expand-all" style="display: none;"><!--DXMETADATA start type="Phrase" name="EXPAND_ALL" -->Expand All<!--DXMETADATA end--></label>
+            </span><!--DXMETADATA start type="Literal" condition="communityenabled" value="%%scrap:name=_COMMUNITY_DROPDOWN%%" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="IsWebOutputRootPageLinkEnabled" format="<a href='#' class="i-page-link" class="i-view-in-frame-link" title='$$VIEW_WITH_NAVIGATION_TOOLS_TIP$$' style='display: none' data-root-page='%%WebOutputRootPage%%%%OutputFileExtension%%' target='_top'>$$VIEW_WITH_NAVIGATION_TOOLS_TEXT$$</a>" --><a href='#' class="i-page-link" class="i-view-in-frame-link" title='Open this Topic in a view that includes Navigation tools (Table of Contents, Index, Search)' style='display: none' data-root-page='webframe.html' target='_top'>View with Navigation Tools</a><!--DXMETADATA end-->
+    </div>
+    <!--DXMETADATA start type="Breadcrumbs" scrap="_BREADCRUMBS" --><div class="i-breadcrumbs-container"><table><tr><td>
+<a href="WhatsNew.html">What's New</a>
+ > Solid Edge V17 - What's New</td></tr></table></div><!--DXMETADATA end -->
+    
+    
+    <div id="i-body-content" class="i-body-content">
+        <!--DXMETADATA start type="TopicSection" name="BodyText"--><DIV id=i-8fe0a9ba-e14a-41d1-aa68-7ebcc599865a-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>New APIs</SPAN> </DIV>
+<DIV id=i-8fe0a9ba-e14a-41d1-aa68-7ebcc599865a-section-content class=i-section-content>
+<DIV id=i-4fa4669d-0460-49a4-8709-e848277b7601-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>SolidEdgeAssembly</SPAN> </DIV>
+<DIV id=i-4fa4669d-0460-49a4-8709-e848277b7601-section-content class=i-section-content>
+<UL>
+<LI><A href="SolidEdgeAssembly~AssemblyDocument~CreateOrEditSimplifiedAssembly.html" data-auto-update-caption="true">AssemblyDocument.CreateOrEditSimplifiedAssembly Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDocument~DeleteSimplifiedAssembly.html" data-auto-update-caption="true">AssemblyDocument.DeleteSimplifiedAssembly Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDocument~GetCapturedRelationshipInformation.html" data-auto-update-caption="true">AssemblyDocument.GetCapturedRelationshipInformation Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDocument~GetSimplifiedAssemblyInputs.html" data-auto-update-caption="true">AssemblyDocument.GetSimplifiedAssemblyInputs Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDocument~PublishVirtualComponents.html" data-auto-update-caption="true">AssemblyDocument.PublishVirtualComponents Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDocument~SaveSimplifiedAssemblyAs.html" data-auto-update-caption="true">AssemblyDocument.SaveSimplifiedAssemblyAs Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDocument~UpdateSimplifiedAssembly.html" data-auto-update-caption="true">AssemblyDocument.UpdateSimplifiedAssembly Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDocument~AssemblyDrivenPartFeatures.html" data-auto-update-caption="true">AssemblyDocument.AssemblyDrivenPartFeatures Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDocument~AssemblyFeatures.html" data-auto-update-caption="true">AssemblyDocument.AssemblyFeatures Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDocument~CapturedRelationshipCount.html" data-auto-update-caption="true">AssemblyDocument.CapturedRelationshipCount Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDocument~ComponentLayouts.html" data-auto-update-caption="true">AssemblyDocument.ComponentLayouts Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDocument~HasCapturedRelationships.html" data-auto-update-caption="true">AssemblyDocument.HasCapturedRelationships Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDocument~HidePreviousLevel.html" data-auto-update-caption="true">AssemblyDocument.HidePreviousLevel Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDocument~IsAssemblySimplified.html" data-auto-update-caption="true">AssemblyDocument.IsAssemblySimplified Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDocument~Pipes.html" data-auto-update-caption="true">AssemblyDocument.Pipes Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDocument~StructuralFrames.html" data-auto-update-caption="true">AssemblyDocument.StructuralFrames Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDocument~VirtualComponentOccurrences.html" data-auto-update-caption="true">AssemblyDocument.VirtualComponentOccurrences Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeatures.html" data-auto-update-caption="true">AssemblyDrivenPartFeatures Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeatures~Application.html" data-auto-update-caption="true">AssemblyDrivenPartFeatures.Application Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeatures~AssemblyDrivenPartFeaturesExtrudedCutouts.html" data-auto-update-caption="true">AssemblyDrivenPartFeatures.AssemblyDrivenPartFeaturesExtrudedCutouts Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeatures~AssemblyDrivenPartFeaturesHoles.html" data-auto-update-caption="true">AssemblyDrivenPartFeatures.AssemblyDrivenPartFeaturesHoles Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeatures~AssemblyDrivenPartFeaturesRevolvedCutouts.html" data-auto-update-caption="true">AssemblyDrivenPartFeatures.AssemblyDrivenPartFeaturesRevolvedCutouts Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeatures~Parent.html" data-auto-update-caption="true">AssemblyDrivenPartFeatures.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutout.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutout Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutout~Delete.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutout.Delete Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutout~GetDepth.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutout.GetDepth Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutout~GetExtentSide.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutout.GetExtentSide Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutout~GetExtentType.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutout.GetExtentType Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutout~GetFromPlane.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutout.GetFromPlane Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutout~GetPartFeatures.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutout.GetPartFeatures Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutout~GetProfiles.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutout.GetProfiles Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutout~GetProfileSide.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutout.GetProfileSide Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutout~GetScopeParts.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutout.GetScopeParts Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutout~GetToPlane.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutout.GetToPlane Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutout~Range.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutout.Range Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutout~RollToFeature.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutout.RollToFeature Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutout~SetDepth.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutout.SetDepth Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutout~SetExtentSide.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutout.SetExtentSide Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutout~SetExtentType.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutout.SetExtentType Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutout~SetFromPlane.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutout.SetFromPlane Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutout~SetProfiles.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutout.SetProfiles Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutout~SetProfileSide.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutout.SetProfileSide Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutout~SetScopeParts.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutout.SetScopeParts Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutout~SetToPlane.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutout.SetToPlane Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutout~Application.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutout.Application Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutout~Edges.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutout.Edges Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutout~Faces.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutout.Faces Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutout~FacesByRay.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutout.FacesByRay Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutout~Name.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutout.Name Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutout~Parent.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutout.Parent Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutout~Suppress.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutout.Suppress Property</A> </LI></UL>
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutouts.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutouts Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutouts~Add.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutouts.Add Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutouts~Item.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutouts.Item Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutouts~Application.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutouts.Application Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutouts~Count.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutouts.Count Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesExtrudedCutouts~Parent.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesExtrudedCutouts.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHole.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHole Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHole~Delete.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHole.Delete Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHole~GetDepth.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHole.GetDepth Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHole~GetExtentSide.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHole.GetExtentSide Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHole~GetExtentType.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHole.GetExtentType Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHole~GetFromPlane.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHole.GetFromPlane Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHole~GetHoleData.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHole.GetHoleData Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHole~GetPartFeatures.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHole.GetPartFeatures Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHole~GetProfiles.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHole.GetProfiles Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHole~GetScopeParts.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHole.GetScopeParts Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHole~GetToPlane.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHole.GetToPlane Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHole~Range.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHole.Range Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHole~RollToFeature.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHole.RollToFeature Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHole~SetDepth.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHole.SetDepth Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHole~SetExtentSide.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHole.SetExtentSide Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHole~SetExtentType.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHole.SetExtentType Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHole~SetFromPlane.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHole.SetFromPlane Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHole~SetHoleData.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHole.SetHoleData Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHole~SetProfiles.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHole.SetProfiles Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHole~SetScopeParts.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHole.SetScopeParts Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHole~SetToPlane.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHole.SetToPlane Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHole~Application.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHole.Application Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHole~Edges.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHole.Edges Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHole~Faces.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHole.Faces Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHole~FacesByRay.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHole.FacesByRay Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHole~Name.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHole.Name Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHole~Parent.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHole.Parent Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHole~Suppress.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHole.Suppress Property</A> </LI></UL>
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHoles.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHoles Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHoles~Add.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHoles.Add Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHoles~Item.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHoles.Item Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHoles~Application.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHoles.Application Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHoles~Count.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHoles.Count Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesHoles~Parent.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesHoles.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutout.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutout Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutout~Delete.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutout.Delete Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutout~GetAngle.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutout.GetAngle Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutout~GetExtentSide.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutout.GetExtentSide Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutout~GetExtentType.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutout.GetExtentType Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutout~GetPartFeatures.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutout.GetPartFeatures Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutout~GetProfiles.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutout.GetProfiles Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutout~GetProfileSide.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutout.GetProfileSide Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutout~GetReferenceAxis.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutout.GetReferenceAxis Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutout~GetScopeParts.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutout.GetScopeParts Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutout~Range.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutout.Range Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutout~RollToFeature.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutout.RollToFeature Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutout~SetAngle.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutout.SetAngle Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutout~SetExtentSide.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutout.SetExtentSide Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutout~SetExtentType.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutout.SetExtentType Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutout~SetProfiles.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutout.SetProfiles Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutout~SetProfileSide.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutout.SetProfileSide Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutout~SetReferenceAxis.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutout.SetReferenceAxis Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutout~SetScopeParts.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutout.SetScopeParts Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutout~Application.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutout.Application Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutout~Edges.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutout.Edges Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutout~Faces.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutout.Faces Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutout~FacesByRay.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutout.FacesByRay Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutout~Name.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutout.Name Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutout~Parent.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutout.Parent Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutout~Suppress.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutout.Suppress Property</A> </LI></UL>
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutouts.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutouts Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutouts~Add.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutouts.Add Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutouts~Item.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutouts.Item Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutouts~Application.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutouts.Application Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutouts~Count.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutouts.Count Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyDrivenPartFeaturesRevolvedCutouts~Parent.html" data-auto-update-caption="true">AssemblyDrivenPartFeaturesRevolvedCutouts.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgeAssembly~AssemblyFamilyMember~ExcludeObject.html" data-auto-update-caption="true">AssemblyFamilyMember.ExcludeObject Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFamilyMember~IncludeObject.html" data-auto-update-caption="true">AssemblyFamilyMember.IncludeObject Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFamilyMembers~SaveAllMembers.html" data-auto-update-caption="true">AssemblyFamilyMembers.SaveAllMembers Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeatures.html" data-auto-update-caption="true">AssemblyFeatures Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeAssembly~AssemblyFeatures~Application.html" data-auto-update-caption="true">AssemblyFeatures.Application Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeatures~AssemblyFeaturesExtrudedCutouts.html" data-auto-update-caption="true">AssemblyFeatures.AssemblyFeaturesExtrudedCutouts Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeatures~AssemblyFeaturesHoles.html" data-auto-update-caption="true">AssemblyFeatures.AssemblyFeaturesHoles Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeatures~AssemblyFeaturesMirrors.html" data-auto-update-caption="true">AssemblyFeatures.AssemblyFeaturesMirrors Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeatures~AssemblyFeaturesPatterns.html" data-auto-update-caption="true">AssemblyFeatures.AssemblyFeaturesPatterns Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeatures~AssemblyFeaturesRevolvedCutouts.html" data-auto-update-caption="true">AssemblyFeatures.AssemblyFeaturesRevolvedCutouts Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeatures~Parent.html" data-auto-update-caption="true">AssemblyFeatures.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutout.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutout Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutout~Delete.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutout.Delete Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutout~GetDepth.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutout.GetDepth Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutout~GetExtentSide.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutout.GetExtentSide Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutout~GetExtentType.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutout.GetExtentType Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutout~GetFromPlane.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutout.GetFromPlane Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutout~GetProfiles.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutout.GetProfiles Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutout~GetProfileSide.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutout.GetProfileSide Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutout~GetScopeParts.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutout.GetScopeParts Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutout~GetToPlane.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutout.GetToPlane Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutout~Range.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutout.Range Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutout~RollToFeature.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutout.RollToFeature Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutout~SetDepth.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutout.SetDepth Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutout~SetExtentSide.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutout.SetExtentSide Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutout~SetExtentType.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutout.SetExtentType Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutout~SetFromPlane.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutout.SetFromPlane Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutout~SetProfiles.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutout.SetProfiles Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutout~SetProfileSide.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutout.SetProfileSide Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutout~SetScopeParts.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutout.SetScopeParts Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutout~SetToPlane.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutout.SetToPlane Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutout~Application.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutout.Application Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutout~Edges.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutout.Edges Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutout~Faces.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutout.Faces Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutout~FacesByRay.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutout.FacesByRay Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutout~Name.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutout.Name Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutout~Parent.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutout.Parent Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutout~Suppress.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutout.Suppress Property</A> </LI></UL>
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutouts.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutouts Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutouts~Add.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutouts.Add Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutouts~Item.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutouts.Item Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutouts~Application.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutouts.Application Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutouts~Count.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutouts.Count Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesExtrudedCutouts~Parent.html" data-auto-update-caption="true">AssemblyFeaturesExtrudedCutouts.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHole.html" data-auto-update-caption="true">AssemblyFeaturesHole Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHole~Delete.html" data-auto-update-caption="true">AssemblyFeaturesHole.Delete Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHole~GetDepth.html" data-auto-update-caption="true">AssemblyFeaturesHole.GetDepth Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHole~GetExtentSide.html" data-auto-update-caption="true">AssemblyFeaturesHole.GetExtentSide Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHole~GetExtentType.html" data-auto-update-caption="true">AssemblyFeaturesHole.GetExtentType Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHole~GetFromPlane.html" data-auto-update-caption="true">AssemblyFeaturesHole.GetFromPlane Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHole~GetHoleData.html" data-auto-update-caption="true">AssemblyFeaturesHole.GetHoleData Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHole~GetProfiles.html" data-auto-update-caption="true">AssemblyFeaturesHole.GetProfiles Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHole~GetScopeParts.html" data-auto-update-caption="true">AssemblyFeaturesHole.GetScopeParts Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHole~GetToPlane.html" data-auto-update-caption="true">AssemblyFeaturesHole.GetToPlane Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHole~Range.html" data-auto-update-caption="true">AssemblyFeaturesHole.Range Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHole~RollToFeature.html" data-auto-update-caption="true">AssemblyFeaturesHole.RollToFeature Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHole~SetDepth.html" data-auto-update-caption="true">AssemblyFeaturesHole.SetDepth Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHole~SetExtentSide.html" data-auto-update-caption="true">AssemblyFeaturesHole.SetExtentSide Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHole~SetExtentType.html" data-auto-update-caption="true">AssemblyFeaturesHole.SetExtentType Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHole~SetFromPlane.html" data-auto-update-caption="true">AssemblyFeaturesHole.SetFromPlane Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHole~SetHoleData.html" data-auto-update-caption="true">AssemblyFeaturesHole.SetHoleData Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHole~SetProfiles.html" data-auto-update-caption="true">AssemblyFeaturesHole.SetProfiles Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHole~SetScopeParts.html" data-auto-update-caption="true">AssemblyFeaturesHole.SetScopeParts Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHole~SetToPlane.html" data-auto-update-caption="true">AssemblyFeaturesHole.SetToPlane Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHole~Application.html" data-auto-update-caption="true">AssemblyFeaturesHole.Application Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHole~Edges.html" data-auto-update-caption="true">AssemblyFeaturesHole.Edges Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHole~Faces.html" data-auto-update-caption="true">AssemblyFeaturesHole.Faces Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHole~FacesByRay.html" data-auto-update-caption="true">AssemblyFeaturesHole.FacesByRay Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHole~Name.html" data-auto-update-caption="true">AssemblyFeaturesHole.Name Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHole~Parent.html" data-auto-update-caption="true">AssemblyFeaturesHole.Parent Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHole~Suppress.html" data-auto-update-caption="true">AssemblyFeaturesHole.Suppress Property</A> </LI></UL>
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHoles.html" data-auto-update-caption="true">AssemblyFeaturesHoles Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHoles~Add.html" data-auto-update-caption="true">AssemblyFeaturesHoles.Add Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHoles~Item.html" data-auto-update-caption="true">AssemblyFeaturesHoles.Item Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHoles~Application.html" data-auto-update-caption="true">AssemblyFeaturesHoles.Application Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHoles~Count.html" data-auto-update-caption="true">AssemblyFeaturesHoles.Count Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesHoles~Parent.html" data-auto-update-caption="true">AssemblyFeaturesHoles.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesMirror.html" data-auto-update-caption="true">AssemblyFeaturesMirror Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesMirror~Delete.html" data-auto-update-caption="true">AssemblyFeaturesMirror.Delete Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesMirror~GetMirrorType.html" data-auto-update-caption="true">AssemblyFeaturesMirror.GetMirrorType Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesMirror~GetParentFeatures.html" data-auto-update-caption="true">AssemblyFeaturesMirror.GetParentFeatures Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesMirror~GetPlane.html" data-auto-update-caption="true">AssemblyFeaturesMirror.GetPlane Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesMirror~Range.html" data-auto-update-caption="true">AssemblyFeaturesMirror.Range Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesMirror~RollToFeature.html" data-auto-update-caption="true">AssemblyFeaturesMirror.RollToFeature Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesMirror~SetMirrorType.html" data-auto-update-caption="true">AssemblyFeaturesMirror.SetMirrorType Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesMirror~SetParentFeatures.html" data-auto-update-caption="true">AssemblyFeaturesMirror.SetParentFeatures Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesMirror~SetPlane.html" data-auto-update-caption="true">AssemblyFeaturesMirror.SetPlane Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesMirror~Application.html" data-auto-update-caption="true">AssemblyFeaturesMirror.Application Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesMirror~Edges.html" data-auto-update-caption="true">AssemblyFeaturesMirror.Edges Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesMirror~Faces.html" data-auto-update-caption="true">AssemblyFeaturesMirror.Faces Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesMirror~FacesByRay.html" data-auto-update-caption="true">AssemblyFeaturesMirror.FacesByRay Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesMirror~Name.html" data-auto-update-caption="true">AssemblyFeaturesMirror.Name Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesMirror~Parent.html" data-auto-update-caption="true">AssemblyFeaturesMirror.Parent Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesMirror~Suppress.html" data-auto-update-caption="true">AssemblyFeaturesMirror.Suppress Property</A> </LI></UL>
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesMirrors.html" data-auto-update-caption="true">AssemblyFeaturesMirrors Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesMirrors~Add.html" data-auto-update-caption="true">AssemblyFeaturesMirrors.Add Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesMirrors~Item.html" data-auto-update-caption="true">AssemblyFeaturesMirrors.Item Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesMirrors~Application.html" data-auto-update-caption="true">AssemblyFeaturesMirrors.Application Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesMirrors~Count.html" data-auto-update-caption="true">AssemblyFeaturesMirrors.Count Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesMirrors~Parent.html" data-auto-update-caption="true">AssemblyFeaturesMirrors.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesPattern.html" data-auto-update-caption="true">AssemblyFeaturesPattern Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesPattern~Delete.html" data-auto-update-caption="true">AssemblyFeaturesPattern.Delete Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesPattern~GetParentFeatures.html" data-auto-update-caption="true">AssemblyFeaturesPattern.GetParentFeatures Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesPattern~GetPatternType.html" data-auto-update-caption="true">AssemblyFeaturesPattern.GetPatternType Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesPattern~GetProfile.html" data-auto-update-caption="true">AssemblyFeaturesPattern.GetProfile Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesPattern~Range.html" data-auto-update-caption="true">AssemblyFeaturesPattern.Range Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesPattern~RollToFeature.html" data-auto-update-caption="true">AssemblyFeaturesPattern.RollToFeature Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesPattern~SetParentFeatures.html" data-auto-update-caption="true">AssemblyFeaturesPattern.SetParentFeatures Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesPattern~SetPatternType.html" data-auto-update-caption="true">AssemblyFeaturesPattern.SetPatternType Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesPattern~SetProfile.html" data-auto-update-caption="true">AssemblyFeaturesPattern.SetProfile Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesPattern~Application.html" data-auto-update-caption="true">AssemblyFeaturesPattern.Application Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesPattern~Edges.html" data-auto-update-caption="true">AssemblyFeaturesPattern.Edges Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesPattern~Faces.html" data-auto-update-caption="true">AssemblyFeaturesPattern.Faces Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesPattern~FacesByRay.html" data-auto-update-caption="true">AssemblyFeaturesPattern.FacesByRay Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesPattern~Name.html" data-auto-update-caption="true">AssemblyFeaturesPattern.Name Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesPattern~Parent.html" data-auto-update-caption="true">AssemblyFeaturesPattern.Parent Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesPattern~Suppress.html" data-auto-update-caption="true">AssemblyFeaturesPattern.Suppress Property</A> </LI></UL>
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesPatterns.html" data-auto-update-caption="true">AssemblyFeaturesPatterns Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesPatterns~Add.html" data-auto-update-caption="true">AssemblyFeaturesPatterns.Add Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesPatterns~Item.html" data-auto-update-caption="true">AssemblyFeaturesPatterns.Item Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesPatterns~Application.html" data-auto-update-caption="true">AssemblyFeaturesPatterns.Application Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesPatterns~Count.html" data-auto-update-caption="true">AssemblyFeaturesPatterns.Count Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesPatterns~Parent.html" data-auto-update-caption="true">AssemblyFeaturesPatterns.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesRevolvedCutout.html" data-auto-update-caption="true">AssemblyFeaturesRevolvedCutout Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesRevolvedCutout~Delete.html" data-auto-update-caption="true">AssemblyFeaturesRevolvedCutout.Delete Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesRevolvedCutout~GetAngle.html" data-auto-update-caption="true">AssemblyFeaturesRevolvedCutout.GetAngle Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesRevolvedCutout~GetExtentSide.html" data-auto-update-caption="true">AssemblyFeaturesRevolvedCutout.GetExtentSide Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesRevolvedCutout~GetExtentType.html" data-auto-update-caption="true">AssemblyFeaturesRevolvedCutout.GetExtentType Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesRevolvedCutout~GetProfiles.html" data-auto-update-caption="true">AssemblyFeaturesRevolvedCutout.GetProfiles Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesRevolvedCutout~GetProfileSide.html" data-auto-update-caption="true">AssemblyFeaturesRevolvedCutout.GetProfileSide Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesRevolvedCutout~GetReferenceAxis.html" data-auto-update-caption="true">AssemblyFeaturesRevolvedCutout.GetReferenceAxis Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesRevolvedCutout~GetScopeParts.html" data-auto-update-caption="true">AssemblyFeaturesRevolvedCutout.GetScopeParts Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesRevolvedCutout~Range.html" data-auto-update-caption="true">AssemblyFeaturesRevolvedCutout.Range Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesRevolvedCutout~RollToFeature.html" data-auto-update-caption="true">AssemblyFeaturesRevolvedCutout.RollToFeature Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesRevolvedCutout~SetAngle.html" data-auto-update-caption="true">AssemblyFeaturesRevolvedCutout.SetAngle Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesRevolvedCutout~SetExtentSide.html" data-auto-update-caption="true">AssemblyFeaturesRevolvedCutout.SetExtentSide Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesRevolvedCutout~SetExtentType.html" data-auto-update-caption="true">AssemblyFeaturesRevolvedCutout.SetExtentType Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesRevolvedCutout~SetProfiles.html" data-auto-update-caption="true">AssemblyFeaturesRevolvedCutout.SetProfiles Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesRevolvedCutout~SetProfileSide.html" data-auto-update-caption="true">AssemblyFeaturesRevolvedCutout.SetProfileSide Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesRevolvedCutout~SetReferenceAxis.html" data-auto-update-caption="true">AssemblyFeaturesRevolvedCutout.SetReferenceAxis Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesRevolvedCutout~SetScopeParts.html" data-auto-update-caption="true">AssemblyFeaturesRevolvedCutout.SetScopeParts Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesRevolvedCutout~Application.html" data-auto-update-caption="true">AssemblyFeaturesRevolvedCutout.Application Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesRevolvedCutout~Edges.html" data-auto-update-caption="true">AssemblyFeaturesRevolvedCutout.Edges Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesRevolvedCutout~Faces.html" data-auto-update-caption="true">AssemblyFeaturesRevolvedCutout.Faces Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesRevolvedCutout~FacesByRay.html" data-auto-update-caption="true">AssemblyFeaturesRevolvedCutout.FacesByRay Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesRevolvedCutout~Name.html" data-auto-update-caption="true">AssemblyFeaturesRevolvedCutout.Name Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesRevolvedCutout~Parent.html" data-auto-update-caption="true">AssemblyFeaturesRevolvedCutout.Parent Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesRevolvedCutout~Suppress.html" data-auto-update-caption="true">AssemblyFeaturesRevolvedCutout.Suppress Property</A> </LI></UL>
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesRevolvedCutouts.html" data-auto-update-caption="true">AssemblyFeaturesRevolvedCutouts Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesRevolvedCutouts~Add.html" data-auto-update-caption="true">AssemblyFeaturesRevolvedCutouts.Add Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesRevolvedCutouts~Item.html" data-auto-update-caption="true">AssemblyFeaturesRevolvedCutouts.Item Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesRevolvedCutouts~Application.html" data-auto-update-caption="true">AssemblyFeaturesRevolvedCutouts.Application Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesRevolvedCutouts~Count.html" data-auto-update-caption="true">AssemblyFeaturesRevolvedCutouts.Count Property</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyFeaturesRevolvedCutouts~Parent.html" data-auto-update-caption="true">AssemblyFeaturesRevolvedCutouts.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgeAssembly~ComponentLayout.html" data-auto-update-caption="true">ComponentLayout Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeAssembly~ComponentLayout~Delete.html" data-auto-update-caption="true">ComponentLayout.Delete Method</A> 
+<LI><A href="SolidEdgeAssembly~ComponentLayout~Application.html" data-auto-update-caption="true">ComponentLayout.Application Property</A> 
+<LI><A href="SolidEdgeAssembly~ComponentLayout~AttributeSets.html" data-auto-update-caption="true">ComponentLayout.AttributeSets Property</A> 
+<LI><A href="SolidEdgeAssembly~ComponentLayout~IsAttributeSetPresent.html" data-auto-update-caption="true">ComponentLayout.IsAttributeSetPresent Property</A> 
+<LI><A href="SolidEdgeAssembly~ComponentLayout~Name.html" data-auto-update-caption="true">ComponentLayout.Name Property</A> 
+<LI><A href="SolidEdgeAssembly~ComponentLayout~Parent.html" data-auto-update-caption="true">ComponentLayout.Parent Property</A> 
+<LI><A href="SolidEdgeAssembly~ComponentLayout~Profile.html" data-auto-update-caption="true">ComponentLayout.Profile Property</A> 
+<LI><A href="SolidEdgeAssembly~ComponentLayout~RefPlane.html" data-auto-update-caption="true">ComponentLayout.RefPlane Property</A> 
+<LI><A href="SolidEdgeAssembly~ComponentLayout~Type.html" data-auto-update-caption="true">ComponentLayout.Type Property</A> </LI></UL>
+<LI><A href="SolidEdgeAssembly~ComponentLayouts.html" data-auto-update-caption="true">ComponentLayouts Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeAssembly~ComponentLayouts~Add.html" data-auto-update-caption="true">ComponentLayouts.Add Method</A> 
+<LI><A href="SolidEdgeAssembly~ComponentLayouts~Item.html" data-auto-update-caption="true">ComponentLayouts.Item Method</A> 
+<LI><A href="SolidEdgeAssembly~ComponentLayouts~Application.html" data-auto-update-caption="true">ComponentLayouts.Application Property</A> 
+<LI><A href="SolidEdgeAssembly~ComponentLayouts~Count.html" data-auto-update-caption="true">ComponentLayouts.Count Property</A> 
+<LI><A href="SolidEdgeAssembly~ComponentLayouts~Parent.html" data-auto-update-caption="true">ComponentLayouts.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgeAssembly~FeatureTopologyQueryTypeConstants.html" data-auto-update-caption="true">FeatureTopologyQueryTypeConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeAssembly~FeatureTopologyQueryTypeConstants.html" data-auto-update-caption="true">FeatureTopologyQueryTypeConstants.igQueryAll Constant</A> 
+<LI><A href="SolidEdgeAssembly~FeatureTopologyQueryTypeConstants.html" data-auto-update-caption="true">FeatureTopologyQueryTypeConstants.igQueryCone Constant</A> 
+<LI><A href="SolidEdgeAssembly~FeatureTopologyQueryTypeConstants.html" data-auto-update-caption="true">FeatureTopologyQueryTypeConstants.igQueryCylinder Constant</A> 
+<LI><A href="SolidEdgeAssembly~FeatureTopologyQueryTypeConstants.html" data-auto-update-caption="true">FeatureTopologyQueryTypeConstants.igQueryEllipse Constant</A> 
+<LI><A href="SolidEdgeAssembly~FeatureTopologyQueryTypeConstants.html" data-auto-update-caption="true">FeatureTopologyQueryTypeConstants.igQueryPlane Constant</A> 
+<LI><A href="SolidEdgeAssembly~FeatureTopologyQueryTypeConstants.html" data-auto-update-caption="true">FeatureTopologyQueryTypeConstants.igQueryRoundable Constant</A> 
+<LI><A href="SolidEdgeAssembly~FeatureTopologyQueryTypeConstants.html" data-auto-update-caption="true">FeatureTopologyQueryTypeConstants.igQuerySphere Constant</A> 
+<LI><A href="SolidEdgeAssembly~FeatureTopologyQueryTypeConstants.html" data-auto-update-caption="true">FeatureTopologyQueryTypeConstants.igQuerySpline Constant</A> 
+<LI><A href="SolidEdgeAssembly~FeatureTopologyQueryTypeConstants.html" data-auto-update-caption="true">FeatureTopologyQueryTypeConstants.igQueryStraight Constant</A> 
+<LI><A href="SolidEdgeAssembly~FeatureTopologyQueryTypeConstants.html" data-auto-update-caption="true">FeatureTopologyQueryTypeConstants.igQueryTorus Constant</A> </LI></UL>
+<LI><A href="SolidEdgeAssembly~Occurrence~CaptureRelationships.html" data-auto-update-caption="true">Occurrence.CaptureRelationships Method</A> 
+<LI><A href="SolidEdgeAssembly~Occurrence~ClearCapturedRelationships.html" data-auto-update-caption="true">Occurrence.ClearCapturedRelationships Method</A> 
+<LI><A href="SolidEdgeAssembly~Occurrence~GetSimplifiedBodies.html" data-auto-update-caption="true">Occurrence.GetSimplifiedBodies Method</A> 
+<LI><A href="SolidEdgeAssembly~Occurrence~Body.html" data-auto-update-caption="true">Occurrence.Body Property</A> 
+<LI><A href="SolidEdgeAssembly~Occurrence~HasBodyOverride.html" data-auto-update-caption="true">Occurrence.HasBodyOverride Property</A> 
+<LI><A href="SolidEdgeAssembly~Occurrence~IsPatterned.html" data-auto-update-caption="true">Occurrence.IsPatterned Property</A> 
+<LI><A href="SolidEdgeAssembly~Occurrence~IsPatternItem.html" data-auto-update-caption="true">Occurrence.IsPatternItem Property</A> 
+<LI><A href="SolidEdgeAssembly~Pipe.html" data-auto-update-caption="true">Pipe Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeAssembly~Pipe~Delete.html" data-auto-update-caption="true">Pipe.Delete Method</A> 
+<LI><A href="SolidEdgeAssembly~Pipe~GetPipeFittings.html" data-auto-update-caption="true">Pipe.GetPipeFittings Method</A> 
+<LI><A href="SolidEdgeAssembly~Pipe~GetPipeLengths.html" data-auto-update-caption="true">Pipe.GetPipeLengths Method</A> 
+<LI><A href="SolidEdgeAssembly~Pipe~GetPipeSegments.html" data-auto-update-caption="true">Pipe.GetPipeSegments Method</A> 
+<LI><A href="SolidEdgeAssembly~Pipe~Application.html" data-auto-update-caption="true">Pipe.Application Property</A> 
+<LI><A href="SolidEdgeAssembly~Pipe~DefaultEndTreatment.html" data-auto-update-caption="true">Pipe.DefaultEndTreatment Property</A> 
+<LI><A href="SolidEdgeAssembly~Pipe~Name.html" data-auto-update-caption="true">Pipe.Name Property</A> 
+<LI><A href="SolidEdgeAssembly~Pipe~Parent.html" data-auto-update-caption="true">Pipe.Parent Property</A> 
+<LI><A href="SolidEdgeAssembly~Pipe~PipeFittingStandard.html" data-auto-update-caption="true">Pipe.PipeFittingStandard Property</A> 
+<LI><A href="SolidEdgeAssembly~Pipe~PipeSegmentStandard.html" data-auto-update-caption="true">Pipe.PipeSegmentStandard Property</A> 
+<LI><A href="SolidEdgeAssembly~Pipe~Visible.html" data-auto-update-caption="true">Pipe.Visible Property</A> </LI></UL>
+<LI><A href="SolidEdgeAssembly~PipeFittingEndTreatmentConstants.html" data-auto-update-caption="true">PipeFittingEndTreatmentConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeAssembly~PipeFittingEndTreatmentConstants.html" data-auto-update-caption="true">PipeFittingEndTreatmentConstants.sePipeFittingEndTreatmentButtWeld Constant</A> 
+<LI><A href="SolidEdgeAssembly~PipeFittingEndTreatmentConstants.html" data-auto-update-caption="true">PipeFittingEndTreatmentConstants.sePipeFittingEndTreatmentFlange Constant</A> 
+<LI><A href="SolidEdgeAssembly~PipeFittingEndTreatmentConstants.html" data-auto-update-caption="true">PipeFittingEndTreatmentConstants.sePipeFittingEndTreatmentNone Constant</A> 
+<LI><A href="SolidEdgeAssembly~PipeFittingEndTreatmentConstants.html" data-auto-update-caption="true">PipeFittingEndTreatmentConstants.sePipeFittingEndTreatmentPipePenetration Constant</A> 
+<LI><A href="SolidEdgeAssembly~PipeFittingEndTreatmentConstants.html" data-auto-update-caption="true">PipeFittingEndTreatmentConstants.sePipeFittingEndTreatmentSocketWeld Constant</A> 
+<LI><A href="SolidEdgeAssembly~PipeFittingEndTreatmentConstants.html" data-auto-update-caption="true">PipeFittingEndTreatmentConstants.sePipeFittingEndTreatmentThread Constant</A> </LI></UL>
+<LI><A href="SolidEdgeAssembly~PipeFittingTypeConstants.html" data-auto-update-caption="true">PipeFittingTypeConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeAssembly~PipeFittingTypeConstants.html" data-auto-update-caption="true">PipeFittingTypeConstants.sePipeFittingTypeCompanionFlange Constant</A> 
+<LI><A href="SolidEdgeAssembly~PipeFittingTypeConstants.html" data-auto-update-caption="true">PipeFittingTypeConstants.sePipeFittingTypeCoupling Constant</A> 
+<LI><A href="SolidEdgeAssembly~PipeFittingTypeConstants.html" data-auto-update-caption="true">PipeFittingTypeConstants.sePipeFittingTypeCross Constant</A> 
+<LI><A href="SolidEdgeAssembly~PipeFittingTypeConstants.html" data-auto-update-caption="true">PipeFittingTypeConstants.sePipeFittingTypeElbow Constant</A> 
+<LI><A href="SolidEdgeAssembly~PipeFittingTypeConstants.html" data-auto-update-caption="true">PipeFittingTypeConstants.sePipeFittingTypeNone Constant</A> 
+<LI><A href="SolidEdgeAssembly~PipeFittingTypeConstants.html" data-auto-update-caption="true">PipeFittingTypeConstants.sePipeFittingTypePlug Constant</A> 
+<LI><A href="SolidEdgeAssembly~PipeFittingTypeConstants.html" data-auto-update-caption="true">PipeFittingTypeConstants.sePipeFittingTypeReducer Constant</A> 
+<LI><A href="SolidEdgeAssembly~PipeFittingTypeConstants.html" data-auto-update-caption="true">PipeFittingTypeConstants.sePipeFittingTypeReturn180 Constant</A> 
+<LI><A href="SolidEdgeAssembly~PipeFittingTypeConstants.html" data-auto-update-caption="true">PipeFittingTypeConstants.sePipeFittingTypeTee Constant</A> 
+<LI><A href="SolidEdgeAssembly~PipeFittingTypeConstants.html" data-auto-update-caption="true">PipeFittingTypeConstants.sePipeFittingTypeY Constant</A> </LI></UL>
+<LI><A href="SolidEdgeAssembly~Pipes.html" data-auto-update-caption="true">Pipes Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeAssembly~Pipes~Item.html" data-auto-update-caption="true">Pipes.Item Method</A> 
+<LI><A href="SolidEdgeAssembly~Pipes~Application.html" data-auto-update-caption="true">Pipes.Application Property</A> 
+<LI><A href="SolidEdgeAssembly~Pipes~Count.html" data-auto-update-caption="true">Pipes.Count Property</A> 
+<LI><A href="SolidEdgeAssembly~Pipes~Parent.html" data-auto-update-caption="true">Pipes.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgeAssembly~StructuralFrame~CutLength.html" data-auto-update-caption="true">StructuralFrame.CutLength Method</A> 
+<LI><A href="SolidEdgeAssembly~StructuralFrame~SegmentCutLength.html" data-auto-update-caption="true">StructuralFrame.SegmentCutLength Method</A> 
+<LI><A href="SolidEdgeAssembly~SubOccurrence~GetSimplifiedBodies.html" data-auto-update-caption="true">SubOccurrence.GetSimplifiedBodies Method</A> 
+<LI><A href="SolidEdgeAssembly~SubOccurrence~Body.html" data-auto-update-caption="true">SubOccurrence.Body Property</A> 
+<LI><A href="SolidEdgeAssembly~SubOccurrence~HasBodyOverride.html" data-auto-update-caption="true">SubOccurrence.HasBodyOverride Property</A> 
+<LI><A href="SolidEdgeAssembly~SubOccurrence~IsPatterned.html" data-auto-update-caption="true">SubOccurrence.IsPatterned Property</A> 
+<LI><A href="SolidEdgeAssembly~SubOccurrence~IsPatternItem.html" data-auto-update-caption="true">SubOccurrence.IsPatternItem Property</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponent.html" data-auto-update-caption="true">VirtualComponent Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeAssembly~VirtualComponent~Delete.html" data-auto-update-caption="true">VirtualComponent.Delete Method</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponent~GetGeometry.html" data-auto-update-caption="true">VirtualComponent.GetGeometry Method</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponent~RemoveGeometry.html" data-auto-update-caption="true">VirtualComponent.RemoveGeometry Method</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponent~SetGeometry.html" data-auto-update-caption="true">VirtualComponent.SetGeometry Method</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponent~UpdateComponent.html" data-auto-update-caption="true">VirtualComponent.UpdateComponent Method</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponent~Application.html" data-auto-update-caption="true">VirtualComponent.Application Property</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponent~AttributeSets.html" data-auto-update-caption="true">VirtualComponent.AttributeSets Property</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponent~IsAttributeSetPresent.html" data-auto-update-caption="true">VirtualComponent.IsAttributeSetPresent Property</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponent~Name.html" data-auto-update-caption="true">VirtualComponent.Name Property</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponent~Parent.html" data-auto-update-caption="true">VirtualComponent.Parent Property</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponent~Properties.html" data-auto-update-caption="true">VirtualComponent.Properties Property</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponent~PublishPath.html" data-auto-update-caption="true">VirtualComponent.PublishPath Property</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponent~TemplateName.html" data-auto-update-caption="true">VirtualComponent.TemplateName Property</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponent~Type.html" data-auto-update-caption="true">VirtualComponent.Type Property</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponent~VirtualComponentOccurrences.html" data-auto-update-caption="true">VirtualComponent.VirtualComponentOccurrences Property</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponent~VirtualComponentType.html" data-auto-update-caption="true">VirtualComponent.VirtualComponentType Property</A> </LI></UL>
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrence.html" data-auto-update-caption="true">VirtualComponentOccurrence Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrence~Delete.html" data-auto-update-caption="true">VirtualComponentOccurrence.Delete Method</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrence~GetOrigin.html" data-auto-update-caption="true">VirtualComponentOccurrence.GetOrigin Method</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrence~GetOriginByKeypoints.html" data-auto-update-caption="true">VirtualComponentOccurrence.GetOriginByKeypoints Method</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrence~GetViewDefinition.html" data-auto-update-caption="true">VirtualComponentOccurrence.GetViewDefinition Method</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrence~Hide.html" data-auto-update-caption="true">VirtualComponentOccurrence.Hide Method</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrence~HideAll.html" data-auto-update-caption="true">VirtualComponentOccurrence.HideAll Method</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrence~IsMaster.html" data-auto-update-caption="true">VirtualComponentOccurrence.IsMaster Method</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrence~MoveTo.html" data-auto-update-caption="true">VirtualComponentOccurrence.MoveTo Method</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrence~PositionComponent.html" data-auto-update-caption="true">VirtualComponentOccurrence.PositionComponent Method</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrence~ReplaceComponent.html" data-auto-update-caption="true">VirtualComponentOccurrence.ReplaceComponent Method</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrence~SetOrigin.html" data-auto-update-caption="true">VirtualComponentOccurrence.SetOrigin Method</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrence~SetOriginByKeypoints.html" data-auto-update-caption="true">VirtualComponentOccurrence.SetOriginByKeypoints Method</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrence~SetViewDefinition.html" data-auto-update-caption="true">VirtualComponentOccurrence.SetViewDefinition Method</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrence~Show.html" data-auto-update-caption="true">VirtualComponentOccurrence.Show Method</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrence~ShowAll.html" data-auto-update-caption="true">VirtualComponentOccurrence.ShowAll Method</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrence~Angle.html" data-auto-update-caption="true">VirtualComponentOccurrence.Angle Property</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrence~Application.html" data-auto-update-caption="true">VirtualComponentOccurrence.Application Property</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrence~AttributeSets.html" data-auto-update-caption="true">VirtualComponentOccurrence.AttributeSets Property</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrence~IsAttributeSetPresent.html" data-auto-update-caption="true">VirtualComponentOccurrence.IsAttributeSetPresent Property</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrence~IsPositioned.html" data-auto-update-caption="true">VirtualComponentOccurrence.IsPositioned Property</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrence~IsPreDefined.html" data-auto-update-caption="true">VirtualComponentOccurrence.IsPreDefined Property</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrence~Name.html" data-auto-update-caption="true">VirtualComponentOccurrence.Name Property</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrence~Parent.html" data-auto-update-caption="true">VirtualComponentOccurrence.Parent Property</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrence~Type.html" data-auto-update-caption="true">VirtualComponentOccurrence.Type Property</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrence~VirtualComponent.html" data-auto-update-caption="true">VirtualComponentOccurrence.VirtualComponent Property</A> </LI></UL>
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrences.html" data-auto-update-caption="true">VirtualComponentOccurrences Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrences~Add.html" data-auto-update-caption="true">VirtualComponentOccurrences.Add Method</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrences~AddAsPreDefined.html" data-auto-update-caption="true">VirtualComponentOccurrences.AddAsPreDefined Method</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrences~Item.html" data-auto-update-caption="true">VirtualComponentOccurrences.Item Method</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrences~Application.html" data-auto-update-caption="true">VirtualComponentOccurrences.Application Property</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrences~Count.html" data-auto-update-caption="true">VirtualComponentOccurrences.Count Property</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentOccurrences~Parent.html" data-auto-update-caption="true">VirtualComponentOccurrences.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgeAssembly~VirtualComponentPublishConstants.html" data-auto-update-caption="true">VirtualComponentPublishConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeAssembly~VirtualComponentPublishConstants.html" data-auto-update-caption="true">VirtualComponentPublishConstants.seVCPublishOn_FrontView Constant</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentPublishConstants.html" data-auto-update-caption="true">VirtualComponentPublishConstants.seVCPublishOn_RightView Constant</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentPublishConstants.html" data-auto-update-caption="true">VirtualComponentPublishConstants.seVCPublishOn_SketchView Constant</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentPublishConstants.html" data-auto-update-caption="true">VirtualComponentPublishConstants.seVCPublishOn_TopView Constant</A> </LI></UL>
+<LI><A href="SolidEdgeAssembly~VirtualComponentStatusConstants.html" data-auto-update-caption="true">VirtualComponentStatusConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeAssembly~VirtualComponentStatusConstants.html" data-auto-update-caption="true">VirtualComponentStatusConstants.seVCStatus_AddManagedToUnManaged Constant</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentStatusConstants.html" data-auto-update-caption="true">VirtualComponentStatusConstants.seVCStatus_AddUnManagedToManaged Constant</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentStatusConstants.html" data-auto-update-caption="true">VirtualComponentStatusConstants.seVCStatus_CannotAddToComponent Constant</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentStatusConstants.html" data-auto-update-caption="true">VirtualComponentStatusConstants.seVCStatus_ComponentSketchMissing Constant</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentStatusConstants.html" data-auto-update-caption="true">VirtualComponentStatusConstants.seVCStatus_DuplicateNameConflictWithVirtualComponent Constant</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentStatusConstants.html" data-auto-update-caption="true">VirtualComponentStatusConstants.seVCStatus_Fail Constant</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentStatusConstants.html" data-auto-update-caption="true">VirtualComponentStatusConstants.seVCStatus_NameConflictWithPreDefinedComponent Constant</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentStatusConstants.html" data-auto-update-caption="true">VirtualComponentStatusConstants.seVCStatus_NameConflictWithVirtualComponent Constant</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentStatusConstants.html" data-auto-update-caption="true">VirtualComponentStatusConstants.seVCStatus_ReplaceConflictWithVirtualComponent Constant</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentStatusConstants.html" data-auto-update-caption="true">VirtualComponentStatusConstants.seVCStatus_SourceFileNotFound Constant</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentStatusConstants.html" data-auto-update-caption="true">VirtualComponentStatusConstants.seVCStatus_Success Constant</A> </LI></UL>
+<LI><A href="SolidEdgeAssembly~VirtualComponentTypeConstants.html" data-auto-update-caption="true">VirtualComponentTypeConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeAssembly~VirtualComponentTypeConstants.html" data-auto-update-caption="true">VirtualComponentTypeConstants.seVirtualComponentType_Assembly Constant</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentTypeConstants.html" data-auto-update-caption="true">VirtualComponentTypeConstants.seVirtualComponentType_Part Constant</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentTypeConstants.html" data-auto-update-caption="true">VirtualComponentTypeConstants.seVirtualComponentType_Sheetmetal Constant</A> 
+<LI><A href="SolidEdgeAssembly~VirtualComponentTypeConstants.html" data-auto-update-caption="true">VirtualComponentTypeConstants.seVirtualComponentType_Unknown Constant</A> </LI></UL></LI></UL></DIV>
+<DIV id=i-08296215-ebca-4d1a-8bed-1f8740710231-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>SolidEdgeConstants</SPAN> </DIV>
+<DIV id=i-08296215-ebca-4d1a-8bed-1f8740710231-section-content class=i-section-content>
+<UL>
+<LI><A href="SolidEdgeConstants~ApplicationGlobalConstants.html" data-auto-update-caption="true">ApplicationGlobalConstants.seApplicationGlobalUseDimensionStyleMapping Constant</A> 
+<LI><A href="SolidEdgeConstants~CapturedRelationshipOffsetTypeConstants.html" data-auto-update-caption="true">CapturedRelationshipOffsetTypeConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeConstants~CapturedRelationshipOffsetTypeConstants.html" data-auto-update-caption="true">CapturedRelationshipOffsetTypeConstants.seFixed Constant</A> 
+<LI><A href="SolidEdgeConstants~CapturedRelationshipOffsetTypeConstants.html" data-auto-update-caption="true">CapturedRelationshipOffsetTypeConstants.seFloating Constant</A> 
+<LI><A href="SolidEdgeConstants~CapturedRelationshipOffsetTypeConstants.html" data-auto-update-caption="true">CapturedRelationshipOffsetTypeConstants.seOffsetNotSupported Constant</A> </LI></UL>
+<LI><A href="SolidEdgeConstants~CapturedRelationshipTypeConstants.html" data-auto-update-caption="true">CapturedRelationshipTypeConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeConstants~CapturedRelationshipTypeConstants.html" data-auto-update-caption="true">CapturedRelationshipTypeConstants.seAxialAlign Constant</A> 
+<LI><A href="SolidEdgeConstants~CapturedRelationshipTypeConstants.html" data-auto-update-caption="true">CapturedRelationshipTypeConstants.seConnect Constant</A> 
+<LI><A href="SolidEdgeConstants~CapturedRelationshipTypeConstants.html" data-auto-update-caption="true">CapturedRelationshipTypeConstants.seMate Constant</A> 
+<LI><A href="SolidEdgeConstants~CapturedRelationshipTypeConstants.html" data-auto-update-caption="true">CapturedRelationshipTypeConstants.seParallel Constant</A> 
+<LI><A href="SolidEdgeConstants~CapturedRelationshipTypeConstants.html" data-auto-update-caption="true">CapturedRelationshipTypeConstants.sePlanarAlign Constant</A> 
+<LI><A href="SolidEdgeConstants~CapturedRelationshipTypeConstants.html" data-auto-update-caption="true">CapturedRelationshipTypeConstants.seTangent Constant</A> </LI></UL>
+<LI><A href="SolidEdgeConstants~ComponentImageCreationModeConstants.html" data-auto-update-caption="true">ComponentImageCreationModeConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeConstants~ComponentImageCreationModeConstants.html" data-auto-update-caption="true">ComponentImageCreationModeConstants.seAllVisible Constant</A> 
+<LI><A href="SolidEdgeConstants~ComponentImageCreationModeConstants.html" data-auto-update-caption="true">ComponentImageCreationModeConstants.seExplicit Constant</A> </LI></UL>
+<LI><A href="SolidEdgeConstants~DrawingViewBsplineSimplificationConstants.html" data-auto-update-caption="true">DrawingViewBsplineSimplificationConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeConstants~DrawingViewBsplineSimplificationConstants.html" data-auto-update-caption="true">DrawingViewBsplineSimplificationConstants.igAlwaysSimplify Constant</A> 
+<LI><A href="SolidEdgeConstants~DrawingViewBsplineSimplificationConstants.html" data-auto-update-caption="true">DrawingViewBsplineSimplificationConstants.igNeverSimplify Constant</A> 
+<LI><A href="SolidEdgeConstants~DrawingViewBsplineSimplificationConstants.html" data-auto-update-caption="true">DrawingViewBsplineSimplificationConstants.igSimplifyNonPlanarOnly Constant</A> </LI></UL>
+<LI><A href="SolidEdgeConstants~DrawingViewIntersectionProcessingConstants.html" data-auto-update-caption="true">DrawingViewIntersectionProcessingConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeConstants~DrawingViewIntersectionProcessingConstants.html" data-auto-update-caption="true">DrawingViewIntersectionProcessingConstants.igInterferenceEdgesAllParts Constant</A> 
+<LI><A href="SolidEdgeConstants~DrawingViewIntersectionProcessingConstants.html" data-auto-update-caption="true">DrawingViewIntersectionProcessingConstants.igInterferenceEdgesThreadedPartsOnly Constant</A> 
+<LI><A href="SolidEdgeConstants~DrawingViewIntersectionProcessingConstants.html" data-auto-update-caption="true">DrawingViewIntersectionProcessingConstants.igNoInterferenceEdges Constant</A> 
+<LI><A href="SolidEdgeConstants~DrawingViewIntersectionProcessingConstants.html" data-auto-update-caption="true">DrawingViewIntersectionProcessingConstants.igNoIntersectionProcessing Constant</A> </LI></UL>
+<LI><A href="SolidEdgeConstants~ExtendSurfaceExtentTypeConstants.html" data-auto-update-caption="true">ExtendSurfaceExtentTypeConstants.igESLinearCurvatureContinuous Constant</A> 
+<LI><A href="SolidEdgeConstants~ExtendSurfaceExtentTypeConstants.html" data-auto-update-caption="true">ExtendSurfaceExtentTypeConstants.igESLinearTangentContinuous Constant</A> 
+<LI><A href="SolidEdgeConstants~ExtendSurfaceExtentTypeConstants.html" data-auto-update-caption="true">ExtendSurfaceExtentTypeConstants.igESReflective Constant</A> 
+<LI><A href="SolidEdgeConstants~FaceMoveConstants.html" data-auto-update-caption="true">FaceMoveConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeConstants~FaceMoveConstants.html" data-auto-update-caption="true">FaceMoveConstants.igFaceMoveAlong2PointVector Constant</A> 
+<LI><A href="SolidEdgeConstants~FaceMoveConstants.html" data-auto-update-caption="true">FaceMoveConstants.igFaceMoveAlongEdge Constant</A> 
+<LI><A href="SolidEdgeConstants~FaceMoveConstants.html" data-auto-update-caption="true">FaceMoveConstants.igFaceMoveAlongFaceNormal Constant</A> 
+<LI><A href="SolidEdgeConstants~FaceMoveConstants.html" data-auto-update-caption="true">FaceMoveConstants.igFaceMoveAlongVector Constant</A> 
+<LI><A href="SolidEdgeConstants~FaceMoveConstants.html" data-auto-update-caption="true">FaceMoveConstants.igFaceMoveIgnoreBlends Constant</A> 
+<LI><A href="SolidEdgeConstants~FaceMoveConstants.html" data-auto-update-caption="true">FaceMoveConstants.igFaceMoveInPlane Constant</A> 
+<LI><A href="SolidEdgeConstants~FaceMoveConstants.html" data-auto-update-caption="true">FaceMoveConstants.igFaceMoveNone Constant</A> 
+<LI><A href="SolidEdgeConstants~FaceMoveConstants.html" data-auto-update-caption="true">FaceMoveConstants.igFaceMoveOffsetAlongVector Constant</A> 
+<LI><A href="SolidEdgeConstants~FaceMoveConstants.html" data-auto-update-caption="true">FaceMoveConstants.igFaceMoveOffsetReverseVector Constant</A> 
+<LI><A href="SolidEdgeConstants~FaceMoveConstants.html" data-auto-update-caption="true">FaceMoveConstants.igFaceMoveRecreateBlends Constant</A> 
+<LI><A href="SolidEdgeConstants~FaceMoveConstants.html" data-auto-update-caption="true">FaceMoveConstants.igFaceMoveReverseVector Constant</A> </LI></UL>
+<LI><A href="SolidEdgeConstants~FaceRotateConstants.html" data-auto-update-caption="true">FaceRotateConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeConstants~FaceRotateConstants.html" data-auto-update-caption="true">FaceRotateConstants.igFaceRotateAxisEnd Constant</A> 
+<LI><A href="SolidEdgeConstants~FaceRotateConstants.html" data-auto-update-caption="true">FaceRotateConstants.igFaceRotateAxisStart Constant</A> 
+<LI><A href="SolidEdgeConstants~FaceRotateConstants.html" data-auto-update-caption="true">FaceRotateConstants.igFaceRotateByGeometry Constant</A> 
+<LI><A href="SolidEdgeConstants~FaceRotateConstants.html" data-auto-update-caption="true">FaceRotateConstants.igFaceRotateByPoints Constant</A> 
+<LI><A href="SolidEdgeConstants~FaceRotateConstants.html" data-auto-update-caption="true">FaceRotateConstants.igFaceRotateIgnoreBlends Constant</A> 
+<LI><A href="SolidEdgeConstants~FaceRotateConstants.html" data-auto-update-caption="true">FaceRotateConstants.igFaceRotateNone Constant</A> 
+<LI><A href="SolidEdgeConstants~FaceRotateConstants.html" data-auto-update-caption="true">FaceRotateConstants.igFaceRotateRecreateBlends Constant</A> </LI></UL>
+<LI><A href="SolidEdgeConstants~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igCopy Constant</A> 
+<LI><A href="SolidEdgeConstants~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igDelSMFaceBoth Constant</A> 
+<LI><A href="SolidEdgeConstants~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igDelSMFaceNone Constant</A> 
+<LI><A href="SolidEdgeConstants~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igDelSystemRelief Constant</A> 
+<LI><A href="SolidEdgeConstants~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igDelZeroBendRadius Constant</A> 
+<LI><A href="SolidEdgeConstants~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igIgnoreBlends Constant</A> 
+<LI><A href="SolidEdgeConstants~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igLinearCurvatureContinuousExtension Constant</A> 
+<LI><A href="SolidEdgeConstants~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igLinearTangentExtension Constant</A> 
+<LI><A href="SolidEdgeConstants~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igMove Constant</A> 
+<LI><A href="SolidEdgeConstants~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igRecreateBlends Constant</A> 
+<LI><A href="SolidEdgeConstants~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igReflective Constant</A> 
+<LI><A href="SolidEdgeConstants~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igReverseNormal Constant</A> 
+<LI><A href="SolidEdgeConstants~FeatureStatusConstants.html" data-auto-update-caption="true">FeatureStatusConstants.igFeatureRolledBack Constant</A> 
+<LI><A href="SolidEdgeConstants~FeatureTypeConstants.html" data-auto-update-caption="true">FeatureTypeConstants.igFaceMoveObject Constant</A> 
+<LI><A href="SolidEdgeConstants~FeatureTypeConstants.html" data-auto-update-caption="true">FeatureTypeConstants.igFaceOffsetObject Constant</A> 
+<LI><A href="SolidEdgeConstants~FeatureTypeConstants.html" data-auto-update-caption="true">FeatureTypeConstants.igFaceRotateObject Constant</A> 
+<LI><A href="SolidEdgeConstants~FeatureTypeConstants.html" data-auto-update-caption="true">FeatureTypeConstants.igResizeBendObject Constant</A> 
+<LI><A href="SolidEdgeConstants~FeatureTypeConstants.html" data-auto-update-caption="true">FeatureTypeConstants.igResizeHoleObject Constant</A> 
+<LI><A href="SolidEdgeConstants~FeatureTypeConstants.html" data-auto-update-caption="true">FeatureTypeConstants.igResizeRoundObject Constant</A> 
+<LI><A href="SolidEdgeConstants~MatTablePropIndex.html" data-auto-update-caption="true">MatTablePropIndex Object</A> 
+<LI><A href="SolidEdgeConstants~MatTablePropIndexConstants.html" data-auto-update-caption="true">MatTablePropIndexConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeConstants~MatTablePropIndexConstants.html" data-auto-update-caption="true">MatTablePropIndexConstants.seCoefOfThermalExpansion Constant</A> 
+<LI><A href="SolidEdgeConstants~MatTablePropIndexConstants.html" data-auto-update-caption="true">MatTablePropIndexConstants.seElongation Constant</A> 
+<LI><A href="SolidEdgeConstants~MatTablePropIndexConstants.html" data-auto-update-caption="true">MatTablePropIndexConstants.seFaceStyle Constant</A> 
+<LI><A href="SolidEdgeConstants~MatTablePropIndexConstants.html" data-auto-update-caption="true">MatTablePropIndexConstants.seFillStyle Constant</A> 
+<LI><A href="SolidEdgeConstants~MatTablePropIndexConstants.html" data-auto-update-caption="true">MatTablePropIndexConstants.seMaterialName Constant</A> 
+<LI><A href="SolidEdgeConstants~MatTablePropIndexConstants.html" data-auto-update-caption="true">MatTablePropIndexConstants.seModulusElasticity Constant</A> 
+<LI><A href="SolidEdgeConstants~MatTablePropIndexConstants.html" data-auto-update-caption="true">MatTablePropIndexConstants.sePoissonRatio Constant</A> 
+<LI><A href="SolidEdgeConstants~MatTablePropIndexConstants.html" data-auto-update-caption="true">MatTablePropIndexConstants.seSpecificHeat Constant</A> 
+<LI><A href="SolidEdgeConstants~MatTablePropIndexConstants.html" data-auto-update-caption="true">MatTablePropIndexConstants.seThermalConductivity Constant</A> 
+<LI><A href="SolidEdgeConstants~MatTablePropIndexConstants.html" data-auto-update-caption="true">MatTablePropIndexConstants.seUltimateStress Constant</A> 
+<LI><A href="SolidEdgeConstants~MatTablePropIndexConstants.html" data-auto-update-caption="true">MatTablePropIndexConstants.seVSPlusStyle Constant</A> 
+<LI><A href="SolidEdgeConstants~MatTablePropIndexConstants.html" data-auto-update-caption="true">MatTablePropIndexConstants.seYieldStress Constant</A> </LI></UL>
+<LI><A href="SolidEdgeConstants~ObjectType.html" data-auto-update-caption="true">ObjectType.igComponentImage2d Constant</A> 
+<LI><A href="SolidEdgeConstants~ObjectType.html" data-auto-update-caption="true">ObjectType.igComponentSketch Constant</A> 
+<LI><A href="SolidEdgeConstants~ObjectType.html" data-auto-update-caption="true">ObjectType.seComponentLayout Constant</A> 
+<LI><A href="SolidEdgeConstants~ObjectType.html" data-auto-update-caption="true">ObjectType.seVirtualComponent Constant</A> 
+<LI><A href="SolidEdgeConstants~ObjectType.html" data-auto-update-caption="true">ObjectType.seVirtualComponentOccurrence Constant</A> 
+<LI><A href="SolidEdgeConstants~PipeFittingEndTreatmentConstants.html" data-auto-update-caption="true">PipeFittingEndTreatmentConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeConstants~PipeFittingEndTreatmentConstants.html" data-auto-update-caption="true">PipeFittingEndTreatmentConstants.sePipeFittingEndTreatmentButtWeld Constant</A> 
+<LI><A href="SolidEdgeConstants~PipeFittingEndTreatmentConstants.html" data-auto-update-caption="true">PipeFittingEndTreatmentConstants.sePipeFittingEndTreatmentFlange Constant</A> 
+<LI><A href="SolidEdgeConstants~PipeFittingEndTreatmentConstants.html" data-auto-update-caption="true">PipeFittingEndTreatmentConstants.sePipeFittingEndTreatmentNone Constant</A> 
+<LI><A href="SolidEdgeConstants~PipeFittingEndTreatmentConstants.html" data-auto-update-caption="true">PipeFittingEndTreatmentConstants.sePipeFittingEndTreatmentPipePenetration Constant</A> 
+<LI><A href="SolidEdgeConstants~PipeFittingEndTreatmentConstants.html" data-auto-update-caption="true">PipeFittingEndTreatmentConstants.sePipeFittingEndTreatmentSocketWeld Constant</A> 
+<LI><A href="SolidEdgeConstants~PipeFittingEndTreatmentConstants.html" data-auto-update-caption="true">PipeFittingEndTreatmentConstants.sePipeFittingEndTreatmentThread Constant</A> </LI></UL>
+<LI><A href="SolidEdgeConstants~PipeFittingTypeConstants.html" data-auto-update-caption="true">PipeFittingTypeConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeConstants~PipeFittingTypeConstants.html" data-auto-update-caption="true">PipeFittingTypeConstants.sePipeFittingTypeCompanionFlange Constant</A> 
+<LI><A href="SolidEdgeConstants~PipeFittingTypeConstants.html" data-auto-update-caption="true">PipeFittingTypeConstants.sePipeFittingTypeCoupling Constant</A> 
+<LI><A href="SolidEdgeConstants~PipeFittingTypeConstants.html" data-auto-update-caption="true">PipeFittingTypeConstants.sePipeFittingTypeCross Constant</A> 
+<LI><A href="SolidEdgeConstants~PipeFittingTypeConstants.html" data-auto-update-caption="true">PipeFittingTypeConstants.sePipeFittingTypeElbow Constant</A> 
+<LI><A href="SolidEdgeConstants~PipeFittingTypeConstants.html" data-auto-update-caption="true">PipeFittingTypeConstants.sePipeFittingTypeNone Constant</A> 
+<LI><A href="SolidEdgeConstants~PipeFittingTypeConstants.html" data-auto-update-caption="true">PipeFittingTypeConstants.sePipeFittingTypePlug Constant</A> 
+<LI><A href="SolidEdgeConstants~PipeFittingTypeConstants.html" data-auto-update-caption="true">PipeFittingTypeConstants.sePipeFittingTypeReducer Constant</A> 
+<LI><A href="SolidEdgeConstants~PipeFittingTypeConstants.html" data-auto-update-caption="true">PipeFittingTypeConstants.sePipeFittingTypeReturn180 Constant</A> 
+<LI><A href="SolidEdgeConstants~PipeFittingTypeConstants.html" data-auto-update-caption="true">PipeFittingTypeConstants.sePipeFittingTypeTee Constant</A> 
+<LI><A href="SolidEdgeConstants~PipeFittingTypeConstants.html" data-auto-update-caption="true">PipeFittingTypeConstants.sePipeFittingTypeY Constant</A> </LI></UL>
+<LI><A href="SolidEdgeConstants~seLocateFilterConstants.html" data-auto-update-caption="true">seLocateFilterConstants.seLocateGroup Constant</A> 
+<LI><A href="SolidEdgeConstants~VirtualComponentPublishConstants.html" data-auto-update-caption="true">VirtualComponentPublishConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeConstants~VirtualComponentPublishConstants.html" data-auto-update-caption="true">VirtualComponentPublishConstants.seVCPublishOn_FrontView Constant</A> 
+<LI><A href="SolidEdgeConstants~VirtualComponentPublishConstants.html" data-auto-update-caption="true">VirtualComponentPublishConstants.seVCPublishOn_RightView Constant</A> 
+<LI><A href="SolidEdgeConstants~VirtualComponentPublishConstants.html" data-auto-update-caption="true">VirtualComponentPublishConstants.seVCPublishOn_SketchView Constant</A> 
+<LI><A href="SolidEdgeConstants~VirtualComponentPublishConstants.html" data-auto-update-caption="true">VirtualComponentPublishConstants.seVCPublishOn_TopView Constant</A> </LI></UL>
+<LI><A href="SolidEdgeConstants~VirtualComponentStatusConstants.html" data-auto-update-caption="true">VirtualComponentStatusConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeConstants~VirtualComponentStatusConstants.html" data-auto-update-caption="true">VirtualComponentStatusConstants.seVCStatus_AddManagedToUnManaged Constant</A> 
+<LI><A href="SolidEdgeConstants~VirtualComponentStatusConstants.html" data-auto-update-caption="true">VirtualComponentStatusConstants.seVCStatus_AddUnManagedToManaged Constant</A> 
+<LI><A href="SolidEdgeConstants~VirtualComponentStatusConstants.html" data-auto-update-caption="true">VirtualComponentStatusConstants.seVCStatus_CannotAddToComponent Constant</A> 
+<LI><A href="SolidEdgeConstants~VirtualComponentStatusConstants.html" data-auto-update-caption="true">VirtualComponentStatusConstants.seVCStatus_ComponentSketchMissing Constant</A> 
+<LI><A href="SolidEdgeConstants~VirtualComponentStatusConstants.html" data-auto-update-caption="true">VirtualComponentStatusConstants.seVCStatus_DuplicateNameConflictWithVirtualComponent Constant</A> 
+<LI><A href="SolidEdgeConstants~VirtualComponentStatusConstants.html" data-auto-update-caption="true">VirtualComponentStatusConstants.seVCStatus_Fail Constant</A> 
+<LI><A href="SolidEdgeConstants~VirtualComponentStatusConstants.html" data-auto-update-caption="true">VirtualComponentStatusConstants.seVCStatus_NameConflictWithPreDefinedComponent Constant</A> 
+<LI><A href="SolidEdgeConstants~VirtualComponentStatusConstants.html" data-auto-update-caption="true">VirtualComponentStatusConstants.seVCStatus_NameConflictWithVirtualComponent Constant</A> 
+<LI><A href="SolidEdgeConstants~VirtualComponentStatusConstants.html" data-auto-update-caption="true">VirtualComponentStatusConstants.seVCStatus_ReplaceConflictWithVirtualComponent Constant</A> 
+<LI><A href="SolidEdgeConstants~VirtualComponentStatusConstants.html" data-auto-update-caption="true">VirtualComponentStatusConstants.seVCStatus_SourceFileNotFound Constant</A> 
+<LI><A href="SolidEdgeConstants~VirtualComponentStatusConstants.html" data-auto-update-caption="true">VirtualComponentStatusConstants.seVCStatus_Success Constant</A> </LI></UL>
+<LI><A href="SolidEdgeConstants~VirtualComponentTypeConstants.html" data-auto-update-caption="true">VirtualComponentTypeConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeConstants~VirtualComponentTypeConstants.html" data-auto-update-caption="true">VirtualComponentTypeConstants.seVirtualComponentType_Assembly Constant</A> 
+<LI><A href="SolidEdgeConstants~VirtualComponentTypeConstants.html" data-auto-update-caption="true">VirtualComponentTypeConstants.seVirtualComponentType_Part Constant</A> 
+<LI><A href="SolidEdgeConstants~VirtualComponentTypeConstants.html" data-auto-update-caption="true">VirtualComponentTypeConstants.seVirtualComponentType_Sheetmetal Constant</A> 
+<LI><A href="SolidEdgeConstants~VirtualComponentTypeConstants.html" data-auto-update-caption="true">VirtualComponentTypeConstants.seVirtualComponentType_Unknown Constant</A> </LI></UL></LI></UL></DIV>
+<DIV id=i-ef4074e4-f84f-4cd4-ad74-c6afbac6373c-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>SolidEdgeDraft</SPAN> </DIV>
+<DIV id=i-ef4074e4-f84f-4cd4-ad74-c6afbac6373c-section-content class=i-section-content>
+<UL>
+<LI><A href="SolidEdgeDraft~DrawingView~ModelToView.html" data-auto-update-caption="true">DrawingView.ModelToView Method</A> 
+<LI><A href="SolidEdgeDraft~DrawingView~RetrieveCenterLinesCenterMarks.html" data-auto-update-caption="true">DrawingView.RetrieveCenterLinesCenterMarks Method</A> 
+<LI><A href="SolidEdgeDraft~DrawingView~ViewOrientation.html" data-auto-update-caption="true">DrawingView.ViewOrientation Method</A> 
+<LI><A href="SolidEdgeDraft~DrawingView~BsplineSimplification.html" data-auto-update-caption="true">DrawingView.BsplineSimplification Property</A> 
+<LI><A href="SolidEdgeDraft~DrawingView~Defaults_DeriveSectionHatchStyleNameFromPart.html" data-auto-update-caption="true">DrawingView.Defaults_DeriveSectionHatchStyleNameFromPart Property</A> 
+<LI><A href="SolidEdgeDraft~DrawingView~Defaults_HiddenEdgeStyleName.html" data-auto-update-caption="true">DrawingView.Defaults_HiddenEdgeStyleName Property</A> 
+<LI><A href="SolidEdgeDraft~DrawingView~Defaults_SectionHatchStyleName.html" data-auto-update-caption="true">DrawingView.Defaults_SectionHatchStyleName Property</A> 
+<LI><A href="SolidEdgeDraft~DrawingView~Defaults_ShowEdgesHiddenByOtherParts.html" data-auto-update-caption="true">DrawingView.Defaults_ShowEdgesHiddenByOtherParts Property</A> 
+<LI><A href="SolidEdgeDraft~DrawingView~Defaults_ShowHiddenEdges.html" data-auto-update-caption="true">DrawingView.Defaults_ShowHiddenEdges Property</A> 
+<LI><A href="SolidEdgeDraft~DrawingView~Defaults_ShowSectionHatch.html" data-auto-update-caption="true">DrawingView.Defaults_ShowSectionHatch Property</A> 
+<LI><A href="SolidEdgeDraft~DrawingView~Defaults_ShowTangentEdges.html" data-auto-update-caption="true">DrawingView.Defaults_ShowTangentEdges Property</A> 
+<LI><A href="SolidEdgeDraft~DrawingView~Defaults_ShowTubeCenterlines.html" data-auto-update-caption="true">DrawingView.Defaults_ShowTubeCenterlines Property</A> 
+<LI><A href="SolidEdgeDraft~DrawingView~Defaults_TangentEdgeStyleName.html" data-auto-update-caption="true">DrawingView.Defaults_TangentEdgeStyleName Property</A> 
+<LI><A href="SolidEdgeDraft~DrawingView~Defaults_TubeCenterlineStyleName.html" data-auto-update-caption="true">DrawingView.Defaults_TubeCenterlineStyleName Property</A> 
+<LI><A href="SolidEdgeDraft~DrawingView~Defaults_VisibleEdgeStyleName.html" data-auto-update-caption="true">DrawingView.Defaults_VisibleEdgeStyleName Property</A> 
+<LI><A href="SolidEdgeDraft~DrawingView~IntersectionProcessing.html" data-auto-update-caption="true">DrawingView.IntersectionProcessing Property</A> 
+<LI><A href="SolidEdgeDraft~DrawingView~Snapshot.html" data-auto-update-caption="true">DrawingView.Snapshot Property</A> 
+<LI><A href="SolidEdgeDraft~DrawingView~TangencyTolerance.html" data-auto-update-caption="true">DrawingView.TangencyTolerance Property</A> 
+<LI><A href="SolidEdgeDraft~DrawingView~ThreadAxisTolerance.html" data-auto-update-caption="true">DrawingView.ThreadAxisTolerance Property</A> 
+<LI><A href="SolidEdgeDraft~DrawingViewBsplineSimplificationConstants.html" data-auto-update-caption="true">DrawingViewBsplineSimplificationConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeDraft~DrawingViewBsplineSimplificationConstants.html" data-auto-update-caption="true">DrawingViewBsplineSimplificationConstants.igAlwaysSimplify Constant</A> 
+<LI><A href="SolidEdgeDraft~DrawingViewBsplineSimplificationConstants.html" data-auto-update-caption="true">DrawingViewBsplineSimplificationConstants.igNeverSimplify Constant</A> 
+<LI><A href="SolidEdgeDraft~DrawingViewBsplineSimplificationConstants.html" data-auto-update-caption="true">DrawingViewBsplineSimplificationConstants.igSimplifyNonPlanarOnly Constant</A> </LI></UL>
+<LI><A href="SolidEdgeDraft~DrawingViewIntersectionProcessingConstants.html" data-auto-update-caption="true">DrawingViewIntersectionProcessingConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeDraft~DrawingViewIntersectionProcessingConstants.html" data-auto-update-caption="true">DrawingViewIntersectionProcessingConstants.igInterferenceEdgesAllParts Constant</A> 
+<LI><A href="SolidEdgeDraft~DrawingViewIntersectionProcessingConstants.html" data-auto-update-caption="true">DrawingViewIntersectionProcessingConstants.igInterferenceEdgesThreadedPartsOnly Constant</A> 
+<LI><A href="SolidEdgeDraft~DrawingViewIntersectionProcessingConstants.html" data-auto-update-caption="true">DrawingViewIntersectionProcessingConstants.igNoInterferenceEdges Constant</A> 
+<LI><A href="SolidEdgeDraft~DrawingViewIntersectionProcessingConstants.html" data-auto-update-caption="true">DrawingViewIntersectionProcessingConstants.igNoIntersectionProcessing Constant</A> </LI></UL>
+<LI><A href="SolidEdgeDraft~ModelWeld~BottomNoteAngle.html" data-auto-update-caption="true">ModelWeld.BottomNoteAngle Property</A> 
+<LI><A href="SolidEdgeDraft~ModelWeld~BottomNoteCSize.html" data-auto-update-caption="true">ModelWeld.BottomNoteCSize Property</A> 
+<LI><A href="SolidEdgeDraft~ModelWeld~BottomNoteDepth.html" data-auto-update-caption="true">ModelWeld.BottomNoteDepth Property</A> 
+<LI><A href="SolidEdgeDraft~ModelWeld~BottomPosOffset.html" data-auto-update-caption="true">ModelWeld.BottomPosOffset Property</A> 
+<LI><A href="SolidEdgeDraft~ModelWeld~TopNoteAngle.html" data-auto-update-caption="true">ModelWeld.TopNoteAngle Property</A> 
+<LI><A href="SolidEdgeDraft~ModelWeld~TopNoteCSize.html" data-auto-update-caption="true">ModelWeld.TopNoteCSize Property</A> 
+<LI><A href="SolidEdgeDraft~ModelWeld~TopNoteDepth.html" data-auto-update-caption="true">ModelWeld.TopNoteDepth Property</A> 
+<LI><A href="SolidEdgeDraft~ModelWeld~TopPosOffset.html" data-auto-update-caption="true">ModelWeld.TopPosOffset Property</A> 
+<LI><A href="SolidEdgeDraft~SheetWindow~Display2DModelSheetTab.html" data-auto-update-caption="true">SheetWindow.Display2DModelSheetTab Property</A> 
+<LI><A href="SolidEdgeDraft~SheetWindow~DisplayBackgroundSheetTabs.html" data-auto-update-caption="true">SheetWindow.DisplayBackgroundSheetTabs Property</A> 
+<LI><A href="SolidEdgeDraft~SheetWindow~DisplayWorkingSheetTabs.html" data-auto-update-caption="true">SheetWindow.DisplayWorkingSheetTabs Property</A> </LI></UL></DIV>
+<DIV id=i-42a6a6c5-8970-4b9a-b92a-b1380481a7c9-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>SolidEdgeFramework</SPAN> </DIV>
+<DIV id=i-42a6a6c5-8970-4b9a-b92a-b1380481a7c9-section-content class=i-section-content>
+<UL>
+<LI><A href="SolidEdgeFramework~Application~GetMaterialTable.html" data-auto-update-caption="true">Application.GetMaterialTable Method</A> 
+<LI><A href="SolidEdgeFramework~ApplicationGlobalConstants.html" data-auto-update-caption="true">ApplicationGlobalConstants.seApplicationGlobalUseDimensionStyleMapping Constant</A> 
+<LI><A href="SolidEdgeFramework~MatTable.html" data-auto-update-caption="true">MatTable Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeFramework~MatTable~AddMaterial.html" data-auto-update-caption="true">MatTable.AddMaterial Method</A> 
+<LI><A href="SolidEdgeFramework~MatTable~ApplyMaterial.html" data-auto-update-caption="true">MatTable.ApplyMaterial Method</A> 
+<LI><A href="SolidEdgeFramework~MatTable~DeleteMaterial.html" data-auto-update-caption="true">MatTable.DeleteMaterial Method</A> 
+<LI><A href="SolidEdgeFramework~MatTable~GetMaterialList.html" data-auto-update-caption="true">MatTable.GetMaterialList Method</A> 
+<LI><A href="SolidEdgeFramework~MatTable~GetMatLibFileName.html" data-auto-update-caption="true">MatTable.GetMatLibFileName Method</A> 
+<LI><A href="SolidEdgeFramework~MatTable~GetMatPropValue.html" data-auto-update-caption="true">MatTable.GetMatPropValue Method</A> 
+<LI><A href="SolidEdgeFramework~MatTable~SetActiveDocument.html" data-auto-update-caption="true">MatTable.SetActiveDocument Method</A> 
+<LI><A href="SolidEdgeFramework~MatTable~SetMatPropValue.html" data-auto-update-caption="true">MatTable.SetMatPropValue Method</A> 
+<LI><A href="SolidEdgeFramework~MatTable~WriteMaterialDataToXML.html" data-auto-update-caption="true">MatTable.WriteMaterialDataToXML Method</A> 
+<LI><A href="SolidEdgeFramework~MatTable~WriteMatLibFileFromXML.html" data-auto-update-caption="true">MatTable.WriteMatLibFileFromXML Method</A> </LI></UL>
+<LI><A href="SolidEdgeFramework~MatTablePropIndex.html" data-auto-update-caption="true">MatTablePropIndex Object</A> 
+<LI><A href="SolidEdgeFramework~MatTablePropIndexConstants.html" data-auto-update-caption="true">MatTablePropIndexConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeFramework~MatTablePropIndexConstants.html" data-auto-update-caption="true">MatTablePropIndexConstants.seCoefOfThermalExpansion Constant</A> 
+<LI><A href="SolidEdgeFramework~MatTablePropIndexConstants.html" data-auto-update-caption="true">MatTablePropIndexConstants.seElongation Constant</A> 
+<LI><A href="SolidEdgeFramework~MatTablePropIndexConstants.html" data-auto-update-caption="true">MatTablePropIndexConstants.seFaceStyle Constant</A> 
+<LI><A href="SolidEdgeFramework~MatTablePropIndexConstants.html" data-auto-update-caption="true">MatTablePropIndexConstants.seFillStyle Constant</A> 
+<LI><A href="SolidEdgeFramework~MatTablePropIndexConstants.html" data-auto-update-caption="true">MatTablePropIndexConstants.seMaterialName Constant</A> 
+<LI><A href="SolidEdgeFramework~MatTablePropIndexConstants.html" data-auto-update-caption="true">MatTablePropIndexConstants.seModulusElasticity Constant</A> 
+<LI><A href="SolidEdgeFramework~MatTablePropIndexConstants.html" data-auto-update-caption="true">MatTablePropIndexConstants.sePoissonRatio Constant</A> 
+<LI><A href="SolidEdgeFramework~MatTablePropIndexConstants.html" data-auto-update-caption="true">MatTablePropIndexConstants.seSpecificHeat Constant</A> 
+<LI><A href="SolidEdgeFramework~MatTablePropIndexConstants.html" data-auto-update-caption="true">MatTablePropIndexConstants.seThermalConductivity Constant</A> 
+<LI><A href="SolidEdgeFramework~MatTablePropIndexConstants.html" data-auto-update-caption="true">MatTablePropIndexConstants.seUltimateStress Constant</A> 
+<LI><A href="SolidEdgeFramework~MatTablePropIndexConstants.html" data-auto-update-caption="true">MatTablePropIndexConstants.seVSPlusStyle Constant</A> 
+<LI><A href="SolidEdgeFramework~MatTablePropIndexConstants.html" data-auto-update-caption="true">MatTablePropIndexConstants.seYieldStress Constant</A> </LI></UL>
+<LI><A href="SolidEdgeFramework~ObjectType.html" data-auto-update-caption="true">ObjectType.igComponentImage2d Constant</A> 
+<LI><A href="SolidEdgeFramework~ObjectType.html" data-auto-update-caption="true">ObjectType.igComponentSketch Constant</A> 
+<LI><A href="SolidEdgeFramework~ObjectType.html" data-auto-update-caption="true">ObjectType.seComponentLayout Constant</A> 
+<LI><A href="SolidEdgeFramework~ObjectType.html" data-auto-update-caption="true">ObjectType.seVirtualComponent Constant</A> 
+<LI><A href="SolidEdgeFramework~ObjectType.html" data-auto-update-caption="true">ObjectType.seVirtualComponentOccurrence Constant</A> </LI></UL></DIV>
+<DIV id=i-a483d56d-dc1a-4509-9c45-f56d070788b3-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>SolidEdgeFrameworkSupport</SPAN> </DIV>
+<DIV id=i-a483d56d-dc1a-4509-9c45-f56d070788b3-section-content class=i-section-content>
+<UL>
+<LI><A href="SolidEdgeFrameworkSupport~ComponentImage2d.html" data-auto-update-caption="true">ComponentImage2d Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeFrameworkSupport~ComponentImage2d~Delete.html" data-auto-update-caption="true">ComponentImage2d.Delete Method</A> 
+<LI><A href="SolidEdgeFrameworkSupport~ComponentImage2d~Application.html" data-auto-update-caption="true">ComponentImage2d.Application Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~ComponentImage2d~AttributeSets.html" data-auto-update-caption="true">ComponentImage2d.AttributeSets Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~ComponentImage2d~IsAttributeSetPresent.html" data-auto-update-caption="true">ComponentImage2d.IsAttributeSetPresent Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~ComponentImage2d~Layer.html" data-auto-update-caption="true">ComponentImage2d.Layer Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~ComponentImage2d~Parent.html" data-auto-update-caption="true">ComponentImage2d.Parent Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~ComponentImage2d~Style.html" data-auto-update-caption="true">ComponentImage2d.Style Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~ComponentImage2d~Type.html" data-auto-update-caption="true">ComponentImage2d.Type Property</A> </LI></UL>
+<LI><A href="SolidEdgeFrameworkSupport~ComponentImageCreationModeConstants.html" data-auto-update-caption="true">ComponentImageCreationModeConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeFrameworkSupport~ComponentImageCreationModeConstants.html" data-auto-update-caption="true">ComponentImageCreationModeConstants.seAllVisible Constant</A> 
+<LI><A href="SolidEdgeFrameworkSupport~ComponentImageCreationModeConstants.html" data-auto-update-caption="true">ComponentImageCreationModeConstants.seExplicit Constant</A> </LI></UL>
+<LI><A href="SolidEdgeFrameworkSupport~ComponentImages2d.html" data-auto-update-caption="true">ComponentImages2d Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeFrameworkSupport~ComponentImages2d~AddComponentImage.html" data-auto-update-caption="true">ComponentImages2d.AddComponentImage Method</A> 
+<LI><A href="SolidEdgeFrameworkSupport~ComponentImages2d~Item.html" data-auto-update-caption="true">ComponentImages2d.Item Method</A> 
+<LI><A href="SolidEdgeFrameworkSupport~ComponentImages2d~Application.html" data-auto-update-caption="true">ComponentImages2d.Application Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~ComponentImages2d~Count.html" data-auto-update-caption="true">ComponentImages2d.Count Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~ComponentImages2d~Parent.html" data-auto-update-caption="true">ComponentImages2d.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgeFrameworkSupport~DimensionStyle~TextAutoFillBackground.html" data-auto-update-caption="true">DimensionStyle.TextAutoFillBackground Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~DimStyle~TextAutoFillBackground.html" data-auto-update-caption="true">DimStyle.TextAutoFillBackground Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~WeldSymbol~BottomNoteAngle.html" data-auto-update-caption="true">WeldSymbol.BottomNoteAngle Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~WeldSymbol~BottomNoteCSize.html" data-auto-update-caption="true">WeldSymbol.BottomNoteCSize Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~WeldSymbol~BottomNoteDepth.html" data-auto-update-caption="true">WeldSymbol.BottomNoteDepth Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~WeldSymbol~BottomPosOffset.html" data-auto-update-caption="true">WeldSymbol.BottomPosOffset Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~WeldSymbol~TailNote2.html" data-auto-update-caption="true">WeldSymbol.TailNote2 Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~WeldSymbol~TopNoteAngle.html" data-auto-update-caption="true">WeldSymbol.TopNoteAngle Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~WeldSymbol~TopNoteCSize.html" data-auto-update-caption="true">WeldSymbol.TopNoteCSize Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~WeldSymbol~TopNoteDepth.html" data-auto-update-caption="true">WeldSymbol.TopNoteDepth Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~WeldSymbol~TopPosOffset.html" data-auto-update-caption="true">WeldSymbol.TopPosOffset Property</A> </LI></UL></DIV>
+<DIV id=i-4d322e9d-2eb8-45f3-8a60-8ac2c3f625b1-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>SolidEdgeGeometry</SPAN> </DIV>
+<DIV id=i-4d322e9d-2eb8-45f3-8a60-8ac2c3f625b1-section-content class=i-section-content>
+<UL>
+<LI><A href="SolidEdgeGeometry~Body~IsOverriddenBody.html" data-auto-update-caption="true">Body.IsOverriddenBody Property</A> </LI></UL></DIV>
+<DIV id=i-fbb00f77-6fd3-429a-a7b1-984e39adf532-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>SolidEdgePart</SPAN> </DIV>
+<DIV id=i-fbb00f77-6fd3-429a-a7b1-984e39adf532-section-content class=i-section-content>
+<UL>
+<LI><A href="SolidEdgePart~CapturedRelationshipOffsetTypeConstants.html" data-auto-update-caption="true">CapturedRelationshipOffsetTypeConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~CapturedRelationshipOffsetTypeConstants.html" data-auto-update-caption="true">CapturedRelationshipOffsetTypeConstants.seFixed Constant</A> 
+<LI><A href="SolidEdgePart~CapturedRelationshipOffsetTypeConstants.html" data-auto-update-caption="true">CapturedRelationshipOffsetTypeConstants.seFloating Constant</A> 
+<LI><A href="SolidEdgePart~CapturedRelationshipOffsetTypeConstants.html" data-auto-update-caption="true">CapturedRelationshipOffsetTypeConstants.seOffsetNotSupported Constant</A> </LI></UL>
+<LI><A href="SolidEdgePart~CapturedRelationshipTypeConstants.html" data-auto-update-caption="true">CapturedRelationshipTypeConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~CapturedRelationshipTypeConstants.html" data-auto-update-caption="true">CapturedRelationshipTypeConstants.seAxialAlign Constant</A> 
+<LI><A href="SolidEdgePart~CapturedRelationshipTypeConstants.html" data-auto-update-caption="true">CapturedRelationshipTypeConstants.seConnect Constant</A> 
+<LI><A href="SolidEdgePart~CapturedRelationshipTypeConstants.html" data-auto-update-caption="true">CapturedRelationshipTypeConstants.seMate Constant</A> 
+<LI><A href="SolidEdgePart~CapturedRelationshipTypeConstants.html" data-auto-update-caption="true">CapturedRelationshipTypeConstants.seParallel Constant</A> 
+<LI><A href="SolidEdgePart~CapturedRelationshipTypeConstants.html" data-auto-update-caption="true">CapturedRelationshipTypeConstants.sePlanarAlign Constant</A> 
+<LI><A href="SolidEdgePart~CapturedRelationshipTypeConstants.html" data-auto-update-caption="true">CapturedRelationshipTypeConstants.seTangent Constant</A> </LI></UL>
+<LI><A href="SolidEdgePart~ChangeBendAngle.html" data-auto-update-caption="true">ChangeBendAngle Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~ChangeBendAngle~Delete.html" data-auto-update-caption="true">ChangeBendAngle.Delete Method</A> 
+<LI><A href="SolidEdgePart~ChangeBendAngle~GetStyle.html" data-auto-update-caption="true">ChangeBendAngle.GetStyle Method</A> 
+<LI><A href="SolidEdgePart~ChangeBendAngle~Range.html" data-auto-update-caption="true">ChangeBendAngle.Range Method</A> 
+<LI><A href="SolidEdgePart~ChangeBendAngle~SetStyle.html" data-auto-update-caption="true">ChangeBendAngle.SetStyle Method</A> 
+<LI><A href="SolidEdgePart~ChangeBendAngle~Angle.html" data-auto-update-caption="true">ChangeBendAngle.Angle Property</A> 
+<LI><A href="SolidEdgePart~ChangeBendAngle~Application.html" data-auto-update-caption="true">ChangeBendAngle.Application Property</A> 
+<LI><A href="SolidEdgePart~ChangeBendAngle~AttributeSets.html" data-auto-update-caption="true">ChangeBendAngle.AttributeSets Property</A> 
+<LI><A href="SolidEdgePart~ChangeBendAngle~Bend.html" data-auto-update-caption="true">ChangeBendAngle.Bend Property</A> 
+<LI><A href="SolidEdgePart~ChangeBendAngle~DisplayName.html" data-auto-update-caption="true">ChangeBendAngle.DisplayName Property</A> 
+<LI><A href="SolidEdgePart~ChangeBendAngle~Edges.html" data-auto-update-caption="true">ChangeBendAngle.Edges Property</A> 
+<LI><A href="SolidEdgePart~ChangeBendAngle~Faces.html" data-auto-update-caption="true">ChangeBendAngle.Faces Property</A> 
+<LI><A href="SolidEdgePart~ChangeBendAngle~FacesByRay.html" data-auto-update-caption="true">ChangeBendAngle.FacesByRay Property</A> 
+<LI><A href="SolidEdgePart~ChangeBendAngle~IsAttributeSetPresent.html" data-auto-update-caption="true">ChangeBendAngle.IsAttributeSetPresent Property</A> 
+<LI><A href="SolidEdgePart~ChangeBendAngle~Name.html" data-auto-update-caption="true">ChangeBendAngle.Name Property</A> 
+<LI><A href="SolidEdgePart~ChangeBendAngle~Parent.html" data-auto-update-caption="true">ChangeBendAngle.Parent Property</A> 
+<LI><A href="SolidEdgePart~ChangeBendAngle~Reference.html" data-auto-update-caption="true">ChangeBendAngle.Reference Property</A> 
+<LI><A href="SolidEdgePart~ChangeBendAngle~ShowDimensions.html" data-auto-update-caption="true">ChangeBendAngle.ShowDimensions Property</A> 
+<LI><A href="SolidEdgePart~ChangeBendAngle~Status.html" data-auto-update-caption="true">ChangeBendAngle.Status Property</A> 
+<LI><A href="SolidEdgePart~ChangeBendAngle~Suppress.html" data-auto-update-caption="true">ChangeBendAngle.Suppress Property</A> 
+<LI><A href="SolidEdgePart~ChangeBendAngle~SystemName.html" data-auto-update-caption="true">ChangeBendAngle.SystemName Property</A> 
+<LI><A href="SolidEdgePart~ChangeBendAngle~Type.html" data-auto-update-caption="true">ChangeBendAngle.Type Property</A> </LI></UL>
+<LI><A href="SolidEdgePart~ChangeBendAngles.html" data-auto-update-caption="true">ChangeBendAngles Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~ChangeBendAngles~Add.html" data-auto-update-caption="true">ChangeBendAngles.Add Method</A> 
+<LI><A href="SolidEdgePart~ChangeBendAngles~Item.html" data-auto-update-caption="true">ChangeBendAngles.Item Method</A> 
+<LI><A href="SolidEdgePart~ChangeBendAngles~Application.html" data-auto-update-caption="true">ChangeBendAngles.Application Property</A> 
+<LI><A href="SolidEdgePart~ChangeBendAngles~Count.html" data-auto-update-caption="true">ChangeBendAngles.Count Property</A> 
+<LI><A href="SolidEdgePart~ChangeBendAngles~Parent.html" data-auto-update-caption="true">ChangeBendAngles.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgePart~ComponentSketch.html" data-auto-update-caption="true">ComponentSketch Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~ComponentSketch~Delete.html" data-auto-update-caption="true">ComponentSketch.Delete Method</A> 
+<LI><A href="SolidEdgePart~ComponentSketch~Application.html" data-auto-update-caption="true">ComponentSketch.Application Property</A> 
+<LI><A href="SolidEdgePart~ComponentSketch~AttributeSets.html" data-auto-update-caption="true">ComponentSketch.AttributeSets Property</A> 
+<LI><A href="SolidEdgePart~ComponentSketch~IsAttributeSetPresent.html" data-auto-update-caption="true">ComponentSketch.IsAttributeSetPresent Property</A> 
+<LI><A href="SolidEdgePart~ComponentSketch~Name.html" data-auto-update-caption="true">ComponentSketch.Name Property</A> 
+<LI><A href="SolidEdgePart~ComponentSketch~Parent.html" data-auto-update-caption="true">ComponentSketch.Parent Property</A> 
+<LI><A href="SolidEdgePart~ComponentSketch~Profiles.html" data-auto-update-caption="true">ComponentSketch.Profiles Property</A> 
+<LI><A href="SolidEdgePart~ComponentSketch~ShowSketchColors.html" data-auto-update-caption="true">ComponentSketch.ShowSketchColors Property</A> 
+<LI><A href="SolidEdgePart~ComponentSketch~Style.html" data-auto-update-caption="true">ComponentSketch.Style Property</A> 
+<LI><A href="SolidEdgePart~ComponentSketch~Type.html" data-auto-update-caption="true">ComponentSketch.Type Property</A> </LI></UL>
+<LI><A href="SolidEdgePart~ComponentSketches.html" data-auto-update-caption="true">ComponentSketches Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~ComponentSketches~Add.html" data-auto-update-caption="true">ComponentSketches.Add Method</A> 
+<LI><A href="SolidEdgePart~ComponentSketches~Item.html" data-auto-update-caption="true">ComponentSketches.Item Method</A> 
+<LI><A href="SolidEdgePart~ComponentSketches~Application.html" data-auto-update-caption="true">ComponentSketches.Application Property</A> 
+<LI><A href="SolidEdgePart~ComponentSketches~Count.html" data-auto-update-caption="true">ComponentSketches.Count Property</A> 
+<LI><A href="SolidEdgePart~ComponentSketches~Parent.html" data-auto-update-caption="true">ComponentSketches.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgePart~ConstructionModel~DeleteBlends.html" data-auto-update-caption="true">ConstructionModel.DeleteBlends Property</A> 
+<LI><A href="SolidEdgePart~ConstructionModel~DeleteHoles.html" data-auto-update-caption="true">ConstructionModel.DeleteHoles Property</A> 
+<LI><A href="SolidEdgePart~ConstructionModel~DeleteRegions.html" data-auto-update-caption="true">ConstructionModel.DeleteRegions Property</A> 
+<LI><A href="SolidEdgePart~ConstructionModel~FaceMoves.html" data-auto-update-caption="true">ConstructionModel.FaceMoves Property</A> 
+<LI><A href="SolidEdgePart~ConstructionModel~FaceOffsets.html" data-auto-update-caption="true">ConstructionModel.FaceOffsets Property</A> 
+<LI><A href="SolidEdgePart~ConstructionModel~FaceRotates.html" data-auto-update-caption="true">ConstructionModel.FaceRotates Property</A> 
+<LI><A href="SolidEdgePart~ConstructionModel~ResizeBends.html" data-auto-update-caption="true">ConstructionModel.ResizeBends Property</A> 
+<LI><A href="SolidEdgePart~ConstructionModel~ResizeHoles.html" data-auto-update-caption="true">ConstructionModel.ResizeHoles Property</A> 
+<LI><A href="SolidEdgePart~ConstructionModel~ResizeRounds.html" data-auto-update-caption="true">ConstructionModel.ResizeRounds Property</A> 
+<LI><A href="SolidEdgePart~CopiedPart~LinkMaterial.html" data-auto-update-caption="true">CopiedPart.LinkMaterial Property</A> 
+<LI><A href="SolidEdgePart~DeleteHoles~AddByFace.html" data-auto-update-caption="true">DeleteHoles.AddByFace Method</A> 
+<LI><A href="SolidEdgePart~DelSMFace.html" data-auto-update-caption="true">DelSMFace Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~DelSMFace~Delete.html" data-auto-update-caption="true">DelSMFace.Delete Method</A> 
+<LI><A href="SolidEdgePart~DelSMFace~GetStyle.html" data-auto-update-caption="true">DelSMFace.GetStyle Method</A> 
+<LI><A href="SolidEdgePart~DelSMFace~Range.html" data-auto-update-caption="true">DelSMFace.Range Method</A> 
+<LI><A href="SolidEdgePart~DelSMFace~SetStyle.html" data-auto-update-caption="true">DelSMFace.SetStyle Method</A> 
+<LI><A href="SolidEdgePart~DelSMFace~Application.html" data-auto-update-caption="true">DelSMFace.Application Property</A> 
+<LI><A href="SolidEdgePart~DelSMFace~AttributeSets.html" data-auto-update-caption="true">DelSMFace.AttributeSets Property</A> 
+<LI><A href="SolidEdgePart~DelSMFace~DeleteType.html" data-auto-update-caption="true">DelSMFace.DeleteType Property</A> 
+<LI><A href="SolidEdgePart~DelSMFace~DisplayName.html" data-auto-update-caption="true">DelSMFace.DisplayName Property</A> 
+<LI><A href="SolidEdgePart~DelSMFace~Edges.html" data-auto-update-caption="true">DelSMFace.Edges Property</A> 
+<LI><A href="SolidEdgePart~DelSMFace~Faces.html" data-auto-update-caption="true">DelSMFace.Faces Property</A> 
+<LI><A href="SolidEdgePart~DelSMFace~FacesByRay.html" data-auto-update-caption="true">DelSMFace.FacesByRay Property</A> 
+<LI><A href="SolidEdgePart~DelSMFace~IsAttributeSetPresent.html" data-auto-update-caption="true">DelSMFace.IsAttributeSetPresent Property</A> 
+<LI><A href="SolidEdgePart~DelSMFace~Name.html" data-auto-update-caption="true">DelSMFace.Name Property</A> 
+<LI><A href="SolidEdgePart~DelSMFace~Parent.html" data-auto-update-caption="true">DelSMFace.Parent Property</A> 
+<LI><A href="SolidEdgePart~DelSMFace~ShowDimensions.html" data-auto-update-caption="true">DelSMFace.ShowDimensions Property</A> 
+<LI><A href="SolidEdgePart~DelSMFace~Status.html" data-auto-update-caption="true">DelSMFace.Status Property</A> 
+<LI><A href="SolidEdgePart~DelSMFace~Suppress.html" data-auto-update-caption="true">DelSMFace.Suppress Property</A> 
+<LI><A href="SolidEdgePart~DelSMFace~SystemName.html" data-auto-update-caption="true">DelSMFace.SystemName Property</A> 
+<LI><A href="SolidEdgePart~DelSMFace~Type.html" data-auto-update-caption="true">DelSMFace.Type Property</A> </LI></UL>
+<LI><A href="SolidEdgePart~DelSMFaces.html" data-auto-update-caption="true">DelSMFaces Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~DelSMFaces~Add.html" data-auto-update-caption="true">DelSMFaces.Add Method</A> 
+<LI><A href="SolidEdgePart~DelSMFaces~Item.html" data-auto-update-caption="true">DelSMFaces.Item Method</A> 
+<LI><A href="SolidEdgePart~DelSMFaces~Application.html" data-auto-update-caption="true">DelSMFaces.Application Property</A> 
+<LI><A href="SolidEdgePart~DelSMFaces~Count.html" data-auto-update-caption="true">DelSMFaces.Count Property</A> 
+<LI><A href="SolidEdgePart~DelSMFaces~Parent.html" data-auto-update-caption="true">DelSMFaces.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgePart~ExtendSurfaceExtentTypeConstants.html" data-auto-update-caption="true">ExtendSurfaceExtentTypeConstants.igESLinearCurvatureContinuous Constant</A> 
+<LI><A href="SolidEdgePart~ExtendSurfaceExtentTypeConstants.html" data-auto-update-caption="true">ExtendSurfaceExtentTypeConstants.igESLinearTangentContinuous Constant</A> 
+<LI><A href="SolidEdgePart~ExtendSurfaceExtentTypeConstants.html" data-auto-update-caption="true">ExtendSurfaceExtentTypeConstants.igESReflective Constant</A> 
+<LI><A href="SolidEdgePart~ExtendSurfaces~AddEx.html" data-auto-update-caption="true">ExtendSurfaces.AddEx Method</A> 
+<LI><A href="SolidEdgePart~FaceMove.html" data-auto-update-caption="true">FaceMove Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~FaceMove~Delete.html" data-auto-update-caption="true">FaceMove.Delete Method</A> 
+<LI><A href="SolidEdgePart~FaceMove~GetDimensions.html" data-auto-update-caption="true">FaceMove.GetDimensions Method</A> 
+<LI><A href="SolidEdgePart~FaceMove~Range.html" data-auto-update-caption="true">FaceMove.Range Method</A> 
+<LI><A href="SolidEdgePart~FaceMove~AlongOrReverseVector.html" data-auto-update-caption="true">FaceMove.AlongOrReverseVector Property</A> 
+<LI><A href="SolidEdgePart~FaceMove~Application.html" data-auto-update-caption="true">FaceMove.Application Property</A> 
+<LI><A href="SolidEdgePart~FaceMove~AttributeSets.html" data-auto-update-caption="true">FaceMove.AttributeSets Property</A> 
+<LI><A href="SolidEdgePart~FaceMove~DisplayName.html" data-auto-update-caption="true">FaceMove.DisplayName Property</A> 
+<LI><A href="SolidEdgePart~FaceMove~Distance.html" data-auto-update-caption="true">FaceMove.Distance Property</A> 
+<LI><A href="SolidEdgePart~FaceMove~EdgeAlongDirectionToMove.html" data-auto-update-caption="true">FaceMove.EdgeAlongDirectionToMove Property</A> 
+<LI><A href="SolidEdgePart~FaceMove~Edges.html" data-auto-update-caption="true">FaceMove.Edges Property</A> 
+<LI><A href="SolidEdgePart~FaceMove~FaceAlongNormalToMove.html" data-auto-update-caption="true">FaceMove.FaceAlongNormalToMove Property</A> 
+<LI><A href="SolidEdgePart~FaceMove~FaceMoveBlendType.html" data-auto-update-caption="true">FaceMove.FaceMoveBlendType Property</A> 
+<LI><A href="SolidEdgePart~FaceMove~FaceMoveType.html" data-auto-update-caption="true">FaceMove.FaceMoveType Property</A> 
+<LI><A href="SolidEdgePart~FaceMove~Faces.html" data-auto-update-caption="true">FaceMove.Faces Property</A> 
+<LI><A href="SolidEdgePart~FaceMove~FacesByRay.html" data-auto-update-caption="true">FaceMove.FacesByRay Property</A> 
+<LI><A href="SolidEdgePart~FaceMove~FacesToMove.html" data-auto-update-caption="true">FaceMove.FacesToMove Property</A> 
+<LI><A href="SolidEdgePart~FaceMove~FromPoint.html" data-auto-update-caption="true">FaceMove.FromPoint Property</A> 
+<LI><A href="SolidEdgePart~FaceMove~InPlane.html" data-auto-update-caption="true">FaceMove.InPlane Property</A> 
+<LI><A href="SolidEdgePart~FaceMove~IsAttributeSetPresent.html" data-auto-update-caption="true">FaceMove.IsAttributeSetPresent Property</A> 
+<LI><A href="SolidEdgePart~FaceMove~Name.html" data-auto-update-caption="true">FaceMove.Name Property</A> 
+<LI><A href="SolidEdgePart~FaceMove~OffsetAlongOrReverseVector.html" data-auto-update-caption="true">FaceMove.OffsetAlongOrReverseVector Property</A> 
+<LI><A href="SolidEdgePart~FaceMove~OffsetDistance.html" data-auto-update-caption="true">FaceMove.OffsetDistance Property</A> 
+<LI><A href="SolidEdgePart~FaceMove~Parent.html" data-auto-update-caption="true">FaceMove.Parent Property</A> 
+<LI><A href="SolidEdgePart~FaceMove~Point1Of2PointVector.html" data-auto-update-caption="true">FaceMove.Point1Of2PointVector Property</A> 
+<LI><A href="SolidEdgePart~FaceMove~Point2Of2PointVector.html" data-auto-update-caption="true">FaceMove.Point2Of2PointVector Property</A> 
+<LI><A href="SolidEdgePart~FaceMove~ShowDimensions.html" data-auto-update-caption="true">FaceMove.ShowDimensions Property</A> 
+<LI><A href="SolidEdgePart~FaceMove~Status.html" data-auto-update-caption="true">FaceMove.Status Property</A> 
+<LI><A href="SolidEdgePart~FaceMove~Suppress.html" data-auto-update-caption="true">FaceMove.Suppress Property</A> 
+<LI><A href="SolidEdgePart~FaceMove~SystemName.html" data-auto-update-caption="true">FaceMove.SystemName Property</A> 
+<LI><A href="SolidEdgePart~FaceMove~ToPoint.html" data-auto-update-caption="true">FaceMove.ToPoint Property</A> 
+<LI><A href="SolidEdgePart~FaceMove~Type.html" data-auto-update-caption="true">FaceMove.Type Property</A> </LI></UL>
+<LI><A href="SolidEdgePart~FaceMoveConstants.html" data-auto-update-caption="true">FaceMoveConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~FaceMoveConstants.html" data-auto-update-caption="true">FaceMoveConstants.igFaceMoveAlong2PointVector Constant</A> 
+<LI><A href="SolidEdgePart~FaceMoveConstants.html" data-auto-update-caption="true">FaceMoveConstants.igFaceMoveAlongEdge Constant</A> 
+<LI><A href="SolidEdgePart~FaceMoveConstants.html" data-auto-update-caption="true">FaceMoveConstants.igFaceMoveAlongFaceNormal Constant</A> 
+<LI><A href="SolidEdgePart~FaceMoveConstants.html" data-auto-update-caption="true">FaceMoveConstants.igFaceMoveAlongVector Constant</A> 
+<LI><A href="SolidEdgePart~FaceMoveConstants.html" data-auto-update-caption="true">FaceMoveConstants.igFaceMoveIgnoreBlends Constant</A> 
+<LI><A href="SolidEdgePart~FaceMoveConstants.html" data-auto-update-caption="true">FaceMoveConstants.igFaceMoveInPlane Constant</A> 
+<LI><A href="SolidEdgePart~FaceMoveConstants.html" data-auto-update-caption="true">FaceMoveConstants.igFaceMoveNone Constant</A> 
+<LI><A href="SolidEdgePart~FaceMoveConstants.html" data-auto-update-caption="true">FaceMoveConstants.igFaceMoveOffsetAlongVector Constant</A> 
+<LI><A href="SolidEdgePart~FaceMoveConstants.html" data-auto-update-caption="true">FaceMoveConstants.igFaceMoveOffsetReverseVector Constant</A> 
+<LI><A href="SolidEdgePart~FaceMoveConstants.html" data-auto-update-caption="true">FaceMoveConstants.igFaceMoveRecreateBlends Constant</A> 
+<LI><A href="SolidEdgePart~FaceMoveConstants.html" data-auto-update-caption="true">FaceMoveConstants.igFaceMoveReverseVector Constant</A> </LI></UL>
+<LI><A href="SolidEdgePart~FaceMoves.html" data-auto-update-caption="true">FaceMoves Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~FaceMoves~Add.html" data-auto-update-caption="true">FaceMoves.Add Method</A> 
+<LI><A href="SolidEdgePart~FaceMoves~Item.html" data-auto-update-caption="true">FaceMoves.Item Method</A> 
+<LI><A href="SolidEdgePart~FaceMoves~Application.html" data-auto-update-caption="true">FaceMoves.Application Property</A> 
+<LI><A href="SolidEdgePart~FaceMoves~Count.html" data-auto-update-caption="true">FaceMoves.Count Property</A> 
+<LI><A href="SolidEdgePart~FaceMoves~Parent.html" data-auto-update-caption="true">FaceMoves.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgePart~FaceOffset.html" data-auto-update-caption="true">FaceOffset Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~FaceOffset~Delete.html" data-auto-update-caption="true">FaceOffset.Delete Method</A> 
+<LI><A href="SolidEdgePart~FaceOffset~Range.html" data-auto-update-caption="true">FaceOffset.Range Method</A> 
+<LI><A href="SolidEdgePart~FaceOffset~AlongOrReverseDirectionToKeyPoint.html" data-auto-update-caption="true">FaceOffset.AlongOrReverseDirectionToKeyPoint Property</A> 
+<LI><A href="SolidEdgePart~FaceOffset~AlongOrReverseVector.html" data-auto-update-caption="true">FaceOffset.AlongOrReverseVector Property</A> 
+<LI><A href="SolidEdgePart~FaceOffset~Application.html" data-auto-update-caption="true">FaceOffset.Application Property</A> 
+<LI><A href="SolidEdgePart~FaceOffset~AttributeSets.html" data-auto-update-caption="true">FaceOffset.AttributeSets Property</A> 
+<LI><A href="SolidEdgePart~FaceOffset~DisplayName.html" data-auto-update-caption="true">FaceOffset.DisplayName Property</A> 
+<LI><A href="SolidEdgePart~FaceOffset~Distance.html" data-auto-update-caption="true">FaceOffset.Distance Property</A> 
+<LI><A href="SolidEdgePart~FaceOffset~DistanceFromKeyPoint.html" data-auto-update-caption="true">FaceOffset.DistanceFromKeyPoint Property</A> 
+<LI><A href="SolidEdgePart~FaceOffset~Edges.html" data-auto-update-caption="true">FaceOffset.Edges Property</A> 
+<LI><A href="SolidEdgePart~FaceOffset~FaceOffsetBlendType.html" data-auto-update-caption="true">FaceOffset.FaceOffsetBlendType Property</A> 
+<LI><A href="SolidEdgePart~FaceOffset~Faces.html" data-auto-update-caption="true">FaceOffset.Faces Property</A> 
+<LI><A href="SolidEdgePart~FaceOffset~FacesByRay.html" data-auto-update-caption="true">FaceOffset.FacesByRay Property</A> 
+<LI><A href="SolidEdgePart~FaceOffset~FacesToOffset.html" data-auto-update-caption="true">FaceOffset.FacesToOffset Property</A> 
+<LI><A href="SolidEdgePart~FaceOffset~IsAttributeSetPresent.html" data-auto-update-caption="true">FaceOffset.IsAttributeSetPresent Property</A> 
+<LI><A href="SolidEdgePart~FaceOffset~Name.html" data-auto-update-caption="true">FaceOffset.Name Property</A> 
+<LI><A href="SolidEdgePart~FaceOffset~Parent.html" data-auto-update-caption="true">FaceOffset.Parent Property</A> 
+<LI><A href="SolidEdgePart~FaceOffset~ShowDimensions.html" data-auto-update-caption="true">FaceOffset.ShowDimensions Property</A> 
+<LI><A href="SolidEdgePart~FaceOffset~Status.html" data-auto-update-caption="true">FaceOffset.Status Property</A> 
+<LI><A href="SolidEdgePart~FaceOffset~Suppress.html" data-auto-update-caption="true">FaceOffset.Suppress Property</A> 
+<LI><A href="SolidEdgePart~FaceOffset~SystemName.html" data-auto-update-caption="true">FaceOffset.SystemName Property</A> 
+<LI><A href="SolidEdgePart~FaceOffset~ToPoint.html" data-auto-update-caption="true">FaceOffset.ToPoint Property</A> 
+<LI><A href="SolidEdgePart~FaceOffset~ToReferenceEntity.html" data-auto-update-caption="true">FaceOffset.ToReferenceEntity Property</A> 
+<LI><A href="SolidEdgePart~FaceOffset~Type.html" data-auto-update-caption="true">FaceOffset.Type Property</A> </LI></UL>
+<LI><A href="SolidEdgePart~FaceOffsets.html" data-auto-update-caption="true">FaceOffsets Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~FaceOffsets~Add.html" data-auto-update-caption="true">FaceOffsets.Add Method</A> 
+<LI><A href="SolidEdgePart~FaceOffsets~Item.html" data-auto-update-caption="true">FaceOffsets.Item Method</A> 
+<LI><A href="SolidEdgePart~FaceOffsets~Application.html" data-auto-update-caption="true">FaceOffsets.Application Property</A> 
+<LI><A href="SolidEdgePart~FaceOffsets~Count.html" data-auto-update-caption="true">FaceOffsets.Count Property</A> 
+<LI><A href="SolidEdgePart~FaceOffsets~Parent.html" data-auto-update-caption="true">FaceOffsets.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgePart~FaceRotate.html" data-auto-update-caption="true">FaceRotate Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~FaceRotate~Delete.html" data-auto-update-caption="true">FaceRotate.Delete Method</A> 
+<LI><A href="SolidEdgePart~FaceRotate~GetDimensions.html" data-auto-update-caption="true">FaceRotate.GetDimensions Method</A> 
+<LI><A href="SolidEdgePart~FaceRotate~Range.html" data-auto-update-caption="true">FaceRotate.Range Method</A> 
+<LI><A href="SolidEdgePart~FaceRotate~Angle.html" data-auto-update-caption="true">FaceRotate.Angle Property</A> 
+<LI><A href="SolidEdgePart~FaceRotate~Application.html" data-auto-update-caption="true">FaceRotate.Application Property</A> 
+<LI><A href="SolidEdgePart~FaceRotate~AttributeSets.html" data-auto-update-caption="true">FaceRotate.AttributeSets Property</A> 
+<LI><A href="SolidEdgePart~FaceRotate~DisplayName.html" data-auto-update-caption="true">FaceRotate.DisplayName Property</A> 
+<LI><A href="SolidEdgePart~FaceRotate~Edges.html" data-auto-update-caption="true">FaceRotate.Edges Property</A> 
+<LI><A href="SolidEdgePart~FaceRotate~FaceRotateBlendType.html" data-auto-update-caption="true">FaceRotate.FaceRotateBlendType Property</A> 
+<LI><A href="SolidEdgePart~FaceRotate~FaceRotateType.html" data-auto-update-caption="true">FaceRotate.FaceRotateType Property</A> 
+<LI><A href="SolidEdgePart~FaceRotate~Faces.html" data-auto-update-caption="true">FaceRotate.Faces Property</A> 
+<LI><A href="SolidEdgePart~FaceRotate~FacesByRay.html" data-auto-update-caption="true">FaceRotate.FacesByRay Property</A> 
+<LI><A href="SolidEdgePart~FaceRotate~FacesToRotate.html" data-auto-update-caption="true">FaceRotate.FacesToRotate Property</A> 
+<LI><A href="SolidEdgePart~FaceRotate~IsAttributeSetPresent.html" data-auto-update-caption="true">FaceRotate.IsAttributeSetPresent Property</A> 
+<LI><A href="SolidEdgePart~FaceRotate~LineAxis.html" data-auto-update-caption="true">FaceRotate.LineAxis Property</A> 
+<LI><A href="SolidEdgePart~FaceRotate~LineAxisStartOrEnd.html" data-auto-update-caption="true">FaceRotate.LineAxisStartOrEnd Property</A> 
+<LI><A href="SolidEdgePart~FaceRotate~Name.html" data-auto-update-caption="true">FaceRotate.Name Property</A> 
+<LI><A href="SolidEdgePart~FaceRotate~Parent.html" data-auto-update-caption="true">FaceRotate.Parent Property</A> 
+<LI><A href="SolidEdgePart~FaceRotate~Point1Of2PointAxis.html" data-auto-update-caption="true">FaceRotate.Point1Of2PointAxis Property</A> 
+<LI><A href="SolidEdgePart~FaceRotate~Point2Of2PointAxis.html" data-auto-update-caption="true">FaceRotate.Point2Of2PointAxis Property</A> 
+<LI><A href="SolidEdgePart~FaceRotate~ShowDimensions.html" data-auto-update-caption="true">FaceRotate.ShowDimensions Property</A> 
+<LI><A href="SolidEdgePart~FaceRotate~Status.html" data-auto-update-caption="true">FaceRotate.Status Property</A> 
+<LI><A href="SolidEdgePart~FaceRotate~Suppress.html" data-auto-update-caption="true">FaceRotate.Suppress Property</A> 
+<LI><A href="SolidEdgePart~FaceRotate~SystemName.html" data-auto-update-caption="true">FaceRotate.SystemName Property</A> 
+<LI><A href="SolidEdgePart~FaceRotate~Type.html" data-auto-update-caption="true">FaceRotate.Type Property</A> </LI></UL>
+<LI><A href="SolidEdgePart~FaceRotateConstants.html" data-auto-update-caption="true">FaceRotateConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~FaceRotateConstants.html" data-auto-update-caption="true">FaceRotateConstants.igFaceRotateAxisEnd Constant</A> 
+<LI><A href="SolidEdgePart~FaceRotateConstants.html" data-auto-update-caption="true">FaceRotateConstants.igFaceRotateAxisStart Constant</A> 
+<LI><A href="SolidEdgePart~FaceRotateConstants.html" data-auto-update-caption="true">FaceRotateConstants.igFaceRotateByGeometry Constant</A> 
+<LI><A href="SolidEdgePart~FaceRotateConstants.html" data-auto-update-caption="true">FaceRotateConstants.igFaceRotateByPoints Constant</A> 
+<LI><A href="SolidEdgePart~FaceRotateConstants.html" data-auto-update-caption="true">FaceRotateConstants.igFaceRotateIgnoreBlends Constant</A> 
+<LI><A href="SolidEdgePart~FaceRotateConstants.html" data-auto-update-caption="true">FaceRotateConstants.igFaceRotateNone Constant</A> 
+<LI><A href="SolidEdgePart~FaceRotateConstants.html" data-auto-update-caption="true">FaceRotateConstants.igFaceRotateRecreateBlends Constant</A> </LI></UL>
+<LI><A href="SolidEdgePart~FaceRotates.html" data-auto-update-caption="true">FaceRotates Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~FaceRotates~Add.html" data-auto-update-caption="true">FaceRotates.Add Method</A> 
+<LI><A href="SolidEdgePart~FaceRotates~Item.html" data-auto-update-caption="true">FaceRotates.Item Method</A> 
+<LI><A href="SolidEdgePart~FaceRotates~Application.html" data-auto-update-caption="true">FaceRotates.Application Property</A> 
+<LI><A href="SolidEdgePart~FaceRotates~Count.html" data-auto-update-caption="true">FaceRotates.Count Property</A> 
+<LI><A href="SolidEdgePart~FaceRotates~Parent.html" data-auto-update-caption="true">FaceRotates.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgePart~FamilyMember~Description.html" data-auto-update-caption="true">FamilyMember.Description Property</A> 
+<LI><A href="SolidEdgePart~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igCopy Constant</A> 
+<LI><A href="SolidEdgePart~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igDelSMFaceBoth Constant</A> 
+<LI><A href="SolidEdgePart~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igDelSMFaceNone Constant</A> 
+<LI><A href="SolidEdgePart~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igDelSystemRelief Constant</A> 
+<LI><A href="SolidEdgePart~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igDelZeroBendRadius Constant</A> 
+<LI><A href="SolidEdgePart~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igIgnoreBlends Constant</A> 
+<LI><A href="SolidEdgePart~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igLinearCurvatureContinuousExtension Constant</A> 
+<LI><A href="SolidEdgePart~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igLinearTangentExtension Constant</A> 
+<LI><A href="SolidEdgePart~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igMove Constant</A> 
+<LI><A href="SolidEdgePart~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igRecreateBlends Constant</A> 
+<LI><A href="SolidEdgePart~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igReflective Constant</A> 
+<LI><A href="SolidEdgePart~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igReverseNormal Constant</A> 
+<LI><A href="SolidEdgePart~FeatureStatusConstants.html" data-auto-update-caption="true">FeatureStatusConstants.igFeatureRolledBack Constant</A> 
+<LI><A href="SolidEdgePart~FeatureTypeConstants.html" data-auto-update-caption="true">FeatureTypeConstants.igFaceMoveObject Constant</A> 
+<LI><A href="SolidEdgePart~FeatureTypeConstants.html" data-auto-update-caption="true">FeatureTypeConstants.igFaceOffsetObject Constant</A> 
+<LI><A href="SolidEdgePart~FeatureTypeConstants.html" data-auto-update-caption="true">FeatureTypeConstants.igFaceRotateObject Constant</A> 
+<LI><A href="SolidEdgePart~FeatureTypeConstants.html" data-auto-update-caption="true">FeatureTypeConstants.igResizeBendObject Constant</A> 
+<LI><A href="SolidEdgePart~FeatureTypeConstants.html" data-auto-update-caption="true">FeatureTypeConstants.igResizeHoleObject Constant</A> 
+<LI><A href="SolidEdgePart~FeatureTypeConstants.html" data-auto-update-caption="true">FeatureTypeConstants.igResizeRoundObject Constant</A> 
+<LI><A href="SolidEdgePart~LabelWeldData~BottomNoteAngle.html" data-auto-update-caption="true">LabelWeldData.BottomNoteAngle Property</A> 
+<LI><A href="SolidEdgePart~LabelWeldData~BottomNoteCSize.html" data-auto-update-caption="true">LabelWeldData.BottomNoteCSize Property</A> 
+<LI><A href="SolidEdgePart~LabelWeldData~BottomNoteDepth.html" data-auto-update-caption="true">LabelWeldData.BottomNoteDepth Property</A> 
+<LI><A href="SolidEdgePart~LabelWeldData~BottomPosOffset.html" data-auto-update-caption="true">LabelWeldData.BottomPosOffset Property</A> 
+<LI><A href="SolidEdgePart~LabelWeldData~CrossSectionArea.html" data-auto-update-caption="true">LabelWeldData.CrossSectionArea Property</A> 
+<LI><A href="SolidEdgePart~LabelWeldData~TailNote2.html" data-auto-update-caption="true">LabelWeldData.TailNote2 Property</A> 
+<LI><A href="SolidEdgePart~LabelWeldData~TopNoteAngle.html" data-auto-update-caption="true">LabelWeldData.TopNoteAngle Property</A> 
+<LI><A href="SolidEdgePart~LabelWeldData~TopNoteCSize.html" data-auto-update-caption="true">LabelWeldData.TopNoteCSize Property</A> 
+<LI><A href="SolidEdgePart~LabelWeldData~TopNoteDepth.html" data-auto-update-caption="true">LabelWeldData.TopNoteDepth Property</A> 
+<LI><A href="SolidEdgePart~LabelWeldData~TopPosOffset.html" data-auto-update-caption="true">LabelWeldData.TopPosOffset Property</A> 
+<LI><A href="SolidEdgePart~Model~ChangeBendAngles.html" data-auto-update-caption="true">Model.ChangeBendAngles Property</A> 
+<LI><A href="SolidEdgePart~Model~DeleteBlends.html" data-auto-update-caption="true">Model.DeleteBlends Property</A> 
+<LI><A href="SolidEdgePart~Model~DeleteHoles.html" data-auto-update-caption="true">Model.DeleteHoles Property</A> 
+<LI><A href="SolidEdgePart~Model~DeleteRegions.html" data-auto-update-caption="true">Model.DeleteRegions Property</A> 
+<LI><A href="SolidEdgePart~Model~DelSMFaces.html" data-auto-update-caption="true">Model.DelSMFaces Property</A> 
+<LI><A href="SolidEdgePart~Model~FaceMoves.html" data-auto-update-caption="true">Model.FaceMoves Property</A> 
+<LI><A href="SolidEdgePart~Model~FaceOffsets.html" data-auto-update-caption="true">Model.FaceOffsets Property</A> 
+<LI><A href="SolidEdgePart~Model~FaceRotates.html" data-auto-update-caption="true">Model.FaceRotates Property</A> 
+<LI><A href="SolidEdgePart~Model~ResizeBends.html" data-auto-update-caption="true">Model.ResizeBends Property</A> 
+<LI><A href="SolidEdgePart~Model~ResizeHoles.html" data-auto-update-caption="true">Model.ResizeHoles Property</A> 
+<LI><A href="SolidEdgePart~Model~ResizeRounds.html" data-auto-update-caption="true">Model.ResizeRounds Property</A> 
+<LI><A href="SolidEdgePart~Models~AddThickenFeature.html" data-auto-update-caption="true">Models.AddThickenFeature Method</A> 
+<LI><A href="SolidEdgePart~PartDocument~CreateFeatureLibrary.html" data-auto-update-caption="true">PartDocument.CreateFeatureLibrary Method</A> 
+<LI><A href="SolidEdgePart~PartDocument~GetCapturedRelationshipInformation.html" data-auto-update-caption="true">PartDocument.GetCapturedRelationshipInformation Method</A> 
+<LI><A href="SolidEdgePart~PartDocument~PlaceFeatureLibrary.html" data-auto-update-caption="true">PartDocument.PlaceFeatureLibrary Method</A> 
+<LI><A href="SolidEdgePart~PartDocument~CapturedRelationshipCount.html" data-auto-update-caption="true">PartDocument.CapturedRelationshipCount Property</A> 
+<LI><A href="SolidEdgePart~PartDocument~ComponentSketches.html" data-auto-update-caption="true">PartDocument.ComponentSketches Property</A> 
+<LI><A href="SolidEdgePart~PartDocument~HardwareFile.html" data-auto-update-caption="true">PartDocument.HardwareFile Property</A> 
+<LI><A href="SolidEdgePart~PartDocument~HasCapturedRelationships.html" data-auto-update-caption="true">PartDocument.HasCapturedRelationships Property</A> 
+<LI><A href="SolidEdgePart~PartDocument~IsGeometricVersionDirty.html" data-auto-update-caption="true">PartDocument.IsGeometricVersionDirty Property</A> 
+<LI><A href="SolidEdgePart~Profile~ComponentImages2d.html" data-auto-update-caption="true">Profile.ComponentImages2d Property</A> 
+<LI><A href="SolidEdgePart~ResizeBend.html" data-auto-update-caption="true">ResizeBend Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~ResizeBend~Delete.html" data-auto-update-caption="true">ResizeBend.Delete Method</A> 
+<LI><A href="SolidEdgePart~ResizeBend~DropParents.html" data-auto-update-caption="true">ResizeBend.DropParents Method</A> 
+<LI><A href="SolidEdgePart~ResizeBend~GetDimensions.html" data-auto-update-caption="true">ResizeBend.GetDimensions Method</A> 
+<LI><A href="SolidEdgePart~ResizeBend~GetFaces.html" data-auto-update-caption="true">ResizeBend.GetFaces Method</A> 
+<LI><A href="SolidEdgePart~ResizeBend~Range.html" data-auto-update-caption="true">ResizeBend.Range Method</A> 
+<LI><A href="SolidEdgePart~ResizeBend~Reorder.html" data-auto-update-caption="true">ResizeBend.Reorder Method</A> 
+<LI><A href="SolidEdgePart~ResizeBend~RollToFeature.html" data-auto-update-caption="true">ResizeBend.RollToFeature Method</A> 
+<LI><A href="SolidEdgePart~ResizeBend~SetFaces.html" data-auto-update-caption="true">ResizeBend.SetFaces Method</A> 
+<LI><A href="SolidEdgePart~ResizeBend~Application.html" data-auto-update-caption="true">ResizeBend.Application Property</A> 
+<LI><A href="SolidEdgePart~ResizeBend~AttributeSets.html" data-auto-update-caption="true">ResizeBend.AttributeSets Property</A> 
+<LI><A href="SolidEdgePart~ResizeBend~DisplayName.html" data-auto-update-caption="true">ResizeBend.DisplayName Property</A> 
+<LI><A href="SolidEdgePart~ResizeBend~Edges.html" data-auto-update-caption="true">ResizeBend.Edges Property</A> 
+<LI><A href="SolidEdgePart~ResizeBend~Faces.html" data-auto-update-caption="true">ResizeBend.Faces Property</A> 
+<LI><A href="SolidEdgePart~ResizeBend~FacesByRay.html" data-auto-update-caption="true">ResizeBend.FacesByRay Property</A> 
+<LI><A href="SolidEdgePart~ResizeBend~IsAttributeSetPresent.html" data-auto-update-caption="true">ResizeBend.IsAttributeSetPresent Property</A> 
+<LI><A href="SolidEdgePart~ResizeBend~Name.html" data-auto-update-caption="true">ResizeBend.Name Property</A> 
+<LI><A href="SolidEdgePart~ResizeBend~Parent.html" data-auto-update-caption="true">ResizeBend.Parent Property</A> 
+<LI><A href="SolidEdgePart~ResizeBend~Radius.html" data-auto-update-caption="true">ResizeBend.Radius Property</A> 
+<LI><A href="SolidEdgePart~ResizeBend~ShowDimensions.html" data-auto-update-caption="true">ResizeBend.ShowDimensions Property</A> 
+<LI><A href="SolidEdgePart~ResizeBend~Status.html" data-auto-update-caption="true">ResizeBend.Status Property</A> 
+<LI><A href="SolidEdgePart~ResizeBend~Suppress.html" data-auto-update-caption="true">ResizeBend.Suppress Property</A> 
+<LI><A href="SolidEdgePart~ResizeBend~SuppressVariable.html" data-auto-update-caption="true">ResizeBend.SuppressVariable Property</A> 
+<LI><A href="SolidEdgePart~ResizeBend~SystemName.html" data-auto-update-caption="true">ResizeBend.SystemName Property</A> 
+<LI><A href="SolidEdgePart~ResizeBend~Type.html" data-auto-update-caption="true">ResizeBend.Type Property</A> 
+<LI><A href="SolidEdgePart~ResizeBend~Visible.html" data-auto-update-caption="true">ResizeBend.Visible Property</A> </LI></UL>
+<LI><A href="SolidEdgePart~ResizeBends.html" data-auto-update-caption="true">ResizeBends Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~ResizeBends~Add.html" data-auto-update-caption="true">ResizeBends.Add Method</A> 
+<LI><A href="SolidEdgePart~ResizeBends~Item.html" data-auto-update-caption="true">ResizeBends.Item Method</A> 
+<LI><A href="SolidEdgePart~ResizeBends~Application.html" data-auto-update-caption="true">ResizeBends.Application Property</A> 
+<LI><A href="SolidEdgePart~ResizeBends~Count.html" data-auto-update-caption="true">ResizeBends.Count Property</A> 
+<LI><A href="SolidEdgePart~ResizeBends~Parent.html" data-auto-update-caption="true">ResizeBends.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgePart~ResizeHole.html" data-auto-update-caption="true">ResizeHole Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~ResizeHole~Delete.html" data-auto-update-caption="true">ResizeHole.Delete Method</A> 
+<LI><A href="SolidEdgePart~ResizeHole~DropParents.html" data-auto-update-caption="true">ResizeHole.DropParents Method</A> 
+<LI><A href="SolidEdgePart~ResizeHole~GetDimensions.html" data-auto-update-caption="true">ResizeHole.GetDimensions Method</A> 
+<LI><A href="SolidEdgePart~ResizeHole~Range.html" data-auto-update-caption="true">ResizeHole.Range Method</A> 
+<LI><A href="SolidEdgePart~ResizeHole~Reorder.html" data-auto-update-caption="true">ResizeHole.Reorder Method</A> 
+<LI><A href="SolidEdgePart~ResizeHole~RollToFeature.html" data-auto-update-caption="true">ResizeHole.RollToFeature Method</A> 
+<LI><A href="SolidEdgePart~ResizeHole~Application.html" data-auto-update-caption="true">ResizeHole.Application Property</A> 
+<LI><A href="SolidEdgePart~ResizeHole~AttributeSets.html" data-auto-update-caption="true">ResizeHole.AttributeSets Property</A> 
+<LI><A href="SolidEdgePart~ResizeHole~Diameter.html" data-auto-update-caption="true">ResizeHole.Diameter Property</A> 
+<LI><A href="SolidEdgePart~ResizeHole~DisplayName.html" data-auto-update-caption="true">ResizeHole.DisplayName Property</A> 
+<LI><A href="SolidEdgePart~ResizeHole~Edges.html" data-auto-update-caption="true">ResizeHole.Edges Property</A> 
+<LI><A href="SolidEdgePart~ResizeHole~ExtendType.html" data-auto-update-caption="true">ResizeHole.ExtendType Property</A> 
+<LI><A href="SolidEdgePart~ResizeHole~Faces.html" data-auto-update-caption="true">ResizeHole.Faces Property</A> 
+<LI><A href="SolidEdgePart~ResizeHole~FacesByRay.html" data-auto-update-caption="true">ResizeHole.FacesByRay Property</A> 
+<LI><A href="SolidEdgePart~ResizeHole~IsAttributeSetPresent.html" data-auto-update-caption="true">ResizeHole.IsAttributeSetPresent Property</A> 
+<LI><A href="SolidEdgePart~ResizeHole~Name.html" data-auto-update-caption="true">ResizeHole.Name Property</A> 
+<LI><A href="SolidEdgePart~ResizeHole~Parent.html" data-auto-update-caption="true">ResizeHole.Parent Property</A> 
+<LI><A href="SolidEdgePart~ResizeHole~ShowDimensions.html" data-auto-update-caption="true">ResizeHole.ShowDimensions Property</A> 
+<LI><A href="SolidEdgePart~ResizeHole~Status.html" data-auto-update-caption="true">ResizeHole.Status Property</A> 
+<LI><A href="SolidEdgePart~ResizeHole~Suppress.html" data-auto-update-caption="true">ResizeHole.Suppress Property</A> 
+<LI><A href="SolidEdgePart~ResizeHole~SuppressVariable.html" data-auto-update-caption="true">ResizeHole.SuppressVariable Property</A> 
+<LI><A href="SolidEdgePart~ResizeHole~SystemName.html" data-auto-update-caption="true">ResizeHole.SystemName Property</A> 
+<LI><A href="SolidEdgePart~ResizeHole~ThreadHoleData.html" data-auto-update-caption="true">ResizeHole.ThreadHoleData Property</A> 
+<LI><A href="SolidEdgePart~ResizeHole~Type.html" data-auto-update-caption="true">ResizeHole.Type Property</A> 
+<LI><A href="SolidEdgePart~ResizeHole~Visible.html" data-auto-update-caption="true">ResizeHole.Visible Property</A> </LI></UL>
+<LI><A href="SolidEdgePart~ResizeHoles.html" data-auto-update-caption="true">ResizeHoles Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~ResizeHoles~Add.html" data-auto-update-caption="true">ResizeHoles.Add Method</A> 
+<LI><A href="SolidEdgePart~ResizeHoles~Item.html" data-auto-update-caption="true">ResizeHoles.Item Method</A> 
+<LI><A href="SolidEdgePart~ResizeHoles~Application.html" data-auto-update-caption="true">ResizeHoles.Application Property</A> 
+<LI><A href="SolidEdgePart~ResizeHoles~Count.html" data-auto-update-caption="true">ResizeHoles.Count Property</A> 
+<LI><A href="SolidEdgePart~ResizeHoles~Parent.html" data-auto-update-caption="true">ResizeHoles.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgePart~ResizeRound.html" data-auto-update-caption="true">ResizeRound Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~ResizeRound~Delete.html" data-auto-update-caption="true">ResizeRound.Delete Method</A> 
+<LI><A href="SolidEdgePart~ResizeRound~DropParents.html" data-auto-update-caption="true">ResizeRound.DropParents Method</A> 
+<LI><A href="SolidEdgePart~ResizeRound~GetDimensions.html" data-auto-update-caption="true">ResizeRound.GetDimensions Method</A> 
+<LI><A href="SolidEdgePart~ResizeRound~GetFaces.html" data-auto-update-caption="true">ResizeRound.GetFaces Method</A> 
+<LI><A href="SolidEdgePart~ResizeRound~Range.html" data-auto-update-caption="true">ResizeRound.Range Method</A> 
+<LI><A href="SolidEdgePart~ResizeRound~Reorder.html" data-auto-update-caption="true">ResizeRound.Reorder Method</A> 
+<LI><A href="SolidEdgePart~ResizeRound~RollToFeature.html" data-auto-update-caption="true">ResizeRound.RollToFeature Method</A> 
+<LI><A href="SolidEdgePart~ResizeRound~SetFaces.html" data-auto-update-caption="true">ResizeRound.SetFaces Method</A> 
+<LI><A href="SolidEdgePart~ResizeRound~Application.html" data-auto-update-caption="true">ResizeRound.Application Property</A> 
+<LI><A href="SolidEdgePart~ResizeRound~AttributeSets.html" data-auto-update-caption="true">ResizeRound.AttributeSets Property</A> 
+<LI><A href="SolidEdgePart~ResizeRound~DisplayName.html" data-auto-update-caption="true">ResizeRound.DisplayName Property</A> 
+<LI><A href="SolidEdgePart~ResizeRound~Edges.html" data-auto-update-caption="true">ResizeRound.Edges Property</A> 
+<LI><A href="SolidEdgePart~ResizeRound~Faces.html" data-auto-update-caption="true">ResizeRound.Faces Property</A> 
+<LI><A href="SolidEdgePart~ResizeRound~FacesByRay.html" data-auto-update-caption="true">ResizeRound.FacesByRay Property</A> 
+<LI><A href="SolidEdgePart~ResizeRound~IsAttributeSetPresent.html" data-auto-update-caption="true">ResizeRound.IsAttributeSetPresent Property</A> 
+<LI><A href="SolidEdgePart~ResizeRound~Name.html" data-auto-update-caption="true">ResizeRound.Name Property</A> 
+<LI><A href="SolidEdgePart~ResizeRound~Parent.html" data-auto-update-caption="true">ResizeRound.Parent Property</A> 
+<LI><A href="SolidEdgePart~ResizeRound~Radius.html" data-auto-update-caption="true">ResizeRound.Radius Property</A> 
+<LI><A href="SolidEdgePart~ResizeRound~ShowDimensions.html" data-auto-update-caption="true">ResizeRound.ShowDimensions Property</A> 
+<LI><A href="SolidEdgePart~ResizeRound~Status.html" data-auto-update-caption="true">ResizeRound.Status Property</A> 
+<LI><A href="SolidEdgePart~ResizeRound~Suppress.html" data-auto-update-caption="true">ResizeRound.Suppress Property</A> 
+<LI><A href="SolidEdgePart~ResizeRound~SuppressVariable.html" data-auto-update-caption="true">ResizeRound.SuppressVariable Property</A> 
+<LI><A href="SolidEdgePart~ResizeRound~SystemName.html" data-auto-update-caption="true">ResizeRound.SystemName Property</A> 
+<LI><A href="SolidEdgePart~ResizeRound~Type.html" data-auto-update-caption="true">ResizeRound.Type Property</A> 
+<LI><A href="SolidEdgePart~ResizeRound~Visible.html" data-auto-update-caption="true">ResizeRound.Visible Property</A> </LI></UL>
+<LI><A href="SolidEdgePart~ResizeRounds.html" data-auto-update-caption="true">ResizeRounds Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~ResizeRounds~Add.html" data-auto-update-caption="true">ResizeRounds.Add Method</A> 
+<LI><A href="SolidEdgePart~ResizeRounds~Item.html" data-auto-update-caption="true">ResizeRounds.Item Method</A> 
+<LI><A href="SolidEdgePart~ResizeRounds~Application.html" data-auto-update-caption="true">ResizeRounds.Application Property</A> 
+<LI><A href="SolidEdgePart~ResizeRounds~Count.html" data-auto-update-caption="true">ResizeRounds.Count Property</A> 
+<LI><A href="SolidEdgePart~ResizeRounds~Parent.html" data-auto-update-caption="true">ResizeRounds.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgePart~SheetMetalDocument~CreateFeatureLibrary.html" data-auto-update-caption="true">SheetMetalDocument.CreateFeatureLibrary Method</A> 
+<LI><A href="SolidEdgePart~SheetMetalDocument~GetCapturedRelationshipInformation.html" data-auto-update-caption="true">SheetMetalDocument.GetCapturedRelationshipInformation Method</A> 
+<LI><A href="SolidEdgePart~SheetMetalDocument~PlaceFeatureLibrary.html" data-auto-update-caption="true">SheetMetalDocument.PlaceFeatureLibrary Method</A> 
+<LI><A href="SolidEdgePart~SheetMetalDocument~CapturedRelationshipCount.html" data-auto-update-caption="true">SheetMetalDocument.CapturedRelationshipCount Property</A> 
+<LI><A href="SolidEdgePart~SheetMetalDocument~ComponentSketches.html" data-auto-update-caption="true">SheetMetalDocument.ComponentSketches Property</A> 
+<LI><A href="SolidEdgePart~SheetMetalDocument~HardwareFile.html" data-auto-update-caption="true">SheetMetalDocument.HardwareFile Property</A> 
+<LI><A href="SolidEdgePart~SheetMetalDocument~HasCapturedRelationships.html" data-auto-update-caption="true">SheetMetalDocument.HasCapturedRelationships Property</A> 
+<LI><A href="SolidEdgePart~SheetMetalDocument~IsGeometricVersionDirty.html" data-auto-update-caption="true">SheetMetalDocument.IsGeometricVersionDirty Property</A> 
+<LI><A href="SolidEdgePart~StitchSurfaces~AddByMultiple.html" data-auto-update-caption="true">StitchSurfaces.AddByMultiple Method</A> 
+<LI><A href="SolidEdgePart~SweptCutout~LockAxis.html" data-auto-update-caption="true">SweptCutout.LockAxis Property</A> 
+<LI><A href="SolidEdgePart~SweptProtrusion~LockAxis.html" data-auto-update-caption="true">SweptProtrusion.LockAxis Property</A> 
+<LI><A href="SolidEdgePart~SweptSurface~LockAxis.html" data-auto-update-caption="true">SweptSurface.LockAxis Property</A> 
+<LI><A href="SolidEdgePart~Thickens~Add.html" data-auto-update-caption="true">Thickens.Add Method</A> 
+<LI><A href="SolidEdgePart~WeldmentDocument~GetCapturedRelationshipInformation.html" data-auto-update-caption="true">WeldmentDocument.GetCapturedRelationshipInformation Method</A> 
+<LI><A href="SolidEdgePart~WeldmentDocument~CapturedRelationshipCount.html" data-auto-update-caption="true">WeldmentDocument.CapturedRelationshipCount Property</A> 
+<LI><A href="SolidEdgePart~WeldmentDocument~ComponentSketches.html" data-auto-update-caption="true">WeldmentDocument.ComponentSketches Property</A> 
+<LI><A href="SolidEdgePart~WeldmentDocument~HasCapturedRelationships.html" data-auto-update-caption="true">WeldmentDocument.HasCapturedRelationships Property</A> 
+<LI><A href="SolidEdgePart~WeldmentDocument~IsGeometricVersionDirty.html" data-auto-update-caption="true">WeldmentDocument.IsGeometricVersionDirty Property</A> </LI></UL></DIV>
+<DIV id=i-3c4d7256-1b14-487c-b661-dccb433b9079-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>RevisionManager</SPAN> </DIV>
+<DIV id=i-3c4d7256-1b14-487c-b661-dccb433b9079-section-content class=i-section-content>
+<UL>
+<LI><A href="RevisionManager~IRMgrApp~Quit.html" data-auto-update-caption="true">IRMgrApp.Quit Method</A> </LI></UL></DIV></DIV><!--DXMETADATA end-->
+            <a name="seealsobookmark"></a>
+            <!--DXMETADATA start type="FilteredItemList" scrap="CATEGORISED_LINKS" namespace="linkcategory" source="Item" filter="" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=seealso,caption=""%%phrase:name=SeeAlso%%%%designlist:tagidentifier=seealso,itemtype=See Also%%""%%%%filtereditemlist%%</div>"--><div class="i-section-heading" id="i-seealso-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">See Also</span></div><div id="i-seealso-section-content" class="i-section-content"><div class="i-see-also-link">
+<a href="V17SP1-WhatsNew.html">Solid Edge V17 SP1 - What's New</a></div>
+<div class="i-see-also-link">
+<a href="V17SP2-WhatsNew.html">Solid Edge V17 SP2 - What's New</a></div>
+<div class="i-see-also-link">
+<a href="V17SP3-WhatsNew.html">Solid Edge V17 SP3 - What's New</a></div>
+<div class="i-see-also-link">
+<a href="V17SP4-WhatsNew.html">Solid Edge V17 SP4 - What's New</a></div>
+<div class="i-see-also-link">
+<a href="V17SP5-WhatsNew.html">Solid Edge V17 SP5 - What's New</a></div>
+<div class="i-see-also-link">
+<a href="V17SP6-WhatsNew.html">Solid Edge V17 SP6 - What's New</a></div>
+<div class="i-see-also-link">
+<a href="V17SP7-WhatsNew.html">Solid Edge V17 SP7 - What's New</a></div>
+<div class="i-see-also-link">
+<a href="V17SP8-WhatsNew.html">Solid Edge V17 SP8 - What's New</a></div>
+<div class="i-see-also-link">
+<a href="V17SP9-WhatsNew.html">Solid Edge V17 SP9 - What's New</a></div>
+<div class="i-see-also-link">
+<a href="V17SP10-WhatsNew.html">Solid Edge V17 SP10 - What's New</a></div>
+<div class="i-see-also-link">
+<a href="V17SP11-WhatsNew.html">Solid Edge V17 SP11 - What's New</a></div>
+<div class="i-see-also-link">
+<a href="V17SP12-WhatsNew.html">Solid Edge V17 SP12 - What's New</a></div>
+<div class="i-see-also-link">
+<a href="V17SP13-WhatsNew.html">Solid Edge V17 SP13 - What's New</a></div>
+<div class="i-see-also-link">
+<a href="V17SP14-WhatsNew.html">Solid Edge V17 SP14 - What's New</a></div>
+
+</div><!--DXMETADATA end-->
+        
+    </div>
+    <div id="i-footer-content" class="i-footer-content">
+        <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_FOOTER" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="CopyrightNotice" format="<p>&nbsp;</p><p>&nbsp;</p><hr style=""height: 1px"" /><p>%%variable%%</p>" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="FeedbackLink" format="" --><!--DXMETADATA end-->
+    </div>
+    
+
+    <!--DXMETADATA start type="IsNew" format="<script type=""text/javascript"">setIsNew = true;</script>" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<script type=""text/javascript"">setIsResponsiveEnabled = true;</script>" --><!--DXMETADATA end-->
+    <script type="text/javascript">
+        $(function() {
+            var documentInstance = new Innovasys.Content.Document(document.body);
+            documentInstance.isNew = !(typeof setIsNew === "undefined");
+            documentInstance.isResponsiveEnabled = !(typeof setIsResponsiveEnabled === "undefined");
+            documentInstance.load();
+        });
+    </script>
+</body>
+</html>

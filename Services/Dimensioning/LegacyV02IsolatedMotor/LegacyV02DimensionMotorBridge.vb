@@ -22,6 +22,49 @@ Public NotInheritable Class LegacyV02DimensionMotorBridge
         Extraer_dft_dxf_flatdxf.LegacyV02Dimensioning.UniqueDvAutoDimensioningEngine.Run(draft, log, appLogger, legacyNorm, legacyZones)
     End Sub
 
+    Friend Shared Function ToMainNormConfig(src As Extraer_dft_dxf_flatdxf.LegacyV02Dimensioning.DimensioningNormConfig) As DimensioningNormConfig
+        If src Is Nothing Then Return DimensioningNormConfig.DefaultConfig()
+        Dim dst As New DimensioningNormConfig()
+        Dim tSrc As Type = GetType(Extraer_dft_dxf_flatdxf.LegacyV02Dimensioning.DimensioningNormConfig)
+        Dim tDst As Type = GetType(DimensioningNormConfig)
+        For Each p As PropertyInfo In tSrc.GetProperties(BindingFlags.Public Or BindingFlags.Instance)
+            Try
+                If Not p.CanRead OrElse p.GetIndexParameters().Length <> 0 Then Continue For
+                Dim pd As PropertyInfo = tDst.GetProperty(p.Name, BindingFlags.Public Or BindingFlags.Instance)
+                If pd Is Nothing OrElse Not pd.CanWrite Then Continue For
+                Dim v As Object = p.GetValue(src, Nothing)
+                If v Is Nothing Then Continue For
+                If Not pd.PropertyType.IsAssignableFrom(v.GetType()) Then Continue For
+                pd.SetValue(dst, v, Nothing)
+            Catch
+            End Try
+        Next
+        dst.EnableInteriorHoleCenterDimensions = True
+        Return dst
+    End Function
+
+    Public Shared Sub ApplyInteriorHoleDimensions(
+        draft As DraftDocument,
+        sheet As Sheet,
+        views As IList(Of DrawingView),
+        styleObj As Object,
+        legacyNorm As Extraer_dft_dxf_flatdxf.LegacyV02Dimensioning.DimensioningNormConfig,
+        appLogger As Logger)
+
+        If legacyNorm IsNot Nothing AndAlso Not legacyNorm.EnableInteriorHoleCenterDimensions Then Return
+        If draft Is Nothing OrElse sheet Is Nothing OrElse views Is Nothing Then Return
+        Dim mainNorm As DimensioningNormConfig = ToMainNormConfig(legacyNorm)
+        Dim dims As SolidEdgeFrameworkSupport.Dimensions = Nothing
+        Try
+            dims = CType(sheet.Dimensions, SolidEdgeFrameworkSupport.Dimensions)
+        Catch
+            Return
+        End Try
+        If dims Is Nothing Then Return
+        Dim legacyLog As New Extraer_dft_dxf_flatdxf.LegacyV02Dimensioning.DimensionLogger(appLogger)
+        InteriorHoleDimensioningService.CreateForLegacyViews(draft, sheet, views, dims, styleObj, mainNorm, legacyLog)
+    End Sub
+
     Private Shared Function CloneNormReflection(src As DimensioningNormConfig) As Extraer_dft_dxf_flatdxf.LegacyV02Dimensioning.DimensioningNormConfig
         If src Is Nothing Then Return Extraer_dft_dxf_flatdxf.LegacyV02Dimensioning.DimensioningNormConfig.DefaultConfig()
         Dim dst As New Extraer_dft_dxf_flatdxf.LegacyV02Dimensioning.DimensioningNormConfig()

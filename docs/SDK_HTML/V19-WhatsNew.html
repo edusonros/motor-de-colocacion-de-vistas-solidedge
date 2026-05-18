@@ -1,0 +1,976 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--DXMETADATA start type="MetaCharset" --><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><!--DXMETADATA end-->
+    <meta http-equiv="X-UA-Compatible" value="IE=9" />
+
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Literal" condition="helpversion:value=3" value="<meta name=""Microsoft.Help.SelfBranded"" content=""true"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="ItemTitle" format="<title>%%ItemTitle%%</title>" --><title>Solid Edge V19 - What's New</title><!--DXMETADATA end-->
+    <!--DXMETADATA start type="ItemTitle" format="<meta name=""Title"" content=""%%ItemTitleNoQuotes%%""/>" --><meta name="Title" content="Solid Edge V19 - What's New"/><!--DXMETADATA end-->    
+    
+
+    <!--DXMETADATA start type="PackageLink" packagename="jquery" filetype="script" firstlinkattributes="id=""mshs_support_script"""--><script src="template/packages/jquery/script/chm.mshc/jquery-1.7.2.min.js" type="text/javascript" id="mshs_support_script"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="script"--><script src="template/packages/jquery-ui/script/chm.mshc/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/jquery-ui/css/chm.mshc/jquery-ui-1.8.18.custom.css"></link><!--DXMETADATA end-->
+	
+    <!--DXMETADATA start type="Synopsis" StripHtmlTags="True" MaxLength="250" format="<meta name=""Description"" content=""%%Synopsis%%"" />"--><meta name="Description" content=" New APIs 
+
+ SolidEdgeAssembly 
+
+
+AssemblyPattern.GetOccurrences Method 
+AssemblyPatternOccurrence.Suppress Property 
+Occurrence.GetExplodeMatrix Method 
+SegmentAngularRelation3d.GetElement1 Method 
+SegmentAngularRelation3d.GetElement2 Metho" /><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-topics" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/plugins-topics/css/chm.mshc/jquery-plugins.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-topics" filetype="css" firstlinkattributes=" data-mshv2-stylesheet=""/template/packages/core-topics/topics.mshv2.css"" data-mshv1-stylesheet=""/template/packages/core-topics/topics.mshv1.css"" data-responsive-mobile=""template/packages/core-topics/topics.mobile.css"" data-responsive-tablet=""template/packages/core-topics/topics.tablet.css"""--><link rel="stylesheet" type="text/css" href="template/packages/core-topics/css/topics.css"  data-mshv2-stylesheet="/template/packages/core-topics/topics.mshv2.css" data-mshv1-stylesheet="/template/packages/core-topics/topics.mshv1.css" data-responsive-mobile="template/packages/core-topics/topics.mobile.css" data-responsive-tablet="template/packages/core-topics/topics.tablet.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-topics" filetype="script"--><script src="template/packages/plugins-topics/script/chm.mshc/jquery-plugins.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-topics" filetype="script"--><script src="template/packages/core-topics/script/topics.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="TopicId" format="<meta name=""Microsoft.Help.Id"" content=""%%TopicId%%""/>" --><meta name="Microsoft.Help.Id" content="34665c83-7c14-490b-a205-21873cca9320"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocParentId" format="<meta name=""Microsoft.Help.TocParent"" content=""%%TocParentId%%""/>" --><meta name="Microsoft.Help.TocParent" content="7d9d9936-62c1-4718-a852-d74a2116b7de"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocOrdinal" format="<meta name=""Microsoft.Help.TocOrder"" content=""%%TocOrdinal%%""/>" --><meta name="Microsoft.Help.TocOrder" content="13"/><!--DXMETADATA end-->
+    <meta name="Microsoft.Help.F1" content=""/>
+    <meta name="Microsoft.Help.ContentType" content="Concepts" />
+    <!--DXMETADATA start type="MshvKeywords" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="MshvMetaTags" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.Locale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.TopicLocale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="Stylesheets" --><link rel="stylesheet" type="text/css" href="stylesheets/customstyles.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Scripts" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="DesignTime"--><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_PROPERTIES" --><!--DXMETADATA end -->
+
+    <!--DXMETADATA start type="CustomHeadContent" --><!--DXMETADATA end-->
+</head>
+
+<body>
+    <div id="i-before-header-content" class="i-before-header-content">
+        
+    </div>
+    <div id="i-header-content" class="i-header-content">
+        <!--DXMETADATA start type="LogoImage" --><img class="logoimage" src="images/sesdk_header.jpg" border="0"></img><!--DXMETADATA end-->
+            <div class="i-project-title"><!--DXMETADATA start type="ProjectTitle" -->Solid Edge 2019 SDK<!--DXMETADATA end--></div>
+        <div class="i-page-title"><div class="i-page-title-text"><!--DXMETADATA start type="ItemTitle" -->Solid Edge V19 - What's New<!--DXMETADATA end--></div></div>
+    </div>
+    <div id="i-after-header-content" class="i-after-header-content">
+        <!-- Spacing --> <span class="i-toggle-all-sections i-function-link">
+                <label class="i-collapse-all"><!--DXMETADATA start type="Phrase" name="COLLAPSE_ALL" -->Collapse All<!--DXMETADATA end--></label>
+                <label class="i-expand-all" style="display: none;"><!--DXMETADATA start type="Phrase" name="EXPAND_ALL" -->Expand All<!--DXMETADATA end--></label>
+            </span><!--DXMETADATA start type="Literal" condition="communityenabled" value="%%scrap:name=_COMMUNITY_DROPDOWN%%" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="IsWebOutputRootPageLinkEnabled" format="<a href='#' class="i-page-link" class="i-view-in-frame-link" title='$$VIEW_WITH_NAVIGATION_TOOLS_TIP$$' style='display: none' data-root-page='%%WebOutputRootPage%%%%OutputFileExtension%%' target='_top'>$$VIEW_WITH_NAVIGATION_TOOLS_TEXT$$</a>" --><a href='#' class="i-page-link" class="i-view-in-frame-link" title='Open this Topic in a view that includes Navigation tools (Table of Contents, Index, Search)' style='display: none' data-root-page='webframe.html' target='_top'>View with Navigation Tools</a><!--DXMETADATA end-->
+    </div>
+    <!--DXMETADATA start type="Breadcrumbs" scrap="_BREADCRUMBS" --><div class="i-breadcrumbs-container"><table><tr><td>
+<a href="WhatsNew.html">What's New</a>
+ > Solid Edge V19 - What's New</td></tr></table></div><!--DXMETADATA end -->
+    
+    
+    <div id="i-body-content" class="i-body-content">
+        <!--DXMETADATA start type="TopicSection" name="BodyText"--><DIV id=i-13f8952b-bab3-4c50-9cce-dc340b8ac8cc-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>New APIs</SPAN> </DIV>
+<DIV id=i-13f8952b-bab3-4c50-9cce-dc340b8ac8cc-section-content class=i-section-content>
+<DIV id=i-b6901ad8-cc64-445e-b2ad-60eaa64a4a1b-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>SolidEdgeAssembly</SPAN> </DIV>
+<DIV id=i-b6901ad8-cc64-445e-b2ad-60eaa64a4a1b-section-content class=i-section-content>
+<UL>
+<LI><A href="SolidEdgeAssembly~AssemblyPattern~GetOccurrences.html" data-auto-update-caption="true">AssemblyPattern.GetOccurrences Method</A> 
+<LI><A href="SolidEdgeAssembly~AssemblyPatternOccurrence~Suppress.html" data-auto-update-caption="true">AssemblyPatternOccurrence.Suppress Property</A> 
+<LI><A href="SolidEdgeAssembly~Occurrence~GetExplodeMatrix.html" data-auto-update-caption="true">Occurrence.GetExplodeMatrix Method</A> 
+<LI><A href="SolidEdgeAssembly~SegmentAngularRelation3d~GetElement1.html" data-auto-update-caption="true">SegmentAngularRelation3d.GetElement1 Method</A> 
+<LI><A href="SolidEdgeAssembly~SegmentAngularRelation3d~GetElement2.html" data-auto-update-caption="true">SegmentAngularRelation3d.GetElement2 Method</A> 
+<LI><A href="SolidEdgeAssembly~SegmentAngularRelation3d~AngleCounterclockwise.html" data-auto-update-caption="true">SegmentAngularRelation3d.AngleCounterclockwise Property</A> 
+<LI><A href="SolidEdgeAssembly~SegmentAngularRelation3d~AngleFromPositiveDirection.html" data-auto-update-caption="true">SegmentAngularRelation3d.AngleFromPositiveDirection Property</A> 
+<LI><A href="SolidEdgeAssembly~SegmentAngularRelation3d~AngleToPositiveDirection.html" data-auto-update-caption="true">SegmentAngularRelation3d.AngleToPositiveDirection Property</A> 
+<LI><A href="SolidEdgeAssembly~SegmentAngularRelation3d~Dimension.html" data-auto-update-caption="true">SegmentAngularRelation3d.Dimension Property</A> 
+<LI><A href="SolidEdgeAssembly~SegmentDistanceRelation3d~GetElement1.html" data-auto-update-caption="true">SegmentDistanceRelation3d.GetElement1 Method</A> 
+<LI><A href="SolidEdgeAssembly~SegmentDistanceRelation3d~GetElement2.html" data-auto-update-caption="true">SegmentDistanceRelation3d.GetElement2 Method</A> 
+<LI><A href="SolidEdgeAssembly~SegmentDistanceRelation3d~GetElement3.html" data-auto-update-caption="true">SegmentDistanceRelation3d.GetElement3 Method</A> 
+<LI><A href="SolidEdgeAssembly~SegmentDistanceRelation3d~Dimension.html" data-auto-update-caption="true">SegmentDistanceRelation3d.Dimension Property</A> 
+<LI><A href="SolidEdgeAssembly~SegmentDistanceRelation3d~DistanceType.html" data-auto-update-caption="true">SegmentDistanceRelation3d.DistanceType Property</A> 
+<LI><A href="SolidEdgeAssembly~SegmentRadiusRelation3d~GetElement1.html" data-auto-update-caption="true">SegmentRadiusRelation3d.GetElement1 Method</A> 
+<LI><A href="SolidEdgeAssembly~SegmentRadiusRelation3d~Dimension.html" data-auto-update-caption="true">SegmentRadiusRelation3d.Dimension Property</A> 
+<LI><A href="SolidEdgeAssembly~SegmentTangentRelation3d~GetElement1.html" data-auto-update-caption="true">SegmentTangentRelation3d.GetElement1 Method</A> 
+<LI><A href="SolidEdgeAssembly~SegmentTangentRelation3d~GetElement2.html" data-auto-update-caption="true">SegmentTangentRelation3d.GetElement2 Method</A> 
+<LI><A href="SolidEdgeAssembly~SubOccurrence~GetExplodeMatrix.html" data-auto-update-caption="true">SubOccurrence.GetExplodeMatrix Method</A> 
+<LI><A href="SolidEdgeAssembly~Tube~GetPathSegmentsRelations.html" data-auto-update-caption="true">Tube.GetPathSegmentsRelations Method</A> </LI></UL></DIV>
+<DIV id=i-c48dc306-4fa2-47c7-b9f1-f88c3a59cc9a-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>SolidEdgeConstants</SPAN> </DIV>
+<DIV id=i-c48dc306-4fa2-47c7-b9f1-f88c3a59cc9a-section-content class=i-section-content>
+<UL>
+<LI><A href="SolidEdgeConstants~AngularVelocityPrecisionConstants.html" data-auto-update-caption="true">AngularVelocityPrecisionConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeConstants~AngularVelocityPrecisionConstants.html" data-auto-update-caption="true">AngularVelocityPrecisionConstants.seAngularVelocityPrecisionBillionths Constant</A> 
+<LI><A href="SolidEdgeConstants~AngularVelocityPrecisionConstants.html" data-auto-update-caption="true">AngularVelocityPrecisionConstants.seAngularVelocityPrecisionHundredBillionths Constant</A> 
+<LI><A href="SolidEdgeConstants~AngularVelocityPrecisionConstants.html" data-auto-update-caption="true">AngularVelocityPrecisionConstants.seAngularVelocityPrecisionHundredMillionths Constant</A> 
+<LI><A href="SolidEdgeConstants~AngularVelocityPrecisionConstants.html" data-auto-update-caption="true">AngularVelocityPrecisionConstants.seAngularVelocityPrecisionHundredThousandths Constant</A> 
+<LI><A href="SolidEdgeConstants~AngularVelocityPrecisionConstants.html" data-auto-update-caption="true">AngularVelocityPrecisionConstants.seAngularVelocityPrecisionHundredths Constant</A> 
+<LI><A href="SolidEdgeConstants~AngularVelocityPrecisionConstants.html" data-auto-update-caption="true">AngularVelocityPrecisionConstants.seAngularVelocityPrecisionMillionths Constant</A> 
+<LI><A href="SolidEdgeConstants~AngularVelocityPrecisionConstants.html" data-auto-update-caption="true">AngularVelocityPrecisionConstants.seAngularVelocityPrecisionOnes Constant</A> 
+<LI><A href="SolidEdgeConstants~AngularVelocityPrecisionConstants.html" data-auto-update-caption="true">AngularVelocityPrecisionConstants.seAngularVelocityPrecisionTenBillionths Constant</A> 
+<LI><A href="SolidEdgeConstants~AngularVelocityPrecisionConstants.html" data-auto-update-caption="true">AngularVelocityPrecisionConstants.seAngularVelocityPrecisionTenMillionths Constant</A> 
+<LI><A href="SolidEdgeConstants~AngularVelocityPrecisionConstants.html" data-auto-update-caption="true">AngularVelocityPrecisionConstants.seAngularVelocityPrecisionTenThousandths Constant</A> 
+<LI><A href="SolidEdgeConstants~AngularVelocityPrecisionConstants.html" data-auto-update-caption="true">AngularVelocityPrecisionConstants.seAngularVelocityPrecisionTenths Constant</A> 
+<LI><A href="SolidEdgeConstants~AngularVelocityPrecisionConstants.html" data-auto-update-caption="true">AngularVelocityPrecisionConstants.seAngularVelocityPrecisionThousandths Constant</A> </LI></UL>
+<LI><A href="SolidEdgeConstants~ApplicationDisplayConstants.html" data-auto-update-caption="true">ApplicationDisplayConstants.seAutomaticSelectionApplicationDisplay Constant</A> 
+<LI><A href="SolidEdgeConstants~ApplicationDisplayConstants.html" data-auto-update-caption="true">ApplicationDisplayConstants.seGraphicsCardDrivenAdvancedApplicationDisplay Constant</A> 
+<LI><A href="SolidEdgeConstants~ApplicationGlobalConstants.html" data-auto-update-caption="true">ApplicationGlobalConstants.seApplicationGlobalTeamCenterMode Constant</A> 
+<LI><A href="SolidEdgeConstants~BendDirectionConstants.html" data-auto-update-caption="true">BendDirectionConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeConstants~BendDirectionConstants.html" data-auto-update-caption="true">BendDirectionConstants.seBendDirectionDown Constant</A> 
+<LI><A href="SolidEdgeConstants~BendDirectionConstants.html" data-auto-update-caption="true">BendDirectionConstants.seBendDirectionUnknown Constant</A> 
+<LI><A href="SolidEdgeConstants~BendDirectionConstants.html" data-auto-update-caption="true">BendDirectionConstants.seBendDirectionUp Constant</A> </LI></UL>
+<LI><A href="SolidEdgeConstants~BlockLabelOriginLocationConstants.html" data-auto-update-caption="true">BlockLabelOriginLocationConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeConstants~BlockLabelOriginLocationConstants.html" data-auto-update-caption="true">BlockLabelOriginLocationConstants.igBlockLabelBottomCenter Constant</A> 
+<LI><A href="SolidEdgeConstants~BlockLabelOriginLocationConstants.html" data-auto-update-caption="true">BlockLabelOriginLocationConstants.igBlockLabelBottomLeft Constant</A> 
+<LI><A href="SolidEdgeConstants~BlockLabelOriginLocationConstants.html" data-auto-update-caption="true">BlockLabelOriginLocationConstants.igBlockLabelBottomRight Constant</A> 
+<LI><A href="SolidEdgeConstants~BlockLabelOriginLocationConstants.html" data-auto-update-caption="true">BlockLabelOriginLocationConstants.igBlockLabelMiddleCenter Constant</A> 
+<LI><A href="SolidEdgeConstants~BlockLabelOriginLocationConstants.html" data-auto-update-caption="true">BlockLabelOriginLocationConstants.igBlockLabelMiddleLeft Constant</A> 
+<LI><A href="SolidEdgeConstants~BlockLabelOriginLocationConstants.html" data-auto-update-caption="true">BlockLabelOriginLocationConstants.igBlockLabelMiddleRight Constant</A> 
+<LI><A href="SolidEdgeConstants~BlockLabelOriginLocationConstants.html" data-auto-update-caption="true">BlockLabelOriginLocationConstants.igBlockLabelTopCenter Constant</A> 
+<LI><A href="SolidEdgeConstants~BlockLabelOriginLocationConstants.html" data-auto-update-caption="true">BlockLabelOriginLocationConstants.igBlockLabelTopLeft Constant</A> 
+<LI><A href="SolidEdgeConstants~BlockLabelOriginLocationConstants.html" data-auto-update-caption="true">BlockLabelOriginLocationConstants.igBlockLabelTopRight Constant</A> 
+<LI><A href="SolidEdgeConstants~BlockLabelOriginLocationConstants.html" data-auto-update-caption="true">BlockLabelOriginLocationConstants.igBlockLabelUnderCenter Constant</A> 
+<LI><A href="SolidEdgeConstants~BlockLabelOriginLocationConstants.html" data-auto-update-caption="true">BlockLabelOriginLocationConstants.igBlockLabelUnderLeft Constant</A> 
+<LI><A href="SolidEdgeConstants~BlockLabelOriginLocationConstants.html" data-auto-update-caption="true">BlockLabelOriginLocationConstants.igBlockLabelUnderRight Constant</A> </LI></UL>
+<LI><A href="SolidEdgeConstants~DimStatusConstants.html" data-auto-update-caption="true">DimStatusConstants.seOneEndDetached Constant</A> 
+<LI><A href="SolidEdgeConstants~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igFlangeMatchFace Constant</A> 
+<LI><A href="SolidEdgeConstants~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igHemTypeCenteredLoop Constant</A> 
+<LI><A href="SolidEdgeConstants~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igHemTypeClosed Constant</A> 
+<LI><A href="SolidEdgeConstants~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igHemTypeClosedLoop Constant</A> 
+<LI><A href="SolidEdgeConstants~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igHemTypeCurl Constant</A> 
+<LI><A href="SolidEdgeConstants~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igHemTypeOpen Constant</A> 
+<LI><A href="SolidEdgeConstants~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igHemTypeOpenLoop Constant</A> 
+<LI><A href="SolidEdgeConstants~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igHemTypeSFlange Constant</A> 
+<LI><A href="SolidEdgeConstants~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igSMFaceCutout Constant</A> 
+<LI><A href="SolidEdgeConstants~FeatureTypeConstants.html" data-auto-update-caption="true">FeatureTypeConstants.igGussetFeatureObject Constant</A> 
+<LI><A href="SolidEdgeConstants~FeatureTypeConstants.html" data-auto-update-caption="true">FeatureTypeConstants.igMatchFlangeFaceFeatureObject Constant</A> 
+<LI><A href="SolidEdgeConstants~GussetConstants.html" data-auto-update-caption="true">GussetConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeConstants~GussetConstants.html" data-auto-update-caption="true">GussetConstants.igAutomaticProfile Constant</A> 
+<LI><A href="SolidEdgeConstants~GussetConstants.html" data-auto-update-caption="true">GussetConstants.igGussetNone Constant</A> 
+<LI><A href="SolidEdgeConstants~GussetConstants.html" data-auto-update-caption="true">GussetConstants.igIncludeRounding Constant</A> 
+<LI><A href="SolidEdgeConstants~GussetConstants.html" data-auto-update-caption="true">GussetConstants.igPatternFill Constant</A> 
+<LI><A href="SolidEdgeConstants~GussetConstants.html" data-auto-update-caption="true">GussetConstants.igPatternFit Constant</A> 
+<LI><A href="SolidEdgeConstants~GussetConstants.html" data-auto-update-caption="true">GussetConstants.igPatternFixed Constant</A> 
+<LI><A href="SolidEdgeConstants~GussetConstants.html" data-auto-update-caption="true">GussetConstants.igRoundShape Constant</A> 
+<LI><A href="SolidEdgeConstants~GussetConstants.html" data-auto-update-caption="true">GussetConstants.igSquareShape Constant</A> 
+<LI><A href="SolidEdgeConstants~GussetConstants.html" data-auto-update-caption="true">GussetConstants.igUserDrawnProfile Constant</A> </LI></UL>
+<LI><A href="SolidEdgeConstants~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeConstants~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants.seHemBendOutside Constant</A> 
+<LI><A href="SolidEdgeConstants~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants.seHemMiterCorner Constant</A> 
+<LI><A href="SolidEdgeConstants~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants.seHemNoBendRelief Constant</A> 
+<LI><A href="SolidEdgeConstants~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants.seHemNoMiter Constant</A> 
+<LI><A href="SolidEdgeConstants~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants.seHemRectBendRelief Constant</A> 
+<LI><A href="SolidEdgeConstants~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants.seHemRoundBendRelief Constant</A> 
+<LI><A href="SolidEdgeConstants~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants.seHemSideMaterialInside Constant</A> 
+<LI><A href="SolidEdgeConstants~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants.seHemSideMaterialOutside Constant</A> 
+<LI><A href="SolidEdgeConstants~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants.seHemTypeCenteredLoop Constant</A> 
+<LI><A href="SolidEdgeConstants~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants.seHemTypeClosed Constant</A> 
+<LI><A href="SolidEdgeConstants~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants.seHemTypeClosedLoop Constant</A> 
+<LI><A href="SolidEdgeConstants~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants.seHemTypeCurl Constant</A> 
+<LI><A href="SolidEdgeConstants~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants.seHemTypeOpen Constant</A> 
+<LI><A href="SolidEdgeConstants~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants.seHemTypeOpenLoop Constant</A> 
+<LI><A href="SolidEdgeConstants~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants.seHemTypeSFlange Constant</A> </LI></UL>
+<LI><A href="SolidEdgeConstants~KeypointIndexConstants.html" data-auto-update-caption="true">KeypointIndexConstants.igEllipseArcMajorReverse Constant</A> 
+<LI><A href="SolidEdgeConstants~KeypointIndexConstants.html" data-auto-update-caption="true">KeypointIndexConstants.igEllipseArcMinorReverse Constant</A> 
+<LI><A href="SolidEdgeConstants~KeypointIndexConstants.html" data-auto-update-caption="true">KeypointIndexConstants.igEllipseMajorReverse Constant</A> 
+<LI><A href="SolidEdgeConstants~KeypointIndexConstants.html" data-auto-update-caption="true">KeypointIndexConstants.igEllipseMinorReverse Constant</A> 
+<LI><A href="SolidEdgeConstants~LinearVelocityPrecisionConstants.html" data-auto-update-caption="true">LinearVelocityPrecisionConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeConstants~LinearVelocityPrecisionConstants.html" data-auto-update-caption="true">LinearVelocityPrecisionConstants.seLinearVelocityPrecisionBillionths Constant</A> 
+<LI><A href="SolidEdgeConstants~LinearVelocityPrecisionConstants.html" data-auto-update-caption="true">LinearVelocityPrecisionConstants.seLinearVelocityPrecisionHundredBillionths Constant</A> 
+<LI><A href="SolidEdgeConstants~LinearVelocityPrecisionConstants.html" data-auto-update-caption="true">LinearVelocityPrecisionConstants.seLinearVelocityPrecisionHundredMillionths Constant</A> 
+<LI><A href="SolidEdgeConstants~LinearVelocityPrecisionConstants.html" data-auto-update-caption="true">LinearVelocityPrecisionConstants.seLinearVelocityPrecisionHundredThousandths Constant</A> 
+<LI><A href="SolidEdgeConstants~LinearVelocityPrecisionConstants.html" data-auto-update-caption="true">LinearVelocityPrecisionConstants.seLinearVelocityPrecisionHundredths Constant</A> 
+<LI><A href="SolidEdgeConstants~LinearVelocityPrecisionConstants.html" data-auto-update-caption="true">LinearVelocityPrecisionConstants.seLinearVelocityPrecisionMillionths Constant</A> 
+<LI><A href="SolidEdgeConstants~LinearVelocityPrecisionConstants.html" data-auto-update-caption="true">LinearVelocityPrecisionConstants.seLinearVelocityPrecisionOnes Constant</A> 
+<LI><A href="SolidEdgeConstants~LinearVelocityPrecisionConstants.html" data-auto-update-caption="true">LinearVelocityPrecisionConstants.seLinearVelocityPrecisionTenBillionths Constant</A> 
+<LI><A href="SolidEdgeConstants~LinearVelocityPrecisionConstants.html" data-auto-update-caption="true">LinearVelocityPrecisionConstants.seLinearVelocityPrecisionTenMillionths Constant</A> 
+<LI><A href="SolidEdgeConstants~LinearVelocityPrecisionConstants.html" data-auto-update-caption="true">LinearVelocityPrecisionConstants.seLinearVelocityPrecisionTenThousandths Constant</A> 
+<LI><A href="SolidEdgeConstants~LinearVelocityPrecisionConstants.html" data-auto-update-caption="true">LinearVelocityPrecisionConstants.seLinearVelocityPrecisionTenths Constant</A> 
+<LI><A href="SolidEdgeConstants~LinearVelocityPrecisionConstants.html" data-auto-update-caption="true">LinearVelocityPrecisionConstants.seLinearVelocityPrecisionThousandths Constant</A> </LI></UL>
+<LI><A href="SolidEdgeConstants~PartCopyUpdateModeConstants.html" data-auto-update-caption="true">PartCopyUpdateModeConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeConstants~PartCopyUpdateModeConstants.html" data-auto-update-caption="true">PartCopyUpdateModeConstants.igPartCopyUpdateAutomatic Constant</A> 
+<LI><A href="SolidEdgeConstants~PartCopyUpdateModeConstants.html" data-auto-update-caption="true">PartCopyUpdateModeConstants.igPartCopyUpdateManual Constant</A> 
+<LI><A href="SolidEdgeConstants~PartCopyUpdateModeConstants.html" data-auto-update-caption="true">PartCopyUpdateModeConstants.igPartCopyUpdatePrompt Constant</A> </LI></UL>
+<LI><A href="SolidEdgeConstants~PartGlobalConstants.html" data-auto-update-caption="true">PartGlobalConstants.sePartGlobalPartCopyUpdateMode Constant</A> 
+<LI><A href="SolidEdgeConstants~SheetMetalGlobalConstants.html" data-auto-update-caption="true">SheetMetalGlobalConstants.seSheetMetalGlobalPartCopyUpdateMode Constant</A> 
+<LI><A href="SolidEdgeConstants~SubfixAlignmentConstants.html" data-auto-update-caption="true">SubfixAlignmentConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeConstants~SubfixAlignmentConstants.html" data-auto-update-caption="true">SubfixAlignmentConstants.seSubfixAlignCenter Constant</A> 
+<LI><A href="SolidEdgeConstants~SubfixAlignmentConstants.html" data-auto-update-caption="true">SubfixAlignmentConstants.seSubfixAlignLeft Constant</A> </LI></UL>
+<LI><A href="SolidEdgeConstants~TitlePosition.html" data-auto-update-caption="true">TitlePosition Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeConstants~TitlePosition.html" data-auto-update-caption="true">TitlePosition.igFooter Constant</A> 
+<LI><A href="SolidEdgeConstants~TitlePosition.html" data-auto-update-caption="true">TitlePosition.igFooterAndHeader Constant</A> 
+<LI><A href="SolidEdgeConstants~TitlePosition.html" data-auto-update-caption="true">TitlePosition.igHeader Constant</A> 
+<LI><A href="SolidEdgeConstants~TitlePosition.html" data-auto-update-caption="true">TitlePosition.igNeither Constant</A> </LI></UL>
+<LI><A href="SolidEdgeConstants~UnitOfMeasureAngularVelocityReadoutConstants.html" data-auto-update-caption="true">UnitOfMeasureAngularVelocityReadoutConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeConstants~UnitOfMeasureAngularVelocityReadoutConstants.html" data-auto-update-caption="true">UnitOfMeasureAngularVelocityReadoutConstants.seCyclePerHour Constant</A> 
+<LI><A href="SolidEdgeConstants~UnitOfMeasureAngularVelocityReadoutConstants.html" data-auto-update-caption="true">UnitOfMeasureAngularVelocityReadoutConstants.seCyclePerMinute Constant</A> 
+<LI><A href="SolidEdgeConstants~UnitOfMeasureAngularVelocityReadoutConstants.html" data-auto-update-caption="true">UnitOfMeasureAngularVelocityReadoutConstants.seCyclePerSecond Constant</A> 
+<LI><A href="SolidEdgeConstants~UnitOfMeasureAngularVelocityReadoutConstants.html" data-auto-update-caption="true">UnitOfMeasureAngularVelocityReadoutConstants.seDegreePerHour Constant</A> 
+<LI><A href="SolidEdgeConstants~UnitOfMeasureAngularVelocityReadoutConstants.html" data-auto-update-caption="true">UnitOfMeasureAngularVelocityReadoutConstants.seDegreePerMinute Constant</A> 
+<LI><A href="SolidEdgeConstants~UnitOfMeasureAngularVelocityReadoutConstants.html" data-auto-update-caption="true">UnitOfMeasureAngularVelocityReadoutConstants.seDegreePerSecond Constant</A> 
+<LI><A href="SolidEdgeConstants~UnitOfMeasureAngularVelocityReadoutConstants.html" data-auto-update-caption="true">UnitOfMeasureAngularVelocityReadoutConstants.seRadianPerHour Constant</A> 
+<LI><A href="SolidEdgeConstants~UnitOfMeasureAngularVelocityReadoutConstants.html" data-auto-update-caption="true">UnitOfMeasureAngularVelocityReadoutConstants.seRadianPerMinute Constant</A> 
+<LI><A href="SolidEdgeConstants~UnitOfMeasureAngularVelocityReadoutConstants.html" data-auto-update-caption="true">UnitOfMeasureAngularVelocityReadoutConstants.seRadianPerSecond Constant</A> </LI></UL>
+<LI><A href="SolidEdgeConstants~UnitOfMeasureLinearVelocityReadoutConstants.html" data-auto-update-caption="true">UnitOfMeasureLinearVelocityReadoutConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeConstants~UnitOfMeasureLinearVelocityReadoutConstants.html" data-auto-update-caption="true">UnitOfMeasureLinearVelocityReadoutConstants.seCentimeterPerSecond Constant</A> 
+<LI><A href="SolidEdgeConstants~UnitOfMeasureLinearVelocityReadoutConstants.html" data-auto-update-caption="true">UnitOfMeasureLinearVelocityReadoutConstants.seFootPerSecond Constant</A> 
+<LI><A href="SolidEdgeConstants~UnitOfMeasureLinearVelocityReadoutConstants.html" data-auto-update-caption="true">UnitOfMeasureLinearVelocityReadoutConstants.seInchPerSecond Constant</A> 
+<LI><A href="SolidEdgeConstants~UnitOfMeasureLinearVelocityReadoutConstants.html" data-auto-update-caption="true">UnitOfMeasureLinearVelocityReadoutConstants.seKilometerPerHour Constant</A> 
+<LI><A href="SolidEdgeConstants~UnitOfMeasureLinearVelocityReadoutConstants.html" data-auto-update-caption="true">UnitOfMeasureLinearVelocityReadoutConstants.seKilometerPerSecond Constant</A> 
+<LI><A href="SolidEdgeConstants~UnitOfMeasureLinearVelocityReadoutConstants.html" data-auto-update-caption="true">UnitOfMeasureLinearVelocityReadoutConstants.seMeterPerSecond Constant</A> 
+<LI><A href="SolidEdgeConstants~UnitOfMeasureLinearVelocityReadoutConstants.html" data-auto-update-caption="true">UnitOfMeasureLinearVelocityReadoutConstants.seMilePerHour Constant</A> 
+<LI><A href="SolidEdgeConstants~UnitOfMeasureLinearVelocityReadoutConstants.html" data-auto-update-caption="true">UnitOfMeasureLinearVelocityReadoutConstants.seMilePerSecond Constant</A> 
+<LI><A href="SolidEdgeConstants~UnitOfMeasureLinearVelocityReadoutConstants.html" data-auto-update-caption="true">UnitOfMeasureLinearVelocityReadoutConstants.seMillimeterPerSecond Constant</A> </LI></UL></LI></UL></DIV>
+<DIV id=i-e02e129a-105d-4c16-aeeb-deb3fae1bbc3-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>SolidEdgeDraft</SPAN> </DIV>
+<DIV id=i-e02e129a-105d-4c16-aeeb-deb3fae1bbc3-section-content class=i-section-content>
+<UL>
+<LI><A href="SolidEdgeDraft~Block.html" data-auto-update-caption="true">Block Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeDraft~Block~Application.html" data-auto-update-caption="true">Block.Application Property</A> 
+<LI><A href="SolidEdgeDraft~Block~DefaultView.html" data-auto-update-caption="true">Block.DefaultView Property</A> 
+<LI><A href="SolidEdgeDraft~Block~Name.html" data-auto-update-caption="true">Block.Name Property</A> 
+<LI><A href="SolidEdgeDraft~Block~OccurrenceCount.html" data-auto-update-caption="true">Block.OccurrenceCount Property</A> 
+<LI><A href="SolidEdgeDraft~Block~Parent.html" data-auto-update-caption="true">Block.Parent Property</A> 
+<LI><A href="SolidEdgeDraft~Block~ScaleDimAndAnnot.html" data-auto-update-caption="true">Block.ScaleDimAndAnnot Property</A> 
+<LI><A href="SolidEdgeDraft~Block~Views.html" data-auto-update-caption="true">Block.Views Property</A> </LI></UL>
+<LI><A href="SolidEdgeDraft~BlockLabel.html" data-auto-update-caption="true">BlockLabel Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeDraft~BlockLabel~BringForward.html" data-auto-update-caption="true">BlockLabel.BringForward Method</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~BringToFront.html" data-auto-update-caption="true">BlockLabel.BringToFront Method</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~Copy.html" data-auto-update-caption="true">BlockLabel.Copy Method</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~Cut.html" data-auto-update-caption="true">BlockLabel.Cut Method</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~Delete.html" data-auto-update-caption="true">BlockLabel.Delete Method</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~Duplicate.html" data-auto-update-caption="true">BlockLabel.Duplicate Method</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~GetOrigin.html" data-auto-update-caption="true">BlockLabel.GetOrigin Method</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~Mirror.html" data-auto-update-caption="true">BlockLabel.Mirror Method</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~Move.html" data-auto-update-caption="true">BlockLabel.Move Method</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~Range.html" data-auto-update-caption="true">BlockLabel.Range Method</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~Rotate.html" data-auto-update-caption="true">BlockLabel.Rotate Method</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~Scale.html" data-auto-update-caption="true">BlockLabel.Scale Method</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~Select.html" data-auto-update-caption="true">BlockLabel.Select Method</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~SendBackward.html" data-auto-update-caption="true">BlockLabel.SendBackward Method</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~SendToBack.html" data-auto-update-caption="true">BlockLabel.SendToBack Method</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~SetOrigin.html" data-auto-update-caption="true">BlockLabel.SetOrigin Method</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~Angle.html" data-auto-update-caption="true">BlockLabel.Angle Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~Application.html" data-auto-update-caption="true">BlockLabel.Application Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~Description.html" data-auto-update-caption="true">BlockLabel.Description Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~Document.html" data-auto-update-caption="true">BlockLabel.Document Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~Global.html" data-auto-update-caption="true">BlockLabel.Global Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~Index.html" data-auto-update-caption="true">BlockLabel.Index Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~Key.html" data-auto-update-caption="true">BlockLabel.Key Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~Layer.html" data-auto-update-caption="true">BlockLabel.Layer Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~Name.html" data-auto-update-caption="true">BlockLabel.Name Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~OriginLocation.html" data-auto-update-caption="true">BlockLabel.OriginLocation Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~Parent.html" data-auto-update-caption="true">BlockLabel.Parent Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~PositionLocked.html" data-auto-update-caption="true">BlockLabel.PositionLocked Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~Prompt.html" data-auto-update-caption="true">BlockLabel.Prompt Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~style.html" data-auto-update-caption="true">BlockLabel.style Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~Type.html" data-auto-update-caption="true">BlockLabel.Type Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~value.html" data-auto-update-caption="true">BlockLabel.value Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~VisibleInOccurrence.html" data-auto-update-caption="true">BlockLabel.VisibleInOccurrence Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabel~ZOrder.html" data-auto-update-caption="true">BlockLabel.ZOrder Property</A> </LI></UL>
+<LI><A href="SolidEdgeDraft~BlockLabelOccurrence.html" data-auto-update-caption="true">BlockLabelOccurrence Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeDraft~BlockLabelOccurrence~GetOrigin.html" data-auto-update-caption="true">BlockLabelOccurrence.GetOrigin Method</A> 
+<LI><A href="SolidEdgeDraft~BlockLabelOccurrence~SetOrigin.html" data-auto-update-caption="true">BlockLabelOccurrence.SetOrigin Method</A> 
+<LI><A href="SolidEdgeDraft~BlockLabelOccurrence~Angle.html" data-auto-update-caption="true">BlockLabelOccurrence.Angle Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabelOccurrence~Application.html" data-auto-update-caption="true">BlockLabelOccurrence.Application Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabelOccurrence~BlockLabel.html" data-auto-update-caption="true">BlockLabelOccurrence.BlockLabel Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabelOccurrence~Description.html" data-auto-update-caption="true">BlockLabelOccurrence.Description Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabelOccurrence~Global.html" data-auto-update-caption="true">BlockLabelOccurrence.Global Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabelOccurrence~Layer.html" data-auto-update-caption="true">BlockLabelOccurrence.Layer Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabelOccurrence~Name.html" data-auto-update-caption="true">BlockLabelOccurrence.Name Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabelOccurrence~OriginLocation.html" data-auto-update-caption="true">BlockLabelOccurrence.OriginLocation Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabelOccurrence~Parent.html" data-auto-update-caption="true">BlockLabelOccurrence.Parent Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabelOccurrence~PositionLocked.html" data-auto-update-caption="true">BlockLabelOccurrence.PositionLocked Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabelOccurrence~Prompt.html" data-auto-update-caption="true">BlockLabelOccurrence.Prompt Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabelOccurrence~style.html" data-auto-update-caption="true">BlockLabelOccurrence.style Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabelOccurrence~value.html" data-auto-update-caption="true">BlockLabelOccurrence.value Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabelOccurrence~VisibleInOccurrence.html" data-auto-update-caption="true">BlockLabelOccurrence.VisibleInOccurrence Property</A> </LI></UL>
+<LI><A href="SolidEdgeDraft~BlockLabelOccurrences.html" data-auto-update-caption="true">BlockLabelOccurrences Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeDraft~BlockLabelOccurrences~Item.html" data-auto-update-caption="true">BlockLabelOccurrences.Item Method</A> 
+<LI><A href="SolidEdgeDraft~BlockLabelOccurrences~Application.html" data-auto-update-caption="true">BlockLabelOccurrences.Application Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabelOccurrences~Count.html" data-auto-update-caption="true">BlockLabelOccurrences.Count Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabelOccurrences~Parent.html" data-auto-update-caption="true">BlockLabelOccurrences.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgeDraft~BlockLabelOriginLocationConstants.html" data-auto-update-caption="true">BlockLabelOriginLocationConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeDraft~BlockLabelOriginLocationConstants.html" data-auto-update-caption="true">BlockLabelOriginLocationConstants.igBlockLabelBottomCenter Constant</A> 
+<LI><A href="SolidEdgeDraft~BlockLabelOriginLocationConstants.html" data-auto-update-caption="true">BlockLabelOriginLocationConstants.igBlockLabelBottomLeft Constant</A> 
+<LI><A href="SolidEdgeDraft~BlockLabelOriginLocationConstants.html" data-auto-update-caption="true">BlockLabelOriginLocationConstants.igBlockLabelBottomRight Constant</A> 
+<LI><A href="SolidEdgeDraft~BlockLabelOriginLocationConstants.html" data-auto-update-caption="true">BlockLabelOriginLocationConstants.igBlockLabelMiddleCenter Constant</A> 
+<LI><A href="SolidEdgeDraft~BlockLabelOriginLocationConstants.html" data-auto-update-caption="true">BlockLabelOriginLocationConstants.igBlockLabelMiddleLeft Constant</A> 
+<LI><A href="SolidEdgeDraft~BlockLabelOriginLocationConstants.html" data-auto-update-caption="true">BlockLabelOriginLocationConstants.igBlockLabelMiddleRight Constant</A> 
+<LI><A href="SolidEdgeDraft~BlockLabelOriginLocationConstants.html" data-auto-update-caption="true">BlockLabelOriginLocationConstants.igBlockLabelTopCenter Constant</A> 
+<LI><A href="SolidEdgeDraft~BlockLabelOriginLocationConstants.html" data-auto-update-caption="true">BlockLabelOriginLocationConstants.igBlockLabelTopLeft Constant</A> 
+<LI><A href="SolidEdgeDraft~BlockLabelOriginLocationConstants.html" data-auto-update-caption="true">BlockLabelOriginLocationConstants.igBlockLabelTopRight Constant</A> 
+<LI><A href="SolidEdgeDraft~BlockLabelOriginLocationConstants.html" data-auto-update-caption="true">BlockLabelOriginLocationConstants.igBlockLabelUnderCenter Constant</A> 
+<LI><A href="SolidEdgeDraft~BlockLabelOriginLocationConstants.html" data-auto-update-caption="true">BlockLabelOriginLocationConstants.igBlockLabelUnderLeft Constant</A> 
+<LI><A href="SolidEdgeDraft~BlockLabelOriginLocationConstants.html" data-auto-update-caption="true">BlockLabelOriginLocationConstants.igBlockLabelUnderRight Constant</A> </LI></UL>
+<LI><A href="SolidEdgeDraft~BlockLabels.html" data-auto-update-caption="true">BlockLabels Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeDraft~BlockLabels~Add.html" data-auto-update-caption="true">BlockLabels.Add Method</A> 
+<LI><A href="SolidEdgeDraft~BlockLabels~Item.html" data-auto-update-caption="true">BlockLabels.Item Method</A> 
+<LI><A href="SolidEdgeDraft~BlockLabels~Application.html" data-auto-update-caption="true">BlockLabels.Application Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabels~Count.html" data-auto-update-caption="true">BlockLabels.Count Property</A> 
+<LI><A href="SolidEdgeDraft~BlockLabels~Parent.html" data-auto-update-caption="true">BlockLabels.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgeDraft~BlockOccurrence.html" data-auto-update-caption="true">BlockOccurrence Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeDraft~BlockOccurrence~BringForward.html" data-auto-update-caption="true">BlockOccurrence.BringForward Method</A> 
+<LI><A href="SolidEdgeDraft~BlockOccurrence~BringToFront.html" data-auto-update-caption="true">BlockOccurrence.BringToFront Method</A> 
+<LI><A href="SolidEdgeDraft~BlockOccurrence~Copy.html" data-auto-update-caption="true">BlockOccurrence.Copy Method</A> 
+<LI><A href="SolidEdgeDraft~BlockOccurrence~Cut.html" data-auto-update-caption="true">BlockOccurrence.Cut Method</A> 
+<LI><A href="SolidEdgeDraft~BlockOccurrence~Delete.html" data-auto-update-caption="true">BlockOccurrence.Delete Method</A> 
+<LI><A href="SolidEdgeDraft~BlockOccurrence~Duplicate.html" data-auto-update-caption="true">BlockOccurrence.Duplicate Method</A> 
+<LI><A href="SolidEdgeDraft~BlockOccurrence~Mirror.html" data-auto-update-caption="true">BlockOccurrence.Mirror Method</A> 
+<LI><A href="SolidEdgeDraft~BlockOccurrence~Move.html" data-auto-update-caption="true">BlockOccurrence.Move Method</A> 
+<LI><A href="SolidEdgeDraft~BlockOccurrence~Range.html" data-auto-update-caption="true">BlockOccurrence.Range Method</A> 
+<LI><A href="SolidEdgeDraft~BlockOccurrence~Rotate.html" data-auto-update-caption="true">BlockOccurrence.Rotate Method</A> 
+<LI><A href="SolidEdgeDraft~BlockOccurrence~Scale.html" data-auto-update-caption="true">BlockOccurrence.Scale Method</A> 
+<LI><A href="SolidEdgeDraft~BlockOccurrence~Select.html" data-auto-update-caption="true">BlockOccurrence.Select Method</A> 
+<LI><A href="SolidEdgeDraft~BlockOccurrence~SendBackward.html" data-auto-update-caption="true">BlockOccurrence.SendBackward Method</A> 
+<LI><A href="SolidEdgeDraft~BlockOccurrence~SendToBack.html" data-auto-update-caption="true">BlockOccurrence.SendToBack Method</A> 
+<LI><A href="SolidEdgeDraft~BlockOccurrence~Unblock.html" data-auto-update-caption="true">BlockOccurrence.Unblock Method</A> 
+<LI><A href="SolidEdgeDraft~BlockOccurrence~Application.html" data-auto-update-caption="true">BlockOccurrence.Application Property</A> 
+<LI><A href="SolidEdgeDraft~BlockOccurrence~Block.html" data-auto-update-caption="true">BlockOccurrence.Block Property</A> 
+<LI><A href="SolidEdgeDraft~BlockOccurrence~BlockLabelOccurrences.html" data-auto-update-caption="true">BlockOccurrence.BlockLabelOccurrences Property</A> 
+<LI><A href="SolidEdgeDraft~BlockOccurrence~BlockView.html" data-auto-update-caption="true">BlockOccurrence.BlockView Property</A> 
+<LI><A href="SolidEdgeDraft~BlockOccurrence~Document.html" data-auto-update-caption="true">BlockOccurrence.Document Property</A> 
+<LI><A href="SolidEdgeDraft~BlockOccurrence~Index.html" data-auto-update-caption="true">BlockOccurrence.Index Property</A> 
+<LI><A href="SolidEdgeDraft~BlockOccurrence~Key.html" data-auto-update-caption="true">BlockOccurrence.Key Property</A> 
+<LI><A href="SolidEdgeDraft~BlockOccurrence~Layer.html" data-auto-update-caption="true">BlockOccurrence.Layer Property</A> 
+<LI><A href="SolidEdgeDraft~BlockOccurrence~MemberReference.html" data-auto-update-caption="true">BlockOccurrence.MemberReference Property</A> 
+<LI><A href="SolidEdgeDraft~BlockOccurrence~Name.html" data-auto-update-caption="true">BlockOccurrence.Name Property</A> 
+<LI><A href="SolidEdgeDraft~BlockOccurrence~Parent.html" data-auto-update-caption="true">BlockOccurrence.Parent Property</A> 
+<LI><A href="SolidEdgeDraft~BlockOccurrence~Type.html" data-auto-update-caption="true">BlockOccurrence.Type Property</A> 
+<LI><A href="SolidEdgeDraft~BlockOccurrence~ZOrder.html" data-auto-update-caption="true">BlockOccurrence.ZOrder Property</A> </LI></UL>
+<LI><A href="SolidEdgeDraft~BlockOccurrences.html" data-auto-update-caption="true">BlockOccurrences Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeDraft~BlockOccurrences~Add.html" data-auto-update-caption="true">BlockOccurrences.Add Method</A> 
+<LI><A href="SolidEdgeDraft~BlockOccurrences~Item.html" data-auto-update-caption="true">BlockOccurrences.Item Method</A> 
+<LI><A href="SolidEdgeDraft~BlockOccurrences~Application.html" data-auto-update-caption="true">BlockOccurrences.Application Property</A> 
+<LI><A href="SolidEdgeDraft~BlockOccurrences~Count.html" data-auto-update-caption="true">BlockOccurrences.Count Property</A> 
+<LI><A href="SolidEdgeDraft~BlockOccurrences~Parent.html" data-auto-update-caption="true">BlockOccurrences.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgeDraft~Blocks.html" data-auto-update-caption="true">Blocks Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeDraft~Blocks~Add.html" data-auto-update-caption="true">Blocks.Add Method</A> 
+<LI><A href="SolidEdgeDraft~Blocks~CopyBlock.html" data-auto-update-caption="true">Blocks.CopyBlock Method</A> 
+<LI><A href="SolidEdgeDraft~Blocks~Item.html" data-auto-update-caption="true">Blocks.Item Method</A> 
+<LI><A href="SolidEdgeDraft~Blocks~Application.html" data-auto-update-caption="true">Blocks.Application Property</A> 
+<LI><A href="SolidEdgeDraft~Blocks~Count.html" data-auto-update-caption="true">Blocks.Count Property</A> 
+<LI><A href="SolidEdgeDraft~Blocks~Parent.html" data-auto-update-caption="true">Blocks.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgeDraft~BlockView.html" data-auto-update-caption="true">BlockView Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeDraft~BlockView~Delete.html" data-auto-update-caption="true">BlockView.Delete Method</A> 
+<LI><A href="SolidEdgeDraft~BlockView~GetOrigin.html" data-auto-update-caption="true">BlockView.GetOrigin Method</A> 
+<LI><A href="SolidEdgeDraft~BlockView~ReplaceGraphics.html" data-auto-update-caption="true">BlockView.ReplaceGraphics Method</A> 
+<LI><A href="SolidEdgeDraft~BlockView~SetOrigin.html" data-auto-update-caption="true">BlockView.SetOrigin Method</A> 
+<LI><A href="SolidEdgeDraft~BlockView~UpdatePreview.html" data-auto-update-caption="true">BlockView.UpdatePreview Method</A> 
+<LI><A href="SolidEdgeDraft~BlockView~Application.html" data-auto-update-caption="true">BlockView.Application Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~Arcs2d.html" data-auto-update-caption="true">BlockView.Arcs2d Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~AttributeSets.html" data-auto-update-caption="true">BlockView.AttributeSets Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~Balloons.html" data-auto-update-caption="true">BlockView.Balloons Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~BlockLabels.html" data-auto-update-caption="true">BlockView.BlockLabels Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~BlockOccurrences.html" data-auto-update-caption="true">BlockView.BlockOccurrences Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~BoltHoleCircles.html" data-auto-update-caption="true">BlockView.BoltHoleCircles Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~Boundaries2d.html" data-auto-update-caption="true">BlockView.Boundaries2d Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~BsplineCurves2d.html" data-auto-update-caption="true">BlockView.BsplineCurves2d Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~CenterLines.html" data-auto-update-caption="true">BlockView.CenterLines Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~CenterMarks.html" data-auto-update-caption="true">BlockView.CenterMarks Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~Circles2d.html" data-auto-update-caption="true">BlockView.Circles2d Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~ComplexStrings2d.html" data-auto-update-caption="true">BlockView.ComplexStrings2d Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~Connectors.html" data-auto-update-caption="true">BlockView.Connectors Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~CornerAnnotations.html" data-auto-update-caption="true">BlockView.CornerAnnotations Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~Curves2d.html" data-auto-update-caption="true">BlockView.Curves2d Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~DatumFrames.html" data-auto-update-caption="true">BlockView.DatumFrames Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~DatumPoints.html" data-auto-update-caption="true">BlockView.DatumPoints Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~DatumTargets.html" data-auto-update-caption="true">BlockView.DatumTargets Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~Dimensions.html" data-auto-update-caption="true">BlockView.Dimensions Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~Document.html" data-auto-update-caption="true">BlockView.Document Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~DrawingViews.html" data-auto-update-caption="true">BlockView.DrawingViews Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~Ellipses2d.html" data-auto-update-caption="true">BlockView.Ellipses2d Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~EllipticalArcs2d.html" data-auto-update-caption="true">BlockView.EllipticalArcs2d Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~FeatureControlFrames.html" data-auto-update-caption="true">BlockView.FeatureControlFrames Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~Index.html" data-auto-update-caption="true">BlockView.Index Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~IsAttributeSetPresent.html" data-auto-update-caption="true">BlockView.IsAttributeSetPresent Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~Leaders.html" data-auto-update-caption="true">BlockView.Leaders Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~Lines2d.html" data-auto-update-caption="true">BlockView.Lines2d Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~LineStrings2d.html" data-auto-update-caption="true">BlockView.LineStrings2d Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~Name.html" data-auto-update-caption="true">BlockView.Name Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~Parent.html" data-auto-update-caption="true">BlockView.Parent Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~Points2d.html" data-auto-update-caption="true">BlockView.Points2d Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~Relations2d.html" data-auto-update-caption="true">BlockView.Relations2d Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~SmartFrames2d.html" data-auto-update-caption="true">BlockView.SmartFrames2d Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~SurfaceFinishSymbols.html" data-auto-update-caption="true">BlockView.SurfaceFinishSymbols Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~TextBoxes.html" data-auto-update-caption="true">BlockView.TextBoxes Property</A> 
+<LI><A href="SolidEdgeDraft~BlockView~WeldSymbols.html" data-auto-update-caption="true">BlockView.WeldSymbols Property</A> </LI></UL>
+<LI><A href="SolidEdgeDraft~BlockViews.html" data-auto-update-caption="true">BlockViews Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeDraft~BlockViews~Add.html" data-auto-update-caption="true">BlockViews.Add Method</A> 
+<LI><A href="SolidEdgeDraft~BlockViews~Item.html" data-auto-update-caption="true">BlockViews.Item Method</A> 
+<LI><A href="SolidEdgeDraft~BlockViews~Application.html" data-auto-update-caption="true">BlockViews.Application Property</A> 
+<LI><A href="SolidEdgeDraft~BlockViews~Block.html" data-auto-update-caption="true">BlockViews.Block Property</A> 
+<LI><A href="SolidEdgeDraft~BlockViews~Count.html" data-auto-update-caption="true">BlockViews.Count Property</A> 
+<LI><A href="SolidEdgeDraft~BlockViews~Parent.html" data-auto-update-caption="true">BlockViews.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgeDraft~CuttingPlane.html" data-auto-update-caption="true">CuttingPlane Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeDraft~CuttingPlane~Application.html" data-auto-update-caption="true">CuttingPlane.Application Property</A> 
+<LI><A href="SolidEdgeDraft~CuttingPlane~Caption.html" data-auto-update-caption="true">CuttingPlane.Caption Property</A> 
+<LI><A href="SolidEdgeDraft~CuttingPlane~DisplayCaption.html" data-auto-update-caption="true">CuttingPlane.DisplayCaption Property</A> 
+<LI><A href="SolidEdgeDraft~CuttingPlane~DisplayType.html" data-auto-update-caption="true">CuttingPlane.DisplayType Property</A> 
+<LI><A href="SolidEdgeDraft~CuttingPlane~LineType.html" data-auto-update-caption="true">CuttingPlane.LineType Property</A> 
+<LI><A href="SolidEdgeDraft~CuttingPlane~LineWidth.html" data-auto-update-caption="true">CuttingPlane.LineWidth Property</A> 
+<LI><A href="SolidEdgeDraft~CuttingPlane~StyleName.html" data-auto-update-caption="true">CuttingPlane.StyleName Property</A> 
+<LI><A href="SolidEdgeDraft~CuttingPlane~TerminatorRatio.html" data-auto-update-caption="true">CuttingPlane.TerminatorRatio Property</A> 
+<LI><A href="SolidEdgeDraft~CuttingPlane~TerminatorType.html" data-auto-update-caption="true">CuttingPlane.TerminatorType Property</A> 
+<LI><A href="SolidEdgeDraft~CuttingPlane~TextColor.html" data-auto-update-caption="true">CuttingPlane.TextColor Property</A> 
+<LI><A href="SolidEdgeDraft~CuttingPlane~TextFont.html" data-auto-update-caption="true">CuttingPlane.TextFont Property</A> 
+<LI><A href="SolidEdgeDraft~CuttingPlane~TextFontStyle.html" data-auto-update-caption="true">CuttingPlane.TextFontStyle Property</A> 
+<LI><A href="SolidEdgeDraft~CuttingPlane~TextHeight.html" data-auto-update-caption="true">CuttingPlane.TextHeight Property</A> 
+<LI><A href="SolidEdgeDraft~CuttingPlane~TextRatio.html" data-auto-update-caption="true">CuttingPlane.TextRatio Property</A> </LI></UL>
+<LI><A href="SolidEdgeDraft~DraftDocument~Blocks.html" data-auto-update-caption="true">DraftDocument.Blocks Property</A> 
+<LI><A href="SolidEdgeDraft~DraftDocument~Tables.html" data-auto-update-caption="true">DraftDocument.Tables Property</A> 
+<LI><A href="SolidEdgeDraft~DrawingView~ConvertToIndependentDetailView.html" data-auto-update-caption="true">DrawingView.ConvertToIndependentDetailView Method</A> 
+<LI><A href="SolidEdgeDraft~DVArc2d~BendAngle.html" data-auto-update-caption="true">DVArc2d.BendAngle Property</A> 
+<LI><A href="SolidEdgeDraft~DVArc2d~BendRadius.html" data-auto-update-caption="true">DVArc2d.BendRadius Property</A> 
+<LI><A href="SolidEdgeDraft~DVBSplineCurve2d~BendAngle.html" data-auto-update-caption="true">DVBSplineCurve2d.BendAngle Property</A> 
+<LI><A href="SolidEdgeDraft~DVBSplineCurve2d~BendRadius.html" data-auto-update-caption="true">DVBSplineCurve2d.BendRadius Property</A> 
+<LI><A href="SolidEdgeDraft~DVCircle2d~BendAngle.html" data-auto-update-caption="true">DVCircle2d.BendAngle Property</A> 
+<LI><A href="SolidEdgeDraft~DVCircle2d~BendRadius.html" data-auto-update-caption="true">DVCircle2d.BendRadius Property</A> 
+<LI><A href="SolidEdgeDraft~DVEllipse2d~BendAngle.html" data-auto-update-caption="true">DVEllipse2d.BendAngle Property</A> 
+<LI><A href="SolidEdgeDraft~DVEllipse2d~BendRadius.html" data-auto-update-caption="true">DVEllipse2d.BendRadius Property</A> 
+<LI><A href="SolidEdgeDraft~DVEllipticalArc2d~BendAngle.html" data-auto-update-caption="true">DVEllipticalArc2d.BendAngle Property</A> 
+<LI><A href="SolidEdgeDraft~DVEllipticalArc2d~BendRadius.html" data-auto-update-caption="true">DVEllipticalArc2d.BendRadius Property</A> 
+<LI><A href="SolidEdgeDraft~DVLine2d~BendQuantity.html" data-auto-update-caption="true">DVLine2d.BendQuantity Property</A> 
+<LI><A href="SolidEdgeDraft~ModelLink~ChangeSource.html" data-auto-update-caption="true">ModelLink.ChangeSource Method</A> 
+<LI><A href="SolidEdgeDraft~ModelMember~ShowEdgesHiddenByOtherParts.html" data-auto-update-caption="true">ModelMember.ShowEdgesHiddenByOtherParts Property</A> 
+<LI><A href="SolidEdgeDraft~Sheet~BlockLabels.html" data-auto-update-caption="true">Sheet.BlockLabels Property</A> 
+<LI><A href="SolidEdgeDraft~Sheet~BlockOccurrences.html" data-auto-update-caption="true">Sheet.BlockOccurrences Property</A> 
+<LI><A href="SolidEdgeDraft~Sheet~DefaultTextScale.html" data-auto-update-caption="true">Sheet.DefaultTextScale Property</A> 
+<LI><A href="SolidEdgeDraft~Table.html" data-auto-update-caption="true">Table Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeDraft~Table~Delete.html" data-auto-update-caption="true">Table.Delete Method</A> 
+<LI><A href="SolidEdgeDraft~Table~SetOrigin.html" data-auto-update-caption="true">Table.SetOrigin Method</A> 
+<LI><A href="SolidEdgeDraft~Table~Update.html" data-auto-update-caption="true">Table.Update Method</A> 
+<LI><A href="SolidEdgeDraft~Table~Application.html" data-auto-update-caption="true">Table.Application Property</A> 
+<LI><A href="SolidEdgeDraft~Table~Cell.html" data-auto-update-caption="true">Table.Cell Property</A> 
+<LI><A href="SolidEdgeDraft~Table~ColumnHeaderPosition.html" data-auto-update-caption="true">Table.ColumnHeaderPosition Property</A> 
+<LI><A href="SolidEdgeDraft~Table~Columns.html" data-auto-update-caption="true">Table.Columns Property</A> 
+<LI><A href="SolidEdgeDraft~Table~Margin.html" data-auto-update-caption="true">Table.Margin Property</A> 
+<LI><A href="SolidEdgeDraft~Table~MaximumRows.html" data-auto-update-caption="true">Table.MaximumRows Property</A> 
+<LI><A href="SolidEdgeDraft~Table~PageGap.html" data-auto-update-caption="true">Table.PageGap Property</A> 
+<LI><A href="SolidEdgeDraft~Table~Parent.html" data-auto-update-caption="true">Table.Parent Property</A> 
+<LI><A href="SolidEdgeDraft~Table~ReverseDisplayOrder.html" data-auto-update-caption="true">Table.ReverseDisplayOrder Property</A> 
+<LI><A href="SolidEdgeDraft~Table~Rows.html" data-auto-update-caption="true">Table.Rows Property</A> 
+<LI><A href="SolidEdgeDraft~Table~ShowColumnHeader.html" data-auto-update-caption="true">Table.ShowColumnHeader Property</A> 
+<LI><A href="SolidEdgeDraft~Table~TableStyle.html" data-auto-update-caption="true">Table.TableStyle Property</A> 
+<LI><A href="SolidEdgeDraft~Table~Titles.html" data-auto-update-caption="true">Table.Titles Property</A> </LI></UL>
+<LI><A href="SolidEdgeDraft~TableCell.html" data-auto-update-caption="true">TableCell Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeDraft~TableCell~Application.html" data-auto-update-caption="true">TableCell.Application Property</A> 
+<LI><A href="SolidEdgeDraft~TableCell~Parent.html" data-auto-update-caption="true">TableCell.Parent Property</A> 
+<LI><A href="SolidEdgeDraft~TableCell~value.html" data-auto-update-caption="true">TableCell.value Property</A> </LI></UL>
+<LI><A href="SolidEdgeDraft~TableColumn.html" data-auto-update-caption="true">TableColumn Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeDraft~TableColumn~Delete.html" data-auto-update-caption="true">TableColumn.Delete Method</A> 
+<LI><A href="SolidEdgeDraft~TableColumn~Application.html" data-auto-update-caption="true">TableColumn.Application Property</A> 
+<LI><A href="SolidEdgeDraft~TableColumn~DataAlignment.html" data-auto-update-caption="true">TableColumn.DataAlignment Property</A> 
+<LI><A href="SolidEdgeDraft~TableColumn~Header.html" data-auto-update-caption="true">TableColumn.Header Property</A> 
+<LI><A href="SolidEdgeDraft~TableColumn~HeaderAlignment.html" data-auto-update-caption="true">TableColumn.HeaderAlignment Property</A> 
+<LI><A href="SolidEdgeDraft~TableColumn~Index.html" data-auto-update-caption="true">TableColumn.Index Property</A> 
+<LI><A href="SolidEdgeDraft~TableColumn~Parent.html" data-auto-update-caption="true">TableColumn.Parent Property</A> 
+<LI><A href="SolidEdgeDraft~TableColumn~Show.html" data-auto-update-caption="true">TableColumn.Show Property</A> 
+<LI><A href="SolidEdgeDraft~TableColumn~SortAscending.html" data-auto-update-caption="true">TableColumn.SortAscending Property</A> 
+<LI><A href="SolidEdgeDraft~TableColumn~SortPrecedence.html" data-auto-update-caption="true">TableColumn.SortPrecedence Property</A> 
+<LI><A href="SolidEdgeDraft~TableColumn~Width.html" data-auto-update-caption="true">TableColumn.Width Property</A> </LI></UL>
+<LI><A href="SolidEdgeDraft~TableColumns.html" data-auto-update-caption="true">TableColumns Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeDraft~TableColumns~Add.html" data-auto-update-caption="true">TableColumns.Add Method</A> 
+<LI><A href="SolidEdgeDraft~TableColumns~Item.html" data-auto-update-caption="true">TableColumns.Item Method</A> 
+<LI><A href="SolidEdgeDraft~TableColumns~Application.html" data-auto-update-caption="true">TableColumns.Application Property</A> 
+<LI><A href="SolidEdgeDraft~TableColumns~Count.html" data-auto-update-caption="true">TableColumns.Count Property</A> 
+<LI><A href="SolidEdgeDraft~TableColumns~Parent.html" data-auto-update-caption="true">TableColumns.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgeDraft~TableRow.html" data-auto-update-caption="true">TableRow Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeDraft~TableRow~Delete.html" data-auto-update-caption="true">TableRow.Delete Method</A> 
+<LI><A href="SolidEdgeDraft~TableRow~Application.html" data-auto-update-caption="true">TableRow.Application Property</A> 
+<LI><A href="SolidEdgeDraft~TableRow~Index.html" data-auto-update-caption="true">TableRow.Index Property</A> 
+<LI><A href="SolidEdgeDraft~TableRow~Parent.html" data-auto-update-caption="true">TableRow.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgeDraft~TableRows.html" data-auto-update-caption="true">TableRows Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeDraft~TableRows~Add.html" data-auto-update-caption="true">TableRows.Add Method</A> 
+<LI><A href="SolidEdgeDraft~TableRows~Item.html" data-auto-update-caption="true">TableRows.Item Method</A> 
+<LI><A href="SolidEdgeDraft~TableRows~Application.html" data-auto-update-caption="true">TableRows.Application Property</A> 
+<LI><A href="SolidEdgeDraft~TableRows~Count.html" data-auto-update-caption="true">TableRows.Count Property</A> 
+<LI><A href="SolidEdgeDraft~TableRows~Parent.html" data-auto-update-caption="true">TableRows.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgeDraft~Tables.html" data-auto-update-caption="true">Tables Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeDraft~Tables~Add.html" data-auto-update-caption="true">Tables.Add Method</A> 
+<LI><A href="SolidEdgeDraft~Tables~Item.html" data-auto-update-caption="true">Tables.Item Method</A> 
+<LI><A href="SolidEdgeDraft~Tables~Application.html" data-auto-update-caption="true">Tables.Application Property</A> 
+<LI><A href="SolidEdgeDraft~Tables~Count.html" data-auto-update-caption="true">Tables.Count Property</A> 
+<LI><A href="SolidEdgeDraft~Tables~Parent.html" data-auto-update-caption="true">Tables.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgeDraft~TableTitle.html" data-auto-update-caption="true">TableTitle Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeDraft~TableTitle~Delete.html" data-auto-update-caption="true">TableTitle.Delete Method</A> 
+<LI><A href="SolidEdgeDraft~TableTitle~Application.html" data-auto-update-caption="true">TableTitle.Application Property</A> 
+<LI><A href="SolidEdgeDraft~TableTitle~Index.html" data-auto-update-caption="true">TableTitle.Index Property</A> 
+<LI><A href="SolidEdgeDraft~TableTitle~Parent.html" data-auto-update-caption="true">TableTitle.Parent Property</A> 
+<LI><A href="SolidEdgeDraft~TableTitle~Position.html" data-auto-update-caption="true">TableTitle.Position Property</A> 
+<LI><A href="SolidEdgeDraft~TableTitle~value.html" data-auto-update-caption="true">TableTitle.value Property</A> </LI></UL>
+<LI><A href="SolidEdgeDraft~TableTitles.html" data-auto-update-caption="true">TableTitles Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeDraft~TableTitles~Add.html" data-auto-update-caption="true">TableTitles.Add Method</A> 
+<LI><A href="SolidEdgeDraft~TableTitles~Item.html" data-auto-update-caption="true">TableTitles.Item Method</A> 
+<LI><A href="SolidEdgeDraft~TableTitles~Application.html" data-auto-update-caption="true">TableTitles.Application Property</A> 
+<LI><A href="SolidEdgeDraft~TableTitles~Count.html" data-auto-update-caption="true">TableTitles.Count Property</A> 
+<LI><A href="SolidEdgeDraft~TableTitles~Parent.html" data-auto-update-caption="true">TableTitles.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgeDraft~TitlePosition.html" data-auto-update-caption="true">TitlePosition Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeDraft~TitlePosition.html" data-auto-update-caption="true">TitlePosition.igFooter Constant</A> 
+<LI><A href="SolidEdgeDraft~TitlePosition.html" data-auto-update-caption="true">TitlePosition.igFooterAndHeader Constant</A> 
+<LI><A href="SolidEdgeDraft~TitlePosition.html" data-auto-update-caption="true">TitlePosition.igHeader Constant</A> 
+<LI><A href="SolidEdgeDraft~TitlePosition.html" data-auto-update-caption="true">TitlePosition.igNeither Constant</A> </LI></UL></LI></UL></DIV>
+<DIV id=i-f4a83053-dcdd-4fa4-be4e-27ef9dec8db2-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>SolidEdgeFramework</SPAN> </DIV>
+<DIV id=i-f4a83053-dcdd-4fa4-be4e-27ef9dec8db2-section-content class=i-section-content>
+<UL>
+<LI><A href="SolidEdgeFramework~_ISolidEdgeTCE.html" data-auto-update-caption="true">_ISolidEdgeTCE Object</A> 
+<LI><A href="SolidEdgeFramework~Application~ApprenticeMode.html" data-auto-update-caption="true">Application.ApprenticeMode Property</A> 
+<LI><A href="SolidEdgeFramework~Application~IsIdling.html" data-auto-update-caption="true">Application.IsIdling Property</A> 
+<LI><A href="SolidEdgeFramework~Application~ShowStartupScreen.html" data-auto-update-caption="true">Application.ShowStartupScreen Property</A> 
+<LI><A href="SolidEdgeFramework~Application~SolidEdgeTCE.html" data-auto-update-caption="true">Application.SolidEdgeTCE Property</A> 
+<LI><A href="SolidEdgeFramework~ApplicationGlobalConstants.html" data-auto-update-caption="true">ApplicationGlobalConstants.seApplicationGlobalTeamCenterMode Constant</A> 
+<LI><A href="SolidEdgeFramework~SolidEdgeTCE.html" data-auto-update-caption="true">SolidEdgeTCE Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeFramework~SolidEdgeTCE~AssignItemID.html" data-auto-update-caption="true">SolidEdgeTCE.AssignItemID Method</A> 
+<LI><A href="SolidEdgeFramework~SolidEdgeTCE~CheckInDocumentsToTeamCenterServer.html" data-auto-update-caption="true">SolidEdgeTCE.CheckInDocumentsToTeamCenterServer Method</A> 
+<LI><A href="SolidEdgeFramework~SolidEdgeTCE~CheckOutDocumentsFromTeamCenterServer.html" data-auto-update-caption="true">SolidEdgeTCE.CheckOutDocumentsFromTeamCenterServer Method</A> 
+<LI><A href="SolidEdgeFramework~SolidEdgeTCE~DoesTeamCenterFileExists.html" data-auto-update-caption="true">SolidEdgeTCE.DoesTeamCenterFileExists Method</A> 
+<LI><A href="SolidEdgeFramework~SolidEdgeTCE~GetDocumentUID.html" data-auto-update-caption="true">SolidEdgeTCE.GetDocumentUID Method</A> 
+<LI><A href="SolidEdgeFramework~SolidEdgeTCE~GetPDMCachePath.html" data-auto-update-caption="true">SolidEdgeTCE.GetPDMCachePath Method</A> 
+<LI><A href="SolidEdgeFramework~SolidEdgeTCE~GetTeamCenterMode.html" data-auto-update-caption="true">SolidEdgeTCE.GetTeamCenterMode Method</A> 
+<LI><A href="SolidEdgeFramework~SolidEdgeTCE~IsTeamCenterFileCheckedOut.html" data-auto-update-caption="true">SolidEdgeTCE.IsTeamCenterFileCheckedOut Method</A> 
+<LI><A href="SolidEdgeFramework~SolidEdgeTCE~SetTeamCenterMode.html" data-auto-update-caption="true">SolidEdgeTCE.SetTeamCenterMode Method</A> 
+<LI><A href="SolidEdgeFramework~SolidEdgeTCE~ValidateLogin.html" data-auto-update-caption="true">SolidEdgeTCE.ValidateLogin Method</A> </LI></UL>
+<LI><A href="SolidEdgeFramework~variable~IsSuppressVariable.html" data-auto-update-caption="true">variable.IsSuppressVariable Property</A> </LI></UL></DIV>
+<DIV id=i-037f9967-9b06-48c0-99e5-7bacb76aee62-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>SolidEdgeFrameworkSupport</SPAN> </DIV>
+<DIV id=i-037f9967-9b06-48c0-99e5-7bacb76aee62-section-content class=i-section-content>
+<UL>
+<LI><A href="SolidEdgeFrameworkSupport~Balloon~TextScale.html" data-auto-update-caption="true">Balloon.TextScale Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~BoltHoleCircle~TextScale.html" data-auto-update-caption="true">BoltHoleCircle.TextScale Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~CenterMark~TextScale.html" data-auto-update-caption="true">CenterMark.TextScale Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~Connector~TextScale.html" data-auto-update-caption="true">Connector.TextScale Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~CornerAnnotation~TextScale.html" data-auto-update-caption="true">CornerAnnotation.TextScale Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~DatumFrame~TextScale.html" data-auto-update-caption="true">DatumFrame.TextScale Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~DatumPoint~TextScale.html" data-auto-update-caption="true">DatumPoint.TextScale Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~DatumTarget~TextScale.html" data-auto-update-caption="true">DatumTarget.TextScale Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~Dimension~SubfixAlignment.html" data-auto-update-caption="true">Dimension.SubfixAlignment Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~Dimension~SubfixString2.html" data-auto-update-caption="true">Dimension.SubfixString2 Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~Dimension~TextScale.html" data-auto-update-caption="true">Dimension.TextScale Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~DimensionStyle~FractionSeparator.html" data-auto-update-caption="true">DimensionStyle.FractionSeparator Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~DimensionStyle~HeightPMI.html" data-auto-update-caption="true">DimensionStyle.HeightPMI Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~DimStatusConstants.html" data-auto-update-caption="true">DimStatusConstants.seOneEndDetached Constant</A> 
+<LI><A href="SolidEdgeFrameworkSupport~DimStyle~FractionSeparator.html" data-auto-update-caption="true">DimStyle.FractionSeparator Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~DimStyle~HeightPMI.html" data-auto-update-caption="true">DimStyle.HeightPMI Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~FeatureControlFrame~TextScale.html" data-auto-update-caption="true">FeatureControlFrame.TextScale Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~SubfixAlignmentConstants.html" data-auto-update-caption="true">SubfixAlignmentConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgeFrameworkSupport~SubfixAlignmentConstants.html" data-auto-update-caption="true">SubfixAlignmentConstants.seSubfixAlignCenter Constant</A> 
+<LI><A href="SolidEdgeFrameworkSupport~SubfixAlignmentConstants.html" data-auto-update-caption="true">SubfixAlignmentConstants.seSubfixAlignLeft Constant</A> </LI></UL>
+<LI><A href="SolidEdgeFrameworkSupport~SurfaceFinishSymbol~TextScale.html" data-auto-update-caption="true">SurfaceFinishSymbol.TextScale Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~TextBox~TextScale.html" data-auto-update-caption="true">TextBox.TextScale Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~TextEdit~TextScale.html" data-auto-update-caption="true">TextEdit.TextScale Property</A> 
+<LI><A href="SolidEdgeFrameworkSupport~WeldSymbol~TextScale.html" data-auto-update-caption="true">WeldSymbol.TextScale Property</A> </LI></UL></DIV>
+<DIV id=i-044886d8-1ff5-48cd-8b03-d5e5f07b7bbd-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>SolidEdgeGeometry</SPAN> </DIV>
+<DIV id=i-044886d8-1ff5-48cd-8b03-d5e5f07b7bbd-section-content class=i-section-content>
+<UL>
+<LI><A href="SolidEdgeGeometry~Face~GetBendCenterLineAttributesEx.html" data-auto-update-caption="true">Face.GetBendCenterLineAttributesEx Method</A> </LI></UL></DIV>
+<DIV id=i-e9353d90-8037-4ff8-8057-07ca158ee59a-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>SolidEdgePart</SPAN> </DIV>
+<DIV id=i-e9353d90-8037-4ff8-8057-07ca158ee59a-section-content class=i-section-content>
+<UL>
+<LI><A href="SolidEdgePart~BendDirectionConstants.html" data-auto-update-caption="true">BendDirectionConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~BendDirectionConstants.html" data-auto-update-caption="true">BendDirectionConstants.seBendDirectionDown Constant</A> 
+<LI><A href="SolidEdgePart~BendDirectionConstants.html" data-auto-update-caption="true">BendDirectionConstants.seBendDirectionUnknown Constant</A> 
+<LI><A href="SolidEdgePart~BendDirectionConstants.html" data-auto-update-caption="true">BendDirectionConstants.seBendDirectionUp Constant</A> </LI></UL>
+<LI><A href="SolidEdgePart~BendTable.html" data-auto-update-caption="true">BendTable Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~BendTable~AddColumn.html" data-auto-update-caption="true">BendTable.AddColumn Method</A> 
+<LI><A href="SolidEdgePart~BendTable~ChangeBendSequence.html" data-auto-update-caption="true">BendTable.ChangeBendSequence Method</A> 
+<LI><A href="SolidEdgePart~BendTable~DeleteColumn.html" data-auto-update-caption="true">BendTable.DeleteColumn Method</A> 
+<LI><A href="SolidEdgePart~BendTable~GetBendData.html" data-auto-update-caption="true">BendTable.GetBendData Method</A> 
+<LI><A href="SolidEdgePart~BendTable~GetBendUserData.html" data-auto-update-caption="true">BendTable.GetBendUserData Method</A> 
+<LI><A href="SolidEdgePart~BendTable~GetColumnData.html" data-auto-update-caption="true">BendTable.GetColumnData Method</A> 
+<LI><A href="SolidEdgePart~BendTable~SetBendUserData.html" data-auto-update-caption="true">BendTable.SetBendUserData Method</A> 
+<LI><A href="SolidEdgePart~BendTable~SetColumnData.html" data-auto-update-caption="true">BendTable.SetColumnData Method</A> 
+<LI><A href="SolidEdgePart~BendTable~Application.html" data-auto-update-caption="true">BendTable.Application Property</A> 
+<LI><A href="SolidEdgePart~BendTable~AttributeSets.html" data-auto-update-caption="true">BendTable.AttributeSets Property</A> 
+<LI><A href="SolidEdgePart~BendTable~BendCount.html" data-auto-update-caption="true">BendTable.BendCount Property</A> 
+<LI><A href="SolidEdgePart~BendTable~BendFaces.html" data-auto-update-caption="true">BendTable.BendFaces Property</A> 
+<LI><A href="SolidEdgePart~BendTable~ColumnCount.html" data-auto-update-caption="true">BendTable.ColumnCount Property</A> 
+<LI><A href="SolidEdgePart~BendTable~ColumnId.html" data-auto-update-caption="true">BendTable.ColumnId Property</A> 
+<LI><A href="SolidEdgePart~BendTable~IsAttributeSetPresent.html" data-auto-update-caption="true">BendTable.IsAttributeSetPresent Property</A> 
+<LI><A href="SolidEdgePart~BendTable~Parent.html" data-auto-update-caption="true">BendTable.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgePart~BlueSurf~ExactRange.html" data-auto-update-caption="true">BlueSurf.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~BodyFeature~RemoveImportedColors.html" data-auto-update-caption="true">BodyFeature.RemoveImportedColors Method</A> 
+<LI><A href="SolidEdgePart~ChangeBendAngle~ExactRange.html" data-auto-update-caption="true">ChangeBendAngle.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~ConstructionModel~IsFacetBody.html" data-auto-update-caption="true">ConstructionModel.IsFacetBody Property</A> 
+<LI><A href="SolidEdgePart~ConvToSM~ExactRange.html" data-auto-update-caption="true">ConvToSM.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~CopiedPart~IsUpToDate.html" data-auto-update-caption="true">CopiedPart.IsUpToDate Property</A> 
+<LI><A href="SolidEdgePart~CopySurface~ExactRange.html" data-auto-update-caption="true">CopySurface.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~CrossBrake.html" data-auto-update-caption="true">CrossBrake Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~CrossBrake~Delete.html" data-auto-update-caption="true">CrossBrake.Delete Method</A> 
+<LI><A href="SolidEdgePart~CrossBrake~Application.html" data-auto-update-caption="true">CrossBrake.Application Property</A> 
+<LI><A href="SolidEdgePart~CrossBrake~BendAngle.html" data-auto-update-caption="true">CrossBrake.BendAngle Property</A> 
+<LI><A href="SolidEdgePart~CrossBrake~BendDirection.html" data-auto-update-caption="true">CrossBrake.BendDirection Property</A> 
+<LI><A href="SolidEdgePart~CrossBrake~DisplayName.html" data-auto-update-caption="true">CrossBrake.DisplayName Property</A> 
+<LI><A href="SolidEdgePart~CrossBrake~Faces.html" data-auto-update-caption="true">CrossBrake.Faces Property</A> 
+<LI><A href="SolidEdgePart~CrossBrake~Lines.html" data-auto-update-caption="true">CrossBrake.Lines Property</A> 
+<LI><A href="SolidEdgePart~CrossBrake~Name.html" data-auto-update-caption="true">CrossBrake.Name Property</A> 
+<LI><A href="SolidEdgePart~CrossBrake~Parent.html" data-auto-update-caption="true">CrossBrake.Parent Property</A> 
+<LI><A href="SolidEdgePart~CrossBrake~Status.html" data-auto-update-caption="true">CrossBrake.Status Property</A> 
+<LI><A href="SolidEdgePart~CrossBrake~Suppress.html" data-auto-update-caption="true">CrossBrake.Suppress Property</A> 
+<LI><A href="SolidEdgePart~CrossBrake~SystemName.html" data-auto-update-caption="true">CrossBrake.SystemName Property</A> 
+<LI><A href="SolidEdgePart~CrossBrake~Type.html" data-auto-update-caption="true">CrossBrake.Type Property</A> </LI></UL>
+<LI><A href="SolidEdgePart~CrossBrakes.html" data-auto-update-caption="true">CrossBrakes Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~CrossBrakes~AddCrossBrake.html" data-auto-update-caption="true">CrossBrakes.AddCrossBrake Method</A> 
+<LI><A href="SolidEdgePart~CrossBrakes~Item.html" data-auto-update-caption="true">CrossBrakes.Item Method</A> 
+<LI><A href="SolidEdgePart~CrossBrakes~Application.html" data-auto-update-caption="true">CrossBrakes.Application Property</A> 
+<LI><A href="SolidEdgePart~CrossBrakes~Count.html" data-auto-update-caption="true">CrossBrakes.Count Property</A> 
+<LI><A href="SolidEdgePart~CrossBrakes~Parent.html" data-auto-update-caption="true">CrossBrakes.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgePart~CurveByTable~ExactRange.html" data-auto-update-caption="true">CurveByTable.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~DelSMFace~ExactRange.html" data-auto-update-caption="true">DelSMFace.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~DerivedCurve~ExactRange.html" data-auto-update-caption="true">DerivedCurve.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~ExtendSurface~ExactRange.html" data-auto-update-caption="true">ExtendSurface.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~ExtendSurface~RollToFeature.html" data-auto-update-caption="true">ExtendSurface.RollToFeature Method</A> 
+<LI><A href="SolidEdgePart~ExtendSurface~SuppressVariable.html" data-auto-update-caption="true">ExtendSurface.SuppressVariable Property</A> 
+<LI><A href="SolidEdgePart~FaceMove~ExactRange.html" data-auto-update-caption="true">FaceMove.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~FaceOffset~ExactRange.html" data-auto-update-caption="true">FaceOffset.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~FaceOffset~RollToFeature.html" data-auto-update-caption="true">FaceOffset.RollToFeature Method</A> 
+<LI><A href="SolidEdgePart~FaceOffset~SuppressVariable.html" data-auto-update-caption="true">FaceOffset.SuppressVariable Property</A> 
+<LI><A href="SolidEdgePart~FaceRotate~ExactRange.html" data-auto-update-caption="true">FaceRotate.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igFlangeMatchFace Constant</A> 
+<LI><A href="SolidEdgePart~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igHemTypeCenteredLoop Constant</A> 
+<LI><A href="SolidEdgePart~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igHemTypeClosed Constant</A> 
+<LI><A href="SolidEdgePart~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igHemTypeClosedLoop Constant</A> 
+<LI><A href="SolidEdgePart~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igHemTypeCurl Constant</A> 
+<LI><A href="SolidEdgePart~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igHemTypeOpen Constant</A> 
+<LI><A href="SolidEdgePart~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igHemTypeOpenLoop Constant</A> 
+<LI><A href="SolidEdgePart~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igHemTypeSFlange Constant</A> 
+<LI><A href="SolidEdgePart~FeaturePropertyConstants.html" data-auto-update-caption="true">FeaturePropertyConstants.igSMFaceCutout Constant</A> 
+<LI><A href="SolidEdgePart~FeatureTypeConstants.html" data-auto-update-caption="true">FeatureTypeConstants.igGussetFeatureObject Constant</A> 
+<LI><A href="SolidEdgePart~FeatureTypeConstants.html" data-auto-update-caption="true">FeatureTypeConstants.igMatchFlangeFaceFeatureObject Constant</A> 
+<LI><A href="SolidEdgePart~FilletWeld~ExactRange.html" data-auto-update-caption="true">FilletWeld.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~Flange~GetMatchFace.html" data-auto-update-caption="true">Flange.GetMatchFace Method</A> 
+<LI><A href="SolidEdgePart~Flange~SetMatchFace.html" data-auto-update-caption="true">Flange.SetMatchFace Method</A> 
+<LI><A href="SolidEdgePart~Flanges~AddByMatchFace.html" data-auto-update-caption="true">Flanges.AddByMatchFace Method</A> 
+<LI><A href="SolidEdgePart~FlatPattern~ExactRange.html" data-auto-update-caption="true">FlatPattern.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~FlatPattern~GetCutSizeValues.html" data-auto-update-caption="true">FlatPattern.GetCutSizeValues Method</A> 
+<LI><A href="SolidEdgePart~FlatPattern~SetCutSizeValues.html" data-auto-update-caption="true">FlatPattern.SetCutSizeValues Method</A> 
+<LI><A href="SolidEdgePart~FlatPatternModel~GetCutSize.html" data-auto-update-caption="true">FlatPatternModel.GetCutSize Method</A> 
+<LI><A href="SolidEdgePart~FlatPatternModel~CutSizeViolation.html" data-auto-update-caption="true">FlatPatternModel.CutSizeViolation Property</A> 
+<LI><A href="SolidEdgePart~GrooveWeld~ExactRange.html" data-auto-update-caption="true">GrooveWeld.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~Gusset.html" data-auto-update-caption="true">Gusset Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~Gusset~Delete.html" data-auto-update-caption="true">Gusset.Delete Method</A> 
+<LI><A href="SolidEdgePart~Gusset~ExactRange.html" data-auto-update-caption="true">Gusset.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~Gusset~Range.html" data-auto-update-caption="true">Gusset.Range Method</A> 
+<LI><A href="SolidEdgePart~Gusset~Application.html" data-auto-update-caption="true">Gusset.Application Property</A> 
+<LI><A href="SolidEdgePart~Gusset~AttributeSets.html" data-auto-update-caption="true">Gusset.AttributeSets Property</A> 
+<LI><A href="SolidEdgePart~Gusset~DieRadius.html" data-auto-update-caption="true">Gusset.DieRadius Property</A> 
+<LI><A href="SolidEdgePart~Gusset~DisplayName.html" data-auto-update-caption="true">Gusset.DisplayName Property</A> 
+<LI><A href="SolidEdgePart~Gusset~Distance.html" data-auto-update-caption="true">Gusset.Distance Property</A> 
+<LI><A href="SolidEdgePart~Gusset~Edges.html" data-auto-update-caption="true">Gusset.Edges Property</A> 
+<LI><A href="SolidEdgePart~Gusset~Faces.html" data-auto-update-caption="true">Gusset.Faces Property</A> 
+<LI><A href="SolidEdgePart~Gusset~FacesByRay.html" data-auto-update-caption="true">Gusset.FacesByRay Property</A> 
+<LI><A href="SolidEdgePart~Gusset~FormedRadius.html" data-auto-update-caption="true">Gusset.FormedRadius Property</A> 
+<LI><A href="SolidEdgePart~Gusset~IsAttributeSetPresent.html" data-auto-update-caption="true">Gusset.IsAttributeSetPresent Property</A> 
+<LI><A href="SolidEdgePart~Gusset~MaterialSide.html" data-auto-update-caption="true">Gusset.MaterialSide Property</A> 
+<LI><A href="SolidEdgePart~Gusset~Name.html" data-auto-update-caption="true">Gusset.Name Property</A> 
+<LI><A href="SolidEdgePart~Gusset~NumberOfOccurrences.html" data-auto-update-caption="true">Gusset.NumberOfOccurrences Property</A> 
+<LI><A href="SolidEdgePart~Gusset~OccurrenceSpacing.html" data-auto-update-caption="true">Gusset.OccurrenceSpacing Property</A> 
+<LI><A href="SolidEdgePart~Gusset~Parent.html" data-auto-update-caption="true">Gusset.Parent Property</A> 
+<LI><A href="SolidEdgePart~Gusset~PatternType.html" data-auto-update-caption="true">Gusset.PatternType Property</A> 
+<LI><A href="SolidEdgePart~Gusset~Profile.html" data-auto-update-caption="true">Gusset.Profile Property</A> 
+<LI><A href="SolidEdgePart~Gusset~PunchRadius.html" data-auto-update-caption="true">Gusset.PunchRadius Property</A> 
+<LI><A href="SolidEdgePart~Gusset~Rounding.html" data-auto-update-caption="true">Gusset.Rounding Property</A> 
+<LI><A href="SolidEdgePart~Gusset~Shape.html" data-auto-update-caption="true">Gusset.Shape Property</A> 
+<LI><A href="SolidEdgePart~Gusset~ShowDimensions.html" data-auto-update-caption="true">Gusset.ShowDimensions Property</A> 
+<LI><A href="SolidEdgePart~Gusset~Status.html" data-auto-update-caption="true">Gusset.Status Property</A> 
+<LI><A href="SolidEdgePart~Gusset~Suppress.html" data-auto-update-caption="true">Gusset.Suppress Property</A> 
+<LI><A href="SolidEdgePart~Gusset~SystemName.html" data-auto-update-caption="true">Gusset.SystemName Property</A> 
+<LI><A href="SolidEdgePart~Gusset~TaperAngle.html" data-auto-update-caption="true">Gusset.TaperAngle Property</A> 
+<LI><A href="SolidEdgePart~Gusset~ThicknessSide.html" data-auto-update-caption="true">Gusset.ThicknessSide Property</A> 
+<LI><A href="SolidEdgePart~Gusset~Type.html" data-auto-update-caption="true">Gusset.Type Property</A> 
+<LI><A href="SolidEdgePart~Gusset~Width.html" data-auto-update-caption="true">Gusset.Width Property</A> </LI></UL>
+<LI><A href="SolidEdgePart~GussetConstants.html" data-auto-update-caption="true">GussetConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~GussetConstants.html" data-auto-update-caption="true">GussetConstants.igAutomaticProfile Constant</A> 
+<LI><A href="SolidEdgePart~GussetConstants.html" data-auto-update-caption="true">GussetConstants.igGussetNone Constant</A> 
+<LI><A href="SolidEdgePart~GussetConstants.html" data-auto-update-caption="true">GussetConstants.igIncludeRounding Constant</A> 
+<LI><A href="SolidEdgePart~GussetConstants.html" data-auto-update-caption="true">GussetConstants.igPatternFill Constant</A> 
+<LI><A href="SolidEdgePart~GussetConstants.html" data-auto-update-caption="true">GussetConstants.igPatternFit Constant</A> 
+<LI><A href="SolidEdgePart~GussetConstants.html" data-auto-update-caption="true">GussetConstants.igPatternFixed Constant</A> 
+<LI><A href="SolidEdgePart~GussetConstants.html" data-auto-update-caption="true">GussetConstants.igRoundShape Constant</A> 
+<LI><A href="SolidEdgePart~GussetConstants.html" data-auto-update-caption="true">GussetConstants.igSquareShape Constant</A> 
+<LI><A href="SolidEdgePart~GussetConstants.html" data-auto-update-caption="true">GussetConstants.igUserDrawnProfile Constant</A> </LI></UL>
+<LI><A href="SolidEdgePart~Gussets.html" data-auto-update-caption="true">Gussets Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~Gussets~AddByBend.html" data-auto-update-caption="true">Gussets.AddByBend Method</A> 
+<LI><A href="SolidEdgePart~Gussets~AddByProfile.html" data-auto-update-caption="true">Gussets.AddByProfile Method</A> 
+<LI><A href="SolidEdgePart~Gussets~Item.html" data-auto-update-caption="true">Gussets.Item Method</A> 
+<LI><A href="SolidEdgePart~Gussets~Application.html" data-auto-update-caption="true">Gussets.Application Property</A> 
+<LI><A href="SolidEdgePart~Gussets~Count.html" data-auto-update-caption="true">Gussets.Count Property</A> 
+<LI><A href="SolidEdgePart~Gussets~Parent.html" data-auto-update-caption="true">Gussets.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgePart~Hem.html" data-auto-update-caption="true">Hem Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~Hem~Delete.html" data-auto-update-caption="true">Hem.Delete Method</A> 
+<LI><A href="SolidEdgePart~Hem~ExactRange.html" data-auto-update-caption="true">Hem.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~Hem~GetStyle.html" data-auto-update-caption="true">Hem.GetStyle Method</A> 
+<LI><A href="SolidEdgePart~Hem~Range.html" data-auto-update-caption="true">Hem.Range Method</A> 
+<LI><A href="SolidEdgePart~Hem~SetStyle.html" data-auto-update-caption="true">Hem.SetStyle Method</A> 
+<LI><A href="SolidEdgePart~Hem~Application.html" data-auto-update-caption="true">Hem.Application Property</A> 
+<LI><A href="SolidEdgePart~Hem~AttributeSets.html" data-auto-update-caption="true">Hem.AttributeSets Property</A> 
+<LI><A href="SolidEdgePart~Hem~BendRadius1.html" data-auto-update-caption="true">Hem.BendRadius1 Property</A> 
+<LI><A href="SolidEdgePart~Hem~DisplayName.html" data-auto-update-caption="true">Hem.DisplayName Property</A> 
+<LI><A href="SolidEdgePart~Hem~Edges.html" data-auto-update-caption="true">Hem.Edges Property</A> 
+<LI><A href="SolidEdgePart~Hem~Faces.html" data-auto-update-caption="true">Hem.Faces Property</A> 
+<LI><A href="SolidEdgePart~Hem~FacesByRay.html" data-auto-update-caption="true">Hem.FacesByRay Property</A> 
+<LI><A href="SolidEdgePart~Hem~FlangeLength1.html" data-auto-update-caption="true">Hem.FlangeLength1 Property</A> 
+<LI><A href="SolidEdgePart~Hem~HemType.html" data-auto-update-caption="true">Hem.HemType Property</A> 
+<LI><A href="SolidEdgePart~Hem~IsAttributeSetPresent.html" data-auto-update-caption="true">Hem.IsAttributeSetPresent Property</A> 
+<LI><A href="SolidEdgePart~Hem~Name.html" data-auto-update-caption="true">Hem.Name Property</A> 
+<LI><A href="SolidEdgePart~Hem~Parent.html" data-auto-update-caption="true">Hem.Parent Property</A> 
+<LI><A href="SolidEdgePart~Hem~ShowDimensions.html" data-auto-update-caption="true">Hem.ShowDimensions Property</A> 
+<LI><A href="SolidEdgePart~Hem~Status.html" data-auto-update-caption="true">Hem.Status Property</A> 
+<LI><A href="SolidEdgePart~Hem~Suppress.html" data-auto-update-caption="true">Hem.Suppress Property</A> 
+<LI><A href="SolidEdgePart~Hem~SystemName.html" data-auto-update-caption="true">Hem.SystemName Property</A> 
+<LI><A href="SolidEdgePart~Hem~Type.html" data-auto-update-caption="true">Hem.Type Property</A> </LI></UL>
+<LI><A href="SolidEdgePart~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants Enumeration</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants.seHemBendOutside Constant</A> 
+<LI><A href="SolidEdgePart~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants.seHemMiterCorner Constant</A> 
+<LI><A href="SolidEdgePart~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants.seHemNoBendRelief Constant</A> 
+<LI><A href="SolidEdgePart~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants.seHemNoMiter Constant</A> 
+<LI><A href="SolidEdgePart~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants.seHemRectBendRelief Constant</A> 
+<LI><A href="SolidEdgePart~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants.seHemRoundBendRelief Constant</A> 
+<LI><A href="SolidEdgePart~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants.seHemSideMaterialInside Constant</A> 
+<LI><A href="SolidEdgePart~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants.seHemSideMaterialOutside Constant</A> 
+<LI><A href="SolidEdgePart~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants.seHemTypeCenteredLoop Constant</A> 
+<LI><A href="SolidEdgePart~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants.seHemTypeClosed Constant</A> 
+<LI><A href="SolidEdgePart~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants.seHemTypeClosedLoop Constant</A> 
+<LI><A href="SolidEdgePart~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants.seHemTypeCurl Constant</A> 
+<LI><A href="SolidEdgePart~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants.seHemTypeOpen Constant</A> 
+<LI><A href="SolidEdgePart~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants.seHemTypeOpenLoop Constant</A> 
+<LI><A href="SolidEdgePart~HemFeatureConstants.html" data-auto-update-caption="true">HemFeatureConstants.seHemTypeSFlange Constant</A> </LI></UL>
+<LI><A href="SolidEdgePart~Hems.html" data-auto-update-caption="true">Hems Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~Hems~Add.html" data-auto-update-caption="true">Hems.Add Method</A> 
+<LI><A href="SolidEdgePart~Hems~Item.html" data-auto-update-caption="true">Hems.Item Method</A> 
+<LI><A href="SolidEdgePart~Hems~Application.html" data-auto-update-caption="true">Hems.Application Property</A> 
+<LI><A href="SolidEdgePart~Hems~Count.html" data-auto-update-caption="true">Hems.Count Property</A> 
+<LI><A href="SolidEdgePart~Hems~Parent.html" data-auto-update-caption="true">Hems.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgePart~LoftedFlange~GetDivideBends.html" data-auto-update-caption="true">LoftedFlange.GetDivideBends Method</A> 
+<LI><A href="SolidEdgePart~LoftedFlange~SetDivideBends.html" data-auto-update-caption="true">LoftedFlange.SetDivideBends Method</A> 
+<LI><A href="SolidEdgePart~MatchFlangeFace.html" data-auto-update-caption="true">MatchFlangeFace Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~MatchFlangeFace~Delete.html" data-auto-update-caption="true">MatchFlangeFace.Delete Method</A> 
+<LI><A href="SolidEdgePart~MatchFlangeFace~ExactRange.html" data-auto-update-caption="true">MatchFlangeFace.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~MatchFlangeFace~Range.html" data-auto-update-caption="true">MatchFlangeFace.Range Method</A> 
+<LI><A href="SolidEdgePart~MatchFlangeFace~Application.html" data-auto-update-caption="true">MatchFlangeFace.Application Property</A> 
+<LI><A href="SolidEdgePart~MatchFlangeFace~AttributeSets.html" data-auto-update-caption="true">MatchFlangeFace.AttributeSets Property</A> 
+<LI><A href="SolidEdgePart~MatchFlangeFace~DisplayName.html" data-auto-update-caption="true">MatchFlangeFace.DisplayName Property</A> 
+<LI><A href="SolidEdgePart~MatchFlangeFace~Edges.html" data-auto-update-caption="true">MatchFlangeFace.Edges Property</A> 
+<LI><A href="SolidEdgePart~MatchFlangeFace~Faces.html" data-auto-update-caption="true">MatchFlangeFace.Faces Property</A> 
+<LI><A href="SolidEdgePart~MatchFlangeFace~FacesByRay.html" data-auto-update-caption="true">MatchFlangeFace.FacesByRay Property</A> 
+<LI><A href="SolidEdgePart~MatchFlangeFace~FlangeFace.html" data-auto-update-caption="true">MatchFlangeFace.FlangeFace Property</A> 
+<LI><A href="SolidEdgePart~MatchFlangeFace~IsAttributeSetPresent.html" data-auto-update-caption="true">MatchFlangeFace.IsAttributeSetPresent Property</A> 
+<LI><A href="SolidEdgePart~MatchFlangeFace~Name.html" data-auto-update-caption="true">MatchFlangeFace.Name Property</A> 
+<LI><A href="SolidEdgePart~MatchFlangeFace~OffsetDistance.html" data-auto-update-caption="true">MatchFlangeFace.OffsetDistance Property</A> 
+<LI><A href="SolidEdgePart~MatchFlangeFace~OffsetSide.html" data-auto-update-caption="true">MatchFlangeFace.OffsetSide Property</A> 
+<LI><A href="SolidEdgePart~MatchFlangeFace~Parent.html" data-auto-update-caption="true">MatchFlangeFace.Parent Property</A> 
+<LI><A href="SolidEdgePart~MatchFlangeFace~ShowDimensions.html" data-auto-update-caption="true">MatchFlangeFace.ShowDimensions Property</A> 
+<LI><A href="SolidEdgePart~MatchFlangeFace~Status.html" data-auto-update-caption="true">MatchFlangeFace.Status Property</A> 
+<LI><A href="SolidEdgePart~MatchFlangeFace~Suppress.html" data-auto-update-caption="true">MatchFlangeFace.Suppress Property</A> 
+<LI><A href="SolidEdgePart~MatchFlangeFace~SystemName.html" data-auto-update-caption="true">MatchFlangeFace.SystemName Property</A> 
+<LI><A href="SolidEdgePart~MatchFlangeFace~TargetPlane.html" data-auto-update-caption="true">MatchFlangeFace.TargetPlane Property</A> 
+<LI><A href="SolidEdgePart~MatchFlangeFace~Type.html" data-auto-update-caption="true">MatchFlangeFace.Type Property</A> </LI></UL>
+<LI><A href="SolidEdgePart~MatchFlangeFaces.html" data-auto-update-caption="true">MatchFlangeFaces Object</A> 
+<LI style="LIST-STYLE-TYPE: none; DISPLAY: inline">
+<UL>
+<LI><A href="SolidEdgePart~MatchFlangeFaces~Add.html" data-auto-update-caption="true">MatchFlangeFaces.Add Method</A> 
+<LI><A href="SolidEdgePart~MatchFlangeFaces~Item.html" data-auto-update-caption="true">MatchFlangeFaces.Item Method</A> 
+<LI><A href="SolidEdgePart~MatchFlangeFaces~Application.html" data-auto-update-caption="true">MatchFlangeFaces.Application Property</A> 
+<LI><A href="SolidEdgePart~MatchFlangeFaces~Count.html" data-auto-update-caption="true">MatchFlangeFaces.Count Property</A> 
+<LI><A href="SolidEdgePart~MatchFlangeFaces~Parent.html" data-auto-update-caption="true">MatchFlangeFaces.Parent Property</A> </LI></UL>
+<LI><A href="SolidEdgePart~MirrorCopyGeometry~ExactRange.html" data-auto-update-caption="true">MirrorCopyGeometry.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~MirrorPart~ExactRange.html" data-auto-update-caption="true">MirrorPart.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~Model~ComputePhysicalPropertiesWithSpecifiedDensity.html" data-auto-update-caption="true">Model.ComputePhysicalPropertiesWithSpecifiedDensity Method</A> 
+<LI><A href="SolidEdgePart~Model~CrossBrakes.html" data-auto-update-caption="true">Model.CrossBrakes Property</A> 
+<LI><A href="SolidEdgePart~Model~DisplayCenterOfMass.html" data-auto-update-caption="true">Model.DisplayCenterOfMass Property</A> 
+<LI><A href="SolidEdgePart~Model~DisplayCenterOfVolume.html" data-auto-update-caption="true">Model.DisplayCenterOfVolume Property</A> 
+<LI><A href="SolidEdgePart~Model~DisplayPrincipalAxes.html" data-auto-update-caption="true">Model.DisplayPrincipalAxes Property</A> 
+<LI><A href="SolidEdgePart~Model~Gussets.html" data-auto-update-caption="true">Model.Gussets Property</A> 
+<LI><A href="SolidEdgePart~Model~Hems.html" data-auto-update-caption="true">Model.Hems Property</A> 
+<LI><A href="SolidEdgePart~Model~IsFacetBody.html" data-auto-update-caption="true">Model.IsFacetBody Property</A> 
+<LI><A href="SolidEdgePart~Model~MatchFlangeFaces.html" data-auto-update-caption="true">Model.MatchFlangeFaces Property</A> 
+<LI><A href="SolidEdgePart~MountingBoss~ExactRange.html" data-auto-update-caption="true">MountingBoss.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~NormalToFaceCutout~ExactRange.html" data-auto-update-caption="true">NormalToFaceCutout.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~NormalToFaceProtrusion~ExactRange.html" data-auto-update-caption="true">NormalToFaceProtrusion.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~PartGlobalConstants.html" data-auto-update-caption="true">PartGlobalConstants.sePartGlobalPartCopyUpdateMode Constant</A> 
+<LI><A href="SolidEdgePart~PartingSplit~ExactRange.html" data-auto-update-caption="true">PartingSplit.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~PartingSurface~ExactRange.html" data-auto-update-caption="true">PartingSurface.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~PatternCopyGeometry~ExactRange.html" data-auto-update-caption="true">PatternCopyGeometry.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~PatternPart~ExactRange.html" data-auto-update-caption="true">PatternPart.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~ProjectCurves~AddArray.html" data-auto-update-caption="true">ProjectCurves.AddArray Method</A> 
+<LI><A href="SolidEdgePart~ResizeBend~ExactRange.html" data-auto-update-caption="true">ResizeBend.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~ResizeHole~ExactRange.html" data-auto-update-caption="true">ResizeHole.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~ResizeRound~ExactRange.html" data-auto-update-caption="true">ResizeRound.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~RipEdge~ExactRange.html" data-auto-update-caption="true">RipEdge.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~SheetMetalDocument~GetDefaultCutSizeValues.html" data-auto-update-caption="true">SheetMetalDocument.GetDefaultCutSizeValues Method</A> 
+<LI><A href="SolidEdgePart~SheetMetalDocument~SetDefaultCutSizeValues.html" data-auto-update-caption="true">SheetMetalDocument.SetDefaultCutSizeValues Method</A> 
+<LI><A href="SolidEdgePart~SheetMetalDocument~BendTable.html" data-auto-update-caption="true">SheetMetalDocument.BendTable Property</A> 
+<LI><A href="SolidEdgePart~SheetMetalGlobalConstants.html" data-auto-update-caption="true">SheetMetalGlobalConstants.seSheetMetalGlobalPartCopyUpdateMode Constant</A> 
+<LI><A href="SolidEdgePart~Sketch~IsUnderDefined.html" data-auto-update-caption="true">Sketch.IsUnderDefined Property</A> 
+<LI><A href="SolidEdgePart~SplitCurve~ExactRange.html" data-auto-update-caption="true">SplitCurve.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~SplitFace~ExactRange.html" data-auto-update-caption="true">SplitFace.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~StitchSurface~ExactRange.html" data-auto-update-caption="true">StitchSurface.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~StitchWeld~ExactRange.html" data-auto-update-caption="true">StitchWeld.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~SuppressVariable~GetRange.html" data-auto-update-caption="true">SuppressVariable.GetRange Method</A> 
+<LI><A href="SolidEdgePart~SuppressVariable~GetValue.html" data-auto-update-caption="true">SuppressVariable.GetValue Method</A> 
+<LI><A href="SolidEdgePart~SuppressVariable~SetRange.html" data-auto-update-caption="true">SuppressVariable.SetRange Method</A> 
+<LI><A href="SolidEdgePart~SuppressVariable~SetValue.html" data-auto-update-caption="true">SuppressVariable.SetValue Method</A> 
+<LI><A href="SolidEdgePart~SuppressVariable~DisplayName.html" data-auto-update-caption="true">SuppressVariable.DisplayName Property</A> 
+<LI><A href="SolidEdgePart~SuppressVariable~Expose.html" data-auto-update-caption="true">SuppressVariable.Expose Property</A> 
+<LI><A href="SolidEdgePart~SuppressVariable~ExposeName.html" data-auto-update-caption="true">SuppressVariable.ExposeName Property</A> 
+<LI><A href="SolidEdgePart~SuppressVariable~Formula.html" data-auto-update-caption="true">SuppressVariable.Formula Property</A> 
+<LI><A href="SolidEdgePart~SuppressVariable~IsSuppressVariable.html" data-auto-update-caption="true">SuppressVariable.IsSuppressVariable Property</A> 
+<LI><A href="SolidEdgePart~SuppressVariable~Name.html" data-auto-update-caption="true">SuppressVariable.Name Property</A> 
+<LI><A href="SolidEdgePart~SuppressVariable~Properties.html" data-auto-update-caption="true">SuppressVariable.Properties Property</A> 
+<LI><A href="SolidEdgePart~SuppressVariable~SystemName.html" data-auto-update-caption="true">SuppressVariable.SystemName Property</A> 
+<LI><A href="SolidEdgePart~SuppressVariable~Type.html" data-auto-update-caption="true">SuppressVariable.Type Property</A> 
+<LI><A href="SolidEdgePart~SuppressVariable~UnitsType.html" data-auto-update-caption="true">SuppressVariable.UnitsType Property</A> 
+<LI><A href="SolidEdgePart~SuppressVariable~Value.html" data-auto-update-caption="true">SuppressVariable.Value Property</A> 
+<LI><A href="SolidEdgePart~SuppressVariable~VariableTableName.html" data-auto-update-caption="true">SuppressVariable.VariableTableName Property</A> 
+<LI><A href="SolidEdgePart~SurfaceByBoundary~ExactRange.html" data-auto-update-caption="true">SurfaceByBoundary.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~SweptSurface~SetOrigins.html" data-auto-update-caption="true">SweptSurface.SetOrigins Method</A> 
+<LI><A href="SolidEdgePart~TrimSurface~ExactRange.html" data-auto-update-caption="true">TrimSurface.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~WeldBeadByExtrudedProtrusion~ExactRange.html" data-auto-update-caption="true">WeldBeadByExtrudedProtrusion.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~WeldBeadByRevolvedProtrusion~ExactRange.html" data-auto-update-caption="true">WeldBeadByRevolvedProtrusion.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~WeldBeadBySweptProtrusion~ExactRange.html" data-auto-update-caption="true">WeldBeadBySweptProtrusion.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~WeldmentModel~DisplayCenterOfMass.html" data-auto-update-caption="true">WeldmentModel.DisplayCenterOfMass Property</A> 
+<LI><A href="SolidEdgePart~WeldmentModel~DisplayCenterOfVolume.html" data-auto-update-caption="true">WeldmentModel.DisplayCenterOfVolume Property</A> 
+<LI><A href="SolidEdgePart~WeldmentModel~DisplayPrincipalAxes.html" data-auto-update-caption="true">WeldmentModel.DisplayPrincipalAxes Property</A> 
+<LI><A href="SolidEdgePart~WeldMirror~ExactRange.html" data-auto-update-caption="true">WeldMirror.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~WeldPattern~ExactRange.html" data-auto-update-caption="true">WeldPattern.ExactRange Method</A> 
+<LI><A href="SolidEdgePart~WrapSketch~ExactRange.html" data-auto-update-caption="true">WrapSketch.ExactRange Method</A> </LI></UL></DIV></DIV><!--DXMETADATA end-->
+            <a name="seealsobookmark"></a>
+            <!--DXMETADATA start type="FilteredItemList" scrap="CATEGORISED_LINKS" namespace="linkcategory" source="Item" filter="" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=seealso,caption=""%%phrase:name=SeeAlso%%%%designlist:tagidentifier=seealso,itemtype=See Also%%""%%%%filtereditemlist%%</div>"--><div class="i-section-heading" id="i-seealso-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">See Also</span></div><div id="i-seealso-section-content" class="i-section-content"><div class="i-see-also-link">
+<a href="V19SP1-WhatsNew.html">Solid Edge V19 SP1 - What's New</a></div>
+<div class="i-see-also-link">
+<a href="V19SP2-WhatsNew.html">Solid Edge V19 SP2 - What's New</a></div>
+<div class="i-see-also-link">
+<a href="V19SP3-WhatsNew.html">Solid Edge V19 SP3 - What's New</a></div>
+<div class="i-see-also-link">
+<a href="V19SP4-WhatsNew.html">Solid Edge V19 SP4 - What's New</a></div>
+<div class="i-see-also-link">
+<a href="V19SP5-WhatsNew.html">Solid Edge V19 SP5 - What's New</a></div>
+<div class="i-see-also-link">
+<a href="V19SP6-WhatsNew.html">Solid Edge V19 SP6 - What's New</a></div>
+<div class="i-see-also-link">
+<a href="V19SP7-WhatsNew.html">Solid Edge V19 SP7 - What's New</a></div>
+<div class="i-see-also-link">
+<a href="V19SP8-WhatsNew.html">Solid Edge V19 SP8 - What's New</a></div>
+<div class="i-see-also-link">
+<a href="V19SP9-WhatsNew.html">Solid Edge V19 SP9 - What's New</a></div>
+<div class="i-see-also-link">
+<a href="V19SP10-WhatsNew.html">Solid Edge V19 SP10 - What's New</a></div>
+<div class="i-see-also-link">
+<a href="V19SP11-WhatsNew.html">Solid Edge V19 SP11 - What's New</a></div>
+<div class="i-see-also-link">
+<a href="V19SP12-WhatsNew.html">Solid Edge V19 SP12 - What's New</a></div>
+
+</div><!--DXMETADATA end-->
+        
+    </div>
+    <div id="i-footer-content" class="i-footer-content">
+        <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_FOOTER" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="CopyrightNotice" format="<p>&nbsp;</p><p>&nbsp;</p><hr style=""height: 1px"" /><p>%%variable%%</p>" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="FeedbackLink" format="" --><!--DXMETADATA end-->
+    </div>
+    
+
+    <!--DXMETADATA start type="IsNew" format="<script type=""text/javascript"">setIsNew = true;</script>" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<script type=""text/javascript"">setIsResponsiveEnabled = true;</script>" --><!--DXMETADATA end-->
+    <script type="text/javascript">
+        $(function() {
+            var documentInstance = new Innovasys.Content.Document(document.body);
+            documentInstance.isNew = !(typeof setIsNew === "undefined");
+            documentInstance.isResponsiveEnabled = !(typeof setIsResponsiveEnabled === "undefined");
+            documentInstance.load();
+        });
+    </script>
+</body>
+</html>

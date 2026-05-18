@@ -1,0 +1,792 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--DXMETADATA start type="MetaCharset" --><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><!--DXMETADATA end-->
+    <meta http-equiv="X-UA-Compatible" value="IE=9" />
+
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Literal" condition="helpversion:value=3" value="<meta name=""Microsoft.Help.SelfBranded"" content=""true"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="PageItemTitle" format="<title>%%PageItemTitle%%</title>" --><title>AddThickenFeature Method</title><!--DXMETADATA end-->
+    <!--DXMETADATA start type="ItemTitleNoQuotes" format="<meta name=""Title"" content=""%%ItemTitleNoQuotes%%""/>" --><!--DXMETADATA end-->    
+    
+
+    <!--DXMETADATA start type="PackageLink" packagename="jquery" filetype="script" firstlinkattributes="id=""mshs_support_script"""--><script src="template/packages/jquery/script/chm.mshc/jquery-1.7.2.min.js" type="text/javascript" id="mshs_support_script"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="script"--><script src="template/packages/jquery-ui/script/chm.mshc/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/jquery-ui/css/chm.mshc/jquery-ui-1.8.18.custom.css"></link><!--DXMETADATA end-->
+	
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/plugins-ax/css/chm.mshc/jquery-plugins.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="css" firstlinkattributes=" data-mshv2-stylesheet=""/template/packages/core-ax/dx.com.mshv2.css"" data-mshv1-stylesheet=""/template/packages/core-ax/dx.com.mshv1.css"" data-responsive-mobile=""template/packages/core-ax/dx.com.mobile.css"" data-responsive-tablet=""template/packages/core-ax/dx.com.tablet.css"""--><link rel="stylesheet" type="text/css" href="template/packages/core-ax/css/dx.com.css"  data-mshv2-stylesheet="/template/packages/core-ax/dx.com.mshv2.css" data-mshv1-stylesheet="/template/packages/core-ax/dx.com.mshv1.css" data-responsive-mobile="template/packages/core-ax/dx.com.mobile.css" data-responsive-tablet="template/packages/core-ax/dx.com.tablet.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="script"--><script src="template/packages/plugins-ax/script/chm.mshc/jquery-plugins.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="script"--><script src="template/packages/core-ax/script/dx.com.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="TopicId" format="<meta name=""Microsoft.Help.Id"" content=""%%TopicId%%""/>" --><meta name="Microsoft.Help.Id" content="SolidEdgePart~Models~AddThickenFeature"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Synopsis" StripHtmlTags="True" MaxLength="250" format="<meta name=""Description"" content=""%%Synopsis%%"" />"--><meta name="Description" content=" " /><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocParentId" format="<meta name=""Microsoft.Help.TocParent"" content=""%%TocParentId%%""/>" --><meta name="Microsoft.Help.TocParent" content="SolidEdgePart~Models_methods"/><!--DXMETADATA end-->
+    <meta name="Microsoft.Help.ContentType" content="Reference" />
+    <!--DXMETADATA start type="MshvKeywords" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="MshvMetaTags" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.Locale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.TopicLocale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="Stylesheets" --><link rel="stylesheet" type="text/css" href="stylesheets/customstyles.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Scripts" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="DesignTime"--><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_PROPERTIES" --><!--DXMETADATA end -->
+
+    <!--DXMETADATA start type="CustomHeadContent" --><!--DXMETADATA end-->
+</head>
+
+<body>
+    <div id="i-before-header-content" class="i-before-header-content">
+        
+    </div>
+    <div id="i-header-content" class="i-header-content">
+        <!--DXMETADATA start type="LogoImage" --><img class="logoimage" src="images/sesdk_header.jpg" border="0"></img><!--DXMETADATA end-->
+            <div class="i-project-title"><!--DXMETADATA start type="ProjectTitle" -->Solid Edge Part Type Library<!--DXMETADATA end--></div>
+        <div class="i-page-title"><div class="i-page-title-text"><!--DXMETADATA start type="PageItemTitle" -->AddThickenFeature Method<!--DXMETADATA end--></div></div>
+    </div>
+    <div id="i-after-header-content" class="i-after-header-content">
+        <!-- Spacing --> <span class="i-toggle-all-sections i-function-link">
+                <label class="i-collapse-all"><!--DXMETADATA start type="Phrase" name="COLLAPSE_ALL" -->Collapse All<!--DXMETADATA end--></label>
+                <label class="i-expand-all" style="display: none;"><!--DXMETADATA start type="Phrase" name="EXPAND_ALL" -->Expand All<!--DXMETADATA end--></label>
+            </span><!--DXMETADATA start type="Literal" condition="communityenabled" value="%%scrap:name=_COMMUNITY_DROPDOWN%%" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="IsWebOutputRootPageLinkEnabled" format="<a href='#' class="i-page-link" class="i-view-in-frame-link" title='$$VIEW_WITH_NAVIGATION_TOOLS_TIP$$' style='display: none' data-root-page='%%WebOutputRootPage%%%%OutputFileExtension%%' target='_top'>$$VIEW_WITH_NAVIGATION_TOOLS_TEXT$$</a>" --><a href='#' class="i-page-link" class="i-view-in-frame-link" title='Open this Topic in a view that includes Navigation tools (Table of Contents, Index, Search)' style='display: none' data-root-page='webframe.html' target='_top'>View with Navigation Tools</a><!--DXMETADATA end-->
+    </div>
+    <!--DXMETADATA start type="Breadcrumbs" scrap="_BREADCRUMBS" --><div class="i-breadcrumbs-container"><table><tr><td>
+<a href="SolidEdgePart_P.html">Solid Edge Part Type Library</a>
+ > <a href="SolidEdgePart~Models.html">Models Collection</a>
+ : AddThickenFeature Method</td></tr></table></div><!--DXMETADATA end -->
+    
+    <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_BUBBLES" namespace="parameter" source="Item" -->
+<div id="SidePopupContent" class="i-popup-content">
+igLeft - Thicken in the direction opposite to Face Normal<BR>igRight - Thicken in the direction of Face Normal<BR>igSymmetric- Thicken in both direction with half of the offset value.
+</div>
+<div id="offsetDistancePopupContent" class="i-popup-content">
+Specify offset distance as double.
+</div>
+<div id="NumberOfFacesPopupContent" class="i-popup-content">
+Specify number of faces as integer.
+</div>
+<div id="FacesPopupContent" class="i-popup-content">
+Specify Array of faces.
+</div>
+<!--DXMETADATA end -->
+    <div id="i-body-content" class="i-body-content">
+        <!--DXMETADATA start type="Description" source="Item" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=description,caption=$$Description$$%%<div class=""i-description-content"">%%description%%</div></div>" --><div class="i-section-heading" id="i-description-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Description</span></div><div id="i-description-section-content" class="i-section-content"><div class="i-description-content"> </div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="Syntax" lang="VB" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=syntax,caption=$$Syntax$$%%<div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>%%Syntax%%</pre></tr></table></div></div>" --><div class="i-section-heading" id="i-syntax-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Syntax</span></div><div id="i-syntax-section-content" class="i-section-content"><div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>Public Function AddThickenFeature( _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="SidePopupLink" data-popup-contentsource="#SidePopupContent" data-popup-showevent="click mouseenter">Side</a></i> As <a href="SolidEdgePart~FeaturePropertyConstants.html">FeaturePropertyConstants</a>, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="offsetDistancePopupLink" data-popup-contentsource="#offsetDistancePopupContent" data-popup-showevent="click mouseenter">offsetDistance</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="NumberOfFacesPopupLink" data-popup-contentsource="#NumberOfFacesPopupContent" data-popup-showevent="click mouseenter">NumberOfFaces</a></i> As Long, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="FacesPopupLink" data-popup-contentsource="#FacesPopupContent" data-popup-showevent="click mouseenter">Faces</a></i>() As Object _
+) As <a href="SolidEdgePart~Model.html">Model</a></pre></tr></table></div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_LIST" namespace="parameter" source="Item" filter="" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=parameters,caption=$$ParameterList$$%%%%filtereditemlist%%</div>" --><div class="i-section-heading" id="i-parameters-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Parameters</span></div><div id="i-parameters-section-content" class="i-section-content"><dl>
+<dt><I>Side</I></dt>
+<dd><table class="i-filtered-item-list"><tr><th>Value</th><th>Description</th></tr>
+<tr><td class="i-member-name">igAddRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igAll</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igAlongAnAxis</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igAngularDummy</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igAsConstruction</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igBend</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igBendAndFaceCornerRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igBendOnlyCornerRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igBoth</td><td class="i-description">Feature Properties - Both</td></tr>
+<tr><td class="i-member-name">igChainedCornerRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igChamfer2Setbacks</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igChamfer45degSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igChamferAngleSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCircular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseCornerCircleCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseCornerClosed</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseCornerNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseCornerOpen</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igClosed</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseFaces</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igConcave</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igConstantRadiusArc</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igConstRadiusRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igContinuous</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igConvex</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCopy</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCornerRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCounterboreHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCounterboreProfileIsAtBottom</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCounterboreProfileIsAtTop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCounterdrillHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCountersinkHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCurvatureContinuous</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCurvatureContinuousInterior</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCurveSetSeperator</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDeleteFaceHeal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDelSMFaceBoth</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDelSMFaceNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDelSystemRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDelZeroBendRadius</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDevelopableSurface</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDinDimension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEdgeBasedCrossSection</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEdgesByLoop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEdgesByVertex</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEndCaps</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEqualOffset</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEquationType</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igExtend</td><td class="i-description">Feature Properties - Extend</td></tr>
+<tr><td class="i-member-name">igExtendBendRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFacesTouchingCurvesOnly</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFilletBendRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFinite</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeCenterOfEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeEndFromEndEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeEndOnEndEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeFromBothEndsOfEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeFromDefinedStartPoint</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeFullEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeMatchFace</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeOffset</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeStartFromEndEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeStartOnEndEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlatten</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFormedEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFromNonReferenceEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFromReferenceEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFromTo</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFull</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igGroove</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeCenteredLoop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeClosed</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeClosedLoop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeCurl</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeOpen</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeOpenLoop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeSFlange</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igIgnoreBlends</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igInside</td><td class="i-description">Feature Properties - Remove/Add Material Inside</td></tr>
+<tr><td class="i-member-name">igInsideDimension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igIntersect</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLancedEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLeft</td><td class="i-description">Feature Properties - Project to Left</td></tr>
+<tr><td class="i-member-name">igLinear</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLinearCurvatureContinuousExtension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLinearTangentExtension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLip</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLouverFormedEndType</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLouverLancedEndType</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLouverRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLouverRoundNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMaterialInsideOML</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreByAngle</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreByDist</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreManufacturingCut</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreNormalToThickness</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreParallelToThickness</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreRegularCut</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMove</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMultipleEdges</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNatural</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNeutralFactorFromExcel</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNFType</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNoCornerRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNoExtend</td><td class="i-description">Feature Properties - Do Not Extend</td></tr>
+<tr><td class="i-member-name">igNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNonSymmetric</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNormal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNormalSideDummy</td><td class="i-description">Feature Properties - Normal Side</td></tr>
+<tr><td class="i-member-name">igNoRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNullConstant</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igOffset</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igOutside</td><td class="i-description">Feature Properties - Remove/Add Material Outside</td></tr>
+<tr><td class="i-member-name">igOutsideDimension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igOverlapFaces</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igParallelDummy</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igParallelToPlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPartingFromCurve</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPartingFromEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPartingFromPlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPartingFromSurface</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternAlongCurve</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternByTable</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternCircular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternDuplicate</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternFillRegion</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternMirror</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternMountingBoss</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternRectangular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternUserDefined</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPeriodic</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igProfileBasedCrossSection</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igProjectOptionProject</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igProjectOptionWrap</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPunchedEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRadial</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRaisedCounterboreSlot</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRecessedCounterboreSlot</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRecreateBlends</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRectangularBendRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igReflective</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRegularHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRegularSlot</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRegularThread</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRemoveBoundaries</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRemoveExternalBoundaries</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRemoveInternalBoundaries</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igReverseNormal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igReverseNormalSideDummy</td><td class="i-description">Feature Properties - Reverse Normal Side</td></tr>
+<tr><td class="i-member-name">igRight</td><td class="i-description">Feature Properties - Project to Right</td></tr>
+<tr><td class="i-member-name">igRipBendRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRipCornerRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndCapAcrossSharpEdges</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndMiterAtCorner</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndPreserveTopologyOff</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndPreserveTopologyOn</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAcrossSharpEdges</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAcrossTangentEdgesOff</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAcrossTangentEdgesOn</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAlongBlendEdgesOff</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAlongBlendEdgesOn</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAroundCorner</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundAllVertexSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundEndVertexEdgeSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundSetbackIsAbsolute</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundSetbackIsRelative</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundSingleVertexSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundStartVertexEdgeSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundVertexEdgeSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igShowBoundaries</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSideInfoSetSeperator</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSingleEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSlotGroup</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSMClearanceCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSMFaceCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSMMidPlaneCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSplit</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSplitAngle1Left</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSplitAngle1Right</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSplitDraft</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igStart</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igStepDraft</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igStepDraftPerpendicular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igStraightPipeThread</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSubtract</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepAlignArcLength</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepAlignNormal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepAlignParallel</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepAlignParametrically</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepC1Continuity</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepC2Continuity</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepMergeAll</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepMergeAlongPath</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepMergeNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepScaleNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepScaleStartAndEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepTwistNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepTwistStartAndEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepTwistTurns</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepTwistTurnsPerUnitLength</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSymmetric</td><td class="i-description">Feature Properties - Symmetric Extent</td></tr>
+<tr><td class="i-member-name">igTangent</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTangentInterior</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperByAngle</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperByRatio</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperByRLRatio</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperDimAtBottom</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperDimAtTop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperedEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperedHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperedPipeThread</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperedToPlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTappedHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThickness</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThkInProfilePlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThkNormalToProfilePlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThreeHundredAndSixty</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThroughAll</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThroughAxis</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igToEndOfEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igToggleToConstruction</td><td class="i-description">Toggle from Design to Construction</td></tr>
+<tr><td class="i-member-name">igToggleToDesign</td><td class="i-description">Toggle from Construction to Design</td></tr>
+<tr><td class="i-member-name">igToKeyPoint</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igToNext</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentCircleCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentCrown</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentDraft</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentFormedFeatureDisplayAsCenterMark</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentFormedFeatureDisplayAsModeled</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentFormedFeatureDisplayAsSketch</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentFormedFeatureDisplayAsSketchAndCenterMark</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentIntersect</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentMiterRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentOff</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentRectangularCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentUCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentVCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igUnequalOffset</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igUnite</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igUShaped</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igVarRadiusRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igVBottomDimToFlat</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igVBottomDimToV</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igVShaped</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igWeldGrooveCapProject</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igWeldGrooveCapSameAsTop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igWeldGrooveCapSurface</td><td class="i-description"> </td></tr>
+</table>igLeft - Thicken in the direction opposite to Face Normal<BR>igRight - Thicken in the direction of Face Normal<BR>igSymmetric- Thicken in both direction with half of the offset value.</dd>
+<dt><I>offsetDistance</I></dt>
+<dd>Specify offset distance as double.</dd>
+<dt><I>NumberOfFaces</I></dt>
+<dd>Specify number of faces as integer.</dd>
+<dt><I>Faces</I></dt>
+<dd>Specify Array of faces.</dd>
+</dl></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##RETURNS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=returns,caption=$$Return_Type$$%%<div class=""i-returns-content"">%%comment%%</div></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##REMARKS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=remarks,caption=$$Remarks$$%%%%comment%%</div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="sourcecode" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=source,caption=$$Source_Code$$%%<table border=0 cellpadding=0 cellspacing=0 class=sourcecode><tr><td nowrap>%%sourcecode%%</td></tr></table></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##EXAMPLEINTRO" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=""$$Example$$%%designlist:tagidentifier=##EXAMPLECODE,itemtype=Example%%""%%%%comment%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="EXAMPLEGROUP_LIST" namespace="ExampleGroup" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""="",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><div class="i-section-heading" id="i-example-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Example</span></div><div id="i-example-section-content" class="i-section-content">
+<div class="i-tab-container">
+    <ul>
+        <li class="i-filtered-content-VB.NET">
+			<a href="#i-tab-content-37928172-436c-436d-90e2-9f84fdd52085">Example (VB.NET)</a>
+		</li>
+        <li class="i-filtered-content-CS">
+			<a href="#i-tab-content-729b3a15-f6a9-4811-825e-e8a1de8f35d0">Example (C#)</a>
+		</li>
+
+    </ul>
+	<div id="i-tab-content-37928172-436c-436d-90e2-9f84fdd52085" class="i-filtered-content-VB.NET">
+		<pre><span style="color: #0000FF; ">Imports</span> System.Runtime.InteropServices
+<span style="color: #0000FF; ">Public</span> <span style="color: #0000FF; ">Class</span> Form1
+
+    <span style="color: #0000FF; ">Private</span> <span style="color: #0000FF; ">Sub</span> Button1_Click(sender <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Object</span>, e <span style="color: #0000FF; ">As</span> EventArgs) <span style="color: #0000FF; ">Handles</span> Button1.Click
+        <span style="color: #0000FF; ">Dim</span> application <span style="color: #0000FF; ">As</span> SolidEdgeFramework.Application = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> documents <span style="color: #0000FF; ">As</span> SolidEdgeFramework.Documents = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> partDocument <span style="color: #0000FF; ">As</span> SolidEdgePart.PartDocument = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objModels <span style="color: #0000FF; ">As</span> SolidEdgePart.Models = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objModel <span style="color: #0000FF; ">As</span> SolidEdgePart.Mode = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objAddThkFeat <span style="color: #0000FF; ">As</span> SolidEdgePart.Thicken = <span style="color: #0000FF; ">Nothing</span>
+
+        <span style="color: #0000FF; ">Try</span>
+
+            Console.WriteLine(<span style="color: #800000; ">&quot;Connecting to Solid Edge.&quot;</span>)
+
+            <span style="color: #008000; ">' Connect to or start Solid Edge.
+</span>            application = ConnectToSolidEdge(<span style="color: #0000FF; ">True</span>)
+
+            <span style="color: #008000; ">' Make sure user can see the GUI.
+</span>            application.Visible = <span style="color: #0000FF; ">True</span>
+
+            <span style="color: #008000; ">' Bring Solid Edge to the foreground.
+</span>            application.Activate()
+
+            <span style="color: #008000; ">' Get a reference to the documents collection.
+</span>            documents = application.Documents
+
+            Console.WriteLine(<span style="color: #800000; ">&quot;Creating a new part document.&quot;</span>)
+
+            <span style="color: #008000; ">' Create a new part document.
+</span>            partDocument = <span style="color: #0000FF; ">CType</span>(documents.Add(<span style="color: #800000; ">&quot;SolidEdge.PartDocument&quot;</span>), SolidEdgePart.PartDocument)
+
+            <span style="color: #008000; ">' Always a good idea to give SE a chance to breathe.
+</span>            application.DoIdle()
+
+            Console.WriteLine(<span style="color: #800000; ">&quot;Drawing part.&quot;</span>)
+
+            <span style="color: #008000; ">' Create geometry.
+</span>            CreateAddThickenFeat(partDocument)
+
+            Console.WriteLine(<span style="color: #800000; ">&quot;Switching to ISO view.&quot;</span>)
+
+            <span style="color: #008000; ">' Switch to ISO view.
+</span>            application.StartCommand(<span style="color: #0000FF; ">CType</span>(SolidEdgeConstants.PartCommandConstants.PartViewISOView, SolidEdgeFramework.SolidEdgeCommandConstants))
+
+
+
+        <span style="color: #0000FF; ">Catch</span> ex <span style="color: #0000FF; ">As</span> System.Exception
+#<span style="color: #0000FF; ">If</span> DEBUG <span style="color: #0000FF; ">Then</span>
+            System.Diagnostics.Debugger.Break()
+#<span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+            Console.WriteLine(ex.Message)
+        <span style="color: #0000FF; ">Finally</span>
+            Console.WriteLine(<span style="color: #800000; ">&quot;Unregistering OleMessageFilter.&quot;</span>)
+
+        <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">Try</span>
+    <span style="color: #0000FF; ">End Sub</span>
+
+    <span style="color: #0000FF; ">Public</span> <span style="color: #0000FF; ">Shared</span> <span style="color: #0000FF; ">Sub</span> CreateAddThickenFeat(<span style="color: #0000FF; ">ByVal</span> partDocument <span style="color: #0000FF; ">As</span> SolidEdgePart.PartDocument)
+        <span style="color: #0000FF; ">Dim</span> profileSets <span style="color: #0000FF; ">As</span> SolidEdgePart.ProfileSets = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> profileSet <span style="color: #0000FF; ">As</span> SolidEdgePart.ProfileSet = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> profiles <span style="color: #0000FF; ">As</span> SolidEdgePart.Profiles = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> profile <span style="color: #0000FF; ">As</span> SolidEdgePart.Profile = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> refplanes <span style="color: #0000FF; ">As</span> SolidEdgePart.RefPlanes = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> relations2d <span style="color: #0000FF; ">As</span> SolidEdgeFrameworkSupport.Relations2d = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> relation2d <span style="color: #0000FF; ">As</span> SolidEdgeFrameworkSupport.Relation2d = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> lines2d <span style="color: #0000FF; ">As</span> SolidEdgeFrameworkSupport.Lines2d = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> line2d <span style="color: #0000FF; ">As</span> SolidEdgeFrameworkSupport.Line2d = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> models <span style="color: #0000FF; ">As</span> SolidEdgePart.Models = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> model <span style="color: #0000FF; ">As</span> SolidEdgePart.Model = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> aProfiles <span style="color: #0000FF; ">As</span> System.Array = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objFace(0 <span style="color: #0000FF; ">To</span> 2) <span style="color: #0000FF; ">As</span> SolidEdgeGeometry.Face
+        <span style="color: #0000FF; ">Dim</span> objExFeat <span style="color: #0000FF; ">As</span> SolidEdgePart.ExtrudedProtrusion = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objThkFeat <span style="color: #0000FF; ">As</span> SolidEdgePart.Thicken = <span style="color: #0000FF; ">Nothing</span>
+
+        <span style="color: #008000; ">' Get a reference to the profile sets collection.
+</span>        profileSets = partDocument.ProfileSets
+
+        <span style="color: #008000; ">' Add a new profile set.
+</span>        profileSet = profileSets.Add()
+
+        <span style="color: #008000; ">' Get a reference to the profiles collection.
+</span>        profiles = profileSet.Profiles
+
+        <span style="color: #008000; ">' Get a reference to the ref planes collection.
+</span>        refplanes = partDocument.RefPlanes
+
+        <span style="color: #008000; ">' Add a new profile.
+</span>        profile = profiles.Add(refplanes.Item(3))
+
+        <span style="color: #008000; ">' Get a reference to the lines2d collection.
+</span>        lines2d = profile.Lines2d
+
+        <span style="color: #008000; ">' UOM = meters.
+</span>        <span style="color: #0000FF; ">Dim</span> lineMatrix(,) <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = {{0, 0, 0.08, 0}, {0.08, 0, 0.08, 0.06}, {0.08, 0.06, 0.064, 0.06}, {0.064, 0.06, 0.064, 0.02}, {0.064, 0.02, 0.048, 0.02}, {0.048, 0.02, 0.048, 0.06}, {0.048, 0.06, 0.032, 0.06}, {0.032, 0.06, 0.032, 0.02}, {0.032, 0.02, 0.016, 0.02}, {0.016, 0.02, 0.016, 0.06}, {0.016, 0.06, 0, 0.06}, {0, 0.06, 0, 0}}
+
+        <span style="color: #008000; ">' Draw the Base Profile.
+</span>        <span style="color: #0000FF; ">For</span> i <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Integer</span> = 0 <span style="color: #0000FF; ">To</span> lineMatrix.GetUpperBound(0)
+            line2d = lines2d.AddBy2Points(x1:=lineMatrix(i, 0), y1:=lineMatrix(i, 1), x2:=lineMatrix(i, 2), y2:=lineMatrix(i, 3))
+        <span style="color: #0000FF; ">Next</span> i
+
+        <span style="color: #008000; ">' Define Relations among the Line objects to make the Profile closed.
+</span>        relations2d = <span style="color: #0000FF; ">CType</span>(profile.Relations2d, SolidEdgeFrameworkSupport.Relations2d)
+
+        <span style="color: #008000; ">' Connect all of the lines.
+</span>        <span style="color: #0000FF; ">For</span> i <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Integer</span> = 1 <span style="color: #0000FF; ">To</span> lines2d.Count
+            <span style="color: #0000FF; ">Dim</span> j <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Integer</span> = i + 1
+
+            <span style="color: #008000; ">' When we reach the last line, wrap around and connect it to the first line.
+</span>            <span style="color: #0000FF; ">If</span> j &gt; lines2d.Count <span style="color: #0000FF; ">Then</span>
+                j = 1
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+
+            relation2d = relations2d.AddKeypoint(Object1:=lines2d.Item(i), Index1:=<span style="color: #0000FF; ">CInt</span>(SolidEdgeConstants.KeypointIndexConstants.igLineEnd), Object2:=lines2d.Item(j), Index2:=<span style="color: #0000FF; ">CInt</span>(SolidEdgeConstants.KeypointIndexConstants.igLineStart), guaranteed_ok:=<span style="color: #0000FF; ">True</span>)
+        <span style="color: #0000FF; ">Next</span> i
+
+        <span style="color: #008000; ">' Close the profile.
+</span>        profile.End(SolidEdgePart.ProfileValidationType.igProfileClosed)
+
+        <span style="color: #008000; ">' Hide the profile.
+</span>        profile.Visible = <span style="color: #0000FF; ">False</span>
+
+        <span style="color: #008000; ">' Create a new array of profile objects.
+</span>        aProfiles = Array.CreateInstance(<span style="color: #0000FF; ">GetType</span>(SolidEdgePart.Profile), 1)
+        aProfiles.SetValue(profile, 0)
+
+        <span style="color: #008000; ">' Get a reference to the models collection.
+</span>        models = partDocument.Models
+
+        Console.WriteLine(<span style="color: #800000; ">&quot;Creating finite extruded protrusion.&quot;</span>)
+
+        <span style="color: #008000; ">' Create the extended protrusion.
+</span>        model = models.AddFiniteExtrudedProtrusion(NumberOfProfiles:=aProfiles.Length, ProfileArray:=aProfiles, ProfilePlaneSide:=SolidEdgePart.FeaturePropertyConstants.igRight, ExtrusionDistance:=0.005)
+
+        objExFeat = model.ExtrudedProtrusions(0)
+        objFace(0) = objExFeat.TopCap
+
+        model = models.AddThickenFeature(SolidEdgePart.FeaturePropertyConstants.igLeft, 0.1, 1, objFace)
+    <span style="color: #0000FF; ">End Sub</span>
+
+    <span style="color: #008000; ">''' </span><span style="color: #808080; ">&lt;summary&gt;</span><span style="color: #008000; ">
+    ''' Connects to a running instance of Solid Edge.
+    ''' </span><span style="color: #808080; ">&lt;/summary&gt;</span><span style="color: #008000; ">
+</span>    <span style="color: #0000FF; ">Private</span> <span style="color: #0000FF; ">Shared</span> <span style="color: #0000FF; ">Function</span> ConnectToSolidEdge() <span style="color: #0000FF; ">As</span> SolidEdgeFramework.Application
+        <span style="color: #0000FF; ">Return</span> ConnectToSolidEdge(<span style="color: #0000FF; ">False</span>)
+    <span style="color: #0000FF; ">End Function</span>
+
+    <span style="color: #008000; ">''' </span><span style="color: #808080; ">&lt;summary&gt;</span><span style="color: #008000; ">
+    ''' Connects to a running instance of Solid Edge with an option to start if not running.
+    ''' </span><span style="color: #808080; ">&lt;/summary&gt;</span><span style="color: #008000; ">
+</span>    <span style="color: #0000FF; ">Private</span> <span style="color: #0000FF; ">Shared</span> <span style="color: #0000FF; ">Function</span> ConnectToSolidEdge(<span style="color: #0000FF; ">ByVal</span> startIfNotRunning <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Boolean</span>) <span style="color: #0000FF; ">As</span> SolidEdgeFramework.Application
+        <span style="color: #0000FF; ">Try</span>
+            <span style="color: #008000; ">' Attempt to connect to a running instance of Solid Edge.
+</span>            <span style="color: #0000FF; ">Return</span> <span style="color: #0000FF; ">CType</span>(Marshal.GetActiveObject(<span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>), SolidEdgeFramework.Application)
+        <span style="color: #0000FF; ">Catch</span> ex <span style="color: #0000FF; ">As</span> System.Runtime.InteropServices.COMException
+            <span style="color: #008000; ">' Failed to connect.
+</span>            <span style="color: #0000FF; ">If</span> ex.ErrorCode = -2147221021 <span style="color: #0000FF; ">Then</span> <span style="color: #008000; ">' MK_E_UNAVAILABLE
+</span>                <span style="color: #0000FF; ">If</span> startIfNotRunning <span style="color: #0000FF; ">Then</span>
+                    <span style="color: #008000; ">' Start Solid Edge.
+</span>                    <span style="color: #0000FF; ">Return</span> <span style="color: #0000FF; ">CType</span>(Activator.CreateInstance(Type.GetTypeFromProgID(<span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>)), SolidEdgeFramework.Application)
+                <span style="color: #0000FF; ">Else</span>
+                    <span style="color: #0000FF; ">Throw</span> <span style="color: #0000FF; ">New</span> System.Exception(<span style="color: #800000; ">&quot;Solid Edge is not running.&quot;</span>)
+                <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+            <span style="color: #0000FF; ">Else</span>
+                <span style="color: #0000FF; ">Throw</span>
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+        <span style="color: #0000FF; ">Catch</span>
+            <span style="color: #0000FF; ">Throw</span>
+        <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">Try</span>
+    <span style="color: #0000FF; ">End Function</span>
+<span style="color: #0000FF; ">End Class</span>
+</pre>
+	</div>
+	<div id="i-tab-content-729b3a15-f6a9-4811-825e-e8a1de8f35d0" class="i-filtered-content-CS">
+		<pre><span style="color: #0000FF; ">using</span> System;
+<span style="color: #0000FF; ">using</span> System.Runtime.InteropServices;
+<span style="color: #0000FF; ">public</span> <span style="color: #0000FF; ">class</span> Form1
+{
+
+    <span style="color: #0000FF; ">private</span> <span style="color: #0000FF; ">void</span> Button1_Click(<span style="color: #0000FF; ">object</span> sender, EventArgs e)
+    {
+        SolidEdgeFramework.Application application = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeFramework.Documents documents = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.PartDocument partDocument = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.Models objModels = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.Mode objModel = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.Thicken objAddThkFeat = <span style="color: #0000FF; ">null</span>;
+
+        <span style="color: #0000FF; ">try</span>
+        {
+
+            Console.WriteLine(<span style="color: #800000; ">&quot;Connecting to Solid Edge.&quot;</span>);
+
+            <span style="color: #008000; ">// Connect to or start Solid Edge.
+</span>            application = ConnectToSolidEdge(<span style="color: #0000FF; ">true</span>);
+
+            <span style="color: #008000; ">// Make sure user can see the GUI.
+</span>            application.Visible = <span style="color: #0000FF; ">true</span>;
+
+            <span style="color: #008000; ">// Bring Solid Edge to the foreground.
+</span>            application.Activate();
+
+            <span style="color: #008000; ">// Get a reference to the documents collection.
+</span>            documents = application.Documents;
+
+            Console.WriteLine(<span style="color: #800000; ">&quot;Creating a new part document.&quot;</span>);
+
+            <span style="color: #008000; ">// Create a new part document.
+</span>            partDocument = (SolidEdgePart.PartDocument)documents.Add(<span style="color: #800000; ">&quot;SolidEdge.PartDocument&quot;</span>);
+
+            <span style="color: #008000; ">// Always a good idea to give SE a chance to breathe.
+</span>            application.DoIdle();
+
+            Console.WriteLine(<span style="color: #800000; ">&quot;Drawing part.&quot;</span>);
+
+            <span style="color: #008000; ">// Create geometry.
+</span>            CreateAddThickenFeat(partDocument);
+
+            Console.WriteLine(<span style="color: #800000; ">&quot;Switching to ISO view.&quot;</span>);
+
+            <span style="color: #008000; ">// Switch to ISO view.
+</span>            application.StartCommand((SolidEdgeFramework.SolidEdgeCommandConstants)SolidEdgeConstants.PartCommandConstants.PartViewISOView);
+
+
+
+        }
+        <span style="color: #0000FF; ">catch</span> (System.Exception ex)
+        {
+<span style="color: #0000FF; ">#if</span> DEBUG
+            System.Diagnostics.Debugger.Break();
+<span style="color: #0000FF; ">#endif</span>
+            Console.WriteLine(ex.Message);
+        }
+        <span style="color: #0000FF; ">finally</span>
+        {
+            Console.WriteLine(<span style="color: #800000; ">&quot;Unregistering OleMessageFilter.&quot;</span>);
+
+        }
+    }
+
+    <span style="color: #0000FF; ">public</span> <span style="color: #0000FF; ">static</span> <span style="color: #0000FF; ">void</span> CreateAddThickenFeat(SolidEdgePart.PartDocument partDocument)
+    {
+        SolidEdgePart.ProfileSets profileSets = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.ProfileSet profileSet = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.Profiles profiles = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.Profile profile = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.RefPlanes refplanes = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeFrameworkSupport.Relations2d relations2d = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeFrameworkSupport.Relation2d relation2d = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeFrameworkSupport.Lines2d lines2d = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeFrameworkSupport.Line2d line2d = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.Models models = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.Model model = <span style="color: #0000FF; ">null</span>;
+        System.Array aProfiles = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeGeometry.Face[] objFace = <span style="color: #0000FF; ">new</span> SolidEdgeGeometry.Face[3];
+        SolidEdgePart.ExtrudedProtrusion objExFeat = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.Thicken objThkFeat = <span style="color: #0000FF; ">null</span>;
+
+        <span style="color: #008000; ">// Get a reference to the profile sets collection.
+</span>        profileSets = partDocument.ProfileSets;
+
+        <span style="color: #008000; ">// Add a new profile set.
+</span>        profileSet = profileSets.Add();
+
+        <span style="color: #008000; ">// Get a reference to the profiles collection.
+</span>        profiles = profileSet.Profiles;
+
+        <span style="color: #008000; ">// Get a reference to the ref planes collection.
+</span>        refplanes = partDocument.RefPlanes;
+
+        <span style="color: #008000; ">// Add a new profile.
+</span>        profile = profiles.Add(refplanes.Item(3));
+
+        <span style="color: #008000; ">// Get a reference to the lines2d collection.
+</span>        lines2d = profile.Lines2d;
+
+        <span style="color: #008000; ">// UOM = meters.
+</span>        <span style="color: #0000FF; ">double</span>[,] lineMatrix =
+        {
+            {0, 0, 0.08, 0},
+            {0.08, 0, 0.08, 0.06},
+            {0.08, 0.06, 0.064, 0.06},
+            {0.064, 0.06, 0.064, 0.02},
+            {0.064, 0.02, 0.048, 0.02},
+            {0.048, 0.02, 0.048, 0.06},
+            {0.048, 0.06, 0.032, 0.06},
+            {0.032, 0.06, 0.032, 0.02},
+            {0.032, 0.02, 0.016, 0.02},
+            {0.016, 0.02, 0.016, 0.06},
+            {0.016, 0.06, 0, 0.06},
+            {0, 0.06, 0, 0}
+        };
+
+        <span style="color: #008000; ">// Draw the Base Profile.
+</span>        <span style="color: #0000FF; ">for</span> (<span style="color: #0000FF; ">int</span> i = 0; i &lt;= lineMatrix.GetUpperBound(0); i++)
+        {
+            line2d = lines2d.AddBy2Points(x1:lineMatrix[i, 0], y1:lineMatrix[i, 1], x2:lineMatrix[i, 2], y2:lineMatrix[i, 3]);
+        }
+
+        <span style="color: #008000; ">// Define Relations among the Line objects to make the Profile closed.
+</span>        relations2d = (SolidEdgeFrameworkSupport.Relations2d)profile.Relations2d;
+
+        <span style="color: #008000; ">// Connect all of the lines.
+</span>        <span style="color: #0000FF; ">for</span> (<span style="color: #0000FF; ">int</span> i = 1; i &lt;= lines2d.Count; i++)
+        {
+            <span style="color: #0000FF; ">int</span> j = i + 1;
+
+            <span style="color: #008000; ">// When we reach the last line, wrap around and connect it to the first line.
+</span>            <span style="color: #0000FF; ">if</span> (j &gt; lines2d.Count)
+            {
+                j = 1;
+            }
+
+            relation2d = relations2d.AddKeypoint(Object1:lines2d.Item(i), Index1:Convert.ToInt32(SolidEdgeConstants.KeypointIndexConstants.igLineEnd), Object2:lines2d.Item(j), Index2:Convert.ToInt32(SolidEdgeConstants.KeypointIndexConstants.igLineStart), guaranteed_ok:<span style="color: #0000FF; ">true</span>);
+        }
+
+        <span style="color: #008000; ">// Close the profile.
+</span>        profile.End(SolidEdgePart.ProfileValidationType.igProfileClosed);
+
+        <span style="color: #008000; ">// Hide the profile.
+</span>        profile.Visible = <span style="color: #0000FF; ">false</span>;
+
+        <span style="color: #008000; ">// Create a new array of profile objects.
+</span>        aProfiles = (System.Array[])Array.CreateInstance(<span style="color: #0000FF; ">typeof</span>(SolidEdgePart.Profile), 1);
+        aProfiles.SetValue(profile, 0);
+
+        <span style="color: #008000; ">// Get a reference to the models collection.
+</span>        models = partDocument.Models;
+
+        Console.WriteLine(<span style="color: #800000; ">&quot;Creating finite extruded protrusion.&quot;</span>);
+
+        <span style="color: #008000; ">// Create the extended protrusion.
+</span>        model = models.AddFiniteExtrudedProtrusion(NumberOfProfiles:aProfiles.Length, ProfileArray:aProfiles, ProfilePlaneSide:SolidEdgePart.FeaturePropertyConstants.igRight, ExtrusionDistance:0.005);
+
+        objExFeat = model.ExtrudedProtrusions(0);
+        objFace[0] = objExFeat.TopCap;
+
+        model = models.AddThickenFeature(SolidEdgePart.FeaturePropertyConstants.igLeft, 0.1, 1, objFace);
+    }
+
+    <span style="color: #008000; ">/// </span><span style="color: #808080; ">&lt;summary&gt;</span><span style="color: #008000; ">
+    /// Connects to a running instance of Solid Edge.
+    /// </span><span style="color: #808080; ">&lt;/summary&gt;</span><span style="color: #008000; ">
+</span>    <span style="color: #0000FF; ">private</span> <span style="color: #0000FF; ">static</span> SolidEdgeFramework.Application ConnectToSolidEdge()
+    {
+        <span style="color: #0000FF; ">return</span> ConnectToSolidEdge(<span style="color: #0000FF; ">false</span>);
+    }
+
+    <span style="color: #008000; ">/// </span><span style="color: #808080; ">&lt;summary&gt;</span><span style="color: #008000; ">
+    /// Connects to a running instance of Solid Edge with an option to start if not running.
+    /// </span><span style="color: #808080; ">&lt;/summary&gt;</span><span style="color: #008000; ">
+</span>    <span style="color: #0000FF; ">private</span> <span style="color: #0000FF; ">static</span> SolidEdgeFramework.Application ConnectToSolidEdge(<span style="color: #0000FF; ">bool</span> startIfNotRunning)
+    {
+        <span style="color: #0000FF; ">try</span>
+        {
+            <span style="color: #008000; ">// Attempt to connect to a running instance of Solid Edge.
+</span>            <span style="color: #0000FF; ">return</span> (SolidEdgeFramework.Application)Marshal.GetActiveObject(<span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>);
+        }
+        <span style="color: #0000FF; ">catch</span> (System.Runtime.InteropServices.COMException ex)
+        {
+            <span style="color: #008000; ">// Failed to connect.
+</span>            <span style="color: #0000FF; ">if</span> (ex.ErrorCode == -2147221021) <span style="color: #008000; ">// MK_E_UNAVAILABLE
+</span>            {
+                <span style="color: #0000FF; ">if</span> (startIfNotRunning)
+                {
+                    <span style="color: #008000; ">// Start Solid Edge.
+</span>                    <span style="color: #0000FF; ">return</span> (SolidEdgeFramework.Application)Activator.CreateInstance(Type.GetTypeFromProgID(<span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>));
+                }
+                <span style="color: #0000FF; ">else</span>
+                {
+                    <span style="color: #0000FF; ">throw</span> <span style="color: #0000FF; ">new</span> System.Exception(<span style="color: #800000; ">&quot;Solid Edge is not running.&quot;</span>);
+                }
+            }
+            <span style="color: #0000FF; ">else</span>
+            {
+                <span style="color: #0000FF; ">throw</span>;
+            }
+        }
+        <span style="color: #0000FF; ">catch</span>
+        {
+            <span style="color: #0000FF; ">throw</span>;
+        }
+    }
+
+    <span style="color: #0000FF; ">public</span> Form1()
+    {
+        SubscribeToEvents();
+    }
+
+    <span style="color: #0000FF; ">private</span> <span style="color: #0000FF; ">bool</span> EventsSubscribed = <span style="color: #0000FF; ">false</span>;
+    <span style="color: #0000FF; ">private</span> <span style="color: #0000FF; ">void</span> SubscribeToEvents()
+    {
+        <span style="color: #0000FF; ">if</span> (EventsSubscribed)
+            <span style="color: #0000FF; ">return</span>;
+        <span style="color: #0000FF; ">else</span>
+            EventsSubscribed = <span style="color: #0000FF; ">true</span>;
+
+        Button1.Click += Button1_Click;
+    }
+
+}</pre>
+	</div>
+	
+</div>
+</div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="INLINE_EXAMPLE" namespace="Example" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""<>"",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="MENU_LINK" namespace="example" source="Item" filter="type=linked" NoHeader="True" NoFooter="True" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=examplelinks,caption=$$Example$$%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="FilteredItemList" scrap="CATEGORIZED_LINKS" namespace="linkcategory" source="Item" filter="" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=seealso,caption=""$$See_Also$$%%designlist:tagidentifier=##SEEALSO,itemtype=See Also%%""%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><div class="i-section-heading" id="i-seealso-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">See Also</span></div><div id="i-seealso-section-content" class="i-section-content"><p id=dxseealsocontent><a href="SolidEdgePart~Models.html">Models Collection</a>
+&nbsp;|&nbsp;<a href="SolidEdgePart~Models_members.html">Models Members</a>
+&nbsp;|&nbsp;<a href="V17-WhatsNew.html">Solid Edge V17 - What's New</a>
+</p>
+</p></div><!--DXMETADATA end -->
+    </div>
+    <div id="i-footer-content" class="i-footer-content">
+        <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_FOOTER" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="CopyrightNotice" format="<p>&nbsp;</p><p>&nbsp;</p><hr style=""height: 1px"" /><p>%%variable%%</p>" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="FeedbackLink" format="" --><!--DXMETADATA end-->
+    </div>
+    
+
+    <!--DXMETADATA start type="IsNew" format="<script type=""text/javascript"">setIsNew = true;</script>" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<script type=""text/javascript"">setIsResponsiveEnabled = true;</script>" --><!--DXMETADATA end-->
+    <script type="text/javascript">
+        $(function() {
+            var documentInstance = new Innovasys.Content.Document(document.body);
+            documentInstance.isNew = !(typeof setIsNew === "undefined");
+            documentInstance.isResponsiveEnabled = !(typeof setIsResponsiveEnabled === "undefined");
+            documentInstance.load();
+        });
+    </script>
+</body>
+</html>

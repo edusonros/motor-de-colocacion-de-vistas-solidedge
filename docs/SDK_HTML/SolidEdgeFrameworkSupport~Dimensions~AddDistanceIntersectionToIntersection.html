@@ -1,0 +1,288 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--DXMETADATA start type="MetaCharset" --><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><!--DXMETADATA end-->
+    <meta http-equiv="X-UA-Compatible" value="IE=9" />
+
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Literal" condition="helpversion:value=3" value="<meta name=""Microsoft.Help.SelfBranded"" content=""true"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="PageItemTitle" format="<title>%%PageItemTitle%%</title>" --><title>AddDistanceIntersectionToIntersection Method</title><!--DXMETADATA end-->
+    <!--DXMETADATA start type="ItemTitleNoQuotes" format="<meta name=""Title"" content=""%%ItemTitleNoQuotes%%""/>" --><!--DXMETADATA end-->    
+    
+
+    <!--DXMETADATA start type="PackageLink" packagename="jquery" filetype="script" firstlinkattributes="id=""mshs_support_script"""--><script src="template/packages/jquery/script/chm.mshc/jquery-1.7.2.min.js" type="text/javascript" id="mshs_support_script"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="script"--><script src="template/packages/jquery-ui/script/chm.mshc/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/jquery-ui/css/chm.mshc/jquery-ui-1.8.18.custom.css"></link><!--DXMETADATA end-->
+	
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/plugins-ax/css/chm.mshc/jquery-plugins.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="css" firstlinkattributes=" data-mshv2-stylesheet=""/template/packages/core-ax/dx.com.mshv2.css"" data-mshv1-stylesheet=""/template/packages/core-ax/dx.com.mshv1.css"" data-responsive-mobile=""template/packages/core-ax/dx.com.mobile.css"" data-responsive-tablet=""template/packages/core-ax/dx.com.tablet.css"""--><link rel="stylesheet" type="text/css" href="template/packages/core-ax/css/dx.com.css"  data-mshv2-stylesheet="/template/packages/core-ax/dx.com.mshv2.css" data-mshv1-stylesheet="/template/packages/core-ax/dx.com.mshv1.css" data-responsive-mobile="template/packages/core-ax/dx.com.mobile.css" data-responsive-tablet="template/packages/core-ax/dx.com.tablet.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="script"--><script src="template/packages/plugins-ax/script/chm.mshc/jquery-plugins.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="script"--><script src="template/packages/core-ax/script/dx.com.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="TopicId" format="<meta name=""Microsoft.Help.Id"" content=""%%TopicId%%""/>" --><meta name="Microsoft.Help.Id" content="SolidEdgeFrameworkSupport~Dimensions~AddDistanceIntersectionToIntersection"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Synopsis" StripHtmlTags="True" MaxLength="250" format="<meta name=""Description"" content=""%%Synopsis%%"" />"--><meta name="Description" content="Adds a dimension to measure distance between two specified intersections." /><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocParentId" format="<meta name=""Microsoft.Help.TocParent"" content=""%%TocParentId%%""/>" --><meta name="Microsoft.Help.TocParent" content="SolidEdgeFrameworkSupport~Dimensions_methods"/><!--DXMETADATA end-->
+    <meta name="Microsoft.Help.ContentType" content="Reference" />
+    <!--DXMETADATA start type="MshvKeywords" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="MshvMetaTags" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.Locale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.TopicLocale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="Stylesheets" --><link rel="stylesheet" type="text/css" href="stylesheets/customstyles.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Scripts" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="DesignTime"--><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_PROPERTIES" --><!--DXMETADATA end -->
+
+    <!--DXMETADATA start type="CustomHeadContent" --><!--DXMETADATA end-->
+</head>
+
+<body>
+    <div id="i-before-header-content" class="i-before-header-content">
+        
+    </div>
+    <div id="i-header-content" class="i-header-content">
+        <!--DXMETADATA start type="LogoImage" --><img class="logoimage" src="images/sesdk_header.jpg" border="0"></img><!--DXMETADATA end-->
+            <div class="i-project-title"><!--DXMETADATA start type="ProjectTitle" -->Solid Edge FrameworkSupport Type Library<!--DXMETADATA end--></div>
+        <div class="i-page-title"><div class="i-page-title-text"><!--DXMETADATA start type="PageItemTitle" -->AddDistanceIntersectionToIntersection Method<!--DXMETADATA end--></div></div>
+    </div>
+    <div id="i-after-header-content" class="i-after-header-content">
+        <!-- Spacing --> <span class="i-toggle-all-sections i-function-link">
+                <label class="i-collapse-all"><!--DXMETADATA start type="Phrase" name="COLLAPSE_ALL" -->Collapse All<!--DXMETADATA end--></label>
+                <label class="i-expand-all" style="display: none;"><!--DXMETADATA start type="Phrase" name="EXPAND_ALL" -->Expand All<!--DXMETADATA end--></label>
+            </span><!--DXMETADATA start type="Literal" condition="communityenabled" value="%%scrap:name=_COMMUNITY_DROPDOWN%%" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="IsWebOutputRootPageLinkEnabled" format="<a href='#' class="i-page-link" class="i-view-in-frame-link" title='$$VIEW_WITH_NAVIGATION_TOOLS_TIP$$' style='display: none' data-root-page='%%WebOutputRootPage%%%%OutputFileExtension%%' target='_top'>$$VIEW_WITH_NAVIGATION_TOOLS_TEXT$$</a>" --><a href='#' class="i-page-link" class="i-view-in-frame-link" title='Open this Topic in a view that includes Navigation tools (Table of Contents, Index, Search)' style='display: none' data-root-page='webframe.html' target='_top'>View with Navigation Tools</a><!--DXMETADATA end-->
+    </div>
+    <!--DXMETADATA start type="Breadcrumbs" scrap="_BREADCRUMBS" --><div class="i-breadcrumbs-container"><table><tr><td>
+<a href="SolidEdgeFrameworkSupport_P.html">Solid Edge FrameworkSupport Type Library</a>
+ > <a href="SolidEdgeFrameworkSupport~Dimensions.html">Dimensions Collection</a>
+ : AddDistanceIntersectionToIntersection Method</td></tr></table></div><!--DXMETADATA end -->
+    
+    <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_BUBBLES" namespace="parameter" source="Item" -->
+<div id="Object11PopupContent" class="i-popup-content">
+Specifies the first object of the first intersection on which the dimension is to be based.
+</div>
+<div id="x11PopupContent" class="i-popup-content">
+Specifies the coordinates of a point on Object11.
+</div>
+<div id="y11PopupContent" class="i-popup-content">
+Specifies the coordinates of a point on Object11.
+</div>
+<div id="z11PopupContent" class="i-popup-content">
+Specifies the coordinates of a point on Object11.
+</div>
+<div id="Object12PopupContent" class="i-popup-content">
+Specifies the second object of the first intersection on which the dimension is to be based.
+</div>
+<div id="x12PopupContent" class="i-popup-content">
+Specifies the coordinates of a point on Object12.
+</div>
+<div id="y12PopupContent" class="i-popup-content">
+Specifies the coordinates of a point on Object12.
+</div>
+<div id="z12PopupContent" class="i-popup-content">
+Specifies the coordinates of a point on Object12.
+</div>
+<div id="Object21PopupContent" class="i-popup-content">
+Specifies the first object of the second intersection on which the dimension is to be based.
+</div>
+<div id="x21PopupContent" class="i-popup-content">
+Specifies the coordinates of a point on Object21.
+</div>
+<div id="y21PopupContent" class="i-popup-content">
+Specifies the coordinates of a point on Object21.
+</div>
+<div id="z21PopupContent" class="i-popup-content">
+Specifies the coordinates of a point on Object21.
+</div>
+<div id="Object22PopupContent" class="i-popup-content">
+Specifies the second object of the second intersection on which the dimension is to be based.
+</div>
+<div id="x22PopupContent" class="i-popup-content">
+Specifies the coordinates of a point on Object22.
+</div>
+<div id="y22PopupContent" class="i-popup-content">
+Specifies the coordinates of a point on Object22.
+</div>
+<div id="z22PopupContent" class="i-popup-content">
+Specifies the coordinates of a point on Object22.
+</div>
+<!--DXMETADATA end -->
+    <div id="i-body-content" class="i-body-content">
+        <!--DXMETADATA start type="Description" source="Item" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=description,caption=$$Description$$%%<div class=""i-description-content"">%%description%%</div></div>" --><div class="i-section-heading" id="i-description-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Description</span></div><div id="i-description-section-content" class="i-section-content"><div class="i-description-content">Adds a dimension to measure distance between two specified intersections.</div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="Syntax" lang="VB" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=syntax,caption=$$Syntax$$%%<div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>%%Syntax%%</pre></tr></table></div></div>" --><div class="i-section-heading" id="i-syntax-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Syntax</span></div><div id="i-syntax-section-content" class="i-section-content"><div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>Public Function AddDistanceIntersectionToIntersection( _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="Object11PopupLink" data-popup-contentsource="#Object11PopupContent" data-popup-showevent="click mouseenter">Object11</a></i> As Object, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="x11PopupLink" data-popup-contentsource="#x11PopupContent" data-popup-showevent="click mouseenter">x11</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="y11PopupLink" data-popup-contentsource="#y11PopupContent" data-popup-showevent="click mouseenter">y11</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="z11PopupLink" data-popup-contentsource="#z11PopupContent" data-popup-showevent="click mouseenter">z11</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="Object12PopupLink" data-popup-contentsource="#Object12PopupContent" data-popup-showevent="click mouseenter">Object12</a></i> As Object, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="x12PopupLink" data-popup-contentsource="#x12PopupContent" data-popup-showevent="click mouseenter">x12</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="y12PopupLink" data-popup-contentsource="#y12PopupContent" data-popup-showevent="click mouseenter">y12</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="z12PopupLink" data-popup-contentsource="#z12PopupContent" data-popup-showevent="click mouseenter">z12</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="Object21PopupLink" data-popup-contentsource="#Object21PopupContent" data-popup-showevent="click mouseenter">Object21</a></i> As Object, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="x21PopupLink" data-popup-contentsource="#x21PopupContent" data-popup-showevent="click mouseenter">x21</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="y21PopupLink" data-popup-contentsource="#y21PopupContent" data-popup-showevent="click mouseenter">y21</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="z21PopupLink" data-popup-contentsource="#z21PopupContent" data-popup-showevent="click mouseenter">z21</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="Object22PopupLink" data-popup-contentsource="#Object22PopupContent" data-popup-showevent="click mouseenter">Object22</a></i> As Object, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="x22PopupLink" data-popup-contentsource="#x22PopupContent" data-popup-showevent="click mouseenter">x22</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="y22PopupLink" data-popup-contentsource="#y22PopupContent" data-popup-showevent="click mouseenter">y22</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="z22PopupLink" data-popup-contentsource="#z22PopupContent" data-popup-showevent="click mouseenter">z22</a></i> As Double _
+) As <a href="SolidEdgeFrameworkSupport~Dimension.html">Dimension</a></pre></tr></table></div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_LIST" namespace="parameter" source="Item" filter="" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=parameters,caption=$$ParameterList$$%%%%filtereditemlist%%</div>" --><div class="i-section-heading" id="i-parameters-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Parameters</span></div><div id="i-parameters-section-content" class="i-section-content"><dl>
+<dt><I>Object11</I></dt>
+<dd>Specifies the first object of the first intersection on which the dimension is to be based.</dd>
+<dt><I>x11</I></dt>
+<dd>Specifies the coordinates of a point on Object11.</dd>
+<dt><I>y11</I></dt>
+<dd>Specifies the coordinates of a point on Object11.</dd>
+<dt><I>z11</I></dt>
+<dd>Specifies the coordinates of a point on Object11.</dd>
+<dt><I>Object12</I></dt>
+<dd>Specifies the second object of the first intersection on which the dimension is to be based.</dd>
+<dt><I>x12</I></dt>
+<dd>Specifies the coordinates of a point on Object12.</dd>
+<dt><I>y12</I></dt>
+<dd>Specifies the coordinates of a point on Object12.</dd>
+<dt><I>z12</I></dt>
+<dd>Specifies the coordinates of a point on Object12.</dd>
+<dt><I>Object21</I></dt>
+<dd>Specifies the first object of the second intersection on which the dimension is to be based.</dd>
+<dt><I>x21</I></dt>
+<dd>Specifies the coordinates of a point on Object21.</dd>
+<dt><I>y21</I></dt>
+<dd>Specifies the coordinates of a point on Object21.</dd>
+<dt><I>z21</I></dt>
+<dd>Specifies the coordinates of a point on Object21.</dd>
+<dt><I>Object22</I></dt>
+<dd>Specifies the second object of the second intersection on which the dimension is to be based.</dd>
+<dt><I>x22</I></dt>
+<dd>Specifies the coordinates of a point on Object22.</dd>
+<dt><I>y22</I></dt>
+<dd>Specifies the coordinates of a point on Object22.</dd>
+<dt><I>z22</I></dt>
+<dd>Specifies the coordinates of a point on Object22.</dd>
+</dl></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##RETURNS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=returns,caption=$$Return_Type$$%%<div class=""i-returns-content"">%%comment%%</div></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##REMARKS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=remarks,caption=$$Remarks$$%%%%comment%%</div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="sourcecode" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=source,caption=$$Source_Code$$%%<table border=0 cellpadding=0 cellspacing=0 class=sourcecode><tr><td nowrap>%%sourcecode%%</td></tr></table></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##EXAMPLEINTRO" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=""$$Example$$%%designlist:tagidentifier=##EXAMPLECODE,itemtype=Example%%""%%%%comment%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="EXAMPLEGROUP_LIST" namespace="ExampleGroup" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""="",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><div class="i-section-heading" id="i-example-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Example</span></div><div id="i-example-section-content" class="i-section-content">
+<div class="i-tab-container">
+    <ul>
+        <li class="i-filtered-content-VB.NET">
+			<a href="#i-tab-content-b46caf0f-3efe-44bd-b402-9a63f6bcd9d0">Example (VB.NET)</a>
+		</li>
+        <li class="i-filtered-content-CS">
+			<a href="#i-tab-content-2ce7951b-a805-42e2-bf27-cd94bb2afa7d">Example (C#)</a>
+		</li>
+
+    </ul>
+	<div id="i-tab-content-b46caf0f-3efe-44bd-b402-9a63f6bcd9d0" class="i-filtered-content-VB.NET">
+		<pre><span style="color: #0000FF; ">Imports</span> System.Runtime.InteropServices
+
+<span style="color: #0000FF; ">Public</span> <span style="color: #0000FF; ">Class</span> Form1
+    <span style="color: #0000FF; ">Private</span> <span style="color: #0000FF; ">Sub</span> Button1_Click(sender <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Object</span>, e <span style="color: #0000FF; ">As</span> EventArgs) <span style="color: #0000FF; ">Handles</span> Button1.Click
+        <span style="color: #0000FF; ">Dim</span> application <span style="color: #0000FF; ">As</span> SolidEdgeFramework.Application = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> partDocument <span style="color: #0000FF; ">As</span> SolidEdgePart.PartDocument = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> draftDocument <span style="color: #0000FF; ">As</span> SolidEdgeDraft.DraftDocument = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objLine1 <span style="color: #0000FF; ">As</span> SolidEdgeFrameworkSupport.Line2d = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objLine2 <span style="color: #0000FF; ">As</span> SolidEdgeFrameworkSupport.Line2d = <span style="color: #0000FF; ">Nothing</span>
+
+        <span style="color: #0000FF; ">Dim</span> objLine3 <span style="color: #0000FF; ">As</span> SolidEdgeFrameworkSupport.Line2d = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objLine4 <span style="color: #0000FF; ">As</span> SolidEdgeFrameworkSupport.Line2d = <span style="color: #0000FF; ">Nothing</span>
+
+        <span style="color: #0000FF; ">Dim</span> objDims <span style="color: #0000FF; ">As</span> SolidEdgeFrameworkSupport.Dimensions = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objDim <span style="color: #0000FF; ">As</span> SolidEdgeFrameworkSupport.Dimension = <span style="color: #0000FF; ">Nothing</span>
+
+        <span style="color: #0000FF; ">Try</span>
+            application = Marshal.GetActiveObject(<span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>)
+            draftDocument = application.Documents.Add(<span style="color: #800000; ">&quot;SolidEdge.DraftDocument&quot;</span>)
+            objDims = draftDocument.ActiveSheet.Dimensions
+            objLine1 = draftDocument.ActiveSheet.Lines2d.AddBy2Points(0.1, 0.1, 0.3, 0.3)
+            objLine2 = draftDocument.ActiveSheet.Lines2d.AddBy2Points(0.2, 0.1, 0.4, 0.5)
+
+            objLine3 = draftDocument.ActiveSheet.Lines2d.AddBy2Points(0.5, 0.1, 0.7, 0.3)
+            objLine4 = draftDocument.ActiveSheet.Lines2d.AddBy2Points(0.6, 0.1, 0.8, 0.5)
+
+            objDim = objDims.AddDistanceIntersectionToIntersection(objLine1, 0.1, 0.1, 0.0, objLine2, 0.2, 0.1, 0.0, objLine3, 0.5, 0.5, 0.0, objLine4, 0.6, 0.5, 0.0)
+        <span style="color: #0000FF; ">Catch</span> ex <span style="color: #0000FF; ">As</span> Exception
+            <span style="color: #0000FF; ">MsgBox</span>(ex.ToString)
+        <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">Try</span>
+    <span style="color: #0000FF; ">End Sub</span>
+<span style="color: #0000FF; ">End Class</span>
+</pre>
+	</div>
+	<div id="i-tab-content-2ce7951b-a805-42e2-bf27-cd94bb2afa7d" class="i-filtered-content-CS">
+		<pre><span style="color: #0000FF; ">using</span> System;
+<span style="color: #0000FF; ">using</span> System.Windows.Forms;
+<span style="color: #0000FF; ">using</span> System.Runtime.InteropServices;
+
+<span style="color: #0000FF; ">public</span> <span style="color: #0000FF; ">class</span> Form1
+{
+    <span style="color: #0000FF; ">private</span> <span style="color: #0000FF; ">void</span> Button1_Click(<span style="color: #0000FF; ">object</span> sender, EventArgs e)
+    {
+        SolidEdgeFramework.Application application = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.PartDocument partDocument = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeDraft.DraftDocument draftDocument = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeFrameworkSupport.Line2d objLine1 = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeFrameworkSupport.Line2d objLine2 = <span style="color: #0000FF; ">null</span>;
+
+        SolidEdgeFrameworkSupport.Line2d objLine3 = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeFrameworkSupport.Line2d objLine4 = <span style="color: #0000FF; ">null</span>;
+
+        SolidEdgeFrameworkSupport.Dimensions objDims = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeFrameworkSupport.Dimension objDim = <span style="color: #0000FF; ">null</span>;
+
+        <span style="color: #0000FF; ">try</span>
+        {
+            application = (SolidEdgeFramework.Application)Marshal.GetActiveObject(<span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>);
+            draftDocument = application.Documents.Add(<span style="color: #800000; ">&quot;SolidEdge.DraftDocument&quot;</span>);
+            objDims = draftDocument.ActiveSheet.Dimensions;
+            objLine1 = draftDocument.ActiveSheet.Lines2d.AddBy2Points(0.1, 0.1, 0.3, 0.3);
+            objLine2 = draftDocument.ActiveSheet.Lines2d.AddBy2Points(0.2, 0.1, 0.4, 0.5);
+
+            objLine3 = draftDocument.ActiveSheet.Lines2d.AddBy2Points(0.5, 0.1, 0.7, 0.3);
+            objLine4 = draftDocument.ActiveSheet.Lines2d.AddBy2Points(0.6, 0.1, 0.8, 0.5);
+
+            objDim = objDims.AddDistanceIntersectionToIntersection(objLine1, 0.1, 0.1, 0.0, objLine2, 0.2, 0.1, 0.0, objLine3, 0.5, 0.5, 0.0, objLine4, 0.6, 0.5, 0.0);
+        }
+        <span style="color: #0000FF; ">catch</span> (Exception ex)
+        {
+            MessageBox.Show(ex.ToString());
+        }
+    }
+}
+</pre>
+	</div>
+	
+</div>
+</div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="INLINE_EXAMPLE" namespace="Example" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""<>"",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="MENU_LINK" namespace="example" source="Item" filter="type=linked" NoHeader="True" NoFooter="True" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=examplelinks,caption=$$Example$$%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="FilteredItemList" scrap="CATEGORIZED_LINKS" namespace="linkcategory" source="Item" filter="" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=seealso,caption=""$$See_Also$$%%designlist:tagidentifier=##SEEALSO,itemtype=See Also%%""%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><div class="i-section-heading" id="i-seealso-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">See Also</span></div><div id="i-seealso-section-content" class="i-section-content"><p id=dxseealsocontent><a href="SolidEdgeFrameworkSupport~Dimensions.html">Dimensions Collection</a>
+&nbsp;|&nbsp;<a href="SolidEdgeFrameworkSupport~Dimensions_members.html">Dimensions Members</a>
+</p>
+</p></div><!--DXMETADATA end -->
+    </div>
+    <div id="i-footer-content" class="i-footer-content">
+        <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_FOOTER" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="CopyrightNotice" format="<p>&nbsp;</p><p>&nbsp;</p><hr style=""height: 1px"" /><p>%%variable%%</p>" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="FeedbackLink" format="" --><!--DXMETADATA end-->
+    </div>
+    
+
+    <!--DXMETADATA start type="IsNew" format="<script type=""text/javascript"">setIsNew = true;</script>" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<script type=""text/javascript"">setIsResponsiveEnabled = true;</script>" --><!--DXMETADATA end-->
+    <script type="text/javascript">
+        $(function() {
+            var documentInstance = new Innovasys.Content.Document(document.body);
+            documentInstance.isNew = !(typeof setIsNew === "undefined");
+            documentInstance.isResponsiveEnabled = !(typeof setIsResponsiveEnabled === "undefined");
+            documentInstance.load();
+        });
+    </script>
+</body>
+</html>

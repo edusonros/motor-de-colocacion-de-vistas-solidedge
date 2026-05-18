@@ -31,6 +31,16 @@ Partial Class MainForm
         Me.tabPageMotorViews = New TabPage()
         Me.tabPageMotorMetadata = New TabPage()
         Me.tabPageMotorDimensions = New TabPage()
+        Me.tabPageLaserCut = New TabPage()
+        Me.tblLaserTabHost = New TableLayoutPanel()
+        Me.tblLaserTabRightColumn = New TableLayoutPanel()
+        Me.grpLaserPieces = New GroupBox()
+        Me.tblLaserPiecesInner = New TableLayoutPanel()
+        Me.flowLaserButtons = New FlowLayoutPanel()
+        Me.btnLaserScan = New Button()
+        Me.btnLaserGenerate = New Button()
+        Me.lblLaserSummary = New Label()
+        Me.dgvLaserPieces = New DataGridView()
         Me.tblMetadataTabHost = New TableLayoutPanel()
         Me.tblMetadataTabRightColumn = New TableLayoutPanel()
         Me.tblMetadataPlanTwoCols = New TableLayoutPanel()
@@ -53,6 +63,7 @@ Partial Class MainForm
         Me.btnMotorMetadata = New Button()
         Me.btnMotorDimensioning = New Button()
         Me.btnOpenVariableTable = New Button()
+        Me.btnMotorLaser = New Button()
         Me.tblRightLogProgress = New TableLayoutPanel()
         Me.grpInput = New GroupBox()
         Me.grpAsmComponents = New GroupBox()
@@ -188,6 +199,7 @@ Partial Class MainForm
         Me.btnClearLog = New Button()
 
         CType(Me.dgvAsmComponents, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgvLaserPieces, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
 
         Me.mainLayout.Dock = DockStyle.Fill
@@ -241,9 +253,11 @@ Partial Class MainForm
         Me.tabPageMotorViews.Text = "Motor de vistas"
         Me.tabPageMotorMetadata.Text = "Motor de metadatos"
         Me.tabPageMotorDimensions.Text = "Motor de acotación"
+        Me.tabPageLaserCut.Text = "Piezas a Corte Laser"
         Me.tabMotors.Controls.Add(Me.tabPageMotorViews)
         Me.tabMotors.Controls.Add(Me.tabPageMotorMetadata)
         Me.tabMotors.Controls.Add(Me.tabPageMotorDimensions)
+        Me.tabMotors.Controls.Add(Me.tabPageLaserCut)
 
         Me.tblMotorTab1LeftColumn.Dock = DockStyle.Fill
         Me.tblMotorTab1LeftColumn.Margin = New Padding(0, 0, 4, 0)
@@ -252,9 +266,9 @@ Partial Class MainForm
         Me.tblMotorTab1LeftColumn.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 100.0!))
         Me.tblMotorTab1LeftColumn.RowCount = 3
         Me.tblMotorTab1LeftColumn.RowStyles.Clear()
-        Me.tblMotorTab1LeftColumn.RowStyles.Add(New RowStyle(SizeType.Absolute, 148.0!))
-        Me.tblMotorTab1LeftColumn.RowStyles.Add(New RowStyle(SizeType.Percent, 50.0!))
-        Me.tblMotorTab1LeftColumn.RowStyles.Add(New RowStyle(SizeType.Percent, 50.0!))
+        Me.tblMotorTab1LeftColumn.RowStyles.Add(New RowStyle(SizeType.Absolute, 108.0!))
+        Me.tblMotorTab1LeftColumn.RowStyles.Add(New RowStyle(SizeType.Percent, 100.0!))
+        Me.tblMotorTab1LeftColumn.RowStyles.Add(New RowStyle(SizeType.Absolute, 132.0!))
 
         Me.pnlMotorViewsAdvancedHost.Dock = DockStyle.Fill
         Me.pnlMotorViewsAdvancedHost.Padding = New Padding(2, 0, 0, 0)
@@ -390,6 +404,63 @@ Partial Class MainForm
         Me.tblDimensionTabHost.Controls.Add(Me.tblDimensionTabRightColumn, 1, 0)
         Me.tabPageMotorDimensions.Controls.Add(Me.tblDimensionTabHost)
 
+        Me.tblLaserTabHost.Dock = DockStyle.Fill
+        Me.tblLaserTabHost.Margin = New Padding(0)
+        Me.tblLaserTabHost.ColumnCount = 1
+        Me.tblLaserTabHost.ColumnStyles.Clear()
+        Me.tblLaserTabHost.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 100.0!))
+        Me.tblLaserTabHost.RowCount = 3
+        Me.tblLaserTabHost.RowStyles.Clear()
+        Me.tblLaserTabHost.RowStyles.Add(New RowStyle(SizeType.Absolute, 118.0!))
+        Me.tblLaserTabHost.RowStyles.Add(New RowStyle(SizeType.Percent, 72.0!))
+        Me.tblLaserTabHost.RowStyles.Add(New RowStyle(SizeType.Percent, 28.0!))
+
+        Me.tblLaserTabRightColumn.Dock = DockStyle.Fill
+        Me.tblLaserTabRightColumn.Margin = New Padding(0)
+        Me.tblLaserTabRightColumn.ColumnCount = 1
+        Me.tblLaserTabRightColumn.ColumnStyles.Clear()
+        Me.tblLaserTabRightColumn.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 100.0!))
+        Me.tblLaserTabRightColumn.RowCount = 1
+        Me.tblLaserTabRightColumn.RowStyles.Clear()
+        Me.tblLaserTabRightColumn.RowStyles.Add(New RowStyle(SizeType.Percent, 100.0!))
+
+        Me.grpLaserPieces.Dock = DockStyle.Fill
+        Me.grpLaserPieces.Text = "Piezas para corte láser (editar antes de generar)"
+        Me.grpLaserPieces.Margin = New Padding(0, 0, 0, 4)
+        Me.tblLaserPiecesInner.Dock = DockStyle.Fill
+        Me.tblLaserPiecesInner.ColumnCount = 1
+        Me.tblLaserPiecesInner.ColumnStyles.Clear()
+        Me.tblLaserPiecesInner.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 100.0!))
+        Me.tblLaserPiecesInner.RowCount = 3
+        Me.tblLaserPiecesInner.RowStyles.Clear()
+        Me.tblLaserPiecesInner.RowStyles.Add(New RowStyle(SizeType.Absolute, 40.0!))
+        Me.tblLaserPiecesInner.RowStyles.Add(New RowStyle(SizeType.Absolute, 28.0!))
+        Me.tblLaserPiecesInner.RowStyles.Add(New RowStyle(SizeType.Percent, 100.0!))
+        Me.flowLaserButtons.Dock = DockStyle.Fill
+        Me.flowLaserButtons.FlowDirection = FlowDirection.LeftToRight
+        Me.flowLaserButtons.WrapContents = False
+        Me.btnLaserScan.Text = "Escanear ASM"
+        Me.btnLaserScan.AutoSize = True
+        Me.btnLaserScan.Margin = New Padding(0, 6, 8, 0)
+        Me.btnLaserGenerate.Text = "Generar DFT/DXF corte"
+        Me.btnLaserGenerate.AutoSize = True
+        Me.btnLaserGenerate.Margin = New Padding(0, 6, 0, 0)
+        Me.flowLaserButtons.Controls.Add(Me.btnLaserScan)
+        Me.flowLaserButtons.Controls.Add(Me.btnLaserGenerate)
+        Me.lblLaserSummary.Dock = DockStyle.Fill
+        Me.lblLaserSummary.Text = "Escanee un ASM para cargar la tabla."
+        Me.lblLaserSummary.AutoEllipsis = True
+        Me.dgvLaserPieces.Dock = DockStyle.Fill
+        Me.dgvLaserPieces.MinimumSize = New Size(400, 220)
+        Me.tblLaserPiecesInner.Controls.Add(Me.flowLaserButtons, 0, 0)
+        Me.tblLaserPiecesInner.Controls.Add(Me.lblLaserSummary, 0, 1)
+        Me.tblLaserPiecesInner.Controls.Add(Me.dgvLaserPieces, 0, 2)
+        Me.grpLaserPieces.Controls.Add(Me.tblLaserPiecesInner)
+        Me.tblLaserTabHost.Controls.Add(Me.grpInput, 0, 0)
+        Me.tblLaserTabHost.Controls.Add(Me.grpLaserPieces, 0, 1)
+        Me.tblLaserTabHost.Controls.Add(Me.grpProgress, 0, 2)
+        Me.tabPageLaserCut.Controls.Add(Me.tblLaserTabHost)
+
         Me.pnlSharedSidebar.Dock = DockStyle.Fill
         Me.pnlSharedSidebar.ColumnCount = 1
         Me.pnlSharedSidebar.ColumnStyles.Clear()
@@ -427,9 +498,14 @@ Partial Class MainForm
         Me.btnOpenVariableTable.AutoSize = True
         Me.btnOpenVariableTable.MinimumSize = New Size(170, 44)
         Me.btnOpenVariableTable.Margin = New Padding(0, 0, 8, 6)
+        Me.btnMotorLaser.Text = "Corte láser"
+        Me.btnMotorLaser.AutoSize = True
+        Me.btnMotorLaser.MinimumSize = New Size(120, 44)
+        Me.btnMotorLaser.Margin = New Padding(0, 0, 8, 6)
         Me.flowGenerateBar.Controls.Add(Me.btnMotorViews)
         Me.flowGenerateBar.Controls.Add(Me.btnMotorMetadata)
         Me.flowGenerateBar.Controls.Add(Me.btnMotorDimensioning)
+        Me.flowGenerateBar.Controls.Add(Me.btnMotorLaser)
         Me.flowGenerateBar.Controls.Add(Me.btnOpenVariableTable)
         Me.flowGenerateBar.Controls.Add(Me.btnGenerate)
         Me.pnlGenerateBar.Controls.Add(Me.flowGenerateBar)
@@ -447,7 +523,7 @@ Partial Class MainForm
         Me.tblRightLogProgress.Controls.Add(Me.grpLog, 0, 0)
         Me.tblRightLogProgress.Controls.Add(Me.grpProgress, 0, 1)
 
-        For Each gb In New GroupBox() {Me.grpInput, Me.grpAsmComponents, Me.grpTemplates, Me.grpTraceability, Me.grpGeneration, Me.grpAdvanced, Me.grpProgress, Me.grpLog, Me.grpPdfPreview}
+        For Each gb In New GroupBox() {Me.grpInput, Me.grpAsmComponents, Me.grpTemplates, Me.grpTraceability, Me.grpGeneration, Me.grpAdvanced, Me.grpProgress, Me.grpLog, Me.grpPdfPreview, Me.grpLaserPieces}
             gb.Dock = DockStyle.Fill
             gb.Font = New Font("Segoe UI", 9.0!)
             gb.Margin = New Padding(8)
@@ -464,7 +540,7 @@ Partial Class MainForm
         Me.grpTraceability.Text = "Metadatos (plano y pieza)"
         Me.grpGeneration.Text = "Opciones de generación"
         Me.grpAdvanced.Text = "Opciones de procesado"
-        Me.grpProgress.Text = "Progreso, estado y metadatos DFT"
+        Me.grpProgress.Text = "Progreso y estado de generación"
         Me.grpLog.Text = "Log"
 
         Me.tblInput.Dock = DockStyle.Fill
@@ -500,9 +576,9 @@ Partial Class MainForm
         Me.tblAsmComponents.ColumnCount = 1
         Me.tblAsmComponents.RowCount = 3
         Me.tblAsmComponents.RowStyles.Clear()
-        Me.tblAsmComponents.RowStyles.Add(New RowStyle(SizeType.Absolute, 30.0!))
+        Me.tblAsmComponents.RowStyles.Add(New RowStyle(SizeType.Absolute, 24.0!))
         Me.tblAsmComponents.RowStyles.Add(New RowStyle(SizeType.Percent, 100.0!))
-        Me.tblAsmComponents.RowStyles.Add(New RowStyle(SizeType.Absolute, 32.0!))
+        Me.tblAsmComponents.RowStyles.Add(New RowStyle(SizeType.Absolute, 30.0!))
         Me.lblAsmComponentHint.Text = "Solo aplica para entrada ASM."
         Me.lblAsmComponentHint.Dock = DockStyle.Fill
         Me.dgvAsmComponents.Dock = DockStyle.Fill
@@ -720,8 +796,8 @@ Partial Class MainForm
         Me.chkPreferSweepAllDrawingDimensions.Margin = New Padding(18, 0, 0, 0)
         Me.flowGenerationLeft.Controls.Add(Me.chkPreferSweepAllDrawingDimensions)
         Me.chkSuppressDimTrackSpacing.AutoSize = True
-        Me.chkSuppressDimTrackSpacing.Text = "Prueba: sin espaciado TrackDistance (cotas pegadas a la pieza)"
-        Me.chkSuppressDimTrackSpacing.Checked = True
+        Me.chkSuppressDimTrackSpacing.Text = "Sin espaciado 12/10 mm (TrackDistance y carriles desactivados)"
+        Me.chkSuppressDimTrackSpacing.Checked = False
         Me.chkSuppressDimTrackSpacing.Margin = New Padding(18, 0, 0, 0)
         Me.flowGenerationLeft.Controls.Add(Me.chkSuppressDimTrackSpacing)
         Me.chkDedupDimensionsByKeypoints.AutoSize = True
@@ -882,6 +958,7 @@ Partial Class MainForm
         Me.StartPosition = FormStartPosition.CenterScreen
 
         CType(Me.dgvAsmComponents, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvLaserPieces, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
     End Sub
 
@@ -896,6 +973,17 @@ Partial Class MainForm
     Friend WithEvents tabPageMotorViews As TabPage
     Friend WithEvents tabPageMotorMetadata As TabPage
     Friend WithEvents tabPageMotorDimensions As TabPage
+    Friend WithEvents tabPageLaserCut As TabPage
+    Friend WithEvents tblLaserTabHost As TableLayoutPanel
+    Friend WithEvents tblLaserTabRightColumn As TableLayoutPanel
+    Friend WithEvents grpLaserPieces As GroupBox
+    Friend WithEvents tblLaserPiecesInner As TableLayoutPanel
+    Friend WithEvents flowLaserButtons As FlowLayoutPanel
+    Friend WithEvents btnLaserScan As Button
+    Friend WithEvents btnLaserGenerate As Button
+    Friend WithEvents lblLaserSummary As Label
+    Friend WithEvents dgvLaserPieces As DataGridView
+    Friend WithEvents btnMotorLaser As Button
     Friend WithEvents tblMetadataTabHost As TableLayoutPanel
     Friend WithEvents tblMetadataTabRightColumn As TableLayoutPanel
     Friend WithEvents tblMetadataPlanTwoCols As TableLayoutPanel

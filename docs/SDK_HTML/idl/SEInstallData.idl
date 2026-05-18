@@ -1,0 +1,63 @@
+// Generated .IDL file (by the OLE/COM Object Viewer)
+// 
+// typelib filename: SEInstallData.dll
+
+[
+  uuid(42E04299-18A0-11D5-BBB2-00C04F79BEA5),
+  version(1.0),
+  helpstring("Solid Edge Install Data Library"),
+  helpfile("sesdk.chm"),
+  helpcontext(0x0001d4c1),
+  custom(DE77BA64-517C-11D1-A2DA-0000F8773CE9, 117441067),
+  custom(DE77BA63-517C-11D1-A2DA-0000F8773CE9, 1338202627),
+  custom(DE77BA65-517C-11D1-A2DA-0000F8773CE9, "Created by MIDL version 7.00.0555 at Mon May 28 05:57:06 2012
+")
+
+]
+library SEInstallDataLib
+{
+    // TLib :     // TLib : OLE Automation : {00020430-0000-0000-C000-000000000046}
+    importlib("stdole2.tlb");
+
+    // Forward declare all types defined in this typelib
+    interface ISEInstallData;
+
+    [
+      uuid(42E042A6-18A0-11D5-BBB2-00C04F79BEA5),
+      helpstring("SEInstallData Class"),
+      helpcontext(0x0001d4c8)
+    ]
+    coclass SEInstallData {
+        [default] interface ISEInstallData;
+    };
+
+    [
+      odl,
+      uuid(42E042A5-18A0-11D5-BBB2-00C04F79BEA5),
+      helpstring("ISEInstallData Interface"),
+      dual,
+      oleautomation
+    ]
+    interface ISEInstallData : IDispatch {
+        [id(0x00000064), helpstring("Gets Full Version"), helpcontext(0x0001d4c2)]
+        HRESULT GetVersion([out, retval] BSTR* pbstrVersion);
+        [id(0x00000065), helpstring("Gets Major Version"), helpcontext(0x0001d4c3)]
+        HRESULT GetMajorVersion([out, retval] long* plMajorVersion);
+        [id(0x00000066), helpstring("Gets Minor Version"), helpcontext(0x0001d4c4)]
+        HRESULT GetMinorVersion([out, retval] long* plMinorVersion);
+        [id(0x00000067), helpstring("Gets Service Pack Version"), helpcontext(0x0001d4c5)]
+        HRESULT GetServicePackVersion([out, retval] long* plServicePackVersion);
+        [id(0x00000068), helpstring("Gets Build Number"), helpcontext(0x0001d4c6)]
+        HRESULT GetBuildNumber([out, retval] long* plBuildNumber);
+        [id(0x00000069), helpstring("Gets Installation Path"), helpcontext(0x0001d4c7)]
+        HRESULT GetInstalledPath([out, retval] BSTR* pbstrInstalledPath);
+        [id(0x0000006a), helpstring("Gets Parasolid Version"), helpcontext(0x0001d4c8)]
+        HRESULT GetParasolidVersion([out, retval] BSTR* pbstrParasolidVersion);
+        [id(0x0000006b), helpstring("Gets Parasolid Major Version"), helpcontext(0x0001d4c9)]
+        HRESULT GetParasolidMajorVersion([out, retval] long* plParasolidMajorVersion);
+        [id(0x0000006c), helpstring("Gets Parasolid Minor Version"), helpcontext(0x0001d4ca)]
+        HRESULT GetParasolidMinorVersion([out, retval] long* plParasolidMinorVersion);
+        [id(0x0000006d), helpstring("Gets Installed Language ID"), helpcontext(0x0001d4cb)]
+        HRESULT GetLanguageID([out, retval] long* plLANGID);
+    };
+};

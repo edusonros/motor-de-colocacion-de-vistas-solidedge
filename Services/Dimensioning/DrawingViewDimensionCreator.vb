@@ -148,7 +148,9 @@ Friend NotInheritable Class DrawingViewDimensionCreator
         AddSweepEntities(entities, viewInfo.View, "DVLineStrings2d", "LINESTRING", centerX, centerY)
         AddSweepEntities(entities, viewInfo.View, "DVBSplineCurves2d", "SPLINE", centerX, centerY)
         AddSweepEntities(entities, viewInfo.View, "DVArcs2d", "ARC", centerX, centerY)
-        AddSweepEntities(entities, viewInfo.View, "DVCircles2d", "CIRCLE", centerX, centerY)
+        If Not uneNorm.EnableInteriorHoleCenterDimensions Then
+            AddSweepEntities(entities, viewInfo.View, "DVCircles2d", "CIRCLE", centerX, centerY)
+        End If
         AddSweepEntities(entities, viewInfo.View, "DVEllipses2d", "ELLIPSE", centerX, centerY)
         AddSweepEntities(entities, viewInfo.View, "DVPoints2d", "POINT", centerX, centerY)
 
@@ -233,7 +235,7 @@ Friend NotInheritable Class DrawingViewDimensionCreator
                 Select Case it.Kind
                     Case "LINE"
                         dimObj = TryCreateByReferenceMethods(dims, it.Obj, New String() {"AddLength"}, log, "LINE")
-                    Case "ARC", "CIRCLE"
+                    Case "ARC"
                         Dim rM As Double = 0.0R
                         If TryDvArcOrCircleRadiusMeters(it.Obj, rM) Then
                             Dim rMm As Double = rM * 1000.0R
@@ -246,7 +248,21 @@ Friend NotInheritable Class DrawingViewDimensionCreator
                                 Continue For
                             End If
                         End If
-                        dimObj = TryCreateByReferenceMethods(dims, it.Obj, New String() {"AddRadius", "AddRadialDiameter", "AddCircularDiameter", "AddLength"}, log, it.Kind)
+                        dimObj = TryCreateByReferenceMethods(dims, it.Obj, New String() {"AddRadius", "AddRadialDiameter", "AddCircularDiameter"}, log, it.Kind)
+                    Case "CIRCLE"
+                        Dim rM As Double = 0.0R
+                        If TryDvArcOrCircleRadiusMeters(it.Obj, rM) Then
+                            Dim rMm As Double = rM * 1000.0R
+                            If rMm < uneNorm.MinRadiusToDimensionMm Then
+                                discarded += 1
+                                log?.LogLine("[DIM][SWEEP][SKIP] view=" & viewInfo.ViewIndex.ToString(CultureInfo.InvariantCulture) &
+                                             " kind=" & it.Kind &
+                                             " r_mm=" & rMm.ToString("0.###", CultureInfo.InvariantCulture) &
+                                             " reason=min_radius_threshold")
+                                Continue For
+                            End If
+                        End If
+                        dimObj = TryCreateCircularDiameterOnReference(dims, it.Obj, log)
                     Case "ELLIPSE", "LINESTRING", "SPLINE", "POINT"
                         dimObj = TryCreateByReferenceMethods(dims, it.Obj, New String() {"AddLength"}, log, it.Kind)
                 End Select
@@ -519,9 +535,15 @@ Friend NotInheritable Class DrawingViewDimensionCreator
         Return TryCreateByReferenceMethods(dims, arcOrCircle, New String() {"AddRadius", "AddRadialDiameter", "AddCircularDiameter"}, log, "REF_RAD")
     End Function
 
+    ''' <summary>Diámetro circular (SDK: <c>Dimensions.AddCircularDiameter</c>) sobre <c>DVCircle2d.Reference</c>.</summary>
+    Friend Shared Function TryCreateCircularDiameterOnReference(dims As Dimensions, circleObj As Object, log As DimensionLogger) As Dimension
+        If dims Is Nothing OrElse circleObj Is Nothing Then Return Nothing
+        Return TryCreateByReferenceMethods(dims, circleObj, New String() {"AddCircularDiameter", "AddRadialDiameter", "AddRadius"}, log, "REF_CIRC_DIA")
+    End Function
+
     Friend Shared Function TryCreateDiameterOnReference(dims As Dimensions, circleObj As Object, log As DimensionLogger) As Dimension
         If dims Is Nothing OrElse circleObj Is Nothing Then Return Nothing
-        Return TryCreateByReferenceMethods(dims, circleObj, New String() {"AddDiameter", "AddRadialDiameter", "AddCircularDiameter", "AddRadius"}, log, "REF_DIA")
+        Return TryCreateCircularDiameterOnReference(dims, circleObj, log)
     End Function
 
     Private Shared Function TryCreateByReferenceMethods(

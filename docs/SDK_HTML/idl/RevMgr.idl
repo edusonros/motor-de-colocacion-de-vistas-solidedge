@@ -1,0 +1,883 @@
+// Generated .IDL file (by the OLE/COM Object Viewer)
+// 
+// typelib filename: RevMgr.tlb
+
+[
+  uuid(DF778D1A-0AA4-11D1-BC6E-0800360E1E02),
+  version(1.0),
+  helpstring("Solid Edge Revision Manager Object Library"),
+  helpfile("sesdk.chm"),
+  helpcontext(00000000),
+  custom(DE77BA64-517C-11D1-A2DA-0000F8773CE9, 117441067),
+  custom(DE77BA63-517C-11D1-A2DA-0000F8773CE9, 1338208509),
+  custom(DE77BA65-517C-11D1-A2DA-0000F8773CE9, "Created by MIDL version 7.00.0555 at Mon May 28 07:35:09 2012
+")
+
+]
+library RevisionManager
+{
+    // TLib :     // TLib : OLE Automation : {00020430-0000-0000-C000-000000000046}
+    importlib("stdole2.tlb");
+
+    // Forward declare all types defined in this typelib
+    dispinterface IRMgrApp;
+    dispinterface IDocAuto;
+    dispinterface ILinkedDocsAuto;
+    dispinterface IPropertySetsAuto;
+    dispinterface IPropertiesAuto;
+    dispinterface IPropertyAuto;
+    dispinterface IInsight;
+
+    typedef [helpstring("Global Constants"), helpcontext(0x000186d9)]
+    enum {
+        seApplicationGlobalCheckInOnClose = 0,
+        seApplicationGlobalLogFilesLocation = 1,
+        seApplicationGlobalInsightCacheLocation = 2,
+        seApplicationGlobalInsightFolderMappingFileLocation = 3,
+        seApplicationGlobalSearchScope = 4,
+        seApplicationGlobalOfflineMode = 5,
+        seApplicationGlobalLookAheadVersion = 6,
+        seApplicationGlobalUploadOnClose = 7,
+        seApplicationGlobalRevisionDelimiter = 8,
+        seApplicationGlobalApplyStatusToLinks = 9,
+        seApplicationGlobalUpdateDraft = 10,
+        seApplicationGlobalMakeRevisionsObsolete = 11,
+        seApplicationGlobalAvailableRootFolder = 12,
+        seApplicationGlobalObsoleteRootFolder = 13,
+        seApplicationGlobalInWorkRootFolder = 14,
+        seApplicationGlobalReleasedRootFolder = 15,
+        seApplicationGlobalInReviewRootFolder = 16,
+        seApplicationGlobalBaselinedRootFolder = 17,
+        seApplicationGlobalAdminFileLocation = 18,
+        seApplicationGlobalTeamcenterFormula = 19
+    } ApplicationGlobalConstants;
+
+    typedef [helpstring("RevisionRule Type"), helpcontext(0x000186ed)]
+    enum {
+        LastSavedType = 0,
+        LatestReleasedRevision = 1,
+        LatestRevision = 2,
+        ExternalBOM = 3
+    } RevisionRuleType;
+
+    typedef [helpstring("Get Data from Cookie File"), helpcontext(0x00018747)]
+    enum {
+        GET_REVISION_RULE = 0
+    } CookieDataToGet;
+
+    typedef [helpstring("Document Status"), helpcontext(0x000186b1)]
+    enum {
+        igStatusAvailable = 0,
+        igStatusInWork = 1,
+        igStatusInReview = 2,
+        igStatusReleased = 3,
+        igStatusBaselined = 4,
+        igStatusObsolete = 5
+    } DocumentStatus;
+
+    typedef [helpstring("Search Type"), helpcontext(0x000186dd)]
+    enum {
+        ShallowSearch = 0,
+        DeepSearch = 1
+    } SearchType;
+
+    typedef [helpstring("Link Type Option"), helpcontext(0x000186b6)]
+    enum {
+        seLinkTypeAll = 0,
+        seLinkTypeNormal = 1,
+        seLinkTypeInterpart = 2
+    } LinkTypeConstants;
+
+    typedef [helpstring("OverWriteFilesOption"), helpcontext(0x000186df)]
+    enum {
+        NoToAll = 0,
+        YesToAll = 1
+    } OverWriteFilesOption;
+
+    typedef [helpstring("CheckInOptions"), helpcontext(0x000186e0)]
+    enum {
+        DoNotCheckInOption = 0,
+        UploadAndCheckInOption = 1
+    } CheckInOptions;
+
+    typedef [helpstring("UploadType"), helpcontext(0x000186e1)]
+    enum {
+        DeepUploadType = 0,
+        ShallowUploadType = 1
+    } UploadType;
+
+    typedef [helpstring("DocumentAccess"), helpcontext(0x000186e2)]
+    enum {
+        igReadWrite = 0,
+        igReadOnly = 1,
+        igReadExclusive = 2
+    } DocumentAccess;
+
+    typedef [helpstring("DocFOPStatus"), helpcontext(0x000186f0)]
+    enum {
+        FopStatusUnknown = 0,
+        NotInvolvedInFOP = 1,
+        FOPMasterDocument = 2,
+        FOPMemberDocument = 4,
+        FOPMasterAndChild = 6
+    } DocFOPStatus;
+
+    typedef [helpstring("SPServerType"), helpcontext(0x000186f2)]
+    enum {
+        SERVER_TYPE_NOT_SHAREPOINT = 0,
+        SHAREPOINT_V1_SERVER = 1,
+        SHAREPOINT_V2_SERVER = 2,
+        SHAREPOINT_V3_SERVER = 3
+    } SPServerType;
+
+    typedef [helpstring("InsightSPUserRights"), helpcontext(0x0001870b)]
+    enum {
+        seAddAndCustomizePages = 0x00040000,
+        seAddDelPrivateWebParts = 0x10000000,
+        seAddListItems = 2,
+        seApplyStyleSheets = 0x00100000,
+        seApplyThemeAndBorder = 0x00080000,
+        seBrowseDirectories = 0x04000000,
+        seBrowseUserInfo = 0x08000000,
+        seCancelCheckout = 256,
+        seCreatePersonalGroups = 0x01000000,
+        seCreateSSCSite = 0x00400000,
+        seDeleteListItems = 8,
+        seEditListItems = 4,
+        seManageListPermissions = 1024,
+        seManageLists = 2048,
+        seManagePersonalViews = 512,
+        seManageRoles = 0x02000000,
+        seManageSubwebs = 0x00800000,
+        seManageWeb = 0x40000000,
+        seOpenWeb = 0x00010000,
+        seUpdatePersonalWebParts = 0x20000000,
+        seViewListItems = 1,
+        seViewPages = 0x00020000,
+        seViewUsageData = 0x00200000
+    } InsightSPUserRights;
+
+    typedef [helpstring("Revision Manager Actions"), helpcontext(0x0001874b)]
+    enum {
+        UnknownAction = 0,
+        CopyAction = 1,
+        CopyAllAction = 2,
+        ReviseAction = 3,
+        ReviseAllAction = 4,
+        RenameAction = 5,
+        RenameAllAction = 6,
+        ReplaceAction = 7,
+        ReplaceAllAction = 8
+    } RevisionManagerAction;
+
+    typedef [helpstring("PCF File Permissions"), helpcontext(0x0001874f)]
+    enum {
+        NoPermissions = 0,
+        SavePermissions = 0x00600000,
+        PrintPermissions = 0x000a0000,
+        ForwardPermissions = 57344,
+        MarkupPermissions = 768,
+        MeasurePermissions = 80,
+        PMIPermissions = 2,
+        CrossSectionPermissions = 8,
+        AllPermissions = 0x006ae35a
+    } PCFFilePermissions;
+
+    [
+      uuid(DF778D1B-0AA4-11D1-BC6E-0800360E1E02),
+      helpstring("Revision Manager Application"),
+      helpcontext(0x000186a1)
+    ]
+    dispinterface IRMgrApp {
+        properties:
+            [id(0x00000001), helpcontext(0x000186b2)            
+]
+            IDispatch* Application;
+            [id(0x00000002), helpcontext(0x000186b3)            
+]
+            IDispatch* Parent;
+            [id(0x00000006), helpcontext(0x000186b5)            
+]
+            long DisplayAlerts;
+            [id(0x0000000c), helpcontext(0x000186b9)            
+]
+            BSTR LinkMgmtFileName;
+            [id(0x0000000d), helpcontext(0x000186bb)            
+]
+            BSTR LogFilesDirectory;
+            [id(0x00000011), helpcontext(0x000186e8)            
+]
+            long Visible;
+            [id(0x00000017), hidden, helpcontext(0x00018716)            
+]
+            long ResolveLink;
+        methods:
+            [id(0x00000003), helpcontext(0x000186a4)]
+            IDispatch* Open(
+                            BSTR FileName, 
+                            [in, optional] VARIANT RevisionRuleOption, 
+                            [in, optional] VARIANT StopFileOpenIfRevisionRuleNotApplicable);
+            [id(0x00000005), propget, helpcontext(0x000186a5)]
+            BSTR WhereUsedCriteria(
+                            VARIANT Filter, 
+                            VARIANT SearchSubDirectories);
+            [id(0x00000005), propput, helpcontext(0x000186a5)]
+            void WhereUsedCriteria(
+                            [in, optional] VARIANT Filter, 
+                            [in, optional] VARIANT SearchSubDirectories, 
+                            BSTR rhs);
+            [id(0x00000004), helpcontext(0x000186a6)]
+            IDispatch* FindWhereUsed([in, optional] VARIANT DocumentPathName);
+            [id(0x0000000e), helpcontext(0x000186bc)]
+            long FindDuplicateDocuments(
+                            [in] VARIANT ListOfFoldersOrFiles, 
+                            [in, optional] VARIANT bProcessSubFolders, 
+                            [in, optional] VARIANT bProcessAssemblyDocuments, 
+                            [in, optional] VARIANT bProcessDraftDocuments, 
+                            [in, optional] VARIANT bProcessPartDocuments, 
+                            [in, optional] VARIANT bProcessWeldmentDocuments, 
+                            [in, optional] VARIANT bProcessSheetMetalDocuments, 
+                            [out, optional] VARIANT* DetailLogFile, 
+                            [out, optional] VARIANT* SummaryLogFile);
+            [id(0x0000000f), helpcontext(0x000186bd)]
+            long FindBrokenLinks(
+                            [in, optional] VARIANT ListOfFoldersOrFiles, 
+                            [in, optional] VARIANT InputTextFileName, 
+                            [in, optional] VARIANT bProcessSubFolders, 
+                            [in, optional] VARIANT bProcessAssemblyDocuments, 
+                            [in, optional] VARIANT bProcessDraftDocuments, 
+                            [in, optional] VARIANT bProcessPartDocuments, 
+                            [in, optional] VARIANT bProcessWeldmentDocuments, 
+                            [in, optional] VARIANT bProcessSheetMetalDocuments, 
+                            [out, optional] VARIANT* DetailLogFile, 
+                            [out, optional] VARIANT* SummaryLogFile);
+            [id(0x00000010), helpcontext(0x000186be)]
+            long RedefineLinks(
+                            [in] BSTR CurrentLinkStr, 
+                            [in] BSTR RedefineLinkStr, 
+                            [in, optional] VARIANT ListOfFoldersOrFiles, 
+                            [in, optional] VARIANT InputTextFileName, 
+                            [in, optional] VARIANT bProcessSubFolders, 
+                            [in, optional] VARIANT bReplaceIfFileExists, 
+                            [in, optional] VARIANT bProcessAssemblyDocuments, 
+                            [in, optional] VARIANT bProcessDraftDocuments, 
+                            [in, optional] VARIANT bProcessPartDocuments, 
+                            [in, optional] VARIANT bProcessWeldmentDocuments, 
+                            [in, optional] VARIANT bProcessSheetMetalDocuments, 
+                            [out, optional] VARIANT* DetailLogFile, 
+                            [out, optional] VARIANT* ErrorLogFile);
+            [id(0x00000007), propget, helpcontext(0x000186bf)]
+            IDispatch* Insight();
+            [id(0x00000008), propget, helpcontext(0x000186bf)]
+            IDispatch* PropertySets();
+            [id(0x00000009), helpcontext(0x000186da)]
+            long GetGlobalParameter(
+                            [in] ApplicationGlobalConstants Parameter, 
+                            [in, out] VARIANT* Value);
+            [id(0x0000000a), helpcontext(0x000186db)]
+            long SetGlobalParameter(
+                            [in] ApplicationGlobalConstants Parameter, 
+                            [in] VARIANT Value);
+            [id(0x0000000b), helpcontext(0x000186d0)]
+            long FindWhereUsedOnServer(
+                            [in] long NumberOfProperties, 
+                            [in] VARIANT ListOfProperties, 
+                            [in] long NumberOfSharePointDirectories, 
+                            [in] VARIANT ListOfSharePointDirectories, 
+                            [in] long NumberOfDocuments, 
+                            [in] VARIANT ListOfDocumentsForWhereUsed, 
+                            [out] long* NumberOfUserFiles, 
+                            [out] VARIANT* DocumentsUsedByList, 
+                            [in, optional] VARIANT TypeOfSearch);
+            [id(0x00000012), helpcontext(0x00018706)]
+            long SearchDocuments(
+                            [in] VARIANT_BOOL bUseSearchScope, 
+                            [in] BSTR bstrFolders, 
+                            [in] VARIANT_BOOL bIncludeSubFolders, 
+                            [out] VARIANT* ListOfFoundDocuments, 
+                            [out] int* iNumDocsFound, 
+                            [in, optional] VARIANT varFileFilterOrText, 
+                            [in, optional] VARIANT PropertyList, 
+                            [in, optional] VARIANT ConditionList, 
+                            [in, optional] VARIANT PropertyValueList, 
+                            [in, optional] VARIANT varNumProps, 
+                            [in, optional] VARIANT varCheckModified, 
+                            [in, optional] VARIANT varNumberOfDays, 
+                            [out, optional] VARIANT* ListOfTitles, 
+                            [out, optional] VARIANT* ListOfSubjects, 
+                            [out, optional] VARIANT* ListOfModifiedDates);
+            [id(0x00000013), helpcontext(0x00018707)]
+            long SaveDataToPCF(
+                            [in] BSTR PCFFileName, 
+                            [out] VARIANT_BOOL* bInvalidPCF);
+            [id(0x00000014), helpcontext(0x00018708)]
+            long OpenDataFromPCF(
+                            [in] BSTR PCFFileName, 
+                            [out] VARIANT_BOOL* bHasData);
+            [id(0x00000015), helpcontext(0x00018709)]
+            void Quit();
+            [id(0x00000016), helpcontext(0x0098967f)]
+            long SEAdminUpdate();
+            [id(0x00000018), helpcontext(0x00018728)]
+            long GetCreatedSEFileVersion(
+                            [in] BSTR bstrFileName, 
+                            [out] long* pCreatedSEFileVersion);
+            [id(0x00000019), helpcontext(0x00018729)]
+            long GetSavedSEFileVersion(
+                            [in] BSTR bstrFileName, 
+                            [out] long* pSavedSEFileVersion);
+            [id(0x0000001a), helpcontext(0x00018741)]
+            long CreatePCFFor3Dfile(
+                            [in] BSTR bstrPCFFileName, 
+                            [in] VARIANT_BOOL bStoreViewData, 
+                            [in] BSTR bstrPCFFilePathTobeCreated);
+            [id(0x0000001b), helpcontext(0x00018742)]
+            long OpenFileInVMThroughAutomation([in] BSTR bstrPCFFileName);
+            [id(0x0000001c), helpcontext(0x00018748)]
+            IDispatch* OpenFileInRevisionManager([in] BSTR FileName);
+            [id(0x0000001d), helpcontext(0x0001874c)]
+            long SetActionInRevisionManager(
+                            [in] long nFileCount, 
+                            [in] VARIANT ListOfInputFileNames, 
+                            [in] VARIANT ListOfInputActions, 
+                            [in, optional] VARIANT ListOfNewFileNames, 
+                            [in, optional] VARIANT NewFilePathForAllFiles);
+            [id(0x0000001e), helpcontext(0x0001874d)]
+            long SetActionForAllFilesInRevisionManager(
+                            [in] RevisionManagerAction ActionToSet, 
+                            [in] BSTR NewFilePathForAllFiles);
+            [id(0x0000001f), helpcontext(0x0001874e)]
+            long PerformActionInRevisionManager();
+            [id(0x00000020), helpcontext(0x00018750)]
+            long CreatePCFFor3DFileWithPermissionsPassword(
+                            [in] BSTR bstrFileName, 
+                            [in] VARIANT_BOOL bStoreViewData, 
+                            [in] BSTR bstrPCFFilePathTobeCreated, 
+                            [in] PCFFilePermissions PCFFilePermissions, 
+                            [in] BSTR bstrPCFFilePassword);
+    };
+
+    [
+      uuid(DF778D19-0AA4-11D1-BC6E-0800360E1E02),
+      helpstring("Revision Manager Application"),
+      helpcontext(0x000186a1)
+    ]
+    coclass Application {
+        [default] dispinterface IRMgrApp;
+    };
+
+    [
+      uuid(5CAC1972-0CD0-11D1-BC6F-0800360E1E02),
+      helpcontext(0x000186a2)
+    ]
+    dispinterface IDocAuto {
+        properties:
+            [id(0x00000003), helpcontext(0x000186a8)            
+]
+            BSTR Revision;
+            [id(0x00000004), helpcontext(0x000186a9)            
+]
+            BSTR DocNum;
+            [id(0x00000001), helpcontext(0x000186b3)            
+]
+            IDispatch* Parent;
+            [id(0x00000002), helpcontext(0x000186b2)            
+]
+            IDispatch* Application;
+            [id(0x00000005), helpcontext(0x000186a7)            
+]
+            BSTR FullName;
+            [id(00000000)            
+]
+            BSTR _FullName;
+            [id(0x00000032), helpcontext(0x000186aa)            
+]
+            DocumentStatus Status;
+            [id(0x00000033), helpcontext(0x000186b4)            
+]
+            int Occurrences;
+            [id(0x00000034), helpcontext(0x000186b8)            
+]
+            BSTR AbsolutePath;
+        methods:
+            [id(0x00000009), propget, helpcontext(0x000186ab)]
+            IDispatch* LinkedDocuments([in, optional] VARIANT LinkTypeOption);
+            [id(0x00000006), helpcontext(0x000186ae)]
+            long Replace(
+                            BSTR NewFileName, 
+                            [in, optional] VARIANT Options);
+            [id(0x00000007), helpcontext(0x000186ac)]
+            long Copy(
+                            BSTR NewFileName, 
+                            [in, optional] VARIANT NewRevision, 
+                            [in, optional] VARIANT NewDocNum, 
+                            [in, optional] VARIANT Option);
+            [id(0x00000008), helpcontext(0x000186ad)]
+            long Rename(
+                            BSTR NewFileName, 
+                            [in, optional] VARIANT NewRevision, 
+                            [in, optional] VARIANT NewDocNum, 
+                            [in, optional] VARIANT Option);
+            [id(0x0000000a), helpcontext(0x000186de)]
+            long Revise(
+                            BSTR NewFileName, 
+                            [in, optional] VARIANT NewRevision, 
+                            [in, optional] VARIANT NewDocNum);
+            [id(0x0000000c), helpcontext(0x000186f1)]
+            long IsDocumentFOP([out] long* FOPStatus);
+            [id(0x00000035), helpcontext(0x000186b7)]
+            long SetPath(BSTR NewFileName);
+            [id(0x00000021), helpcontext(0x000186ba)]
+            long SaveAllLinks();
+            [id(0x0000000d), helpcontext(0x0001873d)]
+            long OpenInSEEditor();
+    };
+
+    [
+      uuid(5CAC1974-0CD0-11D1-BC6F-0800360E1E02),
+      helpstring("Revision Manager Document"),
+      helpcontext(0x000186a2)
+    ]
+    coclass Document {
+        [default] dispinterface IDocAuto;
+    };
+
+    [
+      uuid(5CAC1975-0CD0-11D1-BC6F-0800360E1E02),
+      helpcontext(0x000186a3)
+    ]
+    dispinterface ILinkedDocsAuto {
+        properties:
+            [id(0x00000003), helpcontext(0x000186af)            
+]
+            long Count;
+            [id(0x00000001), helpcontext(0x000186b2)            
+]
+            IDispatch* Application;
+            [id(0x00000002), helpcontext(0x000186b3)            
+]
+            IDispatch* Parent;
+        methods:
+            [id(0x00000004), propget, helpcontext(0x000186b0)]
+            IDispatch* Item(VARIANT Index);
+            [id(00000000), propget, helpcontext(0x000186b0)]
+            IDispatch* _Item(VARIANT Index);
+            [id(0xfffffffc), propget]
+            IUnknown* _NewEnum();
+    };
+
+    [
+      uuid(5CAC1977-0CD0-11D1-BC6F-0800360E1E02),
+      helpstring("Collection of linked documents"),
+      helpcontext(0x000186a3)
+    ]
+    coclass LinkedDocuments {
+        [default] dispinterface ILinkedDocsAuto;
+    };
+
+    [
+      uuid(8547D4AB-BC5C-4BD2-B9E6-9D9C017A90F3),
+      helpcontext(0x000186bf)
+    ]
+    dispinterface IPropertySetsAuto {
+        properties:
+            [id(0x00000001), helpcontext(0x000186b2)            
+]
+            IDispatch* Application;
+            [id(0x00000002), helpcontext(0x000186b3)            
+]
+            IDispatch* Parent;
+            [id(0x00000003), helpcontext(0x000186af)            
+]
+            long Count;
+        methods:
+            [id(0x00000004), propget, helpcontext(0x000186b0)]
+            IDispatch* Item(VARIANT Index);
+            [id(0x00000005), helpcontext(0x000186a4)]
+            long Open(
+                            BSTR FileName, 
+                            [in, optional] VARIANT OpenReadOnly);
+            [id(0x00000006), helpcontext(0x000186c0)]
+            long Save();
+            [id(0x00000007), helpcontext(0x000186d7)]
+            long Upload();
+            [id(0xfffffffc), propget]
+            IUnknown* _NewEnum();
+    };
+
+    [
+      uuid(0323A7D6-9F38-4000-BF00-7AFAF7A40F99),
+      helpstring("PropertySets collection"),
+      helpcontext(0x000186bf)
+    ]
+    coclass PropertySets {
+        [default] dispinterface IPropertySetsAuto;
+    };
+
+    [
+      uuid(A24DBDF4-6290-40E6-943C-39CA4C52B1A4),
+      helpcontext(0x000186a1)
+    ]
+    dispinterface IPropertiesAuto {
+        properties:
+            [id(0x00000001), helpcontext(0x000186b2)            
+]
+            IDispatch* Application;
+            [id(0x00000002), helpcontext(0x000186b3)            
+]
+            IDispatch* Parent;
+            [id(0x00000003), helpcontext(0x000186af)            
+]
+            long Count;
+            [id(0x00000004), helpcontext(0x000186c3)            
+]
+            BSTR Name;
+        methods:
+            [id(0x00000005), propget, helpcontext(0x000186b0)]
+            IDispatch* Item(VARIANT Index);
+            [id(0x00000006), helpcontext(0x000186c2)]
+            IDispatch* Add(
+                            [in] BSTR Name, 
+                            [in] VARIANT Value);
+            [id(0x00000007), helpcontext(0x000186c0)]
+            long Save();
+            [id(0x00000008), propget, helpcontext(0x000186d6)]
+            IDispatch* PropertyByID([in] long PropID);
+            [id(0xfffffffc), propget]
+            IUnknown* _NewEnum();
+    };
+
+    [
+      uuid(1EA5BA57-78F6-44BD-B68B-C3DD52632080),
+      helpstring("Properties collection"),
+      helpcontext(0x000186c1)
+    ]
+    coclass Properties {
+        [default] dispinterface IPropertiesAuto;
+    };
+
+    [
+      uuid(8EA76506-8866-4741-8ED2-A51E9DD39DA7),
+      helpcontext(0x000186a1)
+    ]
+    dispinterface IPropertyAuto {
+        properties:
+            [id(0x00000001), helpcontext(0x000186b2)            
+]
+            IDispatch* Application;
+            [id(0x00000002), helpcontext(0x000186b3)            
+]
+            IDispatch* Parent;
+            [id(0x00000003), helpcontext(0x000186c5)            
+]
+            long ID;
+            [id(0x00000005), helpcontext(0x000186c3)            
+]
+            BSTR Name;
+            [id(0x00000004), helpcontext(0x000186c6)            
+]
+            VARIANT Value;
+        methods:
+            [id(0x00000006), helpcontext(0x000186c7)]
+            long Delete();
+    };
+
+    [
+      uuid(DE2F5653-8899-4355-A14B-27B5DC32A0FE),
+      helpstring("Property object"),
+      helpcontext(0x000186c9)
+    ]
+    coclass Property {
+        [default] dispinterface IPropertyAuto;
+    };
+
+    [
+      uuid(B7FEABBF-8E2A-4FFB-B53B-20FBB7E0F6E2),
+      helpcontext(0x000186ca)
+    ]
+    dispinterface IInsight {
+        properties:
+        methods:
+            [id(0x00000001), helpcontext(0x000186cb)]
+            long DownloadDocumentFromServer(
+                            [in] BSTR FileToDownLoadFromServer, 
+                            [in] DocumentAccess FileAccessMode, 
+                            [out] BSTR* LocalPath, 
+                            [in, optional] VARIANT GetLatestDocuments, 
+                            [in, optional] VARIANT ProcessIndirectDocuments, 
+                            [in, optional] VARIANT RevisionRuleOption, 
+                            [in, optional] VARIANT StopFileOpenIfRevisionRuleNotApplicable);
+            [id(0x00000002), helpcontext(0x0001871a)]
+            long ImportDocumentsToServer(
+                            [in] long NumberOfDocumentsFoldersToImport, 
+                            [in] VARIANT ListOfDocumentsFoldersToImport, 
+                            [in] BSTR ImportLocation, 
+                            [in] UploadType TypeOfUpload, 
+                            [in] CheckInOptions CheckInOption);
+            [id(0x00000003), helpcontext(0x000186cd)]
+            long UploadDocumentsToServer(
+                            [in] long NumberOfDocumentsToUpload, 
+                            [in] VARIANT DocumentsToUpload);
+            [id(0x00000004), helpcontext(0x000186ce)]
+            long ExportDocumentsFromServer(
+                            [in] long NumberOfDocumentsToExport, 
+                            [in] VARIANT ListOfDocumentsToExport, 
+                            [in] BSTR ExportToLocation, 
+                            VARIANT_BOOL SetDocToReadOnly, 
+                            OverWriteFilesOption OverWriteOption);
+            [id(0x00000005), helpcontext(0x000186cf)]
+            long DeleteDocumentsFromServer(
+                            [in] long NumberOfDocumentsToBeDeleted, 
+                            [in] VARIANT ListOfDocumentsToBeDeleted, 
+                            [out] long* NumberOfSuccessfullyDeletedDocuments, 
+                            [out] VARIANT* SuccessfullyDeletedDocuments);
+            [id(0x00000006), helpcontext(0x000186d0)]
+            long FindWhereUsedOnServer(
+                            [in] long NumberOfProperties, 
+                            [in] VARIANT ListOfProperties, 
+                            [in] long NumberOfSharePointDirectories, 
+                            [in] VARIANT ListOfSharePointDirectories, 
+                            [in] long NumberOfDocuments, 
+                            [in] VARIANT ListOfDocumentsForWhereUsed, 
+                            [out] long* NumberOfUserFiles, 
+                            [out] VARIANT* DocumentsUsedByList, 
+                            [in, optional] VARIANT TypeOfSearch);
+            [id(0x00000007), helpcontext(0x000186d1)]
+            long CheckOutDocumentsFromServer(
+                            [in] long NumberOfDocumentsToCheckOutFromServer, 
+                            [in] VARIANT ListOfDocumentsToCheckOutFromServer);
+            [id(0x00000008), helpcontext(0x000186d2)]
+            long CheckInDocumentsToServer(
+                            [in] long NumberOfDocumentsToCheckInToServer, 
+                            [in] VARIANT ListOfDocumentsToCheckInFromServer, 
+                            [in, optional] VARIANT FailIfDocumentsOpenInSolidEdge);
+            [id(0x00000009), helpcontext(0x000186d3)]
+            long UndoCheckOutDocumentsFromServer(
+                            [in] long NumberOfDocumentsToUndoCheckOutFromServer, 
+                            [in] VARIANT ListOfDocumentsToUndoCheckOutFromServer);
+            [id(0x0000000a), helpcontext(0x000186d4)]
+            long ShowRevisionsForServerDocuments(
+                            [in] BSTR DocumentNameToShowRevisions, 
+                            [out] long* NumberOfRevisions, 
+                            [out] VARIANT* DocumentNamesOfRevisions);
+            [id(0x0000000b), helpcontext(0x000186d5)]
+            long GetRevisedFrom(
+                            [in] BSTR RevisedDocumentName, 
+                            [out] BSTR* RevisedFromDocument);
+            [id(0x0000000c), helpcontext(0x000186d8)]
+            long SetInsightUserNamePassword(
+                            [in] BSTR WorkspaceUrl, 
+                            [in] BSTR UserName, 
+                            [in] BSTR Password, 
+                            [in] BSTR DomainName);
+            [id(0x0000000d), helpcontext(0x000186dc)]
+            long GetLastInsightTransactionMessages(
+                            [out] BSTR* TransactionString, 
+                            [out] long* NumberOfDocuments, 
+                            [out] VARIANT* ListofDocumentNamesWithPath, 
+                            [out] VARIANT* ListofMessages, 
+                            [out] VARIANT* ListofSeverityCodes);
+            [id(0x0000000e), helpcontext(0x0001871d)]
+            long GetOutOfDateDocuments(
+                            [out] long* NumberOfOutOfDateDocuments, 
+                            VARIANT* ListOfOutOfDateDocuments);
+            [id(0x0000000f), helpcontext(0x000186e4)]
+            long ClearCache();
+            [id(0x00000010), helpcontext(0x000186e5)]
+            long DeleteDocumentsFromCache(
+                            [out] long* NumberOFDocumentsToBeDeletedFromCache, 
+                            [in] VARIANT ListOfDocumentsToBeDeletedFromCache, 
+                            [out] long* NumberOfNotDeletedDocuments, 
+                            [out] VARIANT* ListOfNotDeletedDocuments);
+            [id(0x00000011), helpcontext(0x000186e6)]
+            long PutUserNameAndPasswordIntoCache([in] BSTR WorkspaceUrl);
+            [id(0x00000012), helpcontext(0x000186e7)]
+            long EnableDeveloperLog([in] VARIANT bCreateFlag);
+            [id(0x00000013), helpcontext(0x000186e9)]
+            long SynchronizeDocumentsInCache(
+                            [in] long NumberOfDocumentsToBeSynchronizedWithServer, 
+                            [in] VARIANT ListOfDocumentsInCacheToBeSynchronized);
+            [id(0x00000014), helpcontext(0x000186ea)]
+            long SynchronizeAllDocumentsInCache();
+            [id(0x00000015), helpcontext(0x000186eb)]
+            long CheckInAllCheckedOutDocumentsInCache();
+            [id(0x00000016), helpcontext(0x000186ec)]
+            long GetFilePropertiesFromServer(
+                            [in] long NumberOfFilesToBeQueriedForProperties, 
+                            [in] VARIANT FileUrlsList, 
+                            [in] long NumberOfPropertiesTobeQueried, 
+                            [in] VARIANT PropertyUrisList, 
+                            [out] long* numberOfPropertiesValues, 
+                            [out] VARIANT* PropertyValueList);
+            [id(0x00000017), helpcontext(0x000186ee)]
+            long MoveDocumentsThroughWorkFlow(
+                            [in] BSTR FileName, 
+                            [in] DocumentStatus newstatus, 
+                            [in, optional] VARIANT NumberOfDraftFiles, 
+                            [in, optional] VARIANT draftFileList, 
+                            [in, optional] VARIANT draftFileStatusList, 
+                            [in, optional] VARIANT NumberOfRevisionFiles, 
+                            [in, optional] VARIANT revisionFileList, 
+                            [in, optional] VARIANT RevisionFileStatusList);
+            [id(0x00000018), helpcontext(0x000186ef)]
+            long MoveAllDocumentsThroughWorkFlow(
+                            [in] BSTR FileName, 
+                            [in] DocumentStatus newstatus);
+            [id(0x00000019), helpcontext(0x000186f3)]
+            long GetSharePointServerType(
+                            [in] BSTR FileName, 
+                            [in] SPServerType* SPServerType, 
+                            [in, optional] VARIANT* bProcessChecks);
+            [id(0x0000001a), helpcontext(0x00018705)]
+            long FileExists(
+                            [in] BSTR FileUrl, 
+                            [out] VARIANT_BOOL* bFileExists);
+            [id(0x0000001b), helpcontext(0x000186f5)]
+            long CopyFiles(
+                            [in] BSTR FileName, 
+                            [in] VARIANT FilesToBeCopy, 
+                            [in] VARIANT DestinationPathsOfCopiedFiles);
+            [id(0x0000001c), helpcontext(0x000186f6)]
+            long RenameFiles(
+                            [in] VARIANT FilesToBeRenamed, 
+                            [in] VARIANT DestinationPathsOfRenamedFiles);
+            [id(0x0000001d), helpcontext(0x000186f7)]
+            long ReviseFiles(
+                            [in] BSTR FileName, 
+                            [in] VARIANT FilesToBeRevised, 
+                            [in] VARIANT DestinationPathsOfRevisedFiles);
+            [id(0x0000001e), helpcontext(0x000186f8)]
+            long GetIndirectFiles(
+                            [in] BSTR FileName, 
+                            [out] VARIANT* pIndirectFilesList);
+            [id(0x0000001f), helpcontext(0x000186f9)]
+            long CreateFolder(
+                            [in] long numberOfFoldersToCreate, 
+                            [in] VARIANT ListOfFoldersToCreate);
+            [id(0x00000020), helpcontext(0x000186fa)]
+            long DeleteFolder(
+                            [in] long NumberOfDocumentsToBeDeleted, 
+                            [in] VARIANT listOfFilesToDelete, 
+                            [out] long* NumberOfSuccessfullyDeletedDocuments, 
+                            [out] VARIANT* listOfFileSuccessfullyDeleted);
+            [id(0x00000021), helpcontext(0x000186fb)]
+            long FolderExists(
+                            [in] BSTR bstrFolderName, 
+                            [out] VARIANT_BOOL* bFolderExists);
+            [id(0x00000022), helpcontext(0x000186fc)]
+            long GetDirs(
+                            [in] BSTR ParentUrl, 
+                            [out] long* numberOfSubFoldersFound, 
+                            [out] VARIANT* ListOfSubFoldersFound);
+            [id(0x00000023), helpcontext(0x000186fd)]
+            long GetFiles(
+                            [in] BSTR ParentUrl, 
+                            [out] long* numberOfFilesFound, 
+                            [out] VARIANT* ListOfFilesFound, 
+                            [in, optional] VARIANT FileFilter);
+            [id(0x00000024), helpcontext(0x000186fe)]
+            long DoesUserHaveAdminRights(
+                            [in] BSTR FileOrFolderUrl, 
+                            [in] BSTR UserName, 
+                            [out] VARIANT_BOOL* bUserHasAdminRights);
+            [id(0x00000025), helpcontext(0x000186ff)]
+            long IsInsightSupported([out] VARIANT_BOOL* bInsightIsSupported);
+            [id(0x00000026), helpcontext(0x00018700)]
+            long IsFileCheckedOut(
+                            [in] BSTR FileUrl, 
+                            [out] VARIANT_BOOL* bFileIsCheckedOut, 
+                            [out] BSTR* UserName);
+            [id(0x00000027), helpcontext(0x00018701)]
+            long GetCachePath(
+                            [in] long numberOfFilesToGetPathFor, 
+                            [in] VARIANT ListOfFilePaths, 
+                            [out] long* numberOfFilesReturned, 
+                            [out] VARIANT* ListOfFilesContainingCachePaths);
+            [id(0x00000028), helpcontext(0x00018702)]
+            long GetUserRole(
+                            [in] BSTR FileOrFolderUrl, 
+                            [in] BSTR UserName, 
+                            [out] BSTR* UserRole);
+            [id(0x00000029), helpcontext(0x00018703)]
+            long GetDocState(
+                            [in] BSTR UrlToGetStateFor, 
+                            [out] VARIANT* docState);
+            [id(0x0000002a), helpcontext(0x00018704)]
+            long CheckSupport(
+                            [in] BSTR ServerUrl, 
+                            [out] VARIANT_BOOL* bSPSIsSupported);
+            [id(0x0000002b), helpcontext(0x0001870a)]
+            long GetUserRights(
+                            [in] BSTR FileOrFolderUrl, 
+                            [out] InsightSPUserRights* UserRights);
+            [id(0x0000002c), helpcontext(0x00018718)]
+            long GetIndirectFilesTree(
+                            [in] BSTR containerFileName, 
+                            [out] VARIANT* pIndirectFilesTree);
+            [id(0x0000002d), helpcontext(0x00018730)]
+            long UsePathAsDefaultFolderMapPath([in] BSTR TargetWorkspaceUrl);
+            [id(0x0000002e), helpcontext(0x00018736)]
+            long RemoveAllFilesFromRecycleBin([in] BSTR bstrDocLibUrl);
+            [id(0x0000002f), helpcontext(0x00018737)]
+            long RestoreAllFilesFromRecycleBin([in] BSTR bstrDocLibUrl);
+            [id(0x00000030), helpcontext(0x00018738)]
+            long DownloadDocumentFromServerWithAllLinks(
+                            [in] BSTR FileToDownLoadFromServer, 
+                            [in] DocumentAccess FileAccessMode, 
+                            [out] BSTR* LocalPath, 
+                            [in, optional] VARIANT GetLatestDocuments, 
+                            [in, optional] VARIANT ProcessIndirectDocuments, 
+                            [in, optional] VARIANT RevisionRuleOption, 
+                            [in, optional] VARIANT StopFileOpenIfRevisionRuleNotApplicable);
+            [id(0x00000031), helpcontext(0x00018739)]
+            long SetInsightATPRunning([in] VARIANT bRunningInsightATP);
+            [id(0x00000032), helpcontext(0x0001873a)]
+            long SetInsightATPInfo(
+                            [in] BSTR bstrLevel1, 
+                            [in] BSTR bstrATPClassName, 
+                            [in] BSTR bstrATPName, 
+                            [in] VARIANT bRunningInsightATP);
+            [id(0x00000033), helpcontext(0x0001873b)]
+            long ValidateDocsOnLCA(
+                            [in] BSTR bstrInputURL, 
+                            [in] long numberOfDocumentstoValidate, 
+                            [in] VARIANT varlistOfDocsToValidate, 
+                            [in] BSTR bstrInputData);
+            [id(0x00000034), helpcontext(0x0001873c)]
+            long IsVersioningEnabledForTheInputDocLib(
+                            [in] BSTR docLibName, 
+                            [out] VARIANT_BOOL* pbIsVersioningOnForTheInputDocLib);
+            [id(0x00000036), helpcontext(0x0001873e)]
+            long IsDocumentLibraryContainsRequiredProperty(
+                            [in] BSTR docLibName, 
+                            [out] VARIANT_BOOL* pbIsRequiredPropertyExist);
+            [id(0x00000037), helpcontext(0x0001873f)]
+            long SetInsightOfflineMode([in] VARIANT bOfflineModeVal);
+            [id(0x00000038), helpcontext(0x00018740)]
+            long DisplayPropertyManagerDlg([in] BSTR bstrFileName);
+            [id(0x00000039), helpcontext(0x00018746)]
+            long GetCookieData(
+                            [in] BSTR bstrFileName, 
+                            [in] CookieDataToGet valCookieDataToGet, 
+                            [out] RevisionRuleType* varRevisionRule);
+            [id(0x0000003a), helpcontext(0x00018749)]
+            long SetFilePropertiesOnServer(
+                            [in] BSTR bstrInputURL, 
+                            [in] long NumberOfPropertiesToSet, 
+                            [in] VARIANT PropertyUrIList, 
+                            [in] VARIANT PropertyValueList);
+            [id(0x0000003b), helpcontext(0x0001874a)]
+            long ISDocumentParserEnabled(
+                            [in] BSTR bstrInputURL, 
+                            [out] VARIANT_BOOL* bDocParserEnabled);
+    };
+
+    [
+      uuid(06AEF304-AD7E-4C10-9904-29463E231246),
+      helpstring("Insight object"),
+      helpcontext(0x000186ca)
+    ]
+    coclass Insight {
+        [default] dispinterface IInsight;
+    };
+};

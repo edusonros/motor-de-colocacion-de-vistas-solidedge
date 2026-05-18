@@ -89,9 +89,14 @@ Friend NotInheritable Class ReferenceDrawingDimensioningService
         Dim effStyle As Object = DrawingViewDimensionCreator.ResolveForcedStyleObject(draft, sheet, styleObj, log)
         DrawingViewDimensionCreator.TryApplyStyleToDimensionsCollection(dims, effStyle, log, "REF_TARGET")
 
-        Dim exteriorCreated As Integer = CreateExteriorTotalsForAllViews(workList, dims, log)
+        Dim exteriorCreated As Integer = CreateExteriorTotalsForPrimaryView(workList, dims, log)
         If exteriorCreated > 0 Then
-            log?.LogLine("[DIM][DVREF][TOTALS_ALL_VIEWS] created=" & exteriorCreated.ToString(CultureInfo.InvariantCulture))
+            log?.LogLine("[DIM][DVREF][TOTALS_PRIMARY_VIEW] created=" & exteriorCreated.ToString(CultureInfo.InvariantCulture))
+        End If
+
+        Dim holeCreated As Integer = InteriorHoleDimensioningService.CreateForViews(draft, sheet, workList, dims, effStyle, norm, log)
+        If holeCreated > 0 Then
+            log?.LogLine("[DIM][HOLE] created=" & holeCreated.ToString(CultureInfo.InvariantCulture))
         End If
 
         Dim candidates As List(Of DimensionCandidate) = CrearCandidatosDeCotasReferencia(workList, norm, log)
@@ -206,6 +211,13 @@ Friend NotInheritable Class ReferenceDrawingDimensioningService
                      " radialCreated=" & createdRad.ToString(CultureInfo.InvariantCulture) &
                      " totalCreated=" & (createdLin + createdRad + exteriorCreated).ToString(CultureInfo.InvariantCulture))
 
+        If norm.EnableKeypointValueDuplicateCleanup AndAlso sheet IsNot Nothing Then
+            Dim removedDup As Integer = DimensionDuplicateCleanup.RunPostCreationCleanup(sheet, workList, log)
+            If removedDup > 0 Then
+                log?.LogLine("[DIM][DEDUP] post_reference removed=" & removedDup.ToString(CultureInfo.InvariantCulture))
+            End If
+        End If
+
         OrdenarCotasComoPlanoReferencia(draft, sheet, workList, protectedZones, norm, log)
         NormalizeAllDimensionTextPolicy(sheet, log)
 
@@ -244,31 +256,37 @@ Friend NotInheritable Class ReferenceDrawingDimensioningService
         baseLogger?.Log("[DIM] Modo referencia: creación selectiva finalizada.")
     End Sub
 
-    Private Shared Function CreateExteriorTotalsForAllViews(workList As List(Of DrawingViewGeometryInfo), dims As Dimensions, log As DimensionLogger) As Integer
+    ''' <summary>Cotas H/V totales solo en la vista principal (mayor área en hoja) para evitar duplicar 250/264 en cada vista ortogonal.</summary>
+    Private Shared Function CreateExteriorTotalsForPrimaryView(workList As List(Of DrawingViewGeometryInfo), dims As Dimensions, log As DimensionLogger) As Integer
         If workList Is Nothing OrElse dims Is Nothing Then Return 0
+        Dim primary As DrawingViewGeometryInfo = workList.FirstOrDefault(Function(w) w IsNot Nothing AndAlso w.View IsNot Nothing AndAlso w.Extreme IsNot Nothing)
+        If primary Is Nothing Then Return 0
+        log?.LogLine("[DIM][DVREF][TOTALS] primary_view idx=" & primary.ViewIndex.ToString(CultureInfo.InvariantCulture) & " name=" & primary.ViewName)
+        Return CreateExteriorTotalsForSingleView(primary, dims, log)
+    End Function
+
+    Private Shared Function CreateExteriorTotalsForSingleView(info As DrawingViewGeometryInfo, dims As Dimensions, log As DimensionLogger) As Integer
+        If info Is Nothing OrElse info.View Is Nothing OrElse info.Extreme Is Nothing Then Return 0
         Dim created As Integer = 0
-        For Each info In workList
-            If info Is Nothing OrElse info.View Is Nothing OrElse info.Extreme Is Nothing Then Continue For
-            Dim frame As ViewPlacementFrame = Nothing
-            If Not ViewPlacementFrame.TryCreateFromBaseViewSheetBox(info.Box, log, frame) OrElse frame Is Nothing Then Continue For
-            Dim ex As ExtremeDvLinesResult = info.Extreme
+        Dim frame As ViewPlacementFrame = Nothing
+        If Not ViewPlacementFrame.TryCreateFromBaseViewSheetBox(info.Box, log, frame) OrElse frame Is Nothing Then Return 0
+        Dim ex As ExtremeDvLinesResult = info.Extreme
 
-            Dim leftPt As DimensionExtremePoint = BuildExtremePoint(ex.LeftVertical, frame, pickMaxX:=False, pickMaxY:=False)
-            Dim rightPt As DimensionExtremePoint = BuildExtremePoint(ex.RightVertical, frame, pickMaxX:=True, pickMaxY:=False)
-            Dim topPt As DimensionExtremePoint = BuildExtremePoint(ex.TopHorizontal, frame, pickMaxX:=False, pickMaxY:=True)
-            Dim bottomPt As DimensionExtremePoint = BuildExtremePoint(ex.BottomHorizontal, frame, pickMaxX:=False, pickMaxY:=False)
+        Dim leftPt As DimensionExtremePoint = BuildExtremePoint(ex.LeftVertical, frame, pickMaxX:=False, pickMaxY:=False)
+        Dim rightPt As DimensionExtremePoint = BuildExtremePoint(ex.RightVertical, frame, pickMaxX:=True, pickMaxY:=False)
+        Dim topPt As DimensionExtremePoint = BuildExtremePoint(ex.TopHorizontal, frame, pickMaxX:=False, pickMaxY:=True)
+        Dim bottomPt As DimensionExtremePoint = BuildExtremePoint(ex.BottomHorizontal, frame, pickMaxX:=False, pickMaxY:=False)
 
-            If leftPt IsNot Nothing AndAlso rightPt IsNot Nothing AndAlso topPt IsNot Nothing Then
-                If DimensionPlacementEngine.TryInsertHorizontalExteriorFromExtremePoints(dims, leftPt, rightPt, topPt, info.View, frame, log, Nothing) Then
-                    created += 1
-                End If
+        If leftPt IsNot Nothing AndAlso rightPt IsNot Nothing AndAlso topPt IsNot Nothing Then
+            If DimensionPlacementEngine.TryInsertHorizontalExteriorFromExtremePoints(dims, leftPt, rightPt, topPt, info.View, frame, log, Nothing) Then
+                created += 1
             End If
-            If bottomPt IsNot Nothing AndAlso topPt IsNot Nothing AndAlso rightPt IsNot Nothing Then
-                If DimensionPlacementEngine.TryInsertVerticalExteriorFromExtremePoints(dims, bottomPt, topPt, rightPt, info.View, frame, log, Nothing) Then
-                    created += 1
-                End If
+        End If
+        If bottomPt IsNot Nothing AndAlso topPt IsNot Nothing AndAlso rightPt IsNot Nothing Then
+            If DimensionPlacementEngine.TryInsertVerticalExteriorFromExtremePoints(dims, bottomPt, topPt, rightPt, info.View, frame, log, Nothing) Then
+                created += 1
             End If
-        Next
+        End If
         Return created
     End Function
 
@@ -328,7 +346,6 @@ Friend NotInheritable Class ReferenceDrawingDimensioningService
 
             Dim nrm As DimensioningNormConfig = If(norm Is Nothing, DimensioningNormConfig.DefaultConfig(), norm)
             Dim skipLineObjs As New List(Of Object)()
-            CollectOverallDimensions(info, out, log)
             CollectViewExtentLines(info, out, log, nrm, skipLineObjs)
             CollectLines(info, out, log, nrm, skipLineObjs)
             CollectCircles(info, out, log, nrm)
@@ -348,13 +365,12 @@ Friend NotInheritable Class ReferenceDrawingDimensioningService
         If norm IsNot Nothing AndAlso Not norm.ReferenceIncludeViewExtents Then Return
         If info Is Nothing OrElse info.Extreme Is Nothing Then Return
         Dim ex As ExtremeDvLinesResult = info.Extreme
-        Dim n0 As Integer = out.Count
-        AddExtentCandidate(ex.LeftVertical, info, out, skipLineObjs)
-        AddExtentCandidate(ex.RightVertical, info, out, skipLineObjs)
-        AddExtentCandidate(ex.TopHorizontal, info, out, skipLineObjs)
-        AddExtentCandidate(ex.BottomHorizontal, info, out, skipLineObjs)
+        RegisterExtentLineSkip(ex.LeftVertical, skipLineObjs)
+        RegisterExtentLineSkip(ex.RightVertical, skipLineObjs)
+        RegisterExtentLineSkip(ex.TopHorizontal, skipLineObjs)
+        RegisterExtentLineSkip(ex.BottomHorizontal, skipLineObjs)
         log?.LogLine("[DIM][CAND][EXTENT] view=" & info.ViewIndex.ToString(CultureInfo.InvariantCulture) &
-                     " added=" & (out.Count - n0).ToString(CultureInfo.InvariantCulture))
+                     " action=skip_extent_lines_for_aux_candidates")
     End Sub
 
     Private Shared Sub CollectCircles(info As DrawingViewGeometryInfo, out As List(Of DimensionCandidate), log As DimensionLogger, norm As DimensioningNormConfig)
@@ -409,6 +425,11 @@ Friend NotInheritable Class ReferenceDrawingDimensioningService
             End If
             out.Add(cnd)
         Next
+    End Sub
+
+    Private Shared Sub RegisterExtentLineSkip(dli As DvLineSheetInfo, skipLineObjs As List(Of Object))
+        If dli Is Nothing OrElse dli.Line Is Nothing OrElse skipLineObjs Is Nothing Then Return
+        If Not skipLineObjs.Contains(dli.Line) Then skipLineObjs.Add(dli.Line)
     End Sub
 
     Private Shared Sub AddExtentCandidate(
@@ -656,6 +677,7 @@ Friend NotInheritable Class ReferenceDrawingDimensioningService
         Dim countRadDup As New Dictionary(Of Integer, Integer)()
         Dim countDiaDup As New Dictionary(Of Integer, Integer)()
         Dim crossViewNominal As New HashSet(Of String)(StringComparer.OrdinalIgnoreCase)
+        Dim viewSideNominal As New HashSet(Of String)(StringComparer.OrdinalIgnoreCase)
         Dim smallDetail As Integer = 0
         Dim total As Integer = 0
         Dim nLin As Integer = 0
@@ -735,6 +757,14 @@ Friend NotInheritable Class ReferenceDrawingDimensioningService
                     Continue For
                 End If
                 Dim mm As Integer = CInt(Math.Round(c.NominalValue * 1000.0R))
+                If norm.AvoidDuplicateDimensions Then
+                    Dim viewSideKey As String = BuildViewSideNominalKey(c, mm)
+                    If Not String.IsNullOrEmpty(viewSideKey) AndAlso viewSideNominal.Contains(viewSideKey) Then
+                        log?.LogLine("[DIM][SELECT][REJECT] value=" & mm.ToString(CultureInfo.InvariantCulture) &
+                                     " reason=duplicate_same_view_side sig=" & viewSideKey)
+                        Continue For
+                    End If
+                End If
                 Dim cap As Integer = LineDupCap(mm, norm, smallDetail, c.Priority)
                 Dim key As Integer = mm
                 Dim used As Integer = If(countLineDup.ContainsKey(key), countLineDup(key), 0)
@@ -761,6 +791,10 @@ Friend NotInheritable Class ReferenceDrawingDimensioningService
                     crossViewNominal.Add("L|" & mm.ToString(CultureInfo.InvariantCulture))
                 End If
                 If mm <= 5 AndAlso mm >= 1 Then smallDetail += 1
+                If norm.AvoidDuplicateDimensions Then
+                    Dim viewSideKeyKeep As String = BuildViewSideNominalKey(c, mm)
+                    If Not String.IsNullOrEmpty(viewSideKeyKeep) Then viewSideNominal.Add(viewSideKeyKeep)
+                End If
                 sel.Add(c)
                 nLin += 1
                 total += 1
@@ -769,6 +803,24 @@ Friend NotInheritable Class ReferenceDrawingDimensioningService
         Next
 
         Return sel
+    End Function
+
+    Private Shared Function BuildViewSideNominalKey(c As DimensionCandidate, mm As Integer) As String
+        If c Is Nothing OrElse c.View Is Nothing Then Return ""
+        Dim viewIdx As Integer = -1
+        Try
+            viewIdx = CInt(CallByName(c.View, "Index", CallType.Get))
+        Catch
+            viewIdx = -1
+        End Try
+        If viewIdx < 0 Then viewIdx = 0
+        Dim orient As String = If(c.Orientation = DimensionOrientation.Vertical, "V", "H")
+        Dim sideName As String = c.PlacementSide.ToString().ToUpperInvariant()
+        If c.PlacementSide = DimensionSide.Unknown Then
+            sideName = If(c.Orientation = DimensionOrientation.Vertical, "RIGHT", "BOTTOM")
+        End If
+        Dim bucket As Integer = CInt(Math.Round(mm / 0.05R))
+        Return "VS|" & viewIdx.ToString(CultureInfo.InvariantCulture) & "|" & orient & "|" & sideName & "|" & bucket.ToString(CultureInfo.InvariantCulture)
     End Function
 
     Private Shared Function LineDupCap(mm As Integer, norm As DimensioningNormConfig, smallDetail As Integer, linePriority As Integer) As Integer
@@ -784,6 +836,7 @@ Friend NotInheritable Class ReferenceDrawingDimensioningService
             If smallDetail >= 2 Then Return 0
             Return 1
         End If
+        If mm >= 8 AndAlso mm <= 15 Then Return 1
         Return Math.Max(1, norm.ReferenceGenericLineDupCap)
     End Function
 

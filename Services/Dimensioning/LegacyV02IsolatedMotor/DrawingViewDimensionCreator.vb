@@ -149,7 +149,9 @@ Friend NotInheritable Class DrawingViewDimensionCreator
         AddSweepEntities(entities, viewInfo.View, "DVLineStrings2d", "LINESTRING", centerX, centerY)
         AddSweepEntities(entities, viewInfo.View, "DVBSplineCurves2d", "SPLINE", centerX, centerY)
         AddSweepEntities(entities, viewInfo.View, "DVArcs2d", "ARC", centerX, centerY)
-        AddSweepEntities(entities, viewInfo.View, "DVCircles2d", "CIRCLE", centerX, centerY)
+        If Not uneNorm.EnableInteriorHoleCenterDimensions Then
+            AddSweepEntities(entities, viewInfo.View, "DVCircles2d", "CIRCLE", centerX, centerY)
+        End If
         AddSweepEntities(entities, viewInfo.View, "DVEllipses2d", "ELLIPSE", centerX, centerY)
         AddSweepEntities(entities, viewInfo.View, "DVPoints2d", "POINT", centerX, centerY)
 
@@ -234,8 +236,10 @@ Friend NotInheritable Class DrawingViewDimensionCreator
                 Select Case it.Kind
                     Case "LINE"
                         dimObj = TryCreateByReferenceMethods(dims, it.Obj, New String() {"AddLength"}, log, "LINE")
-                    Case "ARC", "CIRCLE"
-                        dimObj = TryCreateByReferenceMethods(dims, it.Obj, New String() {"AddRadius", "AddRadialDiameter", "AddCircularDiameter", "AddLength"}, log, it.Kind)
+                    Case "ARC"
+                        dimObj = TryCreateByReferenceMethods(dims, it.Obj, New String() {"AddRadius", "AddRadialDiameter", "AddCircularDiameter"}, log, it.Kind)
+                    Case "CIRCLE"
+                        dimObj = TryCreateCircularDiameterOnReference(dims, it.Obj, log)
                     Case "ELLIPSE", "LINESTRING", "SPLINE", "POINT"
                         dimObj = TryCreateByReferenceMethods(dims, it.Obj, New String() {"AddLength"}, log, it.Kind)
                 End Select
@@ -254,7 +258,7 @@ Friend NotInheritable Class DrawingViewDimensionCreator
                     log?.LogLine("[DIM][OFFSET][SUPPRESSED] view=" & viewInfo.ViewIndex.ToString(CultureInfo.InvariantCulture) &
                                  " kind=" & it.Kind & " band=" & it.Band)
                 Else
-                    td = ComputeTrackDistanceForBand(viewInfo, it.Band, bandIndex, baseGap, gapStep, layoutScale)
+                    td = ComputeTrackDistanceForBand(viewInfo, it.Band, bandIndex, uneNorm, baseGap, gapStep, layoutScale)
                 End If
                 bandCounters(it.Band) = bandIndex + 1
                 If Not uneNorm.SuppressDimensionTrackDistanceSpacing Then
@@ -382,7 +386,8 @@ Friend NotInheritable Class DrawingViewDimensionCreator
             Dim lenM As Double
             If TryDvLineLengthMeters(obj, lenM) Then
                 Dim lenBucket As Integer = CInt(Math.Round(lenM * 1000.0R))
-                Return kind & "|LENMM|" & lenBucket.ToString(CultureInfo.InvariantCulture)
+                Dim band As String = InferSweepBand(kind, obj)
+                Return "LENMM|" & band & "|" & lenBucket.ToString(CultureInfo.InvariantCulture)
             End If
         End If
         If String.Equals(kind, "ARC", StringComparison.OrdinalIgnoreCase) OrElse
@@ -390,7 +395,7 @@ Friend NotInheritable Class DrawingViewDimensionCreator
             Dim rM As Double
             If TryDvArcOrCircleRadiusMeters(obj, rM) Then
                 Dim rBucket As Integer = CInt(Math.Round(rM * 1000.0R))
-                Return kind & "|RMM|" & rBucket.ToString(CultureInfo.InvariantCulture)
+                Return "RMM|" & rBucket.ToString(CultureInfo.InvariantCulture)
             End If
         End If
         Try
@@ -493,45 +498,36 @@ Friend NotInheritable Class DrawingViewDimensionCreator
         ByVal viewInfo As DrawingViewGeometryInfo,
         ByVal band As String,
         ByVal orderInBand As Integer,
+        ByVal norm As DimensioningNormConfig,
         ByVal baseGap As Double,
         ByVal gapStep As Double,
         Optional ByVal layoutScale As Double = 1.0R
     ) As Double
+        If norm IsNot Nothing Then
+            Dim firstGap As Double = Math.Max(0.008R, norm.MinGapFromView)
+            Dim rowGap As Double = Math.Max(0.006R, norm.GapBetweenDimensionRows)
+            Dim radialScale As Double = If(String.Equals(band, "R", StringComparison.OrdinalIgnoreCase), 0.85R, 1.0R)
+            Return (firstGap + orderInBand * rowGap) * radialScale
+        End If
+
         Dim scale As Double = 0.03R
         If viewInfo IsNot Nothing Then
             Dim refSize As Double = Math.Max(viewInfo.Box.Width, viewInfo.Box.Height)
-            If refSize > 0.0R Then
-                scale = refSize
-            End If
+            If refSize > 0.0R Then scale = refSize
         End If
-
-        ' Distancia mínima respecto a pieza y separación entre cotas por banda.
-        Dim bandBaseFactor As Double
-        Dim bandStepFactor As Double
         Dim ls As Double = Math.Max(0.85R, Math.Min(1.6R, layoutScale))
-        Select Case band
-            Case "H"
-                bandBaseFactor = 0.12R * ls
-                bandStepFactor = 0.078R * ls
-            Case "V"
-                bandBaseFactor = 0.12R * ls
-                bandStepFactor = 0.078R * ls
-            Case "R"
-                bandBaseFactor = 0.1R * ls
-                bandStepFactor = 0.068R * ls
-            Case Else
-                bandBaseFactor = 0.085R * ls
-                bandStepFactor = 0.055R * ls
-        End Select
-
-        Dim td As Double = (scale * bandBaseFactor) + (scale * bandStepFactor * orderInBand)
-
-        ' Clamps para evitar extremos en vistas muy pequeñas o muy grandes.
+        Dim bandBaseFactor As Double = 0.12R * ls
+        Dim bandStepFactor As Double = 0.078R * ls
+        If String.Equals(band, "R", StringComparison.OrdinalIgnoreCase) Then
+            bandBaseFactor = 0.1R * ls
+            bandStepFactor = 0.068R * ls
+        End If
+        Dim tdLegacy As Double = (scale * bandBaseFactor) + (scale * bandStepFactor * orderInBand)
         Dim minTd As Double = Math.Max(baseGap * 2.2R, 0.0038R * ls)
         Dim maxTd As Double = Math.Max(minTd, 0.034R * ls)
-        If td < minTd Then td = minTd
-        If td > maxTd Then td = maxTd
-        Return td
+        If tdLegacy < minTd Then tdLegacy = minTd
+        If tdLegacy > maxTd Then tdLegacy = maxTd
+        Return tdLegacy
     End Function
 
     Friend Shared Function TryCreateAddLengthOnReference(dims As Dimensions, dvLine2d As Object, log As DimensionLogger) As Dimension
@@ -542,6 +538,11 @@ Friend NotInheritable Class DrawingViewDimensionCreator
     Friend Shared Function TryCreateRadiusOnReference(dims As Dimensions, arcOrCircle As Object, log As DimensionLogger) As Dimension
         If dims Is Nothing OrElse arcOrCircle Is Nothing Then Return Nothing
         Return TryCreateByReferenceMethods(dims, arcOrCircle, New String() {"AddRadius", "AddRadialDiameter", "AddCircularDiameter"}, log, "REF_RAD")
+    End Function
+
+    Friend Shared Function TryCreateCircularDiameterOnReference(dims As Dimensions, circleObj As Object, log As DimensionLogger) As Dimension
+        If dims Is Nothing OrElse circleObj Is Nothing Then Return Nothing
+        Return TryCreateByReferenceMethods(dims, circleObj, New String() {"AddCircularDiameter", "AddRadialDiameter", "AddRadius"}, log, "REF_CIRC_DIA")
     End Function
 
     Private Shared Function TryCreateByReferenceMethods(
@@ -633,8 +634,7 @@ Friend NotInheritable Class DrawingViewDimensionCreator
                     log?.LogLine("[DIM][RELOCATE] type=V_TOTAL")
 
                 Case PlannedDimensionKind.LineLength
-                    ' Longitudes interiores: empuje mínimo para mantenerlas cerca de su línea.
-                    Dim td As Double = Math.Max(Math.Min(viewInfo.Box.Height, viewInfo.Box.Width) * 0.015R, 0.0015R)
+                    Dim td As Double = 0.012R
                     CallByName(dimObj, "TrackDistance", CallType.Let, td)
                     log?.LogLine("[DIM][RELOCATE] type=" & p.TypeTag & " mode=trackdistance_small")
             End Select

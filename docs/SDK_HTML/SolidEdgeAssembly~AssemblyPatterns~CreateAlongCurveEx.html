@@ -1,0 +1,469 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--DXMETADATA start type="MetaCharset" --><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><!--DXMETADATA end-->
+    <meta http-equiv="X-UA-Compatible" value="IE=9" />
+
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Literal" condition="helpversion:value=3" value="<meta name=""Microsoft.Help.SelfBranded"" content=""true"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="PageItemTitle" format="<title>%%PageItemTitle%%</title>" --><title>CreateAlongCurveEx Method</title><!--DXMETADATA end-->
+    <!--DXMETADATA start type="ItemTitleNoQuotes" format="<meta name=""Title"" content=""%%ItemTitleNoQuotes%%""/>" --><!--DXMETADATA end-->    
+    
+
+    <!--DXMETADATA start type="PackageLink" packagename="jquery" filetype="script" firstlinkattributes="id=""mshs_support_script"""--><script src="template/packages/jquery/script/chm.mshc/jquery-1.7.2.min.js" type="text/javascript" id="mshs_support_script"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="script"--><script src="template/packages/jquery-ui/script/chm.mshc/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/jquery-ui/css/chm.mshc/jquery-ui-1.8.18.custom.css"></link><!--DXMETADATA end-->
+	
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/plugins-ax/css/chm.mshc/jquery-plugins.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="css" firstlinkattributes=" data-mshv2-stylesheet=""/template/packages/core-ax/dx.com.mshv2.css"" data-mshv1-stylesheet=""/template/packages/core-ax/dx.com.mshv1.css"" data-responsive-mobile=""template/packages/core-ax/dx.com.mobile.css"" data-responsive-tablet=""template/packages/core-ax/dx.com.tablet.css"""--><link rel="stylesheet" type="text/css" href="template/packages/core-ax/css/dx.com.css"  data-mshv2-stylesheet="/template/packages/core-ax/dx.com.mshv2.css" data-mshv1-stylesheet="/template/packages/core-ax/dx.com.mshv1.css" data-responsive-mobile="template/packages/core-ax/dx.com.mobile.css" data-responsive-tablet="template/packages/core-ax/dx.com.tablet.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="script"--><script src="template/packages/plugins-ax/script/chm.mshc/jquery-plugins.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="script"--><script src="template/packages/core-ax/script/dx.com.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="TopicId" format="<meta name=""Microsoft.Help.Id"" content=""%%TopicId%%""/>" --><meta name="Microsoft.Help.Id" content="SolidEdgeAssembly~AssemblyPatterns~CreateAlongCurveEx"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Synopsis" StripHtmlTags="True" MaxLength="250" format="<meta name=""Description"" content=""%%Synopsis%%"" />"--><meta name="Description" content="Creates a pattern along curve by specifying the skip count" /><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocParentId" format="<meta name=""Microsoft.Help.TocParent"" content=""%%TocParentId%%""/>" --><meta name="Microsoft.Help.TocParent" content="SolidEdgeAssembly~AssemblyPatterns_methods"/><!--DXMETADATA end-->
+    <meta name="Microsoft.Help.ContentType" content="Reference" />
+    <!--DXMETADATA start type="MshvKeywords" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="MshvMetaTags" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.Locale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.TopicLocale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="Stylesheets" --><link rel="stylesheet" type="text/css" href="stylesheets/customstyles.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Scripts" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="DesignTime"--><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_PROPERTIES" --><!--DXMETADATA end -->
+
+    <!--DXMETADATA start type="CustomHeadContent" --><!--DXMETADATA end-->
+</head>
+
+<body>
+    <div id="i-before-header-content" class="i-before-header-content">
+        
+    </div>
+    <div id="i-header-content" class="i-header-content">
+        <!--DXMETADATA start type="LogoImage" --><img class="logoimage" src="images/sesdk_header.jpg" border="0"></img><!--DXMETADATA end-->
+            <div class="i-project-title"><!--DXMETADATA start type="ProjectTitle" -->Solid Edge Assembly Type Library<!--DXMETADATA end--></div>
+        <div class="i-page-title"><div class="i-page-title-text"><!--DXMETADATA start type="PageItemTitle" -->CreateAlongCurveEx Method<!--DXMETADATA end--></div></div>
+    </div>
+    <div id="i-after-header-content" class="i-after-header-content">
+        <!-- Spacing --> <span class="i-toggle-all-sections i-function-link">
+                <label class="i-collapse-all"><!--DXMETADATA start type="Phrase" name="COLLAPSE_ALL" -->Collapse All<!--DXMETADATA end--></label>
+                <label class="i-expand-all" style="display: none;"><!--DXMETADATA start type="Phrase" name="EXPAND_ALL" -->Expand All<!--DXMETADATA end--></label>
+            </span><!--DXMETADATA start type="Literal" condition="communityenabled" value="%%scrap:name=_COMMUNITY_DROPDOWN%%" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="IsWebOutputRootPageLinkEnabled" format="<a href='#' class="i-page-link" class="i-view-in-frame-link" title='$$VIEW_WITH_NAVIGATION_TOOLS_TIP$$' style='display: none' data-root-page='%%WebOutputRootPage%%%%OutputFileExtension%%' target='_top'>$$VIEW_WITH_NAVIGATION_TOOLS_TEXT$$</a>" --><a href='#' class="i-page-link" class="i-view-in-frame-link" title='Open this Topic in a view that includes Navigation tools (Table of Contents, Index, Search)' style='display: none' data-root-page='webframe.html' target='_top'>View with Navigation Tools</a><!--DXMETADATA end-->
+    </div>
+    <!--DXMETADATA start type="Breadcrumbs" scrap="_BREADCRUMBS" --><div class="i-breadcrumbs-container"><table><tr><td>
+<a href="SolidEdgeAssembly_P.html">Solid Edge Assembly Type Library</a>
+ > <a href="SolidEdgeAssembly~AssemblyPatterns.html">AssemblyPatterns Collection</a>
+ : CreateAlongCurveEx Method</td></tr></table></div><!--DXMETADATA end -->
+    
+    <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_BUBBLES" namespace="parameter" source="Item" -->
+<div id="NumberOfMastersPopupContent" class="i-popup-content">
+Specify the number of master parts to be used by the pattern. These must be top 
+level occurrences.
+</div>
+<div id="MasterOccsPopupContent" class="i-popup-content">
+Specify the actual array of master parts.
+</div>
+<div id="NumberOfCurves1PopupContent" class="i-popup-content">
+<DD>Specify the number of curves in the first curve of the pattern. </DD>
+</div>
+<div id="Curves1PopupContent" class="i-popup-content">
+Specify the array of curves. Note that they must all be connected.
+</div>
+<div id="AnchorPointForCurves1PopupContent" class="i-popup-content">
+Specify the anchor point. Must be one of the endpoints of the curve.
+</div>
+<div id="AnchorSideForCurves1PopupContent" class="i-popup-content">
+Specify the direction to which the pattern is facing. sePatternCurveRightSide is 
+pointing inside the curve.
+</div>
+<div id="AnchorAtDistanceForCurves1PopupContent" class="i-popup-content">
+Specify the offset value.
+</div>
+<div id="PatternOffsetTypeForCurves1PopupContent" class="i-popup-content">
+Specify pattern offset type. Whether fixed, fit, or fill, as the option 
+presented in the ribbon.
+</div>
+<div id="NumberOfOccurrencesForCurves1PopupContent" class="i-popup-content">
+Specify the number of slave occurrences to be placed. Ignored in Fill mode.
+</div>
+<div id="OccurrenceSpacingForCurves1PopupContent" class="i-popup-content">
+<DD>Specify the space between slaves. Ignored in Fit mode. </DD>
+</div>
+<div id="NumberOfCurves2PopupContent" class="i-popup-content">
+Specify the number of curves in the second&nbsp; curve of the pattern.
+</div>
+<div id="Curves2PopupContent" class="i-popup-content">
+Specify the array of curves. Note that they must all be connected.
+</div>
+<div id="AnchorPointForCurves2PopupContent" class="i-popup-content">
+Specify the array of curves. Note that they must all be connected.
+</div>
+<div id="AnchorSideForCurves2PopupContent" class="i-popup-content">
+Specify the direction in which&nbsp;the pattern is facing. sePatternCurveRightSide is 
+pointing inside the curve.
+</div>
+<div id="AnchorAtDistanceForCurves2PopupContent" class="i-popup-content">
+<DD>Specify the offset value. </DD>
+</div>
+<div id="PatternOffsetTypeForCurves2PopupContent" class="i-popup-content">
+Specify pattern offset type. Whether fixed, fit, or fill, as the option 
+presented in the ribbon.
+</div>
+<div id="NumberOfOccurrencesForCurves2PopupContent" class="i-popup-content">
+Specify the number of slave occurrences to be placed. Ignored in Fill mode.
+</div>
+<div id="OccurrenceSpacingForCurves2PopupContent" class="i-popup-content">
+Specify space between slaves. Ignored in Fit mode.
+</div>
+<div id="TransformTypePopupContent" class="i-popup-content">
+Specify how rotations are treated. Works same as the option on the ribbon
+</div>
+<div id="TransformRotateTypePopupContent" class="i-popup-content">
+Works with TransformType.
+</div>
+<div id="TransformPlaneOrSurfacePopupContent" class="i-popup-content">
+Specify the plane used to determine the rotation. Not needed for all transform 
+types.
+</div>
+<div id="bstrNamePopupContent" class="i-popup-content">
+Name of the feature as string.
+</div>
+<div id="lSkipCountPopupContent" class="i-popup-content">
+Skip count as integer.
+</div>
+<div id="FutureUse2PopupContent" class="i-popup-content">
+
+</div>
+<div id="FutureUse3PopupContent" class="i-popup-content">
+
+</div>
+<!--DXMETADATA end -->
+    <div id="i-body-content" class="i-body-content">
+        <!--DXMETADATA start type="Description" source="Item" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=description,caption=$$Description$$%%<div class=""i-description-content"">%%description%%</div></div>" --><div class="i-section-heading" id="i-description-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Description</span></div><div id="i-description-section-content" class="i-section-content"><div class="i-description-content">Creates a pattern along curve by specifying the skip count</div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="Syntax" lang="VB" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=syntax,caption=$$Syntax$$%%<div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>%%Syntax%%</pre></tr></table></div></div>" --><div class="i-section-heading" id="i-syntax-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Syntax</span></div><div id="i-syntax-section-content" class="i-section-content"><div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>Public Function CreateAlongCurveEx( _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="NumberOfMastersPopupLink" data-popup-contentsource="#NumberOfMastersPopupContent" data-popup-showevent="click mouseenter">NumberOfMasters</a></i> As Long, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="MasterOccsPopupLink" data-popup-contentsource="#MasterOccsPopupContent" data-popup-showevent="click mouseenter">MasterOccs</a></i>() As Object, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="NumberOfCurves1PopupLink" data-popup-contentsource="#NumberOfCurves1PopupContent" data-popup-showevent="click mouseenter">NumberOfCurves1</a></i> As Long, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="Curves1PopupLink" data-popup-contentsource="#Curves1PopupContent" data-popup-showevent="click mouseenter">Curves1</a></i>() As Object, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="AnchorPointForCurves1PopupLink" data-popup-contentsource="#AnchorPointForCurves1PopupContent" data-popup-showevent="click mouseenter">AnchorPointForCurves1</a></i> As Object, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="AnchorSideForCurves1PopupLink" data-popup-contentsource="#AnchorSideForCurves1PopupContent" data-popup-showevent="click mouseenter">AnchorSideForCurves1</a></i> As <a href="SolidEdgePart~PatternCurveAnchorSideConstants.html">PatternCurveAnchorSideConstants</a>, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="AnchorAtDistanceForCurves1PopupLink" data-popup-contentsource="#AnchorAtDistanceForCurves1PopupContent" data-popup-showevent="click mouseenter">AnchorAtDistanceForCurves1</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="PatternOffsetTypeForCurves1PopupLink" data-popup-contentsource="#PatternOffsetTypeForCurves1PopupContent" data-popup-showevent="click mouseenter">PatternOffsetTypeForCurves1</a></i> As <a href="SolidEdgeAssembly~PatternOffsetTypeConstants.html">PatternOffsetTypeConstants</a>, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="NumberOfOccurrencesForCurves1PopupLink" data-popup-contentsource="#NumberOfOccurrencesForCurves1PopupContent" data-popup-showevent="click mouseenter">NumberOfOccurrencesForCurves1</a></i> As Long, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="OccurrenceSpacingForCurves1PopupLink" data-popup-contentsource="#OccurrenceSpacingForCurves1PopupContent" data-popup-showevent="click mouseenter">OccurrenceSpacingForCurves1</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="NumberOfCurves2PopupLink" data-popup-contentsource="#NumberOfCurves2PopupContent" data-popup-showevent="click mouseenter">NumberOfCurves2</a></i> As Long, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="Curves2PopupLink" data-popup-contentsource="#Curves2PopupContent" data-popup-showevent="click mouseenter">Curves2</a></i>() As Object, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="AnchorPointForCurves2PopupLink" data-popup-contentsource="#AnchorPointForCurves2PopupContent" data-popup-showevent="click mouseenter">AnchorPointForCurves2</a></i> As Object, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="AnchorSideForCurves2PopupLink" data-popup-contentsource="#AnchorSideForCurves2PopupContent" data-popup-showevent="click mouseenter">AnchorSideForCurves2</a></i> As <a href="SolidEdgePart~PatternCurveAnchorSideConstants.html">PatternCurveAnchorSideConstants</a>, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="AnchorAtDistanceForCurves2PopupLink" data-popup-contentsource="#AnchorAtDistanceForCurves2PopupContent" data-popup-showevent="click mouseenter">AnchorAtDistanceForCurves2</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="PatternOffsetTypeForCurves2PopupLink" data-popup-contentsource="#PatternOffsetTypeForCurves2PopupContent" data-popup-showevent="click mouseenter">PatternOffsetTypeForCurves2</a></i> As <a href="SolidEdgeAssembly~PatternOffsetTypeConstants.html">PatternOffsetTypeConstants</a>, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="NumberOfOccurrencesForCurves2PopupLink" data-popup-contentsource="#NumberOfOccurrencesForCurves2PopupContent" data-popup-showevent="click mouseenter">NumberOfOccurrencesForCurves2</a></i> As Long, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="OccurrenceSpacingForCurves2PopupLink" data-popup-contentsource="#OccurrenceSpacingForCurves2PopupContent" data-popup-showevent="click mouseenter">OccurrenceSpacingForCurves2</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="TransformTypePopupLink" data-popup-contentsource="#TransformTypePopupContent" data-popup-showevent="click mouseenter">TransformType</a></i> As <a href="SolidEdgePart~PatternTransformTypeConstants.html">PatternTransformTypeConstants</a>, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="TransformRotateTypePopupLink" data-popup-contentsource="#TransformRotateTypePopupContent" data-popup-showevent="click mouseenter">TransformRotateType</a></i> As <a href="SolidEdgePart~PatternTransformRotateTypeConstants.html">PatternTransformRotateTypeConstants</a>, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="TransformPlaneOrSurfacePopupLink" data-popup-contentsource="#TransformPlaneOrSurfacePopupContent" data-popup-showevent="click mouseenter">TransformPlaneOrSurface</a></i> As Object, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="bstrNamePopupLink" data-popup-contentsource="#bstrNamePopupContent" data-popup-showevent="click mouseenter">bstrName</a></i> As String, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="lSkipCountPopupLink" data-popup-contentsource="#lSkipCountPopupContent" data-popup-showevent="click mouseenter">lSkipCount</a></i> As Long, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="FutureUse2PopupLink" data-popup-contentsource="#FutureUse2PopupContent" data-popup-showevent="click mouseenter">FutureUse2</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="FutureUse3PopupLink" data-popup-contentsource="#FutureUse3PopupContent" data-popup-showevent="click mouseenter">FutureUse3</a></i> As Variant _
+) As <a href="SolidEdgeAssembly~AssemblyPattern.html">AssemblyPattern</a></pre></tr></table></div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_LIST" namespace="parameter" source="Item" filter="" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=parameters,caption=$$ParameterList$$%%%%filtereditemlist%%</div>" --><div class="i-section-heading" id="i-parameters-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Parameters</span></div><div id="i-parameters-section-content" class="i-section-content"><dl>
+<dt><I>NumberOfMasters</I></dt>
+<dd>Specify the number of master parts to be used by the pattern. These must be top 
+level occurrences.</dd>
+<dt><I>MasterOccs</I></dt>
+<dd>Specify the actual array of master parts.</dd>
+<dt><I>NumberOfCurves1</I></dt>
+<dd><DD>Specify the number of curves in the first curve of the pattern. </DD></dd>
+<dt><I>Curves1</I></dt>
+<dd>Specify the array of curves. Note that they must all be connected.</dd>
+<dt><I>AnchorPointForCurves1</I></dt>
+<dd>Specify the anchor point. Must be one of the endpoints of the curve.</dd>
+<dt><I>AnchorSideForCurves1</I></dt>
+<dd><table class="i-filtered-item-list"><tr><th>Value</th><th>Description</th></tr>
+<tr><td class="i-member-name">sePatternCurveLeftSide</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">sePatternCurveRightSide</td><td class="i-description"> </td></tr>
+</table>Specify the direction to which the pattern is facing. sePatternCurveRightSide is 
+pointing inside the curve.</dd>
+<dt><I>AnchorAtDistanceForCurves1</I></dt>
+<dd>Specify the offset value.</dd>
+<dt><I>PatternOffsetTypeForCurves1</I></dt>
+<dd><table class="i-filtered-item-list"><tr><th>Value</th><th>Description</th></tr>
+<tr><td class="i-member-name">sePatternChordLengthOffset</td><td class="i-description">Chord Length Offset</td></tr>
+<tr><td class="i-member-name">sePatternFillOffset</td><td class="i-description">Fill Offset</td></tr>
+<tr><td class="i-member-name">sePatternFitOffset</td><td class="i-description">Fit Offset</td></tr>
+<tr><td class="i-member-name">sePatternFixedOffset</td><td class="i-description">Fixed Offset</td></tr>
+</table>Specify pattern offset type. Whether fixed, fit, or fill, as the option 
+presented in the ribbon.</dd>
+<dt><I>NumberOfOccurrencesForCurves1</I></dt>
+<dd>Specify the number of slave occurrences to be placed. Ignored in Fill mode.</dd>
+<dt><I>OccurrenceSpacingForCurves1</I></dt>
+<dd><DD>Specify the space between slaves. Ignored in Fit mode. </DD></dd>
+<dt><I>NumberOfCurves2</I></dt>
+<dd>Specify the number of curves in the second&nbsp; curve of the pattern.</dd>
+<dt><I>Curves2</I></dt>
+<dd>Specify the array of curves. Note that they must all be connected.</dd>
+<dt><I>AnchorPointForCurves2</I></dt>
+<dd>Specify the array of curves. Note that they must all be connected.</dd>
+<dt><I>AnchorSideForCurves2</I></dt>
+<dd><table class="i-filtered-item-list"><tr><th>Value</th><th>Description</th></tr>
+<tr><td class="i-member-name">sePatternCurveLeftSide</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">sePatternCurveRightSide</td><td class="i-description"> </td></tr>
+</table>Specify the direction in which&nbsp;the pattern is facing. sePatternCurveRightSide is 
+pointing inside the curve.</dd>
+<dt><I>AnchorAtDistanceForCurves2</I></dt>
+<dd><DD>Specify the offset value. </DD></dd>
+<dt><I>PatternOffsetTypeForCurves2</I></dt>
+<dd><table class="i-filtered-item-list"><tr><th>Value</th><th>Description</th></tr>
+<tr><td class="i-member-name">sePatternChordLengthOffset</td><td class="i-description">Chord Length Offset</td></tr>
+<tr><td class="i-member-name">sePatternFillOffset</td><td class="i-description">Fill Offset</td></tr>
+<tr><td class="i-member-name">sePatternFitOffset</td><td class="i-description">Fit Offset</td></tr>
+<tr><td class="i-member-name">sePatternFixedOffset</td><td class="i-description">Fixed Offset</td></tr>
+</table>Specify pattern offset type. Whether fixed, fit, or fill, as the option 
+presented in the ribbon.</dd>
+<dt><I>NumberOfOccurrencesForCurves2</I></dt>
+<dd>Specify the number of slave occurrences to be placed. Ignored in Fill mode.</dd>
+<dt><I>OccurrenceSpacingForCurves2</I></dt>
+<dd>Specify space between slaves. Ignored in Fit mode.</dd>
+<dt><I>TransformType</I></dt>
+<dd><table class="i-filtered-item-list"><tr><th>Value</th><th>Description</th></tr>
+<tr><td class="i-member-name">sePatternTransformFullRotation</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">sePatternTransformFullRotationFromSurface</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">sePatternTransformLinear</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">sePatternTransformProjectedRotation</td><td class="i-description"> </td></tr>
+</table>Specify how rotations are treated. Works same as the option on the ribbon</dd>
+<dt><I>TransformRotateType</I></dt>
+<dd><table class="i-filtered-item-list"><tr><th>Value</th><th>Description</th></tr>
+<tr><td class="i-member-name">sePatternTransformRotateOnCurvePosition</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">sePatternTransformRotateOnFeaturePosition</td><td class="i-description"> </td></tr>
+</table>Works with TransformType.</dd>
+<dt><I>TransformPlaneOrSurface</I></dt>
+<dd>Specify the plane used to determine the rotation. Not needed for all transform 
+types.</dd>
+<dt><I>bstrName</I></dt>
+<dd>Name of the feature as string.</dd>
+<dt><I>lSkipCount</I></dt>
+<dd>Skip count as integer.</dd>
+<dt><I>FutureUse2</I></dt>
+<dd></dd>
+<dt><I>FutureUse3</I></dt>
+<dd></dd>
+</dl></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##RETURNS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=returns,caption=$$Return_Type$$%%<div class=""i-returns-content"">%%comment%%</div></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##REMARKS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=remarks,caption=$$Remarks$$%%%%comment%%</div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="sourcecode" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=source,caption=$$Source_Code$$%%<table border=0 cellpadding=0 cellspacing=0 class=sourcecode><tr><td nowrap>%%sourcecode%%</td></tr></table></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##EXAMPLEINTRO" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=""$$Example$$%%designlist:tagidentifier=##EXAMPLECODE,itemtype=Example%%""%%%%comment%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="EXAMPLEGROUP_LIST" namespace="ExampleGroup" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""="",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><div class="i-section-heading" id="i-example-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Example</span></div><div id="i-example-section-content" class="i-section-content">
+<div class="i-tab-container">
+    <ul>
+        <li class="i-filtered-content-VB.NET">
+			<a href="#i-tab-content-cbab1095-b994-4099-a513-bf8b38140793">Example (VB.NET)</a>
+		</li>
+        <li class="i-filtered-content-CS">
+			<a href="#i-tab-content-dde17435-7583-40a9-87a5-695629369f70">Example (C#)</a>
+		</li>
+
+    </ul>
+	<div id="i-tab-content-cbab1095-b994-4099-a513-bf8b38140793" class="i-filtered-content-VB.NET">
+		<pre><span style="color: #0000FF; ">Imports</span> System.Runtime.InteropServices
+<span style="color: #0000FF; ">Imports</span> System.IO
+<span style="color: #0000FF; ">Public</span> <span style="color: #0000FF; ">Class</span> Form1
+
+    <span style="color: #0000FF; ">Private</span> <span style="color: #0000FF; ">Sub</span> Button1_Click(sender <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Object</span>, e <span style="color: #0000FF; ">As</span> EventArgs) <span style="color: #0000FF; ">Handles</span> Button1.Click
+        <span style="color: #0000FF; ">Dim</span> objSEApplication <span style="color: #0000FF; ">As</span> SolidEdgeFramework.Application = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objAsmDoc <span style="color: #0000FF; ">As</span> SolidEdgeAssembly.AssemblyDocument = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objOcc <span style="color: #0000FF; ">As</span> SolidEdgeAssembly.Occurrence = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> AssyPatterns <span style="color: #0000FF; ">As</span> SolidEdgeAssembly.AssemblyPatterns = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> curve1 <span style="color: #0000FF; ">As</span> SolidEdgeGeometry.Curve = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objLayout <span style="color: #0000FF; ">As</span> SolidEdgeAssembly.Layout = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objProfile <span style="color: #0000FF; ">As</span> SolidEdgePart.Profile = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> curvebody <span style="color: #0000FF; ">As</span> SolidEdgeGeometry.CurveBody = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> occArray <span style="color: #0000FF; ">As</span> System.Array = Array.CreateInstance(<span style="color: #0000FF; ">GetType</span>(SolidEdgeAssembly.Occurrence), 1)
+        <span style="color: #0000FF; ">Dim</span> curveArray <span style="color: #0000FF; ">As</span> System.Array = Array.CreateInstance(<span style="color: #0000FF; ">GetType</span>(SolidEdgeGeometry.Curve), 1)
+        <span style="color: #0000FF; ">Dim</span> objRefPlanes <span style="color: #0000FF; ">As</span> SolidEdgeAssembly.AsmRefPlanes = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objRefPlane <span style="color: #0000FF; ">As</span> SolidEdgeAssembly.AsmRefPlane = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objTrainingFolder <span style="color: #0000FF; ">As</span> DirectoryInfo
+        <span style="color: #0000FF; ">Try</span>
+            objSEApplication = Marshal.GetActiveObject(<span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>)
+            <span style="color: #008000; ">'Get Training Folder
+</span>            objTrainingFolder = GetTrainingFolder()
+            <span style="color: #008000; ">'Open carrier.asm
+</span>            objSEApplication.Documents.Open(Path.Combine(objTrainingFolder.FullName, <span style="color: #800000; ">&quot;carrier.asm&quot;</span>))
+            objAsmDoc = objSEApplication.ActiveDocument
+            objRefPlanes = objAsmDoc.AsmRefPlanes
+            objRefPlane = objRefPlanes.Item(1)
+            objLayout = objAsmDoc.Layouts.Add(objRefPlane)
+            objProfile = objLayout.Profile
+            objProfile.Lines2d.AddBy2Points(0.0, 0.0, 2.0, 0.0)
+            curvebody = objProfile.CurveBody
+            curve1 = curvebody.Curves(0)
+            curveArray(0) = curve1
+            AssyPatterns = objAsmDoc.AssemblyPatterns
+            objOcc = objAsmDoc.Occurrences.Item(1)
+            occArray(0) = objOcc
+            AssyPatterns.CreateAlongCurveEx(1, occArray, 1, curveArray, curve1.CurveVertices(0), SolidEdgePart.PatternCurveAnchorSideConstants.sePatternCurveRightSide, 0,
+                                          SolidEdgeAssembly.PatternOffsetTypeConstants.sePatternFixedOffset, 3, 0.3, 0, occArray, 0, <span style="color: #0000FF; ">Nothing</span>, 0, <span style="color: #0000FF; ">Nothing</span>, 0, 0,
+                                          SolidEdgePart.PatternTransformTypeConstants.sePatternTransformLinear, SolidEdgePart.PatternTransformRotateTypeConstants.sePatternTransformRotateOnCurvePosition, <span style="color: #0000FF; ">Nothing</span>, <span style="color: #800000; ">&quot;Test Pattern&quot;</span>, 2)
+
+        <span style="color: #0000FF; ">Catch</span> ex <span style="color: #0000FF; ">As</span> Exception
+            <span style="color: #0000FF; ">MsgBox</span>(ex.ToString)
+        <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">Try</span>
+    <span style="color: #0000FF; ">End Sub</span>
+    <span style="color: #0000FF; ">Function</span> GetTrainingFolder() <span style="color: #0000FF; ">As</span> DirectoryInfo
+        <span style="color: #0000FF; ">Dim</span> objInstallData <span style="color: #0000FF; ">As</span> SEInstallDataLib.SEInstallData = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objInstallFolder <span style="color: #0000FF; ">As</span> DirectoryInfo = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objTrainingFolder <span style="color: #0000FF; ">As</span> DirectoryInfo = <span style="color: #0000FF; ">Nothing</span>
+
+        <span style="color: #0000FF; ">Try</span>
+            objInstallData = <span style="color: #0000FF; ">New</span> SEInstallDataLib.SEInstallData
+            objInstallFolder = <span style="color: #0000FF; ">New</span> DirectoryInfo(objInstallData.GetInstalledPath())
+            objTrainingFolder = <span style="color: #0000FF; ">New</span> DirectoryInfo(Path.Combine(objInstallFolder.Parent.FullName, <span style="color: #800000; ">&quot;Training&quot;</span>))
+        <span style="color: #0000FF; ">Catch</span>
+        <span style="color: #0000FF; ">Finally</span>
+            <span style="color: #0000FF; ">If</span> <span style="color: #0000FF; ">Not</span> (objInstallData <span style="color: #0000FF; ">Is</span> <span style="color: #0000FF; ">Nothing</span>) <span style="color: #0000FF; ">Then</span>
+                Marshal.FinalReleaseComObject(objInstallData)
+                objInstallData = <span style="color: #0000FF; ">Nothing</span>
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+        <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">Try</span>
+
+        <span style="color: #0000FF; ">Return</span> objTrainingFolder
+    <span style="color: #0000FF; ">End Function</span>
+
+<span style="color: #0000FF; ">End Class</span>
+</pre>
+	</div>
+	<div id="i-tab-content-dde17435-7583-40a9-87a5-695629369f70" class="i-filtered-content-CS">
+		<pre><span style="color: #0000FF; ">using</span> System;
+<span style="color: #0000FF; ">using</span> System.Windows.Forms;
+<span style="color: #0000FF; ">using</span> System.Runtime.InteropServices;
+<span style="color: #0000FF; ">using</span> System.IO;
+<span style="color: #0000FF; ">public</span> <span style="color: #0000FF; ">class</span> Form1
+{
+
+    <span style="color: #0000FF; ">private</span> <span style="color: #0000FF; ">void</span> Button1_Click(<span style="color: #0000FF; ">object</span> sender, EventArgs e)
+    {
+        SolidEdgeFramework.Application objSEApplication = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeAssembly.AssemblyDocument objAsmDoc = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeAssembly.Occurrence objOcc = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeAssembly.AssemblyPatterns AssyPatterns = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeGeometry.Curve curve1 = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeAssembly.Layout objLayout = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.Profile objProfile = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeGeometry.CurveBody curvebody = <span style="color: #0000FF; ">null</span>;
+        System.Array occArray = (System.Array[])Array.CreateInstance(<span style="color: #0000FF; ">typeof</span>(SolidEdgeAssembly.Occurrence), 1);
+        System.Array curveArray = (System.Array[])Array.CreateInstance(<span style="color: #0000FF; ">typeof</span>(SolidEdgeGeometry.Curve), 1);
+        SolidEdgeAssembly.AsmRefPlanes objRefPlanes = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeAssembly.AsmRefPlane objRefPlane = <span style="color: #0000FF; ">null</span>;
+        DirectoryInfo objTrainingFolder = <span style="color: #0000FF; ">null</span>;
+        <span style="color: #0000FF; ">try</span>
+        {
+            objSEApplication = (SolidEdgeFramework.Application)Marshal.GetActiveObject(<span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>);
+            <span style="color: #008000; ">//Get Training Folder
+</span>            objTrainingFolder = GetTrainingFolder();
+            <span style="color: #008000; ">//Open carrier.asm
+</span>            objSEApplication.Documents.Open(Path.Combine(objTrainingFolder.FullName, <span style="color: #800000; ">&quot;carrier.asm&quot;</span>));
+            objAsmDoc = objSEApplication.ActiveDocument;
+            objRefPlanes = objAsmDoc.AsmRefPlanes;
+            objRefPlane = objRefPlanes.Item(1);
+            objLayout = objAsmDoc.Layouts.Add(objRefPlane);
+            objProfile = objLayout.Profile;
+            objProfile.Lines2d.AddBy2Points(0.0, 0.0, 2.0, 0.0);
+            curvebody = objProfile.CurveBody;
+            curve1 = curvebody.Curves(0);
+            curveArray[0] = curve1;
+            AssyPatterns = objAsmDoc.AssemblyPatterns;
+            objOcc = objAsmDoc.Occurrences.Item(1);
+            occArray[0] = objOcc;
+            AssyPatterns.CreateAlongCurveEx(1, occArray, 1, curveArray, curve1.CurveVertices(0), SolidEdgePart.PatternCurveAnchorSideConstants.sePatternCurveRightSide, 0, SolidEdgeAssembly.PatternOffsetTypeConstants.sePatternFixedOffset, 3, 0.3, 0, occArray, 0, <span style="color: #0000FF; ">null</span>, 0, <span style="color: #0000FF; ">null</span>, 0, 0, SolidEdgePart.PatternTransformTypeConstants.sePatternTransformLinear, SolidEdgePart.PatternTransformRotateTypeConstants.sePatternTransformRotateOnCurvePosition, <span style="color: #0000FF; ">null</span>, <span style="color: #800000; ">&quot;Test Pattern&quot;</span>, 2);
+
+        }
+        <span style="color: #0000FF; ">catch</span> (Exception ex)
+        {
+            MessageBox.Show(ex.ToString());
+        }
+    }
+    <span style="color: #0000FF; ">public</span> DirectoryInfo GetTrainingFolder()
+    {
+        SEInstallDataLib.SEInstallData objInstallData = <span style="color: #0000FF; ">null</span>;
+        DirectoryInfo objInstallFolder = <span style="color: #0000FF; ">null</span>;
+        DirectoryInfo objTrainingFolder = <span style="color: #0000FF; ">null</span>;
+
+        <span style="color: #0000FF; ">try</span>
+        {
+            objInstallData = <span style="color: #0000FF; ">new</span> SEInstallDataLib.SEInstallData();
+            objInstallFolder = <span style="color: #0000FF; ">new</span> DirectoryInfo(objInstallData.GetInstalledPath());
+            objTrainingFolder = <span style="color: #0000FF; ">new</span> DirectoryInfo(Path.Combine(objInstallFolder.Parent.FullName, <span style="color: #800000; ">&quot;Training&quot;</span>));
+        }
+        <span style="color: #0000FF; ">catch</span>
+        {
+        }
+        <span style="color: #0000FF; ">finally</span>
+        {
+            <span style="color: #0000FF; ">if</span> (objInstallData != <span style="color: #0000FF; ">null</span>)
+            {
+                Marshal.FinalReleaseComObject(objInstallData);
+                objInstallData = <span style="color: #0000FF; ">null</span>;
+            }
+        }
+
+        <span style="color: #0000FF; ">return</span> objTrainingFolder;
+    }
+
+
+    <span style="color: #0000FF; ">public</span> Form1()
+    {
+        SubscribeToEvents();
+    }
+
+    <span style="color: #0000FF; ">private</span> <span style="color: #0000FF; ">bool</span> EventsSubscribed = <span style="color: #0000FF; ">false</span>;
+    <span style="color: #0000FF; ">private</span> <span style="color: #0000FF; ">void</span> SubscribeToEvents()
+    {
+        <span style="color: #0000FF; ">if</span> (EventsSubscribed)
+            <span style="color: #0000FF; ">return</span>;
+        <span style="color: #0000FF; ">else</span>
+            EventsSubscribed = <span style="color: #0000FF; ">true</span>;
+
+        Button1.Click += Button1_Click;
+        Button1.Click += Button1_Click;
+        Button1.Click += Button1_Click;
+        Button1.Click += Button1_Click;
+    }
+
+}
+</pre>
+	</div>
+	
+</div>
+</div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="INLINE_EXAMPLE" namespace="Example" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""<>"",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="MENU_LINK" namespace="example" source="Item" filter="type=linked" NoHeader="True" NoFooter="True" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=examplelinks,caption=$$Example$$%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="FilteredItemList" scrap="CATEGORIZED_LINKS" namespace="linkcategory" source="Item" filter="" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=seealso,caption=""$$See_Also$$%%designlist:tagidentifier=##SEEALSO,itemtype=See Also%%""%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><div class="i-section-heading" id="i-seealso-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">See Also</span></div><div id="i-seealso-section-content" class="i-section-content"><p id=dxseealsocontent><a href="SolidEdgeAssembly~AssemblyPatterns.html">AssemblyPatterns Collection</a>
+&nbsp;|&nbsp;<a href="SolidEdgeAssembly~AssemblyPatterns_members.html">AssemblyPatterns Members</a>
+</p>
+</p></div><!--DXMETADATA end -->
+    </div>
+    <div id="i-footer-content" class="i-footer-content">
+        <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_FOOTER" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="CopyrightNotice" format="<p>&nbsp;</p><p>&nbsp;</p><hr style=""height: 1px"" /><p>%%variable%%</p>" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="FeedbackLink" format="" --><!--DXMETADATA end-->
+    </div>
+    
+
+    <!--DXMETADATA start type="IsNew" format="<script type=""text/javascript"">setIsNew = true;</script>" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<script type=""text/javascript"">setIsResponsiveEnabled = true;</script>" --><!--DXMETADATA end-->
+    <script type="text/javascript">
+        $(function() {
+            var documentInstance = new Innovasys.Content.Document(document.body);
+            documentInstance.isNew = !(typeof setIsNew === "undefined");
+            documentInstance.isResponsiveEnabled = !(typeof setIsResponsiveEnabled === "undefined");
+            documentInstance.load();
+        });
+    </script>
+</body>
+</html>

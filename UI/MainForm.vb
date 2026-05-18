@@ -28,7 +28,7 @@ Partial Public Class MainForm
     Private Const MaxVisibleLogLines As Integer = 1500
     Private Const LogTrimCheckInterval As Integer = 40
     ''' <summary>Escala de la barra "Pieza": ~líneas de log típicas PAR/PSM por pieza.</summary>
-    Private Const ExpectedLogLinesPerPiece As Integer = 360
+    Private ExpectedLogLinesPerPiece As Integer = 1000
     Private _pendingLogLinesForTrim As Integer = 0
     Private _logLinesForCurrentPiece As Integer
     Private _accumulatePieceLogLines As Boolean
@@ -95,6 +95,7 @@ Partial Public Class MainForm
         Me.Text = "Solid Edge - Generador Automatico de DFT / PDF / DXF"
         SetupAsmDataGridView()
         SetupTraceabilityDataGridView()
+        InitLaserTabOnce()
     End Sub
 
     Private Sub SetupAsmDataGridView()
@@ -218,6 +219,7 @@ Partial Public Class MainForm
         _loadedSettings = AppSettingsManager.LoadSettings()
         EnsureMainLayoutGeometry()
         EnsureDrawingPlanMetadataPanel()
+        ApplyUiReform()
         If chkStrictMetadata Is Nothing Then
             chkStrictMetadata = New CheckBox With {.Text = "Validación estricta de metadatos (bloquea generar si falta dato obligatorio)", .AutoSize = True, .Checked = False}
             flowGenerationLeft.Controls.Add(chkStrictMetadata)
@@ -231,8 +233,6 @@ Partial Public Class MainForm
             flowGenerationLeft.Controls.Add(chkProductionDvRefClean)
         End If
         ApplySettingsToUi(_loadedSettings)
-        EnsureSolidEdgeForegroundButton()
-        EnsureSolidEdgeToggleVisibleButton()
         RemoveLabControlsFromUi()
         DimensionInsertionConfig.EnableDrawingViewDimensioningLab = False
         If ForceTitleBlockModeForDebug Then
@@ -249,7 +249,6 @@ Partial Public Class MainForm
         UpdateStatus("Esperando archivo...")
         RenameUiOptionTexts()
         UpdateAsmComponentPanelVisibility()
-        EmbedTemplatesInAdvancedPanel()
         ApplySharedSidebarDockingForActiveTab()
 
         ' Forzar layout inicial robusto (evita paneles apilados por splitter).
@@ -326,32 +325,55 @@ Partial Public Class MainForm
         End Try
     End Sub
 
-    Private Sub EnsureSolidEdgeForegroundButton()
-        If flowGenerationRight Is Nothing Then Return
-        If _btnBringSolidEdgeFront IsNot Nothing Then Return
-
-        _btnBringSolidEdgeFront = New Button With {
-            .Name = "btnBringSolidEdgeFront",
-            .Text = "Abrir Solid Edge en primer plano",
-            .AutoSize = True,
-            .MinimumSize = New Size(220, 30)
-        }
-        AddHandler _btnBringSolidEdgeFront.Click, AddressOf btnBringSolidEdgeFront_Click
-        flowGenerationRight.Controls.Add(_btnBringSolidEdgeFront)
+    ''' <summary>Crea los botones de acceso rápido a Solid Edge (se colocan en la barra inferior).</summary>
+    Private Sub EnsureSolidEdgeQuickAccessButtons()
+        If _btnBringSolidEdgeFront Is Nothing Then
+            _btnBringSolidEdgeFront = New Button With {
+                .Name = "btnBringSolidEdgeFront",
+                .Text = "Traer Solid Edge al frente",
+                .AutoSize = True,
+                .MinimumSize = New Size(200, 44)
+            }
+            AddHandler _btnBringSolidEdgeFront.Click, AddressOf btnBringSolidEdgeFront_Click
+        End If
+        If _btnToggleSolidEdgeVisible Is Nothing Then
+            _btnToggleSolidEdgeVisible = New Button With {
+                .Name = "btnToggleSolidEdgeVisible",
+                .Text = "Mostrar / ocultar Solid Edge",
+                .AutoSize = True,
+                .MinimumSize = New Size(190, 44)
+            }
+            AddHandler _btnToggleSolidEdgeVisible.Click, AddressOf btnToggleSolidEdgeVisible_Click
+        End If
     End Sub
 
-    Private Sub EnsureSolidEdgeToggleVisibleButton()
-        If flowGenerationRight Is Nothing Then Return
-        If _btnToggleSolidEdgeVisible IsNot Nothing Then Return
+    Friend Sub BringMainFormToFront()
+        If InvokeRequired Then
+            BeginInvoke(New Action(AddressOf BringMainFormToFront))
+            Return
+        End If
+        Try
+            If WindowState = FormWindowState.Minimized Then WindowState = FormWindowState.Normal
+            Show()
+            Activate()
+            SetForegroundWindow(Handle)
+        Catch
+        End Try
+    End Sub
 
-        _btnToggleSolidEdgeVisible = New Button With {
-            .Name = "btnToggleSolidEdgeVisible",
-            .Text = "Mostrar / ocultar Solid Edge",
-            .AutoSize = True,
-            .MinimumSize = New Size(210, 30)
-        }
-        AddHandler _btnToggleSolidEdgeVisible.Click, AddressOf btnToggleSolidEdgeVisible_Click
-        flowGenerationRight.Controls.Add(_btnToggleSolidEdgeVisible)
+    ''' <summary>Restaura Solid Edge visible (p. ej. al cerrar la app si el usuario lo tenía visible).</summary>
+    Friend Sub RestoreSolidEdgeVisibleIfHidden()
+        Dim app As SolidEdgeFramework.Application = Nothing
+        Try
+            app = CType(Marshal.GetActiveObject("SolidEdge.Application"), SolidEdgeFramework.Application)
+        Catch
+            Return
+        End Try
+        If app Is Nothing Then Return
+        Try
+            app.Visible = True
+        Catch
+        End Try
     End Sub
 
     Private Sub btnToggleSolidEdgeVisible_Click(sender As Object, e As EventArgs)
@@ -366,7 +388,7 @@ Partial Public Class MainForm
 
             If app Is Nothing Then
                 MessageBox.Show(
-                    "Solid Edge no está en ejecución. Inicie Solid Edge o use «Abrir Solid Edge en primer plano».",
+                    "Solid Edge no está en ejecución. Inicie Solid Edge o use «Traer Solid Edge al frente».",
                     "Mostrar / ocultar Solid Edge",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information)
@@ -535,6 +557,9 @@ Partial Public Class MainForm
 
     Private Sub MainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         Try
+            If chkKeepSolidEdgeVisible IsNot Nothing AndAlso chkKeepSolidEdgeVisible.Checked Then
+                RestoreSolidEdgeVisibleIfHidden()
+            End If
             If _progressUiTimer IsNot Nothing Then
                 _progressUiTimer.Stop()
                 RemoveHandler _progressUiTimer.Tick, AddressOf RefreshProgressTelemetry
@@ -622,6 +647,8 @@ Partial Public Class MainForm
             If tblMotorTab1LeftColumn Is Nothing OrElse tblMotorTab1RightColumn Is Nothing Then Return
             If tblMetadataTabHost Is Nothing OrElse tblMetadataTabRightColumn Is Nothing OrElse tblMetadataPlanTwoCols Is Nothing Then Return
             If tblDimensionTabHost Is Nothing OrElse tblDimensionTabRightColumn Is Nothing Then Return
+            If tblLaserTabHost Is Nothing OrElse tblLaserTabRightColumn Is Nothing Then Return
+            If _tblOptionsTabHost Is Nothing Then Return
 
             Dim idx As Integer = tabMotors.SelectedIndex
             If idx = _lastAppliedMotorChromeTabIndex Then Return
@@ -630,25 +657,46 @@ Partial Public Class MainForm
 
             Select Case idx
                 Case 0
+                    MoveGrpInputToLeftColumn()
                     MovePlanDataBoxesToTraceTableLayout()
+                    ApplyMotorViewsTabLayout()
                     AttachSharedLeftColumnToHost(tblMotorTab1Host, 0, 0)
-                    AttachLogProgressToHost(tblMotorTab1RightColumn, 0, 1)
-                    ApplyRightLogProgressSplitMode(0)
+                    If _tblMotorViewsRightSplit IsNot Nothing Then
+                        If tblMotorTab1RightColumn.Controls.Contains(tblRightLogProgress) Then
+                            tblMotorTab1RightColumn.Controls.Remove(tblRightLogProgress)
+                        End If
+                        If Not tblMotorTab1RightColumn.Controls.Contains(_tblMotorViewsRightSplit) Then
+                            tblMotorTab1RightColumn.Controls.Add(_tblMotorViewsRightSplit, 0, 0)
+                        End If
+                    Else
+                        AttachLogProgressToHost(tblMotorTab1RightColumn, 0, 0)
+                    End If
                 Case 1
+                    MoveGrpInputToLeftColumn()
                     MovePlanDataBoxesToMetadataTwoColumnLayout()
                     AttachSharedLeftColumnToHost(tblMetadataTabHost, 0, 0)
-                    AttachLogProgressToHost(tblMetadataTabRightColumn, 0, 1)
-                    ApplyRightLogProgressSplitMode(1)
+                    AttachMetadataLayoutToHost(tblMetadataTabRightColumn)
                 Case 2
+                    MoveGrpInputToLeftColumn()
                     MovePlanDataBoxesToTraceTableLayout()
                     AttachSharedLeftColumnToHost(tblDimensionTabHost, 0, 0)
-                    AttachLogProgressToHost(tblDimensionTabRightColumn, 0, 1)
-                    ApplyRightLogProgressSplitMode(2)
+                    AttachLogOnlyToHost(tblDimensionTabRightColumn)
+                Case 3
+                    MovePlanDataBoxesToTraceTableLayout()
+                    ApplyLaserCutTabLayout()
+                Case 4
+                    MovePlanDataBoxesToTraceTableLayout()
+                    MoveGrpInputToOptionsStack()
+                    AttachSharedLeftColumnToHost(_tblOptionsTabHost, 0, 0)
+                    AttachLogOnlyToHost(_tblOptionsTabRightColumn)
+                    EnsureOptionsPickerControlsVisible()
                 Case Else
                     Return
             End Select
 
             If grpTraceability IsNot Nothing Then grpTraceability.Visible = False
+            If grpAsmComponents IsNot Nothing Then grpAsmComponents.Visible = (idx <> 3)
+            If grpPdfPreview IsNot Nothing Then grpPdfPreview.Visible = (idx = 0)
 
             pnlSharedSidebar.Visible = False
             If twoColumnBodyLayout.ColumnStyles.Count >= 2 Then
@@ -667,17 +715,22 @@ Partial Public Class MainForm
 
     Private Sub EnsureSharedLeftColumnChildrenPopulated()
         If tblMotorTab1LeftColumn Is Nothing Then Return
-        If grpInput IsNot Nothing AndAlso Not ReferenceEquals(grpInput.Parent, tblMotorTab1LeftColumn) Then
-            Dim p As Control = grpInput.Parent
-            If p IsNot Nothing Then p.Controls.Remove(grpInput)
-            tblMotorTab1LeftColumn.Controls.Add(grpInput, 0, 0)
-            grpInput.Dock = DockStyle.Fill
+        If grpInput IsNot Nothing AndAlso tabMotors IsNot Nothing AndAlso tabMotors.SelectedIndex <> 4 Then
+            If Not ReferenceEquals(grpInput.Parent, tblMotorTab1LeftColumn) Then
+                MoveGrpInputToLeftColumn()
+            End If
         End If
         If grpAsmComponents IsNot Nothing AndAlso Not ReferenceEquals(grpAsmComponents.Parent, tblMotorTab1LeftColumn) Then
             Dim p2 As Control = grpAsmComponents.Parent
             If p2 IsNot Nothing Then p2.Controls.Remove(grpAsmComponents)
             tblMotorTab1LeftColumn.Controls.Add(grpAsmComponents, 0, 1)
             grpAsmComponents.Dock = DockStyle.Fill
+        End If
+        If grpProgress IsNot Nothing AndAlso Not ReferenceEquals(grpProgress.Parent, tblMotorTab1LeftColumn) Then
+            Dim p3 As Control = grpProgress.Parent
+            If p3 IsNot Nothing Then p3.Controls.Remove(grpProgress)
+            tblMotorTab1LeftColumn.Controls.Add(grpProgress, 0, 2)
+            grpProgress.Dock = DockStyle.Fill
         End If
     End Sub
 
@@ -691,10 +744,54 @@ Partial Public Class MainForm
 
     Private Sub AttachLogProgressToHost(host As TableLayoutPanel, col As Integer, row As Integer)
         If tblRightLogProgress Is Nothing OrElse host Is Nothing Then Return
+        EnsureLogProgressInRightSplitPanel()
         If ReferenceEquals(tblRightLogProgress.Parent, host) Then Return
         If tblRightLogProgress.Parent IsNot Nothing Then tblRightLogProgress.Parent.Controls.Remove(tblRightLogProgress)
         host.Controls.Add(tblRightLogProgress, col, row)
         tblRightLogProgress.Dock = DockStyle.Fill
+    End Sub
+
+    Private Sub EnsureLogProgressInRightSplitPanel()
+        If tblRightLogProgress Is Nothing Then Return
+        If grpLog IsNot Nothing Then
+            If Not ReferenceEquals(grpLog.Parent, tblRightLogProgress) Then
+                If grpLog.Parent IsNot Nothing Then grpLog.Parent.Controls.Remove(grpLog)
+                tblRightLogProgress.Controls.Add(grpLog, 0, 0)
+            End If
+            grpLog.Dock = DockStyle.Fill
+            If tabMotors Is Nothing OrElse tabMotors.SelectedIndex <> 3 Then
+                grpLog.Visible = True
+            End If
+        End If
+        If grpProgress IsNot Nothing Then
+            If Not ReferenceEquals(grpProgress.Parent, tblRightLogProgress) Then
+                If grpProgress.Parent IsNot Nothing Then grpProgress.Parent.Controls.Remove(grpProgress)
+                tblRightLogProgress.Controls.Add(grpProgress, 0, 1)
+            End If
+            grpProgress.Dock = DockStyle.Fill
+            grpProgress.Visible = True
+        End If
+        If tblRightLogProgress.RowStyles.Count >= 2 Then
+            tblRightLogProgress.RowStyles(0).SizeType = SizeType.Percent
+            tblRightLogProgress.RowStyles(0).Height = 57.0F
+            tblRightLogProgress.RowStyles(1).SizeType = SizeType.Percent
+            tblRightLogProgress.RowStyles(1).Height = 43.0F
+        End If
+    End Sub
+
+    Private Sub PlaceControlInTableRow(host As TableLayoutPanel, ctrl As Control, row As Integer)
+        If host Is Nothing OrElse ctrl Is Nothing Then Return
+        If ctrl.Parent IsNot Nothing AndAlso Not ReferenceEquals(ctrl.Parent, host) Then
+            ctrl.Parent.Controls.Remove(ctrl)
+        End If
+        If Not host.Controls.Contains(ctrl) Then
+            host.Controls.Add(ctrl, 0, row)
+        Else
+            host.SetColumn(ctrl, 0)
+            host.SetRow(ctrl, row)
+        End If
+        ctrl.Dock = DockStyle.Fill
+        ctrl.Visible = True
     End Sub
 
     Private Sub MovePlanDataBoxesToMetadataTwoColumnLayout()
@@ -734,7 +831,48 @@ Partial Public Class MainForm
         grpPlanPartListBox.Margin = New Padding(0, 10, 0, 0)
     End Sub
 
-    ''' <param name="mode">0=Motor vistas, 1=Metadatos, 2=Acotación</param>
+    ''' <summary>Pestaña corte láser: entrada arriba, tabla láser, log y progreso abajo (ancho completo).</summary>
+    Private Sub ApplyLaserCutTabLayout()
+        If tblLaserTabHost Is Nothing OrElse grpLaserPieces Is Nothing OrElse grpInput Is Nothing Then Return
+
+        If tblLaserTabRightColumn IsNot Nothing AndAlso ReferenceEquals(tblLaserTabRightColumn.Parent, tblLaserTabHost) Then
+            tblLaserTabHost.Controls.Remove(tblLaserTabRightColumn)
+        End If
+        If tblMotorTab1LeftColumn IsNot Nothing AndAlso ReferenceEquals(tblMotorTab1LeftColumn.Parent, tblLaserTabHost) Then
+            tblLaserTabHost.Controls.Remove(tblMotorTab1LeftColumn)
+        End If
+        If tblRightLogProgress IsNot Nothing AndAlso ReferenceEquals(tblRightLogProgress.Parent, tblLaserTabHost) Then
+            tblLaserTabHost.Controls.Remove(tblRightLogProgress)
+        End If
+
+        tblLaserTabHost.ColumnCount = 1
+        tblLaserTabHost.ColumnStyles.Clear()
+        tblLaserTabHost.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 100.0F))
+        tblLaserTabHost.RowCount = 3
+        tblLaserTabHost.RowStyles.Clear()
+        tblLaserTabHost.RowStyles.Add(New RowStyle(SizeType.Absolute, 118.0F))
+        tblLaserTabHost.RowStyles.Add(New RowStyle(SizeType.Percent, 72.0F))
+        tblLaserTabHost.RowStyles.Add(New RowStyle(SizeType.Percent, 28.0F))
+
+        PlaceControlInTableRow(tblLaserTabHost, grpInput, 0)
+        PlaceControlInTableRow(tblLaserTabHost, grpLaserPieces, 1)
+        If grpProgress IsNot Nothing Then PlaceControlInTableRow(tblLaserTabHost, grpProgress, 2)
+
+        If grpLog IsNot Nothing Then
+            If ReferenceEquals(grpLog.Parent, tblLaserTabHost) Then
+                tblLaserTabHost.Controls.Remove(grpLog)
+            End If
+            grpLog.Visible = False
+        End If
+
+        grpInput.Margin = New Padding(4, 4, 6, 2)
+        grpLaserPieces.Margin = New Padding(4, 2, 6, 2)
+        If grpProgress IsNot Nothing Then grpProgress.Margin = New Padding(4, 2, 6, 4)
+
+        tblLaserTabHost.PerformLayout()
+    End Sub
+
+    ''' <param name="mode">0=Motor vistas, 1=Metadatos, 2=Acotación, 3=Corte láser</param>
     Private Sub ApplyRightLogProgressSplitMode(mode As Integer)
         Try
             If tblRightLogProgress Is Nothing OrElse tblRightLogProgress.RowStyles.Count < 2 Then Return
@@ -745,6 +883,8 @@ Partial Public Class MainForm
                     logPct = 74.0F : progPct = 26.0F
                 Case 1
                     logPct = 54.0F : progPct = 46.0F
+                Case 3
+                    logPct = 100.0F : progPct = 0.0F
                 Case Else
                     logPct = 57.0F : progPct = 43.0F
             End Select
@@ -767,6 +907,9 @@ Partial Public Class MainForm
 
     Private Sub RenameUiOptionTexts()
         chkKeepSolidEdgeVisible.Text = "Mostrar Solid Edge mientras se genera"
+        If _btnBringSolidEdgeFront IsNot Nothing Then
+            _btnBringSolidEdgeFront.Text = "Traer Solid Edge al frente"
+        End If
         If _btnToggleSolidEdgeVisible IsNot Nothing Then
             _btnToggleSolidEdgeVisible.Text = "Mostrar / ocultar Solid Edge"
         End If
@@ -841,7 +984,7 @@ Partial Public Class MainForm
         lblTitle.ForeColor = Drawing.Color.White
         lblSubTitle.ForeColor = Drawing.Color.LightGray
 
-        For Each gb As GroupBox In New GroupBox() {grpInput, grpAsmComponents, grpTemplates, grpTraceability, grpGeneration, grpAdvanced, grpProgress, grpLog, grpPdfPreview}
+        For Each gb As GroupBox In New GroupBox() {grpInput, grpAsmComponents, grpTemplates, grpTraceability, grpGeneration, grpAdvanced, grpProgress, grpLog, grpPdfPreview, grpLaserPieces}
             gb.BackColor = panel
             gb.ForeColor = fore
         Next
@@ -860,6 +1003,7 @@ Partial Public Class MainForm
             pnlGenerateBar.BackColor = back
         End If
         StyleAsmDataGridViewDark()
+        StyleLaserDataGridViewDark()
     End Sub
 
     Private Sub StyleAsmDataGridViewDark()
@@ -873,6 +1017,21 @@ Partial Public Class MainForm
         dgvAsmComponents.DefaultCellStyle.ForeColor = Drawing.Color.Gainsboro
         dgvAsmComponents.DefaultCellStyle.SelectionBackColor = Drawing.Color.FromArgb(70, 90, 120)
         dgvAsmComponents.DefaultCellStyle.SelectionForeColor = Drawing.Color.White
+    End Sub
+
+    Private Sub StyleLaserDataGridViewDark()
+        If dgvLaserPieces Is Nothing Then Return
+        dgvLaserPieces.BackgroundColor = Drawing.Color.FromArgb(45, 45, 48)
+        dgvLaserPieces.BorderStyle = BorderStyle.FixedSingle
+        dgvLaserPieces.EnableHeadersVisualStyles = False
+        dgvLaserPieces.ColumnHeadersDefaultCellStyle.BackColor = Drawing.Color.FromArgb(60, 60, 64)
+        dgvLaserPieces.ColumnHeadersDefaultCellStyle.ForeColor = Drawing.Color.White
+        dgvLaserPieces.DefaultCellStyle.BackColor = Drawing.Color.FromArgb(45, 45, 48)
+        dgvLaserPieces.DefaultCellStyle.ForeColor = Drawing.Color.White
+        dgvLaserPieces.AlternatingRowsDefaultCellStyle.BackColor = Drawing.Color.FromArgb(52, 52, 56)
+        dgvLaserPieces.AlternatingRowsDefaultCellStyle.ForeColor = Drawing.Color.White
+        dgvLaserPieces.DefaultCellStyle.SelectionBackColor = Drawing.Color.FromArgb(70, 90, 120)
+        dgvLaserPieces.DefaultCellStyle.SelectionForeColor = Drawing.Color.White
     End Sub
 
     Private Sub StyleAsmDataGridViewLight()
@@ -902,6 +1061,19 @@ Partial Public Class MainForm
             grpPlanPartListBox.ForeColor = fore
         End If
         StyleAsmDataGridViewLight()
+        StyleLaserDataGridViewLight()
+    End Sub
+
+    Private Sub StyleLaserDataGridViewLight()
+        If dgvLaserPieces Is Nothing Then Return
+        dgvLaserPieces.BackgroundColor = SystemColors.Window
+        dgvLaserPieces.BorderStyle = BorderStyle.FixedSingle
+        dgvLaserPieces.EnableHeadersVisualStyles = True
+        dgvLaserPieces.DefaultCellStyle.BackColor = SystemColors.Window
+        dgvLaserPieces.DefaultCellStyle.ForeColor = SystemColors.WindowText
+        dgvLaserPieces.AlternatingRowsDefaultCellStyle.BackColor = Drawing.Color.FromArgb(248, 248, 252)
+        dgvLaserPieces.AlternatingRowsDefaultCellStyle.ForeColor = SystemColors.WindowText
+        dgvLaserPieces.ColumnHeadersDefaultCellStyle.ForeColor = SystemColors.WindowText
     End Sub
 
     Private Sub btnBrowseInput_Click(sender As Object, e As EventArgs) Handles btnBrowseInput.Click
@@ -1153,6 +1325,9 @@ Partial Public Class MainForm
             ElseIf result.Success Then
                 _logger.Log($"Proceso finalizado OK. Procesados={result.ProcessedCount}, Errores={result.ErrorCount}")
                 MessageBox.Show("Proceso completado.", "Generacion", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                If config.DetectInputKind() = SourceFileKind.AssemblyFile AndAlso result.DraftCreatedCount > 0 Then
+                    Await OfferLaserCutAfterAssemblyGenerationAsync().ConfigureAwait(True)
+                End If
             Else
                 _logger.Log($"Proceso finalizado con incidencias. Procesados={result.ProcessedCount}, Errores={result.ErrorCount}")
                 MessageBox.Show("Proceso finalizado con errores. Revisa el log.", "Generacion", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -1337,6 +1512,27 @@ Partial Public Class MainForm
     ''' <summary>Evita reentrada cuando se aplica la cascada de marcado/desmarcado.</summary>
     Private _suppressAsmCascade As Boolean = False
 
+    ''' <summary>Indica si una ruta PAR/PSM está marcada en la tabla de componentes ASM.</summary>
+    Friend Function IsAsmPathSelectedForLaser(fullPath As String) As Boolean
+        If String.IsNullOrWhiteSpace(fullPath) Then Return False
+        If dgvAsmComponents Is Nothing OrElse _asmComponents Is Nothing Then Return True
+        For Each r As DataGridViewRow In dgvAsmComponents.Rows
+            If r Is Nothing OrElse r.IsNewRow OrElse r.Tag Is Nothing Then Continue For
+            Dim idx As Integer = CInt(r.Tag)
+            If idx < 0 OrElse idx >= _asmComponents.Count Then Continue For
+            Dim it = _asmComponents(idx)
+            If it Is Nothing OrElse String.IsNullOrWhiteSpace(it.FullPath) Then Continue For
+            If Not String.Equals(it.FullPath, fullPath, StringComparison.OrdinalIgnoreCase) Then Continue For
+            If String.Equals(it.Kind, "ASM", StringComparison.OrdinalIgnoreCase) Then Continue For
+            Try
+                Return Convert.ToBoolean(r.Cells("colSel").Value)
+            Catch
+                Return False
+            End Try
+        Next
+        Return True
+    End Function
+
     Private Sub dgvAsmComponents_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgvAsmComponents.CellValueChanged
         If _suppressAsmCascade Then Return
         If dgvAsmComponents Is Nothing OrElse e.RowIndex < 0 OrElse e.ColumnIndex < 0 Then Return
@@ -1350,7 +1546,10 @@ Partial Public Class MainForm
         If it Is Nothing Then Return
 
         ' Solo cascada cuando se marca/desmarca un subensamblaje (ASM): se aplica a sus descendientes.
-        If Not String.Equals(it.Kind, "ASM", StringComparison.OrdinalIgnoreCase) Then Return
+        If Not String.Equals(it.Kind, "ASM", StringComparison.OrdinalIgnoreCase) Then
+            SyncLaserIncludeFromAsmGrid()
+            Return
+        End If
 
         Dim newValue As Boolean
         Try
@@ -1391,6 +1590,7 @@ Partial Public Class MainForm
         If affected > 0 Then
             _logger.Log($"[ASM][CASCADE] {(If(newValue, "Marcadas", "Desmarcadas"))} {affected} piezas hijas de {IO.Path.GetFileName(it.FullPath)}")
         End If
+        SyncLaserIncludeFromAsmGrid()
     End Sub
 
     Private Sub dgvAsmComponents_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvAsmComponents.CellContentClick
@@ -2396,6 +2596,7 @@ Partial Public Class MainForm
         End Select
 
         Dim cfg = New JobConfiguration With {
+            .OwnerWindowHandle = Me.Handle,
             .InputFile = txtInputFile.Text.Trim(),
             .OutputFolder = txtOutputFolder.Text.Trim(),
             .TemplateA4 = txtTemplateA4.Text.Trim(),
@@ -2424,7 +2625,7 @@ Partial Public Class MainForm
             .AutoDimensioningMotor = ResolveAutoDimensioningMotorFromUi(runUnitHorizontalTest, runDrawingViewLab),
             .EnableSesdkPostDimensionIntrospection = If(chkSesdkPostDimensionIntrospection Is Nothing, False, chkSesdkPostDimensionIntrospection.Checked),
             .PreferSweepAllDrawingDimensions = If(chkPreferSweepAllDrawingDimensions Is Nothing, False, chkPreferSweepAllDrawingDimensions.Checked),
-            .SuppressDimensionTrackDistanceSpacing = If(chkSuppressDimTrackSpacing Is Nothing, True, chkSuppressDimTrackSpacing.Checked),
+            .SuppressDimensionTrackDistanceSpacing = If(chkSuppressDimTrackSpacing Is Nothing, False, chkSuppressDimTrackSpacing.Checked),
             .EnableKeypointValueDuplicateCleanup = If(chkDedupDimensionsByKeypoints Is Nothing, True, chkDedupDimensionsByKeypoints.Checked),
             .EnableProductionDvRefCleanEngine = If(chkProductionDvRefClean Is Nothing, False, chkProductionDvRefClean.Checked),
             .EnableDrawingViewDimensioningLab = runDrawingViewLab,
@@ -2777,7 +2978,15 @@ Partial Public Class MainForm
     End Sub
 
     Private Sub ToggleUi(enabled As Boolean)
+        If enabled Then
+            If chkKeepSolidEdgeVisible IsNot Nothing AndAlso chkKeepSolidEdgeVisible.Checked Then
+                RestoreSolidEdgeVisibleIfHidden()
+            End If
+            BringMainFormToFront()
+        End If
         btnGenerate.Enabled = enabled
+        If _btnBringSolidEdgeFront IsNot Nothing Then _btnBringSolidEdgeFront.Enabled = True
+        If _btnToggleSolidEdgeVisible IsNot Nothing Then _btnToggleSolidEdgeVisible.Enabled = True
         If btnMotorViews IsNot Nothing Then btnMotorViews.Enabled = enabled
         If btnMotorMetadata IsNot Nothing Then btnMotorMetadata.Enabled = enabled
         If btnMotorDimensioning IsNot Nothing Then btnMotorDimensioning.Enabled = enabled

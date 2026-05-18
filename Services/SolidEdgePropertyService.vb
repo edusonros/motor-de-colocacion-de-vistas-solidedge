@@ -568,6 +568,7 @@ Public Class SolidEdgePropertyService
             If logger IsNot Nothing Then logger.LogException("ApplyPropertiesToOpenModelDocument", ex)
         Finally
             If openedByUs Then TryCloseComDocument(doc, False)
+            SolidEdgeSessionVisibility.SuppressForegroundIfConfigured(app, config, logger)
         End Try
         Return written
     End Function

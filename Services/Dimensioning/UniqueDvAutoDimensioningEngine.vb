@@ -99,6 +99,13 @@ Friend NotInheritable Class UniqueDvAutoDimensioningEngine
                          " created=" & createdView.ToString(CultureInfo.InvariantCulture))
         Next
 
+        If norm.EnableKeypointValueDuplicateCleanup AndAlso ctx.Sheet IsNot Nothing Then
+            Dim removedDup As Integer = DimensionDuplicateCleanup.RunPostCreationCleanup(ctx.Sheet, workList, log)
+            If removedDup > 0 Then
+                log?.LogLine("[DIM][DEDUP] post_sweep removed=" & removedDup.ToString(CultureInfo.InvariantCulture))
+            End If
+        End If
+
         If norm.EnableISO129Rules Then
             Dim arrangeViews As New List(Of DrawingView)()
             For Each inf As DrawingViewGeometryInfo In workList

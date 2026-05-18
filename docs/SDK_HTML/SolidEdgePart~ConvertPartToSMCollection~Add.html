@@ -1,0 +1,1230 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--DXMETADATA start type="MetaCharset" --><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><!--DXMETADATA end-->
+    <meta http-equiv="X-UA-Compatible" value="IE=9" />
+
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Literal" condition="helpversion:value=3" value="<meta name=""Microsoft.Help.SelfBranded"" content=""true"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="PageItemTitle" format="<title>%%PageItemTitle%%</title>" --><title>Add Method</title><!--DXMETADATA end-->
+    <!--DXMETADATA start type="ItemTitleNoQuotes" format="<meta name=""Title"" content=""%%ItemTitleNoQuotes%%""/>" --><!--DXMETADATA end-->    
+    
+
+    <!--DXMETADATA start type="PackageLink" packagename="jquery" filetype="script" firstlinkattributes="id=""mshs_support_script"""--><script src="template/packages/jquery/script/chm.mshc/jquery-1.7.2.min.js" type="text/javascript" id="mshs_support_script"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="script"--><script src="template/packages/jquery-ui/script/chm.mshc/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/jquery-ui/css/chm.mshc/jquery-ui-1.8.18.custom.css"></link><!--DXMETADATA end-->
+	
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/plugins-ax/css/chm.mshc/jquery-plugins.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="css" firstlinkattributes=" data-mshv2-stylesheet=""/template/packages/core-ax/dx.com.mshv2.css"" data-mshv1-stylesheet=""/template/packages/core-ax/dx.com.mshv1.css"" data-responsive-mobile=""template/packages/core-ax/dx.com.mobile.css"" data-responsive-tablet=""template/packages/core-ax/dx.com.tablet.css"""--><link rel="stylesheet" type="text/css" href="template/packages/core-ax/css/dx.com.css"  data-mshv2-stylesheet="/template/packages/core-ax/dx.com.mshv2.css" data-mshv1-stylesheet="/template/packages/core-ax/dx.com.mshv1.css" data-responsive-mobile="template/packages/core-ax/dx.com.mobile.css" data-responsive-tablet="template/packages/core-ax/dx.com.tablet.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="script"--><script src="template/packages/plugins-ax/script/chm.mshc/jquery-plugins.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="script"--><script src="template/packages/core-ax/script/dx.com.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="TopicId" format="<meta name=""Microsoft.Help.Id"" content=""%%TopicId%%""/>" --><meta name="Microsoft.Help.Id" content="SolidEdgePart~ConvertPartToSMCollection~Add"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Synopsis" StripHtmlTags="True" MaxLength="250" format="<meta name=""Description"" content=""%%Synopsis%%"" />"--><meta name="Description" content="Adds an occurrence of the referenced object." /><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocParentId" format="<meta name=""Microsoft.Help.TocParent"" content=""%%TocParentId%%""/>" --><meta name="Microsoft.Help.TocParent" content="SolidEdgePart~ConvertPartToSMCollection_methods"/><!--DXMETADATA end-->
+    <meta name="Microsoft.Help.ContentType" content="Reference" />
+    <!--DXMETADATA start type="MshvKeywords" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="MshvMetaTags" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.Locale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.TopicLocale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="Stylesheets" --><link rel="stylesheet" type="text/css" href="stylesheets/customstyles.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Scripts" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="DesignTime"--><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_PROPERTIES" --><!--DXMETADATA end -->
+
+    <!--DXMETADATA start type="CustomHeadContent" --><!--DXMETADATA end-->
+</head>
+
+<body>
+    <div id="i-before-header-content" class="i-before-header-content">
+        
+    </div>
+    <div id="i-header-content" class="i-header-content">
+        <!--DXMETADATA start type="LogoImage" --><img class="logoimage" src="images/sesdk_header.jpg" border="0"></img><!--DXMETADATA end-->
+            <div class="i-project-title"><!--DXMETADATA start type="ProjectTitle" -->Solid Edge Part Type Library<!--DXMETADATA end--></div>
+        <div class="i-page-title"><div class="i-page-title-text"><!--DXMETADATA start type="PageItemTitle" -->Add Method<!--DXMETADATA end--></div></div>
+    </div>
+    <div id="i-after-header-content" class="i-after-header-content">
+        <!-- Spacing --> <span class="i-toggle-all-sections i-function-link">
+                <label class="i-collapse-all"><!--DXMETADATA start type="Phrase" name="COLLAPSE_ALL" -->Collapse All<!--DXMETADATA end--></label>
+                <label class="i-expand-all" style="display: none;"><!--DXMETADATA start type="Phrase" name="EXPAND_ALL" -->Expand All<!--DXMETADATA end--></label>
+            </span><!--DXMETADATA start type="Literal" condition="communityenabled" value="%%scrap:name=_COMMUNITY_DROPDOWN%%" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="IsWebOutputRootPageLinkEnabled" format="<a href='#' class="i-page-link" class="i-view-in-frame-link" title='$$VIEW_WITH_NAVIGATION_TOOLS_TIP$$' style='display: none' data-root-page='%%WebOutputRootPage%%%%OutputFileExtension%%' target='_top'>$$VIEW_WITH_NAVIGATION_TOOLS_TEXT$$</a>" --><a href='#' class="i-page-link" class="i-view-in-frame-link" title='Open this Topic in a view that includes Navigation tools (Table of Contents, Index, Search)' style='display: none' data-root-page='webframe.html' target='_top'>View with Navigation Tools</a><!--DXMETADATA end-->
+    </div>
+    <!--DXMETADATA start type="Breadcrumbs" scrap="_BREADCRUMBS" --><div class="i-breadcrumbs-container"><table><tr><td>
+<a href="SolidEdgePart_P.html">Solid Edge Part Type Library</a>
+ > <a href="SolidEdgePart~ConvertPartToSMCollection.html">ConvertPartToSMCollection Collection</a>
+ : Add Method</td></tr></table></div><!--DXMETADATA end -->
+    
+    <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_BUBBLES" namespace="parameter" source="Item" -->
+<div id="NumberOfEdgesAndFacesPopupContent" class="i-popup-content">
+
+</div>
+<div id="EdgesAndFacesPopupContent" class="i-popup-content">
+
+</div>
+<div id="NumberOfRipEdgesPopupContent" class="i-popup-content">
+
+</div>
+<div id="RipEdgesPopupContent" class="i-popup-content">
+
+</div>
+<div id="NumberOfRipVerticesPopupContent" class="i-popup-content">
+
+</div>
+<div id="RipVerticesPopupContent" class="i-popup-content">
+
+</div>
+<div id="ThicknessPopupContent" class="i-popup-content">
+
+</div>
+<div id="ThickenDirectionPopupContent" class="i-popup-content">
+
+</div>
+<div id="RipGapPopupContent" class="i-popup-content">
+
+</div>
+<div id="InsideBendRadiusPopupContent" class="i-popup-content">
+
+</div>
+<div id="BRTypePopupContent" class="i-popup-content">
+
+</div>
+<div id="BRDepthPopupContent" class="i-popup-content">
+
+</div>
+<div id="BRWidthPopupContent" class="i-popup-content">
+
+</div>
+<div id="NeutralFactorPopupContent" class="i-popup-content">
+
+</div>
+<div id="CornerClosureTypePopupContent" class="i-popup-content">
+
+</div>
+<div id="OverlapRatioPopupContent" class="i-popup-content">
+
+</div>
+<div id="FlipClosureOrderPopupContent" class="i-popup-content">
+
+</div>
+<div id="CornerTreatmentTypePopupContent" class="i-popup-content">
+
+</div>
+<div id="CornerTreatmentDiameterPopupContent" class="i-popup-content">
+
+</div>
+<div id="OffsetPopupContent" class="i-popup-content">
+
+</div>
+<div id="KeepParentBodyPopupContent" class="i-popup-content">
+
+</div>
+<div id="RemoveInternalLoopsPopupContent" class="i-popup-content">
+
+</div>
+<!--DXMETADATA end -->
+    <div id="i-body-content" class="i-body-content">
+        <!--DXMETADATA start type="Description" source="Item" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=description,caption=$$Description$$%%<div class=""i-description-content"">%%description%%</div></div>" --><div class="i-section-heading" id="i-description-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Description</span></div><div id="i-description-section-content" class="i-section-content"><div class="i-description-content">Adds an occurrence of the referenced object.</div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="Syntax" lang="VB" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=syntax,caption=$$Syntax$$%%<div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>%%Syntax%%</pre></tr></table></div></div>" --><div class="i-section-heading" id="i-syntax-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Syntax</span></div><div id="i-syntax-section-content" class="i-section-content"><div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>Public Function Add( _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="NumberOfEdgesAndFacesPopupLink" data-popup-contentsource="#NumberOfEdgesAndFacesPopupContent" data-popup-showevent="click mouseenter">NumberOfEdgesAndFaces</a></i> As Long, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="EdgesAndFacesPopupLink" data-popup-contentsource="#EdgesAndFacesPopupContent" data-popup-showevent="click mouseenter">EdgesAndFaces</a></i>() As Object, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="NumberOfRipEdgesPopupLink" data-popup-contentsource="#NumberOfRipEdgesPopupContent" data-popup-showevent="click mouseenter">NumberOfRipEdges</a></i> As Long, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="RipEdgesPopupLink" data-popup-contentsource="#RipEdgesPopupContent" data-popup-showevent="click mouseenter">RipEdges</a></i>() As Object, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="NumberOfRipVerticesPopupLink" data-popup-contentsource="#NumberOfRipVerticesPopupContent" data-popup-showevent="click mouseenter">NumberOfRipVertices</a></i> As Long, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="RipVerticesPopupLink" data-popup-contentsource="#RipVerticesPopupContent" data-popup-showevent="click mouseenter">RipVertices</a></i>() As Object, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="ThicknessPopupLink" data-popup-contentsource="#ThicknessPopupContent" data-popup-showevent="click mouseenter">Thickness</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="ThickenDirectionPopupLink" data-popup-contentsource="#ThickenDirectionPopupContent" data-popup-showevent="click mouseenter">ThickenDirection</a></i> As <a href="SolidEdgePart~FeaturePropertyConstants.html">FeaturePropertyConstants</a>, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="RipGapPopupLink" data-popup-contentsource="#RipGapPopupContent" data-popup-showevent="click mouseenter">RipGap</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="InsideBendRadiusPopupLink" data-popup-contentsource="#InsideBendRadiusPopupContent" data-popup-showevent="click mouseenter">InsideBendRadius</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="BRTypePopupLink" data-popup-contentsource="#BRTypePopupContent" data-popup-showevent="click mouseenter">BRType</a></i> As <a href="SolidEdgePart~FeaturePropertyConstants.html">FeaturePropertyConstants</a>, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="BRDepthPopupLink" data-popup-contentsource="#BRDepthPopupContent" data-popup-showevent="click mouseenter">BRDepth</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="BRWidthPopupLink" data-popup-contentsource="#BRWidthPopupContent" data-popup-showevent="click mouseenter">BRWidth</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="NeutralFactorPopupLink" data-popup-contentsource="#NeutralFactorPopupContent" data-popup-showevent="click mouseenter">NeutralFactor</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="CornerClosureTypePopupLink" data-popup-contentsource="#CornerClosureTypePopupContent" data-popup-showevent="click mouseenter">CornerClosureType</a></i> As <a href="SolidEdgePart~FeaturePropertyConstants.html">FeaturePropertyConstants</a>, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="OverlapRatioPopupLink" data-popup-contentsource="#OverlapRatioPopupContent" data-popup-showevent="click mouseenter">OverlapRatio</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="FlipClosureOrderPopupLink" data-popup-contentsource="#FlipClosureOrderPopupContent" data-popup-showevent="click mouseenter">FlipClosureOrder</a></i> As Boolean, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="CornerTreatmentTypePopupLink" data-popup-contentsource="#CornerTreatmentTypePopupContent" data-popup-showevent="click mouseenter">CornerTreatmentType</a></i> As <a href="SolidEdgePart~FeaturePropertyConstants.html">FeaturePropertyConstants</a>, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="CornerTreatmentDiameterPopupLink" data-popup-contentsource="#CornerTreatmentDiameterPopupContent" data-popup-showevent="click mouseenter">CornerTreatmentDiameter</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="OffsetPopupLink" data-popup-contentsource="#OffsetPopupContent" data-popup-showevent="click mouseenter">Offset</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="KeepParentBodyPopupLink" data-popup-contentsource="#KeepParentBodyPopupContent" data-popup-showevent="click mouseenter">KeepParentBody</a></i> As Boolean, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="RemoveInternalLoopsPopupLink" data-popup-contentsource="#RemoveInternalLoopsPopupContent" data-popup-showevent="click mouseenter">RemoveInternalLoops</a></i> As Boolean _
+) As <a href="SolidEdgePart~ConvertPartToSM.html">ConvertPartToSM</a></pre></tr></table></div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_LIST" namespace="parameter" source="Item" filter="" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=parameters,caption=$$ParameterList$$%%%%filtereditemlist%%</div>" --><div class="i-section-heading" id="i-parameters-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Parameters</span></div><div id="i-parameters-section-content" class="i-section-content"><dl>
+<dt><I>NumberOfEdgesAndFaces</I></dt>
+<dd></dd>
+<dt><I>EdgesAndFaces</I></dt>
+<dd></dd>
+<dt><I>NumberOfRipEdges</I></dt>
+<dd></dd>
+<dt><I>RipEdges</I></dt>
+<dd></dd>
+<dt><I>NumberOfRipVertices</I></dt>
+<dd></dd>
+<dt><I>RipVertices</I></dt>
+<dd></dd>
+<dt><I>Thickness</I></dt>
+<dd></dd>
+<dt><I>ThickenDirection</I></dt>
+<dd><table class="i-filtered-item-list"><tr><th>Value</th><th>Description</th></tr>
+<tr><td class="i-member-name">igAddRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igAll</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igAlongAnAxis</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igAngularDummy</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igAsConstruction</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igBend</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igBendAndFaceCornerRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igBendOnlyCornerRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igBoth</td><td class="i-description">Feature Properties - Both</td></tr>
+<tr><td class="i-member-name">igChainedCornerRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igChamfer2Setbacks</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igChamfer45degSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igChamferAngleSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCircular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseCornerCircleCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseCornerClosed</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseCornerNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseCornerOpen</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igClosed</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseFaces</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igConcave</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igConstantRadiusArc</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igConstRadiusRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igContinuous</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igConvex</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCopy</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCornerRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCounterboreHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCounterboreProfileIsAtBottom</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCounterboreProfileIsAtTop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCounterdrillHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCountersinkHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCurvatureContinuous</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCurvatureContinuousInterior</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCurveSetSeperator</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDeleteFaceHeal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDelSMFaceBoth</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDelSMFaceNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDelSystemRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDelZeroBendRadius</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDevelopableSurface</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDinDimension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEdgeBasedCrossSection</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEdgesByLoop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEdgesByVertex</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEndCaps</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEqualOffset</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEquationType</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igExtend</td><td class="i-description">Feature Properties - Extend</td></tr>
+<tr><td class="i-member-name">igExtendBendRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFacesTouchingCurvesOnly</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFilletBendRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFinite</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeCenterOfEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeEndFromEndEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeEndOnEndEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeFromBothEndsOfEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeFromDefinedStartPoint</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeFullEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeMatchFace</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeOffset</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeStartFromEndEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeStartOnEndEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlatten</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFormedEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFromNonReferenceEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFromReferenceEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFromTo</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFull</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igGroove</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeCenteredLoop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeClosed</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeClosedLoop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeCurl</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeOpen</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeOpenLoop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeSFlange</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igIgnoreBlends</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igInside</td><td class="i-description">Feature Properties - Remove/Add Material Inside</td></tr>
+<tr><td class="i-member-name">igInsideDimension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igIntersect</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLancedEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLeft</td><td class="i-description">Feature Properties - Project to Left</td></tr>
+<tr><td class="i-member-name">igLinear</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLinearCurvatureContinuousExtension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLinearTangentExtension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLip</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLouverFormedEndType</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLouverLancedEndType</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLouverRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLouverRoundNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMaterialInsideOML</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreByAngle</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreByDist</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreManufacturingCut</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreNormalToThickness</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreParallelToThickness</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreRegularCut</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMove</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMultipleEdges</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNatural</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNeutralFactorFromExcel</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNFType</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNoCornerRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNoExtend</td><td class="i-description">Feature Properties - Do Not Extend</td></tr>
+<tr><td class="i-member-name">igNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNonSymmetric</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNormal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNormalSideDummy</td><td class="i-description">Feature Properties - Normal Side</td></tr>
+<tr><td class="i-member-name">igNoRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNullConstant</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igOffset</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igOutside</td><td class="i-description">Feature Properties - Remove/Add Material Outside</td></tr>
+<tr><td class="i-member-name">igOutsideDimension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igOverlapFaces</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igParallelDummy</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igParallelToPlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPartingFromCurve</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPartingFromEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPartingFromPlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPartingFromSurface</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternAlongCurve</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternByTable</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternCircular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternDuplicate</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternFillRegion</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternMirror</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternMountingBoss</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternRectangular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternUserDefined</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPeriodic</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igProfileBasedCrossSection</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igProjectOptionProject</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igProjectOptionWrap</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPunchedEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRadial</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRaisedCounterboreSlot</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRecessedCounterboreSlot</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRecreateBlends</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRectangularBendRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igReflective</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRegularHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRegularSlot</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRegularThread</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRemoveBoundaries</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRemoveExternalBoundaries</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRemoveInternalBoundaries</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igReverseNormal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igReverseNormalSideDummy</td><td class="i-description">Feature Properties - Reverse Normal Side</td></tr>
+<tr><td class="i-member-name">igRight</td><td class="i-description">Feature Properties - Project to Right</td></tr>
+<tr><td class="i-member-name">igRipBendRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRipCornerRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndCapAcrossSharpEdges</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndMiterAtCorner</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndPreserveTopologyOff</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndPreserveTopologyOn</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAcrossSharpEdges</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAcrossTangentEdgesOff</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAcrossTangentEdgesOn</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAlongBlendEdgesOff</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAlongBlendEdgesOn</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAroundCorner</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundAllVertexSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundEndVertexEdgeSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundSetbackIsAbsolute</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundSetbackIsRelative</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundSingleVertexSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundStartVertexEdgeSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundVertexEdgeSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igShowBoundaries</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSideInfoSetSeperator</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSingleEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSlotGroup</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSMClearanceCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSMFaceCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSMMidPlaneCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSplit</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSplitAngle1Left</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSplitAngle1Right</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSplitDraft</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igStart</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igStepDraft</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igStepDraftPerpendicular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igStraightPipeThread</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSubtract</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepAlignArcLength</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepAlignNormal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepAlignParallel</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepAlignParametrically</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepC1Continuity</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepC2Continuity</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepMergeAll</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepMergeAlongPath</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepMergeNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepScaleNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepScaleStartAndEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepTwistNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepTwistStartAndEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepTwistTurns</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepTwistTurnsPerUnitLength</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSymmetric</td><td class="i-description">Feature Properties - Symmetric Extent</td></tr>
+<tr><td class="i-member-name">igTangent</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTangentInterior</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperByAngle</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperByRatio</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperByRLRatio</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperDimAtBottom</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperDimAtTop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperedEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperedHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperedPipeThread</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperedToPlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTappedHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThickness</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThkInProfilePlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThkNormalToProfilePlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThreeHundredAndSixty</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThroughAll</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThroughAxis</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igToEndOfEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igToggleToConstruction</td><td class="i-description">Toggle from Design to Construction</td></tr>
+<tr><td class="i-member-name">igToggleToDesign</td><td class="i-description">Toggle from Construction to Design</td></tr>
+<tr><td class="i-member-name">igToKeyPoint</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igToNext</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentCircleCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentCrown</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentDraft</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentFormedFeatureDisplayAsCenterMark</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentFormedFeatureDisplayAsModeled</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentFormedFeatureDisplayAsSketch</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentFormedFeatureDisplayAsSketchAndCenterMark</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentIntersect</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentMiterRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentOff</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentRectangularCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentUCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentVCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igUnequalOffset</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igUnite</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igUShaped</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igVarRadiusRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igVBottomDimToFlat</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igVBottomDimToV</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igVShaped</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igWeldGrooveCapProject</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igWeldGrooveCapSameAsTop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igWeldGrooveCapSurface</td><td class="i-description"> </td></tr>
+</table></dd>
+<dt><I>RipGap</I></dt>
+<dd></dd>
+<dt><I>InsideBendRadius</I></dt>
+<dd></dd>
+<dt><I>BRType</I></dt>
+<dd><table class="i-filtered-item-list"><tr><th>Value</th><th>Description</th></tr>
+<tr><td class="i-member-name">igAddRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igAll</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igAlongAnAxis</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igAngularDummy</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igAsConstruction</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igBend</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igBendAndFaceCornerRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igBendOnlyCornerRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igBoth</td><td class="i-description">Feature Properties - Both</td></tr>
+<tr><td class="i-member-name">igChainedCornerRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igChamfer2Setbacks</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igChamfer45degSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igChamferAngleSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCircular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseCornerCircleCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseCornerClosed</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseCornerNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseCornerOpen</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igClosed</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseFaces</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igConcave</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igConstantRadiusArc</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igConstRadiusRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igContinuous</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igConvex</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCopy</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCornerRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCounterboreHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCounterboreProfileIsAtBottom</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCounterboreProfileIsAtTop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCounterdrillHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCountersinkHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCurvatureContinuous</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCurvatureContinuousInterior</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCurveSetSeperator</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDeleteFaceHeal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDelSMFaceBoth</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDelSMFaceNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDelSystemRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDelZeroBendRadius</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDevelopableSurface</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDinDimension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEdgeBasedCrossSection</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEdgesByLoop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEdgesByVertex</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEndCaps</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEqualOffset</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEquationType</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igExtend</td><td class="i-description">Feature Properties - Extend</td></tr>
+<tr><td class="i-member-name">igExtendBendRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFacesTouchingCurvesOnly</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFilletBendRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFinite</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeCenterOfEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeEndFromEndEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeEndOnEndEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeFromBothEndsOfEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeFromDefinedStartPoint</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeFullEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeMatchFace</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeOffset</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeStartFromEndEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeStartOnEndEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlatten</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFormedEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFromNonReferenceEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFromReferenceEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFromTo</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFull</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igGroove</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeCenteredLoop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeClosed</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeClosedLoop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeCurl</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeOpen</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeOpenLoop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeSFlange</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igIgnoreBlends</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igInside</td><td class="i-description">Feature Properties - Remove/Add Material Inside</td></tr>
+<tr><td class="i-member-name">igInsideDimension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igIntersect</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLancedEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLeft</td><td class="i-description">Feature Properties - Project to Left</td></tr>
+<tr><td class="i-member-name">igLinear</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLinearCurvatureContinuousExtension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLinearTangentExtension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLip</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLouverFormedEndType</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLouverLancedEndType</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLouverRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLouverRoundNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMaterialInsideOML</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreByAngle</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreByDist</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreManufacturingCut</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreNormalToThickness</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreParallelToThickness</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreRegularCut</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMove</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMultipleEdges</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNatural</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNeutralFactorFromExcel</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNFType</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNoCornerRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNoExtend</td><td class="i-description">Feature Properties - Do Not Extend</td></tr>
+<tr><td class="i-member-name">igNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNonSymmetric</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNormal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNormalSideDummy</td><td class="i-description">Feature Properties - Normal Side</td></tr>
+<tr><td class="i-member-name">igNoRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNullConstant</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igOffset</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igOutside</td><td class="i-description">Feature Properties - Remove/Add Material Outside</td></tr>
+<tr><td class="i-member-name">igOutsideDimension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igOverlapFaces</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igParallelDummy</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igParallelToPlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPartingFromCurve</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPartingFromEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPartingFromPlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPartingFromSurface</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternAlongCurve</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternByTable</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternCircular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternDuplicate</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternFillRegion</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternMirror</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternMountingBoss</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternRectangular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternUserDefined</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPeriodic</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igProfileBasedCrossSection</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igProjectOptionProject</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igProjectOptionWrap</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPunchedEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRadial</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRaisedCounterboreSlot</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRecessedCounterboreSlot</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRecreateBlends</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRectangularBendRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igReflective</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRegularHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRegularSlot</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRegularThread</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRemoveBoundaries</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRemoveExternalBoundaries</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRemoveInternalBoundaries</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igReverseNormal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igReverseNormalSideDummy</td><td class="i-description">Feature Properties - Reverse Normal Side</td></tr>
+<tr><td class="i-member-name">igRight</td><td class="i-description">Feature Properties - Project to Right</td></tr>
+<tr><td class="i-member-name">igRipBendRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRipCornerRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndCapAcrossSharpEdges</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndMiterAtCorner</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndPreserveTopologyOff</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndPreserveTopologyOn</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAcrossSharpEdges</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAcrossTangentEdgesOff</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAcrossTangentEdgesOn</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAlongBlendEdgesOff</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAlongBlendEdgesOn</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAroundCorner</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundAllVertexSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundEndVertexEdgeSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundSetbackIsAbsolute</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundSetbackIsRelative</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundSingleVertexSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundStartVertexEdgeSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundVertexEdgeSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igShowBoundaries</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSideInfoSetSeperator</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSingleEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSlotGroup</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSMClearanceCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSMFaceCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSMMidPlaneCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSplit</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSplitAngle1Left</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSplitAngle1Right</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSplitDraft</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igStart</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igStepDraft</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igStepDraftPerpendicular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igStraightPipeThread</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSubtract</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepAlignArcLength</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepAlignNormal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepAlignParallel</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepAlignParametrically</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepC1Continuity</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepC2Continuity</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepMergeAll</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepMergeAlongPath</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepMergeNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepScaleNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepScaleStartAndEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepTwistNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepTwistStartAndEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepTwistTurns</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepTwistTurnsPerUnitLength</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSymmetric</td><td class="i-description">Feature Properties - Symmetric Extent</td></tr>
+<tr><td class="i-member-name">igTangent</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTangentInterior</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperByAngle</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperByRatio</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperByRLRatio</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperDimAtBottom</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperDimAtTop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperedEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperedHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperedPipeThread</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperedToPlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTappedHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThickness</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThkInProfilePlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThkNormalToProfilePlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThreeHundredAndSixty</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThroughAll</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThroughAxis</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igToEndOfEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igToggleToConstruction</td><td class="i-description">Toggle from Design to Construction</td></tr>
+<tr><td class="i-member-name">igToggleToDesign</td><td class="i-description">Toggle from Construction to Design</td></tr>
+<tr><td class="i-member-name">igToKeyPoint</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igToNext</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentCircleCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentCrown</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentDraft</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentFormedFeatureDisplayAsCenterMark</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentFormedFeatureDisplayAsModeled</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentFormedFeatureDisplayAsSketch</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentFormedFeatureDisplayAsSketchAndCenterMark</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentIntersect</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentMiterRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentOff</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentRectangularCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentUCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentVCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igUnequalOffset</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igUnite</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igUShaped</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igVarRadiusRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igVBottomDimToFlat</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igVBottomDimToV</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igVShaped</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igWeldGrooveCapProject</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igWeldGrooveCapSameAsTop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igWeldGrooveCapSurface</td><td class="i-description"> </td></tr>
+</table></dd>
+<dt><I>BRDepth</I></dt>
+<dd></dd>
+<dt><I>BRWidth</I></dt>
+<dd></dd>
+<dt><I>NeutralFactor</I></dt>
+<dd></dd>
+<dt><I>CornerClosureType</I></dt>
+<dd><table class="i-filtered-item-list"><tr><th>Value</th><th>Description</th></tr>
+<tr><td class="i-member-name">igAddRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igAll</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igAlongAnAxis</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igAngularDummy</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igAsConstruction</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igBend</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igBendAndFaceCornerRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igBendOnlyCornerRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igBoth</td><td class="i-description">Feature Properties - Both</td></tr>
+<tr><td class="i-member-name">igChainedCornerRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igChamfer2Setbacks</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igChamfer45degSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igChamferAngleSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCircular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseCornerCircleCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseCornerClosed</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseCornerNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseCornerOpen</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igClosed</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseFaces</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igConcave</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igConstantRadiusArc</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igConstRadiusRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igContinuous</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igConvex</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCopy</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCornerRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCounterboreHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCounterboreProfileIsAtBottom</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCounterboreProfileIsAtTop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCounterdrillHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCountersinkHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCurvatureContinuous</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCurvatureContinuousInterior</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCurveSetSeperator</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDeleteFaceHeal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDelSMFaceBoth</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDelSMFaceNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDelSystemRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDelZeroBendRadius</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDevelopableSurface</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDinDimension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEdgeBasedCrossSection</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEdgesByLoop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEdgesByVertex</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEndCaps</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEqualOffset</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEquationType</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igExtend</td><td class="i-description">Feature Properties - Extend</td></tr>
+<tr><td class="i-member-name">igExtendBendRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFacesTouchingCurvesOnly</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFilletBendRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFinite</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeCenterOfEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeEndFromEndEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeEndOnEndEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeFromBothEndsOfEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeFromDefinedStartPoint</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeFullEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeMatchFace</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeOffset</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeStartFromEndEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeStartOnEndEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlatten</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFormedEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFromNonReferenceEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFromReferenceEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFromTo</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFull</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igGroove</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeCenteredLoop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeClosed</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeClosedLoop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeCurl</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeOpen</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeOpenLoop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeSFlange</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igIgnoreBlends</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igInside</td><td class="i-description">Feature Properties - Remove/Add Material Inside</td></tr>
+<tr><td class="i-member-name">igInsideDimension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igIntersect</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLancedEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLeft</td><td class="i-description">Feature Properties - Project to Left</td></tr>
+<tr><td class="i-member-name">igLinear</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLinearCurvatureContinuousExtension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLinearTangentExtension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLip</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLouverFormedEndType</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLouverLancedEndType</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLouverRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLouverRoundNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMaterialInsideOML</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreByAngle</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreByDist</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreManufacturingCut</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreNormalToThickness</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreParallelToThickness</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreRegularCut</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMove</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMultipleEdges</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNatural</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNeutralFactorFromExcel</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNFType</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNoCornerRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNoExtend</td><td class="i-description">Feature Properties - Do Not Extend</td></tr>
+<tr><td class="i-member-name">igNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNonSymmetric</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNormal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNormalSideDummy</td><td class="i-description">Feature Properties - Normal Side</td></tr>
+<tr><td class="i-member-name">igNoRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNullConstant</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igOffset</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igOutside</td><td class="i-description">Feature Properties - Remove/Add Material Outside</td></tr>
+<tr><td class="i-member-name">igOutsideDimension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igOverlapFaces</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igParallelDummy</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igParallelToPlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPartingFromCurve</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPartingFromEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPartingFromPlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPartingFromSurface</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternAlongCurve</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternByTable</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternCircular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternDuplicate</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternFillRegion</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternMirror</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternMountingBoss</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternRectangular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternUserDefined</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPeriodic</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igProfileBasedCrossSection</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igProjectOptionProject</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igProjectOptionWrap</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPunchedEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRadial</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRaisedCounterboreSlot</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRecessedCounterboreSlot</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRecreateBlends</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRectangularBendRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igReflective</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRegularHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRegularSlot</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRegularThread</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRemoveBoundaries</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRemoveExternalBoundaries</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRemoveInternalBoundaries</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igReverseNormal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igReverseNormalSideDummy</td><td class="i-description">Feature Properties - Reverse Normal Side</td></tr>
+<tr><td class="i-member-name">igRight</td><td class="i-description">Feature Properties - Project to Right</td></tr>
+<tr><td class="i-member-name">igRipBendRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRipCornerRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndCapAcrossSharpEdges</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndMiterAtCorner</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndPreserveTopologyOff</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndPreserveTopologyOn</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAcrossSharpEdges</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAcrossTangentEdgesOff</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAcrossTangentEdgesOn</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAlongBlendEdgesOff</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAlongBlendEdgesOn</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAroundCorner</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundAllVertexSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundEndVertexEdgeSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundSetbackIsAbsolute</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundSetbackIsRelative</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundSingleVertexSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundStartVertexEdgeSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundVertexEdgeSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igShowBoundaries</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSideInfoSetSeperator</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSingleEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSlotGroup</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSMClearanceCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSMFaceCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSMMidPlaneCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSplit</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSplitAngle1Left</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSplitAngle1Right</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSplitDraft</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igStart</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igStepDraft</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igStepDraftPerpendicular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igStraightPipeThread</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSubtract</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepAlignArcLength</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepAlignNormal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepAlignParallel</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepAlignParametrically</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepC1Continuity</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepC2Continuity</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepMergeAll</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepMergeAlongPath</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepMergeNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepScaleNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepScaleStartAndEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepTwistNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepTwistStartAndEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepTwistTurns</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepTwistTurnsPerUnitLength</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSymmetric</td><td class="i-description">Feature Properties - Symmetric Extent</td></tr>
+<tr><td class="i-member-name">igTangent</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTangentInterior</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperByAngle</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperByRatio</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperByRLRatio</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperDimAtBottom</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperDimAtTop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperedEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperedHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperedPipeThread</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperedToPlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTappedHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThickness</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThkInProfilePlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThkNormalToProfilePlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThreeHundredAndSixty</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThroughAll</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThroughAxis</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igToEndOfEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igToggleToConstruction</td><td class="i-description">Toggle from Design to Construction</td></tr>
+<tr><td class="i-member-name">igToggleToDesign</td><td class="i-description">Toggle from Construction to Design</td></tr>
+<tr><td class="i-member-name">igToKeyPoint</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igToNext</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentCircleCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentCrown</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentDraft</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentFormedFeatureDisplayAsCenterMark</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentFormedFeatureDisplayAsModeled</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentFormedFeatureDisplayAsSketch</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentFormedFeatureDisplayAsSketchAndCenterMark</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentIntersect</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentMiterRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentOff</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentRectangularCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentUCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentVCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igUnequalOffset</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igUnite</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igUShaped</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igVarRadiusRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igVBottomDimToFlat</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igVBottomDimToV</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igVShaped</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igWeldGrooveCapProject</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igWeldGrooveCapSameAsTop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igWeldGrooveCapSurface</td><td class="i-description"> </td></tr>
+</table></dd>
+<dt><I>OverlapRatio</I></dt>
+<dd></dd>
+<dt><I>FlipClosureOrder</I></dt>
+<dd></dd>
+<dt><I>CornerTreatmentType</I></dt>
+<dd><table class="i-filtered-item-list"><tr><th>Value</th><th>Description</th></tr>
+<tr><td class="i-member-name">igAddRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igAll</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igAlongAnAxis</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igAngularDummy</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igAsConstruction</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igBend</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igBendAndFaceCornerRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igBendOnlyCornerRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igBoth</td><td class="i-description">Feature Properties - Both</td></tr>
+<tr><td class="i-member-name">igChainedCornerRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igChamfer2Setbacks</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igChamfer45degSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igChamferAngleSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCircular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseCornerCircleCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseCornerClosed</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseCornerNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseCornerOpen</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igClosed</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseFaces</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igConcave</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igConstantRadiusArc</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igConstRadiusRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igContinuous</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igConvex</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCopy</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCornerRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCounterboreHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCounterboreProfileIsAtBottom</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCounterboreProfileIsAtTop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCounterdrillHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCountersinkHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCurvatureContinuous</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCurvatureContinuousInterior</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCurveSetSeperator</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDeleteFaceHeal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDelSMFaceBoth</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDelSMFaceNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDelSystemRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDelZeroBendRadius</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDevelopableSurface</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDinDimension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEdgeBasedCrossSection</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEdgesByLoop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEdgesByVertex</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEndCaps</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEqualOffset</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEquationType</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igExtend</td><td class="i-description">Feature Properties - Extend</td></tr>
+<tr><td class="i-member-name">igExtendBendRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFacesTouchingCurvesOnly</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFilletBendRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFinite</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeCenterOfEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeEndFromEndEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeEndOnEndEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeFromBothEndsOfEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeFromDefinedStartPoint</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeFullEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeMatchFace</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeOffset</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeStartFromEndEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeStartOnEndEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlatten</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFormedEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFromNonReferenceEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFromReferenceEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFromTo</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFull</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igGroove</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeCenteredLoop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeClosed</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeClosedLoop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeCurl</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeOpen</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeOpenLoop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeSFlange</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igIgnoreBlends</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igInside</td><td class="i-description">Feature Properties - Remove/Add Material Inside</td></tr>
+<tr><td class="i-member-name">igInsideDimension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igIntersect</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLancedEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLeft</td><td class="i-description">Feature Properties - Project to Left</td></tr>
+<tr><td class="i-member-name">igLinear</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLinearCurvatureContinuousExtension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLinearTangentExtension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLip</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLouverFormedEndType</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLouverLancedEndType</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLouverRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLouverRoundNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMaterialInsideOML</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreByAngle</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreByDist</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreManufacturingCut</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreNormalToThickness</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreParallelToThickness</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreRegularCut</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMove</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMultipleEdges</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNatural</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNeutralFactorFromExcel</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNFType</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNoCornerRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNoExtend</td><td class="i-description">Feature Properties - Do Not Extend</td></tr>
+<tr><td class="i-member-name">igNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNonSymmetric</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNormal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNormalSideDummy</td><td class="i-description">Feature Properties - Normal Side</td></tr>
+<tr><td class="i-member-name">igNoRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNullConstant</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igOffset</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igOutside</td><td class="i-description">Feature Properties - Remove/Add Material Outside</td></tr>
+<tr><td class="i-member-name">igOutsideDimension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igOverlapFaces</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igParallelDummy</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igParallelToPlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPartingFromCurve</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPartingFromEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPartingFromPlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPartingFromSurface</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternAlongCurve</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternByTable</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternCircular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternDuplicate</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternFillRegion</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternMirror</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternMountingBoss</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternRectangular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternUserDefined</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPeriodic</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igProfileBasedCrossSection</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igProjectOptionProject</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igProjectOptionWrap</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPunchedEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRadial</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRaisedCounterboreSlot</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRecessedCounterboreSlot</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRecreateBlends</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRectangularBendRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igReflective</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRegularHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRegularSlot</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRegularThread</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRemoveBoundaries</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRemoveExternalBoundaries</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRemoveInternalBoundaries</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igReverseNormal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igReverseNormalSideDummy</td><td class="i-description">Feature Properties - Reverse Normal Side</td></tr>
+<tr><td class="i-member-name">igRight</td><td class="i-description">Feature Properties - Project to Right</td></tr>
+<tr><td class="i-member-name">igRipBendRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRipCornerRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndCapAcrossSharpEdges</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndMiterAtCorner</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndPreserveTopologyOff</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndPreserveTopologyOn</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAcrossSharpEdges</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAcrossTangentEdgesOff</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAcrossTangentEdgesOn</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAlongBlendEdgesOff</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAlongBlendEdgesOn</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAroundCorner</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundAllVertexSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundEndVertexEdgeSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundSetbackIsAbsolute</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundSetbackIsRelative</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundSingleVertexSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundStartVertexEdgeSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundVertexEdgeSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igShowBoundaries</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSideInfoSetSeperator</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSingleEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSlotGroup</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSMClearanceCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSMFaceCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSMMidPlaneCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSplit</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSplitAngle1Left</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSplitAngle1Right</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSplitDraft</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igStart</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igStepDraft</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igStepDraftPerpendicular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igStraightPipeThread</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSubtract</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepAlignArcLength</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepAlignNormal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepAlignParallel</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepAlignParametrically</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepC1Continuity</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepC2Continuity</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepMergeAll</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepMergeAlongPath</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepMergeNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepScaleNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepScaleStartAndEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepTwistNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepTwistStartAndEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepTwistTurns</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepTwistTurnsPerUnitLength</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSymmetric</td><td class="i-description">Feature Properties - Symmetric Extent</td></tr>
+<tr><td class="i-member-name">igTangent</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTangentInterior</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperByAngle</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperByRatio</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperByRLRatio</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperDimAtBottom</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperDimAtTop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperedEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperedHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperedPipeThread</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperedToPlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTappedHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThickness</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThkInProfilePlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThkNormalToProfilePlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThreeHundredAndSixty</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThroughAll</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThroughAxis</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igToEndOfEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igToggleToConstruction</td><td class="i-description">Toggle from Design to Construction</td></tr>
+<tr><td class="i-member-name">igToggleToDesign</td><td class="i-description">Toggle from Construction to Design</td></tr>
+<tr><td class="i-member-name">igToKeyPoint</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igToNext</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentCircleCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentCrown</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentDraft</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentFormedFeatureDisplayAsCenterMark</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentFormedFeatureDisplayAsModeled</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentFormedFeatureDisplayAsSketch</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentFormedFeatureDisplayAsSketchAndCenterMark</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentIntersect</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentMiterRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentOff</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentRectangularCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentUCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentVCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igUnequalOffset</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igUnite</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igUShaped</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igVarRadiusRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igVBottomDimToFlat</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igVBottomDimToV</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igVShaped</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igWeldGrooveCapProject</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igWeldGrooveCapSameAsTop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igWeldGrooveCapSurface</td><td class="i-description"> </td></tr>
+</table></dd>
+<dt><I>CornerTreatmentDiameter</I></dt>
+<dd></dd>
+<dt><I>Offset</I></dt>
+<dd></dd>
+<dt><I>KeepParentBody</I></dt>
+<dd></dd>
+<dt><I>RemoveInternalLoops</I></dt>
+<dd></dd>
+</dl></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##RETURNS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=returns,caption=$$Return_Type$$%%<div class=""i-returns-content"">%%comment%%</div></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##REMARKS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=remarks,caption=$$Remarks$$%%%%comment%%</div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="sourcecode" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=source,caption=$$Source_Code$$%%<table border=0 cellpadding=0 cellspacing=0 class=sourcecode><tr><td nowrap>%%sourcecode%%</td></tr></table></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##EXAMPLEINTRO" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=""$$Example$$%%designlist:tagidentifier=##EXAMPLECODE,itemtype=Example%%""%%%%comment%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="EXAMPLEGROUP_LIST" namespace="ExampleGroup" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""="",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="INLINE_EXAMPLE" namespace="Example" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""<>"",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="MENU_LINK" namespace="example" source="Item" filter="type=linked" NoHeader="True" NoFooter="True" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=examplelinks,caption=$$Example$$%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="FilteredItemList" scrap="CATEGORIZED_LINKS" namespace="linkcategory" source="Item" filter="" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=seealso,caption=""$$See_Also$$%%designlist:tagidentifier=##SEEALSO,itemtype=See Also%%""%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><div class="i-section-heading" id="i-seealso-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">See Also</span></div><div id="i-seealso-section-content" class="i-section-content"><p id=dxseealsocontent><a href="SolidEdgePart~ConvertPartToSMCollection.html">ConvertPartToSMCollection Collection</a>
+&nbsp;|&nbsp;<a href="SolidEdgePart~ConvertPartToSMCollection_members.html">ConvertPartToSMCollection Members</a>
+</p>
+</p></div><!--DXMETADATA end -->
+    </div>
+    <div id="i-footer-content" class="i-footer-content">
+        <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_FOOTER" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="CopyrightNotice" format="<p>&nbsp;</p><p>&nbsp;</p><hr style=""height: 1px"" /><p>%%variable%%</p>" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="FeedbackLink" format="" --><!--DXMETADATA end-->
+    </div>
+    
+
+    <!--DXMETADATA start type="IsNew" format="<script type=""text/javascript"">setIsNew = true;</script>" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<script type=""text/javascript"">setIsResponsiveEnabled = true;</script>" --><!--DXMETADATA end-->
+    <script type="text/javascript">
+        $(function() {
+            var documentInstance = new Innovasys.Content.Document(document.body);
+            documentInstance.isNew = !(typeof setIsNew === "undefined");
+            documentInstance.isResponsiveEnabled = !(typeof setIsResponsiveEnabled === "undefined");
+            documentInstance.load();
+        });
+    </script>
+</body>
+</html>

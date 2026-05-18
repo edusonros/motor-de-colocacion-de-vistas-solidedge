@@ -1,0 +1,562 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--DXMETADATA start type="MetaCharset" --><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><!--DXMETADATA end-->
+    <meta http-equiv="X-UA-Compatible" value="IE=9" />
+
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Literal" condition="helpversion:value=3" value="<meta name=""Microsoft.Help.SelfBranded"" content=""true"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="ItemTitle" format="<title>%%ItemTitle%%</title>" --><title>Working with References</title><!--DXMETADATA end-->
+    <!--DXMETADATA start type="ItemTitle" format="<meta name=""Title"" content=""%%ItemTitleNoQuotes%%""/>" --><meta name="Title" content="Working with References"/><!--DXMETADATA end-->    
+    
+
+    <!--DXMETADATA start type="PackageLink" packagename="jquery" filetype="script" firstlinkattributes="id=""mshs_support_script"""--><script src="template/packages/jquery/script/chm.mshc/jquery-1.7.2.min.js" type="text/javascript" id="mshs_support_script"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="script"--><script src="template/packages/jquery-ui/script/chm.mshc/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/jquery-ui/css/chm.mshc/jquery-ui-1.8.18.custom.css"></link><!--DXMETADATA end-->
+	
+    <!--DXMETADATA start type="Synopsis" StripHtmlTags="True" MaxLength="250" format="<meta name=""Description"" content=""%%Synopsis%%"" />"--><meta name="Description" content="
+
+Analyzing Existing Assembly Relationships 
+Code Sample 
+Adding New Assembly Relationships 
+Code Sample  
+When you work with an assembly document interactively, you can work directly with occurrences and part geometry in subassemblies. For exa" /><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-topics" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/plugins-topics/css/chm.mshc/jquery-plugins.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-topics" filetype="css" firstlinkattributes=" data-mshv2-stylesheet=""/template/packages/core-topics/topics.mshv2.css"" data-mshv1-stylesheet=""/template/packages/core-topics/topics.mshv1.css"" data-responsive-mobile=""template/packages/core-topics/topics.mobile.css"" data-responsive-tablet=""template/packages/core-topics/topics.tablet.css"""--><link rel="stylesheet" type="text/css" href="template/packages/core-topics/css/topics.css"  data-mshv2-stylesheet="/template/packages/core-topics/topics.mshv2.css" data-mshv1-stylesheet="/template/packages/core-topics/topics.mshv1.css" data-responsive-mobile="template/packages/core-topics/topics.mobile.css" data-responsive-tablet="template/packages/core-topics/topics.tablet.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-topics" filetype="script"--><script src="template/packages/plugins-topics/script/chm.mshc/jquery-plugins.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-topics" filetype="script"--><script src="template/packages/core-topics/script/topics.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="TopicId" format="<meta name=""Microsoft.Help.Id"" content=""%%TopicId%%""/>" --><meta name="Microsoft.Help.Id" content="518d1cc1-8b0f-4f5a-a406-90fb32e301f0"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocParentId" format="<meta name=""Microsoft.Help.TocParent"" content=""%%TocParentId%%""/>" --><meta name="Microsoft.Help.TocParent" content="d987d015-c160-4a90-b196-ff142889bf36"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocOrdinal" format="<meta name=""Microsoft.Help.TocOrder"" content=""%%TocOrdinal%%""/>" --><meta name="Microsoft.Help.TocOrder" content="3"/><!--DXMETADATA end-->
+    <meta name="Microsoft.Help.F1" content=""/>
+    <meta name="Microsoft.Help.ContentType" content="Concepts" />
+    <!--DXMETADATA start type="MshvKeywords" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="MshvMetaTags" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.Locale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.TopicLocale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="Stylesheets" --><link rel="stylesheet" type="text/css" href="stylesheets/customstyles.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Scripts" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="DesignTime"--><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_PROPERTIES" --><!--DXMETADATA end -->
+
+    <!--DXMETADATA start type="CustomHeadContent" --><!--DXMETADATA end-->
+</head>
+
+<body>
+    <div id="i-before-header-content" class="i-before-header-content">
+        
+    </div>
+    <div id="i-header-content" class="i-header-content">
+        <!--DXMETADATA start type="LogoImage" --><img class="logoimage" src="images/sesdk_header.jpg" border="0"></img><!--DXMETADATA end-->
+            <div class="i-project-title"><!--DXMETADATA start type="ProjectTitle" -->Solid Edge 2019 SDK<!--DXMETADATA end--></div>
+        <div class="i-page-title"><div class="i-page-title-text"><!--DXMETADATA start type="ItemTitle" -->Working with References<!--DXMETADATA end--></div></div>
+    </div>
+    <div id="i-after-header-content" class="i-after-header-content">
+        <!-- Spacing --> <span class="i-toggle-all-sections i-function-link">
+                <label class="i-collapse-all"><!--DXMETADATA start type="Phrase" name="COLLAPSE_ALL" -->Collapse All<!--DXMETADATA end--></label>
+                <label class="i-expand-all" style="display: none;"><!--DXMETADATA start type="Phrase" name="EXPAND_ALL" -->Expand All<!--DXMETADATA end--></label>
+            </span><!--DXMETADATA start type="Literal" condition="communityenabled" value="%%scrap:name=_COMMUNITY_DROPDOWN%%" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="IsWebOutputRootPageLinkEnabled" format="<a href='#' class="i-page-link" class="i-view-in-frame-link" title='$$VIEW_WITH_NAVIGATION_TOOLS_TIP$$' style='display: none' data-root-page='%%WebOutputRootPage%%%%OutputFileExtension%%' target='_top'>$$VIEW_WITH_NAVIGATION_TOOLS_TEXT$$</a>" --><a href='#' class="i-page-link" class="i-view-in-frame-link" title='Open this Topic in a view that includes Navigation tools (Table of Contents, Index, Search)' style='display: none' data-root-page='webframe.html' target='_top'>View with Navigation Tools</a><!--DXMETADATA end-->
+    </div>
+    <!--DXMETADATA start type="Breadcrumbs" scrap="_BREADCRUMBS" --><div class="i-breadcrumbs-container"><table><tr><td>
+<a href="ProgrammersGuide.html">Programmer's Guide</a>
+ > <a href="SolidEdgeTOC.html">Solid Edge</a>
+ > <a href="EnvironmentsToc.html">Environments</a>
+ > <a href="AssemblyEnvironmentToc.html">Assembly</a>
+ > Working with References</td></tr></table></div><!--DXMETADATA end -->
+    
+    
+    <div id="i-body-content" class="i-body-content">
+        <!--DXMETADATA start type="TopicSection" name="BodyText"--><DIV class=i-in-this-topic-container>
+<UL class=i-in-this-topic-list>
+<LI class=i-in-this-topic-item><A class=i-in-this-topic-link href="#i-in-this-topic-a479d85d-98c1-44c5-b944-41e38c7fc413">Analyzing Existing Assembly Relationships </A></LI>
+<LI class=i-in-this-topic-item><A class=i-in-this-topic-link href="#i-in-this-topic-3612d5a9-2fe0-4ca3-b7e4-e94d382bb46f">Code Sample </A></LI>
+<LI class=i-in-this-topic-item><A class=i-in-this-topic-link href="#i-in-this-topic-72855982-5bb5-4dec-b64c-3987331a8bc9">Adding New Assembly Relationships </A></LI>
+<LI class=i-in-this-topic-item><A class=i-in-this-topic-link href="#i-in-this-topic-eb46dff1-e058-49dd-9694-9357ba391a7c">Code Sample </A></LI></UL></DIV> 
+<P>When you work with an assembly document interactively, you can work directly with occurrences and part geometry in subassemblies. For example, you can place relationships between occurrences nested in subassemblies, you can measure distances between faces of occurrences in subassemblies, you can in-place-activate an occurrence within a sub-assembly, and you can apply face styles to occurrences within subassemblies.</P>
+<P>Because you can use the Occurrences collection to access occurrences nested in subassemblies, and because you can access the OccurrenceDocument representing a PartDocument and access geometry within the part, it appears simple to use the automation interface to work with occurrences in subassemblies just as you would through the graphical user interface. However, this appearance is deceptive. When you work with occurrences in subassemblies, and when you work with geometry of parts in occurrences (however deeply nested), use the Reference object to create references to part geometry and to nested occurrences from the top-level assembly. Then use the Reference object to place relationships, measure distances, in-placeactivate nested occurrences, apply face styles, and so forth.</P>
+<P>You can create Reference objects with the AssemblyDocument.CreateReference method. This method has two input parameters: an occurrence (which must be an Occurrence object), and an entity, which can be one of several different types of objects.</P>
+<DIV id=i-2250ebc2-7046-4746-b7f2-e36558f29e62-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>Analyzing Existing Assembly Relationships</SPAN> <A name=i-in-this-topic-a479d85d-98c1-44c5-b944-41e38c7fc413></A></DIV>
+<DIV id=i-2250ebc2-7046-4746-b7f2-e36558f29e62-section-content class=i-section-content>
+<P>When interactively placing parts in an assembly, you define relationships between parts to control their relative positions. Using the automation interface for the Assembly environment, you can access and modify properties of the assembly relationships.</P>
+<P>Relationship objects are accessible through two collections: Relations3d on the AssemblyDocument object and Relations3d on each Part object. The Relations3d collection on the AssemblyDocument allows you to iterate through all relationships in the document. The Relations3d collection on each Part object allows you to iterate through the relationships defined for that specific part.</P>
+<P>There are five types of 3-D relationships: AngularRelation3d, AxialRelation3d, GroundRelation3d, PlanarRelation3d, and PointRelation3d. These do not directly correlate to the interactive commands that place relationships. The relationships are as follows:</P>
+<UL>
+<LI><A href="SolidEdgeAssembly~AngularRelation3d.html">AngularRelation3d</A> - Defines an angular relationship between two objects. 
+<LI><A href="SolidEdgeAssembly~AxialRelation3d.html">AxialRelation3d</A> - Defines a relationship between conical faces. This is an axial align in the interactive interface. 
+<LI><A href="SolidEdgeAssembly~GroundRelation3d.html">GroundRelation3d</A> - Defines a ground constraint. 
+<LI><A href="SolidEdgeAssembly~PointRelation3d.html">PointRelation3d</A> - Applies a connect relationship between points (vertices) of the points in an assembly. 
+<LI><A href="SolidEdgeAssembly~PlanarRelation3d.html">PlanarRelation3d</A> - Defines a relationship between two planar faces. This includes both mates and planar aligns. </LI></UL>
+<P>The following example shows how to use some of these relationship objects. This sample finds all of the PlanarRelation3d objects that define mates and modifies their offset values.</P>
+<DIV class="i-box i-box-caution">See <A href="OleMessageFilterUsage.html" data-auto-update-caption="true">Handling 'Application is Busy' and 'Call was Rejected By Callee' errors</A> for information regarding the use of <A href="OleMessageFilterVB.html">OleMessageFilter</A>. </DIV>
+<DIV id=i-5693d72a-297d-4c9b-a0ba-ffa7a4bdefa2-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>Code Sample</SPAN> <A name=i-in-this-topic-3612d5a9-2fe0-4ca3-b7e4-e94d382bb46f></A></DIV>
+<DIV id=i-5693d72a-297d-4c9b-a0ba-ffa7a4bdefa2-section-content class=i-section-content>
+<DIV class="i-tab-container i-tab-container-widget">
+<UL role=tablist>
+<LI class=i-filtered-content-VB><A href="#i-tab-content-VB">Visual Basic</A> </LI>
+<LI class=i-filtered-content-CS><A href="#i-tab-content-CS">C#</A> </LI></UL>
+<DIV id=i-tab-content-VB class="i-code i-filtered-content-VB"><PRE><SPAN style="COLOR: #0000ff">Imports</SPAN> System.Runtime.InteropServices
+
+<SPAN style="COLOR: #0000ff">Module</SPAN> Program
+    &lt;STAThread()&gt; _
+    <SPAN style="COLOR: #0000ff">Sub</SPAN> Main()
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objApplication <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeFramework.Application = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objAssembly <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeAssembly.AssemblyDocument = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objRelations3d <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeAssembly.Relations3d = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objRelation3d <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Object</SPAN> = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objAngularRelation3d <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeAssembly.AngularRelation3d = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objAxialRelation3d <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeAssembly.AxialRelation3d = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objGroundRelation3d <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeAssembly.GroundRelation3d = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objPointRelation3d <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeAssembly.PointRelation3d = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objPlanarRelation3d <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeAssembly.PlanarRelation3d = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Try</SPAN>
+            OleMessageFilter.Register()
+
+            <SPAN style="COLOR: #008000">' Connect to a running instance of Solid Edge
+</SPAN>            objApplication = Marshal.GetActiveObject(<SPAN style="COLOR: #800000">"SolidEdge.Application"</SPAN>)
+
+            <SPAN style="COLOR: #008000">' Get a reference to the active document
+</SPAN>            objAssembly = objApplication.ActiveDocument
+
+            <SPAN style="COLOR: #008000">' Get a reference to the relations 3d collection
+</SPAN>            objRelations3d = objAssembly.Relations3d
+
+            <SPAN style="COLOR: #008000">' Loop through the relations 3d objects
+</SPAN>            <SPAN style="COLOR: #0000ff">For</SPAN> <SPAN style="COLOR: #0000ff">Each</SPAN> objRelation3d <SPAN style="COLOR: #0000ff">In</SPAN> objRelations3d
+                <SPAN style="COLOR: #008000">' Determine the relation type
+</SPAN>                <SPAN style="COLOR: #0000ff">Select</SPAN> <SPAN style="COLOR: #0000ff">Case</SPAN> objRelation3d.Type
+                    <SPAN style="COLOR: #0000ff">Case</SPAN> SolidEdgeFramework.ObjectType.igAngularRelation3d
+                        objAngularRelation3d = objRelation3d
+                    <SPAN style="COLOR: #0000ff">Case</SPAN> SolidEdgeFramework.ObjectType.igAxialRelation3d
+                        objAxialRelation3d = objRelation3d
+                    <SPAN style="COLOR: #0000ff">Case</SPAN> SolidEdgeFramework.ObjectType.igGroundRelation3d
+                        objGroundRelation3d = objRelation3d
+                    <SPAN style="COLOR: #0000ff">Case</SPAN> SolidEdgeFramework.ObjectType.igPointRelation3d
+                        objPointRelation3d = objRelation3d
+                    <SPAN style="COLOR: #0000ff">Case</SPAN> SolidEdgeFramework.ObjectType.igPlanarRelation3d
+                        objPlanarRelation3d = objRelation3d
+                <SPAN style="COLOR: #0000ff">End</SPAN> <SPAN style="COLOR: #0000ff">Select</SPAN>
+            <SPAN style="COLOR: #0000ff">Next</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Catch</SPAN> ex <SPAN style="COLOR: #0000ff">As</SPAN> Exception
+            Console.WriteLine(ex.Message)
+        <SPAN style="COLOR: #0000ff">Finally</SPAN>
+            OleMessageFilter.Revoke()
+        <SPAN style="COLOR: #0000ff">End</SPAN> <SPAN style="COLOR: #0000ff">Try</SPAN>
+    <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+<SPAN style="COLOR: #0000ff">End Module</SPAN></PRE></DIV>
+<DIV id=i-tab-content-CS class="i-code i-filtered-content-CS"><PRE><SPAN style="COLOR: #0000ff">using</SPAN> SolidEdgeFramework;
+<SPAN style="COLOR: #0000ff">using</SPAN> System;
+<SPAN style="COLOR: #0000ff">using</SPAN> System.Reflection;
+<SPAN style="COLOR: #0000ff">using</SPAN> System.Runtime.InteropServices;
+
+<SPAN style="COLOR: #0000ff">namespace</SPAN> SolidEdge.SDK
+{
+    <SPAN style="COLOR: #0000ff">class</SPAN> Program
+    {
+        [STAThread]
+        <SPAN style="COLOR: #0000ff">static</SPAN> <SPAN style="COLOR: #0000ff">void</SPAN> Main(<SPAN style="COLOR: #0000ff">string</SPAN>[] args)
+        {
+            SolidEdgeFramework.Application application = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeAssembly.AssemblyDocument assembly = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeAssembly.Relations3d relations3d = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            <SPAN style="COLOR: #0000ff">object</SPAN> relation3d = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeAssembly.AngularRelation3d angularRelation3d = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeAssembly.AxialRelation3d axialRelation3d = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeAssembly.GroundRelation3d groundRelation3d = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeAssembly.PointRelation3d pointRelation3d = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeAssembly.PlanarRelation3d planarRelation3d = <SPAN style="COLOR: #0000ff">null</SPAN>;
+
+            <SPAN style="COLOR: #0000ff">try</SPAN>
+            {
+                OleMessageFilter.Register();
+
+                <SPAN style="COLOR: #008000">// Connect to a running instance of Solid Edge
+</SPAN>                application = (SolidEdgeFramework.Application)
+                    Marshal.GetActiveObject(<SPAN style="COLOR: #800000">"SolidEdge.Application"</SPAN>);
+
+                <SPAN style="COLOR: #008000">// Get a reference to the active document
+</SPAN>                assembly = (SolidEdgeAssembly.AssemblyDocument)
+                  application.ActiveDocument;
+
+                <SPAN style="COLOR: #008000">// Get a reference to the relations 3d collection
+</SPAN>                relations3d = assembly.Relations3d;
+
+                <SPAN style="COLOR: #008000">// Loop through the relations 3d objects
+</SPAN>                <SPAN style="COLOR: #0000ff">for</SPAN> (<SPAN style="COLOR: #0000ff">int</SPAN> i = 1; i &lt;= relations3d.Count; i++)
+                {
+                    relation3d = relations3d.Item(i);
+                    Type type = relation3d.GetType();
+
+                    <SPAN style="COLOR: #008000">// Get the value of the Type proprety via Reflection
+</SPAN>                    SolidEdgeFramework.ObjectType objectType =
+                      (SolidEdgeFramework.ObjectType)type.InvokeMember(
+                        <SPAN style="COLOR: #800000">"Type"</SPAN>,
+                        BindingFlags.GetProperty,
+                        <SPAN style="COLOR: #0000ff">null</SPAN>,
+                        relation3d,
+                        <SPAN style="COLOR: #0000ff">null</SPAN>);
+
+                    <SPAN style="COLOR: #008000">// Determine the relation type
+</SPAN>                    <SPAN style="COLOR: #0000ff">switch</SPAN> (objectType)
+                    {
+                        <SPAN style="COLOR: #0000ff">case</SPAN> SolidEdgeFramework.ObjectType.igAngularRelation3d:
+                            angularRelation3d = (SolidEdgeAssembly.AngularRelation3d)
+                              relation3d;
+                            <SPAN style="COLOR: #0000ff">break</SPAN>;
+                        <SPAN style="COLOR: #0000ff">case</SPAN> SolidEdgeFramework.ObjectType.igAxialRelation3d:
+                            axialRelation3d = (SolidEdgeAssembly.AxialRelation3d)
+                              relation3d;
+                            <SPAN style="COLOR: #0000ff">break</SPAN>;
+                        <SPAN style="COLOR: #0000ff">case</SPAN> SolidEdgeFramework.ObjectType.igGroundRelation3d:
+                            groundRelation3d = (SolidEdgeAssembly.GroundRelation3d)
+                              relation3d;
+                            <SPAN style="COLOR: #0000ff">break</SPAN>;
+                        <SPAN style="COLOR: #0000ff">case</SPAN> SolidEdgeFramework.ObjectType.igPointRelation3d:
+                            pointRelation3d = (SolidEdgeAssembly.PointRelation3d)
+                              relation3d;
+                            <SPAN style="COLOR: #0000ff">break</SPAN>;
+                        <SPAN style="COLOR: #0000ff">case</SPAN> SolidEdgeFramework.ObjectType.igPlanarRelation3d:
+                            planarRelation3d = (SolidEdgeAssembly.PlanarRelation3d)
+                              relation3d;
+                            <SPAN style="COLOR: #0000ff">break</SPAN>;
+                    }
+                }
+            }
+            <SPAN style="COLOR: #0000ff">catch</SPAN> (System.Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            <SPAN style="COLOR: #0000ff">finally</SPAN>
+            {
+                OleMessageFilter.Revoke();
+            }
+        }
+    }
+}</PRE></DIV></DIV></DIV></DIV>
+<DIV id=i-ba7ae6b1-9507-4bd0-ac79-3462593aec61-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>Adding New Assembly Relationships</SPAN> <A name=i-in-this-topic-72855982-5bb5-4dec-b64c-3987331a8bc9></A></DIV>
+<DIV id=i-ba7ae6b1-9507-4bd0-ac79-3462593aec61-section-content class=i-section-content>
+<P>There are five methods to define assembly relationships through the automation interface: AddAngular, AddAxial, AddGround, AddPlanar, and AddPoint. These do not exactly correspond with the assembly relationship commands that are available interactively. However, they do correspond to the relationships that the interactive commands create.</P>
+<P>For example, the AddPlanar method can be used to create either a Mate or an Align. The inputs to the AddPlanar method are two reference objects which are described below (but they correspond to the faces being mated or aligned), a Boolean that specifies whether or not the normals to the faces are aligned (this determines whether the faces are mated or aligned), and constraining points on each face (that correspond to the locations where you would click to locate the faces when you work interactively).</P>
+<P>The following sample demonstrates the AddAxial method. This produces the same relationship that the interactive Align command produces when you align cylindrical faces. The inputs to this method are similar to those for the AddPlanar method. The first two inputs are reference objects that represent the cylindrical faces being aligned, and the third input is the Boolean that specifies whether normals to these faces are aligned. This method does not have input parameters for the constraining points the AddPlanar method uses.</P>
+<P>To programmatically create the relationships that the Insert interactive command creates, you would use the AddPlanar and AddAxial methods. This would define the two cylindrical faces whose axes are aligned, and it would define the two planar faces that are mated. To remove the final degree of freedom, you would edit the axial relationship and set its FixedRotate property to True.</P>
+<P>To create a Connect relationship, use the AddPoint method. The first input parameter is a reference object corresponding to the face or edge on the first part; the second input parameter is a constant that defines which key point from the input geometry defines the connection point (for example, CenterPoint, EndPoint, MidPoint, and so forth); and the third and fourth input parameters describe the same characteristics of the second part.</P>
+<P>Within this general description, there are some important refinements. The methods previously described refer to reference objects, which correspond to part geometry. Each Assembly relationship must store a means of retrieving the geometric Part information that defines it. When using the AddPlanar method, for example, you need to pass in references to two planar faces (or reference planes).</P>
+<P>The AssemblyDocument object has a CreateReference method whose job is to create the reference objects. The CreateReference method takes as input an Occurrence (an object that represents a member document of the assembly—which in this case would be a part document) and an Entity. The Entity can be an Edge, Face, or RefPlane object from the Occurrence document. The Reference object stores a path to the geometric representations necessary to construct the relationships.</P>
+<P>To create assembly relationships via the automation interface, Occurrence objects (the Part and Subassembly models that comprise the assembly) must be placed in the Assembly document. You do this with the AssemblyDocument.Occurrances.AddByFilename method. This places the Occurrence in the assembly with a ground relationship. Therefore, (except for the first Occurrence added to the assembly) before any other relationships can be applied between this Occurrence and others in the assembly, the ground relationship must be deleted.</P>
+<DIV class="i-box i-box-caution">See <A href="OleMessageFilterUsage.html" data-auto-update-caption="true">Handling 'Application is Busy' and 'Call was Rejected By Callee' errors</A> for information regarding the use of <A href="OleMessageFilterVB.html">OleMessageFilter</A>. </DIV>
+<DIV id=i-5ceb0a57-0546-460e-afd3-ea8fef160db7-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>Code Sample</SPAN> <A name=i-in-this-topic-eb46dff1-e058-49dd-9694-9357ba391a7c></A></DIV>
+<DIV id=i-5ceb0a57-0546-460e-afd3-ea8fef160db7-section-content class=i-section-content>
+<DIV class="i-tab-container i-tab-container-widget">
+<UL role=tablist>
+<LI class=i-filtered-content-VB><A href="#i-tab-content-VB">Visual Basic</A> </LI>
+<LI class=i-filtered-content-CS><A href="#i-tab-content-CS">C#</A> </LI></UL>
+<DIV id=i-tab-content-VB class="i-code i-filtered-content-VB"><PRE><SPAN style="COLOR: #0000ff">Imports</SPAN> SolidEdgeGeometry
+<SPAN style="COLOR: #0000ff">Imports</SPAN> System.Runtime.InteropServices
+
+<SPAN style="COLOR: #0000ff">Module</SPAN> Program
+    &lt;STAThread()&gt; _
+    <SPAN style="COLOR: #0000ff">Sub</SPAN> Main()
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objApplication <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeFramework.Application = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objDocuments <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeFramework.Documents = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objAssembly <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeAssembly.AssemblyDocument = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objOccurrences <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeAssembly.Occurrences = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objOccurrence1 <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeAssembly.Occurrence = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objOccurrence2 <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeAssembly.Occurrence = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objPart <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.PartDocument = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objModels <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.Models = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objModel <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.Model = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objRevolvedProtrusions <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.RevolvedProtrusions = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objRevolvedProtrusion <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.RevolvedProtrusion = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objRevolvedCutouts <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.RevolvedCutouts = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objRevolvedCutout <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.RevolvedCutout = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objFaces <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeGeometry.Faces = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objFace <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeGeometry.Face = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objGeometry <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Object</SPAN> = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objScrewConicalFace <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeGeometry.Face = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objNutConicalFace <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeGeometry.Face = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objRefToCylinderInScrew <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeFramework.Reference = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objRefToConeInNut <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeFramework.Reference = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objRelations3d <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeAssembly.Relations3d = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objGroundRel <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeAssembly.GroundRelation3d = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objRelNuttoScrew <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeAssembly.AxialRelation3d = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Try</SPAN>
+            OleMessageFilter.Register()
+
+            <SPAN style="COLOR: #008000">' Connect to a running instance of Solid Edge
+</SPAN>            objApplication = Marshal.GetActiveObject(<SPAN style="COLOR: #800000">"SolidEdge.Application"</SPAN>)
+
+            <SPAN style="COLOR: #008000">' Get a reference to the documents collection
+</SPAN>            objDocuments = objApplication.Documents
+
+            <SPAN style="COLOR: #008000">' Create a new assembly document
+</SPAN>            objAssembly = objDocuments.Add(<SPAN style="COLOR: #800000">"SolidEdge.AssemblyDocument"</SPAN>)
+
+            <SPAN style="COLOR: #008000">' Get a reference to the occurrences collection
+</SPAN>            objOccurrences = objAssembly.Occurrences
+
+            <SPAN style="COLOR: #008000">' Add the first occurrence
+</SPAN>            objOccurrence1 = objOccurrences.AddByFilename(<SPAN style="COLOR: #800000">"C:\Screw.par"</SPAN>)
+
+            <SPAN style="COLOR: #008000">' Get a reference to the occurrence document
+</SPAN>            objPart = objOccurrence1.OccurrenceDocument
+
+            <SPAN style="COLOR: #008000">' Get a reference to the models collection
+</SPAN>            objModels = objPart.Models
+
+            <SPAN style="COLOR: #008000">' Get a reference to the one and only model
+</SPAN>            objModel = objModels.Item(1)
+
+            <SPAN style="COLOR: #008000">' Get a reference to the revolved protrusions collection
+</SPAN>            objRevolvedProtrusions = objModel.RevolvedProtrusions
+
+            <SPAN style="COLOR: #008000">' Get a reference to the first revolved protrusion
+</SPAN>            objRevolvedProtrusion = objRevolvedProtrusions.Item(1)
+
+            <SPAN style="COLOR: #008000">' Get a reference to the side faces collection
+</SPAN>            objFaces = objRevolvedProtrusion.SideFaces
+
+            <SPAN style="COLOR: #008000">' Loop through the faces
+</SPAN>            <SPAN style="COLOR: #0000ff">For</SPAN> <SPAN style="COLOR: #0000ff">Each</SPAN> objFace <SPAN style="COLOR: #0000ff">In</SPAN> objFaces
+                <SPAN style="COLOR: #008000">' Get a reference to the geometry object
+</SPAN>                objGeometry = objFace.Geometry
+                <SPAN style="COLOR: #0000ff">If</SPAN> objGeometry.Type = GNTTypePropertyConstants.igCylinder <SPAN style="COLOR: #0000ff">Then</SPAN>
+                    objScrewConicalFace = objFace
+                    <SPAN style="COLOR: #0000ff">Exit</SPAN> <SPAN style="COLOR: #0000ff">For</SPAN>
+                <SPAN style="COLOR: #0000ff">End</SPAN> <SPAN style="COLOR: #0000ff">If</SPAN>
+            <SPAN style="COLOR: #0000ff">Next</SPAN>
+
+            <SPAN style="COLOR: #008000">' Create the first reference
+</SPAN>            objRefToCylinderInScrew = objAssembly.CreateReference( _
+              objOccurrence1, objScrewConicalFace)
+
+            <SPAN style="COLOR: #008000">' Add the second occurrence
+</SPAN>            objOccurrence2 = objOccurrences.AddByFilename(<SPAN style="COLOR: #800000">"C:\Nut.par"</SPAN>)
+
+            <SPAN style="COLOR: #008000">' Get a reference to the occurrence document
+</SPAN>            objPart = objOccurrence2.OccurrenceDocument
+
+            <SPAN style="COLOR: #008000">' Get a reference to the models collection
+</SPAN>            objModels = objPart.Models
+
+            <SPAN style="COLOR: #008000">' Get a reference to the one and only model
+</SPAN>            objModel = objModels.Item(1)
+
+            <SPAN style="COLOR: #008000">' Get a reference to the revolved cutouts collection
+</SPAN>            objRevolvedCutouts = objModel.RevolvedCutouts
+
+            <SPAN style="COLOR: #008000">' Get a reference to the first revolved cutout
+</SPAN>            objRevolvedCutout = objRevolvedCutouts.Item(1)
+
+            <SPAN style="COLOR: #008000">' Get a reference to the side faces collection
+</SPAN>            objFaces = objRevolvedCutout.SideFaces
+
+            <SPAN style="COLOR: #008000">' Loop through the faces
+</SPAN>            <SPAN style="COLOR: #0000ff">For</SPAN> <SPAN style="COLOR: #0000ff">Each</SPAN> objFace <SPAN style="COLOR: #0000ff">In</SPAN> objFaces
+                objGeometry = objFace.Geometry
+                <SPAN style="COLOR: #0000ff">If</SPAN> objGeometry.Type = GNTTypePropertyConstants.igCone <SPAN style="COLOR: #0000ff">Then</SPAN>
+                    objNutConicalFace = objFace
+                    <SPAN style="COLOR: #0000ff">Exit</SPAN> <SPAN style="COLOR: #0000ff">For</SPAN>
+                <SPAN style="COLOR: #0000ff">End</SPAN> <SPAN style="COLOR: #0000ff">If</SPAN>
+            <SPAN style="COLOR: #0000ff">Next</SPAN>
+
+            <SPAN style="COLOR: #008000">' Create the second reference
+</SPAN>            objRefToConeInNut = objAssembly.CreateReference( _
+                          objOccurrence2, objNutConicalFace)
+
+            <SPAN style="COLOR: #008000">' All Occurrences placed through automation are placed "Grounded."
+</SPAN>            <SPAN style="COLOR: #008000">' You must delete the ground constraint on the second Occurrence
+</SPAN>            <SPAN style="COLOR: #008000">' before you can place other relationships.
+</SPAN>            objRelations3d = objAssembly.Relations3d
+            objGroundRel = objRelations3d.Item(2)
+            objGroundRel.Delete()
+
+            <SPAN style="COLOR: #008000">' Rather than passing literal axes to the AddAxial method, pass
+</SPAN>            <SPAN style="COLOR: #008000">' references to conical faces, Just as you select conical faces
+</SPAN>            <SPAN style="COLOR: #008000">' when you use the interactive Align command.
+</SPAN>            objRelNuttoScrew = objRelations3d.AddAxial( _
+              objRefToConeInNut, objRefToCylinderInScrew, <SPAN style="COLOR: #0000ff">False</SPAN>)
+
+        <SPAN style="COLOR: #0000ff">Catch</SPAN> ex <SPAN style="COLOR: #0000ff">As</SPAN> Exception
+            Console.WriteLine(ex.Message)
+        <SPAN style="COLOR: #0000ff">Finally</SPAN>
+            OleMessageFilter.Revoke()
+        <SPAN style="COLOR: #0000ff">End</SPAN> <SPAN style="COLOR: #0000ff">Try</SPAN>
+    <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+<SPAN style="COLOR: #0000ff">End Module</SPAN></PRE></DIV>
+<DIV id=i-tab-content-CS class="i-code i-filtered-content-CS"><PRE><SPAN style="COLOR: #0000ff">using</SPAN> SolidEdgeFramework;
+<SPAN style="COLOR: #0000ff">using</SPAN> SolidEdgeGeometry;
+<SPAN style="COLOR: #0000ff">using</SPAN> System;
+<SPAN style="COLOR: #0000ff">using</SPAN> System.Reflection;
+<SPAN style="COLOR: #0000ff">using</SPAN> System.Runtime.InteropServices;
+
+<SPAN style="COLOR: #0000ff">namespace</SPAN> SolidEdge.SDK
+{
+    <SPAN style="COLOR: #0000ff">class</SPAN> Program
+    {
+        [STAThread]
+        <SPAN style="COLOR: #0000ff">static</SPAN> <SPAN style="COLOR: #0000ff">void</SPAN> Main(<SPAN style="COLOR: #0000ff">string</SPAN>[] args)
+        {
+            SolidEdgeFramework.Application application = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeFramework.Documents documents = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeAssembly.AssemblyDocument assembly = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeAssembly.Occurrences occurrences = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeAssembly.Occurrence occurrence1 = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeAssembly.Occurrence occurrence2 = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgePart.PartDocument part = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgePart.Models models = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgePart.Model model = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgePart.RevolvedProtrusions revolvedProtrusions = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgePart.RevolvedProtrusion revolvedProtrusion = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgePart.RevolvedCutouts revolvedCutouts = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgePart.RevolvedCutout revolvedCutout = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeGeometry.Faces faces = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeGeometry.Face face = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            <SPAN style="COLOR: #0000ff">object</SPAN> geometry = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeGeometry.Face screwConicalFace = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeGeometry.Face nutConicalFace = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeFramework.Reference refToCylinderInScrew = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeFramework.Reference refToConeInNut = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeAssembly.Relations3d relations3d = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeAssembly.GroundRelation3d groundRelation3d = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeAssembly.AxialRelation3d relNuttoScrew = <SPAN style="COLOR: #0000ff">null</SPAN>;
+
+            <SPAN style="COLOR: #0000ff">try</SPAN>
+            {
+                OleMessageFilter.Register();
+
+                <SPAN style="COLOR: #008000">// Connect to a running instance of Solid Edge
+</SPAN>                application = (SolidEdgeFramework.Application)
+                  Marshal.GetActiveObject(<SPAN style="COLOR: #800000">"SolidEdge.Application"</SPAN>);
+
+                <SPAN style="COLOR: #008000">// Get a reference to the documents collection
+</SPAN>                documents = application.Documents;
+
+                <SPAN style="COLOR: #008000">// Get a reference to the active document
+</SPAN>                assembly = (SolidEdgeAssembly.AssemblyDocument)
+                  documents.Add(<SPAN style="COLOR: #800000">"SolidEdge.AssemblyDocument"</SPAN>, Missing.Value);
+
+                <SPAN style="COLOR: #008000">// Get a reference to the occurrences collection
+</SPAN>                occurrences = assembly.Occurrences;
+
+                <SPAN style="COLOR: #008000">// Add the first occurrence
+</SPAN>                occurrence1 = occurrences.AddByFilename(<SPAN style="COLOR: #800000">@"C:\Screw.par"</SPAN>, Missing.Value);
+
+                <SPAN style="COLOR: #008000">// Connect to a running instance of Solid Edge
+</SPAN>                application = (SolidEdgeFramework.Application)
+                  Marshal.GetActiveObject(<SPAN style="COLOR: #800000">"SolidEdge.Application"</SPAN>);
+
+                <SPAN style="COLOR: #008000">// Get a reference to the documents collection
+</SPAN>                documents = application.Documents;
+
+                <SPAN style="COLOR: #008000">// Get a reference to the active document
+</SPAN>                assembly = (SolidEdgeAssembly.AssemblyDocument)
+                  documents.Add(<SPAN style="COLOR: #800000">"SolidEdge.AssemblyDocument"</SPAN>, Missing.Value);
+
+                <SPAN style="COLOR: #008000">// Get a reference to the occurrences collection
+</SPAN>                occurrences = assembly.Occurrences;
+
+                <SPAN style="COLOR: #008000">// Add the first occurrence
+</SPAN>                occurrence1 = occurrences.AddByFilename(<SPAN style="COLOR: #800000">@"C:\Screw.par"</SPAN>, Missing.Value);
+
+                <SPAN style="COLOR: #008000">// Get a reference to the one and only model
+</SPAN>                model = models.Item(1);
+
+                <SPAN style="COLOR: #008000">// Get a reference to the revolved cutouts collection
+</SPAN>                revolvedCutouts = model.RevolvedCutouts;
+
+                <SPAN style="COLOR: #008000">// Get a reference to the first revolved cutout
+</SPAN>                revolvedCutout = revolvedCutouts.Item(1);
+
+                <SPAN style="COLOR: #008000">// Get a reference to the side faces collection
+</SPAN>                faces = (SolidEdgeGeometry.Faces)revolvedCutout.SideFaces;
+
+                <SPAN style="COLOR: #008000">// Loop through the faces
+</SPAN>                <SPAN style="COLOR: #0000ff">for</SPAN> (<SPAN style="COLOR: #0000ff">int</SPAN> i = 1; i &lt;= faces.Count; i++)
+                {
+                    <SPAN style="COLOR: #008000">// Get a reference to the face object
+</SPAN>                    face = (SolidEdgeGeometry.Face)faces.Item(i);
+
+                    <SPAN style="COLOR: #008000">// Get a reference to the geometry object
+</SPAN>                    geometry = face.Geometry;
+
+                    <SPAN style="COLOR: #008000">// Determine the face type
+</SPAN>                    GNTTypePropertyConstants typeProperty = (GNTTypePropertyConstants)
+                      geometry.GetType().InvokeMember(
+                        <SPAN style="COLOR: #800000">"Type"</SPAN>,
+                        BindingFlags.GetProperty,
+                        <SPAN style="COLOR: #0000ff">null</SPAN>,
+                        geometry,
+                        <SPAN style="COLOR: #0000ff">null</SPAN>);
+
+                    <SPAN style="COLOR: #0000ff">if</SPAN> (typeProperty == GNTTypePropertyConstants.igCone)
+                    {
+                        nutConicalFace = face;
+                        <SPAN style="COLOR: #0000ff">break</SPAN>;
+                    }
+                }
+
+                <SPAN style="COLOR: #008000">// Create the second reference
+</SPAN>                refToConeInNut = (SolidEdgeFramework.Reference)
+                  assembly.CreateReference(occurrence2, nutConicalFace);
+
+                <SPAN style="COLOR: #008000">// All Occurrences placed through automation are placed "Grounded."
+                // You must delete the ground constraint on the second Occurrence
+                // before you can place other relationships.
+</SPAN>                relations3d = assembly.Relations3d;
+                groundRelation3d = (SolidEdgeAssembly.GroundRelation3d)
+                  relations3d.Item(2);
+                groundRelation3d.Delete();
+
+                <SPAN style="COLOR: #008000">// Rather than passing literal axes to the AddAxial method, pass
+                // references to conical faces, Just as you select conical faces
+                // when you use the interactive Align command.
+</SPAN>                relNuttoScrew = relations3d.AddAxial(
+                  refToConeInNut,
+                  refToCylinderInScrew,
+                  <SPAN style="COLOR: #0000ff">false</SPAN>);
+
+            }
+            <SPAN style="COLOR: #0000ff">catch</SPAN> (System.Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            <SPAN style="COLOR: #0000ff">finally</SPAN>
+            {
+                OleMessageFilter.Revoke();
+            }
+        }
+    }
+}</PRE></DIV></DIV></DIV></DIV><!--DXMETADATA end-->
+            <a name="seealsobookmark"></a>
+            <!--DXMETADATA start type="FilteredItemList" scrap="CATEGORISED_LINKS" namespace="linkcategory" source="Item" filter="" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=seealso,caption=""%%phrase:name=SeeAlso%%%%designlist:tagidentifier=seealso,itemtype=See Also%%""%%%%filtereditemlist%%</div>"--><!--DXMETADATA end-->
+        
+    </div>
+    <div id="i-footer-content" class="i-footer-content">
+        <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_FOOTER" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="CopyrightNotice" format="<p>&nbsp;</p><p>&nbsp;</p><hr style=""height: 1px"" /><p>%%variable%%</p>" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="FeedbackLink" format="" --><!--DXMETADATA end-->
+    </div>
+    
+
+    <!--DXMETADATA start type="IsNew" format="<script type=""text/javascript"">setIsNew = true;</script>" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<script type=""text/javascript"">setIsResponsiveEnabled = true;</script>" --><!--DXMETADATA end-->
+    <script type="text/javascript">
+        $(function() {
+            var documentInstance = new Innovasys.Content.Document(document.body);
+            documentInstance.isNew = !(typeof setIsNew === "undefined");
+            documentInstance.isResponsiveEnabled = !(typeof setIsResponsiveEnabled === "undefined");
+            documentInstance.load();
+        });
+    </script>
+</body>
+</html>

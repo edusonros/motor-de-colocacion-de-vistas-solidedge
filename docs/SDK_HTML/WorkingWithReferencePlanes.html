@@ -1,0 +1,250 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--DXMETADATA start type="MetaCharset" --><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><!--DXMETADATA end-->
+    <meta http-equiv="X-UA-Compatible" value="IE=9" />
+
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Literal" condition="helpversion:value=3" value="<meta name=""Microsoft.Help.SelfBranded"" content=""true"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="ItemTitle" format="<title>%%ItemTitle%%</title>" --><title>Working with Reference Planes</title><!--DXMETADATA end-->
+    <!--DXMETADATA start type="ItemTitle" format="<meta name=""Title"" content=""%%ItemTitleNoQuotes%%""/>" --><meta name="Title" content="Working with Reference Planes"/><!--DXMETADATA end-->    
+    
+
+    <!--DXMETADATA start type="PackageLink" packagename="jquery" filetype="script" firstlinkattributes="id=""mshs_support_script"""--><script src="template/packages/jquery/script/chm.mshc/jquery-1.7.2.min.js" type="text/javascript" id="mshs_support_script"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="script"--><script src="template/packages/jquery-ui/script/chm.mshc/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/jquery-ui/css/chm.mshc/jquery-ui-1.8.18.custom.css"></link><!--DXMETADATA end-->
+	
+    <!--DXMETADATA start type="Synopsis" StripHtmlTags="True" MaxLength="250" format="<meta name=""Description"" content=""%%Synopsis%%"" />"--><meta name="Description" content="A reference axis defines the axis of revolution for a revolved feature. Reference axes are usually created in the Profile environment when a user defines the profile of the revolution. Two objects—the collection object, RefAxes, and the instance obje" /><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-topics" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/plugins-topics/css/chm.mshc/jquery-plugins.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-topics" filetype="css" firstlinkattributes=" data-mshv2-stylesheet=""/template/packages/core-topics/topics.mshv2.css"" data-mshv1-stylesheet=""/template/packages/core-topics/topics.mshv1.css"" data-responsive-mobile=""template/packages/core-topics/topics.mobile.css"" data-responsive-tablet=""template/packages/core-topics/topics.tablet.css"""--><link rel="stylesheet" type="text/css" href="template/packages/core-topics/css/topics.css"  data-mshv2-stylesheet="/template/packages/core-topics/topics.mshv2.css" data-mshv1-stylesheet="/template/packages/core-topics/topics.mshv1.css" data-responsive-mobile="template/packages/core-topics/topics.mobile.css" data-responsive-tablet="template/packages/core-topics/topics.tablet.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-topics" filetype="script"--><script src="template/packages/plugins-topics/script/chm.mshc/jquery-plugins.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-topics" filetype="script"--><script src="template/packages/core-topics/script/topics.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="TopicId" format="<meta name=""Microsoft.Help.Id"" content=""%%TopicId%%""/>" --><meta name="Microsoft.Help.Id" content="4bbcb198-5495-4a92-a1ea-586690c915af"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocParentId" format="<meta name=""Microsoft.Help.TocParent"" content=""%%TocParentId%%""/>" --><meta name="Microsoft.Help.TocParent" content="d987d015-c160-4a90-b196-ff142889bf36"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocOrdinal" format="<meta name=""Microsoft.Help.TocOrder"" content=""%%TocOrdinal%%""/>" --><meta name="Microsoft.Help.TocOrder" content="1"/><!--DXMETADATA end-->
+    <meta name="Microsoft.Help.F1" content=""/>
+    <meta name="Microsoft.Help.ContentType" content="Concepts" />
+    <!--DXMETADATA start type="MshvKeywords" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="MshvMetaTags" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.Locale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.TopicLocale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="Stylesheets" --><link rel="stylesheet" type="text/css" href="stylesheets/customstyles.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Scripts" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="DesignTime"--><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_PROPERTIES" --><!--DXMETADATA end -->
+
+    <!--DXMETADATA start type="CustomHeadContent" --><!--DXMETADATA end-->
+</head>
+
+<body>
+    <div id="i-before-header-content" class="i-before-header-content">
+        
+    </div>
+    <div id="i-header-content" class="i-header-content">
+        <!--DXMETADATA start type="LogoImage" --><img class="logoimage" src="images/sesdk_header.jpg" border="0"></img><!--DXMETADATA end-->
+            <div class="i-project-title"><!--DXMETADATA start type="ProjectTitle" -->Solid Edge 2019 SDK<!--DXMETADATA end--></div>
+        <div class="i-page-title"><div class="i-page-title-text"><!--DXMETADATA start type="ItemTitle" -->Working with Reference Planes<!--DXMETADATA end--></div></div>
+    </div>
+    <div id="i-after-header-content" class="i-after-header-content">
+        <!-- Spacing --> <span class="i-toggle-all-sections i-function-link">
+                <label class="i-collapse-all"><!--DXMETADATA start type="Phrase" name="COLLAPSE_ALL" -->Collapse All<!--DXMETADATA end--></label>
+                <label class="i-expand-all" style="display: none;"><!--DXMETADATA start type="Phrase" name="EXPAND_ALL" -->Expand All<!--DXMETADATA end--></label>
+            </span><!--DXMETADATA start type="Literal" condition="communityenabled" value="%%scrap:name=_COMMUNITY_DROPDOWN%%" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="IsWebOutputRootPageLinkEnabled" format="<a href='#' class="i-page-link" class="i-view-in-frame-link" title='$$VIEW_WITH_NAVIGATION_TOOLS_TIP$$' style='display: none' data-root-page='%%WebOutputRootPage%%%%OutputFileExtension%%' target='_top'>$$VIEW_WITH_NAVIGATION_TOOLS_TEXT$$</a>" --><a href='#' class="i-page-link" class="i-view-in-frame-link" title='Open this Topic in a view that includes Navigation tools (Table of Contents, Index, Search)' style='display: none' data-root-page='webframe.html' target='_top'>View with Navigation Tools</a><!--DXMETADATA end-->
+    </div>
+    <!--DXMETADATA start type="Breadcrumbs" scrap="_BREADCRUMBS" --><div class="i-breadcrumbs-container"><table><tr><td>
+<a href="ProgrammersGuide.html">Programmer's Guide</a>
+ > <a href="SolidEdgeTOC.html">Solid Edge</a>
+ > <a href="EnvironmentsToc.html">Environments</a>
+ > <a href="AssemblyEnvironmentToc.html">Assembly</a>
+ > Working with Reference Planes</td></tr></table></div><!--DXMETADATA end -->
+    
+    
+    <div id="i-body-content" class="i-body-content">
+        <!--DXMETADATA start type="TopicSection" name="BodyText"--><P>A reference axis defines the axis of revolution for a revolved feature. Reference axes are usually created in the Profile environment when a user defines the profile of the revolution. Two objects—the collection object, RefAxes, and the instance object, RefAxis—are available to enable you to manipulate reference axes in your models.</P>
+<P>The following programs connect to a running instance of Solid Edge, creates an Assembly document and places an assembly reference plane using the AddAngularByAngle method. Then the program creates a Part document and places a reference plane using the AddParallelByDistance method.</P>
+<DIV class="i-box i-box-caution">See <A href="OleMessageFilterUsage.html" data-auto-update-caption="true">Handling 'Application is Busy' and 'Call was Rejected By Callee' errors</A> for information regarding the use of <A href="OleMessageFilterVB.html">OleMessageFilter</A>. </DIV>
+<DIV id=i-6502361a-c31c-4129-a462-1b6e17ae1fe6-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>Code Sample</SPAN> </DIV>
+<DIV id=i-6502361a-c31c-4129-a462-1b6e17ae1fe6-section-content class=i-section-content>
+<DIV class="i-tab-container i-tab-container-widget">
+<UL role=tablist>
+<LI class=i-filtered-content-VB><A href="#i-tab-content-VB">Visual Basic</A> </LI>
+<LI class=i-filtered-content-CS><A href="#i-tab-content-CS">C#</A> </LI></UL>
+<DIV id=i-tab-content-VB class="i-code i-filtered-content-VB"><PRE><SPAN style="COLOR: #0000ff">Imports</SPAN> SolidEdgePart
+<SPAN style="COLOR: #0000ff">Imports</SPAN> System.Runtime.InteropServices
+
+<SPAN style="COLOR: #0000ff">Module</SPAN> Program
+    &lt;STAThread()&gt; _
+    <SPAN style="COLOR: #0000ff">Sub</SPAN> Main()
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objApplication <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeFramework.Application = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objDocuments <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeFramework.Documents = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objAssembly <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeAssembly.AssemblyDocument = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objAsmRefPlanes <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeAssembly.AsmRefPlanes = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objAsmRefPlane <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeAssembly.AsmRefPlane = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objPPlane <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeAssembly.AsmRefPlane = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objPart <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.PartDocument = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objRefPlanes <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.RefPlanes = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objRefPlane <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.RefPlane = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Try</SPAN>
+            OleMessageFilter.Register()
+
+            <SPAN style="COLOR: #008000">' Connect to a running instance of Solid Edge
+</SPAN>            objApplication = Marshal.GetActiveObject(<SPAN style="COLOR: #800000">"SolidEdge.Application"</SPAN>)
+
+            <SPAN style="COLOR: #008000">' Access the Documents collection object
+</SPAN>            objDocuments = objApplication.Documents
+
+            <SPAN style="COLOR: #008000">' Add an Assembly document
+</SPAN>            objAssembly = objDocuments.Add(<SPAN style="COLOR: #800000">"SolidEdge.AssemblyDocument"</SPAN>)
+
+            <SPAN style="COLOR: #008000">' Access the AsmRefPlanes collection object
+</SPAN>            objAsmRefPlanes = objAssembly.AsmRefPlanes
+
+            <SPAN style="COLOR: #008000">' Create a reference plane at an angle to a
+</SPAN>            <SPAN style="COLOR: #008000">' principal reference plane
+</SPAN>            objPPlane = objAsmRefPlanes.Item(2)
+
+            <SPAN style="COLOR: #008000">' Add a new reference plane
+</SPAN>            objAsmRefPlane = objAsmRefPlanes.AddAngularByAngle( _
+              objPPlane, _
+                          (2 * Math.PI / 3), _
+              objAsmRefPlanes.Item(1), _
+              ReferenceElementConstants.igPivotEnd, _
+              ReferenceElementConstants.igNormalSide, _
+              <SPAN style="COLOR: #0000ff">True</SPAN>)
+
+            <SPAN style="COLOR: #008000">' Add a Part document
+</SPAN>            objPart = objDocuments.Add(<SPAN style="COLOR: #800000">"SolidEdge.PartDocument"</SPAN>)
+
+            <SPAN style="COLOR: #008000">' Access the RefPlanes collection object
+</SPAN>            objRefPlanes = objPart.RefPlanes
+
+            <SPAN style="COLOR: #008000">' Create a global reference plane parallel to the top reference plane
+</SPAN>            objRefPlane = objRefPlanes.AddParallelByDistance( _
+              objRefPlanes.Item(1), _
+              0.1, _
+              ReferenceElementConstants.igNormalSide, _
+              <SPAN style="COLOR: #0000ff">False</SPAN>)
+
+        <SPAN style="COLOR: #0000ff">Catch</SPAN> ex <SPAN style="COLOR: #0000ff">As</SPAN> Exception
+            Console.WriteLine(ex.Message)
+        <SPAN style="COLOR: #0000ff">Finally</SPAN>
+            OleMessageFilter.Revoke()
+        <SPAN style="COLOR: #0000ff">End</SPAN> <SPAN style="COLOR: #0000ff">Try</SPAN>
+    <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+<SPAN style="COLOR: #0000ff">End Module</SPAN></PRE></DIV>
+<DIV id=i-tab-content-CS class="i-code i-filtered-content-CS"><PRE><SPAN style="COLOR: #0000ff">using</SPAN> SolidEdgeFramework;
+<SPAN style="COLOR: #0000ff">using</SPAN> SolidEdgePart;
+<SPAN style="COLOR: #0000ff">using</SPAN> System;
+<SPAN style="COLOR: #0000ff">using</SPAN> System.Reflection;
+<SPAN style="COLOR: #0000ff">using</SPAN> System.Runtime.InteropServices;
+
+<SPAN style="COLOR: #0000ff">namespace</SPAN> SolidEdge.SDK
+{
+    <SPAN style="COLOR: #0000ff">class</SPAN> Program
+    {
+        [STAThread]
+        <SPAN style="COLOR: #0000ff">static</SPAN> <SPAN style="COLOR: #0000ff">void</SPAN> Main(<SPAN style="COLOR: #0000ff">string</SPAN>[] args)
+        {
+            SolidEdgeFramework.Application application = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeFramework.Documents documents = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeAssembly.AssemblyDocument assembly = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeAssembly.AsmRefPlanes asmRefPlanes = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeAssembly.AsmRefPlane asmRefPlane = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeAssembly.AsmRefPlane pPlane = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgePart.PartDocument part = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgePart.RefPlanes refPlanes = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgePart.RefPlane refPlane = <SPAN style="COLOR: #0000ff">null</SPAN>;
+
+            <SPAN style="COLOR: #0000ff">try</SPAN>
+            {
+                OleMessageFilter.Register();
+
+                <SPAN style="COLOR: #008000">// Connect to a running instance of Solid Edge
+</SPAN>                application = (SolidEdgeFramework.Application)
+                  Marshal.GetActiveObject(<SPAN style="COLOR: #800000">"SolidEdge.Application"</SPAN>);
+
+                <SPAN style="COLOR: #008000">// Access the Documents collection object
+</SPAN>                documents = application.Documents;
+
+                <SPAN style="COLOR: #008000">// Add an Assembly document
+</SPAN>                assembly = (SolidEdgeAssembly.AssemblyDocument)
+                  documents.Add(<SPAN style="COLOR: #800000">"SolidEdge.AssemblyDocument"</SPAN>, Missing.Value);
+
+                <SPAN style="COLOR: #008000">// Access the AsmRefPlanes collection object
+</SPAN>                asmRefPlanes = assembly.AsmRefPlanes;
+
+                <SPAN style="COLOR: #008000">// Create a reference plane at an angle to a principal
+                // reference plane
+</SPAN>                pPlane = asmRefPlanes.Item(2);
+
+                <SPAN style="COLOR: #008000">// Add a new reference plane.Add a new reference plane
+</SPAN>                asmRefPlane = asmRefPlanes.AddAngularByAngle(
+                  pPlane,
+                  (2 * Math.PI / 3),
+                  asmRefPlanes.Item(1),
+                  ReferenceElementConstants.igPivotEnd,
+                  ReferenceElementConstants.igNormalSide,
+                  <SPAN style="COLOR: #0000ff">true</SPAN>);
+
+                <SPAN style="COLOR: #008000">// Add a Part document
+</SPAN>                part = (SolidEdgePart.PartDocument)
+                  documents.Add(<SPAN style="COLOR: #800000">"SolidEdge.PartDocument"</SPAN>, Missing.Value);
+
+                <SPAN style="COLOR: #008000">// Access the RefPlanes collection object
+</SPAN>                refPlanes = part.RefPlanes;
+
+                <SPAN style="COLOR: #008000">// Create a global reference plane parallel to the top
+                // reference plane
+</SPAN>                refPlane = refPlanes.AddParallelByDistance(
+                  refPlanes.Item(1),
+                  0.1,
+                  ReferenceElementConstants.igNormalSide,
+                  <SPAN style="COLOR: #0000ff">false</SPAN>,
+                  Missing.Value,
+                  Missing.Value,
+                  Missing.Value);
+
+            }
+            <SPAN style="COLOR: #0000ff">catch</SPAN> (System.Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            <SPAN style="COLOR: #0000ff">finally</SPAN>
+            {
+                OleMessageFilter.Revoke();
+            }
+        }
+    }
+}</PRE></DIV></DIV></DIV><!--DXMETADATA end-->
+            <a name="seealsobookmark"></a>
+            <!--DXMETADATA start type="FilteredItemList" scrap="CATEGORISED_LINKS" namespace="linkcategory" source="Item" filter="" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=seealso,caption=""%%phrase:name=SeeAlso%%%%designlist:tagidentifier=seealso,itemtype=See Also%%""%%%%filtereditemlist%%</div>"--><!--DXMETADATA end-->
+        
+    </div>
+    <div id="i-footer-content" class="i-footer-content">
+        <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_FOOTER" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="CopyrightNotice" format="<p>&nbsp;</p><p>&nbsp;</p><hr style=""height: 1px"" /><p>%%variable%%</p>" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="FeedbackLink" format="" --><!--DXMETADATA end-->
+    </div>
+    
+
+    <!--DXMETADATA start type="IsNew" format="<script type=""text/javascript"">setIsNew = true;</script>" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<script type=""text/javascript"">setIsResponsiveEnabled = true;</script>" --><!--DXMETADATA end-->
+    <script type="text/javascript">
+        $(function() {
+            var documentInstance = new Innovasys.Content.Document(document.body);
+            documentInstance.isNew = !(typeof setIsNew === "undefined");
+            documentInstance.isResponsiveEnabled = !(typeof setIsResponsiveEnabled === "undefined");
+            documentInstance.load();
+        });
+    </script>
+</body>
+</html>

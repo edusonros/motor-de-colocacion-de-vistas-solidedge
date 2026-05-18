@@ -1,0 +1,14 @@
+necesito un código que realice la siguiente acción:
+En otra pestaña aparte denomnada "Piezas a Corte Laser", con la misma composicion de la columna izquierda, en la zona de encimad de el log, abra que abrir una especie de tabla donde se indique el espesor de la chapa  y si va plegada o no, para poder rellenarlo ahí.  es decir, me gustaria ver una especie de resumen de las piezas que va a colocar en el dft vacio y con que parametros
+En un template vacio ( DXF_LIMPIO.dft) quiero que insertes los siguiente y de la manera siguiente.
+De todas las piezas de un ASM, hay que coger las que son par y psm. 
+La pieza que es PAR, hay que insertar la vista principal que elegimos para crear el DFT
+LA pieza que es PSM, hay que insertar la vista flat, desarrollada.  Estas llevaran un texto indicando que llevan pliegue, y su coorespondiente DFT deberá indicarse en una lista de piezas a plegar
+HAy que contar cuantas piezas son.
+HAy que distinguir que espesores son y agruparlas en filas según su espesor.
+Al comienzo de cada Fila tiene que haber un texto que indique "Espesor *tal", e ir insertado las figuras a escala 1:1, y la siguiente se insertara en la misma fila, siempre que sea del mismo espesor,separandola de la anterior su ancho de range mas un espacio vacio.  Hay que indicar el nombre debajo de la pieza insertada.
+El comienzo de la siguiente fila tiene que estar a una distancia igual a la altura máxima del range máximo de las piezas de la fila anterior, mas una separación de 20 cm. 
+Si hay alguna pieza que NO tiene indicado el espesor, aparecerá un cuadro de text preguntando el espesor de la pieza "X", y el que se de será el asignado a esa pieza. 
+Una vez tenemos todas las piezas y el dft creado, se debe transformar a un dxf, también a escala 1:1 Llamado Piezas a pedir de Corte.
+Todo estop se creara en el directorio de Planos Automaticos, en un directorio llamado "Corte Laser"
+Esto es mejor que lo cree siempre después de crear los dft.  Hay que pedir confirmación de que los planos dft de las piezs han sido creados.

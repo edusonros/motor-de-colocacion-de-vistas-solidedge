@@ -102,12 +102,14 @@
     <Compile Include="SlotBBoxViewLayout.vb" />
     <Compile Include="LogUtil.vb" />
     <Compile Include="Models\JobConfiguration.vb" />
+    <Compile Include="Models\LaserCutPieceInfo.vb" />
     <Compile Include="Models\ApplyMetadataToDraftFilesResult.vb" />
     <Compile Include="Services\PartsListPropertyTextWriter.vb" />
     <Compile Include="Models\DrawingMetadataInput.vb" />
     <Compile Include="Models\MetadataComponentState.vb" />
     <Compile Include="Services\AppSettingsManager.vb" />
     <Compile Include="Services\DraftGenerationEngine.vb" />
+    <Compile Include="Services\SolidEdgeSessionVisibility.vb" />
     <Compile Include="Services\DraftMotors.vb" />
     <Compile Include="Services\DraftStandaloneMotorPaths.vb" />
     <Compile Include="Services\UnitHorizontalExteriorDimensionTest.vb" />
@@ -126,6 +128,8 @@
     <Compile Include="Services\Dimensioning\ProtectedZone2D.vb" />
     <Compile Include="Services\Dimensioning\PartsListSuperiorService.vb" />
     <Compile Include="Services\Dimensioning\ReferenceDrawingDimensioningService.vb" />
+    <Compile Include="Services\Dimensioning\DimensionDuplicateCleanup.vb" />
+    <Compile Include="Services\Dimensioning\InteriorHoleDimensioningService.vb" />
     <Compile Include="Services\Dimensioning\DimensionCandidate.vb" />
     <Compile Include="Services\Dimensioning\DimensionGeometryReader.vb" />
     <Compile Include="Services\Dimensioning\DimensionPlacementService.vb" />
@@ -140,6 +144,7 @@
     <Compile Include="Services\Dimensioning\LegacyV02IsolatedMotor\DimensionCandidate.vb" />
     <Compile Include="Services\Dimensioning\LegacyV02IsolatedMotor\DimensionCoordinateDiagnostics.vb" />
     <Compile Include="Services\Dimensioning\LegacyV02IsolatedMotor\DimensionDuplicateCleanup.vb" />
+    <Compile Include="Services\Dimensioning\LegacyV02IsolatedMotor\DimensionLaneSpacing.vb" />
     <Compile Include="Services\Dimensioning\LegacyV02IsolatedMotor\DimensionExtremePoint.vb" />
     <Compile Include="Services\Dimensioning\LegacyV02IsolatedMotor\DimensionGeometryReader.vb" />
     <Compile Include="Services\Dimensioning\LegacyV02IsolatedMotor\DimensionInsertionConfig.vb" />
@@ -205,11 +210,21 @@
     <Compile Include="Services\DraftGeometryReporter.vb" />
     <Compile Include="Services\StaComInvoker.vb" />
     <Compile Include="Services\AssemblyComponentService.vb" />
+    <Compile Include="Services\LaserCutPartFilters.vb" />
+    <Compile Include="Services\LaserCutSheetService.vb" />
     <Compile Include="Services\SolidEdgePropertyService.vb" />
     <Compile Include="Services\DrawingMetadataService.vb" />
     <Compile Include="Services\TitleBlockFieldCoordinator.vb" />
     <Compile Include="UI\MainForm.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\MainFormLaserCut.vb">
+      <SubType>Form</SubType>
+      <DependentUpon>MainForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\MainFormUiReform.vb">
+      <SubType>Form</SubType>
+      <DependentUpon>MainForm.vb</DependentUpon>
     </Compile>
     <Compile Include="UI\MainFormDrawingPlanMetadata.vb">
       <SubType>Form</SubType>

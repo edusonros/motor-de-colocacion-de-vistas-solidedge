@@ -1,0 +1,587 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--DXMETADATA start type="MetaCharset" --><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><!--DXMETADATA end-->
+    <meta http-equiv="X-UA-Compatible" value="IE=9" />
+
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Literal" condition="helpversion:value=3" value="<meta name=""Microsoft.Help.SelfBranded"" content=""true"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="PageItemTitle" format="<title>%%PageItemTitle%%</title>" --><title>GetThermalLoadOptions Method</title><!--DXMETADATA end-->
+    <!--DXMETADATA start type="ItemTitleNoQuotes" format="<meta name=""Title"" content=""%%ItemTitleNoQuotes%%""/>" --><!--DXMETADATA end-->    
+    
+
+    <!--DXMETADATA start type="PackageLink" packagename="jquery" filetype="script" firstlinkattributes="id=""mshs_support_script"""--><script src="template/packages/jquery/script/chm.mshc/jquery-1.7.2.min.js" type="text/javascript" id="mshs_support_script"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="script"--><script src="template/packages/jquery-ui/script/chm.mshc/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/jquery-ui/css/chm.mshc/jquery-ui-1.8.18.custom.css"></link><!--DXMETADATA end-->
+	
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/plugins-ax/css/chm.mshc/jquery-plugins.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="css" firstlinkattributes=" data-mshv2-stylesheet=""/template/packages/core-ax/dx.com.mshv2.css"" data-mshv1-stylesheet=""/template/packages/core-ax/dx.com.mshv1.css"" data-responsive-mobile=""template/packages/core-ax/dx.com.mobile.css"" data-responsive-tablet=""template/packages/core-ax/dx.com.tablet.css"""--><link rel="stylesheet" type="text/css" href="template/packages/core-ax/css/dx.com.css"  data-mshv2-stylesheet="/template/packages/core-ax/dx.com.mshv2.css" data-mshv1-stylesheet="/template/packages/core-ax/dx.com.mshv1.css" data-responsive-mobile="template/packages/core-ax/dx.com.mobile.css" data-responsive-tablet="template/packages/core-ax/dx.com.tablet.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="script"--><script src="template/packages/plugins-ax/script/chm.mshc/jquery-plugins.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="script"--><script src="template/packages/core-ax/script/dx.com.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="TopicId" format="<meta name=""Microsoft.Help.Id"" content=""%%TopicId%%""/>" --><meta name="Microsoft.Help.Id" content="SolidEdgePart~Load~GetThermalLoadOptions"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Synopsis" StripHtmlTags="True" MaxLength="250" format="<meta name=""Description"" content=""%%Synopsis%%"" />"--><meta name="Description" content="Get various option parameter values from existing Thermal load." /><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocParentId" format="<meta name=""Microsoft.Help.TocParent"" content=""%%TocParentId%%""/>" --><meta name="Microsoft.Help.TocParent" content="SolidEdgePart~Load_methods"/><!--DXMETADATA end-->
+    <meta name="Microsoft.Help.ContentType" content="Reference" />
+    <!--DXMETADATA start type="MshvKeywords" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="MshvMetaTags" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.Locale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.TopicLocale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="Stylesheets" --><link rel="stylesheet" type="text/css" href="stylesheets/customstyles.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Scripts" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="DesignTime"--><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_PROPERTIES" --><!--DXMETADATA end -->
+
+    <!--DXMETADATA start type="CustomHeadContent" --><!--DXMETADATA end-->
+</head>
+
+<body>
+    <div id="i-before-header-content" class="i-before-header-content">
+        
+    </div>
+    <div id="i-header-content" class="i-header-content">
+        <!--DXMETADATA start type="LogoImage" --><img class="logoimage" src="images/sesdk_header.jpg" border="0"></img><!--DXMETADATA end-->
+            <div class="i-project-title"><!--DXMETADATA start type="ProjectTitle" -->Solid Edge Part Type Library<!--DXMETADATA end--></div>
+        <div class="i-page-title"><div class="i-page-title-text"><!--DXMETADATA start type="PageItemTitle" -->GetThermalLoadOptions Method<!--DXMETADATA end--></div></div>
+    </div>
+    <div id="i-after-header-content" class="i-after-header-content">
+        <!-- Spacing --> <span class="i-toggle-all-sections i-function-link">
+                <label class="i-collapse-all"><!--DXMETADATA start type="Phrase" name="COLLAPSE_ALL" -->Collapse All<!--DXMETADATA end--></label>
+                <label class="i-expand-all" style="display: none;"><!--DXMETADATA start type="Phrase" name="EXPAND_ALL" -->Expand All<!--DXMETADATA end--></label>
+            </span><!--DXMETADATA start type="Literal" condition="communityenabled" value="%%scrap:name=_COMMUNITY_DROPDOWN%%" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="IsWebOutputRootPageLinkEnabled" format="<a href='#' class="i-page-link" class="i-view-in-frame-link" title='$$VIEW_WITH_NAVIGATION_TOOLS_TIP$$' style='display: none' data-root-page='%%WebOutputRootPage%%%%OutputFileExtension%%' target='_top'>$$VIEW_WITH_NAVIGATION_TOOLS_TEXT$$</a>" --><a href='#' class="i-page-link" class="i-view-in-frame-link" title='Open this Topic in a view that includes Navigation tools (Table of Contents, Index, Search)' style='display: none' data-root-page='webframe.html' target='_top'>View with Navigation Tools</a><!--DXMETADATA end-->
+    </div>
+    <!--DXMETADATA start type="Breadcrumbs" scrap="_BREADCRUMBS" --><div class="i-breadcrumbs-container"><table><tr><td>
+<a href="SolidEdgePart_P.html">Solid Edge Part Type Library</a>
+ > <a href="SolidEdgePart~Load.html">Load Object</a>
+ : GetThermalLoadOptions Method</td></tr></table></div><!--DXMETADATA end -->
+    
+    <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_BUBBLES" namespace="parameter" source="Item" -->
+<div id="eLoadTypePopupContent" class="i-popup-content">
+
+</div>
+<div id="dLoadValuePopupContent" class="i-popup-content">
+
+</div>
+<div id="dLoadValueAngAccelnPopupContent" class="i-popup-content">
+
+</div>
+<div id="eLoadDirPopupContent" class="i-popup-content">
+
+</div>
+<div id="xPopupContent" class="i-popup-content">
+
+</div>
+<div id="yPopupContent" class="i-popup-content">
+
+</div>
+<div id="zPopupContent" class="i-popup-content">
+
+</div>
+<div id="xxPopupContent" class="i-popup-content">
+
+</div>
+<div id="yyPopupContent" class="i-popup-content">
+
+</div>
+<div id="zzPopupContent" class="i-popup-content">
+
+</div>
+<div id="colorLoadSymbolPopupContent" class="i-popup-content">
+
+</div>
+<div id="colorLoadSymbolAngAccPopupContent" class="i-popup-content">
+
+</div>
+<div id="dSpacingFactorPopupContent" class="i-popup-content">
+
+</div>
+<div id="dSizeFactorPopupContent" class="i-popup-content">
+
+</div>
+<div id="dSteeringWheelLenPopupContent" class="i-popup-content">
+
+</div>
+<div id="dwLoadPropsPopupContent" class="i-popup-content">
+
+</div>
+<div id="dLoadSymSpacingPopupContent" class="i-popup-content">
+
+</div>
+<div id="dLoadSymSizePopupContent" class="i-popup-content">
+
+</div>
+<div id="dAmbientTempPopupContent" class="i-popup-content">
+
+</div>
+<div id="dSurfEmissivityPopupContent" class="i-popup-content">
+
+</div>
+<div id="dSurfAbsorptivityPopupContent" class="i-popup-content">
+
+</div>
+<div id="dViewFactorPopupContent" class="i-popup-content">
+
+</div>
+<div id="dCavityPopupContent" class="i-popup-content">
+
+</div>
+<!--DXMETADATA end -->
+    <div id="i-body-content" class="i-body-content">
+        <!--DXMETADATA start type="Description" source="Item" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=description,caption=$$Description$$%%<div class=""i-description-content"">%%description%%</div></div>" --><div class="i-section-heading" id="i-description-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Description</span></div><div id="i-description-section-content" class="i-section-content"><div class="i-description-content">Get various option parameter values from existing Thermal load.</div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="Syntax" lang="VB" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=syntax,caption=$$Syntax$$%%<div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>%%Syntax%%</pre></tr></table></div></div>" --><div class="i-section-heading" id="i-syntax-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Syntax</span></div><div id="i-syntax-section-content" class="i-section-content"><div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>Public Sub GetThermalLoadOptions( _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="eLoadTypePopupLink" data-popup-contentsource="#eLoadTypePopupContent" data-popup-showevent="click mouseenter">eLoadType</a></i> As <a href="SolidEdgePart~FEALoadTypeEnum_Auto.html">FEALoadTypeEnum_Auto</a>, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="dLoadValuePopupLink" data-popup-contentsource="#dLoadValuePopupContent" data-popup-showevent="click mouseenter">dLoadValue</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="dLoadValueAngAccelnPopupLink" data-popup-contentsource="#dLoadValueAngAccelnPopupContent" data-popup-showevent="click mouseenter">dLoadValueAngAcceln</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="eLoadDirPopupLink" data-popup-contentsource="#eLoadDirPopupContent" data-popup-showevent="click mouseenter">eLoadDir</a></i> As <a href="SolidEdgePart~LoadSymbDirOptsEnum_Auto.html">LoadSymbDirOptsEnum_Auto</a>, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="xPopupLink" data-popup-contentsource="#xPopupContent" data-popup-showevent="click mouseenter">x</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="yPopupLink" data-popup-contentsource="#yPopupContent" data-popup-showevent="click mouseenter">y</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="zPopupLink" data-popup-contentsource="#zPopupContent" data-popup-showevent="click mouseenter">z</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="xxPopupLink" data-popup-contentsource="#xxPopupContent" data-popup-showevent="click mouseenter">xx</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="yyPopupLink" data-popup-contentsource="#yyPopupContent" data-popup-showevent="click mouseenter">yy</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="zzPopupLink" data-popup-contentsource="#zzPopupContent" data-popup-showevent="click mouseenter">zz</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="colorLoadSymbolPopupLink" data-popup-contentsource="#colorLoadSymbolPopupContent" data-popup-showevent="click mouseenter">colorLoadSymbol</a></i> As ULong, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="colorLoadSymbolAngAccPopupLink" data-popup-contentsource="#colorLoadSymbolAngAccPopupContent" data-popup-showevent="click mouseenter">colorLoadSymbolAngAcc</a></i> As ULong, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="dSpacingFactorPopupLink" data-popup-contentsource="#dSpacingFactorPopupContent" data-popup-showevent="click mouseenter">dSpacingFactor</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="dSizeFactorPopupLink" data-popup-contentsource="#dSizeFactorPopupContent" data-popup-showevent="click mouseenter">dSizeFactor</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="dSteeringWheelLenPopupLink" data-popup-contentsource="#dSteeringWheelLenPopupContent" data-popup-showevent="click mouseenter">dSteeringWheelLen</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="dwLoadPropsPopupLink" data-popup-contentsource="#dwLoadPropsPopupContent" data-popup-showevent="click mouseenter">dwLoadProps</a></i> As ULong, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="dLoadSymSpacingPopupLink" data-popup-contentsource="#dLoadSymSpacingPopupContent" data-popup-showevent="click mouseenter">dLoadSymSpacing</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="dLoadSymSizePopupLink" data-popup-contentsource="#dLoadSymSizePopupContent" data-popup-showevent="click mouseenter">dLoadSymSize</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="dAmbientTempPopupLink" data-popup-contentsource="#dAmbientTempPopupContent" data-popup-showevent="click mouseenter">dAmbientTemp</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="dSurfEmissivityPopupLink" data-popup-contentsource="#dSurfEmissivityPopupContent" data-popup-showevent="click mouseenter">dSurfEmissivity</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="dSurfAbsorptivityPopupLink" data-popup-contentsource="#dSurfAbsorptivityPopupContent" data-popup-showevent="click mouseenter">dSurfAbsorptivity</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="dViewFactorPopupLink" data-popup-contentsource="#dViewFactorPopupContent" data-popup-showevent="click mouseenter">dViewFactor</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="dCavityPopupLink" data-popup-contentsource="#dCavityPopupContent" data-popup-showevent="click mouseenter">dCavity</a></i> As Integer _
+) </pre></tr></table></div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_LIST" namespace="parameter" source="Item" filter="" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=parameters,caption=$$ParameterList$$%%%%filtereditemlist%%</div>" --><div class="i-section-heading" id="i-parameters-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Parameters</span></div><div id="i-parameters-section-content" class="i-section-content"><dl>
+<dt><I>eLoadType</I></dt>
+<dd><table class="i-filtered-item-list"><tr><th>Value</th><th>Description</th></tr>
+<tr><td class="i-member-name">eLoadTypeBearing_Auto</td><td class="i-description">&nbsp;</td></tr>
+<tr><td class="i-member-name">eLoadTypeCentrifugal_Auto</td><td class="i-description">&nbsp;</td></tr>
+<tr><td class="i-member-name">eLoadTypeEnforcedDisplacement_Auto</td><td class="i-description">&nbsp;</td></tr>
+<tr><td class="i-member-name">eLoadTypeEnforcedRotation_Auto</td><td class="i-description">&nbsp;</td></tr>
+<tr><td class="i-member-name">eLoadTypeForce_Auto</td><td class="i-description">&nbsp;</td></tr>
+<tr><td class="i-member-name">eLoadTypeGravity_Auto</td><td class="i-description">&nbsp;</td></tr>
+<tr><td class="i-member-name">eLoadTypeMoment_Auto</td><td class="i-description">&nbsp;</td></tr>
+<tr><td class="i-member-name">eLoadTypeNone_Auto</td><td class="i-description">&nbsp;</td></tr>
+<tr><td class="i-member-name">eLoadTypePressure_Auto</td><td class="i-description">&nbsp;</td></tr>
+<tr><td class="i-member-name">eLoadTypeSSHTConvection_Auto</td><td class="i-description">&nbsp;</td></tr>
+<tr><td class="i-member-name">eLoadTypeSSHTHeatflux_Auto</td><td class="i-description">&nbsp;</td></tr>
+<tr><td class="i-member-name">eLoadTypeSSHTHeatGeneration_Auto</td><td class="i-description">&nbsp;</td></tr>
+<tr><td class="i-member-name">eLoadTypeSSHTRadiation_Auto</td><td class="i-description">&nbsp;</td></tr>
+<tr><td class="i-member-name">eLoadTypeSSHTTemperature_Auto</td><td class="i-description">&nbsp;</td></tr>
+<tr><td class="i-member-name">eLoadTypeTemperature_Auto</td><td class="i-description">&nbsp;</td></tr>
+<tr><td class="i-member-name">eLoadTypeTorque_Auto</td><td class="i-description">&nbsp;</td></tr>
+</table></dd>
+<dt><I>dLoadValue</I></dt>
+<dd></dd>
+<dt><I>dLoadValueAngAcceln</I></dt>
+<dd></dd>
+<dt><I>eLoadDir</I></dt>
+<dd><table class="i-filtered-item-list"><tr><th>Value</th><th>Description</th></tr>
+<tr><td class="i-member-name">eLoadDirAboutAxis_Auto</td><td class="i-description">&nbsp;</td></tr>
+<tr><td class="i-member-name">eLoadDirAlongVec_Auto</td><td class="i-description">&nbsp;</td></tr>
+<tr><td class="i-member-name">eLoadDirCentrifugal_Auto</td><td class="i-description">&nbsp;</td></tr>
+<tr><td class="i-member-name">eLoadDirComponents_Auto</td><td class="i-description">&nbsp;</td></tr>
+<tr><td class="i-member-name">eLoadDirDefault_Auto</td><td class="i-description">&nbsp;</td></tr>
+<tr><td class="i-member-name">eLoadDirForCnstr_Auto</td><td class="i-description">&nbsp;</td></tr>
+<tr><td class="i-member-name">eLoadDirGravity_Auto</td><td class="i-description">&nbsp;</td></tr>
+<tr><td class="i-member-name">eLoadDirHeatFlux_Auto</td><td class="i-description">&nbsp;</td></tr>
+<tr><td class="i-member-name">eLoadDirNormalToFace_Auto</td><td class="i-description">&nbsp;</td></tr>
+<tr><td class="i-member-name">eLoadDirTorque_Auto</td><td class="i-description">&nbsp;</td></tr>
+</table></dd>
+<dt><I>x</I></dt>
+<dd></dd>
+<dt><I>y</I></dt>
+<dd></dd>
+<dt><I>z</I></dt>
+<dd></dd>
+<dt><I>xx</I></dt>
+<dd></dd>
+<dt><I>yy</I></dt>
+<dd></dd>
+<dt><I>zz</I></dt>
+<dd></dd>
+<dt><I>colorLoadSymbol</I></dt>
+<dd></dd>
+<dt><I>colorLoadSymbolAngAcc</I></dt>
+<dd></dd>
+<dt><I>dSpacingFactor</I></dt>
+<dd></dd>
+<dt><I>dSizeFactor</I></dt>
+<dd></dd>
+<dt><I>dSteeringWheelLen</I></dt>
+<dd></dd>
+<dt><I>dwLoadProps</I></dt>
+<dd></dd>
+<dt><I>dLoadSymSpacing</I></dt>
+<dd></dd>
+<dt><I>dLoadSymSize</I></dt>
+<dd></dd>
+<dt><I>dAmbientTemp</I></dt>
+<dd></dd>
+<dt><I>dSurfEmissivity</I></dt>
+<dd></dd>
+<dt><I>dSurfAbsorptivity</I></dt>
+<dd></dd>
+<dt><I>dViewFactor</I></dt>
+<dd></dd>
+<dt><I>dCavity</I></dt>
+<dd></dd>
+</dl></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##RETURNS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=returns,caption=$$Return_Type$$%%<div class=""i-returns-content"">%%comment%%</div></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##REMARKS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=remarks,caption=$$Remarks$$%%%%comment%%</div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="sourcecode" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=source,caption=$$Source_Code$$%%<table border=0 cellpadding=0 cellspacing=0 class=sourcecode><tr><td nowrap>%%sourcecode%%</td></tr></table></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##EXAMPLEINTRO" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=""$$Example$$%%designlist:tagidentifier=##EXAMPLECODE,itemtype=Example%%""%%%%comment%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="EXAMPLEGROUP_LIST" namespace="ExampleGroup" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""="",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><div class="i-section-heading" id="i-example-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Example</span></div><div id="i-example-section-content" class="i-section-content">
+<div class="i-tab-container">
+    <ul>
+        <li class="i-filtered-content-VB.NET">
+			<a href="#i-tab-content-181235ed-b6c9-4930-b81b-0beb9765f1d5">Example (VB.NET)</a>
+		</li>
+
+    </ul>
+	<div id="i-tab-content-181235ed-b6c9-4930-b81b-0beb9765f1d5" class="i-filtered-content-VB.NET">
+		<pre><span style="color: #0000FF; ">Imports</span> System.IO
+<span style="color: #0000FF; ">Imports</span> System.Runtime.InteropServices
+
+<span style="color: #0000FF; ">Module</span> Example
+    &lt;STAThread()&gt; _
+    <span style="color: #0000FF; ">Sub</span> Main()
+        <span style="color: #0000FF; ">Dim</span> objApplication <span style="color: #0000FF; ">As</span> SolidEdgeFramework.Application = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objPartDocument <span style="color: #0000FF; ">As</span> SolidEdgePart.PartDocument = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objStudyOwner <span style="color: #0000FF; ">As</span> SolidEdgePart.StudyOwner = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objStudy <span style="color: #0000FF; ">As</span> SolidEdgePart.Study = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objThermalStudy <span style="color: #0000FF; ">As</span> SolidEdgePart.Study = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objMeshOwner <span style="color: #0000FF; ">As</span> SolidEdgePart.MeshOwner = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objLoadOwner <span style="color: #0000FF; ">As</span> SolidEdgePart.LoadOwner = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objLoad <span style="color: #0000FF; ">As</span> SolidEdgePart.Load = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objModels <span style="color: #0000FF; ">As</span> SolidEdgePart.Models = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objModel <span style="color: #0000FF; ">As</span> SolidEdgePart.Model = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objModelBody <span style="color: #0000FF; ">As</span> SolidEdgeGeometry.Body = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objGeomArray(0) <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Object</span>
+        <span style="color: #0000FF; ">Dim</span> objFaces <span style="color: #0000FF; ">As</span> SolidEdgeGeometry.Faces = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objFaceArray(1) <span style="color: #0000FF; ">As</span> SolidEdgeGeometry.Face
+        <span style="color: #0000FF; ">Dim</span> objExtrudedProtrusions <span style="color: #0000FF; ">As</span> SolidEdgePart.ExtrudedProtrusions = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objExtrudedProtrusion <span style="color: #0000FF; ">As</span> SolidEdgePart.ExtrudedProtrusion = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> estudyType <span style="color: #0000FF; ">As</span> SolidEdgePart.FEAStudyTypeEnum_Auto
+        <span style="color: #0000FF; ">Dim</span> eMeshType <span style="color: #0000FF; ">As</span> SolidEdgePart.FEAMeshTypeEnum_Auto
+        <span style="color: #0000FF; ">Dim</span> dThickness <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = 0
+        <span style="color: #0000FF; ">Dim</span> dwInputOptions <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">UInteger</span> = 0
+        <span style="color: #0000FF; ">Dim</span> ulNumModes <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">ULong</span> = 7
+        <span style="color: #0000FF; ">Dim</span> dFreqlow <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = 0
+        <span style="color: #0000FF; ">Dim</span> dFreqHigh <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = 1.0
+        <span style="color: #0000FF; ">Dim</span> cmdLineOpts <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">String</span> = <span style="color: #800000; ">&quot;&quot;</span>
+        <span style="color: #0000FF; ">Dim</span> nastranKeywordOpts <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">String</span> = <span style="color: #800000; ">&quot;&quot;</span>
+        <span style="color: #0000FF; ">Dim</span> dwResultoptions <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">UInteger</span> = 0
+
+        <span style="color: #008000; ">'Thermal Options
+</span>        <span style="color: #0000FF; ">Dim</span> dConvectionExp <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = 0
+        <span style="color: #0000FF; ">Dim</span> dEnclosureAmbientEle <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = 0
+        <span style="color: #0000FF; ">Dim</span> dwThrmlOptions <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">UInteger</span> = 0
+
+        <span style="color: #008000; ">'Thermal Load Options
+</span>        <span style="color: #0000FF; ">Dim</span> eLoadType <span style="color: #0000FF; ">As</span> SolidEdgePart.FEALoadTypeEnum_Auto = SolidEdgePart.FEALoadTypeEnum_Auto.eLoadTypeNone_Auto
+
+        <span style="color: #0000FF; ">Dim</span> dLoadValue <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = 0.0
+        <span style="color: #0000FF; ">Dim</span> dLoadValueAngAccln <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = 0.0
+
+        <span style="color: #0000FF; ">Dim</span> eLoadSymbDir <span style="color: #0000FF; ">As</span> SolidEdgePart.LoadSymbDirOptsEnum_Auto = SolidEdgePart.LoadSymbDirOptsEnum_Auto.eLoadDirHeatFlux_Auto
+
+        <span style="color: #0000FF; ">Dim</span> dLoadDirX <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = 0.0
+        <span style="color: #0000FF; ">Dim</span> dLoadDirY <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = 0.0
+        <span style="color: #0000FF; ">Dim</span> dLoadDirZ <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = 0.0
+        <span style="color: #0000FF; ">Dim</span> dLoadPosX <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = 0.0
+        <span style="color: #0000FF; ">Dim</span> dLoadPosY <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = 0.0
+        <span style="color: #0000FF; ">Dim</span> dLoadPosZ <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = 0.0
+        <span style="color: #0000FF; ">Dim</span> unColorSymbol <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">UInteger</span> = 255
+        <span style="color: #0000FF; ">Dim</span> unAngAcclnColorSymbol <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">UInteger</span> = 8388673
+        <span style="color: #0000FF; ">Dim</span> dSpacingFactor <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = 0.0
+        <span style="color: #0000FF; ">Dim</span> dSizeFactor <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = 0.0
+        <span style="color: #0000FF; ">Dim</span> dSteeringWheelLen <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = 0.0
+        <span style="color: #0000FF; ">Dim</span> dwLoadProps <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">UInteger</span> = 0
+        <span style="color: #0000FF; ">Dim</span> dLoadSymSpacing <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = 0.0
+        <span style="color: #0000FF; ">Dim</span> dLoadSymSize <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = 0.0
+        <span style="color: #0000FF; ">Dim</span> dAmbientTemp <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = 0.0
+        <span style="color: #0000FF; ">Dim</span> dSurfEmissivity <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = 0.0
+        <span style="color: #0000FF; ">Dim</span> dSurfAbsoptivity <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = 0.0
+        <span style="color: #0000FF; ">Dim</span> dViewFactor <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = 0.0
+        <span style="color: #0000FF; ">Dim</span> nCavity <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Integer</span> = 0
+
+
+        <span style="color: #0000FF; ">Try</span>
+            OleMessageFilter.Register()
+
+            objApplication = Marshal.GetActiveObject(<span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>)
+            objPartDocument = objApplication.ActiveDocument
+
+            <span style="color: #008000; ">' Get Study Owner 
+</span>            objStudyOwner = objPartDocument.StudyOwner
+
+            <span style="color: #008000; ">'Add Thermal Study
+</span>            estudyType = SolidEdgePart.FEAStudyTypeEnum_Auto.eStudyTypeSSHT_Auto
+            eMeshType = SolidEdgePart.FEAMeshTypeEnum_Auto.eMeshTypeTetrahedral_Auto
+            objStudyOwner.AddThermalStudy(estudyType,
+                                        eMeshType,
+                                        dThickness,
+                                        dwInputOptions,
+                                        ulNumModes,
+                                        dFreqlow,
+                                        dFreqHigh,
+                                        cmdLineOpts,
+                                        nastranKeywordOpts,
+                                        dwResultoptions,
+                                        dwThrmlOptions,
+                                        dEnclosureAmbientEle,
+                                        dConvectionExp,
+                                        objStudy)
+
+
+            objThermalStudy = objStudy
+            objModels = objPartDocument.Models
+            objModel = objModels.Item(1)
+
+            <span style="color: #008000; ">' Get the study geometries
+</span>            objModelBody = objModel.Body()
+            objGeomArray(0) = <span style="color: #0000FF; ">Nothing</span>
+            objGeomArray(0) = objModelBody
+
+            <span style="color: #008000; ">' Deselect the geometry from study
+</span>            objThermalStudy.SetGeometries(objGeomArray)
+
+            objThermalStudy.GetLoadOwner(objLoadOwner)
+
+            <span style="color: #008000; ">'Get Thermal Options
+</span>            objThermalStudy.GetThermalStudyOptions(dwThrmlOptions, dEnclosureAmbientEle, dConvectionExp)
+
+            dEnclosureAmbientEle = 10
+            dConvectionExp = 3.4
+
+
+            <span style="color: #008000; ">'Set Thermal Options
+</span>            objThermalStudy.SetThermalStudyOptions(dwThrmlOptions, dEnclosureAmbientEle, dConvectionExp)
+
+            <span style="color: #008000; ">' Get Protrusion.
+</span>            objExtrudedProtrusions = objModel.ExtrudedProtrusions
+            objExtrudedProtrusion = objExtrudedProtrusions.Item(1)
+
+            <span style="color: #008000; ">' Get faces collection
+</span>            objFaces = objExtrudedProtrusion.Faces(SolidEdgeGeometry.FeatureTopologyQueryTypeConstants.igQueryAll)
+
+            objFaceArray(0) = objFaces.Item(0)
+
+            <span style="color: #008000; ">'Heat Flux Load Properties
+</span>            eLoadType = SolidEdgePart.FEALoadTypeEnum_Auto.eLoadTypeSSHTHeatflux_Auto
+            dLoadValue = 100
+            dLoadValueAngAccln = 0.0
+            eLoadSymbDir = SolidEdgePart.LoadSymbDirOptsEnum_Auto.eLoadDirHeatFlux_Auto
+            dLoadDirX = 0.0
+            dLoadDirY = 0.0
+            dLoadDirZ = 1
+            dLoadPosX = -0.039485373058438106
+            dLoadPosY = 0.0
+            dLoadPosZ = 0.034828766147378246
+            unColorSymbol = 255
+            unAngAcclnColorSymbol = 8388673
+            dSpacingFactor = 0.15
+            dSizeFactor = 0.155
+            dSteeringWheelLen = 0.0
+            dwLoadProps = 2304
+            dLoadSymSpacing = 0.046329513280848368
+            dLoadSymSize = 0.047873830390209982
+            dAmbientTemp = 273.15
+            dSurfEmissivity = 0
+            dSurfAbsoptivity = 0
+            dViewFactor = 0
+            nCavity = 1
+
+            <span style="color: #008000; ">'Add Thermal Heat Flux Load
+</span>            objLoadOwner.AddThermalLoad(objFaceArray,
+                                        eLoadType,
+                                        dLoadValue,
+                                        dLoadValueAngAccln,
+                                        eLoadSymbDir,
+                                        dLoadDirX,
+                                        dLoadDirY,
+                                        dLoadDirZ,
+                                        dLoadPosX,
+                                        dLoadPosY,
+                                        dLoadPosZ,
+                                        unColorSymbol,
+                                        unAngAcclnColorSymbol,
+                                        dSpacingFactor,
+                                        dSizeFactor,
+                                        dSteeringWheelLen,
+                                        dwLoadProps,
+                                        dLoadSymSpacing,
+                                        dLoadSymSize,
+                                        dAmbientTemp,
+                                        dSurfEmissivity,
+                                        dSurfAbsoptivity,
+                                        dViewFactor,
+                                        nCavity,
+                                        objLoad)
+
+
+            <span style="color: #008000; ">'Update Heat Flux Load Value.
+</span>            objLoad.SetLoadValue(500)
+
+            objLoad = <span style="color: #0000FF; ">Nothing</span>
+            objFaceArray(0) = <span style="color: #0000FF; ">Nothing</span>
+            objFaceArray(0) = objFaces.Item(4)
+
+            <span style="color: #008000; ">'Radiation Load Properties
+</span>            eLoadType = SolidEdgePart.FEALoadTypeEnum_Auto.eLoadTypeSSHTRadiation_Auto
+            dLoadValue = 100
+            dLoadValueAngAccln = 0.0
+            eLoadSymbDir = SolidEdgePart.LoadSymbDirOptsEnum_Auto.eLoadDirNormalToFace_Auto
+            dLoadDirX = 1
+            dLoadDirY = 0.0
+            dLoadDirZ = 0.0
+            dLoadPosX = -0.04057088227356833
+            dLoadPosY = 0.022897311677400896
+            dLoadPosZ = 0.06554422099691215
+            unColorSymbol = 42495
+            unAngAcclnColorSymbol = 8388673
+            dSpacingFactor = 0.15
+            dSizeFactor = 0.155
+            dSteeringWheelLen = 0.0
+            dwLoadProps = 2048
+            dLoadSymSpacing = 0.046329513280848368
+            dLoadSymSize = 0.047873830390209982
+            dAmbientTemp = 315.15
+            dSurfEmissivity = 0.54
+            dSurfAbsoptivity = 0.237
+            dViewFactor = 0.45
+            nCavity = 1
+
+            <span style="color: #008000; ">'Add Thermal Radiation Load
+</span>            objLoadOwner.AddThermalLoad(objFaceArray,
+                                        eLoadType,
+                                        dLoadValue,
+                                        dLoadValueAngAccln,
+                                        eLoadSymbDir,
+                                        dLoadDirX,
+                                        dLoadDirY,
+                                        dLoadDirZ,
+                                        dLoadPosX,
+                                        dLoadPosY,
+                                        dLoadPosZ,
+                                        unColorSymbol,
+                                        unAngAcclnColorSymbol,
+                                        dSpacingFactor,
+                                        dSizeFactor,
+                                        dSteeringWheelLen,
+                                        dwLoadProps,
+                                        dLoadSymSpacing,
+                                        dLoadSymSize,
+                                        dAmbientTemp,
+                                        dSurfEmissivity,
+                                        dSurfAbsoptivity,
+                                        dViewFactor,
+                                        nCavity,
+                                        objLoad)
+
+
+            <span style="color: #008000; ">'Get Thermal Load Options
+</span>            objLoad.GetThermalLoadOptions(eLoadType,
+                                        dLoadValue,
+                                        dLoadValueAngAccln,
+                                        eLoadSymbDir,
+                                        dLoadDirX,
+                                        dLoadDirY,
+                                        dLoadDirZ,
+                                        dLoadPosX,
+                                        dLoadPosY,
+                                        dLoadPosZ,
+                                        unColorSymbol,
+                                        unAngAcclnColorSymbol,
+                                        dSpacingFactor,
+                                        dSizeFactor,
+                                        dSteeringWheelLen,
+                                        dwLoadProps,
+                                        dLoadSymSpacing,
+                                        dLoadSymSize,
+                                        dAmbientTemp,
+                                        dSurfEmissivity,
+                                        dSurfAbsoptivity,
+                                        dViewFactor,
+                                        nCavity)
+
+            dAmbientTemp = 306.15
+            dSurfAbsoptivity = 0.9
+            dSurfEmissivity = 0.43
+            dViewFactor = 0.75
+            nCavity = 10
+
+            <span style="color: #008000; ">'Set Thermal Load Options
+</span>            objLoad.SetThermalLoadOptions(eLoadType,
+                                        dLoadValue,
+                                        dLoadValueAngAccln,
+                                        eLoadSymbDir,
+                                        dLoadDirX,
+                                        dLoadDirY,
+                                        dLoadDirZ,
+                                        dLoadPosX,
+                                        dLoadPosY,
+                                        dLoadPosY,
+                                        unColorSymbol,
+                                        unAngAcclnColorSymbol,
+                                        dSpacingFactor,
+                                        dSizeFactor,
+                                        dSteeringWheelLen,
+                                        dwLoadProps,
+                                        dLoadSymSpacing,
+                                        dLoadSymSize,
+                                        dAmbientTemp,
+                                        dSurfEmissivity,
+                                        dSurfAbsoptivity,
+                                        dViewFactor,
+                                        nCavity)
+
+
+        <span style="color: #0000FF; ">Catch</span> ex <span style="color: #0000FF; ">As</span> Exception
+            Console.WriteLine(ex.Message)
+        <span style="color: #0000FF; ">Finally</span>
+            OleMessageFilter.Revoke()
+        <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">Try</span>
+    <span style="color: #0000FF; ">End Sub</span>
+
+<span style="color: #0000FF; ">End Module</span></pre>
+	</div>
+	
+</div>
+</div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="INLINE_EXAMPLE" namespace="Example" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""<>"",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="MENU_LINK" namespace="example" source="Item" filter="type=linked" NoHeader="True" NoFooter="True" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=examplelinks,caption=$$Example$$%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="FilteredItemList" scrap="CATEGORIZED_LINKS" namespace="linkcategory" source="Item" filter="" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=seealso,caption=""$$See_Also$$%%designlist:tagidentifier=##SEEALSO,itemtype=See Also%%""%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><div class="i-section-heading" id="i-seealso-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">See Also</span></div><div id="i-seealso-section-content" class="i-section-content"><p id=dxseealsocontent><a href="SolidEdgePart~Load.html">Load Object</a>
+&nbsp;|&nbsp;<a href="SolidEdgePart~Load_members.html">Load Members</a>
+&nbsp;|&nbsp;<a href="ST5-WhatsNew.html">Solid Edge ST5 - What's New</a>
+</p>
+</p></div><!--DXMETADATA end -->
+    </div>
+    <div id="i-footer-content" class="i-footer-content">
+        <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_FOOTER" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="CopyrightNotice" format="<p>&nbsp;</p><p>&nbsp;</p><hr style=""height: 1px"" /><p>%%variable%%</p>" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="FeedbackLink" format="" --><!--DXMETADATA end-->
+    </div>
+    
+
+    <!--DXMETADATA start type="IsNew" format="<script type=""text/javascript"">setIsNew = true;</script>" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<script type=""text/javascript"">setIsResponsiveEnabled = true;</script>" --><!--DXMETADATA end-->
+    <script type="text/javascript">
+        $(function() {
+            var documentInstance = new Innovasys.Content.Document(document.body);
+            documentInstance.isNew = !(typeof setIsNew === "undefined");
+            documentInstance.isResponsiveEnabled = !(typeof setIsResponsiveEnabled === "undefined");
+            documentInstance.load();
+        });
+    </script>
+</body>
+</html>

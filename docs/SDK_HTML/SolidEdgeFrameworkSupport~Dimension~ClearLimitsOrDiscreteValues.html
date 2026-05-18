@@ -1,0 +1,471 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--DXMETADATA start type="MetaCharset" --><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><!--DXMETADATA end-->
+    <meta http-equiv="X-UA-Compatible" value="IE=9" />
+
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Literal" condition="helpversion:value=3" value="<meta name=""Microsoft.Help.SelfBranded"" content=""true"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="PageItemTitle" format="<title>%%PageItemTitle%%</title>" --><title>ClearLimitsOrDiscreteValues Method</title><!--DXMETADATA end-->
+    <!--DXMETADATA start type="ItemTitleNoQuotes" format="<meta name=""Title"" content=""%%ItemTitleNoQuotes%%""/>" --><!--DXMETADATA end-->    
+    
+
+    <!--DXMETADATA start type="PackageLink" packagename="jquery" filetype="script" firstlinkattributes="id=""mshs_support_script"""--><script src="template/packages/jquery/script/chm.mshc/jquery-1.7.2.min.js" type="text/javascript" id="mshs_support_script"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="script"--><script src="template/packages/jquery-ui/script/chm.mshc/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/jquery-ui/css/chm.mshc/jquery-ui-1.8.18.custom.css"></link><!--DXMETADATA end-->
+	
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/plugins-ax/css/chm.mshc/jquery-plugins.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="css" firstlinkattributes=" data-mshv2-stylesheet=""/template/packages/core-ax/dx.com.mshv2.css"" data-mshv1-stylesheet=""/template/packages/core-ax/dx.com.mshv1.css"" data-responsive-mobile=""template/packages/core-ax/dx.com.mobile.css"" data-responsive-tablet=""template/packages/core-ax/dx.com.tablet.css"""--><link rel="stylesheet" type="text/css" href="template/packages/core-ax/css/dx.com.css"  data-mshv2-stylesheet="/template/packages/core-ax/dx.com.mshv2.css" data-mshv1-stylesheet="/template/packages/core-ax/dx.com.mshv1.css" data-responsive-mobile="template/packages/core-ax/dx.com.mobile.css" data-responsive-tablet="template/packages/core-ax/dx.com.tablet.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="script"--><script src="template/packages/plugins-ax/script/chm.mshc/jquery-plugins.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="script"--><script src="template/packages/core-ax/script/dx.com.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="TopicId" format="<meta name=""Microsoft.Help.Id"" content=""%%TopicId%%""/>" --><meta name="Microsoft.Help.Id" content="SolidEdgeFrameworkSupport~Dimension~ClearLimitsOrDiscreteValues"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Synopsis" StripHtmlTags="True" MaxLength="250" format="<meta name=""Description"" content=""%%Synopsis%%"" />"--><meta name="Description" content="Clears limits or discrete values on dimension object." /><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocParentId" format="<meta name=""Microsoft.Help.TocParent"" content=""%%TocParentId%%""/>" --><meta name="Microsoft.Help.TocParent" content="SolidEdgeFrameworkSupport~Dimension_methods"/><!--DXMETADATA end-->
+    <meta name="Microsoft.Help.ContentType" content="Reference" />
+    <!--DXMETADATA start type="MshvKeywords" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="MshvMetaTags" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.Locale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.TopicLocale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="Stylesheets" --><link rel="stylesheet" type="text/css" href="stylesheets/customstyles.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Scripts" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="DesignTime"--><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_PROPERTIES" --><!--DXMETADATA end -->
+
+    <!--DXMETADATA start type="CustomHeadContent" --><!--DXMETADATA end-->
+</head>
+
+<body>
+    <div id="i-before-header-content" class="i-before-header-content">
+        
+    </div>
+    <div id="i-header-content" class="i-header-content">
+        <!--DXMETADATA start type="LogoImage" --><img class="logoimage" src="images/sesdk_header.jpg" border="0"></img><!--DXMETADATA end-->
+            <div class="i-project-title"><!--DXMETADATA start type="ProjectTitle" -->Solid Edge FrameworkSupport Type Library<!--DXMETADATA end--></div>
+        <div class="i-page-title"><div class="i-page-title-text"><!--DXMETADATA start type="PageItemTitle" -->ClearLimitsOrDiscreteValues Method<!--DXMETADATA end--></div></div>
+    </div>
+    <div id="i-after-header-content" class="i-after-header-content">
+        <!-- Spacing --> <span class="i-toggle-all-sections i-function-link">
+                <label class="i-collapse-all"><!--DXMETADATA start type="Phrase" name="COLLAPSE_ALL" -->Collapse All<!--DXMETADATA end--></label>
+                <label class="i-expand-all" style="display: none;"><!--DXMETADATA start type="Phrase" name="EXPAND_ALL" -->Expand All<!--DXMETADATA end--></label>
+            </span><!--DXMETADATA start type="Literal" condition="communityenabled" value="%%scrap:name=_COMMUNITY_DROPDOWN%%" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="IsWebOutputRootPageLinkEnabled" format="<a href='#' class="i-page-link" class="i-view-in-frame-link" title='$$VIEW_WITH_NAVIGATION_TOOLS_TIP$$' style='display: none' data-root-page='%%WebOutputRootPage%%%%OutputFileExtension%%' target='_top'>$$VIEW_WITH_NAVIGATION_TOOLS_TEXT$$</a>" --><a href='#' class="i-page-link" class="i-view-in-frame-link" title='Open this Topic in a view that includes Navigation tools (Table of Contents, Index, Search)' style='display: none' data-root-page='webframe.html' target='_top'>View with Navigation Tools</a><!--DXMETADATA end-->
+    </div>
+    <!--DXMETADATA start type="Breadcrumbs" scrap="_BREADCRUMBS" --><div class="i-breadcrumbs-container"><table><tr><td>
+<a href="SolidEdgeFrameworkSupport_P.html">Solid Edge FrameworkSupport Type Library</a>
+ > <a href="SolidEdgeFrameworkSupport~Dimension.html">Dimension Object</a>
+ : ClearLimitsOrDiscreteValues Method</td></tr></table></div><!--DXMETADATA end -->
+    
+    <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_BUBBLES" namespace="parameter" source="Item" --><!--DXMETADATA end -->
+    <div id="i-body-content" class="i-body-content">
+        <!--DXMETADATA start type="Description" source="Item" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=description,caption=$$Description$$%%<div class=""i-description-content"">%%description%%</div></div>" --><div class="i-section-heading" id="i-description-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Description</span></div><div id="i-description-section-content" class="i-section-content"><div class="i-description-content">Clears limits or discrete values on dimension object.</div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="Syntax" lang="VB" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=syntax,caption=$$Syntax$$%%<div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>%%Syntax%%</pre></tr></table></div></div>" --><div class="i-section-heading" id="i-syntax-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Syntax</span></div><div id="i-syntax-section-content" class="i-section-content"><div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>Public Sub ClearLimitsOrDiscreteValues() </pre></tr></table></div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_LIST" namespace="parameter" source="Item" filter="" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=parameters,caption=$$ParameterList$$%%%%filtereditemlist%%</div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##RETURNS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=returns,caption=$$Return_Type$$%%<div class=""i-returns-content"">%%comment%%</div></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##REMARKS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=remarks,caption=$$Remarks$$%%%%comment%%</div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="sourcecode" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=source,caption=$$Source_Code$$%%<table border=0 cellpadding=0 cellspacing=0 class=sourcecode><tr><td nowrap>%%sourcecode%%</td></tr></table></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##EXAMPLEINTRO" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=""$$Example$$%%designlist:tagidentifier=##EXAMPLECODE,itemtype=Example%%""%%%%comment%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="EXAMPLEGROUP_LIST" namespace="ExampleGroup" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""="",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><div class="i-section-heading" id="i-example-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Example</span></div><div id="i-example-section-content" class="i-section-content">
+<div class="i-tab-container">
+    <ul>
+        <li class="i-filtered-content-VB.NET">
+			<a href="#i-tab-content-5f78dd21-885b-43df-870a-17b0522cd32c">Example (VB.NET)</a>
+		</li>
+        <li class="i-filtered-content-CS">
+			<a href="#i-tab-content-858efff4-b80b-4b26-9537-9a0fa641f478">Example (C#)</a>
+		</li>
+
+    </ul>
+	<div id="i-tab-content-5f78dd21-885b-43df-870a-17b0522cd32c" class="i-filtered-content-VB.NET">
+		<pre><span style="color: #0000FF; ">Imports</span> System.Runtime.InteropServices
+<span style="color: #0000FF; ">Public</span> <span style="color: #0000FF; ">Class</span> Form1
+    <span style="color: #0000FF; ">Private</span> <span style="color: #0000FF; ">Sub</span> Button1_Click(sender <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Object</span>, e <span style="color: #0000FF; ">As</span> EventArgs) <span style="color: #0000FF; ">Handles</span> Button1.Click
+        <span style="color: #0000FF; ">Dim</span> objApplication <span style="color: #0000FF; ">As</span> SolidEdgeFramework.Application = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objDraftDoc <span style="color: #0000FF; ">As</span> SolidEdgeDraft.DraftDocument = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objType <span style="color: #0000FF; ">As</span> Type = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objDimension <span style="color: #0000FF; ">As</span> SolidEdgeFrameworkSupport.Dimension = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objDimensions <span style="color: #0000FF; ">As</span> SolidEdgeFrameworkSupport.Dimensions = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> Sheet <span style="color: #0000FF; ">As</span> SolidEdgeDraft.Sheet = <span style="color: #0000FF; ">Nothing</span>
+
+        <span style="color: #0000FF; ">Try</span>
+
+            <span style="color: #0000FF; ">Try</span>
+                objApplication = Marshal.GetActiveObject(<span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>)
+            <span style="color: #0000FF; ">Catch</span> ex <span style="color: #0000FF; ">As</span> Exception
+                <span style="color: #008000; ">' Get the type from the Solid Edge ProgID
+</span>                objType = Type.GetTypeFromProgID(<span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>)
+                <span style="color: #008000; ">' Start Solid Edge
+</span>                objApplication = Activator.CreateInstance(objType)
+            <span style="color: #0000FF; ">Finally</span>
+                <span style="color: #008000; ">' Make Solid Edge visible
+</span>                objApplication.Visible = <span style="color: #0000FF; ">True</span>
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">Try</span>
+
+
+            <span style="color: #008000; ">' open the document mentioned in the doc files.
+</span>
+            objDraftDoc = objApplication.ActiveDocument
+            <span style="color: #0000FF; ">If</span> objDraftDoc <span style="color: #0000FF; ">Is</span> <span style="color: #0000FF; ">Nothing</span> <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;Could not open document &quot;</span>)
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+
+            Sheet = objDraftDoc.ActiveSheet
+
+            <span style="color: #0000FF; ">If</span> (Sheet <span style="color: #0000FF; ">Is</span> <span style="color: #0000FF; ">Nothing</span>) <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;No active sheet in the document&quot;</span>)
+
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+
+            objDimensions = Sheet.Dimensions
+            objDimension = objDimensions.Item(1)
+
+            <span style="color: #008000; ">'****************DIMENSIONS*****************
+</span>            <span style="color: #008000; ">'***************unit type*******************
+</span>            objDimension.UnitsType = 1
+
+            <span style="color: #0000FF; ">Dim</span> dimUnitType <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Integer</span>
+
+            dimUnitType = objDimension.UnitsType
+
+            <span style="color: #0000FF; ">If</span> dimUnitType &lt;&gt; 1 <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;Failed to get/set unit type&quot;</span>)
+
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+
+            <span style="color: #008000; ">'***************Discrete values*******************
+</span>            <span style="color: #0000FF; ">Dim</span> inputDiscreteValues(0 <span style="color: #0000FF; ">To</span> 3) <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+            <span style="color: #0000FF; ">Dim</span> outputDiscreteValues(0) <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+
+            inputDiscreteValues(0) = 0.0255
+            inputDiscreteValues(1) = 0.26
+            inputDiscreteValues(2) = 0.265
+            inputDiscreteValues(3) = 0.27
+
+            objDimension.SetValueDiscreteValues(inputDiscreteValues)
+
+            objDimension.GetValueDiscreteValues(outputDiscreteValues)
+
+            <span style="color: #0000FF; ">If</span> outputDiscreteValues(0) &lt;&gt; inputDiscreteValues(0) <span style="color: #0000FF; ">Or</span>
+                outputDiscreteValues(1) &lt;&gt; inputDiscreteValues(1) <span style="color: #0000FF; ">Or</span>
+                outputDiscreteValues(2) &lt;&gt; inputDiscreteValues(2) <span style="color: #0000FF; ">Or</span>
+                outputDiscreteValues(3) &lt;&gt; inputDiscreteValues(3) <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;Failed to get/set discrete values&quot;</span>)
+
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+
+            <span style="color: #008000; ">'***************Add discrete value*******************
+</span>            objDimension.AddDiscreteValue(0.22)
+
+            objDimension.GetValueDiscreteValues(outputDiscreteValues)
+
+            <span style="color: #0000FF; ">If</span> outputDiscreteValues(2) &lt;&gt; 0.22 <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;Failed to add discrete values&quot;</span>)
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+
+            <span style="color: #008000; ">'***************Remove discrete value*******************
+</span>            objDimension.RemoveDiscreteValue(0.265)
+
+            objDimension.GetValueDiscreteValues(outputDiscreteValues)
+
+            <span style="color: #0000FF; ">If</span> outputDiscreteValues(4) &lt;&gt; 0.27 <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;Failed to remove discrete values&quot;</span>)
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+
+            <span style="color: #008000; ">'***************Range value*******************
+</span>            objDimension.SetValueRangeValues(0.01, 5, 1)
+
+            <span style="color: #0000FF; ">Dim</span> LowValue <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+            <span style="color: #0000FF; ">Dim</span> HighValue <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+            <span style="color: #0000FF; ">Dim</span> condition <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Integer</span>
+
+            objDimension.GetValueRangeValues(LowValue, condition, HighValue)
+
+            <span style="color: #0000FF; ">If</span> LowValue &lt;&gt; 0.01 <span style="color: #0000FF; ">Or</span>
+                condition &lt;&gt; 5 <span style="color: #0000FF; ">Or</span>
+                HighValue &lt;&gt; 1 <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;Failed to set/get range values&quot;</span>)
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+
+            <span style="color: #008000; ">'***************Range value low*******************
+</span>            objDimension.SetValueRangeLowValue(0.001)
+
+            objDimension.GetValueRangeValues(LowValue, condition, HighValue)
+
+            <span style="color: #0000FF; ">If</span> LowValue &lt;&gt; 0.001 <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;Failed to set/get low range values&quot;</span>)
+
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+
+            <span style="color: #008000; ">'***************Range value high*******************
+</span>            objDimension.SetValueRangeHighValue(2)
+
+            objDimension.GetValueRangeValues(LowValue, condition, HighValue)
+
+            <span style="color: #0000FF; ">If</span> HighValue &lt;&gt; 2 <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;Failed to set/get high range values&quot;</span>)
+
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+
+            <span style="color: #008000; ">'*******************Get out of range value****************
+</span>            <span style="color: #0000FF; ">Dim</span> dBadValue <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+            <span style="color: #0000FF; ">Dim</span> dimensionValue <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = 3.0
+
+            <span style="color: #008000; ">'objDimension.Value = dimensionValue
+</span>            dBadValue = objDimension.GetValueOutOfRange()
+
+            <span style="color: #0000FF; ">If</span> dBadValue &lt;&gt; 0.02 <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;Failed to get out of range value&quot;</span>)
+
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+
+            <span style="color: #008000; ">'*******************Clear limits or discrete values****************
+</span>            <span style="color: #0000FF; ">Dim</span> count <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Integer</span>
+            objDimension.ClearLimitsOrDiscreteValues()
+
+            objDimension.GetValueDiscreteValues(outputDiscreteValues)
+            outputDiscreteValues.GetLength(count)
+
+            <span style="color: #0000FF; ">If</span> count &lt;&gt; 0 <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;Failed to clear limits or discrete values&quot;</span>)
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+
+        <span style="color: #0000FF; ">Catch</span> ex <span style="color: #0000FF; ">As</span> Exception
+            <span style="color: #0000FF; ">MsgBox</span>(ex.ToString)
+
+        <span style="color: #0000FF; ">Finally</span>
+
+            <span style="color: #008000; ">' close the doc
+</span>            objDraftDoc.Close(<span style="color: #0000FF; ">False</span>)
+            objDraftDoc = <span style="color: #0000FF; ">Nothing</span>
+            objApplication = <span style="color: #0000FF; ">Nothing</span>
+
+        <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">Try</span>
+
+
+    <span style="color: #0000FF; ">End Sub</span>
+<span style="color: #0000FF; ">End Class</span>
+</pre>
+	</div>
+	<div id="i-tab-content-858efff4-b80b-4b26-9537-9a0fa641f478" class="i-filtered-content-CS">
+		<pre><span style="color: #0000FF; ">using</span> System;
+<span style="color: #0000FF; ">using</span> System.Windows.Forms;
+<span style="color: #0000FF; ">using</span> System.Runtime.InteropServices;
+<span style="color: #0000FF; ">public</span> <span style="color: #0000FF; ">class</span> Form1
+{
+    <span style="color: #0000FF; ">private</span> <span style="color: #0000FF; ">void</span> Button1_Click(<span style="color: #0000FF; ">object</span> sender, EventArgs e)
+    {
+        SolidEdgeFramework.Application objApplication = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeDraft.DraftDocument objDraftDoc = <span style="color: #0000FF; ">null</span>;
+        Type objType = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeFrameworkSupport.Dimension objDimension = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeFrameworkSupport.Dimensions objDimensions = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeDraft.Sheet Sheet = <span style="color: #0000FF; ">null</span>;
+
+        <span style="color: #0000FF; ">try</span>
+        {
+
+            <span style="color: #0000FF; ">try</span>
+            {
+                objApplication = (SolidEdgeFramework.Application)Marshal.GetActiveObject(<span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>);
+            }
+            <span style="color: #0000FF; ">catch</span> (Exception ex)
+            {
+                <span style="color: #008000; ">// Get the type from the Solid Edge ProgID
+</span>                objType = Type.GetTypeFromProgID(<span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>);
+                <span style="color: #008000; ">// Start Solid Edge
+</span>                objApplication = Activator.CreateInstance(objType);
+            }
+            <span style="color: #0000FF; ">finally</span>
+            {
+                <span style="color: #008000; ">// Make Solid Edge visible
+</span>                objApplication.Visible = <span style="color: #0000FF; ">true</span>;
+            }
+
+
+            <span style="color: #008000; ">// open the document mentioned in the doc files.
+</span>
+            objDraftDoc = objApplication.ActiveDocument;
+            <span style="color: #0000FF; ">if</span> (objDraftDoc == <span style="color: #0000FF; ">null</span>)
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;Could not open document &quot;</span>);
+            }
+
+            Sheet = objDraftDoc.ActiveSheet;
+
+            <span style="color: #0000FF; ">if</span> (Sheet == <span style="color: #0000FF; ">null</span>)
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;No active sheet in the document&quot;</span>);
+
+            }
+
+            objDimensions = Sheet.Dimensions;
+            objDimension = objDimensions.Item(1);
+
+            <span style="color: #008000; ">//****************DIMENSIONS*****************
+            //***************unit type*******************
+</span>            objDimension.UnitsType = 1;
+
+            <span style="color: #0000FF; ">int</span> dimUnitType = objDimension.UnitsType;
+
+
+            <span style="color: #0000FF; ">if</span> (dimUnitType != 1)
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;Failed to get/set unit type&quot;</span>);
+
+            }
+
+            <span style="color: #008000; ">//***************Discrete values*******************
+</span>            <span style="color: #0000FF; ">double</span>[] inputDiscreteValues = <span style="color: #0000FF; ">new</span> <span style="color: #0000FF; ">double</span>[4];
+            <span style="color: #0000FF; ">double</span>[] outputDiscreteValues = <span style="color: #0000FF; ">new</span> <span style="color: #0000FF; ">double</span>[1];
+
+            inputDiscreteValues[0] = 0.0255;
+            inputDiscreteValues[1] = 0.26;
+            inputDiscreteValues[2] = 0.265;
+            inputDiscreteValues[3] = 0.27;
+
+            objDimension.SetValueDiscreteValues(inputDiscreteValues);
+
+            objDimension.GetValueDiscreteValues(outputDiscreteValues);
+
+            <span style="color: #0000FF; ">if</span> (outputDiscreteValues[0] != inputDiscreteValues[0] || outputDiscreteValues[1] != inputDiscreteValues[1] || outputDiscreteValues[2] != inputDiscreteValues[2] || outputDiscreteValues[3] != inputDiscreteValues[3])
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;Failed to get/set discrete values&quot;</span>);
+
+            }
+
+            <span style="color: #008000; ">//***************Add discrete value*******************
+</span>            objDimension.AddDiscreteValue(0.22);
+
+            objDimension.GetValueDiscreteValues(outputDiscreteValues);
+
+            <span style="color: #0000FF; ">if</span> (outputDiscreteValues[2] != 0.22)
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;Failed to add discrete values&quot;</span>);
+            }
+
+            <span style="color: #008000; ">//***************Remove discrete value*******************
+</span>            objDimension.RemoveDiscreteValue(0.265);
+
+            objDimension.GetValueDiscreteValues(outputDiscreteValues);
+
+            <span style="color: #0000FF; ">if</span> (outputDiscreteValues[4] != 0.27)
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;Failed to remove discrete values&quot;</span>);
+            }
+
+            <span style="color: #008000; ">//***************Range value*******************
+</span>            objDimension.SetValueRangeValues(0.01, 5, 1);
+
+            <span style="color: #0000FF; ">double</span> LowValue = 0;
+            <span style="color: #0000FF; ">double</span> HighValue = 0;
+            <span style="color: #0000FF; ">int</span> condition = 0;
+
+            objDimension.GetValueRangeValues(LowValue, condition, HighValue);
+
+            <span style="color: #0000FF; ">if</span> (LowValue != 0.01 || condition != 5 || HighValue != 1)
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;Failed to set/get range values&quot;</span>);
+            }
+
+            <span style="color: #008000; ">//***************Range value low*******************
+</span>            objDimension.SetValueRangeLowValue(0.001);
+
+            objDimension.GetValueRangeValues(LowValue, condition, HighValue);
+
+            <span style="color: #0000FF; ">if</span> (LowValue != 0.001)
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;Failed to set/get low range values&quot;</span>);
+
+            }
+
+            <span style="color: #008000; ">//***************Range value high*******************
+</span>            objDimension.SetValueRangeHighValue(2);
+
+            objDimension.GetValueRangeValues(LowValue, condition, HighValue);
+
+            <span style="color: #0000FF; ">if</span> (HighValue != 2)
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;Failed to set/get high range values&quot;</span>);
+
+            }
+
+            <span style="color: #008000; ">//*******************Get out of range value****************
+</span>            <span style="color: #0000FF; ">double</span> dBadValue = 0;
+            <span style="color: #0000FF; ">double</span> dimensionValue = 3.0;
+
+            <span style="color: #008000; ">//objDimension.Value = dimensionValue
+</span>            dBadValue = objDimension.GetValueOutOfRange();
+
+            <span style="color: #0000FF; ">if</span> (dBadValue != 0.02)
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;Failed to get out of range value&quot;</span>);
+
+            }
+
+            <span style="color: #008000; ">//*******************Clear limits or discrete values****************
+</span>            <span style="color: #0000FF; ">int</span> count = 0;
+            objDimension.ClearLimitsOrDiscreteValues();
+
+            objDimension.GetValueDiscreteValues(outputDiscreteValues);
+            outputDiscreteValues.GetLength(count);
+
+            <span style="color: #0000FF; ">if</span> (count != 0)
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;Failed to clear limits or discrete values&quot;</span>);
+            }
+
+        }
+        <span style="color: #0000FF; ">catch</span> (Exception ex)
+        {
+            MessageBox.Show(ex.ToString());
+
+        }
+        <span style="color: #0000FF; ">finally</span>
+        {
+
+            <span style="color: #008000; ">// close the doc
+</span>            objDraftDoc.Close(<span style="color: #0000FF; ">false</span>);
+            objDraftDoc = <span style="color: #0000FF; ">null</span>;
+            objApplication = <span style="color: #0000FF; ">null</span>;
+
+        }
+
+
+    }
+}
+</pre>
+	</div>
+	
+</div>
+</div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="INLINE_EXAMPLE" namespace="Example" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""<>"",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="MENU_LINK" namespace="example" source="Item" filter="type=linked" NoHeader="True" NoFooter="True" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=examplelinks,caption=$$Example$$%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="FilteredItemList" scrap="CATEGORIZED_LINKS" namespace="linkcategory" source="Item" filter="" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=seealso,caption=""$$See_Also$$%%designlist:tagidentifier=##SEEALSO,itemtype=See Also%%""%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><div class="i-section-heading" id="i-seealso-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">See Also</span></div><div id="i-seealso-section-content" class="i-section-content"><p id=dxseealsocontent><a href="SolidEdgeFrameworkSupport~Dimension.html">Dimension Object</a>
+&nbsp;|&nbsp;<a href="SolidEdgeFrameworkSupport~Dimension_members.html">Dimension Members</a>
+</p>
+</p></div><!--DXMETADATA end -->
+    </div>
+    <div id="i-footer-content" class="i-footer-content">
+        <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_FOOTER" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="CopyrightNotice" format="<p>&nbsp;</p><p>&nbsp;</p><hr style=""height: 1px"" /><p>%%variable%%</p>" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="FeedbackLink" format="" --><!--DXMETADATA end-->
+    </div>
+    
+
+    <!--DXMETADATA start type="IsNew" format="<script type=""text/javascript"">setIsNew = true;</script>" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<script type=""text/javascript"">setIsResponsiveEnabled = true;</script>" --><!--DXMETADATA end-->
+    <script type="text/javascript">
+        $(function() {
+            var documentInstance = new Innovasys.Content.Document(document.body);
+            documentInstance.isNew = !(typeof setIsNew === "undefined");
+            documentInstance.isResponsiveEnabled = !(typeof setIsResponsiveEnabled === "undefined");
+            documentInstance.load();
+        });
+    </script>
+</body>
+</html>

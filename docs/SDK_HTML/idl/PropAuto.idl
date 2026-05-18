@@ -1,0 +1,203 @@
+// Generated .IDL file (by the OLE/COM Object Viewer)
+// 
+// typelib filename: PropAuto.dll
+
+[
+  uuid(AED8FE52-3129-11D1-BC83-0800360E1E02),
+  version(1.0),
+  helpstring("Solid Edge File Properties Object Library"),
+  helpfile("sesdk.chm"),
+  helpcontext(00000000),
+  custom(DE77BA64-517C-11D1-A2DA-0000F8773CE9, 117441067),
+  custom(DE77BA63-517C-11D1-A2DA-0000F8773CE9, 1338191544),
+  custom(DE77BA65-517C-11D1-A2DA-0000F8773CE9, "Created by MIDL version 7.00.0555 at Mon May 28 02:52:23 2012
+")
+
+]
+library SolidEdgeFileProperties
+{
+    // TLib :     // TLib : OLE Automation : {00020430-0000-0000-C000-000000000046}
+    importlib("stdole2.tlb");
+
+    // Forward declare all types defined in this typelib
+    interface IJPropertySets;
+    interface IJProperties;
+    interface IJProperty;
+
+    typedef [helpstring("Propery IDs for common file properties"), helpcontext(0x00030d43)]
+    enum {
+        igSumInfoTitle = 2,
+        igSumInfoSubject = 3,
+        igSumInfoAuthor = 4,
+        igSumInfoKeyWords = 5,
+        igSumInfoComments = 6,
+        igSumInfoTemplate = 7,
+        igSumInfoLastAuthor = 8,
+        igSumInfoRevNumber = 9,
+        igSumInfoEditTime = 10,
+        igSumInfoLastPrinted = 11,
+        igSumInfoCreateTime = 12,
+        igSumInfoLastSave = 13,
+        igSumInfoPageCount = 14,
+        igSumInfoWordCount = 15,
+        igSumInfoCharCount = 16,
+        igSumInfoAppName = 18,
+        igSumInfoDocSecurity = 19,
+        igDocSumInfoCategory = 2,
+        igDocSumInfoFormat = 3,
+        igDocSumInfoBytes = 4,
+        igDocSumInfoLines = 5,
+        igDocSumInfoParagraphs = 6,
+        igDocSumInfoSlides = 7,
+        igDocSumInfoNotes = 8,
+        igDocSumInfoHiddenSlides = 9,
+        igDocSumInfoMMClips = 10,
+        igDocSumInfoManager = 14,
+        igDocSumInfoCompany = 15,
+        igExtSumInfoSavingApp = 2,
+        igExtSumInfoFileSize = 3,
+        igExtSumInfoSheetCount = 4,
+        igExtSumInfoObjectCount = 5,
+        igExtSumInfoStatus = 7,
+        igExtSumInfoUserName = 8,
+        igExtSumInfoCreationLocale = 9,
+        igExtSumInfoHardwarePart = 14,
+        igProjInfoDocNum = 2,
+        igProjInfoRevision = 3,
+        igProjInfoProjectName = 4,
+        igMechModelingMaterial = 3
+    } PropertyIDs;
+
+    [
+      uuid(AED8FE60-3129-11D1-BC83-0800360E1E02),
+      helpstring("Collection of Properties Collection Objects"),
+      helpcontext(0x00030d40)
+    ]
+    coclass PropertySets {
+        [default] interface IJPropertySets;
+    };
+
+    [
+      odl,
+      uuid(AED8FE5F-3129-11D1-BC83-0800360E1E02),
+      helpstring("IJPropertySets Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IJPropertySets : IDispatch {
+        [id(0x00000001), helpstring("Open a file's property sets"), helpcontext(0x00030d45)]
+        HRESULT Open(
+                        [in] BSTR FileName, 
+                        [in, optional] VARIANT OpenReadOnly);
+        [id(0x00000002), propget, helpstring("Number of property sets"), helpcontext(0x00030d47)]
+        HRESULT Count([out, retval] long* pVal);
+        [id(00000000), propget, helpstring("Returns a reference to a Properties Collection Object"), helpcontext(0x00030d44)]
+        HRESULT Item(
+                        [in] VARIANT Index, 
+                        [out, retval] IDispatch** pVal);
+        [id(0xfffffffc), propget, restricted, helpstring("Enumerator")]
+        HRESULT _NewEnum([out, retval] IUnknown** pVal);
+        [id(0x00000005), helpstring("Save changes made in all property sets"), helpcontext(0x00030d46)]
+        HRESULT Save();
+        [id(0x00000006), propget, helpstring("Application"), helpcontext(0x00030d4e)]
+        HRESULT Application([out, retval] IDispatch** pVal);
+        [id(0x00000007), propget, helpstring("Parent"), helpcontext(0x00030d4f)]
+        HRESULT Parent([out, retval] IUnknown** pVal);
+        [id(0x00000008), helpstring("Is File Family Of Assembly"), helpcontext(0x00030d50)]
+        HRESULT IsFileFamilyOfAssembly(
+                        [in] BSTR FileName, 
+                        [out] VARIANT_BOOL* bFamilyOfAssembly);
+        [id(0x00000009), helpstring("Gets the  Family Of Assembly member names and count"), helpcontext(0x00030d51)]
+        HRESULT GetFamilyOfAssemblyMemberNames(
+                        [in] BSTR FileName, 
+                        [out] long* MemberCount, 
+                        [out] SAFEARRAY(BSTR)* MemberNames);
+        [id(0x0000000a), helpstring("Closes a file's property sets"), helpcontext(0x00030d52)]
+        HRESULT Close();
+        [id(0x0000000b), helpstring("Creates Custom Property Set"), helpcontext(0x00030d53)]
+        HRESULT CreateCustonPropertySet();
+        [id(0x0000000c), helpstring("Is File Weldment Assembly"), helpcontext(0x00030d54)]
+        HRESULT IsFileWeldmentAssembly(
+                        [in] BSTR FileName, 
+                        [out] VARIANT_BOOL* bWeldmentAssembly);
+    };
+
+    [
+      uuid(AED8FE62-3129-11D1-BC83-0800360E1E02),
+      helpstring("Collection of Property Objects"),
+      helpcontext(0x00030d41),
+      noncreatable
+    ]
+    coclass Properties {
+        [default] interface IJProperties;
+    };
+
+    [
+      odl,
+      uuid(AED8FE61-3129-11D1-BC83-0800360E1E02),
+      helpstring("IJProperties Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IJProperties : IDispatch {
+        [id(0x00000001), propget, helpstring("Number of properties in this property set"), helpcontext(0x00030d47)]
+        HRESULT Count([out, retval] long* pVal);
+        [id(00000000), propget, helpstring("Returns a reference to Property object"), helpcontext(0x00030d44)]
+        HRESULT Item(
+                        VARIANT Index, 
+                        [out, retval] IDispatch** pVal);
+        [id(0x00000003), propget, helpstring("Name of this property set"), helpcontext(0x00030d4a)]
+        HRESULT Name([out, retval] BSTR* pVal);
+        [id(0x00000004), helpstring("Save changes made to this property set"), helpcontext(0x00030d46)]
+        HRESULT Save();
+        [id(0x00000005), helpstring("Add a new property (custom only)"), helpcontext(0x00030d4c)]
+        HRESULT Add(
+                        [in] BSTR Name, 
+                        [in] VARIANT Value, 
+                        [out, retval] IDispatch** Property);
+        [id(0x00000006), propget, helpstring("Returns a the Property object specified by ID"), helpcontext(0x00030d4d)]
+        HRESULT PropertyByID(
+                        long PropID, 
+                        [out, retval] IDispatch** pVal);
+        [id(0x00000007), propget, helpstring("Returns a reference to the Application"), helpcontext(0x00030d4e)]
+        HRESULT Application([out, retval] IDispatch** pVal);
+        [id(0x00000008), propget, helpstring("Returns a reference to the parent PropertySets collection"), helpcontext(0x00030d4f)]
+        HRESULT Parent([out, retval] IDispatch** pVal);
+        [id(0xfffffffc), propget, restricted, helpstring("Enumerator")]
+        HRESULT _NewEnum([out, retval] IUnknown** pVal);
+    };
+
+    [
+      uuid(AED8FE64-3129-11D1-BC83-0800360E1E02),
+      helpstring("Property Object"),
+      helpcontext(0x00030d42),
+      noncreatable
+    ]
+    coclass Property {
+        [default] interface IJProperty;
+    };
+
+    [
+      odl,
+      uuid(AED8FE63-3129-11D1-BC83-0800360E1E02),
+      helpstring("IJProperty Interface"),
+      dual,
+      oleautomation
+    ]
+    interface IJProperty : IDispatch {
+        [id(0x00000001), propget, helpstring("Property name"), helpcontext(0x00030d4a)]
+        HRESULT Name([out, retval] BSTR* pVal);
+        [id(00000000), propget, helpstring("Returns/Sets a property's value"), helpcontext(0x00030d4b)]
+        HRESULT Value([out, retval] VARIANT* pVal);
+        [id(00000000), propput, helpstring("Returns/Sets a property's value"), helpcontext(0x00030d4b)]
+        HRESULT Value([in] VARIANT pVal);
+        [id(0x00000003), helpstring("Deletes this property (custom only)"), helpcontext(0x00030d48)]
+        HRESULT Delete();
+        [id(0x00000004), propget, helpstring("This property's Property ID"), helpcontext(0x00030d49)]
+        HRESULT ID([out, retval] long* pVal);
+        [id(0x00000005), propget, helpstring("Returns a reference to parent Properties collection"), helpcontext(0x00030d4f)]
+        HRESULT Parent([out, retval] IDispatch** pVal);
+        [id(0x00000006), propget, helpstring("Returns a reference to the Application"), helpcontext(0x00030d4e)]
+        HRESULT Application([out, retval] IDispatch** pVal);
+    };
+};

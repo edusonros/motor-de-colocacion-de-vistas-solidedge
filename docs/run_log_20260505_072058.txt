@@ -1,0 +1,140 @@
+﻿[001] Inicio de proceso.
+[002] Solid Edge: instancia existente reutilizada.
+[003] Solid Edge modo oculto=True, DisplayAlerts=False
+[004] Leyendo archivo origen: C:\Eduardo\1084.9034.00.24432.S01.002.003.001 LM1 Chapa Cuello.psm
+[005] Tipo detectado: SheetMetalFile
+[006] Opciones -> DFT=True, PDF=True, DXF_DRAFT=True, DXF_FLAT=True
+[007] Opciones -> InsertProps=False, SourceMode=FromModelLink
+[008] [TITLEBLOCK] Mode=FromModelLink
+[009] [1/1] Procesando: 1084.9034.00.24432.S01.002.003.001 LM1 Chapa Cuello.psm
+[010] Creando draft...
+[011] [VIEWLAYOUT][ENTER] Slot+Bbox placement (Range center)
+[012] [VIEWLAYOUT][CONFIG] EnableSlotBBoxViewLayout ejecutando motor extendido tras inserción AddByFold clásica
+[013] [VIEWLAYOUT][SHEET] width=0.42 height=0.297 orientation=landscape
+[014] [VIEWLAYOUT][SLOT][REF] Main [0.0264,0.1723]-[0.2334,0.2719]
+[015] [VIEWLAYOUT][SLOT][REF] Right [0.2454,0.1717]-[0.3965,0.2719]
+[016] [VIEWLAYOUT][SLOT][REF] Below [0.0264,0.0883]-[0.2334,0.1723]
+[017] [VIEWLAYOUT][SLOT][REF] Flat [0.0156,0.01]-[0.2198,0.0869]
+[018] [VIEWLAYOUT][SLOT][REF] Iso [0.3163,0.04]-[0.4098,0.1013]
+[019] [VIEWLAYOUT][SLOT][ACTUAL] Main [0.0264,0.1723]-[0.2334,0.2719]
+[020] [VIEWLAYOUT][SLOT][ACTUAL] Right [0.2454,0.1717]-[0.3965,0.2719]
+[021] [VIEWLAYOUT][SLOT][ACTUAL] Below [0.0264,0.0883]-[0.2334,0.1723]
+[022] [VIEWLAYOUT][SLOT][ACTUAL] Flat [0.0156,0.01]-[0.2198,0.0869]
+[023] [VIEWLAYOUT][SLOT][ACTUAL] Iso [0.3163,0.04]-[0.4098,0.1013]
+[024] [VIEWLAYOUT][FREE_AREA] vtx0 Sheet=(0.01,0.01)
+[025] [VIEWLAYOUT][FREE_AREA] vtx1 Sheet=(0.2198,0.01)
+[026] [VIEWLAYOUT][FREE_AREA] vtx2 Sheet=(0.2198,0.04)
+[027] [VIEWLAYOUT][FREE_AREA] vtx3 Sheet=(0.4098,0.04)
+[028] [VIEWLAYOUT][FREE_AREA] vtx4 Sheet=(0.4098,0.2762)
+[029] [VIEWLAYOUT][FREE_AREA] vtx5 Sheet=(0.01,0.2762)
+[030] [VIEWLAYOUT][VIEW][RANGE] Main name=DrawingView 4503 Range=(0,04,0,1898)-(0,2297,0,257) SF=0,5
+[031] [VIEWLAYOUT][VIEW][RANGE] Right name=DrawingView 4475 Range=(0,2547,0,1898)-(0,3124,0,257) SF=0,5
+[032] [VIEWLAYOUT][VIEW][RANGE] Below name=DrawingView 4411 Range=(0,04,0,1071)-(0,2297,0,1648) SF=0,5
+[033] [VIEWLAYOUT][VIEW][RANGE] Iso name=DrawingView 4312 Range=(0,32,0,07876)-(0,405712,0,14) SF=0,225
+[034] [VIEWLAYOUT][VIEW][RANGE] Flat name=DrawingView 3605 Range=(0,035,0,044406)-(0,315028,0,1) SF=0,476603
+[035] [VIEWLAYOUT][ROTATE_CHECK] Main h/w ratio=0,354244 umb=2
+[036] [VIEWLAYOUT][ROTATE_SKIP] ratio bajo umbral
+[037] [VIEWLAYOUT][SCALE][MAIN_GROUP] fits mult min=1.09119662 ceilingSf=0.54559831
+[038] [VIEWLAYOUT][SCALE][FIT] maxAllowed=0.54559831
+[039] [VIEWLAYOUT][SCALE][UNE] chosen=0.5
+[040] [VIEWLAYOUT][SCALE][ISO] ceilingSf=0.22522034
+[041] [VIEWLAYOUT][SCALE][FIT] maxAllowed=0.22522034
+[042] [VIEWLAYOUT][SCALE][UNE] chosen=0.2
+[043] [VIEWLAYOUT][SCALE][FLAT] ceilingSf=0.347545672
+[044] [VIEWLAYOUT][SCALE][FIT] maxAllowed=0.347545672
+[045] [VIEWLAYOUT][SCALE][UNE] chosen=0.2
+[046] [VIEWLAYOUT][CENTER][BEFORE] name=DrawingView 4503 Range=(0,04,0,1898)-(0,2297,0,257) cenR=(0,13485,0,2234) ori=(0,13485,0,2234) tgt=(0,1299,0,2221)
+[047] [VIEWLAYOUT][CENTER][MOVE] name=DrawingView 4503 newOrigin=(0,1299,0,2221)
+[048] [VIEWLAYOUT][CENTER][AFTER] name=DrawingView 4503 Range=(0,03505,0,1885)-(0,22475,0,2557)
+[049] [VIEWLAYOUT][CENTER][BEFORE] name=DrawingView 4475 Range=(0,2547,0,1885)-(0,3124,0,2557) cenR=(0,28355,0,2221) ori=(0,28355,0,2221) tgt=(0,32095,0,2218)
+[050] [VIEWLAYOUT][CENTER][MOVE] name=DrawingView 4475 newOrigin=(0,32095,0,2218)
+[051] [VIEWLAYOUT][CENTER][AFTER] name=DrawingView 4475 Range=(0,2921,0,1882)-(0,3498,0,2554)
+[052] [VIEWLAYOUT][CENTER][BEFORE] name=DrawingView 4411 Range=(0,03505,0,1071)-(0,22475,0,1648) cenR=(0,1299,0,13595) ori=(0,1299,0,13595) tgt=(0,1299,0,1303)
+[053] [VIEWLAYOUT][CENTER][MOVE] name=DrawingView 4411 newOrigin=(0,1299,0,1303)
+[054] [VIEWLAYOUT][CENTER][AFTER] name=DrawingView 4411 Range=(0,03505,0,10145)-(0,22475,0,15915)
+[055] [VIEWLAYOUT][CENTER][BEFORE] name=DrawingView 4312 Range=(0,324056,0,081457)-(0,401656,0,137303) cenR=(0,362856,0,10938) ori=(0,362567,0,113722) tgt=(0,36305,0,07065)
+[056] [VIEWLAYOUT][CENTER][MOVE] name=DrawingView 4312 newOrigin=(0,362761,0,074992)
+[057] [VIEWLAYOUT][CENTER][AFTER] name=DrawingView 4312 Range=(0,32425,0,042727)-(0,40185,0,098573)
+[058] [VIEWLAYOUT][CENTER][BEFORE] name=DrawingView 3605 Range=(0,112574,0,056853)-(0,237454,0,087553) cenR=(0,175014,0,072203) ori=(0,175014,0,072203) tgt=(0,1177,0,04845)
+[059] [VIEWLAYOUT][CENTER][MOVE] name=DrawingView 3605 newOrigin=(0,1177,0,04845)
+[060] [VIEWLAYOUT][CENTER][AFTER] name=DrawingView 3605 Range=(0,05526,0,0331)-(0,18014,0,0638)
+[061] [VIEWLAYOUT][VALIDATE][OK] Main within slot.
+[062] [VIEWLAYOUT][VALIDATE][OK] Right within slot.
+[063] [VIEWLAYOUT][VALIDATE][OK] Below within slot.
+[064] [VIEWLAYOUT][VALIDATE][OK] Iso within slot.
+[065] [VIEWLAYOUT][VALIDATE][OK] Flat within slot.
+[066] [VIEWLAYOUT][SUMMARY] format=A3 orient=landscape sheet_m=0.42x0.297 uneMain=0.5 uneIso=0.2
+[067] [VIEWLAYOUT][SUMMARY] uneFlat=0.2
+[068] [VIEWLAYOUT][SUMMARY] assignedSlot Main=Main [0.0264,0.1723]-[0.2334,0.2719]
+[069] [VIEWLAYOUT][SUMMARY] assignedSlot Right=Right [0.2454,0.1717]-[0.3965,0.2719]
+[070] [VIEWLAYOUT][SUMMARY] assignedSlot Below=Below [0.0264,0.0883]-[0.2334,0.1723]
+[071] [VIEWLAYOUT][SUMMARY] assignedSlot Flat=Flat [0.0156,0.01]-[0.2198,0.0869]
+[072] [VIEWLAYOUT][SUMMARY] assignedSlot Iso=Iso [0.3163,0.04]-[0.4098,0.1013]
+[073] [VIEWLAYOUT][VIEW][RANGE] Main name=DrawingView 4503 Range=(0,03505,0,1882)-(0,22475,0,2554) SF=0,5
+[074] [VIEWLAYOUT][VIEW][RANGE] Right name=DrawingView 4475 Range=(0,2921,0,1882)-(0,3498,0,2554) SF=0,5
+[075] [VIEWLAYOUT][VIEW][RANGE] Below name=DrawingView 4411 Range=(0,03505,0,10145)-(0,22475,0,15915) SF=0,5
+[076] [VIEWLAYOUT][VIEW][RANGE] Iso name=DrawingView 4312 Range=(0,32425,0,042727)-(0,40185,0,098573) SF=0,2
+[077] [VIEWLAYOUT][VIEW][RANGE] Flat name=DrawingView 3605 Range=(0,05526,0,0331)-(0,18014,0,0638) SF=0,2
+[078] [VIEWLAYOUT][SUMMARY] dentro_slot Main=True Right=True Below=True
+[079] [VIEWLAYOUT][SUMMARY] dentro_slot Iso=True
+[080] [VIEWLAYOUT][SUMMARY] dentro_slot Flat=True
+[081] [VIEWLAYOUT][SUMMARY] fallback_a_layout_anterior=false
+[082] [VIEWLAYOUT][ENTER] DONE
+[083] [PARTSLIST][COORD] sheet_origin=top_left_A3_horizontal sheet_se=bottom_left_y_up
+[084] [PARTSLIST][EXISTING][FOUND] count=0
+[085] [PARTSLIST][CREATE][ENTER]
+[086] [PARTSLIST][VIEW][SELECTED] name=DrawingView 4503 type=1 area=0.01275
+[087] [PARTSLIST][ADD][TRY] method=AddEx savedSettings=PART_LIST
+[088] [PARTSLIST][ADD][OK]
+[089] [PARTSLIST][TABLESTYLE][OK] PART_LIST
+[090] [PARTSLIST][SAVEDSETTINGS][OK] PART_LIST
+[091] [PARTSLIST][UPDATE][OK]
+[092] [PARTSLIST][ORIGIN][SET] x=0.01 y=0.287
+[093] [PARTSLIST][UPDATE][OK]
+[094] [PARTSLIST][ORIGIN][AFTER] x=0 y=0
+[095] [PARTSLIST][SETTINGS][TRY_A]
+[096] [PARTSLIST][SETTINGS][TRY_A][ERR] Los tipos no coinciden. (Excepción de HRESULT: 0x80020005 (DISP_E_TYPEMISMATCH))
+[097] [PARTSLIST][SETTINGS][TRY_B]
+[098] [PARTSLIST][SETTINGS][TRY_B][ERR] Los tipos no coinciden. (Excepción de HRESULT: 0x80020005 (DISP_E_TYPEMISMATCH))
+[099] [PARTSLIST][SETTINGS][TRY_C]
+[100] [PARTSLIST][SETTINGS][TRY_C][ERR] Los tipos no coinciden. (Excepción de HRESULT: 0x80020005 (DISP_E_TYPEMISMATCH))
+[101] [PARTSLIST][SETTINGS][FOUND_PART_LIST] False
+[102] [PARTSLIST][AUDIT] rows=1 cols=13 isUpToDate=True tableStyle=PART_LIST savedSettingsProp=
+[103] [PARTSLIST][EXISTING][ASSEMBLYFILE] C:\Eduardo\1084.9034.00.24432.S01.002.003.001 LM1 Chapa Cuello.psm
+[104] [PARTSLIST][REFCHECK][WARN] saved_settings_not_confirmed actual= expected=PART_LIST
+[105] [PARTSLIST][REFCHECK][OK] style=PART_LIST savedSettings=?
+[106] [ZONE][PARTSLIST] minX=0 minY=0 maxX=0.315 maxY=0.005
+[107] [PARTSLIST][REF][OK] assembly_linked
+[108] [ZONE][TITLEBLOCK] minX=0.25 minY=0.245 maxX=0.415 maxY=0.292
+[109] [ZONE][REVISION] minX=0.21 minY=0.26 maxX=0.32 maxY=0.292
+[110] [ZONE][BORDER] sheetApproxW=0.42 sheetApproxH=0.297 margin=0.005 (UNE129+AvoidBorder)
+[111] [DIM][FLAGS] Config_EnableAutoDimensioning=False
+[112] [DIM][FLAGS] Config_EnableDrawingViewDimensioningLab=False
+[113] [DIM][FLAGS] DimensionInsertionConfig_EnableDrawingViewDimensioningLab=False
+[114] [DIM][FLAGS] Effective_runLab=False
+[115] [DIM][FLAGS] Effective_runMainDimensioning=False
+[116] [DIM][DECISION] runLab=False runMainDimensioning=False reason=normal
+[117] [DIM][GATE] Acotado automático no ejecutado (deshabilitado, sin DFT o laboratorio sin documento).
+[118] Guardando DFT...
+[119] DFT: 1084.9034.00.24432.S01.002.003.001 LM1 Chapa Cuello.dft
+[120] [DFT][SUMMARYINFO] Iniciando escritura directa sobre DFT.
+[121] [DFT][SUMMARYINFO] Subject=''
+[122] [DFT][SUMMARYINFO] Title='Cuello Superior'
+[123] [DFT][SUMMARYINFO] Company='BUDENHEIM / 01'
+[124] [DFT][SUMMARYINFO] ProjectName='24432-04-004-01-R2'
+[125] [DFT][SUMMARYINFO] Save=True
+[126] Exportando PDF...
+[127] PDF: 1084.9034.00.24432.S01.002.003.001 LM1 Chapa Cuello.pdf
+[128] Exportando DXF desde DFT...
+[129] DXF(Draft): 1084.9034.00.24432.S01.002.003.001 LM1 Chapa Cuello.dxf
+[001] [FLAT] Analizando pieza de chapa: C:\Eduardo\1084.9034.00.24432.S01.002.003.001 LM1 Chapa Cuello.psm
+[002] [FLAT] Es documento SheetMetal: True
+[003] [FLAT] Tiene flat existente: True
+[004] [FLAT] Se reutilizará flat existente
+[005] [FLAT] No se intentará regenerar flat
+[006] [FLAT] Método de exportación utilizado: Models.SaveAsFlatDXFEx (sin referencias Face/Edge forzadas)
+[007] [FLAT] DXF Flat exportado correctamente: C:\Eduardo\PLANOS AUTOMATICOS V09\DXF\1084.9034.00.24432.S01.002.003.001 LM1 Chapa Cuello_FLAT.dxf
+[130] DXF(Flat): 1084.9034.00.24432.S01.002.003.001 LM1 Chapa Cuello_FLAT.dxf
+[131] RESUMEN -> Procesados=1, OK=1, Error=0, DFT=1, PDF=1, DXF=1, FLAT=1, Omitidos=0
+[132] Solid Edge permanece abierto (instancia preexistente).
+[133] Proceso finalizado OK. Procesados=1, Errores=0

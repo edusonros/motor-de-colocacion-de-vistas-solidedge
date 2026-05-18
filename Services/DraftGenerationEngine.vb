@@ -156,7 +156,7 @@ Public Class DraftGenerationEngine
                         Distinct(StringComparer.OrdinalIgnoreCase).ToList()
                     _logger.Log($"Selección manual ASM activa: {targets.Count} componentes elegidos por el usuario.")
                 Else
-                    targets = ResolveAssemblyTargets(app, config.InputFile, config.ProcessRepeatedComponentsOnce)
+                    targets = ResolveAssemblyTargets(app, config.InputFile, config.ProcessRepeatedComponentsOnce, config)
                     If targets Is Nothing Then targets = New List(Of String)()
                     If targets.Count = 0 Then
                         _logger.Log("[ASM][FALLBACK] ResolveAssemblyTargets devolvió 0; usando AssemblyComponentService.LoadAssemblyComponentItems")
@@ -187,7 +187,7 @@ Public Class DraftGenerationEngine
                 targets.Add(config.InputFile)
             End If
 
-            targets = ExpandSelectedTargets(app, targets, config.ProcessRepeatedComponentsOnce, config.UseSelectedComponents)
+            targets = ExpandSelectedTargets(app, targets, config.ProcessRepeatedComponentsOnce, config.UseSelectedComponents, config)
 
             Dim runAsmOverview As Boolean =
                 inputKind = SourceFileKind.AssemblyFile AndAlso
@@ -382,7 +382,7 @@ Public Class DraftGenerationEngine
             Catch exVis As Exception
                 _logger.Log("[DIMLAB][INTERACTIVE] WARN set Visible/DisplayAlerts: " & exVis.Message)
             End Try
-            _logger.Log("[DIMLAB][INTERACTIVE] app.Visible=True DisplayAlerts=True")
+            _logger.Log("[DIMLAB][INTERACTIVE] app.Visible=True DisplayAlerts=True (modo laboratorio)")
             _logger.Log("[DIMLAB][EXPORT_POLICY] skip_pdf_dxf_flat=True keep_dft_open_until_review=True")
             Dim outLabHint As String = config.OutputFolder.Trim().TrimEnd(IO.Path.DirectorySeparatorChar, IO.Path.AltDirectorySeparatorChar)
             Dim outLeaf As String = ""
@@ -596,6 +596,7 @@ AfterDimensionLabs:
         Dim modelDoc As Object = Nothing
         Try
             modelDoc = ExecuteComWithRetry(Function() app.Documents.Open(modelPath), "[ENGINE][PARTLIST] Open modelo")
+            SolidEdgeSessionVisibility.SuppressForegroundIfConfigured(app, config, _logger)
             If String.IsNullOrWhiteSpace(partSnap.LargoL) OrElse String.IsNullOrWhiteSpace(partSnap.AltoH) OrElse String.IsNullOrWhiteSpace(partSnap.DatoD) Then
                 Dim lV As String = "", hV As String = "", dV As String = "", lhdSrc As String = ""
                 If DrawingMetadataService.TryComputeLhdSameAsCalcButton(dftDoc, modelDoc, _logger, lV, hV, dV, lhdSrc) Then
@@ -614,6 +615,7 @@ AfterDimensionLabs:
                 SolidEdgePropertyService.TryCloseComDocument(modelDoc, False)
                 TryReleaseComObject(modelDoc)
             End If
+            SolidEdgeSessionVisibility.SuppressForegroundIfConfigured(app, config, _logger)
         End Try
     End Sub
 
@@ -662,6 +664,7 @@ AfterDimensionLabs:
         Dim modelDoc As Object = Nothing
         Try
             dftDoc = ExecuteComWithRetry(Function() CType(app.Documents.Open(outDft), DraftDocument), "[GESTOR_META] Open DFT")
+            SolidEdgeSessionVisibility.SuppressForegroundIfConfigured(app, config, _logger)
             If dftDoc Is Nothing Then
                 runResult.ErrorCount += 1
                 Return
@@ -672,6 +675,7 @@ AfterDimensionLabs:
                 If extLc = ".par" OrElse extLc = ".psm" OrElse extLc = ".asm" Then
                     Try
                         modelDoc = ExecuteComWithRetry(Function() app.Documents.Open(modelPath), "[GESTOR_META] Open modelo (PART_LIST)")
+                        SolidEdgeSessionVisibility.SuppressForegroundIfConfigured(app, config, _logger)
                         _logger.Log("[MOTOR][GESTOR_META][PARTSLIST] Documento modelo abierto para Custom.* coherentes con el enlace.")
                     Catch exMo As Exception
                         _logger.Log("[MOTOR][GESTOR_META][PARTSLIST][WARN] Modelo no abierto; se aplicará PART_LIST sólo sobre DFT: " & exMo.Message)
@@ -729,6 +733,7 @@ AfterDimensionLabs:
                 Try : dftDoc.Close(False) : Catch : End Try
                 TryReleaseComObject(dftDoc)
             End If
+            SolidEdgeSessionVisibility.SuppressForegroundIfConfigured(app, config, _logger)
         End Try
     End Sub
 
@@ -764,6 +769,7 @@ AfterDimensionLabs:
         Try
             If Not runLab Then DimensionProductionRunSummary.Reset()
             dftDoc = ExecuteComWithRetry(Function() CType(app.Documents.Open(outDft), DraftDocument), "[ACOTACION] Open DFT")
+            SolidEdgeSessionVisibility.SuppressForegroundIfConfigured(app, config, _logger)
             If dftDoc Is Nothing Then
                 runResult.ErrorCount += 1
                 Return
@@ -839,7 +845,7 @@ AfterDimensionLabs:
                     SolidEdgePropertyService.ApplyDirectSummaryInfoToDraft(exportDoc, config, _logger)
                     Dim outPdf As String = GetOutputPath(outPdfDir, baseName, ".pdf", config.OverwriteExisting)
                     _logger.Log("Exportando PDF...")
-                    ExecuteComWithRetry(Sub() ExportDraftToPdf(app, exportDoc, outPdf), "Export PDF")
+                    ExecuteComWithRetry(Sub() ExportDraftToPdf(app, exportDoc, outPdf, config.KeepSolidEdgeVisible), "Export PDF")
                     _logger.Log($"PDF: {IOPath.GetFileName(outPdf)}")
                     runResult.PdfCreatedCount += 1
                     runResult.LastExportedPdfFullPath = outPdf
@@ -974,6 +980,7 @@ AfterDimensionLabs:
                 dftDoc = ExecuteComWithRetry(
                     Function() CojonudoBestFit_Bueno.CreateDraftAlzadoPrimerDiedro(app, modelPath, dftTemplates, config.TemplateDxf, flatInserted, mainDrawingView, config.EnableSlotBBoxViewLayout, Sub(m) _logger.Log(m)),
                     "CreateDraft")
+                SolidEdgeSessionVisibility.SuppressForegroundIfConfigured(app, config, _logger)
                 If dftDoc IsNot Nothing Then
                     If Not runLab Then
                         Try
@@ -1078,7 +1085,7 @@ AfterDimensionLabs:
                             SolidEdgePropertyService.ApplyDirectSummaryInfoToDraft(exportDoc, config, _logger)
                             Dim outPdf As String = GetOutputPath(outPdfDir, baseName, ".pdf", config.OverwriteExisting)
                             _logger.Log("Exportando PDF...")
-                            ExecuteComWithRetry(Sub() ExportDraftToPdf(app, exportDoc, outPdf), "Export PDF")
+                            ExecuteComWithRetry(Sub() ExportDraftToPdf(app, exportDoc, outPdf, config.KeepSolidEdgeVisible), "Export PDF")
                             _logger.Log($"PDF: {IOPath.GetFileName(outPdf)}")
                             runResult.PdfCreatedCount += 1
                             runResult.LastExportedPdfFullPath = outPdf
@@ -1148,6 +1155,7 @@ AfterDimensionLabs:
             runResult.SkippedCount += 1
         End If
 
+        SolidEdgeSessionVisibility.SuppressForegroundIfConfigured(app, config, _logger)
     End Sub
 
     Private Function BuildTemplateList(config As JobConfiguration) As String()
@@ -1167,7 +1175,7 @@ AfterDimensionLabs:
         Return templates.ToArray()
     End Function
 
-    Private Function ExpandSelectedTargets(app As SolidEdgeFramework.Application, rawTargets As List(Of String), uniqueOnly As Boolean, useManualSelection As Boolean) As List(Of String)
+    Private Function ExpandSelectedTargets(app As SolidEdgeFramework.Application, rawTargets As List(Of String), uniqueOnly As Boolean, useManualSelection As Boolean, config As JobConfiguration) As List(Of String)
         Dim expanded As New List(Of String)()
         For Each p In rawTargets
             If String.IsNullOrWhiteSpace(p) Then Continue For
@@ -1184,7 +1192,7 @@ AfterDimensionLabs:
                     _logger.Log($"[ASM][SELECTION] No se expande subensamblaje en modo manual: {IOPath.GetFileName(p)} (se respetan los desmarcados de sus piezas)")
                 Else
                     _logger.Log($"Expandiendo ASM seleccionado: {IOPath.GetFileName(p)}")
-                    expanded.AddRange(ResolveAssemblyTargets(app, p, uniqueOnly))
+                    expanded.AddRange(ResolveAssemblyTargets(app, p, uniqueOnly, config))
                 End If
             Else
                 _logger.Log($"[SKIP] Tipo no procesable en selección: {IOPath.GetFileName(p)}")
@@ -1198,7 +1206,8 @@ AfterDimensionLabs:
 
     Private Function ResolveAssemblyTargets(app As SolidEdgeFramework.Application,
                                             asmPath As String,
-                                            uniqueOnly As Boolean) As List(Of String)
+                                            uniqueOnly As Boolean,
+                                            config As JobConfiguration) As List(Of String)
         Dim asmDoc As AssemblyDocument = Nothing
         Dim found As IDictionary(Of String, String)
         If uniqueOnly Then
@@ -1224,6 +1233,7 @@ AfterDimensionLabs:
             Catch
             End Try
             TryReleaseComObject(asmDoc)
+            SolidEdgeSessionVisibility.SuppressForegroundIfConfigured(app, config, _logger)
         End Try
     End Function
 
@@ -1309,7 +1319,7 @@ AfterDimensionLabs:
         End Try
     End Sub
 
-    Private Sub ExportDraftToPdf(app As SolidEdgeFramework.Application, draftDoc As DraftDocument, pdfPath As String)
+    Private Sub ExportDraftToPdf(app As SolidEdgeFramework.Application, draftDoc As DraftDocument, pdfPath As String, keepSolidEdgeVisible As Boolean)
         If draftDoc Is Nothing Then Return
         Dim exported As Boolean = False
         Dim firstEx As Exception = Nothing
@@ -1329,9 +1339,8 @@ AfterDimensionLabs:
             End Try
         End If
 
-        If Not exported Then
+        If Not exported AndAlso keepSolidEdgeVisible Then
             Try
-                ' Último fallback: mostrar temporalmente Solid Edge y reintentar exportación.
                 Dim prevVisible As Boolean = app.Visible
                 app.Visible = True
                 draftDoc.SaveAs(pdfPath, Nothing, False)
@@ -1392,15 +1401,7 @@ AfterDimensionLabs:
         End Try
         If app Is Nothing Then Return False
 
-        ' Producción estable: interfaz SIEMPRE visible (sin ocultar ni suprimir alertas).
-        Try
-            app.Visible = True
-            app.DisplayAlerts = True
-        Catch visEx As Exception
-            _logger.Log("[SE][VISIBLE] fallo al establecer visibilidad: " & visEx.Message)
-        End Try
-        _logger.Log("[SE][VISIBLE] True")
-        _logger.Log("[SE][DISPLAY_ALERTS] True")
+        SolidEdgeSessionVisibility.ApplyApplicationVisibility(app, config, _logger)
         Return True
     End Function
 

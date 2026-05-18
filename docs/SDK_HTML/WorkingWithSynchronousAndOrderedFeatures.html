@@ -1,0 +1,277 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--DXMETADATA start type="MetaCharset" --><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><!--DXMETADATA end-->
+    <meta http-equiv="X-UA-Compatible" value="IE=9" />
+
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Literal" condition="helpversion:value=3" value="<meta name=""Microsoft.Help.SelfBranded"" content=""true"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="ItemTitle" format="<title>%%ItemTitle%%</title>" --><title>Working with Synchronous and Ordered features</title><!--DXMETADATA end-->
+    <!--DXMETADATA start type="ItemTitle" format="<meta name=""Title"" content=""%%ItemTitleNoQuotes%%""/>" --><meta name="Title" content="Working with Synchronous and Ordered features"/><!--DXMETADATA end-->    
+    
+
+    <!--DXMETADATA start type="PackageLink" packagename="jquery" filetype="script" firstlinkattributes="id=""mshs_support_script"""--><script src="template/packages/jquery/script/chm.mshc/jquery-1.7.2.min.js" type="text/javascript" id="mshs_support_script"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="script"--><script src="template/packages/jquery-ui/script/chm.mshc/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/jquery-ui/css/chm.mshc/jquery-ui-1.8.18.custom.css"></link><!--DXMETADATA end-->
+	
+    <!--DXMETADATA start type="Synopsis" StripHtmlTags="True" MaxLength="250" format="<meta name=""Description"" content=""%%Synopsis%%"" />"--><meta name="Description" content="Starting with Solid Edge ST3, Synchronous and Ordered modeling in the Part and SheetMetal environments have been integrated. By setting the PartDocument.ModelingMode or SheetMetalDocument.ModelingMode, you can now toggle between Synchronous and Order" /><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-topics" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/plugins-topics/css/chm.mshc/jquery-plugins.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-topics" filetype="css" firstlinkattributes=" data-mshv2-stylesheet=""/template/packages/core-topics/topics.mshv2.css"" data-mshv1-stylesheet=""/template/packages/core-topics/topics.mshv1.css"" data-responsive-mobile=""template/packages/core-topics/topics.mobile.css"" data-responsive-tablet=""template/packages/core-topics/topics.tablet.css"""--><link rel="stylesheet" type="text/css" href="template/packages/core-topics/css/topics.css"  data-mshv2-stylesheet="/template/packages/core-topics/topics.mshv2.css" data-mshv1-stylesheet="/template/packages/core-topics/topics.mshv1.css" data-responsive-mobile="template/packages/core-topics/topics.mobile.css" data-responsive-tablet="template/packages/core-topics/topics.tablet.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-topics" filetype="script"--><script src="template/packages/plugins-topics/script/chm.mshc/jquery-plugins.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-topics" filetype="script"--><script src="template/packages/core-topics/script/topics.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="TopicId" format="<meta name=""Microsoft.Help.Id"" content=""%%TopicId%%""/>" --><meta name="Microsoft.Help.Id" content="4433acc4-4be5-45e1-8941-ebddba048aee"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocParentId" format="<meta name=""Microsoft.Help.TocParent"" content=""%%TocParentId%%""/>" --><meta name="Microsoft.Help.TocParent" content="9e30554d-5e93-430b-9ab4-df4d05c797a5"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocOrdinal" format="<meta name=""Microsoft.Help.TocOrder"" content=""%%TocOrdinal%%""/>" --><meta name="Microsoft.Help.TocOrder" content="4"/><!--DXMETADATA end-->
+    <meta name="Microsoft.Help.F1" content=""/>
+    <meta name="Microsoft.Help.ContentType" content="Concepts" />
+    <!--DXMETADATA start type="MshvKeywords" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="MshvMetaTags" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.Locale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.TopicLocale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="Stylesheets" --><link rel="stylesheet" type="text/css" href="stylesheets/customstyles.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Scripts" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="DesignTime"--><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_PROPERTIES" --><!--DXMETADATA end -->
+
+    <!--DXMETADATA start type="CustomHeadContent" --><!--DXMETADATA end-->
+</head>
+
+<body>
+    <div id="i-before-header-content" class="i-before-header-content">
+        
+    </div>
+    <div id="i-header-content" class="i-header-content">
+        <!--DXMETADATA start type="LogoImage" --><img class="logoimage" src="images/sesdk_header.jpg" border="0"></img><!--DXMETADATA end-->
+            <div class="i-project-title"><!--DXMETADATA start type="ProjectTitle" -->Solid Edge 2019 SDK<!--DXMETADATA end--></div>
+        <div class="i-page-title"><div class="i-page-title-text"><!--DXMETADATA start type="ItemTitle" -->Working with Synchronous and Ordered features<!--DXMETADATA end--></div></div>
+    </div>
+    <div id="i-after-header-content" class="i-after-header-content">
+        <!-- Spacing --> <span class="i-toggle-all-sections i-function-link">
+                <label class="i-collapse-all"><!--DXMETADATA start type="Phrase" name="COLLAPSE_ALL" -->Collapse All<!--DXMETADATA end--></label>
+                <label class="i-expand-all" style="display: none;"><!--DXMETADATA start type="Phrase" name="EXPAND_ALL" -->Expand All<!--DXMETADATA end--></label>
+            </span><!--DXMETADATA start type="Literal" condition="communityenabled" value="%%scrap:name=_COMMUNITY_DROPDOWN%%" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="IsWebOutputRootPageLinkEnabled" format="<a href='#' class="i-page-link" class="i-view-in-frame-link" title='$$VIEW_WITH_NAVIGATION_TOOLS_TIP$$' style='display: none' data-root-page='%%WebOutputRootPage%%%%OutputFileExtension%%' target='_top'>$$VIEW_WITH_NAVIGATION_TOOLS_TEXT$$</a>" --><a href='#' class="i-page-link" class="i-view-in-frame-link" title='Open this Topic in a view that includes Navigation tools (Table of Contents, Index, Search)' style='display: none' data-root-page='webframe.html' target='_top'>View with Navigation Tools</a><!--DXMETADATA end-->
+    </div>
+    <!--DXMETADATA start type="Breadcrumbs" scrap="_BREADCRUMBS" --><div class="i-breadcrumbs-container"><table><tr><td>
+<a href="ProgrammersGuide.html">Programmer's Guide</a>
+ > <a href="SolidEdgeTOC.html">Solid Edge</a>
+ > <a href="EnvironmentsToc.html">Environments</a>
+ > <a href="PartAndSheetMetalEnvironmentToc.html">Part and Sheet Metal</a>
+ > Working with Synchronous and Ordered features</td></tr></table></div><!--DXMETADATA end -->
+    
+    
+    <div id="i-body-content" class="i-body-content">
+        <!--DXMETADATA start type="TopicSection" name="BodyText"--><P>Starting with <A href="0383c62d-c1ff-4393-8d94-a21d55220d8c">Solid Edge ST3</A>, Synchronous and Ordered modeling in the Part and SheetMetal environments have been integrated. By setting the <A href="SolidEdgePart~PartDocument~ModelingMode.html">PartDocument.ModelingMode</A> or <A href="SolidEdgePart~SheetMetalDocument~ModelingMode.html">SheetMetalDocument.ModelingMode</A>, you can now toggle between Synchronous and Ordered modeling environments dynamically during automation.</P>
+<P>The following code demonstrates how to create a Synchronous ExtrudedProtrusion and Ordered ExtrudedProtrusion in the same model.<BR></P>
+<DIV class="i-box i-box-caution">See <A href="OleMessageFilterUsage.html" data-auto-update-caption="true">Handling 'Application is Busy' and 'Call was Rejected By Callee' errors</A> for information regarding the use of <A href="OleMessageFilterVB.html">OleMessageFilter</A>. </DIV>
+<DIV id=i-cdabb8b7-b085-4f6c-b59b-dff4cc7cb480-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>Code Sample</SPAN> </DIV>
+<DIV id=i-cdabb8b7-b085-4f6c-b59b-dff4cc7cb480-section-content class=i-section-content>
+<DIV class="i-tab-container i-tab-container-widget">
+<UL role=tablist>
+<LI class=i-filtered-content-VB><A href="#i-tab-content-VB">Visual Basic</A> </LI></UL>
+<DIV id=i-tab-content-VB class="i-code i-filtered-content-VB"><PRE><SPAN style="COLOR: #0000ff">Imports</SPAN> System.IO
+<SPAN style="COLOR: #0000ff">Imports</SPAN> System.Runtime.InteropServices
+
+<SPAN style="COLOR: #0000ff">Module</SPAN> Program
+    &lt;STAThread()&gt; _
+    <SPAN style="COLOR: #0000ff">Sub</SPAN> Main()
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objApplication <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeFramework.Application = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objDocuments <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeFramework.Documents = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objPartDocument <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.PartDocument = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objModels <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.Models = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objModel <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.Model = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objProfileSets <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.ProfileSets = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objProfileSet <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.ProfileSet = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objProfiles <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.Profiles = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objProfile <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.Profile = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objRefPlanes <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.RefPlanes = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> aProfile(2) <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.Profile
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objExtrudedProtrusion <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.ExtrudedProtrusion = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objLines2d <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeFrameworkSupport.Lines2d = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objRelations2d <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeFrameworkSupport.Relations2d = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objRefPlane <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.RefPlane = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objCircles2d <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeFrameworkSupport.Circles2d = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> mode <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeConstants.ModelingModeConstants = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> lngStatus <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Integer</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Try</SPAN>
+            OleMessageFilter.Register()
+
+            <SPAN style="COLOR: #008000">' Start Solid Edge
+</SPAN>            objApplication = Activator.CreateInstance(Type.GetTypeFromProgID(<SPAN style="COLOR: #800000">"SolidEdge.Application"</SPAN>))
+
+            <SPAN style="COLOR: #008000">' Show Solid Edge
+</SPAN>            objApplication.Visible = <SPAN style="COLOR: #0000ff">True</SPAN>
+            objDocuments = objApplication.Documents
+
+            <SPAN style="COLOR: #008000">' Create a new part document
+</SPAN>            objPartDocument = objDocuments.Add(<SPAN style="COLOR: #800000">"SolidEdge.PartDocument"</SPAN>)
+            objModels = objPartDocument.Models
+
+            <SPAN style="COLOR: #008000">' Set the modeling mode to synchronous
+</SPAN>            objPartDocument.ModelingMode = SolidEdgeConstants.ModelingModeConstants.seModelingModeSynchronous
+
+            <SPAN style="COLOR: #008000">' Create synchronous features
+</SPAN>            objProfileSets = objPartDocument.ProfileSets
+            objProfileSet = objProfileSets.Add()
+            objProfiles = objProfileSet.Profiles
+            objRefPlanes = objPartDocument.RefPlanes
+
+            aProfile(0) = objProfiles.Add(objRefPlanes.Item(3))
+            objLines2d = aProfile(0).Lines2d
+
+            <SPAN style="COLOR: #008000">' Draw lines
+</SPAN>            objLines2d.AddBy2Points(0, 0, 0.08, 0)
+            objLines2d.AddBy2Points(0.08, 0, 0.08, 0.06)
+            objLines2d.AddBy2Points(0.08, 0.06, 0.064, 0.06)
+            objLines2d.AddBy2Points(0.064, 0.06, 0.064, 0.02)
+            objLines2d.AddBy2Points(0.064, 0.02, 0.048, 0.02)
+            objLines2d.AddBy2Points(0.048, 0.02, 0.048, 0.06)
+            objLines2d.AddBy2Points(0.048, 0.06, 0.032, 0.06)
+            objLines2d.AddBy2Points(0.032, 0.06, 0.032, 0.02)
+            objLines2d.AddBy2Points(0.032, 0.02, 0.016, 0.02)
+            objLines2d.AddBy2Points(0.016, 0.02, 0.016, 0.06)
+            objLines2d.AddBy2Points(0.016, 0.06, 0, 0.06)
+            objLines2d.AddBy2Points(0, 0.06, 0, 0)
+            objRelations2d = aProfile(0).Relations2d
+
+            <SPAN style="COLOR: #008000">' Connect lines
+</SPAN>            objRelations2d.AddKeypoint(objLines2d.Item(1), _
+                                       SolidEdgeConstants.KeypointIndexConstants.igLineEnd, _
+                                       objLines2d.Item(2), _
+                                       SolidEdgeConstants.KeypointIndexConstants.igLineStart)
+            objRelations2d.AddKeypoint(objLines2d.Item(2), _
+                                       SolidEdgeConstants.KeypointIndexConstants.igLineEnd, _
+                                       objLines2d.Item(3), _
+                                       SolidEdgeConstants.KeypointIndexConstants.igLineStart)
+            objRelations2d.AddKeypoint(objLines2d.Item(3), _
+                                       SolidEdgeConstants.KeypointIndexConstants.igLineEnd, _
+                                       objLines2d.Item(4), _
+                                       SolidEdgeConstants.KeypointIndexConstants.igLineStart)
+            objRelations2d.AddKeypoint(objLines2d.Item(4), _
+                                       SolidEdgeConstants.KeypointIndexConstants.igLineEnd, _
+                                       objLines2d.Item(5), _
+                                       SolidEdgeConstants.KeypointIndexConstants.igLineStart)
+            objRelations2d.AddKeypoint(objLines2d.Item(5), _
+                                       SolidEdgeConstants.KeypointIndexConstants.igLineEnd, _
+                                       objLines2d.Item(6), _
+                                       SolidEdgeConstants.KeypointIndexConstants.igLineStart)
+            objRelations2d.AddKeypoint(objLines2d.Item(6), _
+                                       SolidEdgeConstants.KeypointIndexConstants.igLineEnd, _
+                                       objLines2d.Item(7), _
+                                       SolidEdgeConstants.KeypointIndexConstants.igLineStart)
+            objRelations2d.AddKeypoint(objLines2d.Item(7), _
+                                       SolidEdgeConstants.KeypointIndexConstants.igLineEnd, _
+                                       objLines2d.Item(8), _
+                                       SolidEdgeConstants.KeypointIndexConstants.igLineStart)
+            objRelations2d.AddKeypoint(objLines2d.Item(8), _
+                                       SolidEdgeConstants.KeypointIndexConstants.igLineEnd, _
+                                       objLines2d.Item(9), _
+                                       SolidEdgeConstants.KeypointIndexConstants.igLineStart)
+            objRelations2d.AddKeypoint(objLines2d.Item(9), _
+                                       SolidEdgeConstants.KeypointIndexConstants.igLineEnd, _
+                                       objLines2d.Item(10), _
+                                       SolidEdgeConstants.KeypointIndexConstants.igLineStart)
+            objRelations2d.AddKeypoint(objLines2d.Item(10), _
+                                       SolidEdgeConstants.KeypointIndexConstants.igLineEnd, _
+                                       objLines2d.Item(11), _
+                                       SolidEdgeConstants.KeypointIndexConstants.igLineStart)
+            objRelations2d.AddKeypoint(objLines2d.Item(11), _
+                                       SolidEdgeConstants.KeypointIndexConstants.igLineEnd, _
+                                       objLines2d.Item(12), _
+                                       SolidEdgeConstants.KeypointIndexConstants.igLineStart)
+            objRelations2d.AddKeypoint(objLines2d.Item(12), _
+                                       SolidEdgeConstants.KeypointIndexConstants.igLineEnd, _
+                                       objLines2d.Item(1), _
+                                       SolidEdgeConstants.KeypointIndexConstants.igLineStart)
+
+            lngStatus = aProfile(0).End(SolidEdgePart.ProfileValidationType.igProfileClosed)
+
+            <SPAN style="COLOR: #0000ff">If</SPAN> lngStatus &lt;&gt; 0 <SPAN style="COLOR: #0000ff">Then</SPAN>
+                <SPAN style="COLOR: #0000ff">Throw</SPAN> <SPAN style="COLOR: #0000ff">New</SPAN> System.Exception(<SPAN style="COLOR: #800000">"Profile not closed"</SPAN>)
+            <SPAN style="COLOR: #0000ff">End</SPAN> <SPAN style="COLOR: #0000ff">If</SPAN>
+
+            objModel = objModels.AddFiniteExtrudedProtrusion(1, _
+                                                             aProfile, _
+                                                             SolidEdgeConstants.FeaturePropertyConstants.igRight, _
+                                                             0.05)
+
+            <SPAN style="COLOR: #0000ff">If</SPAN> objModel.ExtrudedProtrusions.Item(1).Status &lt;&gt; SolidEdgeConstants.FeatureStatusConstants.igFeatureOK <SPAN style="COLOR: #0000ff">Then</SPAN>
+                <SPAN style="COLOR: #0000ff">Throw</SPAN> <SPAN style="COLOR: #0000ff">New</SPAN> System.Exception(<SPAN style="COLOR: #800000">"Error in the Creation of Base Protrusion Feature object"</SPAN>)
+            <SPAN style="COLOR: #0000ff">End</SPAN> <SPAN style="COLOR: #0000ff">If</SPAN>
+
+            <SPAN style="COLOR: #008000">' Now change the modeling mode to ordered
+</SPAN>            objPartDocument.ModelingMode = SolidEdgeConstants.ModelingModeConstants.seModelingModeOrdered
+
+            <SPAN style="COLOR: #008000">' Create ordered features
+</SPAN>            objRefPlane = objRefPlanes.AddParallelByDistance(objRefPlanes.Item(2), _
+                                                             0.01, _
+                                                             SolidEdgeConstants.FeaturePropertyConstants.igRight)
+            objProfileSet = objProfileSets.Add()
+            objProfiles = objProfileSet.Profiles
+            objProfile = objProfiles.Add(objRefPlane)
+            objCircles2d = objProfile.Circles2d
+            objCircles2d.AddByCenterRadius(-0.025, 0.035, 0.005)
+            lngStatus = objProfile.End(SolidEdgePart.ProfileValidationType.igProfileClosed)
+
+            <SPAN style="COLOR: #0000ff">If</SPAN> lngStatus &lt;&gt; 0 <SPAN style="COLOR: #0000ff">Then</SPAN>
+                <SPAN style="COLOR: #0000ff">Throw</SPAN> <SPAN style="COLOR: #0000ff">New</SPAN> System.Exception(<SPAN style="COLOR: #800000">"Profile not closed"</SPAN>)
+            <SPAN style="COLOR: #0000ff">End</SPAN> <SPAN style="COLOR: #0000ff">If</SPAN>
+
+            objExtrudedProtrusion = objModel.ExtrudedProtrusions.AddFinite(objProfile, _
+                                                                           SolidEdgeConstants.FeaturePropertyConstants.igLeft, _
+                                                                           SolidEdgeConstants.FeaturePropertyConstants.igRight, _
+                                                                           0.1)
+
+            <SPAN style="COLOR: #008000">' This feature is seModelingModeSynchronous
+</SPAN>            mode = objModel.ExtrudedProtrusions.Item(1).ModelingModeType
+
+            <SPAN style="COLOR: #008000">' This feature is seModelingModeOrdered
+</SPAN>            mode = objModel.ExtrudedProtrusions.Item(2).ModelingModeType
+
+        <SPAN style="COLOR: #0000ff">Catch</SPAN> ex <SPAN style="COLOR: #0000ff">As</SPAN> Exception
+            Console.WriteLine(ex.Message)
+        <SPAN style="COLOR: #0000ff">Finally</SPAN>
+            OleMessageFilter.Revoke()
+        <SPAN style="COLOR: #0000ff">End</SPAN> <SPAN style="COLOR: #0000ff">Try</SPAN>
+    <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+<SPAN style="COLOR: #0000ff">End Module</SPAN></PRE></DIV></DIV></DIV><!--DXMETADATA end-->
+            <a name="seealsobookmark"></a>
+            <!--DXMETADATA start type="FilteredItemList" scrap="CATEGORISED_LINKS" namespace="linkcategory" source="Item" filter="" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=seealso,caption=""%%phrase:name=SeeAlso%%%%designlist:tagidentifier=seealso,itemtype=See Also%%""%%%%filtereditemlist%%</div>"--><div class="i-section-heading" id="i-seealso-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">See Also</span></div><div id="i-seealso-section-content" class="i-section-content"><div class="i-see-also-link">
+<a href="SolidEdgePart~ModelingModeConstants.html">ModelingModeConstants Enumeration</a></div>
+<div class="i-see-also-link">
+<a href="SolidEdgePart~PartDocument~ModelingMode.html">PartDocument.ModelingMode</a></div>
+<div class="i-see-also-link">
+<a href="SolidEdgePart~SheetMetalDocument~ModelingMode.html">SheetMetalDocument.ModelingMode</a></div>
+<div class="i-see-also-link">
+<a href="SolidEdgePart~ExtrudedProtrusion~ModelingModeType.html">ExtrudedProtrusion.ModelingModeType</a></div>
+
+</div><!--DXMETADATA end-->
+        
+    </div>
+    <div id="i-footer-content" class="i-footer-content">
+        <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_FOOTER" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="CopyrightNotice" format="<p>&nbsp;</p><p>&nbsp;</p><hr style=""height: 1px"" /><p>%%variable%%</p>" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="FeedbackLink" format="" --><!--DXMETADATA end-->
+    </div>
+    
+
+    <!--DXMETADATA start type="IsNew" format="<script type=""text/javascript"">setIsNew = true;</script>" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<script type=""text/javascript"">setIsResponsiveEnabled = true;</script>" --><!--DXMETADATA end-->
+    <script type="text/javascript">
+        $(function() {
+            var documentInstance = new Innovasys.Content.Document(document.body);
+            documentInstance.isNew = !(typeof setIsNew === "undefined");
+            documentInstance.isResponsiveEnabled = !(typeof setIsResponsiveEnabled === "undefined");
+            documentInstance.load();
+        });
+    </script>
+</body>
+</html>

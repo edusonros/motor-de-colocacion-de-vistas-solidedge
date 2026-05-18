@@ -1,0 +1,371 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--DXMETADATA start type="MetaCharset" --><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><!--DXMETADATA end-->
+    <meta http-equiv="X-UA-Compatible" value="IE=9" />
+
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Literal" condition="helpversion:value=3" value="<meta name=""Microsoft.Help.SelfBranded"" content=""true"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="PageItemTitle" format="<title>%%PageItemTitle%%</title>" --><title>CreateCloneComponents Method</title><!--DXMETADATA end-->
+    <!--DXMETADATA start type="ItemTitleNoQuotes" format="<meta name=""Title"" content=""%%ItemTitleNoQuotes%%""/>" --><!--DXMETADATA end-->    
+    
+
+    <!--DXMETADATA start type="PackageLink" packagename="jquery" filetype="script" firstlinkattributes="id=""mshs_support_script"""--><script src="template/packages/jquery/script/chm.mshc/jquery-1.7.2.min.js" type="text/javascript" id="mshs_support_script"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="script"--><script src="template/packages/jquery-ui/script/chm.mshc/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/jquery-ui/css/chm.mshc/jquery-ui-1.8.18.custom.css"></link><!--DXMETADATA end-->
+	
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/plugins-ax/css/chm.mshc/jquery-plugins.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="css" firstlinkattributes=" data-mshv2-stylesheet=""/template/packages/core-ax/dx.com.mshv2.css"" data-mshv1-stylesheet=""/template/packages/core-ax/dx.com.mshv1.css"" data-responsive-mobile=""template/packages/core-ax/dx.com.mobile.css"" data-responsive-tablet=""template/packages/core-ax/dx.com.tablet.css"""--><link rel="stylesheet" type="text/css" href="template/packages/core-ax/css/dx.com.css"  data-mshv2-stylesheet="/template/packages/core-ax/dx.com.mshv2.css" data-mshv1-stylesheet="/template/packages/core-ax/dx.com.mshv1.css" data-responsive-mobile="template/packages/core-ax/dx.com.mobile.css" data-responsive-tablet="template/packages/core-ax/dx.com.tablet.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="script"--><script src="template/packages/plugins-ax/script/chm.mshc/jquery-plugins.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="script"--><script src="template/packages/core-ax/script/dx.com.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="TopicId" format="<meta name=""Microsoft.Help.Id"" content=""%%TopicId%%""/>" --><meta name="Microsoft.Help.Id" content="SolidEdgeAssembly~AssemblyDocument~CreateCloneComponents"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Synopsis" StripHtmlTags="True" MaxLength="250" format="<meta name=""Description"" content=""%%Synopsis%%"" />"--><meta name="Description" content="Creates clones of the selected components with respect to selected faces." /><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocParentId" format="<meta name=""Microsoft.Help.TocParent"" content=""%%TocParentId%%""/>" --><meta name="Microsoft.Help.TocParent" content="SolidEdgeAssembly~AssemblyDocument_methods"/><!--DXMETADATA end-->
+    <meta name="Microsoft.Help.ContentType" content="Reference" />
+    <!--DXMETADATA start type="MshvKeywords" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="MshvMetaTags" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.Locale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.TopicLocale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="Stylesheets" --><link rel="stylesheet" type="text/css" href="stylesheets/customstyles.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Scripts" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="DesignTime"--><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_PROPERTIES" --><!--DXMETADATA end -->
+
+    <!--DXMETADATA start type="CustomHeadContent" --><!--DXMETADATA end-->
+</head>
+
+<body>
+    <div id="i-before-header-content" class="i-before-header-content">
+        
+    </div>
+    <div id="i-header-content" class="i-header-content">
+        <!--DXMETADATA start type="LogoImage" --><img class="logoimage" src="images/sesdk_header.jpg" border="0"></img><!--DXMETADATA end-->
+            <div class="i-project-title"><!--DXMETADATA start type="ProjectTitle" -->Solid Edge Assembly Type Library<!--DXMETADATA end--></div>
+        <div class="i-page-title"><div class="i-page-title-text"><!--DXMETADATA start type="PageItemTitle" -->CreateCloneComponents Method<!--DXMETADATA end--></div></div>
+    </div>
+    <div id="i-after-header-content" class="i-after-header-content">
+        <!-- Spacing --> <span class="i-toggle-all-sections i-function-link">
+                <label class="i-collapse-all"><!--DXMETADATA start type="Phrase" name="COLLAPSE_ALL" -->Collapse All<!--DXMETADATA end--></label>
+                <label class="i-expand-all" style="display: none;"><!--DXMETADATA start type="Phrase" name="EXPAND_ALL" -->Expand All<!--DXMETADATA end--></label>
+            </span><!--DXMETADATA start type="Literal" condition="communityenabled" value="%%scrap:name=_COMMUNITY_DROPDOWN%%" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="IsWebOutputRootPageLinkEnabled" format="<a href='#' class="i-page-link" class="i-view-in-frame-link" title='$$VIEW_WITH_NAVIGATION_TOOLS_TIP$$' style='display: none' data-root-page='%%WebOutputRootPage%%%%OutputFileExtension%%' target='_top'>$$VIEW_WITH_NAVIGATION_TOOLS_TEXT$$</a>" --><a href='#' class="i-page-link" class="i-view-in-frame-link" title='Open this Topic in a view that includes Navigation tools (Table of Contents, Index, Search)' style='display: none' data-root-page='webframe.html' target='_top'>View with Navigation Tools</a><!--DXMETADATA end-->
+    </div>
+    <!--DXMETADATA start type="Breadcrumbs" scrap="_BREADCRUMBS" --><div class="i-breadcrumbs-container"><table><tr><td>
+<a href="SolidEdgeAssembly_P.html">Solid Edge Assembly Type Library</a>
+ > <a href="SolidEdgeAssembly~AssemblyDocument.html">AssemblyDocument Object</a>
+ : CreateCloneComponents Method</td></tr></table></div><!--DXMETADATA end -->
+    
+    <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_BUBBLES" namespace="parameter" source="Item" -->
+<div id="ComponentsToClonePopupContent" class="i-popup-content">
+Specify components in assembly that needs to be cloned.
+</div>
+<div id="ReferenceGeometryFacesPopupContent" class="i-popup-content">
+Specify faces of the bodies other than selected components in ComponentsToClone
+</div>
+<div id="CloneEnviornmentPopupContent" class="i-popup-content">
+Specify components in assembly or subassemblies on which reference geometry is to be searched
+</div>
+<div id="CloneOptionsPopupContent" class="i-popup-content">
+
+</div>
+<div id="bCreateGroupPopupContent" class="i-popup-content">
+Specify as 'True' if you would like to create assembly group of cloned components.
+</div>
+<div id="CloneMatchTypePopupContent" class="i-popup-content">
+
+</div>
+<div id="ErrorStatusPopupContent" class="i-popup-content">
+This argument returns error code (if any). Otherwise returns zero.
+</div>
+<!--DXMETADATA end -->
+    <div id="i-body-content" class="i-body-content">
+        <!--DXMETADATA start type="Description" source="Item" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=description,caption=$$Description$$%%<div class=""i-description-content"">%%description%%</div></div>" --><div class="i-section-heading" id="i-description-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Description</span></div><div id="i-description-section-content" class="i-section-content"><div class="i-description-content">Creates clones of the selected components with respect to selected faces.</div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="Syntax" lang="VB" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=syntax,caption=$$Syntax$$%%<div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>%%Syntax%%</pre></tr></table></div></div>" --><div class="i-section-heading" id="i-syntax-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Syntax</span></div><div id="i-syntax-section-content" class="i-section-content"><div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>Public Sub CreateCloneComponents( _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="ComponentsToClonePopupLink" data-popup-contentsource="#ComponentsToClonePopupContent" data-popup-showevent="click mouseenter">ComponentsToClone</a></i>() As Object, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="ReferenceGeometryFacesPopupLink" data-popup-contentsource="#ReferenceGeometryFacesPopupContent" data-popup-showevent="click mouseenter">ReferenceGeometryFaces</a></i>() As Object, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="CloneEnviornmentPopupLink" data-popup-contentsource="#CloneEnviornmentPopupContent" data-popup-showevent="click mouseenter">CloneEnviornment</a></i>() As Object, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="CloneOptionsPopupLink" data-popup-contentsource="#CloneOptionsPopupContent" data-popup-showevent="click mouseenter">CloneOptions</a></i> As <a href="SolidEdgeAssembly~CloneComponentOptions.html">CloneComponentOptions</a>, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="bCreateGroupPopupLink" data-popup-contentsource="#bCreateGroupPopupContent" data-popup-showevent="click mouseenter">bCreateGroup</a></i> As Boolean, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="CloneMatchTypePopupLink" data-popup-contentsource="#CloneMatchTypePopupContent" data-popup-showevent="click mouseenter">CloneMatchType</a></i> As <a href="SolidEdgeAssembly~CloneMatchTypeOptions.html">CloneMatchTypeOptions</a>, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="ErrorStatusPopupLink" data-popup-contentsource="#ErrorStatusPopupContent" data-popup-showevent="click mouseenter">ErrorStatus</a></i> As Long _
+) </pre></tr></table></div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_LIST" namespace="parameter" source="Item" filter="" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=parameters,caption=$$ParameterList$$%%%%filtereditemlist%%</div>" --><div class="i-section-heading" id="i-parameters-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Parameters</span></div><div id="i-parameters-section-content" class="i-section-content"><dl>
+<dt><I>ComponentsToClone</I></dt>
+<dd>Specify components in assembly that needs to be cloned.</dd>
+<dt><I>ReferenceGeometryFaces</I></dt>
+<dd>Specify faces of the bodies other than selected components in ComponentsToClone</dd>
+<dt><I>CloneEnviornment</I></dt>
+<dd>Specify components in assembly or subassemblies on which reference geometry is to be searched</dd>
+<dt><I>CloneOptions</I></dt>
+<dd><table class="i-filtered-item-list"><tr><th>Value</th><th>Description</th></tr>
+<tr><td class="i-member-name">seCreateGroundRelationships</td><td class="i-description">Create Ground relationships</td></tr>
+<tr><td class="i-member-name">seDoNotCreateRelationships</td><td class="i-description">Do not create relationships</td></tr>
+<tr><td class="i-member-name">seRepairUnsatisfiedRelationships</td><td class="i-description">Repair unsatisfied relationships</td></tr>
+</table></dd>
+<dt><I>bCreateGroup</I></dt>
+<dd>Specify as 'True' if you would like to create assembly group of cloned components.</dd>
+<dt><I>CloneMatchType</I></dt>
+<dd><table class="i-filtered-item-list"><tr><th>Value</th><th>Description</th></tr>
+<tr><td class="i-member-name">CloneMatchTypeAutomatic</td><td class="i-description">Automatic Match</td></tr>
+<tr><td class="i-member-name">CloneMatchTypeExact</td><td class="i-description">Exact Match</td></tr>
+</table></dd>
+<dt><I>ErrorStatus</I></dt>
+<dd>This argument returns error code (if any). Otherwise returns zero.</dd>
+</dl></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##RETURNS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=returns,caption=$$Return_Type$$%%<div class=""i-returns-content"">%%comment%%</div></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##REMARKS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=remarks,caption=$$Remarks$$%%%%comment%%</div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="sourcecode" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=source,caption=$$Source_Code$$%%<table border=0 cellpadding=0 cellspacing=0 class=sourcecode><tr><td nowrap>%%sourcecode%%</td></tr></table></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##EXAMPLEINTRO" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=""$$Example$$%%designlist:tagidentifier=##EXAMPLECODE,itemtype=Example%%""%%%%comment%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="EXAMPLEGROUP_LIST" namespace="ExampleGroup" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""="",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><div class="i-section-heading" id="i-example-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Example</span></div><div id="i-example-section-content" class="i-section-content">
+<div class="i-tab-container">
+    <ul>
+        <li class="i-filtered-content-VB.NET">
+			<a href="#i-tab-content-93c068fc-2106-482e-a85f-3f935295ea92">Example (VB.NET)</a>
+		</li>
+        <li class="i-filtered-content-CS">
+			<a href="#i-tab-content-2659f52e-f8d1-4d10-9078-c793a68a3189">Example (C#)</a>
+		</li>
+
+    </ul>
+	<div id="i-tab-content-93c068fc-2106-482e-a85f-3f935295ea92" class="i-filtered-content-VB.NET">
+		<pre><span style="color: #0000FF; ">Imports</span> System.Runtime.InteropServices
+<span style="color: #0000FF; ">Imports</span> System.IO
+
+<span style="color: #0000FF; ">Public</span> <span style="color: #0000FF; ">Class</span> Form1
+
+    <span style="color: #0000FF; ">Private</span> <span style="color: #0000FF; ">Sub</span> Button1_Click(sender <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Object</span>, e <span style="color: #0000FF; ">As</span> EventArgs) <span style="color: #0000FF; ">Handles</span> Button1.Click
+        <span style="color: #0000FF; ">Dim</span> objSEApplication <span style="color: #0000FF; ">As</span> SolidEdgeFramework.Application = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objAsmDoc <span style="color: #0000FF; ">As</span> SolidEdgeAssembly.AssemblyDocument = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objAsmOcc <span style="color: #0000FF; ">As</span> SolidEdgeAssembly.Occurrence = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objCloneOcc <span style="color: #0000FF; ">As</span> SolidEdgeAssembly.Occurrence = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objRefOcc <span style="color: #0000FF; ">As</span> SolidEdgeAssembly.Occurrence = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objComponenetsToClone <span style="color: #0000FF; ">As</span> Array = Array.CreateInstance(<span style="color: #0000FF; ">GetType</span>(<span style="color: #0000FF; ">Object</span>), 1)
+        <span style="color: #0000FF; ">Dim</span> objFaces <span style="color: #0000FF; ">As</span> Array = Array.CreateInstance(<span style="color: #0000FF; ">GetType</span>(<span style="color: #0000FF; ">Object</span>), 1)
+        <span style="color: #0000FF; ">Dim</span> objCloneEnv <span style="color: #0000FF; ">As</span> Array = Array.CreateInstance(<span style="color: #0000FF; ">GetType</span>(<span style="color: #0000FF; ">Object</span>), 1)
+        <span style="color: #0000FF; ">Dim</span> objPartDoc <span style="color: #0000FF; ">As</span> SolidEdgePart.PartDocument = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objPartBody <span style="color: #0000FF; ">As</span> SolidEdgeGeometry.Body = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> ErrorStatus <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Long</span>
+        <span style="color: #0000FF; ">Dim</span> objTrainingFolder <span style="color: #0000FF; ">As</span> DirectoryInfo
+        <span style="color: #0000FF; ">Dim</span> CloneComponentType <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Object</span> = SolidEdgeConstants.CloneComponentOptions.seDoNotCreateRelationships
+        <span style="color: #0000FF; ">Try</span>
+
+
+         objSEApplication = Marshal.GetActiveObject(<span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>)
+            <span style="color: #008000; ">'Get Training Folder
+</span>            objTrainingFolder = GetTrainingFolder()
+            <span style="color: #008000; ">'Open carrier.asm
+</span>            objSEApplication.Documents.Open(Path.Combine(objTrainingFolder.FullName, <span style="color: #800000; ">&quot;seva04.asm&quot;</span>))
+            objAsmDoc = objSEApplication.ActiveDocument
+
+            <span style="color: #008000; ">' collect all input data for clone command
+</span>            objAsmOcc = objAsmDoc.Occurrences.Item(2)
+            <span style="color: #0000FF; ">Dim</span> occname <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">String</span> = objAsmOcc.Name
+
+            objComponenetsToClone.SetValue(objAsmOcc, 0)
+
+            <span style="color: #008000; ">' get reference geometry
+</span>            objRefOcc = objAsmDoc.Occurrences.Item(1)
+            objPartDoc = objRefOcc.OccurrenceDocument
+            objPartBody = objPartDoc.Models.Item(1).Body
+            objFaces.SetValue(objAsmDoc.CreateReference(objRefOcc, objPartBody.GetEntityByID(228)), 0)
+
+
+            <span style="color: #008000; ">' get clone environment
+</span>            objCloneOcc = objAsmDoc.Occurrences.Item(1)
+            <span style="color: #0000FF; ">Dim</span> occname1 <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">String</span> = objCloneOcc.Name
+
+            objCloneEnv.SetValue(objCloneOcc, 0)
+            objAsmDoc.CreateCloneComponents(objComponenetsToClone, _
+                                            objFaces, _
+                                            objCloneEnv, _
+                                            SolidEdgeConstants.CloneComponentOptions.seDoNotCreateRelationships, _
+                                            <span style="color: #0000FF; ">True</span>, _
+                                            SolidEdgeConstants.CloneMatchTypeOptions.CloneMatchTypeAutomatic, _
+                                            ErrorStatus)
+
+        <span style="color: #0000FF; ">Catch</span> ex <span style="color: #0000FF; ">As</span> Exception
+            <span style="color: #0000FF; ">MsgBox</span>(ex.ToString)
+            <span style="color: #0000FF; ">If</span> <span style="color: #0000FF; ">Not</span> objAsmDoc <span style="color: #0000FF; ">Is</span> <span style="color: #0000FF; ">Nothing</span> <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">Call</span> objAsmDoc.Close()
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+        <span style="color: #0000FF; ">Finally</span>
+          
+        <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">Try</span>
+    <span style="color: #0000FF; ">End Sub</span>
+    <span style="color: #0000FF; ">Function</span> GetTrainingFolder() <span style="color: #0000FF; ">As</span> DirectoryInfo
+        <span style="color: #0000FF; ">Dim</span> objInstallData <span style="color: #0000FF; ">As</span> SEInstallDataLib.SEInstallData = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objInstallFolder <span style="color: #0000FF; ">As</span> DirectoryInfo = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objTrainingFolder <span style="color: #0000FF; ">As</span> DirectoryInfo = <span style="color: #0000FF; ">Nothing</span>
+
+        <span style="color: #0000FF; ">Try</span>
+            objInstallData = <span style="color: #0000FF; ">New</span> SEInstallDataLib.SEInstallData
+            objInstallFolder = <span style="color: #0000FF; ">New</span> DirectoryInfo(objInstallData.GetInstalledPath())
+            objTrainingFolder = <span style="color: #0000FF; ">New</span> DirectoryInfo(Path.Combine(objInstallFolder.Parent.FullName, <span style="color: #800000; ">&quot;Training&quot;</span>))
+        <span style="color: #0000FF; ">Catch</span>
+        <span style="color: #0000FF; ">Finally</span>
+            <span style="color: #0000FF; ">If</span> <span style="color: #0000FF; ">Not</span> (objInstallData <span style="color: #0000FF; ">Is</span> <span style="color: #0000FF; ">Nothing</span>) <span style="color: #0000FF; ">Then</span>
+                Marshal.FinalReleaseComObject(objInstallData)
+                objInstallData = <span style="color: #0000FF; ">Nothing</span>
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+        <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">Try</span>
+
+        <span style="color: #0000FF; ">Return</span> objTrainingFolder
+    <span style="color: #0000FF; ">End Function</span>
+
+
+<span style="color: #0000FF; ">End Class</span>
+</pre>
+	</div>
+	<div id="i-tab-content-2659f52e-f8d1-4d10-9078-c793a68a3189" class="i-filtered-content-CS">
+		<pre><span style="color: #0000FF; ">using</span> System;
+<span style="color: #0000FF; ">using</span> System.Windows.Forms;
+<span style="color: #0000FF; ">using</span> System.Runtime.InteropServices;
+<span style="color: #0000FF; ">using</span> System.IO;
+
+<span style="color: #0000FF; ">public</span> <span style="color: #0000FF; ">class</span> Form1
+{
+
+    <span style="color: #0000FF; ">private</span> <span style="color: #0000FF; ">void</span> Button1_Click(<span style="color: #0000FF; ">object</span> sender, EventArgs e)
+    {
+        SolidEdgeFramework.Application objSEApplication = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeAssembly.AssemblyDocument objAsmDoc = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeAssembly.Occurrence objAsmOcc = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeAssembly.Occurrence objCloneOcc = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeAssembly.Occurrence objRefOcc = <span style="color: #0000FF; ">null</span>;
+        Array objComponenetsToClone = (Array[])Array.CreateInstance(<span style="color: #0000FF; ">typeof</span>(<span style="color: #0000FF; ">object</span>), 1);
+        Array objFaces = (Array[])Array.CreateInstance(<span style="color: #0000FF; ">typeof</span>(<span style="color: #0000FF; ">object</span>), 1);
+        Array objCloneEnv = (Array[])Array.CreateInstance(<span style="color: #0000FF; ">typeof</span>(<span style="color: #0000FF; ">object</span>), 1);
+        SolidEdgePart.PartDocument objPartDoc = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeGeometry.Body objPartBody = <span style="color: #0000FF; ">null</span>;
+        <span style="color: #0000FF; ">long</span> ErrorStatus = 0;
+        DirectoryInfo objTrainingFolder = <span style="color: #0000FF; ">null</span>;
+        <span style="color: #0000FF; ">object</span> CloneComponentType = SolidEdgeConstants.CloneComponentOptions.seDoNotCreateRelationships;
+        <span style="color: #0000FF; ">try</span>
+        {
+
+
+         objSEApplication = (SolidEdgeFramework.Application)Marshal.GetActiveObject(<span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>);
+            <span style="color: #008000; ">//Get Training Folder
+</span>            objTrainingFolder = GetTrainingFolder();
+            <span style="color: #008000; ">//Open carrier.asm
+</span>            objSEApplication.Documents.Open(Path.Combine(objTrainingFolder.FullName, <span style="color: #800000; ">&quot;seva04.asm&quot;</span>));
+            objAsmDoc = objSEApplication.ActiveDocument;
+
+            <span style="color: #008000; ">// collect all input data for clone command
+</span>            objAsmOcc = objAsmDoc.Occurrences.Item(2);
+            <span style="color: #0000FF; ">string</span> occname = objAsmOcc.Name;
+
+            objComponenetsToClone.SetValue(objAsmOcc, 0);
+
+            <span style="color: #008000; ">// get reference geometry
+</span>            objRefOcc = objAsmDoc.Occurrences.Item(1);
+            objPartDoc = objRefOcc.OccurrenceDocument;
+            objPartBody = objPartDoc.Models.Item(1).Body;
+            objFaces.SetValue(objAsmDoc.CreateReference(objRefOcc, objPartBody.GetEntityByID(228)), 0);
+
+
+            <span style="color: #008000; ">// get clone environment
+</span>            objCloneOcc = objAsmDoc.Occurrences.Item(1);
+            <span style="color: #0000FF; ">string</span> occname1 = objCloneOcc.Name;
+
+            objCloneEnv.SetValue(objCloneOcc, 0);
+            objAsmDoc.CreateCloneComponents(objComponenetsToClone, objFaces, objCloneEnv, SolidEdgeConstants.CloneComponentOptions.seDoNotCreateRelationships, <span style="color: #0000FF; ">true</span>, SolidEdgeConstants.CloneMatchTypeOptions.CloneMatchTypeAutomatic, ErrorStatus);
+
+        }
+        <span style="color: #0000FF; ">catch</span> (Exception ex)
+        {
+            MessageBox.Show(ex.ToString());
+            <span style="color: #0000FF; ">if</span> (objAsmDoc != <span style="color: #0000FF; ">null</span>)
+            {
+                objAsmDoc.Close();
+            }
+        }
+        <span style="color: #0000FF; ">finally</span>
+        {
+
+        }
+    }
+    <span style="color: #0000FF; ">public</span> DirectoryInfo GetTrainingFolder()
+    {
+        SEInstallDataLib.SEInstallData objInstallData = <span style="color: #0000FF; ">null</span>;
+        DirectoryInfo objInstallFolder = <span style="color: #0000FF; ">null</span>;
+        DirectoryInfo objTrainingFolder = <span style="color: #0000FF; ">null</span>;
+
+        <span style="color: #0000FF; ">try</span>
+        {
+            objInstallData = <span style="color: #0000FF; ">new</span> SEInstallDataLib.SEInstallData();
+            objInstallFolder = <span style="color: #0000FF; ">new</span> DirectoryInfo(objInstallData.GetInstalledPath());
+            objTrainingFolder = <span style="color: #0000FF; ">new</span> DirectoryInfo(Path.Combine(objInstallFolder.Parent.FullName, <span style="color: #800000; ">&quot;Training&quot;</span>));
+        }
+        <span style="color: #0000FF; ">catch</span>
+        {
+        }
+        <span style="color: #0000FF; ">finally</span>
+        {
+            <span style="color: #0000FF; ">if</span> (objInstallData != <span style="color: #0000FF; ">null</span>)
+            {
+                Marshal.FinalReleaseComObject(objInstallData);
+                objInstallData = <span style="color: #0000FF; ">null</span>;
+            }
+        }
+
+        <span style="color: #0000FF; ">return</span> objTrainingFolder;
+    }
+
+
+
+    <span style="color: #0000FF; ">public</span> Form1()
+    {
+        SubscribeToEvents();
+    }
+
+
+    <span style="color: #0000FF; ">private</span> <span style="color: #0000FF; ">bool</span> EventsSubscribed = <span style="color: #0000FF; ">false</span>;
+    <span style="color: #0000FF; ">private</span> <span style="color: #0000FF; ">void</span> SubscribeToEvents()
+    {
+        <span style="color: #0000FF; ">if</span> (EventsSubscribed)
+            <span style="color: #0000FF; ">return</span>;
+        <span style="color: #0000FF; ">else</span>
+            EventsSubscribed = <span style="color: #0000FF; ">true</span>;
+
+        Button1.Click += Button1_Click;
+    }
+
+}
+</pre>
+	</div>
+	
+</div>
+</div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="INLINE_EXAMPLE" namespace="Example" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""<>"",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="MENU_LINK" namespace="example" source="Item" filter="type=linked" NoHeader="True" NoFooter="True" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=examplelinks,caption=$$Example$$%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="FilteredItemList" scrap="CATEGORIZED_LINKS" namespace="linkcategory" source="Item" filter="" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=seealso,caption=""$$See_Also$$%%designlist:tagidentifier=##SEEALSO,itemtype=See Also%%""%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><div class="i-section-heading" id="i-seealso-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">See Also</span></div><div id="i-seealso-section-content" class="i-section-content"><p id=dxseealsocontent><a href="SolidEdgeAssembly~AssemblyDocument.html">AssemblyDocument Object</a>
+&nbsp;|&nbsp;<a href="SolidEdgeAssembly~AssemblyDocument_members.html">AssemblyDocument Members</a>
+</p>
+</p></div><!--DXMETADATA end -->
+    </div>
+    <div id="i-footer-content" class="i-footer-content">
+        <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_FOOTER" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="CopyrightNotice" format="<p>&nbsp;</p><p>&nbsp;</p><hr style=""height: 1px"" /><p>%%variable%%</p>" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="FeedbackLink" format="" --><!--DXMETADATA end-->
+    </div>
+    
+
+    <!--DXMETADATA start type="IsNew" format="<script type=""text/javascript"">setIsNew = true;</script>" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<script type=""text/javascript"">setIsResponsiveEnabled = true;</script>" --><!--DXMETADATA end-->
+    <script type="text/javascript">
+        $(function() {
+            var documentInstance = new Innovasys.Content.Document(document.body);
+            documentInstance.isNew = !(typeof setIsNew === "undefined");
+            documentInstance.isResponsiveEnabled = !(typeof setIsResponsiveEnabled === "undefined");
+            documentInstance.load();
+        });
+    </script>
+</body>
+</html>

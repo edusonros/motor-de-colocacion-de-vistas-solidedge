@@ -1,0 +1,553 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--DXMETADATA start type="MetaCharset" --><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><!--DXMETADATA end-->
+    <meta http-equiv="X-UA-Compatible" value="IE=9" />
+
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Literal" condition="helpversion:value=3" value="<meta name=""Microsoft.Help.SelfBranded"" content=""true"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="PageItemTitle" format="<title>%%PageItemTitle%%</title>" --><title>AddParallelByDistance Method</title><!--DXMETADATA end-->
+    <!--DXMETADATA start type="ItemTitleNoQuotes" format="<meta name=""Title"" content=""%%ItemTitleNoQuotes%%""/>" --><!--DXMETADATA end-->    
+    
+
+    <!--DXMETADATA start type="PackageLink" packagename="jquery" filetype="script" firstlinkattributes="id=""mshs_support_script"""--><script src="template/packages/jquery/script/chm.mshc/jquery-1.7.2.min.js" type="text/javascript" id="mshs_support_script"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="script"--><script src="template/packages/jquery-ui/script/chm.mshc/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/jquery-ui/css/chm.mshc/jquery-ui-1.8.18.custom.css"></link><!--DXMETADATA end-->
+	
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/plugins-ax/css/chm.mshc/jquery-plugins.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="css" firstlinkattributes=" data-mshv2-stylesheet=""/template/packages/core-ax/dx.com.mshv2.css"" data-mshv1-stylesheet=""/template/packages/core-ax/dx.com.mshv1.css"" data-responsive-mobile=""template/packages/core-ax/dx.com.mobile.css"" data-responsive-tablet=""template/packages/core-ax/dx.com.tablet.css"""--><link rel="stylesheet" type="text/css" href="template/packages/core-ax/css/dx.com.css"  data-mshv2-stylesheet="/template/packages/core-ax/dx.com.mshv2.css" data-mshv1-stylesheet="/template/packages/core-ax/dx.com.mshv1.css" data-responsive-mobile="template/packages/core-ax/dx.com.mobile.css" data-responsive-tablet="template/packages/core-ax/dx.com.tablet.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="script"--><script src="template/packages/plugins-ax/script/chm.mshc/jquery-plugins.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="script"--><script src="template/packages/core-ax/script/dx.com.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="TopicId" format="<meta name=""Microsoft.Help.Id"" content=""%%TopicId%%""/>" --><meta name="Microsoft.Help.Id" content="SolidEdgePart~RefPlanes~AddParallelByDistance"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Synopsis" StripHtmlTags="True" MaxLength="250" format="<meta name=""Description"" content=""%%Synopsis%%"" />"--><meta name="Description" content="Creates a RefPlane object that is parallet to another plane." /><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocParentId" format="<meta name=""Microsoft.Help.TocParent"" content=""%%TocParentId%%""/>" --><meta name="Microsoft.Help.TocParent" content="SolidEdgePart~RefPlanes_methods"/><!--DXMETADATA end-->
+    <meta name="Microsoft.Help.ContentType" content="Reference" />
+    <!--DXMETADATA start type="MshvKeywords" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="MshvMetaTags" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.Locale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.TopicLocale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="Stylesheets" --><link rel="stylesheet" type="text/css" href="stylesheets/customstyles.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Scripts" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="DesignTime"--><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_PROPERTIES" --><!--DXMETADATA end -->
+
+    <!--DXMETADATA start type="CustomHeadContent" --><!--DXMETADATA end-->
+</head>
+
+<body>
+    <div id="i-before-header-content" class="i-before-header-content">
+        
+    </div>
+    <div id="i-header-content" class="i-header-content">
+        <!--DXMETADATA start type="LogoImage" --><img class="logoimage" src="images/sesdk_header.jpg" border="0"></img><!--DXMETADATA end-->
+            <div class="i-project-title"><!--DXMETADATA start type="ProjectTitle" -->Solid Edge Part Type Library<!--DXMETADATA end--></div>
+        <div class="i-page-title"><div class="i-page-title-text"><!--DXMETADATA start type="PageItemTitle" -->AddParallelByDistance Method<!--DXMETADATA end--></div></div>
+    </div>
+    <div id="i-after-header-content" class="i-after-header-content">
+        <!-- Spacing --> <span class="i-toggle-all-sections i-function-link">
+                <label class="i-collapse-all"><!--DXMETADATA start type="Phrase" name="COLLAPSE_ALL" -->Collapse All<!--DXMETADATA end--></label>
+                <label class="i-expand-all" style="display: none;"><!--DXMETADATA start type="Phrase" name="EXPAND_ALL" -->Expand All<!--DXMETADATA end--></label>
+            </span><!--DXMETADATA start type="Literal" condition="communityenabled" value="%%scrap:name=_COMMUNITY_DROPDOWN%%" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="IsWebOutputRootPageLinkEnabled" format="<a href='#' class="i-page-link" class="i-view-in-frame-link" title='$$VIEW_WITH_NAVIGATION_TOOLS_TIP$$' style='display: none' data-root-page='%%WebOutputRootPage%%%%OutputFileExtension%%' target='_top'>$$VIEW_WITH_NAVIGATION_TOOLS_TEXT$$</a>" --><a href='#' class="i-page-link" class="i-view-in-frame-link" title='Open this Topic in a view that includes Navigation tools (Table of Contents, Index, Search)' style='display: none' data-root-page='webframe.html' target='_top'>View with Navigation Tools</a><!--DXMETADATA end-->
+    </div>
+    <!--DXMETADATA start type="Breadcrumbs" scrap="_BREADCRUMBS" --><div class="i-breadcrumbs-container"><table><tr><td>
+<a href="SolidEdgePart_P.html">Solid Edge Part Type Library</a>
+ > <a href="SolidEdgePart~RefPlanes.html">RefPlanes Collection</a>
+ : AddParallelByDistance Method</td></tr></table></div><!--DXMETADATA end -->
+    
+    <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_BUBBLES" namespace="parameter" source="Item" -->
+<div id="ParentPlanePopupContent" class="i-popup-content">
+This argument is the planar element (reference plane or feature face) to which the reference plane is made parallel.
+</div>
+<div id="DistancePopupContent" class="i-popup-content">
+Specifies the distance from the parent plane at which to create reference plane. The value is always positive, in the direction specified by NormalSide.
+</div>
+<div id="NormalSidePopupContent" class="i-popup-content">
+Member of the ReferenceElementConstants constant set that specifies the normal side of the new reference plane with respect to the ParentPlane.
+</div>
+<div id="PivotPopupContent" class="i-popup-content">
+An existing reference plane whose intersection with the ParentPlane establishes the axis of the reference plane.
+</div>
+<div id="PivotOriginPopupContent" class="i-popup-content">
+Member of the ReferenceElementConstants constant set that defines the origin of the pivot axis.
+</div>
+<div id="LocalPopupContent" class="i-popup-content">
+Specifies whether the reference plane should be a local or global reference plane. If not specified, the default is to create a local
+</div>
+<div id="FlipNormalPopupContent" class="i-popup-content">
+Member of the ReferenceElementConstants constant set (igRefEleInit or igFlipNormal).  When set to igRefEleInit, the reference plane normal of the reference plane to be created is not flipped.  When set to igFlipNormal, the reference plane normal of the reference plane to be created is flipped.
+</div>
+<!--DXMETADATA end -->
+    <div id="i-body-content" class="i-body-content">
+        <!--DXMETADATA start type="Description" source="Item" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=description,caption=$$Description$$%%<div class=""i-description-content"">%%description%%</div></div>" --><div class="i-section-heading" id="i-description-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Description</span></div><div id="i-description-section-content" class="i-section-content"><div class="i-description-content">Creates a RefPlane object that is parallet to another plane.</div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="Syntax" lang="VB" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=syntax,caption=$$Syntax$$%%<div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>%%Syntax%%</pre></tr></table></div></div>" --><div class="i-section-heading" id="i-syntax-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Syntax</span></div><div id="i-syntax-section-content" class="i-section-content"><div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>Public Function AddParallelByDistance( _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="ParentPlanePopupLink" data-popup-contentsource="#ParentPlanePopupContent" data-popup-showevent="click mouseenter">ParentPlane</a></i> As Object, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="DistancePopupLink" data-popup-contentsource="#DistancePopupContent" data-popup-showevent="click mouseenter">Distance</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="NormalSidePopupLink" data-popup-contentsource="#NormalSidePopupContent" data-popup-showevent="click mouseenter">NormalSide</a></i> As <a href="SolidEdgePart~ReferenceElementConstants.html">ReferenceElementConstants</a>, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="PivotPopupLink" data-popup-contentsource="#PivotPopupContent" data-popup-showevent="click mouseenter">Pivot</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="PivotOriginPopupLink" data-popup-contentsource="#PivotOriginPopupContent" data-popup-showevent="click mouseenter">PivotOrigin</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="LocalPopupLink" data-popup-contentsource="#LocalPopupContent" data-popup-showevent="click mouseenter">Local</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="FlipNormalPopupLink" data-popup-contentsource="#FlipNormalPopupContent" data-popup-showevent="click mouseenter">FlipNormal</a></i> As Variant _
+) As <a href="SolidEdgePart~RefPlane.html">RefPlane</a></pre></tr></table></div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_LIST" namespace="parameter" source="Item" filter="" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=parameters,caption=$$ParameterList$$%%%%filtereditemlist%%</div>" --><div class="i-section-heading" id="i-parameters-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Parameters</span></div><div id="i-parameters-section-content" class="i-section-content"><dl>
+<dt><I>ParentPlane</I></dt>
+<dd>This argument is the planar element (reference plane or feature face) to which the reference plane is made parallel.</dd>
+<dt><I>Distance</I></dt>
+<dd>Specifies the distance from the parent plane at which to create reference plane. The value is always positive, in the direction specified by NormalSide.</dd>
+<dt><I>NormalSide</I></dt>
+<dd><table class="i-filtered-item-list"><tr><th>Value</th><th>Description</th></tr>
+<tr><td class="i-member-name">ig3PointPlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igAngular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igAtAngleToSurfaceAtKeypoint</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCurveEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCurveStart</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlipNormal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNormalSide</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNormalToCurve</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNormalToCurveAtArcLengthRatio</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNormalToCurveAtDistance</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNormalToCurveAtDistanceAlongCurve</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNormalToCurveAtKeyPoint</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igParallel</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igParallelThroughPoint</td><td class="i-description">Unsupported Internal type.</td></tr>
+<tr><td class="i-member-name">igPivotEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPivotStart</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPlaneAlignX</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPlaneAlignY</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPlaneByMirror</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPlaneFlipHorizontal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPlaneFlipVertical</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPlaneRotateLeft</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPlaneRotateRight</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRefEleInit</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igReverseNormalSide</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTangentToFace</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTangentToSurfaceAtAngle</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTangentToSurfaceAtKeypoint</td><td class="i-description"> </td></tr>
+</table>Member of the ReferenceElementConstants constant set that specifies the normal side of the new reference plane with respect to the ParentPlane.</dd>
+<dt><I>Pivot</I></dt>
+<dd>An existing reference plane whose intersection with the ParentPlane establishes the axis of the reference plane.</dd>
+<dt><I>PivotOrigin</I></dt>
+<dd>Member of the ReferenceElementConstants constant set that defines the origin of the pivot axis.</dd>
+<dt><I>Local</I></dt>
+<dd>Specifies whether the reference plane should be a local or global reference plane. If not specified, the default is to create a local</dd>
+<dt><I>FlipNormal</I></dt>
+<dd>Member of the ReferenceElementConstants constant set (igRefEleInit or igFlipNormal).  When set to igRefEleInit, the reference plane normal of the reference plane to be created is not flipped.  When set to igFlipNormal, the reference plane normal of the reference plane to be created is flipped.</dd>
+</dl></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##RETURNS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=returns,caption=$$Return_Type$$%%<div class=""i-returns-content"">%%comment%%</div></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##REMARKS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=remarks,caption=$$Remarks$$%%%%comment%%</div>" --><div class="i-section-heading" id="i-remarks-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Remarks</span></div><div id="i-remarks-section-content" class="i-section-content">The parent plane can be another reference plane or the planar face of a feature. Through the AddParallelByDistance method, the reference plane can be offset at a specified distance to either side of the parent plane.  Optionally, the reference plane can be set to pivot relative to a specified edge on the parent plane. The specified edge affects the x, y orientation of the reference plane; any feature with a profile on the reference plane is also affected.</div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="sourcecode" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=source,caption=$$Source_Code$$%%<table border=0 cellpadding=0 cellspacing=0 class=sourcecode><tr><td nowrap>%%sourcecode%%</td></tr></table></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##EXAMPLEINTRO" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=""$$Example$$%%designlist:tagidentifier=##EXAMPLECODE,itemtype=Example%%""%%%%comment%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="EXAMPLEGROUP_LIST" namespace="ExampleGroup" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""="",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><div class="i-section-heading" id="i-example-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Example</span></div><div id="i-example-section-content" class="i-section-content">
+<div class="i-tab-container">
+    <ul>
+        <li class="i-filtered-content-Visual Basic">
+			<a href="#i-tab-content-a24a5fbd-36d5-45d2-b55d-985d404546f5">Example (Visual Basic)</a>
+		</li>
+        <li class="i-filtered-content-CS">
+			<a href="#i-tab-content-077f0c5c-1215-4b8e-89a2-e710d55fb10b">Example (C#)</a>
+		</li>
+
+    </ul>
+	<div id="i-tab-content-a24a5fbd-36d5-45d2-b55d-985d404546f5" class="i-filtered-content-Visual Basic">
+		<pre><span style="color: #0000FF; ">Imports</span> System.Runtime.InteropServices
+
+<span style="color: #0000FF; ">Public</span> <span style="color: #0000FF; ">Class</span> Form1
+
+    <span style="color: #0000FF; ">Private</span> <span style="color: #0000FF; ">Sub</span> Button1_Click(sender <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Object</span>, e <span style="color: #0000FF; ">As</span> EventArgs) <span style="color: #0000FF; ">Handles</span> Button1.Click
+        <span style="color: #0000FF; ">Dim</span> objApp <span style="color: #0000FF; ">As</span> SolidEdgeFramework.Application
+        <span style="color: #0000FF; ">Dim</span> objDoc <span style="color: #0000FF; ">As</span> SolidEdgePart.PartDocument
+        <span style="color: #0000FF; ">Dim</span> objModel <span style="color: #0000FF; ">As</span> SolidEdgePart.Model
+        <span style="color: #0000FF; ">Dim</span> objRPlanes <span style="color: #0000FF; ">As</span> SolidEdgePart.RefPlanes
+        <span style="color: #0000FF; ">Dim</span> objPPlane(0 <span style="color: #0000FF; ">To</span> 3) <span style="color: #0000FF; ">As</span> SolidEdgePart.RefPlane
+        <span style="color: #0000FF; ">Dim</span> objPFace(0 <span style="color: #0000FF; ">To</span> 11) <span style="color: #0000FF; ">As</span> SolidEdgeGeometry.Face
+        <span style="color: #0000FF; ">Dim</span> objRPParallel(0 <span style="color: #0000FF; ">To</span> 15) <span style="color: #0000FF; ">As</span> SolidEdgePart.RefPlane
+
+        <span style="color: #008000; ">' Create/get the application with specific settings
+</span>        <span style="color: #0000FF; ">Try</span>
+            <span style="color: #0000FF; ">Try</span>
+                objApp = <span style="color: #0000FF; ">GetObject</span>(, <span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>)
+            <span style="color: #0000FF; ">Catch</span> ex <span style="color: #0000FF; ">As</span> Exception
+                objApp = <span style="color: #0000FF; ">CreateObject</span>(<span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>)
+                objDoc = objApp.Documents.Add(<span style="color: #800000; ">&quot;SolidEdge.PartDocument&quot;</span>)
+                objApp.Visible = <span style="color: #0000FF; ">True</span>
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">Try</span>
+            <span style="color: #008000; ">'Create a part document with a block in it to proceed further
+</span>            objDoc = objApp.ActiveDocument
+
+            objModel = objDoc.Models.Item(1)
+            <span style="color: #008000; ">' geting the reference planes collection object
+</span>            objRPlanes = objDoc.RefPlanes
+            <span style="color: #008000; ">' adding a reference plane parallel to and at a distance to a principal plane
+</span>            objPPlane(0) = objRPlanes.Item(1)
+            objRPParallel(0) = objRPlanes.AddParallelByDistance(ParentPlane:=objPPlane(0), Distance:=0.01,
+                                                            NormalSide:=SolidEdgePart.ReferenceElementConstants.igNormalSide)
+            <span style="color: #0000FF; ">If</span> (objRPlanes.Count &lt;&gt; 5) <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>)
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+            <span style="color: #008000; ">' adding a reference plane coincident to a principal plane
+</span>            objPPlane(1) = objRPlanes.Item(2)
+            objRPParallel(1) = objRPlanes.AddParallelByDistance(ParentPlane:=objPPlane(1), Distance:=0,
+                                                            NormalSide:=SolidEdgePart.ReferenceElementConstants.igNormalSide)
+            <span style="color: #0000FF; ">If</span> (objRPlanes.Count &lt;&gt; 6) <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>)
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+            <span style="color: #008000; ">' adding a reference plane parallel to and at a distance to a plane face of the cube
+</span>            objPFace(0) = objModel.ExtrudedProtrusions.Item(1).TopCap
+            objRPParallel(2) = objRPlanes.AddParallelByDistance(ParentPlane:=objPFace(0), Distance:=0.01,
+                                                            NormalSide:=SolidEdgePart.ReferenceElementConstants.igNormalSide)
+            <span style="color: #0000FF; ">If</span> (objRPlanes.Count &lt;&gt; 7) <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>)
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+            <span style="color: #008000; ">' adding a reference plane coincident to a planar face
+</span>            objPFace(1) = objModel.ExtrudedProtrusions.Item(1).BottomCap
+            objRPParallel(3) = objRPlanes.AddParallelByDistance(ParentPlane:=objPFace(1), Distance:=0,
+                                                            NormalSide:=SolidEdgePart.ReferenceElementConstants.igNormalSide)
+            <span style="color: #0000FF; ">If</span> (objRPlanes.Count &lt;&gt; 8) <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>)
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+            <span style="color: #008000; ">' using the optional arguments
+</span>            <span style="color: #008000; ">' adding a reference plane parallel to and at a distance to a plane face of the cube with SolidEdgePart.ReferenceElementConstants.igPivotStart
+</span>            objPFace(2) = objModel.ExtrudedProtrusions.Item(1).TopCap
+            objRPParallel(4) = objRPlanes.AddParallelByDistance(ParentPlane:=objPFace(2), Distance:=0.01,
+                                                            NormalSide:=SolidEdgePart.ReferenceElementConstants.igNormalSide, Pivot:=objPFace(2).Edges(1), PivotOrigin:=SolidEdgePart.ReferenceElementConstants.igPivotStart)
+            <span style="color: #0000FF; ">If</span> (objRPlanes.Count &lt;&gt; 9) <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>)
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+            <span style="color: #008000; ">' adding a reference plane coincident to a planar face with igPivotStart
+</span>            objPFace(3) = objModel.ExtrudedProtrusions.Item(1).BottomCap
+            objRPParallel(5) = objRPlanes.AddParallelByDistance(ParentPlane:=objPFace(3), Distance:=0,
+                                                            NormalSide:=SolidEdgePart.ReferenceElementConstants.igNormalSide, Pivot:=objPFace(3).Edges(1), PivotOrigin:=SolidEdgePart.ReferenceElementConstants.igPivotStart)
+            <span style="color: #0000FF; ">If</span> (objRPlanes.Count &lt;&gt; 10) <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>)
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+            <span style="color: #008000; ">' adding a reference plane parallel to and at a distance to a plane face of the cube with igPivotEnd
+</span>            objPFace(4) = objModel.ExtrudedProtrusions.Item(1).TopCap
+            objRPParallel(6) = objRPlanes.AddParallelByDistance(ParentPlane:=objPFace(4), Distance:=0.01,
+                                                            NormalSide:=SolidEdgePart.ReferenceElementConstants.igNormalSide, Pivot:=objPFace(4).Edges(1), PivotOrigin:=SolidEdgePart.ReferenceElementConstants.igPivotEnd)
+            <span style="color: #0000FF; ">If</span> (objRPlanes.Count &lt;&gt; 11) <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>)
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+            <span style="color: #008000; ">' adding a reference plane coincident to a planar face with igPivotEnd
+</span>            objPFace(5) = objModel.ExtrudedProtrusions.Item(1).BottomCap
+            objRPParallel(7) = objRPlanes.AddParallelByDistance(ParentPlane:=objPFace(5), Distance:=0,
+                                                            NormalSide:=SolidEdgePart.ReferenceElementConstants.igNormalSide, Pivot:=objPFace(5).Edges(1), PivotOrigin:=SolidEdgePart.ReferenceElementConstants.igPivotEnd)
+            <span style="color: #0000FF; ">If</span> (objRPlanes.Count &lt;&gt; 12) <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>)
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+            <span style="color: #008000; ">' *** using SolidEdgePart.ReferenceElementConstants.igNormalSide for the normalside
+</span>            <span style="color: #008000; ">' adding a reference plane parallel to and at a distance to a principal plane
+</span>            objPPlane(2) = objRPlanes.Item(1)
+            objRPParallel(8) = objRPlanes.AddParallelByDistance(ParentPlane:=objPPlane(2), Distance:=0.01,
+                                                            NormalSide:=SolidEdgePart.ReferenceElementConstants.igNormalSide)
+            <span style="color: #0000FF; ">If</span> (objRPlanes.Count &lt;&gt; 13) <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>)
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+            <span style="color: #008000; ">' adding a reference plane coincident to a principal plane
+</span>            objPPlane(3) = objRPlanes.Item(2)
+            objRPParallel(9) = objRPlanes.AddParallelByDistance(ParentPlane:=objPPlane(3), Distance:=0,
+                                                             NormalSide:=SolidEdgePart.ReferenceElementConstants.igNormalSide)
+            <span style="color: #0000FF; ">If</span> (objRPlanes.Count &lt;&gt; 14) <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>)
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+            <span style="color: #008000; ">' adding a reference plane parallel to and at a distance to a plane face of the cube
+</span>            objPFace(6) = objModel.ExtrudedProtrusions.Item(1).TopCap
+            objRPParallel(10) = objRPlanes.AddParallelByDistance(ParentPlane:=objPFace(6), Distance:=0.01,
+                                                             NormalSide:=SolidEdgePart.ReferenceElementConstants.igNormalSide)
+            <span style="color: #0000FF; ">If</span> (objRPlanes.Count &lt;&gt; 15) <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>)
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+            <span style="color: #008000; ">' adding a reference plane coincident to a planar face
+</span>            objPFace(7) = objModel.ExtrudedProtrusions.Item(1).BottomCap
+            objRPParallel(11) = objRPlanes.AddParallelByDistance(ParentPlane:=objPFace(7), Distance:=0,
+                                                             NormalSide:=SolidEdgePart.ReferenceElementConstants.igNormalSide)
+            <span style="color: #0000FF; ">If</span> (objRPlanes.Count &lt;&gt; 16) <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>)
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+            <span style="color: #008000; ">' using the optional arguments
+</span>            <span style="color: #008000; ">' adding a reference plane parallel to and at a distance to a plane face of the cube with igPivotStart
+</span>            objPFace(8) = objModel.ExtrudedProtrusions.Item(1).TopCap
+            objRPParallel(12) = objRPlanes.AddParallelByDistance(ParentPlane:=objPFace(8), Distance:=0.01,
+                                                             NormalSide:=SolidEdgePart.ReferenceElementConstants.igNormalSide, Pivot:=objPFace(8).Edges(1), PivotOrigin:=SolidEdgePart.ReferenceElementConstants.igPivotStart)
+            <span style="color: #0000FF; ">If</span> (objRPlanes.Count &lt;&gt; 17) <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>)
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+            <span style="color: #008000; ">' adding a reference plane coincident to a planar face with igPivotStart
+</span>            objPFace(9) = objModel.ExtrudedProtrusions.Item(1).BottomCap
+            objRPParallel(13) = objRPlanes.AddParallelByDistance(ParentPlane:=objPFace(9), Distance:=0,
+                                                             NormalSide:=SolidEdgePart.ReferenceElementConstants.igNormalSide, Pivot:=objPFace(9).Edges(1), PivotOrigin:=SolidEdgePart.ReferenceElementConstants.igPivotStart)
+            <span style="color: #0000FF; ">If</span> (objRPlanes.Count &lt;&gt; 18) <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>)
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+            <span style="color: #008000; ">' adding a reference plane parallel to and at a distance to a plane face of the cube with igPivotEnd
+</span>            objPFace(10) = objModel.ExtrudedProtrusions.Item(1).TopCap
+            objRPParallel(14) = objRPlanes.AddParallelByDistance(ParentPlane:=objPFace(10), Distance:=0.01,
+                                                             NormalSide:=SolidEdgePart.ReferenceElementConstants.igNormalSide, Pivot:=objPFace(10).Edges(1), PivotOrigin:=SolidEdgePart.ReferenceElementConstants.igPivotEnd)
+            <span style="color: #0000FF; ">If</span> (objRPlanes.Count &lt;&gt; 19) <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>)
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+            <span style="color: #008000; ">' adding a reference plane coincident to a planar face with igPivotEnd
+</span>            objPFace(11) = objModel.ExtrudedProtrusions.Item(1).BottomCap
+            objRPParallel(15) = objRPlanes.AddParallelByDistance(ParentPlane:=objPFace(11), Distance:=0,
+                                                             NormalSide:=SolidEdgePart.ReferenceElementConstants.igNormalSide, Pivot:=objPFace(11).Edges(1), PivotOrigin:=SolidEdgePart.ReferenceElementConstants.igPivotEnd)
+            <span style="color: #0000FF; ">If</span> (objRPlanes.Count &lt;&gt; 20) <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>)
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+        <span style="color: #008000; ">' USER DISPLAY
+</span>        <span style="color: #0000FF; ">Dim</span> i <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Integer</span>
+            <span style="color: #008000; ">' Release objects
+</span>            objApp = <span style="color: #0000FF; ">Nothing</span>
+            objDoc = <span style="color: #0000FF; ">Nothing</span>
+            objModel = <span style="color: #0000FF; ">Nothing</span>
+            objRPlanes = <span style="color: #0000FF; ">Nothing</span>
+            <span style="color: #0000FF; ">For</span> i = 0 <span style="color: #0000FF; ">To</span> 15
+                objRPParallel(i) = <span style="color: #0000FF; ">Nothing</span>
+            <span style="color: #0000FF; ">Next</span> i
+            <span style="color: #0000FF; ">For</span> i = 0 <span style="color: #0000FF; ">To</span> 11
+                objPFace(i) = <span style="color: #0000FF; ">Nothing</span>
+            <span style="color: #0000FF; ">Next</span> i
+            <span style="color: #0000FF; ">For</span> i = 0 <span style="color: #0000FF; ">To</span> 3
+                objPPlane(i) = <span style="color: #0000FF; ">Nothing</span>
+            <span style="color: #0000FF; ">Next</span> i
+
+        <span style="color: #0000FF; ">Catch</span> ex <span style="color: #0000FF; ">As</span> Exception
+            <span style="color: #0000FF; ">MsgBox</span>(ex.Message)
+        <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">Try</span>
+    <span style="color: #0000FF; ">End Sub</span>
+<span style="color: #0000FF; ">End Class</span>
+</pre>
+	</div>
+	<div id="i-tab-content-077f0c5c-1215-4b8e-89a2-e710d55fb10b" class="i-filtered-content-CS">
+		<pre><span style="color: #0000FF; ">using</span> System;
+<span style="color: #0000FF; ">using</span> System.Windows.Forms;
+<span style="color: #0000FF; ">using</span> System.Runtime.InteropServices;
+
+<span style="color: #0000FF; ">public</span> <span style="color: #0000FF; ">class</span> Form1
+{
+
+    <span style="color: #0000FF; ">private</span> <span style="color: #0000FF; ">void</span> Button1_Click(<span style="color: #0000FF; ">object</span> sender, EventArgs e)
+    {
+        SolidEdgeFramework.Application objApp = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.PartDocument objDoc = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.Model objModel = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.RefPlanes objRPlanes = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.RefPlane[] objPPlane = <span style="color: #0000FF; ">new</span> SolidEdgePart.RefPlane[4];
+        SolidEdgeGeometry.Face[] objPFace = <span style="color: #0000FF; ">new</span> SolidEdgeGeometry.Face[12];
+        SolidEdgePart.RefPlane[] objRPParallel = <span style="color: #0000FF; ">new</span> SolidEdgePart.RefPlane[16];
+
+        <span style="color: #008000; ">// Create/get the application with specific settings
+</span>        <span style="color: #0000FF; ">try</span>
+        {
+            <span style="color: #0000FF; ">try</span>
+            {
+                objApp = Microsoft.VisualBasic.Interaction.GetObject(<span style="color: #0000FF; ">null</span>, <span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>);
+            }
+            <span style="color: #0000FF; ">catch</span> (Exception ex)
+            {
+                objApp = System.Activator.CreateInstance(System.Type.GetTypeFromProgID(<span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>));
+                objDoc = objApp.Documents.Add(<span style="color: #800000; ">&quot;SolidEdge.PartDocument&quot;</span>);
+                objApp.Visible = <span style="color: #0000FF; ">true</span>;
+            }
+            <span style="color: #008000; ">//Create a part document with a block in it to proceed further
+</span>            objDoc = objApp.ActiveDocument;
+
+            objModel = objDoc.Models.Item(1);
+            <span style="color: #008000; ">// geting the reference planes collection object
+</span>            objRPlanes = objDoc.RefPlanes;
+            <span style="color: #008000; ">// adding a reference plane parallel to and at a distance to a principal plane
+</span>            objPPlane[0] = objRPlanes.Item(1);
+            objRPParallel[0] = objRPlanes.AddParallelByDistance(ParentPlane:objPPlane[0], Distance:0.01, NormalSide:SolidEdgePart.ReferenceElementConstants.igNormalSide);
+            <span style="color: #0000FF; ">if</span> (objRPlanes.Count != 5)
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>);
+            }
+            <span style="color: #008000; ">// adding a reference plane coincident to a principal plane
+</span>            objPPlane[1] = objRPlanes.Item(2);
+            objRPParallel[1] = objRPlanes.AddParallelByDistance(ParentPlane:objPPlane[1], Distance:0, NormalSide:SolidEdgePart.ReferenceElementConstants.igNormalSide);
+            <span style="color: #0000FF; ">if</span> (objRPlanes.Count != 6)
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>);
+            }
+            <span style="color: #008000; ">// adding a reference plane parallel to and at a distance to a plane face of the cube
+</span>            objPFace[0] = objModel.ExtrudedProtrusions.Item(1).TopCap;
+            objRPParallel[2] = objRPlanes.AddParallelByDistance(ParentPlane:objPFace[0], Distance:0.01, NormalSide:SolidEdgePart.ReferenceElementConstants.igNormalSide);
+            <span style="color: #0000FF; ">if</span> (objRPlanes.Count != 7)
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>);
+            }
+            <span style="color: #008000; ">// adding a reference plane coincident to a planar face
+</span>            objPFace[1] = objModel.ExtrudedProtrusions.Item(1).BottomCap;
+            objRPParallel[3] = objRPlanes.AddParallelByDistance(ParentPlane:objPFace[1], Distance:0, NormalSide:SolidEdgePart.ReferenceElementConstants.igNormalSide);
+            <span style="color: #0000FF; ">if</span> (objRPlanes.Count != 8)
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>);
+            }
+            <span style="color: #008000; ">// using the optional arguments
+            // adding a reference plane parallel to and at a distance to a plane face of the cube with SolidEdgePart.ReferenceElementConstants.igPivotStart
+</span>            objPFace[2] = objModel.ExtrudedProtrusions.Item(1).TopCap;
+            objRPParallel[4] = objRPlanes.AddParallelByDistance(ParentPlane:objPFace[2], Distance:0.01, NormalSide:SolidEdgePart.ReferenceElementConstants.igNormalSide, Pivot:objPFace[2].Edges(1), PivotOrigin:SolidEdgePart.ReferenceElementConstants.igPivotStart);
+            <span style="color: #0000FF; ">if</span> (objRPlanes.Count != 9)
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>);
+            }
+            <span style="color: #008000; ">// adding a reference plane coincident to a planar face with igPivotStart
+</span>            objPFace[3] = objModel.ExtrudedProtrusions.Item(1).BottomCap;
+            objRPParallel[5] = objRPlanes.AddParallelByDistance(ParentPlane:objPFace[3], Distance:0, NormalSide:SolidEdgePart.ReferenceElementConstants.igNormalSide, Pivot:objPFace[3].Edges(1), PivotOrigin:SolidEdgePart.ReferenceElementConstants.igPivotStart);
+            <span style="color: #0000FF; ">if</span> (objRPlanes.Count != 10)
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>);
+            }
+            <span style="color: #008000; ">// adding a reference plane parallel to and at a distance to a plane face of the cube with igPivotEnd
+</span>            objPFace[4] = objModel.ExtrudedProtrusions.Item(1).TopCap;
+            objRPParallel[6] = objRPlanes.AddParallelByDistance(ParentPlane:objPFace[4], Distance:0.01, NormalSide:SolidEdgePart.ReferenceElementConstants.igNormalSide, Pivot:objPFace[4].Edges(1), PivotOrigin:SolidEdgePart.ReferenceElementConstants.igPivotEnd);
+            <span style="color: #0000FF; ">if</span> (objRPlanes.Count != 11)
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>);
+            }
+            <span style="color: #008000; ">// adding a reference plane coincident to a planar face with igPivotEnd
+</span>            objPFace[5] = objModel.ExtrudedProtrusions.Item(1).BottomCap;
+            objRPParallel[7] = objRPlanes.AddParallelByDistance(ParentPlane:objPFace[5], Distance:0, NormalSide:SolidEdgePart.ReferenceElementConstants.igNormalSide, Pivot:objPFace[5].Edges(1), PivotOrigin:SolidEdgePart.ReferenceElementConstants.igPivotEnd);
+            <span style="color: #0000FF; ">if</span> (objRPlanes.Count != 12)
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>);
+            }
+            <span style="color: #008000; ">// *** using SolidEdgePart.ReferenceElementConstants.igNormalSide for the normalside
+            // adding a reference plane parallel to and at a distance to a principal plane
+</span>            objPPlane[2] = objRPlanes.Item(1);
+            objRPParallel[8] = objRPlanes.AddParallelByDistance(ParentPlane:objPPlane[2], Distance:0.01, NormalSide:SolidEdgePart.ReferenceElementConstants.igNormalSide);
+            <span style="color: #0000FF; ">if</span> (objRPlanes.Count != 13)
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>);
+            }
+            <span style="color: #008000; ">// adding a reference plane coincident to a principal plane
+</span>            objPPlane[3] = objRPlanes.Item(2);
+            objRPParallel[9] = objRPlanes.AddParallelByDistance(ParentPlane:objPPlane[3], Distance:0, NormalSide:SolidEdgePart.ReferenceElementConstants.igNormalSide);
+            <span style="color: #0000FF; ">if</span> (objRPlanes.Count != 14)
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>);
+            }
+            <span style="color: #008000; ">// adding a reference plane parallel to and at a distance to a plane face of the cube
+</span>            objPFace[6] = objModel.ExtrudedProtrusions.Item(1).TopCap;
+            objRPParallel[10] = objRPlanes.AddParallelByDistance(ParentPlane:objPFace[6], Distance:0.01, NormalSide:SolidEdgePart.ReferenceElementConstants.igNormalSide);
+            <span style="color: #0000FF; ">if</span> (objRPlanes.Count != 15)
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>);
+            }
+            <span style="color: #008000; ">// adding a reference plane coincident to a planar face
+</span>            objPFace[7] = objModel.ExtrudedProtrusions.Item(1).BottomCap;
+            objRPParallel[11] = objRPlanes.AddParallelByDistance(ParentPlane:objPFace[7], Distance:0, NormalSide:SolidEdgePart.ReferenceElementConstants.igNormalSide);
+            <span style="color: #0000FF; ">if</span> (objRPlanes.Count != 16)
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>);
+            }
+            <span style="color: #008000; ">// using the optional arguments
+            // adding a reference plane parallel to and at a distance to a plane face of the cube with igPivotStart
+</span>            objPFace[8] = objModel.ExtrudedProtrusions.Item(1).TopCap;
+            objRPParallel[12] = objRPlanes.AddParallelByDistance(ParentPlane:objPFace[8], Distance:0.01, NormalSide:SolidEdgePart.ReferenceElementConstants.igNormalSide, Pivot:objPFace[8].Edges(1), PivotOrigin:SolidEdgePart.ReferenceElementConstants.igPivotStart);
+            <span style="color: #0000FF; ">if</span> (objRPlanes.Count != 17)
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>);
+            }
+            <span style="color: #008000; ">// adding a reference plane coincident to a planar face with igPivotStart
+</span>            objPFace[9] = objModel.ExtrudedProtrusions.Item(1).BottomCap;
+            objRPParallel[13] = objRPlanes.AddParallelByDistance(ParentPlane:objPFace[9], Distance:0, NormalSide:SolidEdgePart.ReferenceElementConstants.igNormalSide, Pivot:objPFace[9].Edges(1), PivotOrigin:SolidEdgePart.ReferenceElementConstants.igPivotStart);
+            <span style="color: #0000FF; ">if</span> (objRPlanes.Count != 18)
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>);
+            }
+            <span style="color: #008000; ">// adding a reference plane parallel to and at a distance to a plane face of the cube with igPivotEnd
+</span>            objPFace[10] = objModel.ExtrudedProtrusions.Item(1).TopCap;
+            objRPParallel[14] = objRPlanes.AddParallelByDistance(ParentPlane:objPFace[10], Distance:0.01, NormalSide:SolidEdgePart.ReferenceElementConstants.igNormalSide, Pivot:objPFace[10].Edges(1), PivotOrigin:SolidEdgePart.ReferenceElementConstants.igPivotEnd);
+            <span style="color: #0000FF; ">if</span> (objRPlanes.Count != 19)
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>);
+            }
+            <span style="color: #008000; ">// adding a reference plane coincident to a planar face with igPivotEnd
+</span>            objPFace[11] = objModel.ExtrudedProtrusions.Item(1).BottomCap;
+            objRPParallel[15] = objRPlanes.AddParallelByDistance(ParentPlane:objPFace[11], Distance:0, NormalSide:SolidEdgePart.ReferenceElementConstants.igNormalSide, Pivot:objPFace[11].Edges(1), PivotOrigin:SolidEdgePart.ReferenceElementConstants.igPivotEnd);
+            <span style="color: #0000FF; ">if</span> (objRPlanes.Count != 20)
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;AddParallelByDistance fails&quot;</span>);
+            }
+        <span style="color: #008000; ">// USER DISPLAY
+</span>        <span style="color: #0000FF; ">int</span> i = 0;
+            <span style="color: #008000; ">// Release objects
+</span>            objApp = <span style="color: #0000FF; ">null</span>;
+            objDoc = <span style="color: #0000FF; ">null</span>;
+            objModel = <span style="color: #0000FF; ">null</span>;
+            objRPlanes = <span style="color: #0000FF; ">null</span>;
+            <span style="color: #0000FF; ">for</span> (i = 0; i &lt;= 15; i++)
+            {
+                objRPParallel[i] = <span style="color: #0000FF; ">null</span>;
+            }
+            <span style="color: #0000FF; ">for</span> (i = 0; i &lt;= 11; i++)
+            {
+                objPFace[i] = <span style="color: #0000FF; ">null</span>;
+            }
+            <span style="color: #0000FF; ">for</span> (i = 0; i &lt;= 3; i++)
+            {
+                objPPlane[i] = <span style="color: #0000FF; ">null</span>;
+            }
+
+        }
+        <span style="color: #0000FF; ">catch</span> (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
+    }
+
+    <span style="color: #0000FF; ">public</span> Form1()
+    {
+        SubscribeToEvents();
+    }
+
+    <span style="color: #0000FF; ">private</span> <span style="color: #0000FF; ">bool</span> EventsSubscribed = <span style="color: #0000FF; ">false</span>;
+    <span style="color: #0000FF; ">private</span> <span style="color: #0000FF; ">void</span> SubscribeToEvents()
+    {
+        <span style="color: #0000FF; ">if</span> (EventsSubscribed)
+            <span style="color: #0000FF; ">return</span>;
+        <span style="color: #0000FF; ">else</span>
+            EventsSubscribed = <span style="color: #0000FF; ">true</span>;
+
+        Button1.Click += Button1_Click;
+        Button2.Click += Button2_Click;
+    }
+
+}
+</pre>
+	</div>
+	
+</div>
+</div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="INLINE_EXAMPLE" namespace="Example" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""<>"",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="MENU_LINK" namespace="example" source="Item" filter="type=linked" NoHeader="True" NoFooter="True" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=examplelinks,caption=$$Example$$%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="FilteredItemList" scrap="CATEGORIZED_LINKS" namespace="linkcategory" source="Item" filter="" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=seealso,caption=""$$See_Also$$%%designlist:tagidentifier=##SEEALSO,itemtype=See Also%%""%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><div class="i-section-heading" id="i-seealso-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">See Also</span></div><div id="i-seealso-section-content" class="i-section-content"><p id=dxseealsocontent><a href="SolidEdgePart~RefPlanes.html">RefPlanes Collection</a>
+&nbsp;|&nbsp;<a href="SolidEdgePart~RefPlanes_members.html">RefPlanes Members</a>
+</p>
+</p></div><!--DXMETADATA end -->
+    </div>
+    <div id="i-footer-content" class="i-footer-content">
+        <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_FOOTER" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="CopyrightNotice" format="<p>&nbsp;</p><p>&nbsp;</p><hr style=""height: 1px"" /><p>%%variable%%</p>" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="FeedbackLink" format="" --><!--DXMETADATA end-->
+    </div>
+    
+
+    <!--DXMETADATA start type="IsNew" format="<script type=""text/javascript"">setIsNew = true;</script>" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<script type=""text/javascript"">setIsResponsiveEnabled = true;</script>" --><!--DXMETADATA end-->
+    <script type="text/javascript">
+        $(function() {
+            var documentInstance = new Innovasys.Content.Document(document.body);
+            documentInstance.isNew = !(typeof setIsNew === "undefined");
+            documentInstance.isResponsiveEnabled = !(typeof setIsResponsiveEnabled === "undefined");
+            documentInstance.load();
+        });
+    </script>
+</body>
+</html>

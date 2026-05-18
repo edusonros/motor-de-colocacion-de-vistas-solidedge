@@ -1,0 +1,348 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--DXMETADATA start type="MetaCharset" --><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><!--DXMETADATA end-->
+    <meta http-equiv="X-UA-Compatible" value="IE=9" />
+
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Literal" condition="helpversion:value=3" value="<meta name=""Microsoft.Help.SelfBranded"" content=""true"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="ItemTitle" format="<title>%%ItemTitle%%</title>" --><title>Handling 'Application is Busy' and 'Call was Rejected By Callee' errors</title><!--DXMETADATA end-->
+    <!--DXMETADATA start type="ItemTitle" format="<meta name=""Title"" content=""%%ItemTitleNoQuotes%%""/>" --><meta name="Title" content="Handling 'Application is Busy' and 'Call was Rejected By Callee' errors"/><!--DXMETADATA end-->    
+    
+
+    <!--DXMETADATA start type="PackageLink" packagename="jquery" filetype="script" firstlinkattributes="id=""mshs_support_script"""--><script src="template/packages/jquery/script/chm.mshc/jquery-1.7.2.min.js" type="text/javascript" id="mshs_support_script"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="script"--><script src="template/packages/jquery-ui/script/chm.mshc/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/jquery-ui/css/chm.mshc/jquery-ui-1.8.18.custom.css"></link><!--DXMETADATA end-->
+	
+    <!--DXMETADATA start type="Synopsis" StripHtmlTags="True" MaxLength="250" format="<meta name=""Description"" content=""%%Synopsis%%"" />"--><meta name="Description" content="If you automate Solid Edge from an external (out-of-proc) application, you may receive one of the following errors:" /><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-topics" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/plugins-topics/css/chm.mshc/jquery-plugins.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-topics" filetype="css" firstlinkattributes=" data-mshv2-stylesheet=""/template/packages/core-topics/topics.mshv2.css"" data-mshv1-stylesheet=""/template/packages/core-topics/topics.mshv1.css"" data-responsive-mobile=""template/packages/core-topics/topics.mobile.css"" data-responsive-tablet=""template/packages/core-topics/topics.tablet.css"""--><link rel="stylesheet" type="text/css" href="template/packages/core-topics/css/topics.css"  data-mshv2-stylesheet="/template/packages/core-topics/topics.mshv2.css" data-mshv1-stylesheet="/template/packages/core-topics/topics.mshv1.css" data-responsive-mobile="template/packages/core-topics/topics.mobile.css" data-responsive-tablet="template/packages/core-topics/topics.tablet.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-topics" filetype="script"--><script src="template/packages/plugins-topics/script/chm.mshc/jquery-plugins.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-topics" filetype="script"--><script src="template/packages/core-topics/script/topics.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="TopicId" format="<meta name=""Microsoft.Help.Id"" content=""%%TopicId%%""/>" --><meta name="Microsoft.Help.Id" content="37a7f693-7a2d-4ff8-a807-cdb39e46dba4"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocParentId" format="<meta name=""Microsoft.Help.TocParent"" content=""%%TocParentId%%""/>" --><meta name="Microsoft.Help.TocParent" content="ca45f3e0-29f8-43e4-916b-e49f5573c12c"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocOrdinal" format="<meta name=""Microsoft.Help.TocOrder"" content=""%%TocOrdinal%%""/>" --><meta name="Microsoft.Help.TocOrder" content="7"/><!--DXMETADATA end-->
+    <meta name="Microsoft.Help.F1" content=""/>
+    <meta name="Microsoft.Help.ContentType" content="Concepts" />
+    <!--DXMETADATA start type="MshvKeywords" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="MshvMetaTags" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.Locale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.TopicLocale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="Stylesheets" --><link rel="stylesheet" type="text/css" href="stylesheets/customstyles.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Scripts" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="DesignTime"--><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_PROPERTIES" --><!--DXMETADATA end -->
+
+    <!--DXMETADATA start type="CustomHeadContent" --><!--DXMETADATA end-->
+</head>
+
+<body>
+    <div id="i-before-header-content" class="i-before-header-content">
+        
+    </div>
+    <div id="i-header-content" class="i-header-content">
+        <!--DXMETADATA start type="LogoImage" --><img class="logoimage" src="images/sesdk_header.jpg" border="0"></img><!--DXMETADATA end-->
+            <div class="i-project-title"><!--DXMETADATA start type="ProjectTitle" -->Solid Edge 2019 SDK<!--DXMETADATA end--></div>
+        <div class="i-page-title"><div class="i-page-title-text"><!--DXMETADATA start type="ItemTitle" -->Handling 'Application is Busy' and 'Call was Rejected By Callee' errors<!--DXMETADATA end--></div></div>
+    </div>
+    <div id="i-after-header-content" class="i-after-header-content">
+        <!-- Spacing --> <span class="i-toggle-all-sections i-function-link">
+                <label class="i-collapse-all"><!--DXMETADATA start type="Phrase" name="COLLAPSE_ALL" -->Collapse All<!--DXMETADATA end--></label>
+                <label class="i-expand-all" style="display: none;"><!--DXMETADATA start type="Phrase" name="EXPAND_ALL" -->Expand All<!--DXMETADATA end--></label>
+            </span><!--DXMETADATA start type="Literal" condition="communityenabled" value="%%scrap:name=_COMMUNITY_DROPDOWN%%" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="IsWebOutputRootPageLinkEnabled" format="<a href='#' class="i-page-link" class="i-view-in-frame-link" title='$$VIEW_WITH_NAVIGATION_TOOLS_TIP$$' style='display: none' data-root-page='%%WebOutputRootPage%%%%OutputFileExtension%%' target='_top'>$$VIEW_WITH_NAVIGATION_TOOLS_TEXT$$</a>" --><a href='#' class="i-page-link" class="i-view-in-frame-link" title='Open this Topic in a view that includes Navigation tools (Table of Contents, Index, Search)' style='display: none' data-root-page='webframe.html' target='_top'>View with Navigation Tools</a><!--DXMETADATA end-->
+    </div>
+    <!--DXMETADATA start type="Breadcrumbs" scrap="_BREADCRUMBS" --><div class="i-breadcrumbs-container"><table><tr><td>
+<a href="ProgrammersGuide.html">Programmer's Guide</a>
+ > <a href="SolidEdgeTOC.html">Solid Edge</a>
+ > Handling 'Application is Busy' and 'Call was Rejected By Callee' errors</td></tr></table></div><!--DXMETADATA end -->
+    
+    
+    <div id="i-body-content" class="i-body-content">
+        <!--DXMETADATA start type="TopicSection" name="BodyText"--><P>If you automate Solid Edge from an external (out-of-proc) application, you may receive one of the following errors:</P>
+<UL>
+<LI>Application is busy (<STRONG>RPC_E_CALL_REJECTED</STRONG> 0x80010001) 
+<LI>Call was rejected by callee (<STRONG>RPC_E_SERVERCALL_RETRYLATER</STRONG> 0x8001010A) </LI></UL>
+<P>These errors occur due to threading contention issues between automation clients and Solid Edge. They can be handled by implementing the <A href="OleMessageFilterVB.html">OleMessageFilter</A> error handlers in your automation application. Once you have the code in place, simply call <EM>OleMessageFilter.Register()</EM> before you make any calls to COM clients and <EM>OleMessageFilter.Revoke()</EM> at the end of your program.</P>
+<DIV class="i-box i-box-caution">In order for <A href="OleMessageFilterVB.html">OleMessageFilter</A> to work, you must ensure that <A href="http://msdn.microsoft.com/en-us/library/system.threading.thread.getapartmentstate" target=_blank>Thread.GetApartmentState method</A> returns STA. In Windows Forms applications, this is the default. In Console applications, it is not the default. You will need to specify the <A href="http://msdn.microsoft.com/en-us/library/system.stathreadattribute.aspx" target=_blank>STAThreadAttribute</A> on your Main() function. </DIV> 
+<DIV id=i-c4e1f654-a7a3-441f-a311-a350ba86a0bf-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>OleMessageFilter for Visual Basic .NET</SPAN> </DIV>
+<DIV id=i-c4e1f654-a7a3-441f-a311-a350ba86a0bf-section-content class=i-section-content>
+<P>In Console applications, you must decorate your Sub Main() function with <A href="http://msdn.microsoft.com/en-us/library/system.stathreadattribute.aspx">STAThreadAttribute</A>.</P>
+<DIV class=i-filtered-content-VB data-title="VB" data-itemid="VB">
+<TABLE class=i-syntax-table>
+<TBODY>
+<TR>
+<TH>VB.NET example usage</TH>
+<TH>
+<DIV class=i-copy-code-wrapper><SPAN class=i-copy-code>Copy Code</SPAN> </DIV></TH></TR>
+<TR>
+<TD class=i-code colSpan=2><PRE>&lt;STAThread()&gt; _
+<SPAN style="COLOR: #0000ff">Sub</SPAN> Main()
+  OleMessageFilter.Register()
+  <SPAN style="COLOR: #008000">' Make COM calls.
+</SPAN>  OleMessageFilter.Revoke()
+<SPAN style="COLOR: #0000ff">End Sub</SPAN></PRE></TD></TR></TBODY></TABLE></DIV>
+<P>In your Visual Basic .NET project, create a new class and name it <A href="OleMessageFilterVB.html">OleMessageFilter.vb</A>. Copy this example code and paste it into the new class.</P>
+<DIV class=i-filtered-content-VB data-title="VB" data-itemid="VB">
+<TABLE class=i-syntax-table>
+<TBODY>
+<TR>
+<TH>VB.NET implementation of OleMessageFilter</TH>
+<TH>
+<DIV class=i-copy-code-wrapper><SPAN class=i-copy-code>Copy Code</SPAN> </DIV></TH></TR>
+<TR>
+<TD class=i-code colSpan=2><PRE><SPAN style="COLOR: #0000ff">Imports</SPAN> System.Runtime.InteropServices
+<SPAN style="COLOR: #0000ff">Imports</SPAN> System.Threading
+
+<SPAN style="COLOR: #0000ff">Public</SPAN> <SPAN style="COLOR: #0000ff">Class</SPAN> OleMessageFilter
+    <SPAN style="COLOR: #0000ff">Implements</SPAN> IOleMessageFilter
+
+    <SPAN style="COLOR: #0000ff">Public</SPAN> <SPAN style="COLOR: #0000ff">Shared</SPAN> <SPAN style="COLOR: #0000ff">Sub</SPAN> Register()
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> newFilter <SPAN style="COLOR: #0000ff">As</SPAN> IOleMessageFilter = <SPAN style="COLOR: #0000ff">New</SPAN> OleMessageFilter()
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> oldFilter <SPAN style="COLOR: #0000ff">As</SPAN> IOleMessageFilter = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> iRetVal <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Integer</SPAN>
+
+        <SPAN style="COLOR: #0000ff">If</SPAN> (Thread.CurrentThread.GetApartmentState() = ApartmentState.STA) <SPAN style="COLOR: #0000ff">Then</SPAN>
+            iRetVal = CoRegisterMessageFilter(newFilter, oldFilter)
+        <SPAN style="COLOR: #0000ff">Else</SPAN>
+            <SPAN style="COLOR: #0000ff">Throw</SPAN> <SPAN style="COLOR: #0000ff">New</SPAN> COMException(<SPAN style="COLOR: #800000">"Unable to register message filter because the current thread apartment state is not STA."</SPAN>)
+        <SPAN style="COLOR: #0000ff">End</SPAN> <SPAN style="COLOR: #0000ff">If</SPAN>
+
+    <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+
+    <SPAN style="COLOR: #0000ff">Public</SPAN> <SPAN style="COLOR: #0000ff">Shared</SPAN> <SPAN style="COLOR: #0000ff">Sub</SPAN> Revoke()
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> oldFilter <SPAN style="COLOR: #0000ff">As</SPAN> IOleMessageFilter = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        CoRegisterMessageFilter(<SPAN style="COLOR: #0000ff">Nothing</SPAN>, oldFilter)
+    <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+
+    <SPAN style="COLOR: #0000ff">Private</SPAN> <SPAN style="COLOR: #0000ff">Function</SPAN> HandleInComingCall(<SPAN style="COLOR: #0000ff">ByVal</SPAN> dwCallType <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Integer</SPAN>, _
+                                        <SPAN style="COLOR: #0000ff">ByVal</SPAN> hTaskCaller <SPAN style="COLOR: #0000ff">As</SPAN> System.IntPtr, _
+                                        <SPAN style="COLOR: #0000ff">ByVal</SPAN> dwTickCount <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Integer</SPAN>, _
+                                        <SPAN style="COLOR: #0000ff">ByVal</SPAN> lpInterfaceInfo <SPAN style="COLOR: #0000ff">As</SPAN> System.IntPtr) _
+                                        <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Integer</SPAN> <SPAN style="COLOR: #0000ff">Implements</SPAN> IOleMessageFilter.HandleInComingCall
+
+        <SPAN style="COLOR: #0000ff">Return</SPAN> SERVERCALL.SERVERCALL_ISHANDLED
+    <SPAN style="COLOR: #0000ff">End Function</SPAN>
+
+    <SPAN style="COLOR: #0000ff">Private</SPAN> <SPAN style="COLOR: #0000ff">Function</SPAN> RetryRejectedCall(<SPAN style="COLOR: #0000ff">ByVal</SPAN> hTaskCallee <SPAN style="COLOR: #0000ff">As</SPAN> System.IntPtr, _
+                                       <SPAN style="COLOR: #0000ff">ByVal</SPAN> dwTickCount <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Integer</SPAN>, _
+                                       <SPAN style="COLOR: #0000ff">ByVal</SPAN> dwRejectType <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Integer</SPAN>) _
+                                       <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Integer</SPAN> <SPAN style="COLOR: #0000ff">Implements</SPAN> IOleMessageFilter.RetryRejectedCall
+
+        <SPAN style="COLOR: #0000ff">If</SPAN> dwRejectType = SERVERCALL.SERVERCALL_RETRYLATER <SPAN style="COLOR: #0000ff">Then</SPAN>
+            <SPAN style="COLOR: #0000ff">Return</SPAN> 99
+        <SPAN style="COLOR: #0000ff">End</SPAN> <SPAN style="COLOR: #0000ff">If</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Return</SPAN> -1
+    <SPAN style="COLOR: #0000ff">End Function</SPAN>
+
+    <SPAN style="COLOR: #0000ff">Private</SPAN> <SPAN style="COLOR: #0000ff">Function</SPAN> MessagePending(<SPAN style="COLOR: #0000ff">ByVal</SPAN> hTaskCallee <SPAN style="COLOR: #0000ff">As</SPAN> System.IntPtr, _
+                                    <SPAN style="COLOR: #0000ff">ByVal</SPAN> dwTickCount <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Integer</SPAN>, _
+                                    <SPAN style="COLOR: #0000ff">ByVal</SPAN> dwPendingType <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Integer</SPAN>) _
+                                    <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Integer</SPAN> <SPAN style="COLOR: #0000ff">Implements</SPAN> IOleMessageFilter.MessagePending
+
+        <SPAN style="COLOR: #0000ff">Return</SPAN> PENDINGMSG.PENDINGMSG_WAITDEFPROCESS
+    <SPAN style="COLOR: #0000ff">End Function</SPAN>
+
+    &lt;DllImport(<SPAN style="COLOR: #800000">"Ole32.dll"</SPAN>)&gt; _
+    <SPAN style="COLOR: #0000ff">Private</SPAN> <SPAN style="COLOR: #0000ff">Shared</SPAN> <SPAN style="COLOR: #0000ff">Function</SPAN> CoRegisterMessageFilter(<SPAN style="COLOR: #0000ff">ByVal</SPAN> newFilter <SPAN style="COLOR: #0000ff">As</SPAN> IOleMessageFilter, _
+                                                    <SPAN style="COLOR: #0000ff">ByRef</SPAN> oldFilter <SPAN style="COLOR: #0000ff">As</SPAN> IOleMessageFilter) _
+                                                    <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Integer</SPAN>
+    <SPAN style="COLOR: #0000ff">End Function</SPAN>
+<SPAN style="COLOR: #0000ff">End Class</SPAN>
+
+<SPAN style="COLOR: #0000ff">Enum</SPAN> SERVERCALL
+    SERVERCALL_ISHANDLED = 0
+    SERVERCALL_REJECTED = 1
+    SERVERCALL_RETRYLATER = 2
+<SPAN style="COLOR: #0000ff">End Enum</SPAN>
+
+<SPAN style="COLOR: #0000ff">Enum</SPAN> PENDINGMSG
+    PENDINGMSG_CANCELCALL = 0
+    PENDINGMSG_WAITNOPROCESS = 1
+    PENDINGMSG_WAITDEFPROCESS = 2
+<SPAN style="COLOR: #0000ff">End Enum</SPAN>
+
+&lt;ComImport(), _
+Guid(<SPAN style="COLOR: #800000">"00000016-0000-0000-C000-000000000046"</SPAN>), _
+InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)&gt; _
+<SPAN style="COLOR: #0000ff">Interface</SPAN> IOleMessageFilter
+    &lt;PreserveSig()&gt; _
+    <SPAN style="COLOR: #0000ff">Function</SPAN> HandleInComingCall(<SPAN style="COLOR: #0000ff">ByVal</SPAN> dwCallType <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Integer</SPAN>, _
+                                <SPAN style="COLOR: #0000ff">ByVal</SPAN> hTaskCaller <SPAN style="COLOR: #0000ff">As</SPAN> IntPtr, _
+                                <SPAN style="COLOR: #0000ff">ByVal</SPAN> dwTickCount <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Integer</SPAN>, _
+                                <SPAN style="COLOR: #0000ff">ByVal</SPAN> lpInterfaceInfo <SPAN style="COLOR: #0000ff">As</SPAN> IntPtr) _
+                                <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Integer</SPAN>
+
+    &lt;PreserveSig()&gt; _
+    <SPAN style="COLOR: #0000ff">Function</SPAN> RetryRejectedCall(<SPAN style="COLOR: #0000ff">ByVal</SPAN> hTaskCallee <SPAN style="COLOR: #0000ff">As</SPAN> IntPtr, _
+                               <SPAN style="COLOR: #0000ff">ByVal</SPAN> dwTickCount <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Integer</SPAN>, _
+                               <SPAN style="COLOR: #0000ff">ByVal</SPAN> dwRejectType <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Integer</SPAN>) _
+                               <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Integer</SPAN>
+
+    &lt;PreserveSig()&gt; _
+    <SPAN style="COLOR: #0000ff">Function</SPAN> MessagePending(<SPAN style="COLOR: #0000ff">ByVal</SPAN> hTaskCallee <SPAN style="COLOR: #0000ff">As</SPAN> IntPtr, _
+                            <SPAN style="COLOR: #0000ff">ByVal</SPAN> dwTickCount <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Integer</SPAN>, _
+                            <SPAN style="COLOR: #0000ff">ByVal</SPAN> dwPendingType <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Integer</SPAN>) _
+                            <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Integer</SPAN>
+<SPAN style="COLOR: #0000ff">End Interface</SPAN></PRE></TD></TR></TBODY></TABLE></DIV></DIV>
+<DIV id=i-50a019ff-735c-4c4b-b228-70a61734a7fc-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>OleMessageFilter for Visual C#</SPAN> </DIV>
+<DIV id=i-50a019ff-735c-4c4b-b228-70a61734a7fc-section-content class=i-section-content>
+<P>In Console applications, you must decorate your Main() function with <A href="http://msdn.microsoft.com/en-us/library/system.stathreadattribute.aspx" target=_blank>STAThreadAttribute</A>.</P>
+<DIV class=i-filtered-content-CS data-title="CS" data-itemid="CS">
+<TABLE class=i-syntax-table>
+<TBODY>
+<TR>
+<TH>C# example usage</TH>
+<TH>
+<DIV class=i-copy-code-wrapper><SPAN class=i-copy-code>Copy Code</SPAN> </DIV></TH></TR>
+<TR>
+<TD class=i-code colSpan=2><PRE>[STAThread]
+<SPAN style="COLOR: #0000ff">static</SPAN> <SPAN style="COLOR: #0000ff">void</SPAN> Main(<SPAN style="COLOR: #0000ff">string</SPAN>[] args)
+{
+  OleMessageFilter.Register();
+  <SPAN style="COLOR: #008000">// Make COM calls.
+</SPAN>  OleMessageFilter.Revoke();
+}               </PRE></TD></TR></TBODY></TABLE></DIV>
+<P>In your Visual C# project, create a new class and name it <A href="OleMessageFilterCS.html">OleMessageFilter.cs</A>. Copy this example code and paste it into the new class. You will want to modify the namespace of the example code to match your own namespace.</P>
+<DIV class=i-filtered-content-VB data-title="VB" data-itemid="VB">
+<TABLE class=i-syntax-table>
+<TBODY>
+<TR>
+<TH>C#&nbsp;implementation of OleMessageFilter</TH>
+<TH>
+<DIV class=i-copy-code-wrapper><SPAN class=i-copy-code>Copy Code</SPAN> </DIV></TH></TR>
+<TR>
+<TD class=i-code colSpan=2><PRE><SPAN style="COLOR: #0000ff">using</SPAN> System;
+<SPAN style="COLOR: #0000ff">using</SPAN> System.Runtime.InteropServices;
+<SPAN style="COLOR: #0000ff">using</SPAN> System.Threading;
+
+<SPAN style="COLOR: #0000ff">namespace</SPAN> SolidEdge.SDK
+{
+    <SPAN style="COLOR: #0000ff">class</SPAN> OleMessageFilter : IOleMessageFilter
+    {
+        <SPAN style="COLOR: #0000ff">public</SPAN> <SPAN style="COLOR: #0000ff">static</SPAN> void Register()
+        {
+            IOleMessageFilter newFilter = <SPAN style="COLOR: #0000ff">new</SPAN> OleMessageFilter();
+            IOleMessageFilter oldFilter = null;
+
+            <SPAN style="COLOR: #0000ff">if</SPAN> (Thread.CurrentThread.GetApartmentState() == ApartmentState.STA)
+            {
+                CoRegisterMessageFilter(newFilter, out oldFilter);
+            }
+            <SPAN style="COLOR: #0000ff">else</SPAN>
+            {
+                <SPAN style="COLOR: #0000ff">throw</SPAN> <SPAN style="COLOR: #0000ff">new</SPAN> COMException(<SPAN style="COLOR: #800000">"Unable to register message filter because the current thread apartment state is not STA."</SPAN>);
+            }
+        }
+
+        <SPAN style="COLOR: #0000ff">public</SPAN> <SPAN style="COLOR: #0000ff">static</SPAN> void Revoke()
+        {
+            IOleMessageFilter oldFilter = null;
+            CoRegisterMessageFilter(null, out oldFilter);
+        }
+
+        <SPAN style="COLOR: #0000ff">int</SPAN> IOleMessageFilter.HandleInComingCall(
+            <SPAN style="COLOR: #0000ff">int</SPAN> dwCallType,
+            System.IntPtr hTaskCaller,
+            <SPAN style="COLOR: #0000ff">int</SPAN> dwTickCount,
+            System.IntPtr lpInterfaceInfo)
+        {
+            <SPAN style="COLOR: #0000ff">return</SPAN> (<SPAN style="COLOR: #0000ff">int</SPAN>)SERVERCALL.SERVERCALL_ISHANDLED;
+        }
+
+        <SPAN style="COLOR: #0000ff">int</SPAN> IOleMessageFilter.RetryRejectedCall(
+            System.IntPtr hTaskCallee,
+            <SPAN style="COLOR: #0000ff">int</SPAN> dwTickCount,
+            <SPAN style="COLOR: #0000ff">int</SPAN> dwRejectType)
+        {
+            <SPAN style="COLOR: #0000ff">if</SPAN> (dwRejectType == (<SPAN style="COLOR: #0000ff">int</SPAN>)SERVERCALL.SERVERCALL_RETRYLATER)
+            {
+                <SPAN style="COLOR: #0000ff">return</SPAN> 99;
+            }
+
+            <SPAN style="COLOR: #0000ff">return</SPAN> -1;
+        }
+
+        <SPAN style="COLOR: #0000ff">int</SPAN> IOleMessageFilter.MessagePending(
+            System.IntPtr hTaskCallee,
+            <SPAN style="COLOR: #0000ff">int</SPAN> dwTickCount,
+            <SPAN style="COLOR: #0000ff">int</SPAN> dwPendingType)
+        {
+            <SPAN style="COLOR: #0000ff">return</SPAN> (<SPAN style="COLOR: #0000ff">int</SPAN>)PENDINGMSG.PENDINGMSG_WAITDEFPROCESS;
+        }
+
+        [DllImport(<SPAN style="COLOR: #800000">"Ole32.dll"</SPAN>)]
+        <SPAN style="COLOR: #0000ff">private</SPAN> <SPAN style="COLOR: #0000ff">static</SPAN> extern <SPAN style="COLOR: #0000ff">int</SPAN> CoRegisterMessageFilter(
+            IOleMessageFilter newFilter,
+            out IOleMessageFilter oldFilter);
+    }
+
+    <SPAN style="COLOR: #0000ff">enum</SPAN> SERVERCALL
+    {
+        SERVERCALL_ISHANDLED = 0,
+        SERVERCALL_REJECTED = 1,
+        SERVERCALL_RETRYLATER = 2
+    }
+
+    <SPAN style="COLOR: #0000ff">enum</SPAN> PENDINGMSG
+    {
+        PENDINGMSG_CANCELCALL = 0,
+        PENDINGMSG_WAITNOPROCESS = 1,
+        PENDINGMSG_WAITDEFPROCESS = 2
+    }
+
+    [ComImport(), Guid(<SPAN style="COLOR: #800000">"00000016-0000-0000-C000-000000000046"</SPAN>),
+    InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
+    <SPAN style="COLOR: #0000ff">interface</SPAN> IOleMessageFilter
+    {
+        [PreserveSig]
+        <SPAN style="COLOR: #0000ff">int</SPAN> HandleInComingCall(
+            <SPAN style="COLOR: #0000ff">int</SPAN> dwCallType,
+            IntPtr hTaskCaller,
+            <SPAN style="COLOR: #0000ff">int</SPAN> dwTickCount,
+            IntPtr lpInterfaceInfo);
+
+        [PreserveSig]
+        <SPAN style="COLOR: #0000ff">int</SPAN> RetryRejectedCall(
+            IntPtr hTaskCallee,
+            <SPAN style="COLOR: #0000ff">int</SPAN> dwTickCount,
+            <SPAN style="COLOR: #0000ff">int</SPAN> dwRejectType);
+
+        [PreserveSig]
+        <SPAN style="COLOR: #0000ff">int</SPAN> MessagePending(
+            IntPtr hTaskCallee,
+            <SPAN style="COLOR: #0000ff">int</SPAN> dwTickCount,
+            <SPAN style="COLOR: #0000ff">int</SPAN> dwPendingType);
+    }
+}</PRE></TD></TR></TBODY></TABLE></DIV></DIV><!--DXMETADATA end-->
+            <a name="seealsobookmark"></a>
+            <!--DXMETADATA start type="FilteredItemList" scrap="CATEGORISED_LINKS" namespace="linkcategory" source="Item" filter="" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=seealso,caption=""%%phrase:name=SeeAlso%%%%designlist:tagidentifier=seealso,itemtype=See Also%%""%%%%filtereditemlist%%</div>"--><!--DXMETADATA end-->
+        
+    </div>
+    <div id="i-footer-content" class="i-footer-content">
+        <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_FOOTER" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="CopyrightNotice" format="<p>&nbsp;</p><p>&nbsp;</p><hr style=""height: 1px"" /><p>%%variable%%</p>" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="FeedbackLink" format="" --><!--DXMETADATA end-->
+    </div>
+    
+
+    <!--DXMETADATA start type="IsNew" format="<script type=""text/javascript"">setIsNew = true;</script>" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<script type=""text/javascript"">setIsResponsiveEnabled = true;</script>" --><!--DXMETADATA end-->
+    <script type="text/javascript">
+        $(function() {
+            var documentInstance = new Innovasys.Content.Document(document.body);
+            documentInstance.isNew = !(typeof setIsNew === "undefined");
+            documentInstance.isResponsiveEnabled = !(typeof setIsResponsiveEnabled === "undefined");
+            documentInstance.load();
+        });
+    </script>
+</body>
+</html>

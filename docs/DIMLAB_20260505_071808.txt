@@ -1,0 +1,394 @@
+﻿[DIMLAB][BOOT][START] outRoot=C:\Eduardo\PLANOS AUTOMATICOS V08\OUT_DIMLAB archivoTexto=C:\Eduardo\PLANOS AUTOMATICOS V08\OUT_DIMLAB\DIMLAB_20260505_071808.txt
+[DIMLAB][RUN][exclusive] True
+[DIMLAB][PRECHECK][effectiveRunMainDimensioning] False
+[DIMLAB][PRECHECK][autoDimensioningDisabled] True
+[DIMLAB][PRECHECK][forensicInteractive] False
+[DIMLAB][SHEET_SCAN][ROW] sectionIndex=1 sheetIndex=1 sheetName=Hoja1 drawingViews=5 lines2d=0 dimensions=0
+[DIMLAB][SHEET_SCAN][CANDIDATE] sheetName=Hoja1 drawingViews=5
+[DIMLAB][SHEET_SCAN][ROW] sectionIndex=2 sheetIndex=1 sheetName=Hoja A4 drawingViews=0 lines2d=48 dimensions=0
+[DIMLAB][SHEET_SCAN][ROW] sectionIndex=2 sheetIndex=2 sheetName=Hoja A4V drawingViews=0 lines2d=44 dimensions=0
+[DIMLAB][SHEET_SCAN][ROW] sectionIndex=2 sheetIndex=3 sheetName=Hoja A3 drawingViews=0 lines2d=46 dimensions=0
+[DIMLAB][SHEET_SCAN][ROW] sectionIndex=2 sheetIndex=4 sheetName=Hoja A3V drawingViews=0 lines2d=48 dimensions=0
+[DIMLAB][SHEET_SCAN][ROW] sectionIndex=2 sheetIndex=5 sheetName=A2_HZ drawingViews=0 lines2d=38 dimensions=0
+[DIMLAB][SHEET_SCAN][ROW] sectionIndex=2 sheetIndex=6 sheetName=A2_V drawingViews=0 lines2d=38 dimensions=0
+[DIMLAB][SHEET_SCAN][ROW] sectionIndex=2 sheetIndex=7 sheetName=A1_HZ drawingViews=0 lines2d=39 dimensions=0
+[DIMLAB][SHEET_SCAN][ROW] sectionIndex=2 sheetIndex=8 sheetName=A1_V drawingViews=0 lines2d=40 dimensions=0
+[DIMLAB][SHEET_SCAN][ROW] sectionIndex=3 sheetIndex=1 sheetName=2D Model drawingViews=0 lines2d=0 dimensions=0
+[DIMLAB][SHEET_SCAN][REJECT] sheetName=2D Model reason=two_d_model_sheet
+[DIMLAB][SHEET][RESOLVED_WORKING] name=Hoja1 drawingViews=5
+[DIMLAB][SHEET][ACTIVATE_TRY] name=Hoja1
+[DIMLAB][SHEET][ACTIVATE_OK] name=Hoja1
+[DIMLAB][SHEET][ACTIVE_AFTER_ACTIVATE] name=Hoja1
+[DIMLAB][SHEET][DRAWINGVIEWS_AFTER_ACTIVATE] count=5
+[DIMLAB][PRECHECK][existingDimensionsBeforeLab] 0
+[DIMLAB][VIEW][SCAN] idx=1 Name=DrawingView 4503 ScaleFactor=0.5 Range=0.03505,0.1882->0.22475,0.2554 DVLines2d.Count=12 DVArcs2d.Count=8 DVCircles2d.Count=0
+[DIMLAB][VIEW][SCAN] idx=2 Name=DrawingView 4475 ScaleFactor=0.5 Range=0.2921,0.1882->0.3498,0.2554 DVLines2d.Count=8 DVArcs2d.Count=3 DVCircles2d.Count=0
+[DIMLAB][VIEW][SCAN] idx=3 Name=DrawingView 4411 ScaleFactor=0.5 Range=0.03505,0.10145->0.22475,0.15915 DVLines2d.Count=26 DVArcs2d.Count=4 DVCircles2d.Count=0
+[DIMLAB][VIEW][SCAN] idx=4 Name=DrawingView 4312 ScaleFactor=0.2 Range=0.32425,0.0427267->0.40185,0.0985733 DVLines2d.Count=15 DVArcs2d.Count=3 DVCircles2d.Count=0
+[DIMLAB][VIEW][SCAN] idx=5 Name=DrawingView 3605 ScaleFactor=0.2 Range=0.0552598,0.0331->0.18014,0.0638 DVLines2d.Count=16 DVArcs2d.Count=2 DVCircles2d.Count=0
+[DIMLAB][VIEW][PICK] idx=1 first_orthogonal_with_DVLines
+[DIMLAB][DVLINE][READ_TYPED] idx=1 start=(-0.16999999999999998,-0.0545) end=(0.16999999999999998,-0.0545) endpointLength=0.33999999999999997 dvLength=0.33999999999999997
+[DIMLAB][DVLINE][READ_METHOD_SELECTED] typed
+[DIMLAB][DVLINE][DUMP] index=1 readOk=True start=(-0.16999999999999998,-0.0545) end=(0.16999999999999998,-0.0545) length=0.33999999999999997 KeyPointCount=3 ReferenceIsNothing=False ModelMemberIsNothing=False EdgeType=1
+[DIMLAB][DVLINE][READ_TYPED] idx=2 start=(-0.16999999999999998,-0.051499999999999997) end=(0.16999999999999987,-0.051499999999999997) endpointLength=0.33999999999999986 dvLength=0.33999999999999986
+[DIMLAB][DVLINE][DUMP] index=2 readOk=True start=(-0.16999999999999998,-0.051499999999999997) end=(0.16999999999999987,-0.051499999999999997) length=0.33999999999999986 KeyPointCount=3 ReferenceIsNothing=False ModelMemberIsNothing=False EdgeType=1
+[DIMLAB][DVLINE][READ_TYPED] idx=3 start=(0.17399999999999999,0.054499999999999972) end=(0.17699999999999999,0.0545) endpointLength=0.0030000000000000027 dvLength=0.0030000000000000027
+[DIMLAB][DVLINE][DUMP] index=3 readOk=True start=(0.17399999999999999,0.054499999999999972) end=(0.17699999999999999,0.0545) length=0.0030000000000000027 KeyPointCount=3 ReferenceIsNothing=False ModelMemberIsNothing=False EdgeType=1
+[DIMLAB][DVLINE][READ_TYPED] idx=4 start=(0.17699999999999999,0.0545) end=(0.17699999999999999,-0.047499999999999952) endpointLength=0.10199999999999995 dvLength=0.10199999999999995
+[DIMLAB][DVLINE][DUMP] index=4 readOk=True start=(0.17699999999999999,0.0545) end=(0.17699999999999999,-0.047499999999999952) length=0.10199999999999995 KeyPointCount=3 ReferenceIsNothing=False ModelMemberIsNothing=False EdgeType=1
+[DIMLAB][DVLINE][READ_TYPED] idx=5 start=(0.17399999999999999,0.054499999999999972) end=(0.17399999999999999,-0.047499999999999952) endpointLength=0.10199999999999992 dvLength=0.10199999999999992
+[DIMLAB][DVLINE][DUMP] index=5 readOk=True start=(0.17399999999999999,0.054499999999999972) end=(0.17399999999999999,-0.047499999999999952) length=0.10199999999999992 KeyPointCount=3 ReferenceIsNothing=False ModelMemberIsNothing=False EdgeType=1
+[DIMLAB][DVLINE][READ_TYPED] idx=6 start=(0.17399999999999999,-0.047499999999999938) end=(0.17699999999999999,-0.047499999999999994) endpointLength=0.0030000000000000027 dvLength=0.0030000000000000027
+[DIMLAB][DVLINE][DUMP] index=6 readOk=True start=(0.17399999999999999,-0.047499999999999938) end=(0.17699999999999999,-0.047499999999999994) length=0.0030000000000000027 KeyPointCount=3 ReferenceIsNothing=False ModelMemberIsNothing=False EdgeType=1
+[DIMLAB][DVLINE][READ_TYPED] idx=7 start=(0.17350166494754687,-0.053561216263681849) end=(0.17200095139859822,-0.050963552150675336) endpointLength=0.0029999999999999953 dvLength=0.0029999999999999953
+[DIMLAB][DVLINE][DUMP] index=7 readOk=True start=(0.17350166494754687,-0.053561216263681849) end=(0.17200095139859822,-0.050963552150675336) length=0.0029999999999999953 KeyPointCount=3 ReferenceIsNothing=False ModelMemberIsNothing=False EdgeType=1
+[DIMLAB][DVLINE][READ_TYPED] idx=8 start=(-0.17399999999999999,0.054499999999999972) end=(-0.17699999999999999,0.0545) endpointLength=0.0030000000000000027 dvLength=0.0030000000000000027
+[DIMLAB][DVLINE][DUMP] index=8 readOk=True start=(-0.17399999999999999,0.054499999999999972) end=(-0.17699999999999999,0.0545) length=0.0030000000000000027 KeyPointCount=3 ReferenceIsNothing=False ModelMemberIsNothing=False EdgeType=1
+[DIMLAB][DVLINE][READ_TYPED] idx=9 start=(-0.17399999999999999,-0.04749999999999998) end=(-0.17699999999999999,-0.047499999999999966) endpointLength=0.0030000000000000027 dvLength=0.0030000000000000027
+[DIMLAB][DVLINE][DUMP] index=9 readOk=True start=(-0.17399999999999999,-0.04749999999999998) end=(-0.17699999999999999,-0.047499999999999966) length=0.0030000000000000027 KeyPointCount=3 ReferenceIsNothing=False ModelMemberIsNothing=False EdgeType=1
+[DIMLAB][DVLINE][READ_TYPED] idx=10 start=(-0.17699999999999999,-0.04749999999999998) end=(-0.17699999999999999,0.054499999999999958) endpointLength=0.10199999999999994 dvLength=0.10199999999999994
+[DIMLAB][DVLINE][DUMP] index=10 readOk=True start=(-0.17699999999999999,-0.04749999999999998) end=(-0.17699999999999999,0.054499999999999958) length=0.10199999999999994 KeyPointCount=3 ReferenceIsNothing=False ModelMemberIsNothing=False EdgeType=1
+[DIMLAB][DVLINE][READ_TYPED] idx=11 start=(-0.17350166494754687,-0.053561216263681863) end=(-0.17200095139859822,-0.050963552150675349) endpointLength=0.0029999999999999953 dvLength=0.0029999999999999953
+[DIMLAB][DVLINE][DUMP] index=11 readOk=True start=(-0.17350166494754687,-0.053561216263681863) end=(-0.17200095139859822,-0.050963552150675349) length=0.0029999999999999953 KeyPointCount=3 ReferenceIsNothing=False ModelMemberIsNothing=False EdgeType=1
+[DIMLAB][DVLINE][READ_TYPED] idx=12 start=(-0.17399999999999999,-0.04749999999999998) end=(-0.17399999999999999,0.054499999999999986) endpointLength=0.10199999999999997 dvLength=0.10199999999999997
+[DIMLAB][DVLINE][DUMP] index=12 readOk=True start=(-0.17399999999999999,-0.04749999999999998) end=(-0.17399999999999999,0.054499999999999986) length=0.10199999999999997 KeyPointCount=3 ReferenceIsNothing=False ModelMemberIsNothing=False EdgeType=1
+[DIMLAB][RETRIEVE][TRY] style=U3,5
+[DIMLAB][RETRIEVE][RESULT] FAIL style=U3,5 Los tipos no coinciden. (Excepción de HRESULT: 0x80020005 (DISP_E_TYPEMISMATCH))
+[DIMLAB][RETRIEVE][TRY] style=U2,5
+[DIMLAB][RETRIEVE][RESULT] FAIL style=U2,5 Los tipos no coinciden. (Excepción de HRESULT: 0x80020005 (DISP_E_TYPEMISMATCH))
+[DIMLAB][RETRIEVE][TRY] style=ISO (mm)
+[DIMLAB][RETRIEVE][RESULT] FAIL style=ISO (mm) Los tipos no coinciden. (Excepción de HRESULT: 0x80020005 (DISP_E_TYPEMISMATCH))
+[DIMLAB][RETRIEVE][TRY] style=(active)
+[DIMLAB][RETRIEVE][RESULT] FAIL style= Los tipos no coinciden. (Excepción de HRESULT: 0x80020005 (DISP_E_TYPEMISMATCH))
+[DIMLAB][DVREF][BOUND_SCAN] idx=1 start=(-0.16999999999999998,-0.0545) end=(0.16999999999999998,-0.0545) length=0.33999999999999997 refNothing=False edgeType=1 keyPointCount=3
+[DIMLAB][DVREF][BOUND_SCAN] idx=2 start=(-0.16999999999999998,-0.051499999999999997) end=(0.16999999999999987,-0.051499999999999997) length=0.33999999999999986 refNothing=False edgeType=1 keyPointCount=3
+[DIMLAB][DVREF][BOUND_SCAN] idx=3 start=(0.17399999999999999,0.054499999999999972) end=(0.17699999999999999,0.0545) length=0.0030000000000000027 refNothing=False edgeType=1 keyPointCount=3
+[DIMLAB][DVREF][BOUND_SCAN] idx=4 start=(0.17699999999999999,0.0545) end=(0.17699999999999999,-0.047499999999999952) length=0.10199999999999995 refNothing=False edgeType=1 keyPointCount=3
+[DIMLAB][DVREF][BOUND_SCAN] idx=5 start=(0.17399999999999999,0.054499999999999972) end=(0.17399999999999999,-0.047499999999999952) length=0.10199999999999992 refNothing=False edgeType=1 keyPointCount=3
+[DIMLAB][DVREF][BOUND_SCAN] idx=6 start=(0.17399999999999999,-0.047499999999999938) end=(0.17699999999999999,-0.047499999999999994) length=0.0030000000000000027 refNothing=False edgeType=1 keyPointCount=3
+[DIMLAB][DVREF][BOUND_SCAN] idx=7 start=(0.17350166494754687,-0.053561216263681849) end=(0.17200095139859822,-0.050963552150675336) length=0.0029999999999999953 refNothing=False edgeType=1 keyPointCount=3
+[DIMLAB][DVREF][BOUND_SCAN] idx=8 start=(-0.17399999999999999,0.054499999999999972) end=(-0.17699999999999999,0.0545) length=0.0030000000000000027 refNothing=False edgeType=1 keyPointCount=3
+[DIMLAB][DVREF][BOUND_SCAN] idx=9 start=(-0.17399999999999999,-0.04749999999999998) end=(-0.17699999999999999,-0.047499999999999966) length=0.0030000000000000027 refNothing=False edgeType=1 keyPointCount=3
+[DIMLAB][DVREF][BOUND_SCAN] idx=10 start=(-0.17699999999999999,-0.04749999999999998) end=(-0.17699999999999999,0.054499999999999958) length=0.10199999999999994 refNothing=False edgeType=1 keyPointCount=3
+[DIMLAB][DVREF][BOUND_SCAN] idx=11 start=(-0.17350166494754687,-0.053561216263681863) end=(-0.17200095139859822,-0.050963552150675349) length=0.0029999999999999953 refNothing=False edgeType=1 keyPointCount=3
+[DIMLAB][DVREF][BOUND_SCAN] idx=12 start=(-0.17399999999999999,-0.04749999999999998) end=(-0.17399999999999999,0.054499999999999986) length=0.10199999999999997 refNothing=False edgeType=1 keyPointCount=3
+[DIMLAB][DVREF][BOUNDS] minX=-0.17699999999999999 maxX=0.17699999999999999 minY=-0.0545 maxY=0.0545
+[DIMLAB][DVREF][EXPECTED_TOTALS] width=0.35399999999999998 height=0.109
+[DIMLAB][DVLINE][VALIDATION] pre_dimension_bounds_ok width=0.35399999999999998 height=0.109
+[DIMLAB][DVREF][BOUNDARY_TOL] tol=0.00070799999999999997
+[DIMLAB][DVREF][BOUNDARY_CAND] side=BOTTOM idx=1 point=(-0.16999999999999998,-0.0545) length=0.33999999999999997 refNothing=False
+[DIMLAB][DVREF][BOUNDARY_CAND] side=BOTTOM idx=1 point=(0.16999999999999998,-0.0545) length=0.33999999999999997 refNothing=False
+[DIMLAB][DVREF][BOUNDARY_CAND] side=TOP idx=3 point=(0.17399999999999999,0.054499999999999972) length=0.0030000000000000027 refNothing=False
+[DIMLAB][DVREF][BOUNDARY_CAND] side=RIGHT idx=3 point=(0.17699999999999999,0.0545) length=0.0030000000000000027 refNothing=False
+[DIMLAB][DVREF][BOUNDARY_CAND] side=TOP idx=3 point=(0.17699999999999999,0.0545) length=0.0030000000000000027 refNothing=False
+[DIMLAB][DVREF][BOUNDARY_CAND] side=RIGHT idx=4 point=(0.17699999999999999,0.0545) length=0.10199999999999995 refNothing=False
+[DIMLAB][DVREF][BOUNDARY_CAND] side=TOP idx=4 point=(0.17699999999999999,0.0545) length=0.10199999999999995 refNothing=False
+[DIMLAB][DVREF][BOUNDARY_CAND] side=RIGHT idx=4 point=(0.17699999999999999,-0.047499999999999952) length=0.10199999999999995 refNothing=False
+[DIMLAB][DVREF][BOUNDARY_CAND] side=TOP idx=5 point=(0.17399999999999999,0.054499999999999972) length=0.10199999999999992 refNothing=False
+[DIMLAB][DVREF][BOUNDARY_CAND] side=RIGHT idx=6 point=(0.17699999999999999,-0.047499999999999994) length=0.0030000000000000027 refNothing=False
+[DIMLAB][DVREF][BOUNDARY_CAND] side=TOP idx=8 point=(-0.17399999999999999,0.054499999999999972) length=0.0030000000000000027 refNothing=False
+[DIMLAB][DVREF][BOUNDARY_CAND] side=LEFT idx=8 point=(-0.17699999999999999,0.0545) length=0.0030000000000000027 refNothing=False
+[DIMLAB][DVREF][BOUNDARY_CAND] side=TOP idx=8 point=(-0.17699999999999999,0.0545) length=0.0030000000000000027 refNothing=False
+[DIMLAB][DVREF][BOUNDARY_CAND] side=LEFT idx=9 point=(-0.17699999999999999,-0.047499999999999966) length=0.0030000000000000027 refNothing=False
+[DIMLAB][DVREF][BOUNDARY_CAND] side=LEFT idx=10 point=(-0.17699999999999999,-0.04749999999999998) length=0.10199999999999994 refNothing=False
+[DIMLAB][DVREF][BOUNDARY_CAND] side=LEFT idx=10 point=(-0.17699999999999999,0.054499999999999958) length=0.10199999999999994 refNothing=False
+[DIMLAB][DVREF][BOUNDARY_CAND] side=TOP idx=10 point=(-0.17699999999999999,0.054499999999999958) length=0.10199999999999994 refNothing=False
+[DIMLAB][DVREF][BOUNDARY_CAND] side=TOP idx=12 point=(-0.17399999999999999,0.054499999999999986) length=0.10199999999999997 refNothing=False
+[DIMLAB][DVREF][BOUNDARY_LEFT] count=4
+[DIMLAB][DVREF][BOUNDARY_RIGHT] count=4
+[DIMLAB][DVREF][BOUNDARY_BOTTOM] count=2
+[DIMLAB][DVREF][BOUNDARY_TOP] count=8
+[DIMLAB][DVREF][PAIR_SELECT] name=HorizontalTotal_TopPair p1LineIdx=8 p1=(-0.17699999999999999,0.0545) p2LineIdx=3 p2=(0.17699999999999999,0.0545) sameYDelta=0
+[DIMLAB][DVREF][TRY] name=HorizontalTotal_TopPair axis=H keyPoint=True/True expected=0.35399999999999998
+[DIMLAB][DVREF][TRY_POINTS] p1=(-0.17699999999999999,0.0545) p2=(0.17699999999999999,0.0545)
+[DIMLAB][DVREF][TRY_REFS] ref1Nothing=False ref2Nothing=False
+[DIMLAB][DIMCOUNT][before] 0
+[DIMLAB][DIMCOUNT][after] 1
+[DIMLAB][DIMCOUNT][delta] 1
+[DIMLAB][PLACE][BEFORE] name=HorizontalTotal_TopPair track=0.19454999268054962
+[DIMLAB][PLACE][DESIRED] name=HorizontalTotal_TopPair desiredTrack=0.015120000000000005 freeTop=0.27699999999999997 viewMaxY=0.25539999999999996 availableTop=0.021600000000000008 freeRight=0.39999999999999997 viewMaxX=0.22474999999999998 availableRight=0.17524999999999999
+[DIMLAB][PLACE][BREAK_ALIGNMENT_SKIP] name=HorizontalTotal_TopPair Puntero no válido (Excepción de HRESULT: 0x80004003 (E_POINTER))
+[DIMLAB][PLACE][TRACK_SET] name=HorizontalTotal_TopPair TrackDistance=0.015120000000000005 OK
+[DIMLAB][PLACE][ABS_TRACK_SET_FAIL] name=HorizontalTotal_TopPair No se pudo encontrar Public Let 'AbsoluteTrackDistance' en el tipo 'Dimension'. Utilice la función 'CallByName' con 'CallType.Set'.
+[DIMLAB][PLACE][AFTER] name=HorizontalTotal_TopPair track=0.015119999647140503 range=-0.0076195676684379654,0.23268000038079917..0.2184000010728836,0.24780000002793967
+[DIMLAB][PLACE][VISIBLE_PROBE] name=HorizontalTotal_TopPair True reason=in_sheet
+[DIMLAB][VALIDATE_VISIBLE][RANGE_FINAL] name=HorizontalTotal_TopPair range=-0.0076195676684379654,0.23268000038079917..0.2184000010728836,0.24780000002793967
+[DIMLAB][VALIDATE_VISIBLE][DISPLAYDATA_FINAL] name=HorizontalTotal_TopPair lineCount=3 arcCount=0 textCount=1 pointCount=0
+[DIMLAB][VALIDATE_VISIBLE][result] name=HorizontalTotal_TopPair visible=True materialized=True reason=in_sheet
+[DIMLAB][DVREF][OK] value=0.35399999999999998
+[DIMLAB][DVREF][DELTA] expected=0.35399999999999998 actual=0.35399999999999998 delta=0
+[DIMLAB][SELECTSET][DELTA] HorizontalTotal_TopPair before=0 after=1
+[DIMLAB][DVREF][CONNECTED] selected=True CONNECTED_BY_SELECTSET=True
+[DIMLAB][DVREF][RESULT] SUCCESS_CONNECTED_BY_SELECTSET name=HorizontalTotal_TopPair
+[DIMLAB][DIM][INSPECT] HorizontalTotal_TopPair Value=0.354
+[DIMLAB][DIM][INSPECT] HorizontalTotal_TopPair StatusOfDimension=4
+[DIMLAB][DIM][INSPECT] HorizontalTotal_TopPair DimensionType=1
+[DIMLAB][DIM][INSPECT] HorizontalTotal_TopPair TrackDistance=0.0151199996471405
+[DIMLAB][DIM][INSPECT] HorizontalTotal_TopPair AbsoluteTrackDistance=0.0151199996471405
+[DIMLAB][DIM][INSPECT] HorizontalTotal_TopPair Layer=Predeterminado
+[DIMLAB][DIM][INSPECT] HorizontalTotal_TopPair Range=0,0..0,0
+[DIMLAB][DIM][DISPLAYDATA] name=HorizontalTotal_TopPair lineCount=3 arcCount=0 textCount=1 pointCount=0
+[DIMLAB][DVREF][PAIR_SELECT] name=HorizontalTotal_BottomPair p1LineIdx=10 p1=(-0.17699999999999999,-0.04749999999999998) p2LineIdx=6 p2=(0.17699999999999999,-0.047499999999999994) sameYDelta=1.3877787807814457E-17
+[DIMLAB][DVREF][TRY] name=HorizontalTotal_BottomPair axis=H keyPoint=True/True expected=0.35399999999999998
+[DIMLAB][DVREF][TRY_POINTS] p1=(-0.17699999999999999,-0.04749999999999998) p2=(0.17699999999999999,-0.047499999999999994)
+[DIMLAB][DVREF][TRY_REFS] ref1Nothing=False ref2Nothing=False
+[DIMLAB][DIMCOUNT][before] 1
+[DIMLAB][DVREF][FAIL] name=HorizontalTotal_BottomPair Interfaz no compatible (Excepción de HRESULT: 0x80004002 (E_NOINTERFACE))
+[DIMLAB][GHOST_DIM][DETECTED] test=HorizontalTotal_BottomPair before=1 after=2
+[DIMLAB][DIM][INSPECT] HorizontalTotal_BottomPair_ghost_last Value=0
+[DIMLAB][DIM][INSPECT] HorizontalTotal_BottomPair_ghost_last StatusOfDimension=4
+[DIMLAB][DIM][INSPECT] HorizontalTotal_BottomPair_ghost_last DimensionType=1
+[DIMLAB][DIM][INSPECT] HorizontalTotal_BottomPair_ghost_last TrackDistance=0.00499999988824129
+[DIMLAB][DIM][INSPECT] HorizontalTotal_BottomPair_ghost_last AbsoluteTrackDistance=0
+[DIMLAB][DIM][INSPECT] HorizontalTotal_BottomPair_ghost_last Layer=Predeterminado
+[DIMLAB][DIM][INSPECT] HorizontalTotal_BottomPair_ghost_last Range=0,0..0,0
+[DIMLAB][DIM][DISPLAYDATA] name=HorizontalTotal_BottomPair_ghost_last lineCount=0 arcCount=0 textCount=0 pointCount=0
+[DIMLAB][DVREF][PAIR_SELECT] name=HorizontalTotal_BestSameY p1LineIdx=8 p1=(-0.17699999999999999,0.0545) p2LineIdx=3 p2=(0.17699999999999999,0.0545) sameYDelta=0
+[DIMLAB][DVREF][TRY] name=HorizontalTotal_BestSameY axis=H keyPoint=True/True expected=0.35399999999999998
+[DIMLAB][DVREF][TRY_POINTS] p1=(-0.17699999999999999,0.0545) p2=(0.17699999999999999,0.0545)
+[DIMLAB][DVREF][TRY_REFS] ref1Nothing=False ref2Nothing=False
+[DIMLAB][DIMCOUNT][before] 2
+[DIMLAB][DIMCOUNT][after] 3
+[DIMLAB][DIMCOUNT][delta] 1
+[DIMLAB][PLACE][BEFORE] name=HorizontalTotal_BestSameY track=0.19454999268054962
+[DIMLAB][PLACE][DESIRED] name=HorizontalTotal_BestSameY desiredTrack=0.015120000000000005 freeTop=0.27699999999999997 viewMaxY=0.25539999999999996 availableTop=0.021600000000000008 freeRight=0.39999999999999997 viewMaxX=0.22474999999999998 availableRight=0.17524999999999999
+[DIMLAB][PLACE][BREAK_ALIGNMENT_SKIP] name=HorizontalTotal_BestSameY Puntero no válido (Excepción de HRESULT: 0x80004003 (E_POINTER))
+[DIMLAB][PLACE][TRACK_SET] name=HorizontalTotal_BestSameY TrackDistance=0.015120000000000005 OK
+[DIMLAB][PLACE][ABS_TRACK_SET_FAIL] name=HorizontalTotal_BestSameY No se pudo encontrar Public Let 'AbsoluteTrackDistance' en el tipo 'Dimension'. Utilice la función 'CallByName' con 'CallType.Set'.
+[DIMLAB][PLACE][AFTER] name=HorizontalTotal_BestSameY track=0.015119999647140503 range=-0.0076195676684379654,0.23268000038079917..0.2184000010728836,0.24780000002793967
+[DIMLAB][PLACE][VISIBLE_PROBE] name=HorizontalTotal_BestSameY True reason=in_sheet
+[DIMLAB][VALIDATE_VISIBLE][RANGE_FINAL] name=HorizontalTotal_BestSameY range=-0.0076195676684379654,0.23268000038079917..0.2184000010728836,0.24780000002793967
+[DIMLAB][VALIDATE_VISIBLE][DISPLAYDATA_FINAL] name=HorizontalTotal_BestSameY lineCount=3 arcCount=0 textCount=1 pointCount=0
+[DIMLAB][VALIDATE_VISIBLE][result] name=HorizontalTotal_BestSameY visible=True materialized=True reason=in_sheet
+[DIMLAB][DVREF][OK] value=0.35399999999999998
+[DIMLAB][DVREF][DELTA] expected=0.35399999999999998 actual=0.35399999999999998 delta=0
+[DIMLAB][SELECTSET][DELTA] HorizontalTotal_BestSameY before=1 after=2
+[DIMLAB][DVREF][CONNECTED] selected=True CONNECTED_BY_SELECTSET=True
+[DIMLAB][DVREF][RESULT] SUCCESS_CONNECTED_BY_SELECTSET name=HorizontalTotal_BestSameY
+[DIMLAB][DIM][INSPECT] HorizontalTotal_BestSameY Value=0.354
+[DIMLAB][DIM][INSPECT] HorizontalTotal_BestSameY StatusOfDimension=4
+[DIMLAB][DIM][INSPECT] HorizontalTotal_BestSameY DimensionType=1
+[DIMLAB][DIM][INSPECT] HorizontalTotal_BestSameY TrackDistance=0.0151199996471405
+[DIMLAB][DIM][INSPECT] HorizontalTotal_BestSameY AbsoluteTrackDistance=0.0151199996471405
+[DIMLAB][DIM][INSPECT] HorizontalTotal_BestSameY Layer=Predeterminado
+[DIMLAB][DIM][INSPECT] HorizontalTotal_BestSameY Range=0,0..0,0
+[DIMLAB][DIM][DISPLAYDATA] name=HorizontalTotal_BestSameY lineCount=3 arcCount=0 textCount=1 pointCount=0
+[DIMLAB][DVREF][PAIR_SELECT] name=VerticalTotal_LeftPair_Keypoints p1LineIdx=1 p1=(-0.16999999999999998,-0.0545) p2LineIdx=8 p2=(-0.17399999999999999,0.054499999999999972) sameYDelta=0.10899999999999997
+[DIMLAB][DVREF][TRY] name=VerticalTotal_LeftPair_Keypoints axis=V keyPoint=True/True expected=0.109
+[DIMLAB][DVREF][TRY_POINTS] p1=(-0.16999999999999998,-0.0545) p2=(-0.17399999999999999,0.054499999999999972)
+[DIMLAB][DVREF][TRY_REFS] ref1Nothing=False ref2Nothing=False
+[DIMLAB][DIMCOUNT][before] 3
+[DIMLAB][DVREF][FAIL] name=VerticalTotal_LeftPair_Keypoints Interfaz no compatible (Excepción de HRESULT: 0x80004002 (E_NOINTERFACE))
+[DIMLAB][GHOST_DIM][DETECTED] test=VerticalTotal_LeftPair_Keypoints before=3 after=4
+[DIMLAB][DIM][INSPECT] VerticalTotal_LeftPair_Keypoints_ghost_last Value=0
+[DIMLAB][DIM][INSPECT] VerticalTotal_LeftPair_Keypoints_ghost_last StatusOfDimension=4
+[DIMLAB][DIM][INSPECT] VerticalTotal_LeftPair_Keypoints_ghost_last DimensionType=1
+[DIMLAB][DIM][INSPECT] VerticalTotal_LeftPair_Keypoints_ghost_last TrackDistance=0.00499999988824129
+[DIMLAB][DIM][INSPECT] VerticalTotal_LeftPair_Keypoints_ghost_last AbsoluteTrackDistance=0
+[DIMLAB][DIM][INSPECT] VerticalTotal_LeftPair_Keypoints_ghost_last Layer=Predeterminado
+[DIMLAB][DIM][INSPECT] VerticalTotal_LeftPair_Keypoints_ghost_last Range=0,0..0,0
+[DIMLAB][DIM][DISPLAYDATA] name=VerticalTotal_LeftPair_Keypoints_ghost_last lineCount=0 arcCount=0 textCount=0 pointCount=0
+[DIMLAB][DVREF][PAIR_SELECT] name=VerticalTotal_RightPair_Keypoints p1LineIdx=1 p1=(0.16999999999999998,-0.0545) p2LineIdx=3 p2=(0.17399999999999999,0.054499999999999972) sameYDelta=0.10899999999999997
+[DIMLAB][DVREF][TRY] name=VerticalTotal_RightPair_Keypoints axis=V keyPoint=True/True expected=0.109
+[DIMLAB][DVREF][TRY_POINTS] p1=(0.16999999999999998,-0.0545) p2=(0.17399999999999999,0.054499999999999972)
+[DIMLAB][DVREF][TRY_REFS] ref1Nothing=False ref2Nothing=False
+[DIMLAB][DIMCOUNT][before] 4
+[DIMLAB][DVREF][FAIL] name=VerticalTotal_RightPair_Keypoints Interfaz no compatible (Excepción de HRESULT: 0x80004002 (E_NOINTERFACE))
+[DIMLAB][GHOST_DIM][DETECTED] test=VerticalTotal_RightPair_Keypoints before=4 after=5
+[DIMLAB][DIM][INSPECT] VerticalTotal_RightPair_Keypoints_ghost_last Value=0
+[DIMLAB][DIM][INSPECT] VerticalTotal_RightPair_Keypoints_ghost_last StatusOfDimension=4
+[DIMLAB][DIM][INSPECT] VerticalTotal_RightPair_Keypoints_ghost_last DimensionType=1
+[DIMLAB][DIM][INSPECT] VerticalTotal_RightPair_Keypoints_ghost_last TrackDistance=0.00499999988824129
+[DIMLAB][DIM][INSPECT] VerticalTotal_RightPair_Keypoints_ghost_last AbsoluteTrackDistance=0
+[DIMLAB][DIM][INSPECT] VerticalTotal_RightPair_Keypoints_ghost_last Layer=Predeterminado
+[DIMLAB][DIM][INSPECT] VerticalTotal_RightPair_Keypoints_ghost_last Range=0,0..0,0
+[DIMLAB][DIM][DISPLAYDATA] name=VerticalTotal_RightPair_Keypoints_ghost_last lineCount=0 arcCount=0 textCount=0 pointCount=0
+[DIMLAB][DVREF][PAIR_SELECT] name=VerticalTotal_BestSameX_Keypoints p1LineIdx=1 p1=(-0.16999999999999998,-0.0545) p2LineIdx=8 p2=(-0.17399999999999999,0.054499999999999972) sameYDelta=0.10899999999999997
+[DIMLAB][DVREF][TRY] name=VerticalTotal_BestSameX_Keypoints axis=V keyPoint=True/True expected=0.109
+[DIMLAB][DVREF][TRY_POINTS] p1=(-0.16999999999999998,-0.0545) p2=(-0.17399999999999999,0.054499999999999972)
+[DIMLAB][DVREF][TRY_REFS] ref1Nothing=False ref2Nothing=False
+[DIMLAB][DIMCOUNT][before] 5
+[DIMLAB][DVREF][FAIL] name=VerticalTotal_BestSameX_Keypoints Interfaz no compatible (Excepción de HRESULT: 0x80004002 (E_NOINTERFACE))
+[DIMLAB][GHOST_DIM][DETECTED] test=VerticalTotal_BestSameX_Keypoints before=5 after=6
+[DIMLAB][DIM][INSPECT] VerticalTotal_BestSameX_Keypoints_ghost_last Value=0
+[DIMLAB][DIM][INSPECT] VerticalTotal_BestSameX_Keypoints_ghost_last StatusOfDimension=4
+[DIMLAB][DIM][INSPECT] VerticalTotal_BestSameX_Keypoints_ghost_last DimensionType=1
+[DIMLAB][DIM][INSPECT] VerticalTotal_BestSameX_Keypoints_ghost_last TrackDistance=0.00499999988824129
+[DIMLAB][DIM][INSPECT] VerticalTotal_BestSameX_Keypoints_ghost_last AbsoluteTrackDistance=0
+[DIMLAB][DIM][INSPECT] VerticalTotal_BestSameX_Keypoints_ghost_last Layer=Predeterminado
+[DIMLAB][DIM][INSPECT] VerticalTotal_BestSameX_Keypoints_ghost_last Range=0,0..0,0
+[DIMLAB][DIM][DISPLAYDATA] name=VerticalTotal_BestSameX_Keypoints_ghost_last lineCount=0 arcCount=0 textCount=0 pointCount=0
+[DIMLAB][DVREF][PAIR_SELECT] name=VerticalTotal_LeftObject_ParallelHorizontals bottomMid=(-0.16999999999999998,-0.0545) topMid=(0.17399999999999999,0.054499999999999986)
+[DIMLAB][DVREF][TRY] name=VerticalTotal_LeftObject_ParallelHorizontals axis=H keyPoint=False/False expected=0.109
+[DIMLAB][DVREF][TRY_POINTS] p1=(-0.16999999999999998,-0.0545) p2=(0.17399999999999999,0.054499999999999986)
+[DIMLAB][DVREF][TRY_REFS] ref1Nothing=False ref2Nothing=False
+[DIMLAB][DIMCOUNT][before] 6
+[DIMLAB][DIMCOUNT][after] 7
+[DIMLAB][DIMCOUNT][delta] 1
+[DIMLAB][PLACE][BEFORE] name=VerticalTotal_LeftObject_ParallelHorizontals track=0.19454999268054962
+[DIMLAB][PLACE][DESIRED] name=VerticalTotal_LeftObject_ParallelHorizontals desiredTrack=0.015120000000000005 freeTop=0.27699999999999997 viewMaxY=0.25539999999999996 availableTop=0.021600000000000008 freeRight=0.39999999999999997 viewMaxX=0.22474999999999998 availableRight=0.17524999999999999
+[DIMLAB][PLACE][BREAK_ALIGNMENT_SKIP] name=VerticalTotal_LeftObject_ParallelHorizontals Puntero no válido (Excepción de HRESULT: 0x80004003 (E_POINTER))
+[DIMLAB][PLACE][TRACK_SET] name=VerticalTotal_LeftObject_ParallelHorizontals TrackDistance=0.015120000000000005 OK
+[DIMLAB][PLACE][ABS_TRACK_SET_FAIL] name=VerticalTotal_LeftObject_ParallelHorizontals No se pudo encontrar Public Let 'AbsoluteTrackDistance' en el tipo 'Dimension'. Utilice la función 'CallByName' con 'CallType.Set'.
+[DIMLAB][PLACE][AFTER] name=VerticalTotal_LeftObject_ParallelHorizontals track=0.015119999647140503 range=-0.001706519569521385,0.17818000038079918..0.22340000046193598,0.24780000002793967
+[DIMLAB][PLACE][VISIBLE_PROBE] name=VerticalTotal_LeftObject_ParallelHorizontals True reason=in_sheet
+[DIMLAB][VALIDATE_VISIBLE][RANGE_FINAL] name=VerticalTotal_LeftObject_ParallelHorizontals range=-0.001706519569521385,0.17818000038079918..0.22340000046193598,0.24780000002793967
+[DIMLAB][VALIDATE_VISIBLE][DISPLAYDATA_FINAL] name=VerticalTotal_LeftObject_ParallelHorizontals lineCount=3 arcCount=0 textCount=1 pointCount=0
+[DIMLAB][VALIDATE_VISIBLE][result] name=VerticalTotal_LeftObject_ParallelHorizontals visible=True materialized=True reason=in_sheet
+[DIMLAB][DVREF][OK] value=0.0070000000000000062
+[DIMLAB][DVREF][DELTA] expected=0.109 actual=0.0070000000000000062 delta=0.10199999999999999
+[DIMLAB][SELECTSET][DELTA] VerticalTotal_LeftObject_ParallelHorizontals before=2 after=3
+[DIMLAB][DVREF][CONNECTED] selected=True CONNECTED_BY_SELECTSET=True
+[DIMLAB][DVREF][RESULT] WRONG_VALUE name=VerticalTotal_LeftObject_ParallelHorizontals
+[DIMLAB][DIM][INSPECT] VerticalTotal_LeftObject_ParallelHorizontals Value=0.00700000000000001
+[DIMLAB][DIM][INSPECT] VerticalTotal_LeftObject_ParallelHorizontals StatusOfDimension=4
+[DIMLAB][DIM][INSPECT] VerticalTotal_LeftObject_ParallelHorizontals DimensionType=1
+[DIMLAB][DIM][INSPECT] VerticalTotal_LeftObject_ParallelHorizontals TrackDistance=0.0151199996471405
+[DIMLAB][DIM][INSPECT] VerticalTotal_LeftObject_ParallelHorizontals AbsoluteTrackDistance=0.0151199996471405
+[DIMLAB][DIM][INSPECT] VerticalTotal_LeftObject_ParallelHorizontals Layer=Predeterminado
+[DIMLAB][DIM][INSPECT] VerticalTotal_LeftObject_ParallelHorizontals Range=0,0..0,0
+[DIMLAB][DIM][DISPLAYDATA] name=VerticalTotal_LeftObject_ParallelHorizontals lineCount=3 arcCount=0 textCount=1 pointCount=0
+[DIMLAB][DVREF][PAIR_SELECT] name=VerticalTotal_RightObject_ParallelHorizontals bottomMid=(0.16999999999999998,-0.0545) topMid=(0.17699999999999999,0.054499999999999986)
+[DIMLAB][DVREF][TRY] name=VerticalTotal_RightObject_ParallelHorizontals axis=V keyPoint=False/False expected=0.109
+[DIMLAB][DVREF][TRY_POINTS] p1=(0.16999999999999998,-0.0545) p2=(0.17699999999999999,0.054499999999999986)
+[DIMLAB][DVREF][TRY_REFS] ref1Nothing=False ref2Nothing=False
+[DIMLAB][DIMCOUNT][before] 7
+[DIMLAB][DIMCOUNT][after] 8
+[DIMLAB][DIMCOUNT][delta] 1
+[DIMLAB][PLACE][BEFORE] name=VerticalTotal_RightObject_ParallelHorizontals track=0.19454999268054962
+[DIMLAB][PLACE][DESIRED] name=VerticalTotal_RightObject_ParallelHorizontals desiredTrack=0.016 freeTop=0.27699999999999997 viewMaxY=0.25539999999999996 availableTop=0.021600000000000008 freeRight=0.39999999999999997 viewMaxX=0.22474999999999998 availableRight=0.17524999999999999
+[DIMLAB][PLACE][BREAK_ALIGNMENT_SKIP] name=VerticalTotal_RightObject_ParallelHorizontals Puntero no válido (Excepción de HRESULT: 0x80004003 (E_POINTER))
+[DIMLAB][PLACE][TRACK_SET] name=VerticalTotal_RightObject_ParallelHorizontals TrackDistance=0.016 OK
+[DIMLAB][PLACE][ABS_TRACK_SET_FAIL] name=VerticalTotal_RightObject_ParallelHorizontals No se pudo encontrar Public Let 'AbsoluteTrackDistance' en el tipo 'Dimension'. Utilice la función 'CallByName' con 'CallType.Set'.
+[DIMLAB][PLACE][AFTER] name=VerticalTotal_RightObject_ParallelHorizontals track=0.016000000759959221 range=0.16979347726106642,0.17729999926798046..0.22340000046193598,0.24780000002793967
+[DIMLAB][PLACE][VISIBLE_PROBE] name=VerticalTotal_RightObject_ParallelHorizontals True reason=in_sheet
+[DIMLAB][VALIDATE_VISIBLE][RANGE_FINAL] name=VerticalTotal_RightObject_ParallelHorizontals range=0.16979347726106642,0.17729999926798046..0.22340000046193598,0.24780000002793967
+[DIMLAB][VALIDATE_VISIBLE][DISPLAYDATA_FINAL] name=VerticalTotal_RightObject_ParallelHorizontals lineCount=3 arcCount=0 textCount=1 pointCount=0
+[DIMLAB][VALIDATE_VISIBLE][result] name=VerticalTotal_RightObject_ParallelHorizontals visible=True materialized=True reason=in_sheet
+[DIMLAB][DVREF][OK] value=0.0070000000000000062
+[DIMLAB][DVREF][DELTA] expected=0.109 actual=0.0070000000000000062 delta=0.10199999999999999
+[DIMLAB][SELECTSET][DELTA] VerticalTotal_RightObject_ParallelHorizontals before=3 after=4
+[DIMLAB][DVREF][CONNECTED] selected=True CONNECTED_BY_SELECTSET=True
+[DIMLAB][DVREF][RESULT] WRONG_VALUE name=VerticalTotal_RightObject_ParallelHorizontals
+[DIMLAB][DIM][INSPECT] VerticalTotal_RightObject_ParallelHorizontals Value=0.00700000000000001
+[DIMLAB][DIM][INSPECT] VerticalTotal_RightObject_ParallelHorizontals StatusOfDimension=4
+[DIMLAB][DIM][INSPECT] VerticalTotal_RightObject_ParallelHorizontals DimensionType=1
+[DIMLAB][DIM][INSPECT] VerticalTotal_RightObject_ParallelHorizontals TrackDistance=0.0160000007599592
+[DIMLAB][DIM][INSPECT] VerticalTotal_RightObject_ParallelHorizontals AbsoluteTrackDistance=0.0160000007599592
+[DIMLAB][DIM][INSPECT] VerticalTotal_RightObject_ParallelHorizontals Layer=Predeterminado
+[DIMLAB][DIM][INSPECT] VerticalTotal_RightObject_ParallelHorizontals Range=0,0..0,0
+[DIMLAB][DIM][DISPLAYDATA] name=VerticalTotal_RightObject_ParallelHorizontals lineCount=3 arcCount=0 textCount=1 pointCount=0
+[DIMLAB][DVREF][PAIR_SELECT] name=VerticalTotal_BestObject_ParallelHorizontals_L bottomMid=(-0.16999999999999998,-0.0545) topMid=(0.17399999999999999,0.054499999999999986)
+[DIMLAB][DVREF][TRY] name=VerticalTotal_BestObject_ParallelHorizontals_L axis=H keyPoint=False/False expected=0.109
+[DIMLAB][DVREF][TRY_POINTS] p1=(-0.16999999999999998,-0.0545) p2=(0.17399999999999999,0.054499999999999986)
+[DIMLAB][DVREF][TRY_REFS] ref1Nothing=False ref2Nothing=False
+[DIMLAB][DIMCOUNT][before] 8
+[DIMLAB][DIMCOUNT][after] 9
+[DIMLAB][DIMCOUNT][delta] 1
+[DIMLAB][PLACE][BEFORE] name=VerticalTotal_BestObject_ParallelHorizontals_L track=0.19454999268054962
+[DIMLAB][PLACE][DESIRED] name=VerticalTotal_BestObject_ParallelHorizontals_L desiredTrack=0.015120000000000005 freeTop=0.27699999999999997 viewMaxY=0.25539999999999996 availableTop=0.021600000000000008 freeRight=0.39999999999999997 viewMaxX=0.22474999999999998 availableRight=0.17524999999999999
+[DIMLAB][PLACE][BREAK_ALIGNMENT_SKIP] name=VerticalTotal_BestObject_ParallelHorizontals_L Puntero no válido (Excepción de HRESULT: 0x80004003 (E_POINTER))
+[DIMLAB][PLACE][TRACK_SET] name=VerticalTotal_BestObject_ParallelHorizontals_L TrackDistance=0.015120000000000005 OK
+[DIMLAB][PLACE][ABS_TRACK_SET_FAIL] name=VerticalTotal_BestObject_ParallelHorizontals_L No se pudo encontrar Public Let 'AbsoluteTrackDistance' en el tipo 'Dimension'. Utilice la función 'CallByName' con 'CallType.Set'.
+[DIMLAB][PLACE][AFTER] name=VerticalTotal_BestObject_ParallelHorizontals_L track=0.015119999647140503 range=-0.001706519569521385,0.17818000038079918..0.22340000046193598,0.24780000002793967
+[DIMLAB][PLACE][VISIBLE_PROBE] name=VerticalTotal_BestObject_ParallelHorizontals_L True reason=in_sheet
+[DIMLAB][VALIDATE_VISIBLE][RANGE_FINAL] name=VerticalTotal_BestObject_ParallelHorizontals_L range=-0.001706519569521385,0.17818000038079918..0.22340000046193598,0.24780000002793967
+[DIMLAB][VALIDATE_VISIBLE][DISPLAYDATA_FINAL] name=VerticalTotal_BestObject_ParallelHorizontals_L lineCount=3 arcCount=0 textCount=1 pointCount=0
+[DIMLAB][VALIDATE_VISIBLE][result] name=VerticalTotal_BestObject_ParallelHorizontals_L visible=True materialized=True reason=in_sheet
+[DIMLAB][DVREF][OK] value=0.0070000000000000062
+[DIMLAB][DVREF][DELTA] expected=0.109 actual=0.0070000000000000062 delta=0.10199999999999999
+[DIMLAB][SELECTSET][DELTA] VerticalTotal_BestObject_ParallelHorizontals_L before=4 after=5
+[DIMLAB][DVREF][CONNECTED] selected=True CONNECTED_BY_SELECTSET=True
+[DIMLAB][DVREF][RESULT] WRONG_VALUE name=VerticalTotal_BestObject_ParallelHorizontals_L
+[DIMLAB][DIM][INSPECT] VerticalTotal_BestObject_ParallelHorizontals_L Value=0.00700000000000001
+[DIMLAB][DIM][INSPECT] VerticalTotal_BestObject_ParallelHorizontals_L StatusOfDimension=4
+[DIMLAB][DIM][INSPECT] VerticalTotal_BestObject_ParallelHorizontals_L DimensionType=1
+[DIMLAB][DIM][INSPECT] VerticalTotal_BestObject_ParallelHorizontals_L TrackDistance=0.0151199996471405
+[DIMLAB][DIM][INSPECT] VerticalTotal_BestObject_ParallelHorizontals_L AbsoluteTrackDistance=0.0151199996471405
+[DIMLAB][DIM][INSPECT] VerticalTotal_BestObject_ParallelHorizontals_L Layer=Predeterminado
+[DIMLAB][DIM][INSPECT] VerticalTotal_BestObject_ParallelHorizontals_L Range=0,0..0,0
+[DIMLAB][DIM][DISPLAYDATA] name=VerticalTotal_BestObject_ParallelHorizontals_L lineCount=3 arcCount=0 textCount=1 pointCount=0
+[DIMLAB][DVREF][PAIR_SELECT] name=VerticalTotal_BestObject_ParallelHorizontals_R bottomMid=(0.16999999999999998,-0.0545) topMid=(0.17699999999999999,0.054499999999999986)
+[DIMLAB][DVREF][TRY] name=VerticalTotal_BestObject_ParallelHorizontals_R axis=V keyPoint=False/False expected=0.109
+[DIMLAB][DVREF][TRY_POINTS] p1=(0.16999999999999998,-0.0545) p2=(0.17699999999999999,0.054499999999999986)
+[DIMLAB][DVREF][TRY_REFS] ref1Nothing=False ref2Nothing=False
+[DIMLAB][DIMCOUNT][before] 9
+[DIMLAB][DIMCOUNT][after] 10
+[DIMLAB][DIMCOUNT][delta] 1
+[DIMLAB][PLACE][BEFORE] name=VerticalTotal_BestObject_ParallelHorizontals_R track=0.19454999268054962
+[DIMLAB][PLACE][DESIRED] name=VerticalTotal_BestObject_ParallelHorizontals_R desiredTrack=0.016 freeTop=0.27699999999999997 viewMaxY=0.25539999999999996 availableTop=0.021600000000000008 freeRight=0.39999999999999997 viewMaxX=0.22474999999999998 availableRight=0.17524999999999999
+[DIMLAB][PLACE][BREAK_ALIGNMENT_SKIP] name=VerticalTotal_BestObject_ParallelHorizontals_R Puntero no válido (Excepción de HRESULT: 0x80004003 (E_POINTER))
+[DIMLAB][PLACE][TRACK_SET] name=VerticalTotal_BestObject_ParallelHorizontals_R TrackDistance=0.016 OK
+[DIMLAB][PLACE][ABS_TRACK_SET_FAIL] name=VerticalTotal_BestObject_ParallelHorizontals_R No se pudo encontrar Public Let 'AbsoluteTrackDistance' en el tipo 'Dimension'. Utilice la función 'CallByName' con 'CallType.Set'.
+[DIMLAB][PLACE][AFTER] name=VerticalTotal_BestObject_ParallelHorizontals_R track=0.016000000759959221 range=0.16979347726106642,0.17729999926798046..0.22340000046193598,0.24780000002793967
+[DIMLAB][PLACE][VISIBLE_PROBE] name=VerticalTotal_BestObject_ParallelHorizontals_R True reason=in_sheet
+[DIMLAB][VALIDATE_VISIBLE][RANGE_FINAL] name=VerticalTotal_BestObject_ParallelHorizontals_R range=0.16979347726106642,0.17729999926798046..0.22340000046193598,0.24780000002793967
+[DIMLAB][VALIDATE_VISIBLE][DISPLAYDATA_FINAL] name=VerticalTotal_BestObject_ParallelHorizontals_R lineCount=3 arcCount=0 textCount=1 pointCount=0
+[DIMLAB][VALIDATE_VISIBLE][result] name=VerticalTotal_BestObject_ParallelHorizontals_R visible=True materialized=True reason=in_sheet
+[DIMLAB][DVREF][OK] value=0.0070000000000000062
+[DIMLAB][DVREF][DELTA] expected=0.109 actual=0.0070000000000000062 delta=0.10199999999999999
+[DIMLAB][SELECTSET][DELTA] VerticalTotal_BestObject_ParallelHorizontals_R before=5 after=6
+[DIMLAB][DVREF][CONNECTED] selected=True CONNECTED_BY_SELECTSET=True
+[DIMLAB][DVREF][RESULT] WRONG_VALUE name=VerticalTotal_BestObject_ParallelHorizontals_R
+[DIMLAB][DIM][INSPECT] VerticalTotal_BestObject_ParallelHorizontals_R Value=0.00700000000000001
+[DIMLAB][DIM][INSPECT] VerticalTotal_BestObject_ParallelHorizontals_R StatusOfDimension=4
+[DIMLAB][DIM][INSPECT] VerticalTotal_BestObject_ParallelHorizontals_R DimensionType=1
+[DIMLAB][DIM][INSPECT] VerticalTotal_BestObject_ParallelHorizontals_R TrackDistance=0.0160000007599592
+[DIMLAB][DIM][INSPECT] VerticalTotal_BestObject_ParallelHorizontals_R AbsoluteTrackDistance=0.0160000007599592
+[DIMLAB][DIM][INSPECT] VerticalTotal_BestObject_ParallelHorizontals_R Layer=Predeterminado
+[DIMLAB][DIM][INSPECT] VerticalTotal_BestObject_ParallelHorizontals_R Range=0,0..0,0
+[DIMLAB][DIM][DISPLAYDATA] name=VerticalTotal_BestObject_ParallelHorizontals_R lineCount=3 arcCount=0 textCount=1 pointCount=0
+[DIMLAB][DVREF][PAIR_SELECT] name=SmallGap_BetweenParallelHorizontals gapApprox=0.0030000000000000027
+[DIMLAB][DVREF][TRY] name=SmallGap_BetweenParallelHorizontals axis=V keyPoint=False/True expected=0.0030000000000000027
+[DIMLAB][DVREF][TRY_POINTS] p1=(0,-0.0545) p2=(-5.5511151231257827E-17,-0.051499999999999997)
+[DIMLAB][DVREF][TRY_REFS] ref1Nothing=False ref2Nothing=False
+[DIMLAB][DIMCOUNT][before] 10
+[DIMLAB][DIMCOUNT][after] 11
+[DIMLAB][DIMCOUNT][delta] 1
+[DIMLAB][PLACE][BEFORE] name=SmallGap_BetweenParallelHorizontals track=0.24754999577999115
+[DIMLAB][PLACE][DESIRED] name=SmallGap_BetweenParallelHorizontals desiredTrack=0.016 freeTop=0.27699999999999997 viewMaxY=0.25539999999999996 availableTop=0.021600000000000008 freeRight=0.39999999999999997 viewMaxX=0.22474999999999998 availableRight=0.17524999999999999
+[DIMLAB][PLACE][BREAK_ALIGNMENT_SKIP] name=SmallGap_BetweenParallelHorizontals Puntero no válido (Excepción de HRESULT: 0x80004003 (E_POINTER))
+[DIMLAB][PLACE][TRACK_SET] name=SmallGap_BetweenParallelHorizontals TrackDistance=0.016 OK
+[DIMLAB][PLACE][ABS_TRACK_SET_FAIL] name=SmallGap_BetweenParallelHorizontals No se pudo encontrar Public Let 'AbsoluteTrackDistance' en el tipo 'Dimension'. Utilice la función 'CallByName' con 'CallType.Set'.
+[DIMLAB][PLACE][AFTER] name=SmallGap_BetweenParallelHorizontals track=0.016000000759959221 range=-0.0076195673108100936,0.17729999926798046..0.12990000089406967,0.19480000002793968
+[DIMLAB][PLACE][VISIBLE_PROBE] name=SmallGap_BetweenParallelHorizontals True reason=in_sheet
+[DIMLAB][VALIDATE_VISIBLE][RANGE_FINAL] name=SmallGap_BetweenParallelHorizontals range=-0.0076195673108100936,0.17729999926798046..0.12990000089406967,0.19480000002793968
+[DIMLAB][VALIDATE_VISIBLE][DISPLAYDATA_FINAL] name=SmallGap_BetweenParallelHorizontals lineCount=3 arcCount=0 textCount=1 pointCount=0
+[DIMLAB][VALIDATE_VISIBLE][result] name=SmallGap_BetweenParallelHorizontals visible=True materialized=True reason=in_sheet
+[DIMLAB][DVREF][OK] value=0.16999999999999993
+[DIMLAB][DVREF][DELTA] expected=0.0030000000000000027 actual=0.16999999999999993 delta=0.16699999999999993
+[DIMLAB][SELECTSET][DELTA] SmallGap_BetweenParallelHorizontals before=6 after=7
+[DIMLAB][DVREF][CONNECTED] selected=True CONNECTED_BY_SELECTSET=True
+[DIMLAB][DVREF][RESULT] WRONG_VALUE name=SmallGap_BetweenParallelHorizontals
+[DIMLAB][DIM][INSPECT] SmallGap_BetweenParallelHorizontals Value=0.17
+[DIMLAB][DIM][INSPECT] SmallGap_BetweenParallelHorizontals StatusOfDimension=4
+[DIMLAB][DIM][INSPECT] SmallGap_BetweenParallelHorizontals DimensionType=1
+[DIMLAB][DIM][INSPECT] SmallGap_BetweenParallelHorizontals TrackDistance=0.0160000007599592
+[DIMLAB][DIM][INSPECT] SmallGap_BetweenParallelHorizontals AbsoluteTrackDistance=0.0160000007599592
+[DIMLAB][DIM][INSPECT] SmallGap_BetweenParallelHorizontals Layer=Predeterminado
+[DIMLAB][DIM][INSPECT] SmallGap_BetweenParallelHorizontals Range=0,0..0,0
+[DIMLAB][DIM][DISPLAYDATA] name=SmallGap_BetweenParallelHorizontals lineCount=3 arcCount=0 textCount=1 pointCount=0
+[DIMLAB][DVLINE][READ_TYPED] idx=1 start=(-0.16999999999999998,-0.0545) end=(0.16999999999999998,-0.0545) endpointLength=0.33999999999999997 dvLength=0.33999999999999997
+[DIMLAB][AUX][VALUES] visibleLength=0.16999999999999998 realFromVisible=0.33999999999999997 realFromDV=0.33999999999999997
+[DIMLAB][AUX][RESULT] SUCCESS_VISIBLE_ONLY
+[DIMLAB][UPDATE][DRAFT_UPDATEALL_AFTER_DIMENSIONS] OK
+[DIMLAB][UPDATE][DOIDLE_AFTER_DIMENSIONS] OK
+[DIMLAB][SUMMARY][RetrieveDimensions] E_ABORT_OR_FAIL
+[DIMLAB][SUMMARY][DVRef_HorizontalTotal] SUCCESS_CONNECTED_BY_SELECTSET
+[DIMLAB][SUMMARY][DVRef_VerticalTotal] WRONG_VALUE
+[DIMLAB][SUMMARY][DVRef_SmallGap] WRONG_VALUE
+[DIMLAB][SUMMARY][AuxLine2dFallback] SUCCESS_VISIBLE_ONLY
+[DIMLAB][SUMMARY][RecommendedNextStep] DVLine2d_Reference_validado_horizontalmente_seguir_investigando_vertical
+[DIMLAB][SUMMARY][DVRef_HorizontalTotal_Create] SUCCESS_CONNECTED_BY_SELECTSET
+[DIMLAB][SUMMARY][DVRef_HorizontalTotal_Visible] True
+[DIMLAB][SUMMARY][DVRef_HorizontalTotal_Range] -0.0076195676684379654,0.23268000038079917..0.2184000010728836,0.24780000002793967
+[DIMLAB][SUMMARY][DVRef_HorizontalTotal_TrackDistance] 0.015119999647140503
+[DIMLAB][SUMMARY][DVRef_VerticalTotal_Create] WRONG_VALUE
+[DIMLAB][SUMMARY][DVRef_VerticalTotal_Visible] True
+[DIMLAB][SUMMARY][DVRef_VerticalTotal_Range] -0.001706519569521385,0.17818000038079918..0.22340000046193598,0.24780000002793967
+[DIMLAB][SUMMARY][DVRef_VerticalTotal_TrackDistance] 0.015119999647140503
+[DIMLAB][SUMMARY][DVRef_SmallGap_Create] WRONG_VALUE
+[DIMLAB][SUMMARY][DVRef_SmallGap_Visible] True
+[DIMLAB][SUMMARY][DVRef_SmallGap_Range] -0.0076195673108100936,0.17729999926798046..0.12990000089406967,0.19480000002793968
+[DIMLAB][SUMMARY][SheetDimensionsFinalCount] 12
+[DIMLAB][SUMMARY][CountInterpretation] SheetDimensionsFinalCount=collection_only_not_visual_proof

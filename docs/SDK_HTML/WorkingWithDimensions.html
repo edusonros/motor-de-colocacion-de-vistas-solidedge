@@ -1,0 +1,645 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--DXMETADATA start type="MetaCharset" --><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><!--DXMETADATA end-->
+    <meta http-equiv="X-UA-Compatible" value="IE=9" />
+
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Literal" condition="helpversion:value=3" value="<meta name=""Microsoft.Help.SelfBranded"" content=""true"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="ItemTitle" format="<title>%%ItemTitle%%</title>" --><title>Working with Dimensions</title><!--DXMETADATA end-->
+    <!--DXMETADATA start type="ItemTitle" format="<meta name=""Title"" content=""%%ItemTitleNoQuotes%%""/>" --><meta name="Title" content="Working with Dimensions"/><!--DXMETADATA end-->    
+    
+
+    <!--DXMETADATA start type="PackageLink" packagename="jquery" filetype="script" firstlinkattributes="id=""mshs_support_script"""--><script src="template/packages/jquery/script/chm.mshc/jquery-1.7.2.min.js" type="text/javascript" id="mshs_support_script"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="script"--><script src="template/packages/jquery-ui/script/chm.mshc/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/jquery-ui/css/chm.mshc/jquery-ui-1.8.18.custom.css"></link><!--DXMETADATA end-->
+	
+    <!--DXMETADATA start type="Synopsis" StripHtmlTags="True" MaxLength="250" format="<meta name=""Description"" content=""%%Synopsis%%"" />"--><meta name="Description" content="
+
+Working with Dimensions 
+Placing Dimensions 
+Placing Dimensions 
+Dimensions via Variables 
+Accessing Dimensions through the Variable Table 
+ Working with Dimensions 
+
+Solid Edge allows you to place and edit dimensions on elements. In the P" /><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-topics" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/plugins-topics/css/chm.mshc/jquery-plugins.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-topics" filetype="css" firstlinkattributes=" data-mshv2-stylesheet=""/template/packages/core-topics/topics.mshv2.css"" data-mshv1-stylesheet=""/template/packages/core-topics/topics.mshv1.css"" data-responsive-mobile=""template/packages/core-topics/topics.mobile.css"" data-responsive-tablet=""template/packages/core-topics/topics.tablet.css"""--><link rel="stylesheet" type="text/css" href="template/packages/core-topics/css/topics.css"  data-mshv2-stylesheet="/template/packages/core-topics/topics.mshv2.css" data-mshv1-stylesheet="/template/packages/core-topics/topics.mshv1.css" data-responsive-mobile="template/packages/core-topics/topics.mobile.css" data-responsive-tablet="template/packages/core-topics/topics.tablet.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-topics" filetype="script"--><script src="template/packages/plugins-topics/script/chm.mshc/jquery-plugins.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-topics" filetype="script"--><script src="template/packages/core-topics/script/topics.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="TopicId" format="<meta name=""Microsoft.Help.Id"" content=""%%TopicId%%""/>" --><meta name="Microsoft.Help.Id" content="f3a68a0f-6ed4-4184-a2de-cb6a9e35ee72"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocParentId" format="<meta name=""Microsoft.Help.TocParent"" content=""%%TocParentId%%""/>" --><meta name="Microsoft.Help.TocParent" content="9e30554d-5e93-430b-9ab4-df4d05c797a5"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocOrdinal" format="<meta name=""Microsoft.Help.TocOrder"" content=""%%TocOrdinal%%""/>" --><meta name="Microsoft.Help.TocOrder" content="3"/><!--DXMETADATA end-->
+    <meta name="Microsoft.Help.F1" content=""/>
+    <meta name="Microsoft.Help.ContentType" content="Concepts" />
+    <!--DXMETADATA start type="MshvKeywords" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="MshvMetaTags" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.Locale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.TopicLocale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="Stylesheets" --><link rel="stylesheet" type="text/css" href="stylesheets/customstyles.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Scripts" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="DesignTime"--><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_PROPERTIES" --><!--DXMETADATA end -->
+
+    <!--DXMETADATA start type="CustomHeadContent" --><!--DXMETADATA end-->
+</head>
+
+<body>
+    <div id="i-before-header-content" class="i-before-header-content">
+        
+    </div>
+    <div id="i-header-content" class="i-header-content">
+        <!--DXMETADATA start type="LogoImage" --><img class="logoimage" src="images/sesdk_header.jpg" border="0"></img><!--DXMETADATA end-->
+            <div class="i-project-title"><!--DXMETADATA start type="ProjectTitle" -->Solid Edge 2019 SDK<!--DXMETADATA end--></div>
+        <div class="i-page-title"><div class="i-page-title-text"><!--DXMETADATA start type="ItemTitle" -->Working with Dimensions<!--DXMETADATA end--></div></div>
+    </div>
+    <div id="i-after-header-content" class="i-after-header-content">
+        <!-- Spacing --> <span class="i-toggle-all-sections i-function-link">
+                <label class="i-collapse-all"><!--DXMETADATA start type="Phrase" name="COLLAPSE_ALL" -->Collapse All<!--DXMETADATA end--></label>
+                <label class="i-expand-all" style="display: none;"><!--DXMETADATA start type="Phrase" name="EXPAND_ALL" -->Expand All<!--DXMETADATA end--></label>
+            </span><!--DXMETADATA start type="Literal" condition="communityenabled" value="%%scrap:name=_COMMUNITY_DROPDOWN%%" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="IsWebOutputRootPageLinkEnabled" format="<a href='#' class="i-page-link" class="i-view-in-frame-link" title='$$VIEW_WITH_NAVIGATION_TOOLS_TIP$$' style='display: none' data-root-page='%%WebOutputRootPage%%%%OutputFileExtension%%' target='_top'>$$VIEW_WITH_NAVIGATION_TOOLS_TEXT$$</a>" --><a href='#' class="i-page-link" class="i-view-in-frame-link" title='Open this Topic in a view that includes Navigation tools (Table of Contents, Index, Search)' style='display: none' data-root-page='webframe.html' target='_top'>View with Navigation Tools</a><!--DXMETADATA end-->
+    </div>
+    <!--DXMETADATA start type="Breadcrumbs" scrap="_BREADCRUMBS" --><div class="i-breadcrumbs-container"><table><tr><td>
+<a href="ProgrammersGuide.html">Programmer's Guide</a>
+ > <a href="SolidEdgeTOC.html">Solid Edge</a>
+ > <a href="EnvironmentsToc.html">Environments</a>
+ > <a href="PartAndSheetMetalEnvironmentToc.html">Part and Sheet Metal</a>
+ > Working with Dimensions</td></tr></table></div><!--DXMETADATA end -->
+    
+    
+    <div id="i-body-content" class="i-body-content">
+        <!--DXMETADATA start type="TopicSection" name="BodyText"--><DIV class=i-in-this-topic-container>
+<UL class=i-in-this-topic-list>
+<LI class=i-in-this-topic-item><A class=i-in-this-topic-link href="#i-in-this-topic-ef3f38cb-427e-4a6b-8aa4-dfb9057893c5">Working with Dimensions </A></LI>
+<LI class=i-in-this-topic-item><A class=i-in-this-topic-link href="#i-in-this-topic-15194d1f-9e7f-4243-a877-9daa75949ad3">Placing Dimensions </A></LI>
+<LI class=i-in-this-topic-item><A class=i-in-this-topic-link href="#i-in-this-topic-1cc42a52-a2e2-41db-a023-4e46271b3a30">Placing Dimensions </A></LI>
+<LI class=i-in-this-topic-item><A class=i-in-this-topic-link href="#i-in-this-topic-f89d5e1f-1d69-4c74-9d4c-b5e109f023f8">Dimensions via Variables </A></LI>
+<LI class=i-in-this-topic-item><A class=i-in-this-topic-link href="#i-in-this-topic-f86a0e49-28f7-4585-b06a-1e82a8bb1936">Accessing Dimensions through the Variable Table </A></LI></UL></DIV>
+<DIV id=i-7e188df0-11b6-4ad3-95eb-5996a7f98df6-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>Working with Dimensions</SPAN> <A name=i-in-this-topic-ef3f38cb-427e-4a6b-8aa4-dfb9057893c5></A></DIV>
+<DIV id=i-7e188df0-11b6-4ad3-95eb-5996a7f98df6-section-content class=i-section-content>
+<P>Solid Edge allows you to place and edit dimensions on elements. In the Profile environment, dimension objects control the size and orientation of geometry.</P>
+<P>Dimensions can be linear, radial, or angular. Dimensions supply information about the measurements of elements, such as the angle of a line or the distance between two points. A dimension is related to the element on which it is placed. In the Profile environment, the dimensions control the geometry; if the dimension changes, the geometry updates.</P>
+<P>In a Part document, the Dimensions collection is accessed through the Profile object. The Dimensions collection provides the methods for placing dimensions and for iterating through all the dimensions on the entire sheet or profile.</P>
+<P><STRONG>Linear Dimensions<BR></STRONG>A linear dimension measures the distance between two or more elements, the length of a line, or an arc's length. For a complete description of the properties that define how a linear dimension is placed, see the Programming with Solid Edge on-line Help.</P>
+<P><STRONG>Radial Dimensions</STRONG><BR>Radial dimensions measure the radius or diameter at a point on the element. These dimensions are similar except that they show the radius or diameter value depending on the type. With the ProjectionArc and TrackAngle properties, you can define the measurement point on the element.</P>
+<P><STRONG>Angular Dimensions</STRONG><BR>Angular dimensions measure the angle between two lines or three points. An angular dimension defines two intersecting vectors and four minor sectors. These sectors are distinguished according to whether the angle is measured in the sector where the vector direction goes outward from the intersection point or comes inward, and whether the angle is measured in the clockwise or counterclockwise direction.</P>
+<P>The angles are always measured in the counterclockwise direction with both vector directions going outward from the intersection point (sector one condition). To measure in any other angle, certain properties are set so that the dimension object modifies the vector direction and computes the angle.</P></DIV>
+<DIV id=i-1b3b6afb-c2c0-463c-aac3-16062f037acb-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>Placing Dimensions</SPAN> <A name=i-in-this-topic-15194d1f-9e7f-4243-a877-9daa75949ad3></A></DIV>
+<DIV id=i-1b3b6afb-c2c0-463c-aac3-16062f037acb-section-content class=i-section-content>
+<P>In the Profile environment, driving dimensions control the elements to which they refer. When you edit a driving dimension, the geometry of the element that is related to that dimension is modified.</P>
+<P>You can place dimensions only on existing elements. A set of Add methods is provided on the Dimensions collection, one for each type of dimension. The element to which the dimension is attached determines the type of dimension (driving or driven) that will be placed. The Add methods on the Dimensions collection object take minimal input and place the dimensions with specific default values.</P>
+<P>When you place dimensions between two elements interactively, the dimensions are measured at a specific location on an element. For example, when you place a dimension between the end points of two lines, you select one end of each line. When you place dimensions through automation, you specify a point on the element and a key point flag to define the dimension.</P>
+<P>In the following program, four lines are drawn and connected with key point relationships. The lengths of two of the lines and the distance between two lines are dimensioned. The dimension is set to be a driving dimension so it will control the length and position of the geometry. The sample also shows how to modify a dimension style by changing the units of measurement of one of the dimensions to meters.</P>
+<DIV class="i-box i-box-caution">See <A href="OleMessageFilterUsage.html" data-auto-update-caption="true">Handling 'Application is Busy' and 'Call was Rejected By Callee' errors</A> for information regarding the use of <A href="OleMessageFilterVB.html">OleMessageFilter</A>. </DIV>
+<DIV id=i-da9b2704-c4c0-48cd-bfc0-3c8d1bc094bb-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>Placing Dimensions</SPAN> <A name=i-in-this-topic-1cc42a52-a2e2-41db-a023-4e46271b3a30></A></DIV>
+<DIV id=i-da9b2704-c4c0-48cd-bfc0-3c8d1bc094bb-section-content class=i-section-content>
+<DIV class="i-tab-container i-tab-container-widget">
+<UL role=tablist>
+<LI class=i-filtered-content-VB><A href="#i-tab-content-VB">Visual Basic</A> </LI>
+<LI class=i-filtered-content-CS><A href="#i-tab-content-CS">C#</A> </LI></UL>
+<DIV id=i-tab-content-VB class="i-code i-filtered-content-VB"><PRE><SPAN style="COLOR: #0000ff">Imports</SPAN> SolidEdgeConstants
+<SPAN style="COLOR: #0000ff">Imports</SPAN> System.Runtime.InteropServices
+
+<SPAN style="COLOR: #0000ff">Module</SPAN> Program
+    &lt;STAThread()&gt; _
+    <SPAN style="COLOR: #0000ff">Sub</SPAN> Main()
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objApplication <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeFramework.Application = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objDocuments <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeFramework.Documents = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objPart <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.PartDocument = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objProfileSets <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.ProfileSets = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objProfileSet <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.ProfileSet = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objProfiles <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.Profiles = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objProfile <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.Profile = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objRefPlanes <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.RefPlanes = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objRefPlane <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.RefPlane = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objLines2d <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeFrameworkSupport.Lines2d = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> aLine2d(0 <SPAN style="COLOR: #0000ff">To</SPAN> 3) <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeFrameworkSupport.Line2d
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objRelations2d <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeFrameworkSupport.Relations2d = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objDimensions <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeFrameworkSupport.Dimensions = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objDimension <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeFrameworkSupport.Dimension = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objDimStyle <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeFrameworkSupport.DimStyle = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> i <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Integer</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Try</SPAN>
+            OleMessageFilter.Register()
+
+            <SPAN style="COLOR: #008000">' Connect to a running instance of Solid Edge
+</SPAN>            objApplication = Marshal.GetActiveObject(<SPAN style="COLOR: #800000">"SolidEdge.Application"</SPAN>)
+
+            <SPAN style="COLOR: #008000">' Get a reference to the documents collection
+</SPAN>            objDocuments = objApplication.Documents
+
+            <SPAN style="COLOR: #008000">' Add a Part document      
+</SPAN>            objPart = objDocuments.Add(<SPAN style="COLOR: #800000">"SolidEdge.PartDocument"</SPAN>)
+
+            <SPAN style="COLOR: #008000">' Get a reference to the ref planes collection
+</SPAN>            objRefPlanes = objPart.RefPlanes
+
+            <SPAN style="COLOR: #008000">' Get a reference to the first reference plane
+</SPAN>            objRefPlane = objRefPlanes.Item(1)
+
+            <SPAN style="COLOR: #008000">' Get a reference to the profile sets collection
+</SPAN>            objProfileSets = objPart.ProfileSets
+
+            <SPAN style="COLOR: #008000">' Add a new profile set
+</SPAN>            objProfileSet = objProfileSets.Add()
+
+            <SPAN style="COLOR: #008000">' Get a reference to the profiles collection
+</SPAN>            objProfiles = objProfileSet.Profiles
+
+            <SPAN style="COLOR: #008000">' Add a new profile on the selected reference plane
+</SPAN>            objProfile = objProfiles.Add(objRefPlane)
+
+            <SPAN style="COLOR: #008000">' Get a reference to the lines 2d collection
+</SPAN>            objLines2d = objProfile.Lines2d
+
+            <SPAN style="COLOR: #008000">' Get a reference to the relations 2d collection
+</SPAN>            objRelations2d = objProfile.Relations2d
+
+            <SPAN style="COLOR: #008000">' Get a reference to the dimensions collection
+</SPAN>            objDimensions = objProfile.Dimensions
+
+            <SPAN style="COLOR: #008000">' Draw the geometry.
+</SPAN>            aLine2d(0) = objLines2d.AddBy2Points(0, 0, 0.1, 0)
+            aLine2d(1) = objLines2d.AddBy2Points(0.1, 0, 0.1, 0.1)
+            aLine2d(2) = objLines2d.AddBy2Points(0.1, 0.1, 0, 0.05)
+            aLine2d(3) = objLines2d.AddBy2Points(0, 0.05, 0, 0)
+
+            <SPAN style="COLOR: #008000">' Add endpoint relationships between the lines
+</SPAN>            objRelations2d.AddKeypoint( _
+              aLine2d(0), _
+              KeypointIndexConstants.igLineEnd, _
+              aLine2d(1), _
+              KeypointIndexConstants.igLineStart)
+
+            objRelations2d.AddKeypoint( _
+              aLine2d(1), _
+              KeypointIndexConstants.igLineEnd, _
+              aLine2d(2), _
+              KeypointIndexConstants.igLineStart)
+
+            objRelations2d.AddKeypoint( _
+              aLine2d(2), _
+              KeypointIndexConstants.igLineEnd, _
+              aLine2d(3), _
+              KeypointIndexConstants.igLineStart)
+
+            objRelations2d.AddKeypoint( _
+                          aLine2d(3), _
+              KeypointIndexConstants.igLineEnd, _
+              aLine2d(0), _
+              KeypointIndexConstants.igLineStart)
+
+            <SPAN style="COLOR: #008000">' Add dimensions, and change the dimension units to meters
+</SPAN>            objDimension = objDimensions.AddLength(aLine2d(1))
+
+            objDimension.Constraint = <SPAN style="COLOR: #0000ff">True</SPAN>
+            objDimStyle = objDimension.Style
+            objDimStyle.PrimaryUnits = _
+              DimLinearUnitConstants.igDimStyleLinearMeters
+
+            objDimension = objDimensions.AddLength(aLine2d(3))
+
+            objDimension.Constraint = <SPAN style="COLOR: #0000ff">True</SPAN>
+            objDimStyle = objDimension.Style
+            objDimStyle.PrimaryUnits = _
+              DimLinearUnitConstants.igDimStyleLinearMeters
+
+            objDimension = objDimensions.AddDistanceBetweenObjects( _
+              aLine2d(1), 0.1, 0.1, 0, <SPAN style="COLOR: #0000ff">False</SPAN>, _
+              aLine2d(2), 0, 0.05, 0, <SPAN style="COLOR: #0000ff">False</SPAN>)
+
+            objDimension.Constraint = <SPAN style="COLOR: #0000ff">True</SPAN>
+            objDimStyle = objDimension.Style
+            objDimStyle.PrimaryUnits = _
+              DimLinearUnitConstants.igDimStyleLinearMeters
+
+        <SPAN style="COLOR: #0000ff">Catch</SPAN> ex <SPAN style="COLOR: #0000ff">As</SPAN> Exception
+            Console.WriteLine(ex.Message)
+        <SPAN style="COLOR: #0000ff">Finally</SPAN>
+            OleMessageFilter.Revoke()
+        <SPAN style="COLOR: #0000ff">End</SPAN> <SPAN style="COLOR: #0000ff">Try</SPAN>
+    <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+<SPAN style="COLOR: #0000ff">End Module</SPAN></PRE></DIV>
+<DIV id=i-tab-content-CS class="i-code i-filtered-content-CS"><PRE><SPAN style="COLOR: #0000ff">using</SPAN> SolidEdgeConstants;
+<SPAN style="COLOR: #0000ff">using</SPAN> System;
+<SPAN style="COLOR: #0000ff">using</SPAN> System.Reflection;
+<SPAN style="COLOR: #0000ff">using</SPAN> System.Runtime.InteropServices;
+
+<SPAN style="COLOR: #0000ff">namespace</SPAN> SolidEdge.SDK
+{
+    <SPAN style="COLOR: #0000ff">class</SPAN> Program
+    {
+        [STAThread]
+        <SPAN style="COLOR: #0000ff">static</SPAN> <SPAN style="COLOR: #0000ff">void</SPAN> Main(<SPAN style="COLOR: #0000ff">string</SPAN>[] args)
+        {
+            SolidEdgeFramework.Application application = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeFramework.Documents documents = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgePart.PartDocument part = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgePart.ProfileSets profileSets = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgePart.ProfileSet profileSet = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgePart.Profiles profiles = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgePart.Profile profile = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgePart.RefPlanes refPlanes = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgePart.RefPlane refPlane = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeFrameworkSupport.Lines2d lines2d = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeFrameworkSupport.Line2d[] aLine2d =
+              <SPAN style="COLOR: #0000ff">new</SPAN> SolidEdgeFrameworkSupport.Line2d[4];
+            SolidEdgeFrameworkSupport.Relations2d relations2d = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeFrameworkSupport.Dimensions dimensions = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeFrameworkSupport.Dimension dimension = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeFrameworkSupport.DimStyle dimStyle = <SPAN style="COLOR: #0000ff">null</SPAN>;
+
+            <SPAN style="COLOR: #0000ff">try</SPAN>
+            {
+                OleMessageFilter.Register();
+
+                <SPAN style="COLOR: #008000">// Connect to a running instance of Solid Edge
+</SPAN>                application = (SolidEdgeFramework.Application)
+                  Marshal.GetActiveObject(<SPAN style="COLOR: #800000">"SolidEdge.Application"</SPAN>);
+
+                <SPAN style="COLOR: #008000">// Get a reference to the documents collection
+</SPAN>                documents = application.Documents;
+
+                <SPAN style="COLOR: #008000">// Add a Part document
+</SPAN>                part = (SolidEdgePart.PartDocument)
+                  documents.Add(<SPAN style="COLOR: #800000">"SolidEdge.PartDocument"</SPAN>, Missing.Value);
+
+                <SPAN style="COLOR: #008000">// Get a reference to the ref planes collection
+</SPAN>                refPlanes = part.RefPlanes;
+
+                <SPAN style="COLOR: #008000">// Get a reference to the first reference plane
+</SPAN>                refPlane = refPlanes.Item(1);
+
+                <SPAN style="COLOR: #008000">// Get a reference to the profile sets collection
+</SPAN>                profileSets = part.ProfileSets;
+
+                <SPAN style="COLOR: #008000">// Add a new profile set
+</SPAN>                profileSet = profileSets.Add();
+
+                <SPAN style="COLOR: #008000">// Get a reference to the profiles collection
+</SPAN>                profiles = profileSet.Profiles;
+
+                <SPAN style="COLOR: #008000">// Add a new profile on the selected reference plane
+</SPAN>                profile = profiles.Add(refPlane);
+
+                <SPAN style="COLOR: #008000">// Get a reference to the lines 2d collection
+</SPAN>                lines2d = profile.Lines2d;
+
+                <SPAN style="COLOR: #008000">// Get a reference to the relations 2d collection
+</SPAN>                relations2d = (SolidEdgeFrameworkSupport.Relations2d)
+                  profile.Relations2d;
+
+                <SPAN style="COLOR: #008000">// Get a reference to the dimensions collection
+</SPAN>                dimensions = (SolidEdgeFrameworkSupport.Dimensions)
+                  profile.Dimensions;
+
+                <SPAN style="COLOR: #008000">// Draw the geometry.
+</SPAN>                aLine2d[0] = lines2d.AddBy2Points(0, 0, 0.1, 0);
+                aLine2d[1] = lines2d.AddBy2Points(0.1, 0, 0.1, 0.1);
+                aLine2d[2] = lines2d.AddBy2Points(0.1, 0.1, 0, 0.05);
+                aLine2d[3] = lines2d.AddBy2Points(0, 0.05, 0, 0);
+
+                <SPAN style="COLOR: #008000">// Add endpoint relationships between the lines
+</SPAN>                relations2d.AddKeypoint(
+                  aLine2d[0],
+                  (<SPAN style="COLOR: #0000ff">int</SPAN>)KeypointIndexConstants.igLineEnd,
+                  aLine2d[1],
+                  (<SPAN style="COLOR: #0000ff">int</SPAN>)KeypointIndexConstants.igLineStart,
+                  Missing.Value);
+
+                relations2d.AddKeypoint(
+                  aLine2d[1],
+                  (<SPAN style="COLOR: #0000ff">int</SPAN>)KeypointIndexConstants.igLineEnd,
+                  aLine2d[2],
+                  (<SPAN style="COLOR: #0000ff">int</SPAN>)KeypointIndexConstants.igLineStart,
+                  Missing.Value);
+
+                relations2d.AddKeypoint(
+                  aLine2d[2],
+                  (<SPAN style="COLOR: #0000ff">int</SPAN>)KeypointIndexConstants.igLineEnd,
+                  aLine2d[3],
+                  (<SPAN style="COLOR: #0000ff">int</SPAN>)KeypointIndexConstants.igLineStart,
+                  Missing.Value);
+
+                relations2d.AddKeypoint(
+                  aLine2d[3],
+                  (<SPAN style="COLOR: #0000ff">int</SPAN>)KeypointIndexConstants.igLineEnd,
+                  aLine2d[0],
+                  (<SPAN style="COLOR: #0000ff">int</SPAN>)KeypointIndexConstants.igLineStart,
+                  Missing.Value);
+
+                <SPAN style="COLOR: #008000">// Add dimensions, and change the dimension units to meters
+</SPAN>                dimension = dimensions.AddLength(aLine2d[1]);
+                dimension.Constraint = <SPAN style="COLOR: #0000ff">true</SPAN>;
+                dimStyle = dimension.Style;
+                dimStyle.PrimaryUnits = SolidEdgeFrameworkSupport.DimLinearUnitConstants.igDimStyleLinearMeters;
+
+                dimension = dimensions.AddLength(aLine2d[3]);
+                dimension.Constraint = <SPAN style="COLOR: #0000ff">true</SPAN>;
+                dimStyle = dimension.Style;
+                dimStyle.PrimaryUnits = SolidEdgeFrameworkSupport.DimLinearUnitConstants.igDimStyleLinearMeters;
+
+                dimension = dimensions.AddDistanceBetweenObjects(
+                  aLine2d[1], 0.1, 0.1, 0, <SPAN style="COLOR: #0000ff">false</SPAN>, aLine2d[2], 0, 0.05, 0, <SPAN style="COLOR: #0000ff">false</SPAN>);
+                dimension.Constraint = <SPAN style="COLOR: #0000ff">true</SPAN>;
+                dimStyle = dimension.Style;
+                dimStyle.PrimaryUnits = SolidEdgeFrameworkSupport.DimLinearUnitConstants.igDimStyleLinearMeters;
+
+            }
+            <SPAN style="COLOR: #0000ff">catch</SPAN> (System.Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            <SPAN style="COLOR: #0000ff">finally</SPAN>
+            {
+                OleMessageFilter.Revoke();
+            }
+        }
+    }
+}</PRE></DIV></DIV></DIV></DIV>
+<DIV id=i-ec1824c2-bad3-4750-bdb6-c8505a154e34-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>Dimensions via Variables</SPAN> <A name=i-in-this-topic-f89d5e1f-1d69-4c74-9d4c-b5e109f023f8></A></DIV>
+<DIV id=i-ec1824c2-bad3-4750-bdb6-c8505a154e34-section-content class=i-section-content>
+<P>When working interactively with the Variable Table, both variables and dimensions are displayed in the table. This enables you to create formulas using the values of dimensions and also have formulas that drive the values of dimensions. In this workflow, there is no apparent difference between variables and dimensions. Internally, however, variables and dimensions are two distinct types of objects that have their own unique collections, properties, and methods.</P>
+<P>The Variables collection allows you to work with dimensions in the context of variables through several methods on the collection. These methods include Edit, GetFormula, GetName, PutName, Query, and Translate. The following program uses dimensions through the Variables collection. The following programs assume that Solid Edge is running and in the Profile environment.</P>
+<DIV class="i-box i-box-caution">See <A href="OleMessageFilterUsage.html" data-auto-update-caption="true">Handling 'Application is Busy' and 'Call was Rejected By Callee' errors</A> for information regarding the use of <A href="OleMessageFilterVB.html">OleMessageFilter</A>. </DIV>
+<DIV id=i-27858dab-b31b-4402-bff2-76c046c3e3cc-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>Accessing Dimensions through the Variable Table</SPAN> <A name=i-in-this-topic-f86a0e49-28f7-4585-b06a-1e82a8bb1936></A></DIV>
+<DIV id=i-27858dab-b31b-4402-bff2-76c046c3e3cc-section-content class=i-section-content>
+<DIV class="i-tab-container i-tab-container-widget">
+<UL role=tablist>
+<LI class=i-filtered-content-VB><A href="#i-tab-content-VB">Visual Basic</A> </LI>
+<LI class=i-filtered-content-CS><A href="#i-tab-content-CS">C#</A> </LI></UL>
+<DIV id=i-tab-content-VB class="i-code i-filtered-content-VB"><PRE><SPAN style="COLOR: #0000ff">Imports</SPAN> System.Runtime.InteropServices
+
+<SPAN style="COLOR: #0000ff">Module</SPAN> Program
+    &lt;STAThread()&gt; _
+    <SPAN style="COLOR: #0000ff">Sub</SPAN> Main()
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objApplication <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeFramework.Application = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objPart <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.PartDocument = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objProfileSets <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.ProfileSets = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objProfileSet <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.ProfileSet = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objProfiles <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.Profiles = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objProfile <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgePart.Profile = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objVariables <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeFramework.Variables = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objVariable <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Object</SPAN> = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objLines2d <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeFrameworkSupport.Lines2d = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objLine2d <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeFrameworkSupport.Line2d = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objDimensions <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeFrameworkSupport.Dimensions = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objDimension1 <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeFrameworkSupport.Dimension = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objDimension2 <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeFrameworkSupport.Dimension = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> objVariableList <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeFramework.VariableList = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> sName <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">String</SPAN>
+        <SPAN style="COLOR: #0000ff">Dim</SPAN> sFormula <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">String</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Try</SPAN>
+            OleMessageFilter.Register()
+
+            <SPAN style="COLOR: #008000">' Connect to a running instance of Solid Edge
+</SPAN>            objApplication = Marshal.GetActiveObject(<SPAN style="COLOR: #800000">"SolidEdge.Application"</SPAN>)
+
+            <SPAN style="COLOR: #008000">' Get a reference to the active document
+</SPAN>            objPart = objApplication.ActiveDocument
+
+            <SPAN style="COLOR: #008000">' Get a reference to the active document
+</SPAN>            objProfileSets = objPart.ProfileSets
+
+            <SPAN style="COLOR: #008000">' Get a reference to the profile set
+</SPAN>            objProfileSet = objProfileSets.Item(objProfileSets.Count)
+
+            <SPAN style="COLOR: #008000">' Get a reference to the profiles collection
+</SPAN>            objProfiles = objProfileSet.Profiles
+
+            <SPAN style="COLOR: #008000">' Get a reference to the profile
+</SPAN>            objProfile = objProfiles.Item(1)
+
+            <SPAN style="COLOR: #008000">' Get a reference to the variables collection
+</SPAN>            objVariables = objPart.Variables
+
+            <SPAN style="COLOR: #008000">' Get a reference to the lines2d collection
+</SPAN>            objLines2d = objProfile.Lines2d
+
+            <SPAN style="COLOR: #008000">' Get a reference to the dimensions collection
+</SPAN>            objDimensions = objProfile.Dimensions
+
+            <SPAN style="COLOR: #008000">' Create a new line
+</SPAN>            objLine2d = objLines2d.AddBy2Points(0, 0, 0.1, 0.1)
+
+            <SPAN style="COLOR: #008000">' Place a dimension on the line to control its length
+</SPAN>            objDimension1 = objDimensions.AddLength(objLine2d)
+
+            <SPAN style="COLOR: #008000">' Make the dimension a driving dimension
+</SPAN>            objDimension1.Constraint = <SPAN style="COLOR: #0000ff">True</SPAN>
+
+            <SPAN style="COLOR: #008000">' Create a second line
+</SPAN>            objLine2d = objLines2d.AddBy2Points(0, 0.1, 0.1, 0.2)
+
+            <SPAN style="COLOR: #008000">' Place a dimension on the line to control its length
+</SPAN>            objDimension2 = objDimensions.AddLength(objLine2d)
+
+            <SPAN style="COLOR: #008000">' Make the dimension a driving dimension
+</SPAN>            objDimension2.Constraint = <SPAN style="COLOR: #0000ff">True</SPAN>
+
+            <SPAN style="COLOR: #008000">' Assign a name to the dimension placed on the first line
+</SPAN>            objVariables.PutName(objDimension1, <SPAN style="COLOR: #800000">"Dimension1"</SPAN>)
+
+            <SPAN style="COLOR: #008000">' Retrieve the system name of the second dimension, and display
+</SPAN>            <SPAN style="COLOR: #008000">' it in the debug window
+</SPAN>
+
+            sName = objVariables.GetName(objDimension2)
+            Console.WriteLine(<SPAN style="COLOR: #0000ff">String</SPAN>.Format(<SPAN style="COLOR: #800000">"Dimension = {0}"</SPAN>, sName))
+
+            <SPAN style="COLOR: #008000">' Edit the formula of the second dimension to be half
+</SPAN>            <SPAN style="COLOR: #008000">' the value of the first dimension
+</SPAN>            objVariables.Edit(sName, <SPAN style="COLOR: #800000">"Dimension1/2.0"</SPAN>)
+
+            <SPAN style="COLOR: #008000">' Retrieve the formula from the dimension, and print it to the
+</SPAN>            <SPAN style="COLOR: #008000">' debug window to verify
+</SPAN>            sFormula = objVariables.GetFormula(sName)
+            Console.WriteLine(<SPAN style="COLOR: #0000ff">String</SPAN>.Format(<SPAN style="COLOR: #800000">"Formula = {0}"</SPAN>, sFormula))
+
+            <SPAN style="COLOR: #008000">' This demonstrates the ability to reference a dimension object
+</SPAN>            <SPAN style="COLOR: #008000">' by its name
+</SPAN>            objDimension1 = objVariables.Translate(<SPAN style="COLOR: #800000">"Dimension1"</SPAN>)
+
+            <SPAN style="COLOR: #008000">' To verify a dimension object was returned, change its
+</SPAN>            <SPAN style="COLOR: #008000">' TrackDistance property to cause the dimension to change
+</SPAN>            objDimension1.TrackDistance = objDimension1.TrackDistance * 2
+
+            <SPAN style="COLOR: #008000">' Use the Query method to list all all user-defined
+</SPAN>            <SPAN style="COLOR: #008000">' variables and user-named Dimension objects and
+</SPAN>            <SPAN style="COLOR: #008000">' display in the debug window
+</SPAN>            objVariableList = objVariables.Query(<SPAN style="COLOR: #800000">"*"</SPAN>)
+            <SPAN style="COLOR: #0000ff">For</SPAN> <SPAN style="COLOR: #0000ff">Each</SPAN> objVariable <SPAN style="COLOR: #0000ff">In</SPAN> objVariableList
+                Console.WriteLine(objVariables.GetName(objVariable))
+            <SPAN style="COLOR: #0000ff">Next</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Catch</SPAN> ex <SPAN style="COLOR: #0000ff">As</SPAN> Exception
+            Console.WriteLine(ex.Message)
+        <SPAN style="COLOR: #0000ff">Finally</SPAN>
+            OleMessageFilter.Revoke()
+        <SPAN style="COLOR: #0000ff">End</SPAN> <SPAN style="COLOR: #0000ff">Try</SPAN>
+    <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+<SPAN style="COLOR: #0000ff">End Module</SPAN></PRE></DIV>
+<DIV id=i-tab-content-CS class="i-code i-filtered-content-CS"><PRE><SPAN style="COLOR: #0000ff">using</SPAN> SolidEdgeFramework;
+<SPAN style="COLOR: #0000ff">using</SPAN> System;
+<SPAN style="COLOR: #0000ff">using</SPAN> System.Runtime.InteropServices;
+
+<SPAN style="COLOR: #0000ff">namespace</SPAN> SolidEdge.SDK
+{
+    <SPAN style="COLOR: #0000ff">class</SPAN> Program
+    {
+        [STAThread]
+        <SPAN style="COLOR: #0000ff">static</SPAN> <SPAN style="COLOR: #0000ff">void</SPAN> Main(<SPAN style="COLOR: #0000ff">string</SPAN>[] args)
+        {
+            SolidEdgeFramework.Application application = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgePart.PartDocument part = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgePart.ProfileSets profileSets = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgePart.ProfileSet profileSet = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgePart.Profiles profiles = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgePart.Profile profile = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeFramework.Variables variables = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            Object oVariable = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeFrameworkSupport.Lines2d lines2d = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeFrameworkSupport.Line2d line2d = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeFrameworkSupport.Dimensions dimensions = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeFrameworkSupport.Dimension dimension1 = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeFrameworkSupport.Dimension dimension2 = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            SolidEdgeFramework.VariableList variableList = <SPAN style="COLOR: #0000ff">null</SPAN>;
+            String sName;
+            String sFormula;
+
+            <SPAN style="COLOR: #0000ff">try</SPAN>
+            {
+                OleMessageFilter.Register();
+
+                <SPAN style="COLOR: #008000">// Connect to a running instance of Solid Edge
+</SPAN>                application = (SolidEdgeFramework.Application)
+                  Marshal.GetActiveObject(<SPAN style="COLOR: #800000">"SolidEdge.Application"</SPAN>);
+
+                <SPAN style="COLOR: #008000">// Get a reference to the active document
+</SPAN>                part = (SolidEdgePart.PartDocument)
+                  application.ActiveDocument;
+
+
+                <SPAN style="COLOR: #008000">// Get a reference to the profile sets collection
+</SPAN>                profileSets = part.ProfileSets;
+
+                <SPAN style="COLOR: #008000">// Get a reference to the profile set
+</SPAN>                profileSet = profileSets.Item(profileSets.Count);
+
+                <SPAN style="COLOR: #008000">// Get a reference to the profiles collection
+</SPAN>                profiles = profileSet.Profiles;
+
+                <SPAN style="COLOR: #008000">// Get a reference to the profile
+</SPAN>                profile = profiles.Item(1);
+
+                <SPAN style="COLOR: #008000">// Get a reference to the variables collection
+</SPAN>                variables = (SolidEdgeFramework.Variables)part.Variables;
+
+                <SPAN style="COLOR: #008000">// Get a reference to the lines2d collection
+</SPAN>                lines2d = profile.Lines2d;
+
+                <SPAN style="COLOR: #008000">// Get a reference to the dimensions collection
+</SPAN>                dimensions = (SolidEdgeFrameworkSupport.Dimensions)
+                  profile.Dimensions;
+
+                <SPAN style="COLOR: #008000">// Create a line
+</SPAN>                line2d = lines2d.AddBy2Points(0, 0, 0.1, 0.1);
+
+                <SPAN style="COLOR: #008000">// Place a dimension on the line to control its length
+</SPAN>                dimension1 = dimensions.AddLength(line2d);
+
+                <SPAN style="COLOR: #008000">// Make the dimension a driving dimension
+</SPAN>                dimension1.Constraint = <SPAN style="COLOR: #0000ff">true</SPAN>;
+
+                <SPAN style="COLOR: #008000">// Create a second line
+</SPAN>                line2d = lines2d.AddBy2Points(0, 0.1, 0.1, 0.2);
+
+                <SPAN style="COLOR: #008000">// Place a dimension on the line to control its length
+</SPAN>                dimension2 = dimensions.AddLength(line2d);
+
+                <SPAN style="COLOR: #008000">// Make the dimension a driving dimension
+</SPAN>                dimension2.Constraint = <SPAN style="COLOR: #0000ff">true</SPAN>;
+
+                <SPAN style="COLOR: #008000">// Assign a name to the dimension placed on the first line
+</SPAN>                variables.PutName(dimension1, <SPAN style="COLOR: #800000">"Dimension1"</SPAN>);
+
+                <SPAN style="COLOR: #008000">// Retrieve the system name of the second dimension, and display
+                // it in the debug window
+</SPAN>                sName = variables.GetName(dimension2);
+                Console.WriteLine(String.Format(<SPAN style="COLOR: #800000">"Dimension = {0}"</SPAN>, sName));
+
+                <SPAN style="COLOR: #008000">// Edit the formula of the second dimension to be half
+                // the value of the first dimension
+</SPAN>                variables.Edit(sName, <SPAN style="COLOR: #800000">"Dimension1/2.0"</SPAN>);
+
+                <SPAN style="COLOR: #008000">// Retrieve the formula from the dimension, and print it to the
+                // debug window to verify
+</SPAN>                sFormula = variables.GetFormula(sName);
+                Console.WriteLine(String.Format(<SPAN style="COLOR: #800000">"Formula = {0}"</SPAN>, sFormula));
+
+                <SPAN style="COLOR: #008000">// This demonstrates the ability to reference a dimension object
+                // by its name
+</SPAN>                dimension1 = (SolidEdgeFrameworkSupport.Dimension)
+                  variables.Translate(<SPAN style="COLOR: #800000">"Dimension1"</SPAN>);
+
+                <SPAN style="COLOR: #008000">// To verify a dimension object was returned, change its
+                // TrackDistance property to cause the dimension to change
+</SPAN>                dimension1.TrackDistance = dimension1.TrackDistance * 2;
+
+                <SPAN style="COLOR: #008000">// Use the Query method to list all all user-defined
+                // variables and user-named Dimension objects and
+                // display in the debug window
+</SPAN>                variableList = (SolidEdgeFramework.VariableList)
+                  variables.Query(<SPAN style="COLOR: #800000">"*"</SPAN>, <SPAN style="COLOR: #0000ff">null</SPAN>, <SPAN style="COLOR: #0000ff">null</SPAN>, <SPAN style="COLOR: #0000ff">false</SPAN>);
+
+                <SPAN style="COLOR: #0000ff">for</SPAN> (<SPAN style="COLOR: #0000ff">int</SPAN> i = 1; i &lt;= variableList.Count; i++)
+                {
+                    oVariable = variableList.Item(i);
+                    Console.WriteLine(variables.GetName(oVariable));
+                }
+            }
+            <SPAN style="COLOR: #0000ff">catch</SPAN> (System.Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            <SPAN style="COLOR: #0000ff">finally</SPAN>
+            {
+                OleMessageFilter.Revoke();
+            }
+        }
+    }
+}</PRE></DIV></DIV></DIV></DIV><!--DXMETADATA end-->
+            <a name="seealsobookmark"></a>
+            <!--DXMETADATA start type="FilteredItemList" scrap="CATEGORISED_LINKS" namespace="linkcategory" source="Item" filter="" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=seealso,caption=""%%phrase:name=SeeAlso%%%%designlist:tagidentifier=seealso,itemtype=See Also%%""%%%%filtereditemlist%%</div>"--><!--DXMETADATA end-->
+        
+    </div>
+    <div id="i-footer-content" class="i-footer-content">
+        <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_FOOTER" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="CopyrightNotice" format="<p>&nbsp;</p><p>&nbsp;</p><hr style=""height: 1px"" /><p>%%variable%%</p>" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="FeedbackLink" format="" --><!--DXMETADATA end-->
+    </div>
+    
+
+    <!--DXMETADATA start type="IsNew" format="<script type=""text/javascript"">setIsNew = true;</script>" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<script type=""text/javascript"">setIsResponsiveEnabled = true;</script>" --><!--DXMETADATA end-->
+    <script type="text/javascript">
+        $(function() {
+            var documentInstance = new Innovasys.Content.Document(document.body);
+            documentInstance.isNew = !(typeof setIsNew === "undefined");
+            documentInstance.isResponsiveEnabled = !(typeof setIsResponsiveEnabled === "undefined");
+            documentInstance.load();
+        });
+    </script>
+</body>
+</html>

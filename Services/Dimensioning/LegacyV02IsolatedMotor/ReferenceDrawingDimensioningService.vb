@@ -93,9 +93,10 @@ Friend NotInheritable Class ReferenceDrawingDimensioningService
     Private Shared Sub TryAdjustTrackDistance(dimObj As Dimension, c As DimensionCandidate, norm As DimensioningNormConfig, log As DimensionLogger)
         If dimObj Is Nothing OrElse c Is Nothing OrElse norm Is Nothing Then Return
         Try
-            Dim baseGap As Double = Math.Max(0.01R, Math.Min(0.012R, norm.MinGapFromView))
-            Dim stepGap As Double = Math.Max(0.007R, Math.Min(0.008R, norm.GapBetweenDimensionRows))
-            Dim td As Double = baseGap + stepGap * Math.Min(c.Priority / 10, 3)
+            Dim baseGap As Double = Math.Max(0.008R, norm.MinGapFromView)
+            Dim stepGap As Double = Math.Max(0.006R, norm.GapBetweenDimensionRows)
+            Dim laneIdx As Integer = Math.Max(0, Math.Min(c.Priority \ 10, 6))
+            Dim td As Double = baseGap + stepGap * laneIdx
             CallByName(dimObj, "TrackDistance", CallType.Let, td)
             log?.LogLine("[DIM][PLACE][LANE] trackDistance=" & FormatInv(td))
         Catch

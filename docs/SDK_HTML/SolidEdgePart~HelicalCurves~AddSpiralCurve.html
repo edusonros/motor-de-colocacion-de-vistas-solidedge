@@ -1,0 +1,558 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--DXMETADATA start type="MetaCharset" --><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><!--DXMETADATA end-->
+    <meta http-equiv="X-UA-Compatible" value="IE=9" />
+
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Literal" condition="helpversion:value=3" value="<meta name=""Microsoft.Help.SelfBranded"" content=""true"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="PageItemTitle" format="<title>%%PageItemTitle%%</title>" --><title>AddSpiralCurve Method</title><!--DXMETADATA end-->
+    <!--DXMETADATA start type="ItemTitleNoQuotes" format="<meta name=""Title"" content=""%%ItemTitleNoQuotes%%""/>" --><!--DXMETADATA end-->    
+    
+
+    <!--DXMETADATA start type="PackageLink" packagename="jquery" filetype="script" firstlinkattributes="id=""mshs_support_script"""--><script src="template/packages/jquery/script/chm.mshc/jquery-1.7.2.min.js" type="text/javascript" id="mshs_support_script"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="script"--><script src="template/packages/jquery-ui/script/chm.mshc/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/jquery-ui/css/chm.mshc/jquery-ui-1.8.18.custom.css"></link><!--DXMETADATA end-->
+	
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/plugins-ax/css/chm.mshc/jquery-plugins.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="css" firstlinkattributes=" data-mshv2-stylesheet=""/template/packages/core-ax/dx.com.mshv2.css"" data-mshv1-stylesheet=""/template/packages/core-ax/dx.com.mshv1.css"" data-responsive-mobile=""template/packages/core-ax/dx.com.mobile.css"" data-responsive-tablet=""template/packages/core-ax/dx.com.tablet.css"""--><link rel="stylesheet" type="text/css" href="template/packages/core-ax/css/dx.com.css"  data-mshv2-stylesheet="/template/packages/core-ax/dx.com.mshv2.css" data-mshv1-stylesheet="/template/packages/core-ax/dx.com.mshv1.css" data-responsive-mobile="template/packages/core-ax/dx.com.mobile.css" data-responsive-tablet="template/packages/core-ax/dx.com.tablet.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="script"--><script src="template/packages/plugins-ax/script/chm.mshc/jquery-plugins.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="script"--><script src="template/packages/core-ax/script/dx.com.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="TopicId" format="<meta name=""Microsoft.Help.Id"" content=""%%TopicId%%""/>" --><meta name="Microsoft.Help.Id" content="SolidEdgePart~HelicalCurves~AddSpiralCurve"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Synopsis" StripHtmlTags="True" MaxLength="250" format="<meta name=""Description"" content=""%%Synopsis%%"" />"--><meta name="Description" content="Adds a spiral curve." /><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocParentId" format="<meta name=""Microsoft.Help.TocParent"" content=""%%TocParentId%%""/>" --><meta name="Microsoft.Help.TocParent" content="SolidEdgePart~HelicalCurves_methods"/><!--DXMETADATA end-->
+    <meta name="Microsoft.Help.ContentType" content="Reference" />
+    <!--DXMETADATA start type="MshvKeywords" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="MshvMetaTags" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.Locale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.TopicLocale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="Stylesheets" --><link rel="stylesheet" type="text/css" href="stylesheets/customstyles.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Scripts" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="DesignTime"--><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_PROPERTIES" --><!--DXMETADATA end -->
+
+    <!--DXMETADATA start type="CustomHeadContent" --><!--DXMETADATA end-->
+</head>
+
+<body>
+    <div id="i-before-header-content" class="i-before-header-content">
+        
+    </div>
+    <div id="i-header-content" class="i-header-content">
+        <!--DXMETADATA start type="LogoImage" --><img class="logoimage" src="images/sesdk_header.jpg" border="0"></img><!--DXMETADATA end-->
+            <div class="i-project-title"><!--DXMETADATA start type="ProjectTitle" -->Solid Edge Part Type Library<!--DXMETADATA end--></div>
+        <div class="i-page-title"><div class="i-page-title-text"><!--DXMETADATA start type="PageItemTitle" -->AddSpiralCurve Method<!--DXMETADATA end--></div></div>
+    </div>
+    <div id="i-after-header-content" class="i-after-header-content">
+        <!-- Spacing --> <span class="i-toggle-all-sections i-function-link">
+                <label class="i-collapse-all"><!--DXMETADATA start type="Phrase" name="COLLAPSE_ALL" -->Collapse All<!--DXMETADATA end--></label>
+                <label class="i-expand-all" style="display: none;"><!--DXMETADATA start type="Phrase" name="EXPAND_ALL" -->Expand All<!--DXMETADATA end--></label>
+            </span><!--DXMETADATA start type="Literal" condition="communityenabled" value="%%scrap:name=_COMMUNITY_DROPDOWN%%" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="IsWebOutputRootPageLinkEnabled" format="<a href='#' class="i-page-link" class="i-view-in-frame-link" title='$$VIEW_WITH_NAVIGATION_TOOLS_TIP$$' style='display: none' data-root-page='%%WebOutputRootPage%%%%OutputFileExtension%%' target='_top'>$$VIEW_WITH_NAVIGATION_TOOLS_TEXT$$</a>" --><a href='#' class="i-page-link" class="i-view-in-frame-link" title='Open this Topic in a view that includes Navigation tools (Table of Contents, Index, Search)' style='display: none' data-root-page='webframe.html' target='_top'>View with Navigation Tools</a><!--DXMETADATA end-->
+    </div>
+    <!--DXMETADATA start type="Breadcrumbs" scrap="_BREADCRUMBS" --><div class="i-breadcrumbs-container"><table><tr><td>
+<a href="SolidEdgePart_P.html">Solid Edge Part Type Library</a>
+ > <a href="SolidEdgePart~HelicalCurves.html">HelicalCurves Collection</a>
+ : AddSpiralCurve Method</td></tr></table></div><!--DXMETADATA end -->
+    
+    <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_BUBBLES" namespace="parameter" source="Item" -->
+<div id="AxisElementPopupContent" class="i-popup-content">
+Linear / circular edge or cylinder/cone surface.
+</div>
+<div id="NumPointsPopupContent" class="i-popup-content">
+Total number of keypoints and space points.
+</div>
+<div id="PointTypeConstantsArrayPopupContent" class="i-popup-content">
+Array of point types.
+</div>
+<div id="VertexArrayPopupContent" class="i-popup-content">
+Array of key points.
+</div>
+<div id="posArrayPopupContent" class="i-popup-content">
+Array for position of space point.
+</div>
+<div id="BasePlanePopupContent" class="i-popup-content">
+Base plane.
+</div>
+<div id="RightHandedPopupContent" class="i-popup-content">
+Rotation of helical curve.
+</div>
+<div id="SpiralcurvemethodPopupContent" class="i-popup-content">
+Specifies the inputs to be used. e.g: EndDiameter/pitch/turns
+</div>
+<div id="OutwardPopupContent" class="i-popup-content">
+Specifies if the taper is&nbsp;outward or inward.
+</div>
+<div id="StartAtFirstPointPopupContent" class="i-popup-content">
+Specifies start point of helical curve.
+</div>
+<div id="StartDiameterPopupContent" class="i-popup-content">
+Start diameter as double.
+</div>
+<div id="EndDiameterPopupContent" class="i-popup-content">
+End diameter as double.
+</div>
+<div id="TurnsPopupContent" class="i-popup-content">
+Number of turns.
+</div>
+<div id="RadialPitchPopupContent" class="i-popup-content">
+Radial pitch as double.
+</div>
+<!--DXMETADATA end -->
+    <div id="i-body-content" class="i-body-content">
+        <!--DXMETADATA start type="Description" source="Item" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=description,caption=$$Description$$%%<div class=""i-description-content"">%%description%%</div></div>" --><div class="i-section-heading" id="i-description-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Description</span></div><div id="i-description-section-content" class="i-section-content"><div class="i-description-content">Adds a spiral curve.</div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="Syntax" lang="VB" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=syntax,caption=$$Syntax$$%%<div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>%%Syntax%%</pre></tr></table></div></div>" --><div class="i-section-heading" id="i-syntax-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Syntax</span></div><div id="i-syntax-section-content" class="i-section-content"><div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>Public Function AddSpiralCurve( _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="AxisElementPopupLink" data-popup-contentsource="#AxisElementPopupContent" data-popup-showevent="click mouseenter">AxisElement</a></i> As Object, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="NumPointsPopupLink" data-popup-contentsource="#NumPointsPopupContent" data-popup-showevent="click mouseenter">NumPoints</a></i> As Long, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="PointTypeConstantsArrayPopupLink" data-popup-contentsource="#PointTypeConstantsArrayPopupContent" data-popup-showevent="click mouseenter">PointTypeConstantsArray</a></i>() As <a href="SolidEdgePart~PointTypeConstants.html">PointTypeConstants</a>, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="VertexArrayPopupLink" data-popup-contentsource="#VertexArrayPopupContent" data-popup-showevent="click mouseenter">VertexArray</a></i>() As Object, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="posArrayPopupLink" data-popup-contentsource="#posArrayPopupContent" data-popup-showevent="click mouseenter">posArray</a></i>() As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="BasePlanePopupLink" data-popup-contentsource="#BasePlanePopupContent" data-popup-showevent="click mouseenter">BasePlane</a></i> As Object, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="RightHandedPopupLink" data-popup-contentsource="#RightHandedPopupContent" data-popup-showevent="click mouseenter">RightHanded</a></i> As Boolean, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="SpiralcurvemethodPopupLink" data-popup-contentsource="#SpiralcurvemethodPopupContent" data-popup-showevent="click mouseenter">Spiralcurvemethod</a></i> As <a href="SolidEdgePart~SpiralCurveMethodType.html">SpiralCurveMethodType</a>, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="OutwardPopupLink" data-popup-contentsource="#OutwardPopupContent" data-popup-showevent="click mouseenter">Outward</a></i> As Boolean, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="StartAtFirstPointPopupLink" data-popup-contentsource="#StartAtFirstPointPopupContent" data-popup-showevent="click mouseenter">StartAtFirstPoint</a></i> As Boolean, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="StartDiameterPopupLink" data-popup-contentsource="#StartDiameterPopupContent" data-popup-showevent="click mouseenter">StartDiameter</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="EndDiameterPopupLink" data-popup-contentsource="#EndDiameterPopupContent" data-popup-showevent="click mouseenter">EndDiameter</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="TurnsPopupLink" data-popup-contentsource="#TurnsPopupContent" data-popup-showevent="click mouseenter">Turns</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="RadialPitchPopupLink" data-popup-contentsource="#RadialPitchPopupContent" data-popup-showevent="click mouseenter">RadialPitch</a></i> As Double _
+) As <a href="SolidEdgePart~HelicalCurve.html">HelicalCurve</a></pre></tr></table></div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_LIST" namespace="parameter" source="Item" filter="" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=parameters,caption=$$ParameterList$$%%%%filtereditemlist%%</div>" --><div class="i-section-heading" id="i-parameters-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Parameters</span></div><div id="i-parameters-section-content" class="i-section-content"><dl>
+<dt><I>AxisElement</I></dt>
+<dd>Linear / circular edge or cylinder/cone surface.</dd>
+<dt><I>NumPoints</I></dt>
+<dd>Total number of keypoints and space points.</dd>
+<dt><I>PointTypeConstantsArray</I></dt>
+<dd><table class="i-filtered-item-list"><tr><th>Value</th><th>Description</th></tr>
+<tr><td class="i-member-name">igCylinderEndPoint</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCylinderStartPoint</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igKeyPoint</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSpacePoint</td><td class="i-description"> </td></tr>
+</table>Array of point types.</dd>
+<dt><I>VertexArray</I></dt>
+<dd>Array of key points.</dd>
+<dt><I>posArray</I></dt>
+<dd>Array for position of space point.</dd>
+<dt><I>BasePlane</I></dt>
+<dd>Base plane.</dd>
+<dt><I>RightHanded</I></dt>
+<dd>Rotation of helical curve.</dd>
+<dt><I>Spiralcurvemethod</I></dt>
+<dd><table class="i-filtered-item-list"><tr><th>Value</th><th>Description</th></tr>
+<tr><td class="i-member-name">igSpiralCurveMethodEndDiameterAndRadialPitch</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSpiralCurveMethodEndDiameterAndTurns</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSpiralCurveMethodRadialPitchAndTurns</td><td class="i-description"> </td></tr>
+</table>Specifies the inputs to be used. e.g: EndDiameter/pitch/turns</dd>
+<dt><I>Outward</I></dt>
+<dd>Specifies if the taper is&nbsp;outward or inward.</dd>
+<dt><I>StartAtFirstPoint</I></dt>
+<dd>Specifies start point of helical curve.</dd>
+<dt><I>StartDiameter</I></dt>
+<dd>Start diameter as double.</dd>
+<dt><I>EndDiameter</I></dt>
+<dd>End diameter as double.</dd>
+<dt><I>Turns</I></dt>
+<dd>Number of turns.</dd>
+<dt><I>RadialPitch</I></dt>
+<dd>Radial pitch as double.</dd>
+</dl></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##RETURNS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=returns,caption=$$Return_Type$$%%<div class=""i-returns-content"">%%comment%%</div></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##REMARKS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=remarks,caption=$$Remarks$$%%%%comment%%</div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="sourcecode" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=source,caption=$$Source_Code$$%%<table border=0 cellpadding=0 cellspacing=0 class=sourcecode><tr><td nowrap>%%sourcecode%%</td></tr></table></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##EXAMPLEINTRO" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=""$$Example$$%%designlist:tagidentifier=##EXAMPLECODE,itemtype=Example%%""%%%%comment%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="EXAMPLEGROUP_LIST" namespace="ExampleGroup" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""="",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><div class="i-section-heading" id="i-example-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Example</span></div><div id="i-example-section-content" class="i-section-content">
+<div class="i-tab-container">
+    <ul>
+        <li class="i-filtered-content-VB.NET">
+			<a href="#i-tab-content-0fac8e6d-d10b-4984-8181-2554e50fa660">Example (VB.NET)</a>
+		</li>
+        <li class="i-filtered-content-CS">
+			<a href="#i-tab-content-52581ef4-8bf7-4b64-9fe2-87463e74e6ae">Example (C#)</a>
+		</li>
+
+    </ul>
+	<div id="i-tab-content-0fac8e6d-d10b-4984-8181-2554e50fa660" class="i-filtered-content-VB.NET">
+		<pre><span style="color: #0000FF; ">Imports</span> System.Runtime.InteropServices
+<span style="color: #0000FF; ">Module</span> Module1
+
+    <span style="color: #0000FF; ">Sub</span> Main()
+        <span style="color: #0000FF; ">Dim</span> objApp <span style="color: #0000FF; ">As</span> SolidEdgeFramework.Application = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objDoc <span style="color: #0000FF; ">As</span> SolidEdgePart.PartDocument = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objConstructions <span style="color: #0000FF; ">As</span> SolidEdgePart.Constructions = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objEdges <span style="color: #0000FF; ">As</span> SolidEdgeGeometry.Edges = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objEdgesCyl <span style="color: #0000FF; ">As</span> SolidEdgeGeometry.Edges = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objFacesCyl <span style="color: #0000FF; ">As</span> SolidEdgeGeometry.Faces = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objFaces(1) <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Object</span>
+        <span style="color: #0000FF; ">Dim</span> objEdge <span style="color: #0000FF; ">As</span> SolidEdgeGeometry.Edge = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objEdgArr(0 <span style="color: #0000FF; ">To</span> 2) <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Object</span>
+        <span style="color: #0000FF; ">Dim</span> objEdgArr2(0 <span style="color: #0000FF; ">To</span> 2) <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Object</span>
+        <span style="color: #0000FF; ">Dim</span> kptypeArr(0 <span style="color: #0000FF; ">To</span> 2) <span style="color: #0000FF; ">As</span> SolidEdgeConstants.KeyPointType
+        <span style="color: #0000FF; ">Dim</span> PositionArray(11) <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+        <span style="color: #0000FF; ">Dim</span> PositionArrayVertex(0 <span style="color: #0000FF; ">To</span> 2) <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+        <span style="color: #0000FF; ">Dim</span> pointtypeArr(0 <span style="color: #0000FF; ">To</span> 2) <span style="color: #0000FF; ">As</span> SolidEdgeConstants.PointTypeConstants
+        <span style="color: #0000FF; ">Dim</span> objHelicalCurve <span style="color: #0000FF; ">As</span> SolidEdgePart.HelicalCurve = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objVertex <span style="color: #0000FF; ">As</span> SolidEdgeGeometry.Vertex = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objPlane <span style="color: #0000FF; ">As</span> SolidEdgePart.RefPlane = <span style="color: #0000FF; ">Nothing</span>
+
+        <span style="color: #0000FF; ">Dim</span> HeightArray(0 <span style="color: #0000FF; ">To</span> 3) <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+        <span style="color: #0000FF; ">Dim</span> TurnsArray(0 <span style="color: #0000FF; ">To</span> 3) <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+        <span style="color: #0000FF; ">Dim</span> PitchArray(0 <span style="color: #0000FF; ">To</span> 3) <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+        <span style="color: #0000FF; ">Dim</span> DiameterArray(0 <span style="color: #0000FF; ">To</span> 3) <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+
+        <span style="color: #0000FF; ">Dim</span> HeightArray1(4) <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+        <span style="color: #0000FF; ">Dim</span> PitchArray1(4) <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+        <span style="color: #0000FF; ">Dim</span> TurnsArray1(4) <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+        <span style="color: #0000FF; ">Dim</span> DiameterArray1(4) <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+
+        <span style="color: #0000FF; ">Dim</span> objProfArr(0 <span style="color: #0000FF; ">To</span> 1) <span style="color: #0000FF; ">As</span> SolidEdgePart.Profile
+        <span style="color: #0000FF; ">Dim</span> objLines <span style="color: #0000FF; ">As</span> SolidEdgeFrameworkSupport.Lines2d = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objRelns1 <span style="color: #0000FF; ">As</span> SolidEdgeFrameworkSupport.Relations2d = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> lngStatus <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Long</span>
+        <span style="color: #0000FF; ">Dim</span> objModel <span style="color: #0000FF; ">As</span> SolidEdgePart.Model = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objC1 <span style="color: #0000FF; ">As</span> SolidEdgeFrameworkSupport.Circle2d = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objPPlane <span style="color: #0000FF; ">As</span> SolidEdgePart.RefPlane = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objRPParallel <span style="color: #0000FF; ">As</span> SolidEdgePart.RefPlane = <span style="color: #0000FF; ">Nothing</span>
+
+        <span style="color: #0000FF; ">Try</span>
+            <span style="color: #0000FF; ">Try</span>
+                objApp = Marshal.GetActiveObject(<span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>)
+            <span style="color: #0000FF; ">Catch</span> ex <span style="color: #0000FF; ">As</span> Exception
+                objApp = Activator.CreateInstance(Type.GetTypeFromProgID(<span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>))
+                objApp.DisplayAlerts = <span style="color: #0000FF; ">True</span>
+                objApp.Visible = <span style="color: #0000FF; ">True</span>
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">Try</span>
+            objDoc = objApp.Documents.Add(<span style="color: #800000; ">&quot;SolidEdge.PartDocument&quot;</span>)
+
+            <span style="color: #008000; ">' Draw the Profile
+</span>            objProfArr(0) = objDoc.ProfileSets.Add.Profiles.Add(pRefPlaneDisp:=objDoc.RefPlanes(1))
+            objLines = objProfArr(0).Lines2d
+            objLines.AddBy2Points(x1:=0, y1:=0, x2:=0.06, y2:=0)
+            objLines.AddBy2Points(x1:=0.06, y1:=0, x2:=0.06, y2:=0.06)
+            objLines.AddBy2Points(x1:=0.06, y1:=0.06, x2:=0, y2:=0.06)
+            objLines.AddBy2Points(x1:=0, y1:=0.06, x2:=0, y2:=0)
+            <span style="color: #008000; ">' Relate the Lines to make the Profile closed
+</span>            objRelns1 = objProfArr(0).Relations2d
+            objRelns1.AddKeypoint(Object1:=objLines(0), Index1:=SolidEdgeConstants.KeypointIndexConstants.igLineEnd, Object2:=objLines(1), Index2:=SolidEdgeConstants.KeypointIndexConstants.igLineStart)
+            objRelns1.AddKeypoint(Object1:=objLines(1), Index1:=SolidEdgeConstants.KeypointIndexConstants.igLineEnd, Object2:=objLines(2), Index2:=SolidEdgeConstants.KeypointIndexConstants.igLineStart)
+            objRelns1.AddKeypoint(Object1:=objLines(2), Index1:=SolidEdgeConstants.KeypointIndexConstants.igLineEnd, Object2:=objLines(3), Index2:=SolidEdgeConstants.KeypointIndexConstants.igLineStart)
+            objRelns1.AddKeypoint(Object1:=objLines(3), Index1:=SolidEdgeConstants.KeypointIndexConstants.igLineEnd, Object2:=objLines(0), Index2:=SolidEdgeConstants.KeypointIndexConstants.igLineStart)
+            <span style="color: #008000; ">' Check for the Profile Validity
+</span>            lngStatus = objProfArr(0).End(ValidationCriteria:=SolidEdgePart.ProfileValidationType.igProfileClosed)
+            <span style="color: #0000FF; ">If</span> lngStatus &lt;&gt; 0 <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;Profile not closed&quot;</span>)
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+            <span style="color: #008000; ">' Create the Base Protrusion Object
+</span>            objModel = objDoc.Models.AddFiniteExtrudedProtrusion(NumberOfProfiles:=1, _
+                                                                     ProfileArray:=objProfArr, ProfilePlaneSide:=SolidEdgePart.FeaturePropertyConstants.igRight, _
+                                                                     ExtrusionDistance:=0.02)
+            objProfArr(0).Visible = <span style="color: #0000FF; ">False</span>
+
+            <span style="color: #008000; ">' adding a reference plane parallel to and at a distance to a pricipal plane
+</span>            objPPlane = objDoc.RefPlanes.Item(1)
+            objRPParallel = objDoc.RefPlanes.AddParallelByDistance(ParentPlane:=objPPlane, Distance:=0.1, _
+                                                                    NormalSide:=SolidEdgePart.FeaturePropertyConstants.igRight)
+
+            <span style="color: #008000; ">' Create a Profile
+</span>            objProfArr(1) = objDoc.ProfileSets.Add.Profiles.Add(pRefPlaneDisp:=objRPParallel)
+
+            objC1 = objProfArr(1).Circles2d.AddByCenterRadius(x:=0, y:=0, Radius:=0.01)
+
+            <span style="color: #008000; ">' Create the Cylindrical Protrusion Object
+</span>            objModel.ExtrudedProtrusions.AddFinite(objProfArr(1), SolidEdgePart.FeaturePropertyConstants.igRight, SolidEdgePart.FeaturePropertyConstants.igLeft, 0.02)
+            objProfArr(1).Visible = <span style="color: #0000FF; ">False</span>
+
+            objEdgesCyl = objDoc.Models.Item(1).ExtrudedProtrusions.Item(2).Edges(SolidEdgeConstants.FeatureTopologyQueryTypeConstants.igQueryAll)
+
+            objFacesCyl = objDoc.Models.Item(1).ExtrudedProtrusions.Item(2).Faces(SolidEdgeConstants.FeatureTopologyQueryTypeConstants.igQueryCylinder)
+
+            <span style="color: #008000; ">'obtain the first model and get all its edges
+</span>            objEdges = objDoc.Models.Item(1).ExtrudedProtrusions.Item(1).Edges(SolidEdgeConstants.FeatureTopologyQueryTypeConstants.igQueryAll)
+
+            <span style="color: #008000; ">''fill the edges in array
+</span>            <span style="color: #008000; ">'' Get the Edges and store them in an Array
+</span>            objEdge = objEdges(1)
+            objVertex = objEdge.StartVertex
+            objVertex.GetPointData(PositionArrayVertex)
+            objEdgArr(0) = objVertex
+
+            objEdgArr(1) = <span style="color: #0000FF; ">Nothing</span>
+
+            objEdge = objEdges(1)
+            objVertex = objEdge.EndVertex
+            objEdgArr(2) = objVertex
+
+            objEdgArr2(0) = <span style="color: #0000FF; ">Nothing</span>
+            objEdgArr2(1) = <span style="color: #0000FF; ">Nothing</span>
+            objEdgArr2(2) = <span style="color: #0000FF; ">Nothing</span>
+
+
+            objPlane = objDoc.RefPlanes(0)
+
+            <span style="color: #008000; ">'Define an Array of Points
+</span>            PositionArray(0) = 0
+            PositionArray(1) = 0
+            PositionArray(2) = 0
+            PositionArray(3) = 2.0
+            PositionArray(4) = 0.0
+            PositionArray(5) = 0.0
+            PositionArray(6) = 0
+            PositionArray(7) = 1
+            PositionArray(8) = 1
+
+
+            <span style="color: #008000; ">'now fill the point type aaray
+</span>            pointtypeArr(0) = SolidEdgeConstants.PointTypeConstants.igSpacePoint
+            pointtypeArr(1) = SolidEdgeConstants.PointTypeConstants.igSpacePoint
+            pointtypeArr(2) = SolidEdgeConstants.PointTypeConstants.igSpacePoint
+
+            objConstructions = objDoc.Constructions
+            objHelicalCurve = objConstructions.HelicalCurves.AddSpiralCurve(objFacesCyl(0),
+                                                            0,
+                                                            pointtypeArr,
+                                                            objEdgArr2,
+                                                            PositionArray,
+                                                            objPlane,
+                                                            <span style="color: #0000FF; ">True</span>,
+                                                            SolidEdgePart.SpiralCurveMethodType.igSpiralCurveMethodEndDiameterAndTurns,
+                                                            <span style="color: #0000FF; ">True</span>,
+                                                            <span style="color: #0000FF; ">True</span>,
+                                                            0.1,
+                                                            0.6,
+                                                            2.5,
+                                                            0)
+
+            <span style="color: #0000FF; ">If</span> Err().Number &lt;&gt; 0 <span style="color: #0000FF; ">Or</span> objHelicalCurve <span style="color: #0000FF; ">Is</span> <span style="color: #0000FF; ">Nothing</span> <span style="color: #0000FF; ">Then</span>
+                Console.WriteLine(<span style="color: #800000; ">&quot;Failed at creating spiral curve with cylindrical face&quot;</span>)
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+
+            objHelicalCurve = objConstructions.HelicalCurves.AddSpiralCurve(objEdgesCyl,
+                                                0,
+                                                pointtypeArr,
+                                                objEdgArr2,
+                                                PositionArray,
+                                                objPlane,
+                                                <span style="color: #0000FF; ">True</span>,
+                                                SolidEdgePart.SpiralCurveMethodType.igSpiralCurveMethodRadialPitchAndTurns,
+                                                <span style="color: #0000FF; ">True</span>,
+                                                <span style="color: #0000FF; ">False</span>,
+                                                0.1,
+                                                0,
+                                                2.5,
+                                                0.1)
+
+
+            <span style="color: #0000FF; ">If</span> Err().Number &lt;&gt; 0 <span style="color: #0000FF; ">Or</span> objHelicalCurve <span style="color: #0000FF; ">Is</span> <span style="color: #0000FF; ">Nothing</span> <span style="color: #0000FF; ">Then</span>
+                Console.WriteLine(<span style="color: #800000; ">&quot;Failed at creating spiral curve with with circular edge&quot;</span>)
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+
+
+        <span style="color: #0000FF; ">Catch</span> ex <span style="color: #0000FF; ">As</span> Exception
+            Console.WriteLine(ex.Message)
+        <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">Try</span>
+
+    <span style="color: #0000FF; ">End Sub</span>
+
+<span style="color: #0000FF; ">End Module</span>
+</pre>
+	</div>
+	<div id="i-tab-content-52581ef4-8bf7-4b64-9fe2-87463e74e6ae" class="i-filtered-content-CS">
+		<pre><span style="color: #0000FF; ">using</span> System.Windows.Forms;
+<span style="color: #0000FF; ">using</span> System.Runtime.InteropServices;
+<span style="color: #0000FF; ">internal</span> <span style="color: #0000FF; ">static</span> <span style="color: #0000FF; ">class</span> Module1
+{
+
+    <span style="color: #0000FF; ">public</span> <span style="color: #0000FF; ">static</span> <span style="color: #0000FF; ">void</span> Main()
+    {
+        SolidEdgeFramework.Application objApp = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.PartDocument objDoc = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.Constructions objConstructions = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeGeometry.Edges objEdges = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeGeometry.Edges objEdgesCyl = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeGeometry.Faces objFacesCyl = <span style="color: #0000FF; ">null</span>;
+        <span style="color: #0000FF; ">object</span>[] objFaces = <span style="color: #0000FF; ">new</span> <span style="color: #0000FF; ">object</span>[2];
+        SolidEdgeGeometry.Edge objEdge = <span style="color: #0000FF; ">null</span>;
+        <span style="color: #0000FF; ">object</span>[] objEdgArr = <span style="color: #0000FF; ">new</span> <span style="color: #0000FF; ">object</span>[3];
+        <span style="color: #0000FF; ">object</span>[] objEdgArr2 = <span style="color: #0000FF; ">new</span> <span style="color: #0000FF; ">object</span>[3];
+        SolidEdgeConstants.KeyPointType[] kptypeArr = <span style="color: #0000FF; ">new</span> SolidEdgeConstants.KeyPointType[3];
+        <span style="color: #0000FF; ">double</span>[] PositionArray = <span style="color: #0000FF; ">new</span> <span style="color: #0000FF; ">double</span>[12];
+        <span style="color: #0000FF; ">double</span>[] PositionArrayVertex = <span style="color: #0000FF; ">new</span> <span style="color: #0000FF; ">double</span>[3];
+        SolidEdgeConstants.PointTypeConstants[] pointtypeArr = <span style="color: #0000FF; ">new</span> SolidEdgeConstants.PointTypeConstants[3];
+        SolidEdgePart.HelicalCurve objHelicalCurve = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeGeometry.Vertex objVertex = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.RefPlane objPlane = <span style="color: #0000FF; ">null</span>;
+
+        <span style="color: #0000FF; ">double</span>[] HeightArray = <span style="color: #0000FF; ">new</span> <span style="color: #0000FF; ">double</span>[4];
+        <span style="color: #0000FF; ">double</span>[] TurnsArray = <span style="color: #0000FF; ">new</span> <span style="color: #0000FF; ">double</span>[4];
+        <span style="color: #0000FF; ">double</span>[] PitchArray = <span style="color: #0000FF; ">new</span> <span style="color: #0000FF; ">double</span>[4];
+        <span style="color: #0000FF; ">double</span>[] DiameterArray = <span style="color: #0000FF; ">new</span> <span style="color: #0000FF; ">double</span>[4];
+
+        <span style="color: #0000FF; ">double</span>[] HeightArray1 = <span style="color: #0000FF; ">new</span> <span style="color: #0000FF; ">double</span>[5];
+        <span style="color: #0000FF; ">double</span>[] PitchArray1 = <span style="color: #0000FF; ">new</span> <span style="color: #0000FF; ">double</span>[5];
+        <span style="color: #0000FF; ">double</span>[] TurnsArray1 = <span style="color: #0000FF; ">new</span> <span style="color: #0000FF; ">double</span>[5];
+        <span style="color: #0000FF; ">double</span>[] DiameterArray1 = <span style="color: #0000FF; ">new</span> <span style="color: #0000FF; ">double</span>[5];
+
+        SolidEdgePart.Profile[] objProfArr = <span style="color: #0000FF; ">new</span> SolidEdgePart.Profile[2];
+        SolidEdgeFrameworkSupport.Lines2d objLines = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeFrameworkSupport.Relations2d objRelns1 = <span style="color: #0000FF; ">null</span>;
+        <span style="color: #0000FF; ">long</span> lngStatus = 0;
+        SolidEdgePart.Model objModel = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeFrameworkSupport.Circle2d objC1 = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.RefPlane objPPlane = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.RefPlane objRPParallel = <span style="color: #0000FF; ">null</span>;
+
+        <span style="color: #0000FF; ">try</span>
+        {
+            <span style="color: #0000FF; ">try</span>
+            {
+                objApp = (SolidEdgeFramework.Application)Marshal.GetActiveObject(<span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>);
+            }
+            <span style="color: #0000FF; ">catch</span> (Exception ex)
+            {
+                objApp = Activator.CreateInstance(Type.GetTypeFromProgID(<span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>));
+                objApp.DisplayAlerts = <span style="color: #0000FF; ">true</span>;
+                objApp.Visible = <span style="color: #0000FF; ">true</span>;
+            }
+            objDoc = objApp.Documents.Add(<span style="color: #800000; ">&quot;SolidEdge.PartDocument&quot;</span>);
+
+            <span style="color: #008000; ">// Draw the Profile
+</span>            objProfArr[0] = objDoc.ProfileSets.Add.Profiles.Add(pRefPlaneDisp:objDoc.RefPlanes(1));
+            objLines = objProfArr[0].Lines2d;
+            objLines.AddBy2Points(x1:0, y1:0, x2:0.06, y2:0);
+            objLines.AddBy2Points(x1:0.06, y1:0, x2:0.06, y2:0.06);
+            objLines.AddBy2Points(x1:0.06, y1:0.06, x2:0, y2:0.06);
+            objLines.AddBy2Points(x1:0, y1:0.06, x2:0, y2:0);
+            <span style="color: #008000; ">// Relate the Lines to make the Profile closed
+</span>            objRelns1 = objProfArr[0].Relations2d;
+            objRelns1.AddKeypoint(Object1:objLines(0), Index1:SolidEdgeConstants.KeypointIndexConstants.igLineEnd, Object2:objLines(1), Index2:SolidEdgeConstants.KeypointIndexConstants.igLineStart);
+            objRelns1.AddKeypoint(Object1:objLines(1), Index1:SolidEdgeConstants.KeypointIndexConstants.igLineEnd, Object2:objLines(2), Index2:SolidEdgeConstants.KeypointIndexConstants.igLineStart);
+            objRelns1.AddKeypoint(Object1:objLines(2), Index1:SolidEdgeConstants.KeypointIndexConstants.igLineEnd, Object2:objLines(3), Index2:SolidEdgeConstants.KeypointIndexConstants.igLineStart);
+            objRelns1.AddKeypoint(Object1:objLines(3), Index1:SolidEdgeConstants.KeypointIndexConstants.igLineEnd, Object2:objLines(0), Index2:SolidEdgeConstants.KeypointIndexConstants.igLineStart);
+            <span style="color: #008000; ">// Check for the Profile Validity
+</span>            lngStatus = objProfArr[0].End(ValidationCriteria:SolidEdgePart.ProfileValidationType.igProfileClosed);
+            <span style="color: #0000FF; ">if</span> (lngStatus != 0)
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;Profile not closed&quot;</span>);
+            }
+            <span style="color: #008000; ">// Create the Base Protrusion Object
+</span>            objModel = objDoc.Models.AddFiniteExtrudedProtrusion(NumberOfProfiles:1, ProfileArray:objProfArr, ProfilePlaneSide:SolidEdgePart.FeaturePropertyConstants.igRight, ExtrusionDistance:0.02);
+            objProfArr[0].Visible = <span style="color: #0000FF; ">false</span>;
+
+            <span style="color: #008000; ">// adding a reference plane parallel to and at a distance to a pricipal plane
+</span>            objPPlane = objDoc.RefPlanes.Item(1);
+            objRPParallel = objDoc.RefPlanes.AddParallelByDistance(ParentPlane:objPPlane, Distance:0.1, NormalSide:SolidEdgePart.FeaturePropertyConstants.igRight);
+
+            <span style="color: #008000; ">// Create a Profile
+</span>            objProfArr[1] = objDoc.ProfileSets.Add.Profiles.Add(pRefPlaneDisp:objRPParallel);
+
+            objC1 = objProfArr[1].Circles2d.AddByCenterRadius(x:0, y:0, Radius:0.01);
+
+            <span style="color: #008000; ">// Create the Cylindrical Protrusion Object
+</span>            objModel.ExtrudedProtrusions.AddFinite(objProfArr[1], SolidEdgePart.FeaturePropertyConstants.igRight, SolidEdgePart.FeaturePropertyConstants.igLeft, 0.02);
+            objProfArr[1].Visible = <span style="color: #0000FF; ">false</span>;
+
+            objEdgesCyl = objDoc.Models.Item(1).ExtrudedProtrusions.Item(2).Edges(SolidEdgeConstants.FeatureTopologyQueryTypeConstants.igQueryAll);
+
+            objFacesCyl = objDoc.Models.Item(1).ExtrudedProtrusions.Item(2).Faces(SolidEdgeConstants.FeatureTopologyQueryTypeConstants.igQueryCylinder);
+
+            <span style="color: #008000; ">//obtain the first model and get all its edges
+</span>            objEdges = objDoc.Models.Item(1).ExtrudedProtrusions.Item(1).Edges(SolidEdgeConstants.FeatureTopologyQueryTypeConstants.igQueryAll);
+
+            <span style="color: #008000; ">//'fill the edges in array
+            //' Get the Edges and store them in an Array
+</span>            objEdge = objEdges(1);
+            objVertex = objEdge.StartVertex;
+            objVertex.GetPointData(PositionArrayVertex);
+            objEdgArr[0] = objVertex;
+
+            objEdgArr[1] = <span style="color: #0000FF; ">null</span>;
+
+            objEdge = objEdges(1);
+            objVertex = objEdge.EndVertex;
+            objEdgArr[2] = objVertex;
+
+            objEdgArr2[0] = <span style="color: #0000FF; ">null</span>;
+            objEdgArr2[1] = <span style="color: #0000FF; ">null</span>;
+            objEdgArr2[2] = <span style="color: #0000FF; ">null</span>;
+
+
+            objPlane = objDoc.RefPlanes(0);
+
+            <span style="color: #008000; ">//Define an Array of Points
+</span>            PositionArray[0] = 0;
+            PositionArray[1] = 0;
+            PositionArray[2] = 0;
+            PositionArray[3] = 2.0;
+            PositionArray[4] = 0.0;
+            PositionArray[5] = 0.0;
+            PositionArray[6] = 0;
+            PositionArray[7] = 1;
+            PositionArray[8] = 1;
+
+
+            <span style="color: #008000; ">//now fill the point type aaray
+</span>            pointtypeArr[0] = SolidEdgeConstants.PointTypeConstants.igSpacePoint;
+            pointtypeArr[1] = SolidEdgeConstants.PointTypeConstants.igSpacePoint;
+            pointtypeArr[2] = SolidEdgeConstants.PointTypeConstants.igSpacePoint;
+
+            objConstructions = objDoc.Constructions;
+            objHelicalCurve = objConstructions.HelicalCurves.AddSpiralCurve(objFacesCyl(0), 0, pointtypeArr, objEdgArr2, PositionArray, objPlane, <span style="color: #0000FF; ">true</span>, SolidEdgePart.SpiralCurveMethodType.igSpiralCurveMethodEndDiameterAndTurns, <span style="color: #0000FF; ">true</span>, <span style="color: #0000FF; ">true</span>, 0.1, 0.6, 2.5, 0);
+
+            <span style="color: #0000FF; ">if</span> (Microsoft.VisualBasic.Information.Err().Number != 0 || objHelicalCurve == <span style="color: #0000FF; ">null</span>)
+            {
+                Console.WriteLine(<span style="color: #800000; ">&quot;Failed at creating spiral curve with cylindrical face&quot;</span>);
+            }
+
+            objHelicalCurve = objConstructions.HelicalCurves.AddSpiralCurve(objEdgesCyl, 0, pointtypeArr, objEdgArr2, PositionArray, objPlane, <span style="color: #0000FF; ">true</span>, SolidEdgePart.SpiralCurveMethodType.igSpiralCurveMethodRadialPitchAndTurns, <span style="color: #0000FF; ">true</span>, <span style="color: #0000FF; ">false</span>, 0.1, 0, 2.5, 0.1);
+
+
+            <span style="color: #0000FF; ">if</span> (Microsoft.VisualBasic.Information.Err().Number != 0 || objHelicalCurve == <span style="color: #0000FF; ">null</span>)
+            {
+                Console.WriteLine(<span style="color: #800000; ">&quot;Failed at creating spiral curve with with circular edge&quot;</span>);
+            }
+
+
+        }
+        <span style="color: #0000FF; ">catch</span> (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+
+    }
+
+}</pre>
+	</div>
+	
+</div>
+</div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="INLINE_EXAMPLE" namespace="Example" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""<>"",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="MENU_LINK" namespace="example" source="Item" filter="type=linked" NoHeader="True" NoFooter="True" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=examplelinks,caption=$$Example$$%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="FilteredItemList" scrap="CATEGORIZED_LINKS" namespace="linkcategory" source="Item" filter="" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=seealso,caption=""$$See_Also$$%%designlist:tagidentifier=##SEEALSO,itemtype=See Also%%""%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><div class="i-section-heading" id="i-seealso-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">See Also</span></div><div id="i-seealso-section-content" class="i-section-content"><p id=dxseealsocontent><a href="SolidEdgePart~HelicalCurves.html">HelicalCurves Collection</a>
+&nbsp;|&nbsp;<a href="SolidEdgePart~HelicalCurves_members.html">HelicalCurves Members</a>
+</p>
+</p></div><!--DXMETADATA end -->
+    </div>
+    <div id="i-footer-content" class="i-footer-content">
+        <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_FOOTER" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="CopyrightNotice" format="<p>&nbsp;</p><p>&nbsp;</p><hr style=""height: 1px"" /><p>%%variable%%</p>" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="FeedbackLink" format="" --><!--DXMETADATA end-->
+    </div>
+    
+
+    <!--DXMETADATA start type="IsNew" format="<script type=""text/javascript"">setIsNew = true;</script>" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<script type=""text/javascript"">setIsResponsiveEnabled = true;</script>" --><!--DXMETADATA end-->
+    <script type="text/javascript">
+        $(function() {
+            var documentInstance = new Innovasys.Content.Document(document.body);
+            documentInstance.isNew = !(typeof setIsNew === "undefined");
+            documentInstance.isResponsiveEnabled = !(typeof setIsResponsiveEnabled === "undefined");
+            documentInstance.load();
+        });
+    </script>
+</body>
+</html>

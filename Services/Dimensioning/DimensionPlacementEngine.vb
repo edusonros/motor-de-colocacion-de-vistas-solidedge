@@ -1,5 +1,6 @@
 Option Strict Off
 
+Imports System.Collections.Generic
 Imports System.Globalization
 Imports System.Runtime.InteropServices
 Imports Microsoft.VisualBasic
@@ -628,6 +629,13 @@ Friend NotInheritable Class DimensionPlacementEngine
         Return x
     End Function
 
+    ''' <summary>Opciones para cotas centro–lado / centro–centro (validación de valor y sin expandir Crop de la vista).</summary>
+    Friend NotInheritable Class HoleDistanceInsertOptions
+        Public Property ExpectedM As Double
+        Public Property SuppressCropExpand As Boolean = True
+        Public Property PreferKeyPointsOnCircles As Boolean = True
+    End Class
+
     ''' <summary>
     ''' API: AddDistanceBetweenObjects — intenta primero coordenadas de hoja; opcionalmente respaldo en espacio vista (SheetToView).
     ''' Ruta compartida con Iso129DimensioningService (ISO 129-1 pragmática).
@@ -645,7 +653,8 @@ Friend NotInheritable Class DimensionPlacementEngine
         Optional frame As ViewPlacementFrame = Nothing,
         Optional dv As DrawingView = Nothing,
         Optional skipInsertedDimensionSpatialSanity As Boolean = False,
-        Optional ByRef createdDimensionOut As FrameworkDimension = Nothing) As Boolean
+        Optional ByRef createdDimensionOut As FrameworkDimension = Nothing,
+        Optional holeOptions As HoleDistanceInsertOptions = Nothing) As Boolean
 
         createdDimensionOut = Nothing
         If o1 Is Nothing OrElse o2 Is Nothing Then Return False
@@ -678,12 +687,12 @@ Friend NotInheritable Class DimensionPlacementEngine
         log?.LogLine("[DIM][API] AddDistance* proximidad en HOJA (coordenadas absolutas de pliego).")
         If TryAddDistanceBetweenObjectsKpLoops(
             dims, o1, o2, x1, y1, x2, y2, log, axisLabel, methodUsedOut, contextLabel, frame, dv,
-            x1, y1, x2, y2, "(sheet)", lastEx, skipInsertedDimensionSpatialSanity, createdDimensionOut) Then
+            x1, y1, x2, y2, "(sheet)", lastEx, skipInsertedDimensionSpatialSanity, createdDimensionOut, holeOptions) Then
             Return True
         End If
 
         ' 2) Respaldo: proximidad en espacio vista (SheetToView) — puede crear cotas con Range “raro”; solo si falla hoja.
-        If dv IsNot Nothing AndAlso DimensionInsertionConfig.UseViewSpaceProximityForAddDistance Then
+        If holeOptions Is Nothing AndAlso dv IsNot Nothing AndAlso DimensionInsertionConfig.UseViewSpaceProximityForAddDistance Then
             Dim vx1 As Double = x1, vy1 As Double = y1, vx2 As Double = x2, vy2 As Double = y2
             Try
                 dv.SheetToView(x1, y1, vx1, vy1)
@@ -691,7 +700,7 @@ Friend NotInheritable Class DimensionPlacementEngine
                 log?.LogLine("[DIM][API] AddDistance* respaldo: proximidad en VISTA (SheetToView).")
                 If TryAddDistanceBetweenObjectsKpLoops(
                     dims, o1, o2, vx1, vy1, vx2, vy2, log, axisLabel, methodUsedOut, contextLabel, frame, dv,
-                    x1, y1, x2, y2, "(view)", lastEx, skipInsertedDimensionSpatialSanity, createdDimensionOut) Then
+                    x1, y1, x2, y2, "(view)", lastEx, skipInsertedDimensionSpatialSanity, createdDimensionOut, holeOptions) Then
                     Return True
                 End If
             Catch ex As Exception
@@ -788,76 +797,198 @@ Friend NotInheritable Class DimensionPlacementEngine
         coordTag As String,
         ByRef lastEx As Exception,
         Optional skipInsertedDimensionSpatialSanity As Boolean = False,
-        Optional ByRef createdDimensionOut As FrameworkDimension = Nothing) As Boolean
+        Optional ByRef createdDimensionOut As FrameworkDimension = Nothing,
+        Optional holeOptions As HoleDistanceInsertOptions = Nothing) As Boolean
 
-        Dim kps As Boolean() = {False, True}
-        For Each kp1 In kps
-            For Each kp2 In kps
-                Try
-                    Dim d As FrameworkDimension = dims.AddDistanceBetweenObjects(
-                        o1, px1, py1, 0.0, kp1,
-                        o2, px2, py2, 0.0, kp2)
-                    TrySetConstraintFalse(d)
-                    If d IsNot Nothing Then
-                        If Not skipInsertedDimensionSpatialSanity AndAlso frame IsNot Nothing AndAlso Not IsInsertedDimensionSpatiallySane(d, frame, dv, log) Then
-                            Try
-                                d.Delete()
-                            Catch
-                            End Try
-                            Continue For
-                        End If
-                        methodUsedOut = "AddDistanceBetweenObjects" & coordTag & "(kp1=" & kp1.ToString() & ",kp2=" & kp2.ToString() & ")"
-                        log?.Info("[" & axisLabel.ToUpperInvariant() & "][COM] OK " & methodUsedOut)
-                        If DimensionInsertionConfig.EnableDimensionInsertionDiagnostics AndAlso dv IsNot Nothing Then
-                            DimensionCoordinateDiagnostics.LogCreatedDimensionState(d, log, If(contextLabel, axisLabel), sheetX1, sheetY1, sheetX2, sheetY2)
-                        Else
-                            TryLogInsertedDimensionState(d, frame, log, If(contextLabel, axisLabel))
-                        End If
-                        EnsureDrawingViewCropContainsDimensions(dv, d, axisLabel, frame, log)
-                        createdDimensionOut = d
-                        Return True
+        Dim kpPairs As List(Of KeyValuePair(Of Boolean, Boolean)) = BuildKeyPointTryOrder(o1, o2, holeOptions)
+        For Each pair In kpPairs
+            Dim kp1 As Boolean = pair.Key
+            Dim kp2 As Boolean = pair.Value
+            Try
+                Dim d As FrameworkDimension = dims.AddDistanceBetweenObjects(
+                    o1, px1, py1, 0.0, kp1,
+                    o2, px2, py2, 0.0, kp2)
+                TrySetConstraintFalse(d)
+                If d IsNot Nothing Then
+                    If Not AcceptInsertedDistanceDimension(
+                        d, frame, dv, log, axisLabel, sheetX1, sheetY1, sheetX2, sheetY2,
+                        skipInsertedDimensionSpatialSanity, holeOptions) Then
+                        Try
+                            d.Delete()
+                        Catch
+                        End Try
+                        Continue For
                     End If
-                Catch ex As Exception
-                    lastEx = ex
-                    log?.Err("[" & axisLabel.ToUpperInvariant() & "][COM] EX AddDistanceBetweenObjects" & coordTag & "(kp1=" & kp1.ToString() & ",kp2=" & kp2.ToString() & "): " & FormatExceptionWithHresult(ex))
-                End Try
-            Next
+                    methodUsedOut = "AddDistanceBetweenObjects" & coordTag & "(kp1=" & kp1.ToString() & ",kp2=" & kp2.ToString() & ")"
+                    log?.Info("[" & axisLabel.ToUpperInvariant() & "][COM] OK " & methodUsedOut)
+                    If DimensionInsertionConfig.EnableDimensionInsertionDiagnostics AndAlso dv IsNot Nothing Then
+                        DimensionCoordinateDiagnostics.LogCreatedDimensionState(d, log, If(contextLabel, axisLabel), sheetX1, sheetY1, sheetX2, sheetY2)
+                    Else
+                        TryLogInsertedDimensionState(d, frame, log, If(contextLabel, axisLabel))
+                    End If
+                    If holeOptions Is Nothing OrElse Not holeOptions.SuppressCropExpand Then
+                        EnsureDrawingViewCropContainsDimensions(dv, d, axisLabel, frame, log)
+                    End If
+                    createdDimensionOut = d
+                    Return True
+                End If
+            Catch ex As Exception
+                lastEx = ex
+                log?.Err("[" & axisLabel.ToUpperInvariant() & "][COM] EX AddDistanceBetweenObjects" & coordTag & "(kp1=" & kp1.ToString() & ",kp2=" & kp2.ToString() & "): " & FormatExceptionWithHresult(ex))
+            End Try
         Next
 
-        For Each kp1 In kps
-            For Each kp2 In kps
-                Try
-                    Dim dEx As FrameworkDimension = dims.AddDistanceBetweenObjectsEX(
-                        o1, px1, py1, 0.0, kp1, False,
-                        o2, px2, py2, 0.0, kp2, False)
-                    TrySetConstraintFalse(dEx)
-                    If dEx IsNot Nothing Then
-                        If Not skipInsertedDimensionSpatialSanity AndAlso frame IsNot Nothing AndAlso Not IsInsertedDimensionSpatiallySane(dEx, frame, dv, log) Then
-                            Try
-                                dEx.Delete()
-                            Catch
-                            End Try
-                            Continue For
-                        End If
-                        methodUsedOut = "AddDistanceBetweenObjectsEX" & coordTag & "(kp1=" & kp1.ToString() & ",kp2=" & kp2.ToString() & ",tan=F)"
-                        log?.Info("[" & axisLabel.ToUpperInvariant() & "][COM] OK " & methodUsedOut)
-                        If DimensionInsertionConfig.EnableDimensionInsertionDiagnostics AndAlso dv IsNot Nothing Then
-                            DimensionCoordinateDiagnostics.LogCreatedDimensionState(dEx, log, If(contextLabel, axisLabel), sheetX1, sheetY1, sheetX2, sheetY2)
-                        Else
-                            TryLogInsertedDimensionState(dEx, frame, log, If(contextLabel, axisLabel))
-                        End If
-                        EnsureDrawingViewCropContainsDimensions(dv, dEx, axisLabel, frame, log)
-                        createdDimensionOut = dEx
-                        Return True
+        For Each pair In kpPairs
+            Dim kp1 As Boolean = pair.Key
+            Dim kp2 As Boolean = pair.Value
+            Try
+                Dim dEx As FrameworkDimension = dims.AddDistanceBetweenObjectsEX(
+                    o1, px1, py1, 0.0, kp1, False,
+                    o2, px2, py2, 0.0, kp2, False)
+                TrySetConstraintFalse(dEx)
+                If dEx IsNot Nothing Then
+                    If Not AcceptInsertedDistanceDimension(
+                        dEx, frame, dv, log, axisLabel, sheetX1, sheetY1, sheetX2, sheetY2,
+                        skipInsertedDimensionSpatialSanity, holeOptions) Then
+                        Try
+                            dEx.Delete()
+                        Catch
+                        End Try
+                        Continue For
                     End If
-                Catch ex As Exception
-                    lastEx = ex
-                    log?.Err("[" & axisLabel.ToUpperInvariant() & "][COM] EX AddDistanceBetweenObjectsEX" & coordTag & "(kp1=" & kp1.ToString() & ",kp2=" & kp2.ToString() & "): " & FormatExceptionWithHresult(ex))
-                End Try
-            Next
+                    methodUsedOut = "AddDistanceBetweenObjectsEX" & coordTag & "(kp1=" & kp1.ToString() & ",kp2=" & kp2.ToString() & ",tan=F)"
+                    log?.Info("[" & axisLabel.ToUpperInvariant() & "][COM] OK " & methodUsedOut)
+                    If DimensionInsertionConfig.EnableDimensionInsertionDiagnostics AndAlso dv IsNot Nothing Then
+                        DimensionCoordinateDiagnostics.LogCreatedDimensionState(dEx, log, If(contextLabel, axisLabel), sheetX1, sheetY1, sheetX2, sheetY2)
+                    Else
+                        TryLogInsertedDimensionState(dEx, frame, log, If(contextLabel, axisLabel))
+                    End If
+                    If holeOptions Is Nothing OrElse Not holeOptions.SuppressCropExpand Then
+                        EnsureDrawingViewCropContainsDimensions(dv, dEx, axisLabel, frame, log)
+                    End If
+                    createdDimensionOut = dEx
+                    Return True
+                End If
+            Catch ex As Exception
+                lastEx = ex
+                log?.Err("[" & axisLabel.ToUpperInvariant() & "][COM] EX AddDistanceBetweenObjectsEX" & coordTag & "(kp1=" & kp1.ToString() & ",kp2=" & kp2.ToString() & "): " & FormatExceptionWithHresult(ex))
+            End Try
         Next
 
         Return False
+    End Function
+
+    Private Shared Function BuildKeyPointTryOrder(
+        o1 As Object,
+        o2 As Object,
+        holeOptions As HoleDistanceInsertOptions) As List(Of KeyValuePair(Of Boolean, Boolean))
+
+        Dim preferKp As Boolean = holeOptions IsNot Nothing AndAlso holeOptions.PreferKeyPointsOnCircles
+        If Not preferKp Then
+            preferKp = IsCircleLikeObject(o1) OrElse IsCircleLikeObject(o2)
+        End If
+        Dim list As New List(Of KeyValuePair(Of Boolean, Boolean))()
+        If preferKp Then
+            list.Add(New KeyValuePair(Of Boolean, Boolean)(True, True))
+            list.Add(New KeyValuePair(Of Boolean, Boolean)(True, False))
+            list.Add(New KeyValuePair(Of Boolean, Boolean)(False, True))
+            list.Add(New KeyValuePair(Of Boolean, Boolean)(False, False))
+        Else
+            list.Add(New KeyValuePair(Of Boolean, Boolean)(False, False))
+            list.Add(New KeyValuePair(Of Boolean, Boolean)(True, True))
+            list.Add(New KeyValuePair(Of Boolean, Boolean)(True, False))
+            list.Add(New KeyValuePair(Of Boolean, Boolean)(False, True))
+        End If
+        Return list
+    End Function
+
+    Private Shared Function IsCircleLikeObject(o As Object) As Boolean
+        If o Is Nothing Then Return False
+        If TypeOf o Is DVCircle2d Then Return True
+        Dim tn As String = o.GetType().Name
+        Return tn.IndexOf("Circle", StringComparison.OrdinalIgnoreCase) >= 0
+    End Function
+
+    Private Shared Function AcceptInsertedDistanceDimension(
+        d As FrameworkDimension,
+        frame As ViewPlacementFrame,
+        dv As DrawingView,
+        log As DimensionLogger,
+        axisLabel As String,
+        sheetX1 As Double,
+        sheetY1 As Double,
+        sheetX2 As Double,
+        sheetY2 As Double,
+        skipInsertedDimensionSpatialSanity As Boolean,
+        holeOptions As HoleDistanceInsertOptions) As Boolean
+
+        If d Is Nothing Then Return False
+        If Not skipInsertedDimensionSpatialSanity AndAlso frame IsNot Nothing AndAlso Not IsInsertedDimensionSpatiallySane(d, frame, dv, log) Then
+            Return False
+        End If
+        If holeOptions Is Nothing Then Return True
+        Return IsHoleDistanceGeometricallySane(d, sheetX1, sheetY1, sheetX2, sheetY2, axisLabel, holeOptions.ExpectedM, log)
+    End Function
+
+    ''' <summary>Rechaza cotas con extensiones desmesuradas o valor distinto del nominal calculado (típico de círculo sin keypoint).</summary>
+    Private Shared Function IsHoleDistanceGeometricallySane(
+        d As FrameworkDimension,
+        sheetX1 As Double,
+        sheetY1 As Double,
+        sheetX2 As Double,
+        sheetY2 As Double,
+        axisLabel As String,
+        expectedM As Double,
+        log As DimensionLogger) As Boolean
+
+        If expectedM > 1.0E-9 Then
+            Dim valM As Double = ReadDimensionValueMeters(d)
+            If Not Double.IsNaN(valM) AndAlso Math.Abs(valM - expectedM) > 0.002R Then
+                log?.Warn(String.Format(CultureInfo.InvariantCulture,
+                    "[DIM][HOLE][REJECT] reason=value_mismatch expected_mm={0:0.###} actual_mm={1:0.###}",
+                    expectedM * 1000.0R, valM * 1000.0R))
+                Return False
+            End If
+        End If
+
+        Try
+            Dim rx1 As Double = 0, ry1 As Double = 0, rx2 As Double = 0, ry2 As Double = 0
+            d.Range(rx1, ry1, rx2, ry2)
+            Dim dimW As Double = Math.Abs(rx2 - rx1)
+            Dim dimH As Double = Math.Abs(ry2 - ry1)
+            Dim pickDx As Double = Math.Abs(sheetX2 - sheetX1)
+            Dim pickDy As Double = Math.Abs(sheetY2 - sheetY1)
+            Dim axisIsHorizontal As Boolean = String.Equals(axisLabel, "horizontal", StringComparison.OrdinalIgnoreCase)
+            Dim alongPick As Double = If(axisIsHorizontal, pickDx, pickDy)
+            Dim crossPick As Double = If(axisIsHorizontal, pickDy, pickDx)
+            Dim alongDim As Double = If(axisIsHorizontal, dimW, dimH)
+            Dim crossDim As Double = If(axisIsHorizontal, dimH, dimW)
+            Dim maxAlong As Double = Math.Max(alongPick * 2.5R, 0.012R) + 0.004R
+            Dim maxCross As Double = Math.Max(Math.Max(crossPick, alongPick) * 2.5R, 0.02R) + 0.004R
+            If alongDim > maxAlong OrElse crossDim > maxCross Then
+                log?.Warn(String.Format(CultureInfo.InvariantCulture,
+                    "[DIM][HOLE][REJECT] reason=range_overshoot axis={0} along={1:0.######} cross={2:0.######} maxAlong={3:0.######} maxCross={4:0.######}",
+                    axisLabel, alongDim, crossDim, maxAlong, maxCross))
+                Return False
+            End If
+            Return True
+        Catch ex As Exception
+            log?.Warn("[DIM][HOLE][REJECT] reason=range_unreadable ex=" & ex.Message)
+            Return False
+        End Try
+    End Function
+
+    Private Shared Function ReadDimensionValueMeters(d As FrameworkDimension) As Double
+        If d Is Nothing Then Return Double.NaN
+        Try
+            Return CDbl(d.Value)
+        Catch
+        End Try
+        Try
+            Return CDbl(CallByName(d, "DisplayValue", CallType.Get))
+        Catch
+            Return Double.NaN
+        End Try
     End Function
 
     ''' <summary>

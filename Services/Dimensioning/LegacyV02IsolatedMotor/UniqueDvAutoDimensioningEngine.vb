@@ -59,6 +59,7 @@ Friend NotInheritable Class UniqueDvAutoDimensioningEngine
         Dim useTargetRef As Boolean = String.Equals(norm.DimensionCreationMode, DimensioningNormConfig.ModeTargetReference, StringComparison.OrdinalIgnoreCase)
         If useTargetRef Then
             ReferenceDrawingDimensioningService.Run(ctx, workList, styleObj, norm, log, baseLogger, protectedZones)
+            TryApplyInteriorHoleCenterDimensions(ctx, workList, styleObj, norm, baseLogger)
             sw.Stop()
             log?.LogLine("[DIM][SUMMARY][DOC] mode=TargetDrawingLikeReference viewsProcessed=" & workList.Count.ToString(CultureInfo.InvariantCulture) &
                          " ms=" & sw.ElapsedMilliseconds.ToString(CultureInfo.InvariantCulture))
@@ -98,8 +99,10 @@ Friend NotInheritable Class UniqueDvAutoDimensioningEngine
                          " created=" & createdView.ToString(CultureInfo.InvariantCulture))
         Next
 
+        TryApplyInteriorHoleCenterDimensions(ctx, workList, styleObj, norm, baseLogger)
+
         If norm.EnableKeypointValueDuplicateCleanup AndAlso ctx.Sheet IsNot Nothing Then
-            Dim removedDup As Integer = DimensionDuplicateCleanup.RemoveDuplicateDimensionsByValueAndKeypoints(ctx.Sheet, log)
+            Dim removedDup As Integer = DimensionDuplicateCleanup.RunPostCreationCleanup(ctx.Sheet, workList, log)
             If removedDup > 0 Then
                 log?.LogLine("[DIM][DEDUP] post_sweep removed=" & removedDup.ToString(CultureInfo.InvariantCulture))
             End If
@@ -120,6 +123,13 @@ Friend NotInheritable Class UniqueDvAutoDimensioningEngine
             Une129ArrangeExistingDimensions.OrdenarCotasExistentesUNE129(
                 ctx.Draft, ctx.Sheet, arrangeViews, zoneBoxes, norm,
                 Sub(m) log?.LogLine(m))
+        End If
+
+        If ctx.Sheet IsNot Nothing Then
+            Dim laneAdjusted As Integer = DimensionLaneSpacing.Apply(ctx.Sheet, workList, norm, log)
+            If laneAdjusted > 0 Then
+                log?.LogLine("[DIM][LANE] spacing_applied count=" & laneAdjusted.ToString(CultureInfo.InvariantCulture))
+            End If
         End If
 
         sw.Stop()
@@ -168,6 +178,21 @@ Friend NotInheritable Class UniqueDvAutoDimensioningEngine
             Return ""
         End Try
     End Function
+
+    Private Shared Sub TryApplyInteriorHoleCenterDimensions(
+        ctx As SolidEdgeContext,
+        workList As List(Of DrawingViewGeometryInfo),
+        styleObj As Object,
+        norm As DimensioningNormConfig,
+        appLogger As Logger)
+
+        If ctx Is Nothing OrElse ctx.Sheet Is Nothing OrElse workList Is Nothing Then Return
+        Dim views As New List(Of DrawingView)()
+        For Each info As DrawingViewGeometryInfo In workList
+            If info IsNot Nothing AndAlso info.View IsNot Nothing Then views.Add(info.View)
+        Next
+        LegacyV02DimensionMotorBridge.ApplyInteriorHoleDimensions(ctx.Draft, ctx.Sheet, views, styleObj, norm, appLogger)
+    End Sub
 End Class
 
 End Namespace

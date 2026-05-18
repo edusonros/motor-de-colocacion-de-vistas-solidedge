@@ -77,6 +77,8 @@ Public Class JobConfiguration
     ''' <summary>Inspección profunda de plantillas .dft (PropertySets) y volcado de enlaces del cajetín en cada DFT. Por defecto desactivado.</summary>
     Public Property DebugTemplatesInspection As Boolean = False
     Public Property KeepSolidEdgeVisible As Boolean = False
+    ''' <summary>HWND de la ventana WinForms del generador; para devolver el foco tras operaciones COM si Solid Edge no debe estar al frente.</summary>
+    Public Property OwnerWindowHandle As IntPtr = IntPtr.Zero
     Public Property InsertPropertiesInTitleBlock As Boolean = False
     Public Property TitleBlockPropertySourceMode As TitleBlockPropertySource = TitleBlockPropertySource.FromModelLink
 
@@ -99,7 +101,7 @@ Public Class JobConfiguration
     ''' <summary>Si True (y acotado activo): fuerza modo barrido completo de entidades DV (<c>SweepAllEntities</c>) para crear cotas sobre muchas líneas, arcos, círculos y elipses por vista, con límites de banda amplios.</summary>
     Public Property PreferSweepAllDrawingDimensions As Boolean = False
     ''' <summary>Prueba: no alejar cotas con TrackDistance escalonado (motor LegacyV02).</summary>
-    Public Property SuppressDimensionTrackDistanceSpacing As Boolean = True
+    Public Property SuppressDimensionTrackDistanceSpacing As Boolean = False
     ''' <summary>Eliminar cotas duplicadas (mismo valor y keypoints) tras el barrido.</summary>
     Public Property EnableKeypointValueDuplicateCleanup As Boolean = True
     ''' <summary>Laboratorio DIMLAB: DVLine2d.Reference + AddDistanceBetweenObjects (exclusivo; no ejecuta el motor principal de acotación).</summary>

@@ -1,0 +1,346 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--DXMETADATA start type="MetaCharset" --><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><!--DXMETADATA end-->
+    <meta http-equiv="X-UA-Compatible" value="IE=9" />
+
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Literal" condition="helpversion:value=3" value="<meta name=""Microsoft.Help.SelfBranded"" content=""true"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="PageItemTitle" format="<title>%%PageItemTitle%%</title>" --><title>GetDegreesOfFreedom Method</title><!--DXMETADATA end-->
+    <!--DXMETADATA start type="ItemTitleNoQuotes" format="<meta name=""Title"" content=""%%ItemTitleNoQuotes%%""/>" --><!--DXMETADATA end-->    
+    
+
+    <!--DXMETADATA start type="PackageLink" packagename="jquery" filetype="script" firstlinkattributes="id=""mshs_support_script"""--><script src="template/packages/jquery/script/chm.mshc/jquery-1.7.2.min.js" type="text/javascript" id="mshs_support_script"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="script"--><script src="template/packages/jquery-ui/script/chm.mshc/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/jquery-ui/css/chm.mshc/jquery-ui-1.8.18.custom.css"></link><!--DXMETADATA end-->
+	
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/plugins-ax/css/chm.mshc/jquery-plugins.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="css" firstlinkattributes=" data-mshv2-stylesheet=""/template/packages/core-ax/dx.com.mshv2.css"" data-mshv1-stylesheet=""/template/packages/core-ax/dx.com.mshv1.css"" data-responsive-mobile=""template/packages/core-ax/dx.com.mobile.css"" data-responsive-tablet=""template/packages/core-ax/dx.com.tablet.css"""--><link rel="stylesheet" type="text/css" href="template/packages/core-ax/css/dx.com.css"  data-mshv2-stylesheet="/template/packages/core-ax/dx.com.mshv2.css" data-mshv1-stylesheet="/template/packages/core-ax/dx.com.mshv1.css" data-responsive-mobile="template/packages/core-ax/dx.com.mobile.css" data-responsive-tablet="template/packages/core-ax/dx.com.tablet.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="script"--><script src="template/packages/plugins-ax/script/chm.mshc/jquery-plugins.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="script"--><script src="template/packages/core-ax/script/dx.com.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="TopicId" format="<meta name=""Microsoft.Help.Id"" content=""%%TopicId%%""/>" --><meta name="Microsoft.Help.Id" content="SolidEdgePart~FEAConstraint~GetDegreesOfFreedom"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Synopsis" StripHtmlTags="True" MaxLength="250" format="<meta name=""Description"" content=""%%Synopsis%%"" />"--><meta name="Description" content="Get degrees of freedom of a user defined constraint." /><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocParentId" format="<meta name=""Microsoft.Help.TocParent"" content=""%%TocParentId%%""/>" --><meta name="Microsoft.Help.TocParent" content="SolidEdgePart~FEAConstraint_methods"/><!--DXMETADATA end-->
+    <meta name="Microsoft.Help.ContentType" content="Reference" />
+    <!--DXMETADATA start type="MshvKeywords" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="MshvMetaTags" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.Locale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.TopicLocale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="Stylesheets" --><link rel="stylesheet" type="text/css" href="stylesheets/customstyles.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Scripts" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="DesignTime"--><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_PROPERTIES" --><!--DXMETADATA end -->
+
+    <!--DXMETADATA start type="CustomHeadContent" --><!--DXMETADATA end-->
+</head>
+
+<body>
+    <div id="i-before-header-content" class="i-before-header-content">
+        
+    </div>
+    <div id="i-header-content" class="i-header-content">
+        <!--DXMETADATA start type="LogoImage" --><img class="logoimage" src="images/sesdk_header.jpg" border="0"></img><!--DXMETADATA end-->
+            <div class="i-project-title"><!--DXMETADATA start type="ProjectTitle" -->Solid Edge Part Type Library<!--DXMETADATA end--></div>
+        <div class="i-page-title"><div class="i-page-title-text"><!--DXMETADATA start type="PageItemTitle" -->GetDegreesOfFreedom Method<!--DXMETADATA end--></div></div>
+    </div>
+    <div id="i-after-header-content" class="i-after-header-content">
+        <!-- Spacing --> <span class="i-toggle-all-sections i-function-link">
+                <label class="i-collapse-all"><!--DXMETADATA start type="Phrase" name="COLLAPSE_ALL" -->Collapse All<!--DXMETADATA end--></label>
+                <label class="i-expand-all" style="display: none;"><!--DXMETADATA start type="Phrase" name="EXPAND_ALL" -->Expand All<!--DXMETADATA end--></label>
+            </span><!--DXMETADATA start type="Literal" condition="communityenabled" value="%%scrap:name=_COMMUNITY_DROPDOWN%%" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="IsWebOutputRootPageLinkEnabled" format="<a href='#' class="i-page-link" class="i-view-in-frame-link" title='$$VIEW_WITH_NAVIGATION_TOOLS_TIP$$' style='display: none' data-root-page='%%WebOutputRootPage%%%%OutputFileExtension%%' target='_top'>$$VIEW_WITH_NAVIGATION_TOOLS_TEXT$$</a>" --><a href='#' class="i-page-link" class="i-view-in-frame-link" title='Open this Topic in a view that includes Navigation tools (Table of Contents, Index, Search)' style='display: none' data-root-page='webframe.html' target='_top'>View with Navigation Tools</a><!--DXMETADATA end-->
+    </div>
+    <!--DXMETADATA start type="Breadcrumbs" scrap="_BREADCRUMBS" --><div class="i-breadcrumbs-container"><table><tr><td>
+<a href="SolidEdgePart_P.html">Solid Edge Part Type Library</a>
+ > <a href="SolidEdgePart~FEAConstraint.html">FEAConstraint Object</a>
+ : GetDegreesOfFreedom Method</td></tr></table></div><!--DXMETADATA end -->
+    
+    <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_BUBBLES" namespace="parameter" source="Item" -->
+<div id="bGetXTranslationPopupContent" class="i-popup-content">
+Is X translation constrained.
+</div>
+<div id="bGetYTranslationPopupContent" class="i-popup-content">
+Is&nbsp;Y translation constrained.
+</div>
+<div id="bGetZTranslationPopupContent" class="i-popup-content">
+Is&nbsp;Z translation constrained.
+</div>
+<div id="bGetXRotationPopupContent" class="i-popup-content">
+Is X rotation constrained.
+</div>
+<div id="bGetYRotationPopupContent" class="i-popup-content">
+Is&nbsp;Y rotation constrained.
+</div>
+<div id="bGetZRotationPopupContent" class="i-popup-content">
+Is&nbsp;Z rotation constrained.
+</div>
+<!--DXMETADATA end -->
+    <div id="i-body-content" class="i-body-content">
+        <!--DXMETADATA start type="Description" source="Item" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=description,caption=$$Description$$%%<div class=""i-description-content"">%%description%%</div></div>" --><div class="i-section-heading" id="i-description-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Description</span></div><div id="i-description-section-content" class="i-section-content"><div class="i-description-content">Get degrees of freedom of a user defined constraint.</div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="Syntax" lang="VB" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=syntax,caption=$$Syntax$$%%<div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>%%Syntax%%</pre></tr></table></div></div>" --><div class="i-section-heading" id="i-syntax-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Syntax</span></div><div id="i-syntax-section-content" class="i-section-content"><div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>Public Sub GetDegreesOfFreedom( _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="bGetXTranslationPopupLink" data-popup-contentsource="#bGetXTranslationPopupContent" data-popup-showevent="click mouseenter">bGetXTranslation</a></i> As Long, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="bGetYTranslationPopupLink" data-popup-contentsource="#bGetYTranslationPopupContent" data-popup-showevent="click mouseenter">bGetYTranslation</a></i> As Long, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="bGetZTranslationPopupLink" data-popup-contentsource="#bGetZTranslationPopupContent" data-popup-showevent="click mouseenter">bGetZTranslation</a></i> As Long, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="bGetXRotationPopupLink" data-popup-contentsource="#bGetXRotationPopupContent" data-popup-showevent="click mouseenter">bGetXRotation</a></i> As Long, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="bGetYRotationPopupLink" data-popup-contentsource="#bGetYRotationPopupContent" data-popup-showevent="click mouseenter">bGetYRotation</a></i> As Long, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="bGetZRotationPopupLink" data-popup-contentsource="#bGetZRotationPopupContent" data-popup-showevent="click mouseenter">bGetZRotation</a></i> As Long _
+) </pre></tr></table></div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_LIST" namespace="parameter" source="Item" filter="" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=parameters,caption=$$ParameterList$$%%%%filtereditemlist%%</div>" --><div class="i-section-heading" id="i-parameters-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Parameters</span></div><div id="i-parameters-section-content" class="i-section-content"><dl>
+<dt><I>bGetXTranslation</I></dt>
+<dd>Is X translation constrained.</dd>
+<dt><I>bGetYTranslation</I></dt>
+<dd>Is&nbsp;Y translation constrained.</dd>
+<dt><I>bGetZTranslation</I></dt>
+<dd>Is&nbsp;Z translation constrained.</dd>
+<dt><I>bGetXRotation</I></dt>
+<dd>Is X rotation constrained.</dd>
+<dt><I>bGetYRotation</I></dt>
+<dd>Is&nbsp;Y rotation constrained.</dd>
+<dt><I>bGetZRotation</I></dt>
+<dd>Is&nbsp;Z rotation constrained.</dd>
+</dl></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##RETURNS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=returns,caption=$$Return_Type$$%%<div class=""i-returns-content"">%%comment%%</div></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##REMARKS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=remarks,caption=$$Remarks$$%%%%comment%%</div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="sourcecode" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=source,caption=$$Source_Code$$%%<table border=0 cellpadding=0 cellspacing=0 class=sourcecode><tr><td nowrap>%%sourcecode%%</td></tr></table></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##EXAMPLEINTRO" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=""$$Example$$%%designlist:tagidentifier=##EXAMPLECODE,itemtype=Example%%""%%%%comment%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="EXAMPLEGROUP_LIST" namespace="ExampleGroup" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""="",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><div class="i-section-heading" id="i-example-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Example</span></div><div id="i-example-section-content" class="i-section-content">
+<div class="i-tab-container">
+    <ul>
+        <li class="i-filtered-content-VB.NET">
+			<a href="#i-tab-content-5dd4bfa6-8953-4d3a-b849-741739da07cf">Example (VB.NET)</a>
+		</li>
+        <li class="i-filtered-content-CS">
+			<a href="#i-tab-content-793b83d3-5416-49b8-84f8-3a42b95f7f49">Example (C#)</a>
+		</li>
+
+    </ul>
+	<div id="i-tab-content-5dd4bfa6-8953-4d3a-b849-741739da07cf" class="i-filtered-content-VB.NET">
+		<pre><span style="color: #0000FF; ">Imports</span> System.Runtime.InteropServices
+<span style="color: #0000FF; ">Module</span> Module1
+
+    <span style="color: #0000FF; ">Sub</span> Main()
+        <span style="color: #0000FF; ">Dim</span> objSEApp <span style="color: #0000FF; ">As</span> SolidEdgeFramework.Application = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objConstraint <span style="color: #0000FF; ">As</span> SolidEdgePart.FEAConstraint = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objConstraintsProxiesArray(1) <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Object</span>
+        <span style="color: #0000FF; ">Dim</span> eConstraintType <span style="color: #0000FF; ">As</span> SolidEdgePart.FEAConstraintTypeEnum_Auto
+        <span style="color: #0000FF; ">Dim</span> eConstraintDirection <span style="color: #0000FF; ">As</span> SolidEdgePart.LoadSymbDirOptsEnum_Auto <span style="color: #008000; ">' FEAConstraintTypeEnum_Auto
+</span>        <span style="color: #0000FF; ">Dim</span> dConstraintDirX <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> dConstraintDirY <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> dConstraintDirZ <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> dConstraintPosX <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> dConstraintPosY <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> dConstraintPosZ <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> ColorConstraintSymbol <span style="color: #0000FF; ">As</span> UInt32 = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> dSpacingFactor2 <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> dSizeFactor2 <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> dSteeringWheelLen2 <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> dwConstraintProps <span style="color: #0000FF; ">As</span> UInt32 = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> dConstraintSymSpacing <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> dConstraintSymSize <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span> = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> arrStudyGeomeProxies(2) <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Object</span>
+        <span style="color: #0000FF; ">Dim</span> objDocument <span style="color: #0000FF; ">As</span> SolidEdgePart.PartDocument = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objstudy <span style="color: #0000FF; ">As</span> SolidEdgePart.Study = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objConstraintOwner <span style="color: #0000FF; ">As</span> SolidEdgePart.ConstraintOwner = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objCS <span style="color: #0000FF; ">As</span> SolidEdgePart.CoordinateSystem = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objstudyOwner <span style="color: #0000FF; ">As</span> SolidEdgePart.StudyOwner = <span style="color: #0000FF; ">Nothing</span>
+
+        <span style="color: #0000FF; ">Try</span>
+            objSEApp = Marshal.GetActiveObject(<span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>)
+            objstudy = <span style="color: #0000FF; ">Nothing</span>
+
+            objDocument = objSEApp.ActiveDocument <span style="color: #008000; ">'.Documents.Item(1) '.Open(Openfilename)
+</span>            objCS = objDocument.CoordinateSystems.Item(1)
+            objstudyOwner = objDocument.StudyOwner
+
+            objstudy = objstudyOwner.Item(1) <span style="color: #008000; ">'working on study 2
+</span>
+            objstudy.GetConstraintOwner(objConstraintOwner)
+            objConstraint = objConstraintOwner.Item(1)
+
+
+            <span style="color: #008000; ">'getting all info and set the same 
+</span>            objConstraint.GetGeometries(arrStudyGeomeProxies)
+            objConstraint.GetConstraintOptions(eConstraintType, eConstraintDirection, dConstraintDirX, dConstraintDirY, dConstraintDirZ, dConstraintPosX, dConstraintPosY, dConstraintPosZ, ColorConstraintSymbol, _
+                                    dSpacingFactor2, dSizeFactor2, dSteeringWheelLen2, dwConstraintProps, dConstraintSymSpacing, dConstraintSymSize)
+            objConstraint.GetConstraintType(eConstraintType)
+            eConstraintType = SolidEdgePart.FEAConstraintTypeEnum_Auto.eCnstrTypeFixed_Auto
+
+            objConstraintOwner.AddConstraint(arrStudyGeomeProxies, _
+                                                 eConstraintType, _
+                                                 eConstraintDirection, _
+                                                 dConstraintDirX, _
+                                                 dConstraintDirY, _
+                                                 dConstraintDirZ, _
+                                                 dConstraintPosX, _
+                                                 dConstraintPosY, _
+                                                 dConstraintPosZ, _
+                                                 ColorConstraintSymbol, _
+                                                 dSpacingFactor2, _
+                                                 dSizeFactor2, _
+                                                 dSteeringWheelLen2, _
+                                                 dwConstraintProps, _
+                                                 dConstraintSymSpacing, _
+                                                 dConstraintSymSize, _
+                                                 objConstraint)
+            <span style="color: #008000; ">' Constraint the model in X translation, Y translation and Z rotation.
+</span>            objConstraint.SetDegreesOfFreedom(<span style="color: #0000FF; ">True</span>, <span style="color: #0000FF; ">True</span>, <span style="color: #0000FF; ">False</span>, <span style="color: #0000FF; ">False</span>, <span style="color: #0000FF; ">False</span>, <span style="color: #0000FF; ">True</span>)
+
+            <span style="color: #0000FF; ">Dim</span> bXTrans <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Boolean</span> = <span style="color: #0000FF; ">False</span>
+            <span style="color: #0000FF; ">Dim</span> bYTrans <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Boolean</span> = <span style="color: #0000FF; ">False</span>
+            <span style="color: #0000FF; ">Dim</span> bZTrans <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Boolean</span> = <span style="color: #0000FF; ">False</span>
+            <span style="color: #0000FF; ">Dim</span> bXRot <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Boolean</span> = <span style="color: #0000FF; ">False</span>
+            <span style="color: #0000FF; ">Dim</span> bYRot <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Boolean</span> = <span style="color: #0000FF; ">False</span>
+            <span style="color: #0000FF; ">Dim</span> bZRot <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Boolean</span> = <span style="color: #0000FF; ">False</span>
+
+            <span style="color: #008000; ">' Determine which DOF are constrained.
+</span>            objConstraint.GetDegreesOfFreedom(bXTrans, bYTrans, bZTrans, bXRot, bYRot, bZRot)
+
+            <span style="color: #0000FF; ">If</span> bXTrans = <span style="color: #0000FF; ">True</span> <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;Translation in X&quot;</span>)
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+
+            <span style="color: #0000FF; ">If</span> bYTrans = <span style="color: #0000FF; ">True</span> <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;Translation in Y&quot;</span>)
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+
+            <span style="color: #0000FF; ">If</span> bZRot = <span style="color: #0000FF; ">True</span> <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;Rotation in Z&quot;</span>)
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+
+
+        <span style="color: #0000FF; ">Catch</span> ex <span style="color: #0000FF; ">As</span> Exception
+            Debug.Print(ex.ToString)
+        <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">Try</span>
+    <span style="color: #0000FF; ">End Sub</span>
+
+<span style="color: #0000FF; ">End Module</span>
+</pre>
+	</div>
+	<div id="i-tab-content-793b83d3-5416-49b8-84f8-3a42b95f7f49" class="i-filtered-content-CS">
+		<pre><span style="color: #0000FF; ">using</span> System.Windows.Forms;
+<span style="color: #0000FF; ">using</span> System.Runtime.InteropServices;
+<span style="color: #0000FF; ">internal</span> <span style="color: #0000FF; ">static</span> <span style="color: #0000FF; ">class</span> Module1
+{
+
+    <span style="color: #0000FF; ">public</span> <span style="color: #0000FF; ">static</span> <span style="color: #0000FF; ">void</span> Main()
+    {
+        SolidEdgeFramework.Application objSEApp = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.FEAConstraint objConstraint = <span style="color: #0000FF; ">null</span>;
+        <span style="color: #0000FF; ">object</span>[] objConstraintsProxiesArray = <span style="color: #0000FF; ">new</span> <span style="color: #0000FF; ">object</span>[2];
+        SolidEdgePart.FEAConstraintTypeEnum_Auto eConstraintType = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.LoadSymbDirOptsEnum_Auto eConstraintDirection = <span style="color: #0000FF; ">null</span>; <span style="color: #008000; ">// FEAConstraintTypeEnum_Auto
+</span>        <span style="color: #0000FF; ">double</span> dConstraintDirX = 0;
+        <span style="color: #0000FF; ">double</span> dConstraintDirY = 0;
+        <span style="color: #0000FF; ">double</span> dConstraintDirZ = 0;
+        <span style="color: #0000FF; ">double</span> dConstraintPosX = 0;
+        <span style="color: #0000FF; ">double</span> dConstraintPosY = 0;
+        <span style="color: #0000FF; ">double</span> dConstraintPosZ = 0;
+        UInt32 ColorConstraintSymbol = 0;
+        <span style="color: #0000FF; ">double</span> dSpacingFactor2 = 0;
+        <span style="color: #0000FF; ">double</span> dSizeFactor2 = 0;
+        <span style="color: #0000FF; ">double</span> dSteeringWheelLen2 = 0;
+        UInt32 dwConstraintProps = 0;
+        <span style="color: #0000FF; ">double</span> dConstraintSymSpacing = 0;
+        <span style="color: #0000FF; ">double</span> dConstraintSymSize = 0;
+        <span style="color: #0000FF; ">object</span>[] arrStudyGeomeProxies = <span style="color: #0000FF; ">new</span> <span style="color: #0000FF; ">object</span>[3];
+        SolidEdgePart.PartDocument objDocument = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.Study objstudy = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.ConstraintOwner objConstraintOwner = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.CoordinateSystem objCS = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.StudyOwner objstudyOwner = <span style="color: #0000FF; ">null</span>;
+
+        <span style="color: #0000FF; ">try</span>
+        {
+            objSEApp = (SolidEdgeFramework.Application)Marshal.GetActiveObject(<span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>);
+            objstudy = <span style="color: #0000FF; ">null</span>;
+
+            objDocument = objSEApp.ActiveDocument; <span style="color: #008000; ">//.Documents.Item(1) '.Open(Openfilename)
+</span>            objCS = objDocument.CoordinateSystems.Item(1);
+            objstudyOwner = objDocument.StudyOwner;
+
+            objstudy = objstudyOwner.Item(1); <span style="color: #008000; ">//working on study 2
+</span>
+            objstudy.GetConstraintOwner(objConstraintOwner);
+            objConstraint = objConstraintOwner.Item(1);
+
+
+            <span style="color: #008000; ">//getting all info and set the same 
+</span>            objConstraint.GetGeometries(arrStudyGeomeProxies);
+            objConstraint.GetConstraintOptions(eConstraintType, eConstraintDirection, dConstraintDirX, dConstraintDirY, dConstraintDirZ, dConstraintPosX, dConstraintPosY, dConstraintPosZ, ColorConstraintSymbol, dSpacingFactor2, dSizeFactor2, dSteeringWheelLen2, dwConstraintProps, dConstraintSymSpacing, dConstraintSymSize);
+            objConstraint.GetConstraintType(eConstraintType);
+            eConstraintType = SolidEdgePart.FEAConstraintTypeEnum_Auto.eCnstrTypeFixed_Auto;
+
+            objConstraintOwner.AddConstraint(arrStudyGeomeProxies, eConstraintType, eConstraintDirection, dConstraintDirX, dConstraintDirY, dConstraintDirZ, dConstraintPosX, dConstraintPosY, dConstraintPosZ, ColorConstraintSymbol, dSpacingFactor2, dSizeFactor2, dSteeringWheelLen2, dwConstraintProps, dConstraintSymSpacing, dConstraintSymSize, objConstraint);
+            <span style="color: #008000; ">// Constraint the model in X translation, Y translation and Z rotation.
+</span>            objConstraint.SetDegreesOfFreedom(<span style="color: #0000FF; ">true</span>, <span style="color: #0000FF; ">true</span>, <span style="color: #0000FF; ">false</span>, <span style="color: #0000FF; ">false</span>, <span style="color: #0000FF; ">false</span>, <span style="color: #0000FF; ">true</span>);
+
+            <span style="color: #0000FF; ">bool</span> bXTrans = <span style="color: #0000FF; ">false</span>;
+            <span style="color: #0000FF; ">bool</span> bYTrans = <span style="color: #0000FF; ">false</span>;
+            <span style="color: #0000FF; ">bool</span> bZTrans = <span style="color: #0000FF; ">false</span>;
+            <span style="color: #0000FF; ">bool</span> bXRot = <span style="color: #0000FF; ">false</span>;
+            <span style="color: #0000FF; ">bool</span> bYRot = <span style="color: #0000FF; ">false</span>;
+            <span style="color: #0000FF; ">bool</span> bZRot = <span style="color: #0000FF; ">false</span>;
+
+            <span style="color: #008000; ">// Determine which DOF are constrained.
+</span>            objConstraint.GetDegreesOfFreedom(bXTrans, bYTrans, bZTrans, bXRot, bYRot, bZRot);
+
+            <span style="color: #0000FF; ">if</span> (bXTrans == <span style="color: #0000FF; ">true</span>)
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;Translation in X&quot;</span>);
+            }
+
+            <span style="color: #0000FF; ">if</span> (bYTrans == <span style="color: #0000FF; ">true</span>)
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;Translation in Y&quot;</span>);
+            }
+
+            <span style="color: #0000FF; ">if</span> (bZRot == <span style="color: #0000FF; ">true</span>)
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;Rotation in Z&quot;</span>);
+            }
+
+
+        }
+        <span style="color: #0000FF; ">catch</span> (Exception ex)
+        {
+            Debug.Print(ex.ToString());
+        }
+    }
+
+}</pre>
+	</div>
+	
+</div>
+</div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="INLINE_EXAMPLE" namespace="Example" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""<>"",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="MENU_LINK" namespace="example" source="Item" filter="type=linked" NoHeader="True" NoFooter="True" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=examplelinks,caption=$$Example$$%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="FilteredItemList" scrap="CATEGORIZED_LINKS" namespace="linkcategory" source="Item" filter="" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=seealso,caption=""$$See_Also$$%%designlist:tagidentifier=##SEEALSO,itemtype=See Also%%""%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><div class="i-section-heading" id="i-seealso-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">See Also</span></div><div id="i-seealso-section-content" class="i-section-content"><p id=dxseealsocontent><a href="SolidEdgePart~FEAConstraint.html">FEAConstraint Object</a>
+&nbsp;|&nbsp;<a href="SolidEdgePart~FEAConstraint_members.html">FEAConstraint Members</a>
+</p>
+</p></div><!--DXMETADATA end -->
+    </div>
+    <div id="i-footer-content" class="i-footer-content">
+        <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_FOOTER" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="CopyrightNotice" format="<p>&nbsp;</p><p>&nbsp;</p><hr style=""height: 1px"" /><p>%%variable%%</p>" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="FeedbackLink" format="" --><!--DXMETADATA end-->
+    </div>
+    
+
+    <!--DXMETADATA start type="IsNew" format="<script type=""text/javascript"">setIsNew = true;</script>" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<script type=""text/javascript"">setIsResponsiveEnabled = true;</script>" --><!--DXMETADATA end-->
+    <script type="text/javascript">
+        $(function() {
+            var documentInstance = new Innovasys.Content.Document(document.body);
+            documentInstance.isNew = !(typeof setIsNew === "undefined");
+            documentInstance.isResponsiveEnabled = !(typeof setIsResponsiveEnabled === "undefined");
+            documentInstance.load();
+        });
+    </script>
+</body>
+</html>

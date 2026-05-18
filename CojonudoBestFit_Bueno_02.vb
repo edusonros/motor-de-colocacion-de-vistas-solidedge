@@ -2743,6 +2743,48 @@ Public Module CojonudoBestFit_Bueno
 
 
 
+    ''' <summary>Vista principal láser = misma heurística que DFT (mayor área en Front/Top/Left + giro 90° si aplica).</summary>
+    Public Structure LaserPrincipalViewChoice
+        Public BaseOri As Integer
+        Public ApplyRotMinus90 As Boolean
+        Public BaseOriName As String
+    End Structure
+
+    Public Function ResolveLaserPrincipalViewLayout(app As SolidEdgeFramework.Application,
+                                                    modelPath As String,
+                                                    cleanTemplatePath As String) As LaserPrincipalViewChoice
+        Dim choice As New LaserPrincipalViewChoice With {
+            .BaseOri = CInt(ViewOrientationConstants.igFrontView),
+            .ApplyRotMinus90 = False,
+            .BaseOriName = "Front"
+        }
+        If String.IsNullOrWhiteSpace(modelPath) Then Return choice
+
+        Dim isSheetMetal As Boolean = modelPath.EndsWith(".psm", StringComparison.OrdinalIgnoreCase)
+        Dim sizesOpt = GetBaseViewSizesAtScale1(app, modelPath, cleanTemplatePath, isSheetMetal)
+        If Not sizesOpt.HasValue Then Return choice
+
+        If Not String.IsNullOrWhiteSpace(cleanTemplatePath) AndAlso File.Exists(cleanTemplatePath) Then
+            Dim usable = LayoutEngine.GetUsableAreaForTemplate(cleanTemplatePath)
+            Dim fold = SelectBaseViewForLayoutByFold(sizesOpt.Value, usable)
+            choice.BaseOri = fold.BaseOri
+            choice.BaseOriName = fold.BaseOriName
+            choice.ApplyRotMinus90 = fold.Rotated
+            Return choice
+        End If
+
+        choice.BaseOri = SelectBaseViewByAreaOnly(sizesOpt.Value)
+        choice.BaseOriName = OriToConstantName(choice.BaseOri)
+        Return choice
+    End Function
+
+    ''' <summary>Orientación de vista principal para plano láser (delega en <see cref="ResolveLaserPrincipalViewLayout"/>).</summary>
+    Public Function ResolveLaserPartMainOrientation(app As SolidEdgeFramework.Application,
+                                                   modelPath As String,
+                                                   cleanTemplatePath As String) As Integer
+        Return ResolveLaserPrincipalViewLayout(app, modelPath, cleanTemplatePath).BaseOri
+    End Function
+
     ''' <summary>Wrapper público para DraftGenerator: prepara FlatPattern y crea la vista desarrollada.</summary>
     Public Function CreateFlatViewForDraft(app As SolidEdgeFramework.Application,
                                            modelPath As String,
@@ -3248,5 +3290,219 @@ Public Module CojonudoBestFit_Bueno
             LogEx("DumpAllViews", ex)
         End Try
     End Sub
+
+    ''' <summary>Inserta vista 1:1 en plano de corte láser (sin recálculo UNE de escala).</summary>
+    Public Function InsertLaserCutPieceView(app As SolidEdgeFramework.Application,
+                                            draftDoc As DraftDocument,
+                                            sheet As Sheet,
+                                            modelPath As String,
+                                            templatePath As String,
+                                            insertX As Double,
+                                            insertY As Double,
+                                            scale As Double,
+                                            preferSheetMetalFlat As Boolean,
+                                            log As Action(Of String)) As DrawingView
+        If app Is Nothing OrElse draftDoc Is Nothing OrElse sheet Is Nothing OrElse String.IsNullOrWhiteSpace(modelPath) Then Return Nothing
+        Dim fullPath As String = IO.Path.GetFullPath(modelPath.Trim())
+        If Not File.Exists(fullPath) Then
+            log?.Invoke("[LASER][VIEW][FAIL] file not found path=" & fullPath)
+            Return Nothing
+        End If
+
+        Dim isPsm As Boolean = fullPath.EndsWith(".psm", StringComparison.OrdinalIgnoreCase)
+        If isPsm AndAlso preferSheetMetalFlat Then EnsureFlatPatternReady(app, fullPath)
+
+        Dim link As ModelLink = Nothing
+        Try
+            link = draftDoc.ModelLinks.Add(fullPath)
+            DoIdleSafe(app, "Laser ModelLink")
+        Catch ex As Exception
+            LogEx("InsertLaserCutPieceView ModelLinks.Add", ex)
+            log?.Invoke("[LASER][VIEW][FAIL] ModelLink " & ex.Message)
+            Return Nothing
+        End Try
+        If link Is Nothing Then
+            log?.Invoke("[LASER][VIEW][FAIL] ModelLink=null path=" & fullPath)
+            Return Nothing
+        End If
+
+        Dim dvs As DrawingViews = sheet.DrawingViews
+        Dim dv As DrawingView = Nothing
+        If isPsm Then
+            If preferSheetMetalFlat Then
+                dv = TryInsertLaserPsmFlatView(app, dvs, link, scale, insertX, insertY, log)
+                If dv Is Nothing Then
+                    log?.Invoke("[LASER][VIEW][FALLBACK] PSM sin flat usable, probando vista principal")
+                    dv = TryInsertLaserPsmMainView(app, dvs, link, fullPath, templatePath, scale, insertX, insertY, log)
+                End If
+            Else
+                dv = TryInsertLaserPsmMainView(app, dvs, link, fullPath, templatePath, scale, insertX, insertY, log)
+            End If
+        Else
+            dv = TryInsertLaserParMainView(app, dvs, link, fullPath, templatePath, scale, insertX, insertY, log)
+        End If
+
+        If dv Is Nothing Then Return Nothing
+
+        SafeUpdateView(dv, "LaserCut.Update")
+        DoIdleSafe(app, "LaserCut idle1")
+        SafeUpdateView(dv, "LaserCut.Update2")
+        DoIdleSafe(app, "LaserCut idle2")
+
+        Dim xmin As Double, ymin As Double, xmax As Double, ymax As Double
+        If TryGetViewRange(dv, xmin, ymin, xmax, ymax) Then
+            Dim w As Double = Math.Max(0.0R, xmax - xmin)
+            Dim h As Double = Math.Max(0.0R, ymax - ymin)
+            log?.Invoke("[LASER][VIEW][RANGE] w=" & w.ToString("0.0000", Globalization.CultureInfo.InvariantCulture) &
+                        " h=" & h.ToString("0.0000", Globalization.CultureInfo.InvariantCulture))
+            If w < 0.000001R OrElse h < 0.000001R Then
+                log?.Invoke("[LASER][VIEW][FAIL] zero range path=" & IO.Path.GetFileName(fullPath))
+                Return Nothing
+            End If
+        Else
+            log?.Invoke("[LASER][VIEW][WARN] no Range() path=" & IO.Path.GetFileName(fullPath))
+        End If
+
+        log?.Invoke("[LASER][VIEW][ADD] file=" & IO.Path.GetFileName(fullPath) & " scale=" & scale.ToString("0.####", Globalization.CultureInfo.InvariantCulture))
+        Return dv
+    End Function
+
+    Private Function TryInsertLaserPsmFlatView(app As SolidEdgeFramework.Application,
+                                              dvs As DrawingViews,
+                                              link As ModelLink,
+                                              scale As Double,
+                                              insertX As Double,
+                                              insertY As Double,
+                                              log As Action(Of String)) As DrawingView
+        Dim dv As DrawingView = Nothing
+        Try
+            dv = CType(
+                dvs.AddSheetMetalView(
+                    link,
+                    ViewOrientationConstants.igTopView,
+                    scale,
+                    insertX,
+                    insertY,
+                    SheetMetalDrawingViewTypeConstants.seSheetMetalFlatView),
+                DrawingView)
+            If dv IsNot Nothing Then
+                log?.Invoke("[LASER][VIEW][INSERT] PSM flat AddSheetMetalView")
+                Return dv
+            End If
+        Catch ex As Exception
+            LogEx("TryInsertLaserPsmFlatView AddSheetMetalView", ex)
+            log?.Invoke("[LASER][VIEW][FAIL] PSM flat " & ex.Message)
+        End Try
+
+        Dim flat As DrawingView = Nothing
+        If TryCreateFlatView_ByReflection(dvs, link, scale, flat) AndAlso flat IsNot Nothing Then
+            log?.Invoke("[LASER][VIEW][INSERT] PSM flat reflection")
+            Return flat
+        End If
+
+        log?.Invoke("[LASER][VIEW][FAIL] PSM all flat strategies failed")
+        Return Nothing
+    End Function
+
+    Private Function TryInsertLaserPsmMainView(app As SolidEdgeFramework.Application,
+                                               dvs As DrawingViews,
+                                               link As ModelLink,
+                                               modelPath As String,
+                                               templatePath As String,
+                                               scale As Double,
+                                               insertX As Double,
+                                               insertY As Double,
+                                               log As Action(Of String)) As DrawingView
+        Return TryInsertLaserDesignedMainView(app, dvs, link, modelPath, templatePath, scale, insertX, insertY, isSheetMetal:=True, log)
+    End Function
+
+    Private Function TryInsertLaserParMainView(app As SolidEdgeFramework.Application,
+                                               dvs As DrawingViews,
+                                               link As ModelLink,
+                                               modelPath As String,
+                                               templatePath As String,
+                                               scale As Double,
+                                               insertX As Double,
+                                               insertY As Double,
+                                               log As Action(Of String)) As DrawingView
+        Return TryInsertLaserDesignedMainView(app, dvs, link, modelPath, templatePath, scale, insertX, insertY, isSheetMetal:=False, log)
+    End Function
+
+    ''' <summary>Inserta vista principal 1:1 (mayor área / LayoutByFold, igual que motor DFT).</summary>
+    Private Function TryInsertLaserDesignedMainView(app As SolidEdgeFramework.Application,
+                                                    dvs As DrawingViews,
+                                                    link As ModelLink,
+                                                    modelPath As String,
+                                                    templatePath As String,
+                                                    scale As Double,
+                                                    insertX As Double,
+                                                    insertY As Double,
+                                                    isSheetMetal As Boolean,
+                                                    log As Action(Of String)) As DrawingView
+        Dim layout As LaserPrincipalViewChoice
+        Try
+            layout = ResolveLaserPrincipalViewLayout(app, modelPath, templatePath)
+        Catch ex As Exception
+            LogEx("ResolveLaserPrincipalViewLayout", ex)
+            layout = New LaserPrincipalViewChoice With {.BaseOri = CInt(ViewOrientationConstants.igFrontView), .BaseOriName = "Front"}
+        End Try
+
+        log?.Invoke("[LASER][VIEW][MAIN] file=" & IO.Path.GetFileName(modelPath) &
+                    " base=" & layout.BaseOriName &
+                    " ori=" & layout.BaseOri.ToString(Globalization.CultureInfo.InvariantCulture) &
+                    " rot90=" & layout.ApplyRotMinus90.ToString())
+
+        Dim oris As New List(Of Integer) From {layout.BaseOri}
+        For Each fallbackOri In New Integer() {
+            CInt(ViewOrientationConstants.igFrontView),
+            CInt(ViewOrientationConstants.igTopView),
+            CInt(ViewOrientationConstants.igRightView)}
+            If Not oris.Contains(fallbackOri) Then oris.Add(fallbackOri)
+        Next
+
+        Dim kindTag As String = If(isSheetMetal, "PSM", "PAR")
+        For Each ori In oris
+            Dim dv As DrawingView = Nothing
+            Dim useLayoutRotation As Boolean = (ori = layout.BaseOri) AndAlso layout.ApplyRotMinus90
+            Try
+                If isSheetMetal Then
+                    dv = dvs.AddSheetMetalView(
+                        link, ori, scale, insertX, insertY,
+                        SheetMetalDrawingViewTypeConstants.seSheetMetalDesignedView)
+                Else
+                    dv = dvs.AddPartView(link, ori, scale, insertX, insertY, PartDrawingViewTypeConstants.sePartDesignedView)
+                End If
+                If dv Is Nothing Then
+                    log?.Invoke("[LASER][VIEW][FAIL] " & kindTag & " principal null ori=" & ori.ToString(Globalization.CultureInfo.InvariantCulture))
+                    Continue For
+                End If
+                ForceViewOrientationStandard(dv, ori, "Laser" & kindTag)
+                If useLayoutRotation Then
+                    SafeSetRotationAngle(dv, -RIGHT_ROT_RAD)
+                    log?.Invoke("[LASER][VIEW][ROTATE] " & kindTag & " -90° (LayoutByFold)")
+                End If
+                SafeUpdateView(dv, "Laser" & kindTag & ".Update")
+                DoIdleSafe(app, "Laser" & kindTag & " idle")
+                Dim xmin As Double, ymin As Double, xmax As Double, ymax As Double
+                If TryGetViewRange(dv, xmin, ymin, xmax, ymax) Then
+                    Dim w As Double = Math.Max(0.0R, xmax - xmin)
+                    Dim h As Double = Math.Max(0.0R, ymax - ymin)
+                    If w >= 0.000001R AndAlso h >= 0.000001R Then
+                        log?.Invoke("[LASER][VIEW][INSERT] " & kindTag & " principal ori=" & ori.ToString(Globalization.CultureInfo.InvariantCulture) &
+                                    If(useLayoutRotation, " rot=-90", ""))
+                        Return dv
+                    End If
+                End If
+                log?.Invoke("[LASER][VIEW][FAIL] " & kindTag & " principal zero range ori=" & ori.ToString(Globalization.CultureInfo.InvariantCulture))
+                Try : dv.Delete() : Catch : End Try
+            Catch ex As Exception
+                LogEx("TryInsertLaserDesignedMainView " & kindTag, ex)
+                log?.Invoke("[LASER][VIEW][FAIL] " & kindTag & " principal ori=" & ori.ToString(Globalization.CultureInfo.InvariantCulture) & " " & ex.Message)
+            End Try
+        Next
+
+        log?.Invoke("[LASER][VIEW][FAIL] " & kindTag & " principal all orientations failed path=" & IO.Path.GetFileName(modelPath))
+        Return Nothing
+    End Function
 
 End Module

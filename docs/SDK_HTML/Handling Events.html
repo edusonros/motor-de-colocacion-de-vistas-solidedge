@@ -1,0 +1,431 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--DXMETADATA start type="MetaCharset" --><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><!--DXMETADATA end-->
+    <meta http-equiv="X-UA-Compatible" value="IE=9" />
+
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Literal" condition="helpversion:value=3" value="<meta name=""Microsoft.Help.SelfBranded"" content=""true"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="ItemTitle" format="<title>%%ItemTitle%%</title>" --><title>Handling Events</title><!--DXMETADATA end-->
+    <!--DXMETADATA start type="ItemTitle" format="<meta name=""Title"" content=""%%ItemTitleNoQuotes%%""/>" --><meta name="Title" content="Handling Events"/><!--DXMETADATA end-->    
+    
+
+    <!--DXMETADATA start type="PackageLink" packagename="jquery" filetype="script" firstlinkattributes="id=""mshs_support_script"""--><script src="template/packages/jquery/script/chm.mshc/jquery-1.7.2.min.js" type="text/javascript" id="mshs_support_script"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="script"--><script src="template/packages/jquery-ui/script/chm.mshc/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/jquery-ui/css/chm.mshc/jquery-ui-1.8.18.custom.css"></link><!--DXMETADATA end-->
+	
+    <!--DXMETADATA start type="Synopsis" StripHtmlTags="True" MaxLength="250" format="<meta name=""Description"" content=""%%Synopsis%%"" />"--><meta name="Description" content="Solid Edge provides a wide range of COM event sets. Events are used to notify a client that something of interest has occurred in the object. Events are fired by COM objects and no response from the client is expected. In other words, they are simple" /><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-topics" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/plugins-topics/css/chm.mshc/jquery-plugins.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-topics" filetype="css" firstlinkattributes=" data-mshv2-stylesheet=""/template/packages/core-topics/topics.mshv2.css"" data-mshv1-stylesheet=""/template/packages/core-topics/topics.mshv1.css"" data-responsive-mobile=""template/packages/core-topics/topics.mobile.css"" data-responsive-tablet=""template/packages/core-topics/topics.tablet.css"""--><link rel="stylesheet" type="text/css" href="template/packages/core-topics/css/topics.css"  data-mshv2-stylesheet="/template/packages/core-topics/topics.mshv2.css" data-mshv1-stylesheet="/template/packages/core-topics/topics.mshv1.css" data-responsive-mobile="template/packages/core-topics/topics.mobile.css" data-responsive-tablet="template/packages/core-topics/topics.tablet.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-topics" filetype="script"--><script src="template/packages/plugins-topics/script/chm.mshc/jquery-plugins.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-topics" filetype="script"--><script src="template/packages/core-topics/script/topics.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="TopicId" format="<meta name=""Microsoft.Help.Id"" content=""%%TopicId%%""/>" --><meta name="Microsoft.Help.Id" content="883bb6eb-17de-4229-8bc4-d0cf7eb8f6e6"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocParentId" format="<meta name=""Microsoft.Help.TocParent"" content=""%%TocParentId%%""/>" --><meta name="Microsoft.Help.TocParent" content="ca45f3e0-29f8-43e4-916b-e49f5573c12c"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocOrdinal" format="<meta name=""Microsoft.Help.TocOrder"" content=""%%TocOrdinal%%""/>" --><meta name="Microsoft.Help.TocOrder" content="10"/><!--DXMETADATA end-->
+    <meta name="Microsoft.Help.F1" content=""/>
+    <meta name="Microsoft.Help.ContentType" content="Concepts" />
+    <!--DXMETADATA start type="MshvKeywords" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="MshvMetaTags" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.Locale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.TopicLocale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="Stylesheets" --><link rel="stylesheet" type="text/css" href="stylesheets/customstyles.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Scripts" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="DesignTime"--><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_PROPERTIES" --><!--DXMETADATA end -->
+
+    <!--DXMETADATA start type="CustomHeadContent" --><!--DXMETADATA end-->
+</head>
+
+<body>
+    <div id="i-before-header-content" class="i-before-header-content">
+        
+    </div>
+    <div id="i-header-content" class="i-header-content">
+        <!--DXMETADATA start type="LogoImage" --><img class="logoimage" src="images/sesdk_header.jpg" border="0"></img><!--DXMETADATA end-->
+            <div class="i-project-title"><!--DXMETADATA start type="ProjectTitle" -->Solid Edge 2019 SDK<!--DXMETADATA end--></div>
+        <div class="i-page-title"><div class="i-page-title-text"><!--DXMETADATA start type="ItemTitle" -->Handling Events<!--DXMETADATA end--></div></div>
+    </div>
+    <div id="i-after-header-content" class="i-after-header-content">
+        <!-- Spacing --> <span class="i-toggle-all-sections i-function-link">
+                <label class="i-collapse-all"><!--DXMETADATA start type="Phrase" name="COLLAPSE_ALL" -->Collapse All<!--DXMETADATA end--></label>
+                <label class="i-expand-all" style="display: none;"><!--DXMETADATA start type="Phrase" name="EXPAND_ALL" -->Expand All<!--DXMETADATA end--></label>
+            </span><!--DXMETADATA start type="Literal" condition="communityenabled" value="%%scrap:name=_COMMUNITY_DROPDOWN%%" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="IsWebOutputRootPageLinkEnabled" format="<a href='#' class="i-page-link" class="i-view-in-frame-link" title='$$VIEW_WITH_NAVIGATION_TOOLS_TIP$$' style='display: none' data-root-page='%%WebOutputRootPage%%%%OutputFileExtension%%' target='_top'>$$VIEW_WITH_NAVIGATION_TOOLS_TEXT$$</a>" --><a href='#' class="i-page-link" class="i-view-in-frame-link" title='Open this Topic in a view that includes Navigation tools (Table of Contents, Index, Search)' style='display: none' data-root-page='webframe.html' target='_top'>View with Navigation Tools</a><!--DXMETADATA end-->
+    </div>
+    <!--DXMETADATA start type="Breadcrumbs" scrap="_BREADCRUMBS" --><div class="i-breadcrumbs-container"><table><tr><td>
+<a href="ProgrammersGuide.html">Programmer's Guide</a>
+ > <a href="SolidEdgeTOC.html">Solid Edge</a>
+ > Handling Events</td></tr></table></div><!--DXMETADATA end -->
+    
+    
+    <div id="i-body-content" class="i-body-content">
+        <!--DXMETADATA start type="TopicSection" name="BodyText"--><P>Solid Edge provides a wide range of COM event sets.&nbsp;Events are used to notify a client that something of interest has occurred in the object. Events are fired by COM objects and no response from the client is expected. In other words, they are simple notifications.</P>
+<P>Solid Edge&nbsp;events are available&nbsp;for Mouse, Application, Assembly etc.&nbsp;Some of the events are hit after certain command is invoked&nbsp;and some&nbsp;occur when a command is in progress.</P>
+<P>Before implementing any event interface in your code user should first search for the event set in the&nbsp;object browser. Object browser can give you an idea about the member to which this eventset belong to. For example, if you search for AssemblyChangeEvent in object browser you will find that this event set is a member of "SolidEdgeAssembly.AssemblyDocument" whereas if you search for "ApplicationEvents" in object browser you will find that it is a member of "SolidEdgeFramework". While handling any event set&nbsp;you should use appropriate member to avoid exceptions.</P>
+<P>Below are two methods available in&nbsp;.NET which can be used to&nbsp;hook-up&nbsp;Solid Edge events.</P>
+<P>1. Delegate Event Model</P>
+<P>In this approach user has freedom to&nbsp;handle specific event as per requirement. There is a hidden class&nbsp;which is suffixed with _Event.&nbsp;For example, we have ISEApplicationEvent_Event available.&nbsp;Since it is a hidden class, it will not be available&nbsp;through intellisense. You have to add "_Event" manually to resolve this class.&nbsp;Please refer to below sample for more details.</P>
+<P>2. Connection Point Model</P>
+<P>In this approach after implementing&nbsp;a particular&nbsp;event interface, all the events raised by that interface are handled.&nbsp;While getting a reference to the IConnectionPointContainer make sure that you are using right member for the event set. For example, use application for ApplicationEvents or use AssemblyDocument for AssemblyChangeEvents/AssemblyRecomputeEvents.&nbsp;As shown in below sample code, we will need to leverage the IConnectionPointContainer and IConnectionPoint interfaces from the System.Runtime.InteropServices.ComTypes namespace.</P>
+<DIV id=i-a91a3c97-d85a-4326-ac79-bf4b62ad6f72-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>Delegate Event Model</SPAN> </DIV>
+<DIV id=i-a91a3c97-d85a-4326-ac79-bf4b62ad6f72-section-content class=i-section-content>
+<DIV class="i-tab-container i-tab-container-widget">
+<UL role=tablist>
+<LI class=i-filtered-content-VB><A href="#i-tab-content-VB">VB</A> </LI>
+<LI class=i-filtered-content-CS><A href="#i-tab-content-CS">CS</A> </LI></UL>
+<DIV id=i-tab-content-VB class="i-code i-filtered-content-VB"><PRE><SPAN style="COLOR: #0000ff">Imports</SPAN> System
+<SPAN style="COLOR: #0000ff">Imports</SPAN> System.Runtime.InteropServices
+<SPAN style="COLOR: #0000ff">Imports</SPAN> System.Windows.Forms
+
+<SPAN style="COLOR: #0000ff">Namespace</SPAN> EventTest
+    <SPAN style="COLOR: #0000ff">Partial</SPAN> <SPAN style="COLOR: #0000ff">Public</SPAN> <SPAN style="COLOR: #0000ff">Class</SPAN> Form1
+        <SPAN style="COLOR: #0000ff">Inherits</SPAN> Form
+
+        <SPAN style="COLOR: #0000ff">Private</SPAN> _application <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeFramework.Application
+        <SPAN style="COLOR: #0000ff">Private</SPAN> _applicationEvents <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeFramework.ISEApplicationEvents_Event
+
+        <SPAN style="COLOR: #0000ff">Public</SPAN> <SPAN style="COLOR: #0000ff">Sub</SPAN> <SPAN style="COLOR: #0000ff">New</SPAN>()
+            InitializeComponent()
+        <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Private</SPAN> <SPAN style="COLOR: #0000ff">Sub</SPAN> Form1_Load(<SPAN style="COLOR: #0000ff">ByVal</SPAN> sender <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Object</SPAN>, <SPAN style="COLOR: #0000ff">ByVal</SPAN> e <SPAN style="COLOR: #0000ff">As</SPAN> EventArgs)
+            <SPAN style="COLOR: #008000">' Connect to Solid Edge.
+</SPAN>            _application = <SPAN style="COLOR: #0000ff">DirectCast</SPAN>(Marshal.GetActiveObject(<SPAN style="COLOR: #800000">"SolidEdge.Application"</SPAN>), SolidEdgeFramework.Application)
+
+            <SPAN style="COLOR: #008000">' Connect to application events.
+</SPAN>            _applicationEvents = <SPAN style="COLOR: #0000ff">CType</SPAN>(_application.ApplicationEvents, SolidEdgeFramework.ISEApplicationEvents_Event)
+            <SPAN style="COLOR: #0000ff">AddHandler</SPAN> _applicationEvents.AfterDocumentSave, <SPAN style="COLOR: #0000ff">AddressOf</SPAN> _applicationEvents_AfterDocumentSave
+            <SPAN style="COLOR: #0000ff">AddHandler</SPAN> _applicationEvents.BeforeDocumentSave, <SPAN style="COLOR: #0000ff">AddressOf</SPAN> _applicationEvents_BeforeDocumentSave
+        <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Private</SPAN> <SPAN style="COLOR: #0000ff">Sub</SPAN> _applicationEvents_AfterDocumentSave(<SPAN style="COLOR: #0000ff">ByVal</SPAN> theDocument <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Object</SPAN>)
+            <SPAN style="COLOR: #008000">' Handle AfterDocumentSave.
+</SPAN>        <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Private</SPAN> <SPAN style="COLOR: #0000ff">Sub</SPAN> _applicationEvents_BeforeDocumentSave(<SPAN style="COLOR: #0000ff">ByVal</SPAN> theDocument <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Object</SPAN>)
+            <SPAN style="COLOR: #008000">' Handle BeforeDocumentSave.
+</SPAN>        <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Private</SPAN> <SPAN style="COLOR: #0000ff">Sub</SPAN> Form1_FormClosing(<SPAN style="COLOR: #0000ff">ByVal</SPAN> sender <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Object</SPAN>, <SPAN style="COLOR: #0000ff">ByVal</SPAN> e <SPAN style="COLOR: #0000ff">As</SPAN> FormClosingEventArgs)
+            <SPAN style="COLOR: #008000">' Disconnect to application events.
+</SPAN>            <SPAN style="COLOR: #0000ff">AddHandler</SPAN> _applicationEvents.BeforeDocumentSave, <SPAN style="COLOR: #0000ff">AddressOf</SPAN> _applicationEvents_BeforeDocumentSave
+            <SPAN style="COLOR: #0000ff">AddHandler</SPAN> _applicationEvents.AfterDocumentSave, <SPAN style="COLOR: #0000ff">AddressOf</SPAN> _applicationEvents_AfterDocumentSave
+
+            _applicationEvents = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+    <SPAN style="COLOR: #0000ff">End Class</SPAN>
+<SPAN style="COLOR: #0000ff">End Namespace</SPAN></PRE></DIV>
+<DIV id=i-tab-content-CS class="i-code i-filtered-content-CS"><PRE><SPAN style="COLOR: #0000ff">using</SPAN> System;
+<SPAN style="COLOR: #0000ff">using</SPAN> System.Runtime.InteropServices;
+<SPAN style="COLOR: #0000ff">using</SPAN> System.Windows.Forms;
+
+<SPAN style="COLOR: #0000ff">namespace</SPAN> EventTest
+{
+    <SPAN style="COLOR: #0000ff">public</SPAN> <SPAN style="COLOR: #0000ff">partial</SPAN> <SPAN style="COLOR: #0000ff">class</SPAN> Form1 : Form
+    {
+        <SPAN style="COLOR: #0000ff">private</SPAN> SolidEdgeFramework.Application _application;
+        <SPAN style="COLOR: #0000ff">private</SPAN> SolidEdgeFramework.ISEApplicationEvents_Event _applicationEvents;
+
+        <SPAN style="COLOR: #0000ff">public</SPAN> Form1()
+        {
+            InitializeComponent();
+        }
+
+        <SPAN style="COLOR: #0000ff">private</SPAN> <SPAN style="COLOR: #0000ff">void</SPAN> Form1_Load(<SPAN style="COLOR: #0000ff">object</SPAN> sender, EventArgs e)
+        {
+            <SPAN style="COLOR: #008000">// Connect to Solid Edge.
+</SPAN>            _application = (SolidEdgeFramework.Application)Marshal.GetActiveObject(<SPAN style="COLOR: #800000">"SolidEdge.Application"</SPAN>);
+
+            <SPAN style="COLOR: #008000">// Connect to application events.
+</SPAN>            _applicationEvents = (SolidEdgeFramework.ISEApplicationEvents_Event)_application.ApplicationEvents;
+            _applicationEvents.AfterDocumentSave += _applicationEvents_AfterDocumentSave;
+            _applicationEvents.BeforeDocumentSave += _applicationEvents_BeforeDocumentSave;
+        }
+
+        <SPAN style="COLOR: #0000ff">void</SPAN> _applicationEvents_AfterDocumentSave(<SPAN style="COLOR: #0000ff">object</SPAN> theDocument)
+        {
+            <SPAN style="COLOR: #008000">// Handle AfterDocumentSave.
+</SPAN>        }
+
+        <SPAN style="COLOR: #0000ff">void</SPAN> _applicationEvents_BeforeDocumentSave(<SPAN style="COLOR: #0000ff">object</SPAN> theDocument)
+        {
+            <SPAN style="COLOR: #008000">// Handle BeforeDocumentSave.
+</SPAN>        }
+
+        <SPAN style="COLOR: #0000ff">private</SPAN> <SPAN style="COLOR: #0000ff">void</SPAN> Form1_FormClosing(<SPAN style="COLOR: #0000ff">object</SPAN> sender, FormClosingEventArgs e)
+        {
+            <SPAN style="COLOR: #008000">// Disconnect to application events.
+</SPAN>            _applicationEvents.BeforeDocumentSave += _applicationEvents_BeforeDocumentSave;
+            _applicationEvents.AfterDocumentSave += _applicationEvents_AfterDocumentSave;
+            _applicationEvents = <SPAN style="COLOR: #0000ff">null</SPAN>;
+        }
+    }
+}</PRE></DIV></DIV></DIV>
+<DIV id=i-cc60214e-d0a6-490e-918c-5695ab28d1c1-section-heading class=i-section-heading><SPAN class=i-section-heading-icon><SPAN class=i-hidden>&nbsp;</SPAN></SPAN><SPAN class=i-section-heading-text>Connection Point Model</SPAN> </DIV>
+<DIV id=i-cc60214e-d0a6-490e-918c-5695ab28d1c1-section-content class=i-section-content>
+<DIV class="i-tab-container i-tab-container-widget">
+<UL role=tablist>
+<LI class=i-filtered-content-VB><A href="#i-tab-content-VB">VB</A> </LI>
+<LI class=i-filtered-content-CS><A href="#i-tab-content-CS">CS</A> </LI></UL>
+<DIV id=i-tab-content-VB class="i-code i-filtered-content-VB"><PRE><SPAN style="COLOR: #0000ff">Option</SPAN> Infer <SPAN style="COLOR: #0000ff">On</SPAN>
+
+<SPAN style="COLOR: #0000ff">Imports</SPAN> System
+<SPAN style="COLOR: #0000ff">Imports</SPAN> System.Runtime.InteropServices
+<SPAN style="COLOR: #0000ff">Imports</SPAN> System.Runtime.InteropServices.ComTypes
+<SPAN style="COLOR: #0000ff">Imports</SPAN> System.Windows.Forms
+
+<SPAN style="COLOR: #0000ff">Namespace</SPAN> EventTest
+    <SPAN style="COLOR: #0000ff">Partial</SPAN> <SPAN style="COLOR: #0000ff">Public</SPAN> <SPAN style="COLOR: #0000ff">Class</SPAN> Form1
+        <SPAN style="COLOR: #0000ff">Inherits</SPAN> Form
+        <SPAN style="COLOR: #0000ff">Implements</SPAN> SolidEdgeFramework.ISEApplicationEvents
+
+        <SPAN style="COLOR: #0000ff">Private</SPAN> _application <SPAN style="COLOR: #0000ff">As</SPAN> SolidEdgeFramework.Application
+        <SPAN style="COLOR: #0000ff">Private</SPAN> _connectionPoint <SPAN style="COLOR: #0000ff">As</SPAN> IConnectionPoint
+        <SPAN style="COLOR: #0000ff">Private</SPAN> _cookie <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Integer</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Public</SPAN> <SPAN style="COLOR: #0000ff">Sub</SPAN> <SPAN style="COLOR: #0000ff">New</SPAN>()
+            InitializeComponent()
+        <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Private</SPAN> <SPAN style="COLOR: #0000ff">Sub</SPAN> Form1_Load(<SPAN style="COLOR: #0000ff">ByVal</SPAN> sender <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Object</SPAN>, <SPAN style="COLOR: #0000ff">ByVal</SPAN> e <SPAN style="COLOR: #0000ff">As</SPAN> EventArgs)
+            <SPAN style="COLOR: #008000">' Connect to Solid Edge.
+</SPAN>            _application = <SPAN style="COLOR: #0000ff">DirectCast</SPAN>(Marshal.GetActiveObject(<SPAN style="COLOR: #800000">"SolidEdge.Application"</SPAN>), SolidEdgeFramework.Application)
+
+            ConnectEvents()
+        <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Private</SPAN> <SPAN style="COLOR: #0000ff">Sub</SPAN> Form1_FormClosing(<SPAN style="COLOR: #0000ff">ByVal</SPAN> sender <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Object</SPAN>, <SPAN style="COLOR: #0000ff">ByVal</SPAN> e <SPAN style="COLOR: #0000ff">As</SPAN> FormClosingEventArgs)
+            DisconnectEvents()
+        <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Private</SPAN> <SPAN style="COLOR: #0000ff">Sub</SPAN> ConnectEvents()
+            <SPAN style="COLOR: #008000">' Get the event GUID.
+</SPAN>            <SPAN style="COLOR: #0000ff">Dim</SPAN> typeGuid = <SPAN style="COLOR: #0000ff">GetType</SPAN>(SolidEdgeFramework.ISEApplicationEvents).GUID
+
+            <SPAN style="COLOR: #008000">' Get a reference to the IConnectionPointContainer.
+</SPAN>            <SPAN style="COLOR: #0000ff">Dim</SPAN> container <SPAN style="COLOR: #0000ff">As</SPAN> IConnectionPointContainer = <SPAN style="COLOR: #0000ff">DirectCast</SPAN>(_application, IConnectionPointContainer)
+
+            <SPAN style="COLOR: #008000">' Lookup the IConnectionPoint.
+</SPAN>            container.FindConnectionPoint(typeGuid, _connectionPoint)
+
+            <SPAN style="COLOR: #008000">' Advise the sink.
+</SPAN>            _connectionPoint.Advise(<SPAN style="COLOR: #0000ff">Me</SPAN>, _cookie)
+        <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Private</SPAN> <SPAN style="COLOR: #0000ff">Sub</SPAN> DisconnectEvents()
+            <SPAN style="COLOR: #008000">' Unadvise the sink.
+</SPAN>            _connectionPoint.Unadvise(_cookie)
+
+            <SPAN style="COLOR: #008000">' Clear variables.
+</SPAN>            _cookie = 0
+            _connectionPoint = <SPAN style="COLOR: #0000ff">Nothing</SPAN>
+        <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+
+        <SPAN style="COLOR: #0000ff">#Region</SPAN> "ISEApplicationEvents"
+
+        <SPAN style="COLOR: #0000ff">Public</SPAN> <SPAN style="COLOR: #0000ff">Sub</SPAN> AfterActiveDocumentChange(<SPAN style="COLOR: #0000ff">ByVal</SPAN> theDocument <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Object</SPAN>)
+        <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Public</SPAN> <SPAN style="COLOR: #0000ff">Sub</SPAN> AfterCommandRun(<SPAN style="COLOR: #0000ff">ByVal</SPAN> theCommandID <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Integer</SPAN>)
+        <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Public</SPAN> <SPAN style="COLOR: #0000ff">Sub</SPAN> AfterDocumentOpen(<SPAN style="COLOR: #0000ff">ByVal</SPAN> theDocument <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Object</SPAN>)
+        <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Public</SPAN> <SPAN style="COLOR: #0000ff">Sub</SPAN> AfterDocumentPrint(<SPAN style="COLOR: #0000ff">ByVal</SPAN> theDocument <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Object</SPAN>, <SPAN style="COLOR: #0000ff">ByVal</SPAN> hDC <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Integer</SPAN>, <SPAN style="COLOR: #0000ff">ByRef</SPAN> ModelToDC <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Double</SPAN>, <SPAN style="COLOR: #0000ff">ByRef</SPAN> Rect <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Integer</SPAN>)
+        <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Public</SPAN> <SPAN style="COLOR: #0000ff">Sub</SPAN> AfterDocumentSave(<SPAN style="COLOR: #0000ff">ByVal</SPAN> theDocument <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Object</SPAN>)
+        <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Public</SPAN> <SPAN style="COLOR: #0000ff">Sub</SPAN> AfterEnvironmentActivate(<SPAN style="COLOR: #0000ff">ByVal</SPAN> theEnvironment <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Object</SPAN>)
+        <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Public</SPAN> <SPAN style="COLOR: #0000ff">Sub</SPAN> AfterNewDocumentOpen(<SPAN style="COLOR: #0000ff">ByVal</SPAN> theDocument <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Object</SPAN>)
+        <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Public</SPAN> <SPAN style="COLOR: #0000ff">Sub</SPAN> AfterNewWindow(<SPAN style="COLOR: #0000ff">ByVal</SPAN> theWindow <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Object</SPAN>)
+        <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Public</SPAN> <SPAN style="COLOR: #0000ff">Sub</SPAN> AfterWindowActivate(<SPAN style="COLOR: #0000ff">ByVal</SPAN> theWindow <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Object</SPAN>)
+        <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Public</SPAN> <SPAN style="COLOR: #0000ff">Sub</SPAN> BeforeCommandRun(<SPAN style="COLOR: #0000ff">ByVal</SPAN> theCommandID <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Integer</SPAN>)
+        <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Public</SPAN> <SPAN style="COLOR: #0000ff">Sub</SPAN> BeforeDocumentClose(<SPAN style="COLOR: #0000ff">ByVal</SPAN> theDocument <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Object</SPAN>)
+        <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Public</SPAN> <SPAN style="COLOR: #0000ff">Sub</SPAN> BeforeDocumentPrint(<SPAN style="COLOR: #0000ff">ByVal</SPAN> theDocument <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Object</SPAN>, <SPAN style="COLOR: #0000ff">ByVal</SPAN> hDC <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Integer</SPAN>, <SPAN style="COLOR: #0000ff">ByRef</SPAN> ModelToDC <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Double</SPAN>, <SPAN style="COLOR: #0000ff">ByRef</SPAN> Rect <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Integer</SPAN>)
+        <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Public</SPAN> <SPAN style="COLOR: #0000ff">Sub</SPAN> BeforeDocumentSave(<SPAN style="COLOR: #0000ff">ByVal</SPAN> theDocument <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Object</SPAN>)
+        <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Public</SPAN> <SPAN style="COLOR: #0000ff">Sub</SPAN> BeforeEnvironmentDeactivate(<SPAN style="COLOR: #0000ff">ByVal</SPAN> theEnvironment <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Object</SPAN>)
+        <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Public</SPAN> <SPAN style="COLOR: #0000ff">Sub</SPAN> BeforeQuit()
+        <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+
+        <SPAN style="COLOR: #0000ff">Public</SPAN> <SPAN style="COLOR: #0000ff">Sub</SPAN> BeforeWindowDeactivate(<SPAN style="COLOR: #0000ff">ByVal</SPAN> theWindow <SPAN style="COLOR: #0000ff">As</SPAN> <SPAN style="COLOR: #0000ff">Object</SPAN>)
+        <SPAN style="COLOR: #0000ff">End Sub</SPAN>
+
+        <SPAN style="COLOR: #0000ff">#End Region</SPAN>
+    <SPAN style="COLOR: #0000ff">End Class</SPAN>
+<SPAN style="COLOR: #0000ff">End Namespace</SPAN></PRE></DIV>
+<DIV id=i-tab-content-CS class="i-code i-filtered-content-CS"><PRE><SPAN style="COLOR: #0000ff">using</SPAN> System;
+<SPAN style="COLOR: #0000ff">using</SPAN> System.Runtime.InteropServices;
+<SPAN style="COLOR: #0000ff">using</SPAN> System.Runtime.InteropServices.ComTypes;
+<SPAN style="COLOR: #0000ff">using</SPAN> System.Windows.Forms;
+
+<SPAN style="COLOR: #0000ff">namespace</SPAN> EventTest
+{
+    <SPAN style="COLOR: #0000ff">public</SPAN> <SPAN style="COLOR: #0000ff">partial</SPAN> <SPAN style="COLOR: #0000ff">class</SPAN> Form1 : Form, SolidEdgeFramework.ISEApplicationEvents
+    {
+        <SPAN style="COLOR: #0000ff">private</SPAN> SolidEdgeFramework.Application _application;
+        <SPAN style="COLOR: #0000ff">private</SPAN> IConnectionPoint _connectionPoint;
+        <SPAN style="COLOR: #0000ff">private</SPAN> <SPAN style="COLOR: #0000ff">int</SPAN> _cookie;
+
+        <SPAN style="COLOR: #0000ff">public</SPAN> Form1()
+        {
+            InitializeComponent();
+        }
+
+        <SPAN style="COLOR: #0000ff">private</SPAN> <SPAN style="COLOR: #0000ff">void</SPAN> Form1_Load(<SPAN style="COLOR: #0000ff">object</SPAN> sender, EventArgs e)
+        {
+            <SPAN style="COLOR: #008000">// Connect to Solid Edge.
+</SPAN>            _application = (SolidEdgeFramework.Application)Marshal.GetActiveObject(<SPAN style="COLOR: #800000">"SolidEdge.Application"</SPAN>);
+
+            ConnectEvents();
+        }
+
+        <SPAN style="COLOR: #0000ff">private</SPAN> <SPAN style="COLOR: #0000ff">void</SPAN> Form1_FormClosing(<SPAN style="COLOR: #0000ff">object</SPAN> sender, FormClosingEventArgs e)
+        {
+            DisconnectEvents();
+        }
+
+        <SPAN style="COLOR: #0000ff">private</SPAN> <SPAN style="COLOR: #0000ff">void</SPAN> ConnectEvents()
+        {
+            <SPAN style="COLOR: #008000">// Get the event GUID.
+</SPAN>            <SPAN style="COLOR: #0000ff">var</SPAN> typeGuid = <SPAN style="COLOR: #0000ff">typeof</SPAN>(SolidEdgeFramework.ISEApplicationEvents).GUID;
+
+            <SPAN style="COLOR: #008000">// Get a reference to the IConnectionPointContainer.
+</SPAN>            IConnectionPointContainer container = (IConnectionPointContainer)_application;
+
+            <SPAN style="COLOR: #008000">// Lookup the IConnectionPoint.
+</SPAN>            container.FindConnectionPoint(<SPAN style="COLOR: #0000ff">ref</SPAN> typeGuid, <SPAN style="COLOR: #0000ff">out</SPAN> _connectionPoint);
+
+            <SPAN style="COLOR: #008000">// Advise the sink.
+</SPAN>            _connectionPoint.Advise(<SPAN style="COLOR: #0000ff">this</SPAN>, <SPAN style="COLOR: #0000ff">out</SPAN> _cookie);
+        }
+
+        <SPAN style="COLOR: #0000ff">private</SPAN> <SPAN style="COLOR: #0000ff">void</SPAN> DisconnectEvents()
+        {
+            <SPAN style="COLOR: #008000">// Unadvise the sink.
+</SPAN>            _connectionPoint.Unadvise(_cookie);
+
+            <SPAN style="COLOR: #008000">// Clear variables.
+</SPAN>            _cookie = 0;
+            _connectionPoint = <SPAN style="COLOR: #0000ff">null</SPAN>;
+        }
+
+        <SPAN style="COLOR: #0000ff">#region</SPAN> ISEApplicationEvents
+
+        <SPAN style="COLOR: #0000ff">public</SPAN> <SPAN style="COLOR: #0000ff">void</SPAN> AfterActiveDocumentChange(<SPAN style="COLOR: #0000ff">object</SPAN> theDocument)
+        {
+        }
+
+        <SPAN style="COLOR: #0000ff">public</SPAN> <SPAN style="COLOR: #0000ff">void</SPAN> AfterCommandRun(<SPAN style="COLOR: #0000ff">int</SPAN> theCommandID)
+        {
+        }
+
+        <SPAN style="COLOR: #0000ff">public</SPAN> <SPAN style="COLOR: #0000ff">void</SPAN> AfterDocumentOpen(<SPAN style="COLOR: #0000ff">object</SPAN> theDocument)
+        {
+        }
+
+        <SPAN style="COLOR: #0000ff">public</SPAN> <SPAN style="COLOR: #0000ff">void</SPAN> AfterDocumentPrint(<SPAN style="COLOR: #0000ff">object</SPAN> theDocument, <SPAN style="COLOR: #0000ff">int</SPAN> hDC, <SPAN style="COLOR: #0000ff">ref</SPAN> <SPAN style="COLOR: #0000ff">double</SPAN> ModelToDC, <SPAN style="COLOR: #0000ff">ref</SPAN> <SPAN style="COLOR: #0000ff">int</SPAN> Rect)
+        {
+        }
+
+        <SPAN style="COLOR: #0000ff">public</SPAN> <SPAN style="COLOR: #0000ff">void</SPAN> AfterDocumentSave(<SPAN style="COLOR: #0000ff">object</SPAN> theDocument)
+        {
+        }
+
+        <SPAN style="COLOR: #0000ff">public</SPAN> <SPAN style="COLOR: #0000ff">void</SPAN> AfterEnvironmentActivate(<SPAN style="COLOR: #0000ff">object</SPAN> theEnvironment)
+        {
+        }
+
+        <SPAN style="COLOR: #0000ff">public</SPAN> <SPAN style="COLOR: #0000ff">void</SPAN> AfterNewDocumentOpen(<SPAN style="COLOR: #0000ff">object</SPAN> theDocument)
+        {
+        }
+
+        <SPAN style="COLOR: #0000ff">public</SPAN> <SPAN style="COLOR: #0000ff">void</SPAN> AfterNewWindow(<SPAN style="COLOR: #0000ff">object</SPAN> theWindow)
+        {
+        }
+
+        <SPAN style="COLOR: #0000ff">public</SPAN> <SPAN style="COLOR: #0000ff">void</SPAN> AfterWindowActivate(<SPAN style="COLOR: #0000ff">object</SPAN> theWindow)
+        {
+        }
+
+        <SPAN style="COLOR: #0000ff">public</SPAN> <SPAN style="COLOR: #0000ff">void</SPAN> BeforeCommandRun(<SPAN style="COLOR: #0000ff">int</SPAN> theCommandID)
+        {
+        }
+
+        <SPAN style="COLOR: #0000ff">public</SPAN> <SPAN style="COLOR: #0000ff">void</SPAN> BeforeDocumentClose(<SPAN style="COLOR: #0000ff">object</SPAN> theDocument)
+        {
+        }
+
+        <SPAN style="COLOR: #0000ff">public</SPAN> <SPAN style="COLOR: #0000ff">void</SPAN> BeforeDocumentPrint(<SPAN style="COLOR: #0000ff">object</SPAN> theDocument, <SPAN style="COLOR: #0000ff">int</SPAN> hDC, <SPAN style="COLOR: #0000ff">ref</SPAN> <SPAN style="COLOR: #0000ff">double</SPAN> ModelToDC, <SPAN style="COLOR: #0000ff">ref</SPAN> <SPAN style="COLOR: #0000ff">int</SPAN> Rect)
+        {
+        }
+
+        <SPAN style="COLOR: #0000ff">public</SPAN> <SPAN style="COLOR: #0000ff">void</SPAN> BeforeDocumentSave(<SPAN style="COLOR: #0000ff">object</SPAN> theDocument)
+        {
+        }
+
+        <SPAN style="COLOR: #0000ff">public</SPAN> <SPAN style="COLOR: #0000ff">void</SPAN> BeforeEnvironmentDeactivate(<SPAN style="COLOR: #0000ff">object</SPAN> theEnvironment)
+        {
+        }
+
+        <SPAN style="COLOR: #0000ff">public</SPAN> <SPAN style="COLOR: #0000ff">void</SPAN> BeforeQuit()
+        {
+        }
+
+        <SPAN style="COLOR: #0000ff">public</SPAN> <SPAN style="COLOR: #0000ff">void</SPAN> BeforeWindowDeactivate(<SPAN style="COLOR: #0000ff">object</SPAN> theWindow)
+        {
+        }
+
+        <SPAN style="COLOR: #0000ff">#endregion</SPAN>
+    }
+}</PRE></DIV></DIV></DIV><!--DXMETADATA end-->
+            <a name="seealsobookmark"></a>
+            <!--DXMETADATA start type="FilteredItemList" scrap="CATEGORISED_LINKS" namespace="linkcategory" source="Item" filter="" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=seealso,caption=""%%phrase:name=SeeAlso%%%%designlist:tagidentifier=seealso,itemtype=See Also%%""%%%%filtereditemlist%%</div>"--><!--DXMETADATA end-->
+        
+    </div>
+    <div id="i-footer-content" class="i-footer-content">
+        <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_FOOTER" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="CopyrightNotice" format="<p>&nbsp;</p><p>&nbsp;</p><hr style=""height: 1px"" /><p>%%variable%%</p>" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="FeedbackLink" format="" --><!--DXMETADATA end-->
+    </div>
+    
+
+    <!--DXMETADATA start type="IsNew" format="<script type=""text/javascript"">setIsNew = true;</script>" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<script type=""text/javascript"">setIsResponsiveEnabled = true;</script>" --><!--DXMETADATA end-->
+    <script type="text/javascript">
+        $(function() {
+            var documentInstance = new Innovasys.Content.Document(document.body);
+            documentInstance.isNew = !(typeof setIsNew === "undefined");
+            documentInstance.isResponsiveEnabled = !(typeof setIsResponsiveEnabled === "undefined");
+            documentInstance.load();
+        });
+    </script>
+</body>
+</html>

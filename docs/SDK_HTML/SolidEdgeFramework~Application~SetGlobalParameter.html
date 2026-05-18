@@ -1,0 +1,582 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--DXMETADATA start type="MetaCharset" --><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><!--DXMETADATA end-->
+    <meta http-equiv="X-UA-Compatible" value="IE=9" />
+
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Literal" condition="helpversion:value=3" value="<meta name=""Microsoft.Help.SelfBranded"" content=""true"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="PageItemTitle" format="<title>%%PageItemTitle%%</title>" --><title>SetGlobalParameter Method</title><!--DXMETADATA end-->
+    <!--DXMETADATA start type="ItemTitleNoQuotes" format="<meta name=""Title"" content=""%%ItemTitleNoQuotes%%""/>" --><!--DXMETADATA end-->    
+    
+
+    <!--DXMETADATA start type="PackageLink" packagename="jquery" filetype="script" firstlinkattributes="id=""mshs_support_script"""--><script src="template/packages/jquery/script/chm.mshc/jquery-1.7.2.min.js" type="text/javascript" id="mshs_support_script"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="script"--><script src="template/packages/jquery-ui/script/chm.mshc/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/jquery-ui/css/chm.mshc/jquery-ui-1.8.18.custom.css"></link><!--DXMETADATA end-->
+	
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/plugins-ax/css/chm.mshc/jquery-plugins.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="css" firstlinkattributes=" data-mshv2-stylesheet=""/template/packages/core-ax/dx.com.mshv2.css"" data-mshv1-stylesheet=""/template/packages/core-ax/dx.com.mshv1.css"" data-responsive-mobile=""template/packages/core-ax/dx.com.mobile.css"" data-responsive-tablet=""template/packages/core-ax/dx.com.tablet.css"""--><link rel="stylesheet" type="text/css" href="template/packages/core-ax/css/dx.com.css"  data-mshv2-stylesheet="/template/packages/core-ax/dx.com.mshv2.css" data-mshv1-stylesheet="/template/packages/core-ax/dx.com.mshv1.css" data-responsive-mobile="template/packages/core-ax/dx.com.mobile.css" data-responsive-tablet="template/packages/core-ax/dx.com.tablet.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="script"--><script src="template/packages/plugins-ax/script/chm.mshc/jquery-plugins.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="script"--><script src="template/packages/core-ax/script/dx.com.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="TopicId" format="<meta name=""Microsoft.Help.Id"" content=""%%TopicId%%""/>" --><meta name="Microsoft.Help.Id" content="SolidEdgeFramework~Application~SetGlobalParameter"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Synopsis" StripHtmlTags="True" MaxLength="250" format="<meta name=""Description"" content=""%%Synopsis%%"" />"--><meta name="Description" content="Sets the value of a specified global parameter for the referenced Application or document object." /><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocParentId" format="<meta name=""Microsoft.Help.TocParent"" content=""%%TocParentId%%""/>" --><meta name="Microsoft.Help.TocParent" content="SolidEdgeFramework~Application_methods"/><!--DXMETADATA end-->
+    <meta name="Microsoft.Help.ContentType" content="Reference" />
+    <!--DXMETADATA start type="MshvKeywords" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="MshvMetaTags" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.Locale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.TopicLocale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="Stylesheets" --><link rel="stylesheet" type="text/css" href="stylesheets/customstyles.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Scripts" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="DesignTime"--><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_PROPERTIES" --><!--DXMETADATA end -->
+
+    <!--DXMETADATA start type="CustomHeadContent" --><!--DXMETADATA end-->
+</head>
+
+<body>
+    <div id="i-before-header-content" class="i-before-header-content">
+        
+    </div>
+    <div id="i-header-content" class="i-header-content">
+        <!--DXMETADATA start type="LogoImage" --><img class="logoimage" src="images/sesdk_header.jpg" border="0"></img><!--DXMETADATA end-->
+            <div class="i-project-title"><!--DXMETADATA start type="ProjectTitle" -->Solid Edge Framework Type Library<!--DXMETADATA end--></div>
+        <div class="i-page-title"><div class="i-page-title-text"><!--DXMETADATA start type="PageItemTitle" -->SetGlobalParameter Method<!--DXMETADATA end--></div></div>
+    </div>
+    <div id="i-after-header-content" class="i-after-header-content">
+        <!-- Spacing --> <span class="i-toggle-all-sections i-function-link">
+                <label class="i-collapse-all"><!--DXMETADATA start type="Phrase" name="COLLAPSE_ALL" -->Collapse All<!--DXMETADATA end--></label>
+                <label class="i-expand-all" style="display: none;"><!--DXMETADATA start type="Phrase" name="EXPAND_ALL" -->Expand All<!--DXMETADATA end--></label>
+            </span><!--DXMETADATA start type="Literal" condition="communityenabled" value="%%scrap:name=_COMMUNITY_DROPDOWN%%" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="IsWebOutputRootPageLinkEnabled" format="<a href='#' class="i-page-link" class="i-view-in-frame-link" title='$$VIEW_WITH_NAVIGATION_TOOLS_TIP$$' style='display: none' data-root-page='%%WebOutputRootPage%%%%OutputFileExtension%%' target='_top'>$$VIEW_WITH_NAVIGATION_TOOLS_TEXT$$</a>" --><a href='#' class="i-page-link" class="i-view-in-frame-link" title='Open this Topic in a view that includes Navigation tools (Table of Contents, Index, Search)' style='display: none' data-root-page='webframe.html' target='_top'>View with Navigation Tools</a><!--DXMETADATA end-->
+    </div>
+    <!--DXMETADATA start type="Breadcrumbs" scrap="_BREADCRUMBS" --><div class="i-breadcrumbs-container"><table><tr><td>
+<a href="SolidEdgeFramework_P.html">Solid Edge Framework Type Library</a>
+ > <a href="SolidEdgeFramework~Application.html">Application Object</a>
+ : SetGlobalParameter Method</td></tr></table></div><!--DXMETADATA end -->
+    
+    <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_BUBBLES" namespace="parameter" source="Item" -->
+<div id="ParameterPopupContent" class="i-popup-content">
+Specifies the global parameter for which the setting is to be set. Valid values are members of the ApplicationGlobalConstants for Application objects, AssemblyGlobalConstants for AssemblyDocument objects, PartGlobalConstants for PartDocument objects, SheetMetalGlobalConstants for SheetMetalDocument objects, or WeldmentGlobalConstants for WeldmentDocument objects.
+</div>
+<div id="ValuePopupContent" class="i-popup-content">
+Specifies the setting of the global parameter identified by the Parameter argument. The data type depends on the data being set. For Application objects, the data type is Long or Variant. For all other objects, the data type is Double.
+</div>
+<!--DXMETADATA end -->
+    <div id="i-body-content" class="i-body-content">
+        <!--DXMETADATA start type="Description" source="Item" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=description,caption=$$Description$$%%<div class=""i-description-content"">%%description%%</div></div>" --><div class="i-section-heading" id="i-description-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Description</span></div><div id="i-description-section-content" class="i-section-content"><div class="i-description-content">Sets the value of a specified global parameter for the referenced Application or document object.</div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="Syntax" lang="VB" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=syntax,caption=$$Syntax$$%%<div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>%%Syntax%%</pre></tr></table></div></div>" --><div class="i-section-heading" id="i-syntax-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Syntax</span></div><div id="i-syntax-section-content" class="i-section-content"><div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>Public Sub SetGlobalParameter( _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="ParameterPopupLink" data-popup-contentsource="#ParameterPopupContent" data-popup-showevent="click mouseenter">Parameter</a></i> As <a href="SolidEdgeFramework~ApplicationGlobalConstants.html">ApplicationGlobalConstants</a>, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="ValuePopupLink" data-popup-contentsource="#ValuePopupContent" data-popup-showevent="click mouseenter">Value</a></i> As Variant _
+) </pre></tr></table></div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_LIST" namespace="parameter" source="Item" filter="" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=parameters,caption=$$ParameterList$$%%%%filtereditemlist%%</div>" --><div class="i-section-heading" id="i-parameters-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Parameters</span></div><div id="i-parameters-section-content" class="i-section-content"><dl>
+<dt><I>Parameter</I></dt>
+<dd><table class="i-filtered-item-list"><tr><th>Value</th><th>Description</th></tr>
+<tr><td class="i-member-name">seApplicationGlobal3dInputdevice</td><td class="i-description">3d Input Device</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalActivateAllParts</td><td class="i-description">Activate All Parts</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalActivateChangedPartsFileLargeAsm</td><td class="i-description">Activate changed parts on file for Large asm</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalActivateChangedPartsFileMedAsm</td><td class="i-description">Activate changed parts on file for medium asm</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalActivateChangePartFileSmallAsm</td><td class="i-description">Activate changed parts on file for small asm</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalActivePartColor</td><td class="i-description">Active Part Color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalAdminFileLocation</td><td class="i-description">AdminFileLocation</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalAllowInterPart</td><td class="i-description">Allow Inter-Part links</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalAlwayaUploadToServerCheekedOutToMe</td><td class="i-description">Always upload to server but leave doc cheeked out to me</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalAlwaysUploadToServerCheckDocIn</td><td class="i-description">Always upload to server and check document in</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalANSIInchToleranceFile</td><td class="i-description">ANSI Inch Tolerance File</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalANSIMetricToleranceFile</td><td class="i-description">ANSI Metric Tolerance File</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalAntiAliasActiveLevel</td><td class="i-description">Global anti-alias level [active]</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalAntiAliasLevel</td><td class="i-description">Global anti-alias level</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalAntiAliasState</td><td class="i-description">Global anti-alias state [readonly]</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalApplicationColorScheme</td><td class="i-description">Application color scheme </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalApplicationDisplay</td><td class="i-description">Application display mode for new windows</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalApplyActivationOverridesToParts</td><td class="i-description">Apply Activation Overrides To Parts</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalApplySimplifyOverridesToParts</td><td class="i-description">Apply Simplify Overrides To Parts</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalApplySimplifyOverridesToSubAssemblies</td><td class="i-description">Apply Simplify Overrides To SubAssemblies</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalApplyStatusToLinks</td><td class="i-description">Apply Status To Links</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalArcSmoothness</td><td class="i-description">Arc Smoothness</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalAsmConfigurationChangesDrawingView</td><td class="i-description">Asm Configuration changes make drawing view out of date</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalAsmOpenas</td><td class="i-description">Asm open as </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalAssemblydrivenPartfeatures</td><td class="i-description">Asm driven Part feature</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalAssemblyReferencePlanefeature</td><td class="i-description">Asm Reference Plane in feature</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalAutoHideRelationshipPathfinder</td><td class="i-description">Auto hide relationship pathfinder</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalAutoMakeSiblingParentRevisionObsolute</td><td class="i-description">Automatically make sibling and parent revision obsolute</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalAutomaticallyReviseDrawingSelected3Ddoc</td><td class="i-description">Automatically revise drawing that use selected 3D doc</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalAutomaticSave</td><td class="i-description">Automatic Save</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalAutomaticSaveTime</td><td class="i-description">Automatic Save Time</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalAutomaticSelection</td><td class="i-description">Automatic Selection</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalAutoPreserveDoc</td><td class="i-description">Auto preserve Document</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalAutoPreserveDocAutoSave</td><td class="i-description">Auto Preserve doc by Auto Save</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalAutoPreserveDocBackup</td><td class="i-description">Auto Preserve doc by Backup</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalAutoSaveMinutes</td><td class="i-description">Auto Save minutes</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalAutoScrollASMPathfinder</td><td class="i-description">Auto scroll assembly pathfinder</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalAutoSetDraftStatus</td><td class="i-description">Auto set draft status</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalAutoSharpen</td><td class="i-description">Auto sharpen</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalAutoSharpenLevel</td><td class="i-description">Automatic sharpen level</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalAvailableRootFolder</td><td class="i-description">Available Root Folder</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalBackupDraftfiles</td><td class="i-description">Backup Draft files </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalBackupMinutes</td><td class="i-description">Auto save backup minutes</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalBackupModelfiles</td><td class="i-description">BAckup Model Files</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalBaselinedRootFolder</td><td class="i-description">Baselined Root Folder</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalBendDownCenterlineStyle</td><td class="i-description">Bend down centerline style</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalBendupCenterlineStyle</td><td class="i-description">Bend up centerline style</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalBoundaryEdgesStyle</td><td class="i-description">Boundary edges style</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalChangedPartActivation</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalCheckInOnClose</td><td class="i-description">Check In On Close</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalCheckModelChanges</td><td class="i-description">Check for model changes made by another user</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalCheckOODMaterialOnFileOpen</td><td class="i-description">Enable and Disable Check Of Out of Date Material Properties on file open</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalColorActive</td><td class="i-description">The color for active elements</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalColorBackground</td><td class="i-description">The color for the background</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalColorConstruction</td><td class="i-description">The color for construction elements</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalColorDisabled</td><td class="i-description">The color for disabled items</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalColorFailed</td><td class="i-description">The color for failed items</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalColorHandle</td><td class="i-description">The color for handles</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalColorHighlight</td><td class="i-description">The color for highlighted elements</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalColorLiveSectionCenterline</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalColorLiveSectionEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalColorLiveSectionOpacity</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalColorLiveSectionRegion</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalColorManagerCopyIndividualFaceColors</td><td class="i-description">Color Manager Copy Individual Face Colors</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalColorManagerShowAssemblyStyleOverrides</td><td class="i-description">Color Manager Show Assembly Style Overrides</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalColorManagerShowPartFaceColors</td><td class="i-description">Color Manager Show Part Face Colors</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalColorManagerUseIndividualPartStyles</td><td class="i-description">ColorManager Use Individual Part Styles</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalColorManagerUseToolsOptionsColorSettings</td><td class="i-description">Color Manager Use Tools Options Color Settings</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalColorProfile</td><td class="i-description">The color for profiles, sketches and layouts</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalColorRefPlane</td><td class="i-description">Color RefPlane</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalColorSelected</td><td class="i-description">The color for items in the select set</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalColorSheet</td><td class="i-description">The color for the sheet</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalColorSheetTab1</td><td class="i-description">Specifies the first of two alternating colors for the sheet tabs.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalColorSheetTab2</td><td class="i-description">Specifies the second of two alternating colors for the sheet tabs.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalCommandBarMode</td><td class="i-description">Displays mode in command bar or quick bar.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalCommandUserInterface</td><td class="i-description">Command user interface </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalConfigNames</td><td class="i-description">Config names</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalConfiguration</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalCullingBool</td><td class="i-description">Culling</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalCullingValue</td><td class="i-description">Culling Value</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalCurvatureCombDensity</td><td class="i-description">Curvature Comb Density</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalCurvatureCombMagnitude</td><td class="i-description">Curvature Comb Magnitude</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalCustomOccurrencePropertyFile</td><td class="i-description">Global custom occurrence property file location</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalCustomSettingFile</td><td class="i-description">Custom Setting File</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalCutHardwareSectionViews</td><td class="i-description">Cut hardware in section views</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDefaultSharpness</td><td class="i-description">Default sharpness for new windows</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDefaultUserLangID</td><td class="i-description">The Microsoft LANGID of the user's chosen language for the user interface</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDeriveDisplayAsReference</td><td class="i-description">Derive Display as Reference from Assembly</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDetailEnvelope</td><td class="i-description">Detail Envelope</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDimKeyInValueAuto</td><td class="i-description">Dimention Keyin values automatically</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDimSurroundingComponents</td><td class="i-description">Dimension Surrounding Components</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDisabledEleColorDraft</td><td class="i-description">Disabled Color </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDisperseAsmPlacePart</td><td class="i-description">Disperse this assembly during Place Part</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDisplayArcQuality</td><td class="i-description">Display Arc Quality</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDisplayAsCircle</td><td class="i-description">Display as Circle</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDisplaydropshadows</td><td class="i-description">Display Drop Shadows</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDisplayInterPartCopies</td><td class="i-description">Recently used files Value</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDisplayQuality</td><td class="i-description">Display Quality</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDisplaySectionCaps</td><td class="i-description">Enable the display of section caps with dynamic sections</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDisplaySheet</td><td class="i-description">Display sheet</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDisplayStatistics</td><td class="i-description">Enable display timing statistics in the status bar</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDisplayUnitsMeasurement</td><td class="i-description">Display units of measurement label</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDocumentNameFormula</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDontCreateNewWndPlacePart</td><td class="i-description">Do not create new window</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDoubleClickblock</td><td class="i-description">Double Click a block</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDoubleclickEmbeddedObjects</td><td class="i-description">Double click to open embedded objects</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDraftSaveAsPDFAutoRotateSheetsForTextReadability</td><td class="i-description">Auto rotate sheets for text readability</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDraftSaveAsPDFIncludeGridDisplay</td><td class="i-description">Include grid display in PDF</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDraftSaveAsPDFPrintQualityDPI</td><td class="i-description">Print quality DPI</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDraftSaveAsPDFSaveAllColorsBlack</td><td class="i-description">Save all colors as black</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDraftSaveAsPDFSheetOptions</td><td class="i-description">Sheet options</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDraftSaveAsPDFSheetsRange</td><td class="i-description">Sheets range</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDraftSaveAsPDFTransparentDVBackgrounds</td><td class="i-description">Transparent drawing view backgrounds</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDraftSaveAsPDFUseIndividualSheetSizes</td><td class="i-description">Use individual sheet sizes</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDynamicClipping</td><td class="i-description">Dynamic Clipping</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDynamicPreviewFeaturecreation</td><td class="i-description">Dynamic Preview Feature creation</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalDynamicTransition</td><td class="i-description">Dynamic view transition smoothness</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalECORootFolder</td><td class="i-description">ECO Root Folder</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalECRRootFolder</td><td class="i-description">ECR Root Folder</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalEdgeCondition</td><td class="i-description">Edge Condition </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalEdgeConditionDraft</td><td class="i-description">Edge condition</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalEnableDotNet2GC</td><td class="i-description">Enable/Disable DotNet 2 Garbage Collection</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalEnableDotNet4GC</td><td class="i-description">Enable/Disable DotNet 4 Garbage Collection</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalEnableDynamicEditProfiles</td><td class="i-description">Enable Dynamic Edit of ProfilesSketches</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalEnableDynamicTolerance</td><td class="i-description">Enable dynamic tolerancing of facet data</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalEnableRegionsWithinSketches</td><td class="i-description">Enable Regions Within Sketches</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalEnableSheetDistanceDimValue</td><td class="i-description">Enable sheet distance dimension values</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalEnableThreadedDisplay</td><td class="i-description">Enable multithreaded displays</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalEnableUndoAllProfileSketch</td><td class="i-description">Enable undo All for profilesketch modifications</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalEnableValuechangeUsingMouseWheel</td><td class="i-description">Enable value changes using mouse wheel</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalEnterProfileSketchCreateNewWindow</td><td class="i-description">Entering Profile Sketch</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalExpandWeldmentSubasms</td><td class="i-description">Streering wheel Medium</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalExplodedFlowLineStyle</td><td class="i-description">Exploded flow line style </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalExternalBom</td><td class="i-description">External BOM</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalFastlocateBoxDisplayAsm</td><td class="i-description">Fast locate using box display for assemblies</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalFastlocateboxDisplayParts</td><td class="i-description">Fast locate using box display for parts</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalFastlocateOverPathfinder</td><td class="i-description">Fast locate when over path finder</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalFeatureOriginSize</td><td class="i-description">Feature origin size</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalFloorReflectionIntensity</td><td class="i-description">Global floor reflection intensity (0 to 100)</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalFramePipingUniquenessCutLength</td><td class="i-description">Frame Piping Uniqueness Cut Length</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalFramePipingUniquenessMass</td><td class="i-description">Frame Piping Uniqueness Mass</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalFramePipingUniquenessMiter</td><td class="i-description">Frame Piping Uniqueness Miter</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGraphicsColorAngAccleration</td><td class="i-description">Angular Accleration</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGraphicsColorAngVelocity</td><td class="i-description">Angular Velocity Color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGraphicsColorBeamCurve</td><td class="i-description">Beam Color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGraphicsColorBearing</td><td class="i-description">Bearing Color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGraphicsColorBodyTemp</td><td class="i-description">Body Temperature</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGraphicsColorConnectorSource</td><td class="i-description">Connector Suurce</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGraphicsColorConnectorTarget</td><td class="i-description">Connector Target</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGraphicsColorConstraints</td><td class="i-description">Constraints</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGraphicsColorConvection</td><td class="i-description">Convection color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGraphicsColorDisplacement</td><td class="i-description">Displacement</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGraphicsColorForce</td><td class="i-description">Force</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGraphicsColorGravity</td><td class="i-description">Gravity Color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGraphicsColorHeatFlux</td><td class="i-description">Heat Flux</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGraphicsColorHeatGen</td><td class="i-description">Material Table</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGraphicsColorNode</td><td class="i-description">Node Color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGraphicsColorPressure</td><td class="i-description">Pressure</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGraphicsColorRadition</td><td class="i-description">Radiation color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGraphicsColorRigidLink</td><td class="i-description">Rigid Link Color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGraphicsColorTemperature</td><td class="i-description">Temperature color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGraphicsColorTorqueMomnent</td><td class="i-description">Torque Color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGRID_Draft_MajorLineColor</td><td class="i-description">Specifies the major line color.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGRID_Draft_MinorLineColor</td><td class="i-description">Specifies the minor line color.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGRID_Draft_ShowAlignmentLines</td><td class="i-description">Specifies whether alignment lines are shown</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGRID_Draft_ShowGrid</td><td class="i-description">Specifies whether the grid is shown.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGRID_Draft_ShowKeyIns</td><td class="i-description">Specifies whether key-ins are shown.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGRID_Draft_ShowReadout</td><td class="i-description">Specifies whether position readouts are shown.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGRID_Draft_SnapToGrid</td><td class="i-description">Specifies whether to snap to the grid.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGRID_Ordered_MajorLineColor</td><td class="i-description">Specifies the major line color.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGRID_Ordered_MinorLineColor</td><td class="i-description">Specifies the minor line color.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGRID_Ordered_ShowAlignmentLines</td><td class="i-description">Specifies whether alignment lines are shown</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGRID_Ordered_ShowGrid</td><td class="i-description">Specifies whether the grid is shown.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGRID_Ordered_ShowKeyIns</td><td class="i-description">Specifies whether key-ins are shown.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGRID_Ordered_ShowReadout</td><td class="i-description">Specifies whether position readouts are shown.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGRID_Ordered_SnapToGrid</td><td class="i-description">Specifies whether to snap to the grid.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGRID_Sync_MajorLineColor</td><td class="i-description">Specifies the major line color.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGRID_Sync_MinorLineColor</td><td class="i-description">Specifies the minor line color.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGRID_Sync_ShowAlignmentLines</td><td class="i-description">Specifies whether alignment lines are shown</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGRID_Sync_ShowGrid</td><td class="i-description">Specifies whether the grid is shown.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGRID_Sync_ShowKeyIns</td><td class="i-description">Specifies whether key-ins are shown.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGRID_Sync_ShowReadout</td><td class="i-description">Specifies whether position readouts are shown.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalGRID_Sync_SnapToGrid</td><td class="i-description">Specifies whether to snap to the grid.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalHandle1ColorDraft</td><td class="i-description">Handle1 Color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalHandle2ColorDraft</td><td class="i-description">Handle3 Color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalHandle3ColorDraft</td><td class="i-description">Handle3 Color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalHatchRibsSectionViews</td><td class="i-description">Hatch Rib section Views</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalHiddenEdgeStyle</td><td class="i-description">Hidden edge style</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalHiddenEdgeStyleFromAsm</td><td class="i-description">Hidden edge style from asm </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalHideAllComponents</td><td class="i-description">Hide All Components</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalHideAllComponentsLargeAsm</td><td class="i-description">Hide all Components for large asm</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalHideAllComponentsMedAsm</td><td class="i-description">Hide all Components for medium asm</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalHideAllComponentsSmallAsm</td><td class="i-description">Hide all Components for small asm</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalHighlightColorDraft</td><td class="i-description">Highlight Color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalHoleSizeFile</td><td class="i-description">Hole Size File</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalHorizontalScrollBar</td><td class="i-description">Horizontal scroll bar</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalInactiveHiddenUnusedComponents</td><td class="i-description">Inactive hidden and unused components</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalInclude2DModelSheets</td><td class="i-description">Include 2D model sheets</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalIncludeBackgroundSheets</td><td class="i-description">Include background sheets</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalIncludeCommandPartAssemblySketches</td><td class="i-description">Include Command Part Asm Sketch</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalIncludeDraftViewerData</td><td class="i-description">Include Draft Viewer data in file</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalIncludeWorkingSheets</td><td class="i-description">Include working sheets</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalIncreaseButtonsCommandRibbon2x</td><td class="i-description">Increase buttons on Command Ribbons by 2x</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalIndicateUnderConstraintProfilesPF</td><td class="i-description">Indicate under constraint profiles in path finder</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalInReviewRootFolder</td><td class="i-description">In Review Root Folder</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalInside</td><td class="i-description">Inside Color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalInsideColorDraft</td><td class="i-description">Inside Color in Draft</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalInsideOutside</td><td class="i-description">InsideOutside Color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalInsideOutsideColorDraft</td><td class="i-description">Inside outside color in Draft</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalInsightCacheLocation</td><td class="i-description">Set InsightCacheLocation</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalInsightFolderMappingFileLocation</td><td class="i-description">Set InsightFolderMappingFileLocation</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalInterPartCopyCommand</td><td class="i-description">Inter Part Copy Command</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalInWorkRootFolder</td><td class="i-description">Obsolete Root Folder</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalISOToleranceFile</td><td class="i-description">ISO Tolerance File</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalLargeAsmDynamicDisplay</td><td class="i-description">Large Asm dynamic display</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalLargeAsmOccurence</td><td class="i-description">Large Asm occurance</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalLimitedSave</td><td class="i-description">Limited Save</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalLimitedSaveEnable</td><td class="i-description">Limited Save Enable</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalLimitedUpdate</td><td class="i-description">Limited Update</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalLimitedUpdateEnable</td><td class="i-description">Limited Update Enable</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalLimitsAndFits</td><td class="i-description">Limits and fits </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalLimitSearchToSearchServicesScope</td><td class="i-description">Limit search to this search services</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalLimitsViewsDraft</td><td class="i-description">Limits and Views</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalLinkMgmt</td><td class="i-description">Link Management</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalLogFilesLocation</td><td class="i-description">Set LogFilesLocation</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalLookAheadVersion</td><td class="i-description">LookAheadVersion</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalMacros</td><td class="i-description">MaAcros</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalMaintainItemNumbers</td><td class="i-description">Maintain Item numbers</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalMaintainRelationships</td><td class="i-description">Maintain relationships during place part</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalMakeLiveRulePanelVertical</td><td class="i-description">Make live rule panel as vertical</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalMakeRevisionsObsolete</td><td class="i-description">Make Revisions Obsolete</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalManagedStdParts</td><td class="i-description">Managed standard parts</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalMatTableFile</td><td class="i-description">Material Table</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalMatTableFolder</td><td class="i-description">Material Table Folder</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalMaximumPrintFileSize</td><td class="i-description">Maximum print file size</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalMediumAsmDynamicDisplay</td><td class="i-description">Medium Asm dynamic display</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalModelingStandard</td><td class="i-description">Value of modelling standard&nbsp;used while installing Solid Edge.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalNumberSheetGroupSeparately</td><td class="i-description">Number sheet group seprately </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalNXNAsternScratch</td><td class="i-description">NX Nastern Scratch</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalObsoleteRootFolder</td><td class="i-description">Obsolete Root Folder</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalObsolute</td><td class="i-description">Obsolute</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalOfflineMode</td><td class="i-description">Set OfflineMode</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalOnLineHelpLocation</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalOnlyGenerateEdgesInsideOverlappingCroppedBoundaries</td><td class="i-description">Only generate edges inside and overlapping cropped boundaries</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalOpacityColorDraft</td><td class="i-description">Opacity Color in Draft</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalOpacityRefPlane</td><td class="i-description">Opacity RefPlane</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalOpenAsReadOnly3DFile</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalOpenAsReadOnly3DFile_IndirectFiles</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalOpenAsReadOnlyDftFile</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalOpenAsReadOnlyDftFile_IndirectFiles</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalOrientWindowSelectedPlane</td><td class="i-description">Orient the window to the selected plane</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalOrientXpressSize</td><td class="i-description">Orient Xpress Size</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalOriginEdgeStyle</td><td class="i-description">Origin edge style </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalOverlayColor</td><td class="i-description">The color for visible edge overlay</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalOverlayColorMode</td><td class="i-description">The color mode for visible edge overlay [1=Absolute, 2=Relative]</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalPackagedCollaborationRootFolder</td><td class="i-description">Packaged Collaboration Root Folder</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalPartActivationLargeAsm</td><td class="i-description">Part Activation for large asm</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalPartActivationMediumAsm</td><td class="i-description">Part Activation for medium asm</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalPartActivationSmallAsm</td><td class="i-description">Part Activation for small asm</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalPartandAsmUndoSteps</td><td class="i-description">Part and asm undo steps</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalPartDynamicDisplay</td><td class="i-description">Part Dynamic Display</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalPartIntersections</td><td class="i-description">Part intersections</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalPartSimplificationLargeAsm</td><td class="i-description">Part simplification for large asm</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalPartSimplificationMedAsm</td><td class="i-description">Part simplification for medium asm</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalPartSimplificationSmallAsm</td><td class="i-description">Part simplification for small asm</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalPaste2dBehaviourConstant</td><td class="i-description">Paste2d Behaviour</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalPasteLinkVariableTable</td><td class="i-description">Paste Link to Variable Table</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalPatternedPartsInherit</td><td class="i-description">Patterned parts inherit</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalPFAppereance</td><td class="i-description">Path finder appearance </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalPipeThreadfsFile</td><td class="i-description">PipeThreadfsFile</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalPopupSwapping</td><td class="i-description">Enable swapping of command on popup control.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalPrereleaseRootFolder</td><td class="i-description">Prerelease Root Folder</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalProcesshiddenedges</td><td class="i-description">Process hidden edges</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalProfileEdgeStyle</td><td class="i-description">Profile edge style</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalProfileUndoSteps</td><td class="i-description">Profile undo steps</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalProjectionAngleDraft</td><td class="i-description">Projection Angle</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalPromptForfileProp</td><td class="i-description">Prompt for File Properties</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalPromptMatmodelDoc</td><td class="i-description">Prompt for material in new model document</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalPropertyTextError</td><td class="i-description">Property Text Error</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalPropSeedFile</td><td class="i-description">Property Seed File</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalRecentlyUsedFilesBool</td><td class="i-description">Recently used files Bool</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalRecentlyUsedFilesValue</td><td class="i-description">Recently used files Value</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalRecomputeAssemblySketchEdit</td><td class="i-description">Recompute assembly during sketch edits</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalReferencePlaneSize</td><td class="i-description">Reference plane size</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalReferenceScale</td><td class="i-description">Reference Scale</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalReleasedRootFolder</td><td class="i-description">Released Root Folder</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalReports</td><td class="i-description">Reports</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalRevisionDelimiter</td><td class="i-description">Sets Revision Delimiter</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSaveColorsBlackWhite</td><td class="i-description">Save colors as black and white</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSaveMultiCADDatasettoTC</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSearchScope</td><td class="i-description">Set SearchScope</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSectionCurvatureCombDensity</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSectionCurvatureCombMagnitude</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSelElementColorDraft</td><td class="i-description">Select Element Color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSessionDraftOpenInactive</td><td class="i-description">Draft inactive mode on open (boolean)</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSet2DSelectionFenceOpacity</td><td class="i-description">SecRegionOpacity</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSetBackGroundColor</td><td class="i-description">Background color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSetChildFeatureColor</td><td class="i-description">Child Feature Color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSetConstructionColor</td><td class="i-description">Construction Color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSetDrivenColor</td><td class="i-description">Driven Color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSetFailedColor</td><td class="i-description">Failed Color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSetFullyDefinedColor</td><td class="i-description">Fully Defined Color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSetGeneralBodyColor</td><td class="i-description">General Body Color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSetGuidePathColor</td><td class="i-description">Guide Path color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSetHandle1Color</td><td class="i-description">Handle1 Color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSetHandle2Color</td><td class="i-description">Handle2 Color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSetHandle3Color</td><td class="i-description">Handle3 Color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSetHighlightColor</td><td class="i-description">Highlight color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSetInactiveColor</td><td class="i-description">Inactive Color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSetInconsistantColor</td><td class="i-description">Inconsistant Color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSetOverDefinedColor</td><td class="i-description">Over Defined Color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSetPlaneColor</td><td class="i-description">Plane color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSetPlaneEdgesColor</td><td class="i-description">Plane Edge color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSetPlaneFeatureColor</td><td class="i-description">Plane Feature Color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSetProfileSelectionColor</td><td class="i-description">Profile Selection color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSetRegionColor</td><td class="i-description">Region Color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSetRegionOpacity</td><td class="i-description">PriRegionOpacity</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSetSelectedColor</td><td class="i-description">Selected color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSetSketchColor</td><td class="i-description">Sketch color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSetUnderDefinedColor</td><td class="i-description">User Defined Color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSheetColorDraft</td><td class="i-description">Sheet Color</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSheetMetalDynamicDisplay</td><td class="i-description">Sheet Metal Dynamic Display</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSheetMetalGage</td><td class="i-description">Sheet Metal Gage</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSheetNoNameSeprator</td><td class="i-description">Sheet Number and name seprator</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSheetTab1ColorDraft</td><td class="i-description">Sheet Tab1 Color in Draft</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSheetTab2ColorDraft</td><td class="i-description">Sheet Tab2 Color in Draft</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSheetTabDisplayInfo</td><td class="i-description">Specifies what information is displayed in the sheet tab : 0 = sheet number; 1 = sheet name; 2 = sheet number and sheet name</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSheetTabDisplayInfoSeparator</td><td class="i-description">Specifies the separator string used between the sheet number and sheet name when both are displayed in the sheet tabs.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalShowCommandTips</td><td class="i-description">Show command tips</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalShowDragRectTimeValue</td><td class="i-description">Show drag rectangle when full display time exceeds</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalShowDrawingViewScale</td><td class="i-description">Show drawing view scale</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalShowEdgesByCuttingPlane</td><td class="i-description">Show Edges by cutting plane</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalShowLiveRules</td><td class="i-description">Show Live rules</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalShowOrientationTriad</td><td class="i-description">Show Orientaion Triad</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalShowPartReference</td><td class="i-description">Show Part reference</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalShowPFDocView</td><td class="i-description">Show Path finder in doc view</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalShowRotationAngle</td><td class="i-description">Show rotation angle</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalShowSensorIndicator</td><td class="i-description">Show sensor indicator</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalShowSheetNumberParentAnnotation</td><td class="i-description">Show sheet number if parent annotation</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalShowStartUpScreen</td><td class="i-description">Show Start up screen</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalShowtriangulationbendlines</td><td class="i-description">Show triangulation bend lines</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalShowUnitsInValueFields</td><td class="i-description">Shows units of measure in value fields.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalShowUnitsValueField</td><td class="i-description">Show units in value field</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSimplifyBSplineEdges</td><td class="i-description">Simplify BSpline edges</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSimulationToggleSwitch</td><td class="i-description">Sets or returns simulation license ON/OFF status same as we do through application menu of floating Solid Edge simulation license. This can't be used for premium&nbsp;license of Solid Edge.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSketchRelationshipPeerEdges</td><td class="i-description">Sketch Relationship to peer Edges</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSmallAsmDynamicDisplay</td><td class="i-description">Small Asm dynamic display</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSmallAsmOccurence</td><td class="i-description">Small Asm Occurance</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSoftwareVHL</td><td class="i-description">Enable software VHL/Disable hardware VHL</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalStartEnvironmentSyncOrOrdered</td><td class="i-description">Start part or sheet metal </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalStartLastSaveDoc</td><td class="i-description">Start with my last saved document</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalStartUsingTemplate</td><td class="i-description">Start using template</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalStatusBarCmdFinder</td><td class="i-description">Status Bar Command Finder</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalStatusBarCommonViews</td><td class="i-description">Status Bar Common Views</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalStatusBarFit</td><td class="i-description">Status Bar Fit</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalStatusBarGhostMode</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalStatusBarLookAtFace</td><td class="i-description">Status Bar Look At Face</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalStatusBarNamedViews</td><td class="i-description">Status Bar Named View</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalStatusBarPan</td><td class="i-description">Status Bar Pan</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalStatusBarPreviousView</td><td class="i-description">Status Bar Previous View</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalStatusBarQuickViewCube</td><td class="i-description">Quick View Cube</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalStatusBarRecordVideo</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalStatusBarRotateView</td><td class="i-description">Status Bar Rotate View</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalStatusBarSketchView</td><td class="i-description">Status Bar Sketch View</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalStatusBarSpinAbout</td><td class="i-description">Status Bar Spin About</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalStatusBarUploadToYouTube</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalStatusBarViewStyles</td><td class="i-description">Status Bar View Styles</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalStatusBarZoom</td><td class="i-description">Status Bar Zoom</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalStatusBarZoomArea</td><td class="i-description">Status Bar Zoom Area</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalStatusBarZoomSlider</td><td class="i-description">Status Bar Zoom Slider</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalStatusBarZoomTool</td><td class="i-description">Status Bar Zoom Tool</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSteeringwheelSize</td><td class="i-description">Steerinf Wheel Size</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSTEPAdapterKey</td><td class="i-description">STEP adapter key</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalStopLifeCycleProcess</td><td class="i-description">Stop life cycle process</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalStoreGeomPart</td><td class="i-description">Store geometry in part file</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalStudyType</td><td class="i-description">Study Type</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSubAsmSimplificationLargeAsm</td><td class="i-description">Sub asm simplification for large asm</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSubAsmSimplificationMedAsm</td><td class="i-description">Sub asm simplification for medium asm</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSubAsmSimplificationSmallAsm</td><td class="i-description">Sub asm simplification for small asm</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalSystemInfo</td><td class="i-description">Retrieve system information [readonly]</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalTangentEdgeStyle</td><td class="i-description">Tangent edge style</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalTangentEdgeStyleFromAsm</td><td class="i-description">Tangent edge style from asm </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalTeamcenterFormula</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalTeamCenterMode</td><td class="i-description">TeamCenter Mode</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalTemplatePathFolder</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalTemplateRootFolder</td><td class="i-description">Template Root Folder</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalTextProfileBoldState</td><td class="i-description">Text Profile bold state</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalTextProfileCenterAlignment</td><td class="i-description">Text Profile center alignment</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalTextProfileFontName</td><td class="i-description">Text Profile font name</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalTextProfileItalicState</td><td class="i-description">Text Profile italic state</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalTextProfileLeftAlignment</td><td class="i-description">Text Profile left alignment</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalTextProfileLetterSpacing</td><td class="i-description">Text Profile letter spacing</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalTextProfileLineSpacing</td><td class="i-description">Text Profile line spacing</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalTextProfileMargin</td><td class="i-description">Text Profile margin</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalTextProfileRightAlignment</td><td class="i-description">Text Profile right alignment</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalTextProfileScript</td><td class="i-description">Text Profile script</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalTextProfileSize</td><td class="i-description">Text Profile size</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalTextProfileSmoothness</td><td class="i-description">Text Profile smoothness</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalTextProfileText</td><td class="i-description">Text Profile text</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalThreadDisplayMode</td><td class="i-description">Thread Display mode</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUpdateAll</td><td class="i-description">Inter-Part_Genral Update All</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUpdateDraft</td><td class="i-description">Update draft files also</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUpdateLinkAutomatically</td><td class="i-description">Update links automatically</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUploadOnClose</td><td class="i-description">Upload On Close</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseAllSimplifiedParts</td><td class="i-description">Use All Simplified Parts</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseAllSimplifiedSubAssemblies</td><td class="i-description">Use All Simplified SubAssemblies</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseConfigOrModelViewShow</td><td class="i-description">Use configuration or model view show/hide states</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDefaultPlacementName</td><td class="i-description">Use default placement name during Replace Part</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDetailEnvelopeDisplayAsCircle</td><td class="i-description">Show Detail Envelope as Circle when TRUE.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDetailEnvelopeStandard</td><td class="i-description">Use to set the Detail Envelope Standard Constants. Valid values are defined by enum DetailEnvelopeStandardConstants.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDimensionStyleElementMapAngularCoordinateDim</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDimensionStyleElementMapAngularDim</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDimensionStyleElementMapBalloon</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDimensionStyleElementMapBHC</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDimensionStyleElementMapBlockLabels</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDimensionStyleElementMapCallouts</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDimensionStyleElementMapCenterline</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDimensionStyleElementMapCenterMark</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDimensionStyleElementMapChamferDim</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDimensionStyleElementMapCircularDiameterDim</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDimensionStyleElementMapConnectors</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDimensionStyleElementMapCoordinateDim</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDimensionStyleElementMapDatumFrames</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDimensionStyleElementMapDatumPoints</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDimensionStyleElementMapDatumTargets</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDimensionStyleElementMapEdgeCondition</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDimensionStyleElementMapFCF</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDimensionStyleElementMapLeaders</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDimensionStyleElementMapLinDim</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDimensionStyleElementMapRadialDiameterDim</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDimensionStyleElementMapRadialDim</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDimensionStyleElementMapSTSymbols</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDimensionStyleElementMapSymmetricDiameterDim</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDimensionStyleElementMapWeldSymbols</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDimensionStyleMapping</td><td class="i-description">Use Dimension Style Mapping</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDrawingViewCommandBarDRWcommand</td><td class="i-description">Use Drawing View Command Bar when the Drawing View Wizard command is run </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDrawingViewShowCroppingEdges</td><td class="i-description">Show cropping edges when TRUE.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDrawingViewShowEdgesHiddenTangentEdgesHiddenByOtherParts</td><td class="i-description">Show tangent edges that are hidden by other parts when TRUE.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDrawingViewShowEdgesHiddenTangentEdgesSelfHidden</td><td class="i-description">Show the hidden tangent edges when TRUE.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseDrawingViewWizardModelsDragged</td><td class="i-description">Use drawing view wizard when models are dragged onto the drawing sheet</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseformulaPlacementName</td><td class="i-description">Use formula for placement name</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseGesters</td><td class="i-description">Use gesters</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseISOToleranceTable</td><td class="i-description">Use ISO Tolerance Table when TRUE. Use ANSI Tolerance Table when FALSE.</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUselevelbaseNumbers</td><td class="i-description">Use level bases numbers</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseOnLineHelp</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUserType</td><td class="i-description">User Type</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseshading2DFence</td><td class="i-description">Use Shading 2D Fence</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseShadingDraft</td><td class="i-description">Use shading in Draft</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseShadingHighlight</td><td class="i-description">Use Shading on Highlight</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseShadingRefplanes</td><td class="i-description">Use Shading Reference Plane</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseShadingSelection</td><td class="i-description">Use Shading on Selection</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseSimplifiedModels</td><td class="i-description">Use simplified models</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUseWebBrowser</td><td class="i-description">Use my web browser</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalUsewhenPlacingAsmPartslib</td><td class="i-description">Use when placing asm from parts lib</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalVerticalScrollBar</td><td class="i-description">Vertical scroll bar</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalViewTransitionValue</td><td class="i-description">View Translation</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalVisibleEdgesStyleFromAsm</td><td class="i-description">Visible edge style from asm </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalVisibleEdgeStyle</td><td class="i-description">Visible edge style</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalWeldSymbols</td><td class="i-description">Weld Symbols</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalWeldSymbolsDraft</td><td class="i-description">Weld symbols</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalZebraFolderMapping</td><td class="i-description">Set ZebraFolderMapping</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalZebraFormula</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalZone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalZoomToolLeftClick</td><td class="i-description">Zoom Tool left click </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalZoomToolLeftDrag</td><td class="i-description">Zoom Tool left drag</td></tr>
+<tr><td class="i-member-name">seApplicationGlobalZoomToolRightClick</td><td class="i-description">Zoom Tool right click </td></tr>
+<tr><td class="i-member-name">seApplicationGlobalZoomToolRightDrag</td><td class="i-description">Zoom Tool right drag</td></tr>
+</table>Specifies the global parameter for which the setting is to be set. Valid values are members of the ApplicationGlobalConstants for Application objects, AssemblyGlobalConstants for AssemblyDocument objects, PartGlobalConstants for PartDocument objects, SheetMetalGlobalConstants for SheetMetalDocument objects, or WeldmentGlobalConstants for WeldmentDocument objects.</dd>
+<dt><I>Value</I></dt>
+<dd>Specifies the setting of the global parameter identified by the Parameter argument. The data type depends on the data being set. For Application objects, the data type is Long or Variant. For all other objects, the data type is Double.</dd>
+</dl></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##RETURNS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=returns,caption=$$Return_Type$$%%<div class=""i-returns-content"">%%comment%%</div></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##REMARKS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=remarks,caption=$$Remarks$$%%%%comment%%</div>" --><div class="i-section-heading" id="i-remarks-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Remarks</span></div><div id="i-remarks-section-content" class="i-section-content">The values for Arc quality (seApplicationGlobalDisplayArcQuality constant) range from 6 to 72. For values less than six, the display arc quality will be set to six. For values greater than 72, the display arc quality is set to 72.  The values for Display Quality (seApplicationGlobalDisplayQuality) range from 0 to 48. For values less than 0, the display quality will be set to 0. For values greater than 48, the display quality will be set to 48.</div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="sourcecode" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=source,caption=$$Source_Code$$%%<table border=0 cellpadding=0 cellspacing=0 class=sourcecode><tr><td nowrap>%%sourcecode%%</td></tr></table></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##EXAMPLEINTRO" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=""$$Example$$%%designlist:tagidentifier=##EXAMPLECODE,itemtype=Example%%""%%%%comment%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="EXAMPLEGROUP_LIST" namespace="ExampleGroup" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""="",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="INLINE_EXAMPLE" namespace="Example" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""<>"",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="MENU_LINK" namespace="example" source="Item" filter="type=linked" NoHeader="True" NoFooter="True" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=examplelinks,caption=$$Example$$%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="FilteredItemList" scrap="CATEGORIZED_LINKS" namespace="linkcategory" source="Item" filter="" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=seealso,caption=""$$See_Also$$%%designlist:tagidentifier=##SEEALSO,itemtype=See Also%%""%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><div class="i-section-heading" id="i-seealso-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">See Also</span></div><div id="i-seealso-section-content" class="i-section-content"><p id=dxseealsocontent><a href="SolidEdgeFramework~Application.html">Application Object</a>
+&nbsp;|&nbsp;<a href="SolidEdgeFramework~Application_members.html">Application Members</a>
+</p>
+</p></div><!--DXMETADATA end -->
+    </div>
+    <div id="i-footer-content" class="i-footer-content">
+        <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_FOOTER" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="CopyrightNotice" format="<p>&nbsp;</p><p>&nbsp;</p><hr style=""height: 1px"" /><p>%%variable%%</p>" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="FeedbackLink" format="" --><!--DXMETADATA end-->
+    </div>
+    
+
+    <!--DXMETADATA start type="IsNew" format="<script type=""text/javascript"">setIsNew = true;</script>" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<script type=""text/javascript"">setIsResponsiveEnabled = true;</script>" --><!--DXMETADATA end-->
+    <script type="text/javascript">
+        $(function() {
+            var documentInstance = new Innovasys.Content.Document(document.body);
+            documentInstance.isNew = !(typeof setIsNew === "undefined");
+            documentInstance.isResponsiveEnabled = !(typeof setIsResponsiveEnabled === "undefined");
+            documentInstance.load();
+        });
+    </script>
+</body>
+</html>

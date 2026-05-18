@@ -1,0 +1,217 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--DXMETADATA start type="MetaCharset" --><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><!--DXMETADATA end-->
+    <meta http-equiv="X-UA-Compatible" value="IE=9" />
+
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Literal" condition="helpversion:value=3" value="<meta name=""Microsoft.Help.SelfBranded"" content=""true"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="PageItemTitle" format="<title>%%PageItemTitle%%</title>" --><title>SyncPlanarMove Method</title><!--DXMETADATA end-->
+    <!--DXMETADATA start type="ItemTitleNoQuotes" format="<meta name=""Title"" content=""%%ItemTitleNoQuotes%%""/>" --><!--DXMETADATA end-->    
+    
+
+    <!--DXMETADATA start type="PackageLink" packagename="jquery" filetype="script" firstlinkattributes="id=""mshs_support_script"""--><script src="template/packages/jquery/script/chm.mshc/jquery-1.7.2.min.js" type="text/javascript" id="mshs_support_script"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="script"--><script src="template/packages/jquery-ui/script/chm.mshc/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/jquery-ui/css/chm.mshc/jquery-ui-1.8.18.custom.css"></link><!--DXMETADATA end-->
+	
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/plugins-ax/css/chm.mshc/jquery-plugins.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="css" firstlinkattributes=" data-mshv2-stylesheet=""/template/packages/core-ax/dx.com.mshv2.css"" data-mshv1-stylesheet=""/template/packages/core-ax/dx.com.mshv1.css"" data-responsive-mobile=""template/packages/core-ax/dx.com.mobile.css"" data-responsive-tablet=""template/packages/core-ax/dx.com.tablet.css"""--><link rel="stylesheet" type="text/css" href="template/packages/core-ax/css/dx.com.css"  data-mshv2-stylesheet="/template/packages/core-ax/dx.com.mshv2.css" data-mshv1-stylesheet="/template/packages/core-ax/dx.com.mshv1.css" data-responsive-mobile="template/packages/core-ax/dx.com.mobile.css" data-responsive-tablet="template/packages/core-ax/dx.com.tablet.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="script"--><script src="template/packages/plugins-ax/script/chm.mshc/jquery-plugins.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="script"--><script src="template/packages/core-ax/script/dx.com.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="TopicId" format="<meta name=""Microsoft.Help.Id"" content=""%%TopicId%%""/>" --><meta name="Microsoft.Help.Id" content="SolidEdgePart~Model~SyncPlanarMove"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Synopsis" StripHtmlTags="True" MaxLength="250" format="<meta name=""Description"" content=""%%Synopsis%%"" />"--><meta name="Description" content="Planar move of synchronous faces" /><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocParentId" format="<meta name=""Microsoft.Help.TocParent"" content=""%%TocParentId%%""/>" --><meta name="Microsoft.Help.TocParent" content="SolidEdgePart~Model_methods"/><!--DXMETADATA end-->
+    <meta name="Microsoft.Help.ContentType" content="Reference" />
+    <!--DXMETADATA start type="MshvKeywords" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="MshvMetaTags" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.Locale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.TopicLocale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="Stylesheets" --><link rel="stylesheet" type="text/css" href="stylesheets/customstyles.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Scripts" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="DesignTime"--><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_PROPERTIES" --><!--DXMETADATA end -->
+
+    <!--DXMETADATA start type="CustomHeadContent" --><!--DXMETADATA end-->
+</head>
+
+<body>
+    <div id="i-before-header-content" class="i-before-header-content">
+        
+    </div>
+    <div id="i-header-content" class="i-header-content">
+        <!--DXMETADATA start type="LogoImage" --><img class="logoimage" src="images/sesdk_header.jpg" border="0"></img><!--DXMETADATA end-->
+            <div class="i-project-title"><!--DXMETADATA start type="ProjectTitle" -->Solid Edge Part Type Library<!--DXMETADATA end--></div>
+        <div class="i-page-title"><div class="i-page-title-text"><!--DXMETADATA start type="PageItemTitle" -->SyncPlanarMove Method<!--DXMETADATA end--></div></div>
+    </div>
+    <div id="i-after-header-content" class="i-after-header-content">
+        <!-- Spacing --> <span class="i-toggle-all-sections i-function-link">
+                <label class="i-collapse-all"><!--DXMETADATA start type="Phrase" name="COLLAPSE_ALL" -->Collapse All<!--DXMETADATA end--></label>
+                <label class="i-expand-all" style="display: none;"><!--DXMETADATA start type="Phrase" name="EXPAND_ALL" -->Expand All<!--DXMETADATA end--></label>
+            </span><!--DXMETADATA start type="Literal" condition="communityenabled" value="%%scrap:name=_COMMUNITY_DROPDOWN%%" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="IsWebOutputRootPageLinkEnabled" format="<a href='#' class="i-page-link" class="i-view-in-frame-link" title='$$VIEW_WITH_NAVIGATION_TOOLS_TIP$$' style='display: none' data-root-page='%%WebOutputRootPage%%%%OutputFileExtension%%' target='_top'>$$VIEW_WITH_NAVIGATION_TOOLS_TEXT$$</a>" --><a href='#' class="i-page-link" class="i-view-in-frame-link" title='Open this Topic in a view that includes Navigation tools (Table of Contents, Index, Search)' style='display: none' data-root-page='webframe.html' target='_top'>View with Navigation Tools</a><!--DXMETADATA end-->
+    </div>
+    <!--DXMETADATA start type="Breadcrumbs" scrap="_BREADCRUMBS" --><div class="i-breadcrumbs-container"><table><tr><td>
+<a href="SolidEdgePart_P.html">Solid Edge Part Type Library</a>
+ > <a href="SolidEdgePart~Model.html">Model Object</a>
+ : SyncPlanarMove Method</td></tr></table></div><!--DXMETADATA end -->
+    
+    <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_BUBBLES" namespace="parameter" source="Item" -->
+<div id="NumOfObjectsPopupContent" class="i-popup-content">
+Specifies number of objects that are to be moved.
+</div>
+<div id="psaObjectsPopupContent" class="i-popup-content">
+Specifies the objects and these can be any of the following and we allow combinations of<BR>o&nbsp;Synchronous faces<BR>o&nbsp;Synchronous features<BR>o&nbsp;Coordinate systems (other than base coordinate system)<BR>o&nbsp;Reference planes (other than base reference planes)
+</div>
+<div id="MoveConnectedFaceTypePopupContent" class="i-popup-content">
+Specifies how the faces connected to the selection adapt during the modification.
+</div>
+<div id="MovePrecedenceTypePopupContent" class="i-popup-content">
+Determines behavior of the selected faces versus the other model faces. The type is represented by MovePrecedenceConstants.
+</div>
+<div id="PlaneNormalXPopupContent" class="i-popup-content">
+Specifies X Coordinate of the plane’s normal vector on which the faces are to be moved.
+</div>
+<div id="PlaneNormalYPopupContent" class="i-popup-content">
+Specifies&nbsp;Y Coordinate of the plane’s normal vector on which the faces are to be moved.
+</div>
+<div id="PlaneNormalZPopupContent" class="i-popup-content">
+Specifies&nbsp;Z Coordinate of the plane’s normal vector on which the faces are to be moved.
+</div>
+<div id="StartKeyPtObjPopupContent" class="i-popup-content">
+Specifies the starting reference key point object. If the object is provided then the values passed through StartPtX, StartPtY, and StartPtZ are ignored.
+</div>
+<div id="StartPtXPopupContent" class="i-popup-content">
+Specifies X coordinate of the starting reference key point. If the StartKeyPtObj is provided then this value is ignored.
+</div>
+<div id="StartPtYPopupContent" class="i-popup-content">
+Specifies&nbsp;Y coordinate of the starting reference key point. If the StartKeyPtObj is provided then this value is ignored.
+</div>
+<div id="StartPtZPopupContent" class="i-popup-content">
+Specifies&nbsp;Z coordinate of the starting reference key point. If the StartKeyPtObj is provided then this value is ignored.
+</div>
+<div id="DirectionXPopupContent" class="i-popup-content">
+Specifies X coordinate of the move direction vector. This vector should be on the plane specified.
+</div>
+<div id="DirectionYPopupContent" class="i-popup-content">
+Specifies&nbsp;Y coordinate of the move direction vector. This vector should be on the plane specified.
+</div>
+<div id="DirectionZPopupContent" class="i-popup-content">
+Specifies&nbsp;Z coordinate of the move direction vector. This vector should be on the plane specified.
+</div>
+<div id="ExtentKeyPtObjPopupContent" class="i-popup-content">
+Specifies the end reference key point object. If the object is provided then the distance value passed through ExtentDistance is ignored. We project the key point on to the direction vector to compute the extent distance.
+</div>
+<div id="ExtentDistancePopupContent" class="i-popup-content">
+Specifies the move distance from the start key point. If ExtentKeyPtObj is provided then this value will be ignored.
+</div>
+<div id="bCopyPopupContent" class="i-popup-content">
+Specifies whether to copy the moving faces.
+</div>
+<div id="bDetachPopupContent" class="i-popup-content">
+Specifies whether to detach the moving faces.
+</div>
+<!--DXMETADATA end -->
+    <div id="i-body-content" class="i-body-content">
+        <!--DXMETADATA start type="Description" source="Item" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=description,caption=$$Description$$%%<div class=""i-description-content"">%%description%%</div></div>" --><div class="i-section-heading" id="i-description-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Description</span></div><div id="i-description-section-content" class="i-section-content"><div class="i-description-content">Planar move of synchronous faces</div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="Syntax" lang="VB" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=syntax,caption=$$Syntax$$%%<div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>%%Syntax%%</pre></tr></table></div></div>" --><div class="i-section-heading" id="i-syntax-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Syntax</span></div><div id="i-syntax-section-content" class="i-section-content"><div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>Public Sub SyncPlanarMove( _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="NumOfObjectsPopupLink" data-popup-contentsource="#NumOfObjectsPopupContent" data-popup-showevent="click mouseenter">NumOfObjects</a></i> As Long, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="psaObjectsPopupLink" data-popup-contentsource="#psaObjectsPopupContent" data-popup-showevent="click mouseenter">psaObjects</a></i>() As Object, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="MoveConnectedFaceTypePopupLink" data-popup-contentsource="#MoveConnectedFaceTypePopupContent" data-popup-showevent="click mouseenter">MoveConnectedFaceType</a></i> As <a href="SolidEdgePart~MoveConnectedFaceTypes.html">MoveConnectedFaceTypes</a>, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="MovePrecedenceTypePopupLink" data-popup-contentsource="#MovePrecedenceTypePopupContent" data-popup-showevent="click mouseenter">MovePrecedenceType</a></i> As <a href="SolidEdgePart~MovePrecedenceConstants.html">MovePrecedenceConstants</a>, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="PlaneNormalXPopupLink" data-popup-contentsource="#PlaneNormalXPopupContent" data-popup-showevent="click mouseenter">PlaneNormalX</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="PlaneNormalYPopupLink" data-popup-contentsource="#PlaneNormalYPopupContent" data-popup-showevent="click mouseenter">PlaneNormalY</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="PlaneNormalZPopupLink" data-popup-contentsource="#PlaneNormalZPopupContent" data-popup-showevent="click mouseenter">PlaneNormalZ</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="StartKeyPtObjPopupLink" data-popup-contentsource="#StartKeyPtObjPopupContent" data-popup-showevent="click mouseenter">StartKeyPtObj</a></i> As Object, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="StartPtXPopupLink" data-popup-contentsource="#StartPtXPopupContent" data-popup-showevent="click mouseenter">StartPtX</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="StartPtYPopupLink" data-popup-contentsource="#StartPtYPopupContent" data-popup-showevent="click mouseenter">StartPtY</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="StartPtZPopupLink" data-popup-contentsource="#StartPtZPopupContent" data-popup-showevent="click mouseenter">StartPtZ</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="DirectionXPopupLink" data-popup-contentsource="#DirectionXPopupContent" data-popup-showevent="click mouseenter">DirectionX</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="DirectionYPopupLink" data-popup-contentsource="#DirectionYPopupContent" data-popup-showevent="click mouseenter">DirectionY</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="DirectionZPopupLink" data-popup-contentsource="#DirectionZPopupContent" data-popup-showevent="click mouseenter">DirectionZ</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="ExtentKeyPtObjPopupLink" data-popup-contentsource="#ExtentKeyPtObjPopupContent" data-popup-showevent="click mouseenter">ExtentKeyPtObj</a></i> As Object, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="ExtentDistancePopupLink" data-popup-contentsource="#ExtentDistancePopupContent" data-popup-showevent="click mouseenter">ExtentDistance</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="bCopyPopupLink" data-popup-contentsource="#bCopyPopupContent" data-popup-showevent="click mouseenter">bCopy</a></i> As Boolean, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="bDetachPopupLink" data-popup-contentsource="#bDetachPopupContent" data-popup-showevent="click mouseenter">bDetach</a></i> As Boolean _
+) </pre></tr></table></div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_LIST" namespace="parameter" source="Item" filter="" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=parameters,caption=$$ParameterList$$%%%%filtereditemlist%%</div>" --><div class="i-section-heading" id="i-parameters-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Parameters</span></div><div id="i-parameters-section-content" class="i-section-content"><dl>
+<dt><I>NumOfObjects</I></dt>
+<dd>Specifies number of objects that are to be moved.</dd>
+<dt><I>psaObjects</I></dt>
+<dd>Specifies the objects and these can be any of the following and we allow combinations of<BR>o&nbsp;Synchronous faces<BR>o&nbsp;Synchronous features<BR>o&nbsp;Coordinate systems (other than base coordinate system)<BR>o&nbsp;Reference planes (other than base reference planes)</dd>
+<dt><I>MoveConnectedFaceType</I></dt>
+<dd><table class="i-filtered-item-list"><tr><th>Value</th><th>Description</th></tr>
+<tr><td class="i-member-name">seMoveConnectedFaceTypeExtendTrim</td><td class="i-description">Trims and extends adjacent faces.</td></tr>
+<tr><td class="i-member-name">seMoveConnectedFaceTypeLift</td><td class="i-description">Lifts the select set and adds faces to the model.</td></tr>
+<tr><td class="i-member-name">seMoveConnectedFaceTypeTip</td><td class="i-description">Trims, extends, or changes the current orientation of connected faces.</td></tr>
+</table>Specifies how the faces connected to the selection adapt during the modification.</dd>
+<dt><I>MovePrecedenceType</I></dt>
+<dd><table class="i-filtered-item-list"><tr><th>Value</th><th>Description</th></tr>
+<tr><td class="i-member-name">igModelMovePredecence</td><td class="i-description">Non-moving faces have priority over moving faces.</td></tr>
+<tr><td class="i-member-name">igSelectSetMovePrecedence</td><td class="i-description">Selected and other moving faces have priority over non-moving faces.</td></tr>
+</table>Determines behavior of the selected faces versus the other model faces. The type is represented by MovePrecedenceConstants.</dd>
+<dt><I>PlaneNormalX</I></dt>
+<dd>Specifies X Coordinate of the plane’s normal vector on which the faces are to be moved.</dd>
+<dt><I>PlaneNormalY</I></dt>
+<dd>Specifies&nbsp;Y Coordinate of the plane’s normal vector on which the faces are to be moved.</dd>
+<dt><I>PlaneNormalZ</I></dt>
+<dd>Specifies&nbsp;Z Coordinate of the plane’s normal vector on which the faces are to be moved.</dd>
+<dt><I>StartKeyPtObj</I></dt>
+<dd>Specifies the starting reference key point object. If the object is provided then the values passed through StartPtX, StartPtY, and StartPtZ are ignored.</dd>
+<dt><I>StartPtX</I></dt>
+<dd>Specifies X coordinate of the starting reference key point. If the StartKeyPtObj is provided then this value is ignored.</dd>
+<dt><I>StartPtY</I></dt>
+<dd>Specifies&nbsp;Y coordinate of the starting reference key point. If the StartKeyPtObj is provided then this value is ignored.</dd>
+<dt><I>StartPtZ</I></dt>
+<dd>Specifies&nbsp;Z coordinate of the starting reference key point. If the StartKeyPtObj is provided then this value is ignored.</dd>
+<dt><I>DirectionX</I></dt>
+<dd>Specifies X coordinate of the move direction vector. This vector should be on the plane specified.</dd>
+<dt><I>DirectionY</I></dt>
+<dd>Specifies&nbsp;Y coordinate of the move direction vector. This vector should be on the plane specified.</dd>
+<dt><I>DirectionZ</I></dt>
+<dd>Specifies&nbsp;Z coordinate of the move direction vector. This vector should be on the plane specified.</dd>
+<dt><I>ExtentKeyPtObj</I></dt>
+<dd>Specifies the end reference key point object. If the object is provided then the distance value passed through ExtentDistance is ignored. We project the key point on to the direction vector to compute the extent distance.</dd>
+<dt><I>ExtentDistance</I></dt>
+<dd>Specifies the move distance from the start key point. If ExtentKeyPtObj is provided then this value will be ignored.</dd>
+<dt><I>bCopy</I></dt>
+<dd>Specifies whether to copy the moving faces.</dd>
+<dt><I>bDetach</I></dt>
+<dd>Specifies whether to detach the moving faces.</dd>
+</dl></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##RETURNS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=returns,caption=$$Return_Type$$%%<div class=""i-returns-content"">%%comment%%</div></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##REMARKS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=remarks,caption=$$Remarks$$%%%%comment%%</div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="sourcecode" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=source,caption=$$Source_Code$$%%<table border=0 cellpadding=0 cellspacing=0 class=sourcecode><tr><td nowrap>%%sourcecode%%</td></tr></table></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##EXAMPLEINTRO" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=""$$Example$$%%designlist:tagidentifier=##EXAMPLECODE,itemtype=Example%%""%%%%comment%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="EXAMPLEGROUP_LIST" namespace="ExampleGroup" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""="",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="INLINE_EXAMPLE" namespace="Example" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""<>"",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="MENU_LINK" namespace="example" source="Item" filter="type=linked" NoHeader="True" NoFooter="True" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=examplelinks,caption=$$Example$$%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="FilteredItemList" scrap="CATEGORIZED_LINKS" namespace="linkcategory" source="Item" filter="" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=seealso,caption=""$$See_Also$$%%designlist:tagidentifier=##SEEALSO,itemtype=See Also%%""%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><div class="i-section-heading" id="i-seealso-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">See Also</span></div><div id="i-seealso-section-content" class="i-section-content"><p id=dxseealsocontent><a href="SolidEdgePart~Model.html">Model Object</a>
+&nbsp;|&nbsp;<a href="SolidEdgePart~Model_members.html">Model Members</a>
+</p>
+</p></div><!--DXMETADATA end -->
+    </div>
+    <div id="i-footer-content" class="i-footer-content">
+        <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_FOOTER" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="CopyrightNotice" format="<p>&nbsp;</p><p>&nbsp;</p><hr style=""height: 1px"" /><p>%%variable%%</p>" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="FeedbackLink" format="" --><!--DXMETADATA end-->
+    </div>
+    
+
+    <!--DXMETADATA start type="IsNew" format="<script type=""text/javascript"">setIsNew = true;</script>" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<script type=""text/javascript"">setIsResponsiveEnabled = true;</script>" --><!--DXMETADATA end-->
+    <script type="text/javascript">
+        $(function() {
+            var documentInstance = new Innovasys.Content.Document(document.body);
+            documentInstance.isNew = !(typeof setIsNew === "undefined");
+            documentInstance.isResponsiveEnabled = !(typeof setIsResponsiveEnabled === "undefined");
+            documentInstance.load();
+        });
+    </script>
+</body>
+</html>

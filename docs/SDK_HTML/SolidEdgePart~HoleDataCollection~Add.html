@@ -1,0 +1,564 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--DXMETADATA start type="MetaCharset" --><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><!--DXMETADATA end-->
+    <meta http-equiv="X-UA-Compatible" value="IE=9" />
+
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Literal" condition="helpversion:value=3" value="<meta name=""Microsoft.Help.SelfBranded"" content=""true"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="PageItemTitle" format="<title>%%PageItemTitle%%</title>" --><title>Add Method</title><!--DXMETADATA end-->
+    <!--DXMETADATA start type="ItemTitleNoQuotes" format="<meta name=""Title"" content=""%%ItemTitleNoQuotes%%""/>" --><!--DXMETADATA end-->    
+    
+
+    <!--DXMETADATA start type="PackageLink" packagename="jquery" filetype="script" firstlinkattributes="id=""mshs_support_script"""--><script src="template/packages/jquery/script/chm.mshc/jquery-1.7.2.min.js" type="text/javascript" id="mshs_support_script"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="script"--><script src="template/packages/jquery-ui/script/chm.mshc/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/jquery-ui/css/chm.mshc/jquery-ui-1.8.18.custom.css"></link><!--DXMETADATA end-->
+	
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/plugins-ax/css/chm.mshc/jquery-plugins.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="css" firstlinkattributes=" data-mshv2-stylesheet=""/template/packages/core-ax/dx.com.mshv2.css"" data-mshv1-stylesheet=""/template/packages/core-ax/dx.com.mshv1.css"" data-responsive-mobile=""template/packages/core-ax/dx.com.mobile.css"" data-responsive-tablet=""template/packages/core-ax/dx.com.tablet.css"""--><link rel="stylesheet" type="text/css" href="template/packages/core-ax/css/dx.com.css"  data-mshv2-stylesheet="/template/packages/core-ax/dx.com.mshv2.css" data-mshv1-stylesheet="/template/packages/core-ax/dx.com.mshv1.css" data-responsive-mobile="template/packages/core-ax/dx.com.mobile.css" data-responsive-tablet="template/packages/core-ax/dx.com.tablet.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="script"--><script src="template/packages/plugins-ax/script/chm.mshc/jquery-plugins.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="script"--><script src="template/packages/core-ax/script/dx.com.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="TopicId" format="<meta name=""Microsoft.Help.Id"" content=""%%TopicId%%""/>" --><meta name="Microsoft.Help.Id" content="SolidEdgePart~HoleDataCollection~Add"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Synopsis" StripHtmlTags="True" MaxLength="250" format="<meta name=""Description"" content=""%%Synopsis%%"" />"--><meta name="Description" content="Adds an occurrence of the referenced object." /><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocParentId" format="<meta name=""Microsoft.Help.TocParent"" content=""%%TocParentId%%""/>" --><meta name="Microsoft.Help.TocParent" content="SolidEdgePart~HoleDataCollection_methods"/><!--DXMETADATA end-->
+    <meta name="Microsoft.Help.ContentType" content="Reference" />
+    <!--DXMETADATA start type="MshvKeywords" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="MshvMetaTags" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.Locale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.TopicLocale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="Stylesheets" --><link rel="stylesheet" type="text/css" href="stylesheets/customstyles.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Scripts" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="DesignTime"--><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_PROPERTIES" --><!--DXMETADATA end -->
+
+    <!--DXMETADATA start type="CustomHeadContent" --><!--DXMETADATA end-->
+</head>
+
+<body>
+    <div id="i-before-header-content" class="i-before-header-content">
+        
+    </div>
+    <div id="i-header-content" class="i-header-content">
+        <!--DXMETADATA start type="LogoImage" --><img class="logoimage" src="images/sesdk_header.jpg" border="0"></img><!--DXMETADATA end-->
+            <div class="i-project-title"><!--DXMETADATA start type="ProjectTitle" -->Solid Edge Part Type Library<!--DXMETADATA end--></div>
+        <div class="i-page-title"><div class="i-page-title-text"><!--DXMETADATA start type="PageItemTitle" -->Add Method<!--DXMETADATA end--></div></div>
+    </div>
+    <div id="i-after-header-content" class="i-after-header-content">
+        <!-- Spacing --> <span class="i-toggle-all-sections i-function-link">
+                <label class="i-collapse-all"><!--DXMETADATA start type="Phrase" name="COLLAPSE_ALL" -->Collapse All<!--DXMETADATA end--></label>
+                <label class="i-expand-all" style="display: none;"><!--DXMETADATA start type="Phrase" name="EXPAND_ALL" -->Expand All<!--DXMETADATA end--></label>
+            </span><!--DXMETADATA start type="Literal" condition="communityenabled" value="%%scrap:name=_COMMUNITY_DROPDOWN%%" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="IsWebOutputRootPageLinkEnabled" format="<a href='#' class="i-page-link" class="i-view-in-frame-link" title='$$VIEW_WITH_NAVIGATION_TOOLS_TIP$$' style='display: none' data-root-page='%%WebOutputRootPage%%%%OutputFileExtension%%' target='_top'>$$VIEW_WITH_NAVIGATION_TOOLS_TEXT$$</a>" --><a href='#' class="i-page-link" class="i-view-in-frame-link" title='Open this Topic in a view that includes Navigation tools (Table of Contents, Index, Search)' style='display: none' data-root-page='webframe.html' target='_top'>View with Navigation Tools</a><!--DXMETADATA end-->
+    </div>
+    <!--DXMETADATA start type="Breadcrumbs" scrap="_BREADCRUMBS" --><div class="i-breadcrumbs-container"><table><tr><td>
+<a href="SolidEdgePart_P.html">Solid Edge Part Type Library</a>
+ > <a href="SolidEdgePart~HoleDataCollection.html">HoleDataCollection Collection</a>
+ : Add Method</td></tr></table></div><!--DXMETADATA end -->
+    
+    <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_BUBBLES" namespace="parameter" source="Item" -->
+<div id="HoleTypePopupContent" class="i-popup-content">
+Member of the <A href="SolidEdgePart~FeaturePropertyConstants.html">FeaturePropertyConstants</A> constant set that specifies the type of hole to create. Valid values are igRegularHole, igCounterboreHole, igCountersinkHole, and igCounterdrillHole.
+</div>
+<div id="HoleDiameterPopupContent" class="i-popup-content">
+Specifies the diameter of the hole.
+</div>
+<div id="CounterboreDiameterPopupContent" class="i-popup-content">
+Defines the diameter of a Counterbore hole.
+</div>
+<div id="CounterboreDepthPopupContent" class="i-popup-content">
+Defines the depth of the counterbore of a Counterbore hole.
+</div>
+<div id="CountersinkDiameterPopupContent" class="i-popup-content">
+Defines the countersink diameter of a Countersink hole.
+</div>
+<div id="CountersinkAnglePopupContent" class="i-popup-content">
+Defines the countersink angle of a Countersink hole.
+</div>
+<div id="BottomAnglePopupContent" class="i-popup-content">
+Defines the angle of the bottom of a hole with finite extents. This value is defined in degrees. To define a flat bottom hole, use the value 0. A flat bottom hole is the default.
+</div>
+<div id="TreatmentTypePopupContent" class="i-popup-content">
+Member of the <A href="SolidEdgePart~FeaturePropertyConstants.html">FeaturePropertyConstants</A> constant set that defines the treatment type of a hole. Valid values are igTappedHole, igTaperedHole, or igNone.
+</div>
+<div id="TaperMethodPopupContent" class="i-popup-content">
+Member of the <A href="SolidEdgePart~FeaturePropertyConstants.html">FeaturePropertyConstants</A> constant set that specifies the method used to define the taper of a hole. Valid values are igTaperByAngle and igTaperByRatio.
+</div>
+<div id="TaperPopupContent" class="i-popup-content">
+Defines the taper of the hole. If the TaperMethod argument is set to igTaperbyAngle, the Taper argument specifies this is the taper angle in degrees. If TaperMethod is set to igTaperByRatio, Taper is the ratio value.
+</div>
+<div id="ThreadMinorDiameterPopupContent" class="i-popup-content">
+
+</div>
+<div id="ThreadDepthMethodPopupContent" class="i-popup-content">
+
+</div>
+<div id="ThreadDepthPopupContent" class="i-popup-content">
+
+</div>
+<div id="VBottomDimTypePopupContent" class="i-popup-content">
+
+</div>
+<div id="TaperDimTypePopupContent" class="i-popup-content">
+
+</div>
+<div id="CounterboreProfileLocationTypePopupContent" class="i-popup-content">
+
+</div>
+<div id="TaperLValuePopupContent" class="i-popup-content">
+
+</div>
+<div id="TaperRValuePopupContent" class="i-popup-content">
+
+</div>
+<div id="ThreadExternalDiameterPopupContent" class="i-popup-content">
+
+</div>
+<div id="ThreadDescriptionPopupContent" class="i-popup-content">
+
+</div>
+<div id="IgnoreSavedDefaultValuesPopupContent" class="i-popup-content">
+
+</div>
+<!--DXMETADATA end -->
+    <div id="i-body-content" class="i-body-content">
+        <!--DXMETADATA start type="Description" source="Item" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=description,caption=$$Description$$%%<div class=""i-description-content"">%%description%%</div></div>" --><div class="i-section-heading" id="i-description-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Description</span></div><div id="i-description-section-content" class="i-section-content"><div class="i-description-content">Adds an occurrence of the referenced object.</div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="Syntax" lang="VB" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=syntax,caption=$$Syntax$$%%<div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>%%Syntax%%</pre></tr></table></div></div>" --><div class="i-section-heading" id="i-syntax-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Syntax</span></div><div id="i-syntax-section-content" class="i-section-content"><div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>Public Function Add( _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="HoleTypePopupLink" data-popup-contentsource="#HoleTypePopupContent" data-popup-showevent="click mouseenter">HoleType</a></i> As <a href="SolidEdgePart~FeaturePropertyConstants.html">FeaturePropertyConstants</a>, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="HoleDiameterPopupLink" data-popup-contentsource="#HoleDiameterPopupContent" data-popup-showevent="click mouseenter">HoleDiameter</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="CounterboreDiameterPopupLink" data-popup-contentsource="#CounterboreDiameterPopupContent" data-popup-showevent="click mouseenter">CounterboreDiameter</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="CounterboreDepthPopupLink" data-popup-contentsource="#CounterboreDepthPopupContent" data-popup-showevent="click mouseenter">CounterboreDepth</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="CountersinkDiameterPopupLink" data-popup-contentsource="#CountersinkDiameterPopupContent" data-popup-showevent="click mouseenter">CountersinkDiameter</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="CountersinkAnglePopupLink" data-popup-contentsource="#CountersinkAnglePopupContent" data-popup-showevent="click mouseenter">CountersinkAngle</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="BottomAnglePopupLink" data-popup-contentsource="#BottomAnglePopupContent" data-popup-showevent="click mouseenter">BottomAngle</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="TreatmentTypePopupLink" data-popup-contentsource="#TreatmentTypePopupContent" data-popup-showevent="click mouseenter">TreatmentType</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="TaperMethodPopupLink" data-popup-contentsource="#TaperMethodPopupContent" data-popup-showevent="click mouseenter">TaperMethod</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="TaperPopupLink" data-popup-contentsource="#TaperPopupContent" data-popup-showevent="click mouseenter">Taper</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="ThreadMinorDiameterPopupLink" data-popup-contentsource="#ThreadMinorDiameterPopupContent" data-popup-showevent="click mouseenter">ThreadMinorDiameter</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="ThreadDepthMethodPopupLink" data-popup-contentsource="#ThreadDepthMethodPopupContent" data-popup-showevent="click mouseenter">ThreadDepthMethod</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="ThreadDepthPopupLink" data-popup-contentsource="#ThreadDepthPopupContent" data-popup-showevent="click mouseenter">ThreadDepth</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="VBottomDimTypePopupLink" data-popup-contentsource="#VBottomDimTypePopupContent" data-popup-showevent="click mouseenter">VBottomDimType</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="TaperDimTypePopupLink" data-popup-contentsource="#TaperDimTypePopupContent" data-popup-showevent="click mouseenter">TaperDimType</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="CounterboreProfileLocationTypePopupLink" data-popup-contentsource="#CounterboreProfileLocationTypePopupContent" data-popup-showevent="click mouseenter">CounterboreProfileLocationType</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="TaperLValuePopupLink" data-popup-contentsource="#TaperLValuePopupContent" data-popup-showevent="click mouseenter">TaperLValue</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="TaperRValuePopupLink" data-popup-contentsource="#TaperRValuePopupContent" data-popup-showevent="click mouseenter">TaperRValue</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="ThreadExternalDiameterPopupLink" data-popup-contentsource="#ThreadExternalDiameterPopupContent" data-popup-showevent="click mouseenter">ThreadExternalDiameter</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="ThreadDescriptionPopupLink" data-popup-contentsource="#ThreadDescriptionPopupContent" data-popup-showevent="click mouseenter">ThreadDescription</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="IgnoreSavedDefaultValuesPopupLink" data-popup-contentsource="#IgnoreSavedDefaultValuesPopupContent" data-popup-showevent="click mouseenter">IgnoreSavedDefaultValues</a></i> As Variant _
+) As <a href="SolidEdgePart~HoleData.html">HoleData</a></pre></tr></table></div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_LIST" namespace="parameter" source="Item" filter="" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=parameters,caption=$$ParameterList$$%%%%filtereditemlist%%</div>" --><div class="i-section-heading" id="i-parameters-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Parameters</span></div><div id="i-parameters-section-content" class="i-section-content"><dl>
+<dt><I>HoleType</I></dt>
+<dd><table class="i-filtered-item-list"><tr><th>Value</th><th>Description</th></tr>
+<tr><td class="i-member-name">igAddRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igAll</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igAlongAnAxis</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igAngularDummy</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igAsConstruction</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igBend</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igBendAndFaceCornerRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igBendOnlyCornerRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igBoth</td><td class="i-description">Feature Properties - Both</td></tr>
+<tr><td class="i-member-name">igChainedCornerRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igChamfer2Setbacks</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igChamfer45degSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igChamferAngleSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCircular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseCornerCircleCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseCornerClosed</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseCornerNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseCornerOpen</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igClosed</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseFaces</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igConcave</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igConstantRadiusArc</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igConstRadiusRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igContinuous</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igConvex</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCopy</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCornerRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCounterboreHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCounterboreProfileIsAtBottom</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCounterboreProfileIsAtTop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCounterdrillHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCountersinkHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCurvatureContinuous</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCurvatureContinuousInterior</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCurveSetSeperator</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDeleteFaceHeal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDelSMFaceBoth</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDelSMFaceNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDelSystemRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDelZeroBendRadius</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDevelopableSurface</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDinDimension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEdgeBasedCrossSection</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEdgesByLoop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEdgesByVertex</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEndCaps</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEqualOffset</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEquationType</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igExtend</td><td class="i-description">Feature Properties - Extend</td></tr>
+<tr><td class="i-member-name">igExtendBendRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFacesTouchingCurvesOnly</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFilletBendRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFinite</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeCenterOfEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeEndFromEndEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeEndOnEndEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeFromBothEndsOfEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeFromDefinedStartPoint</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeFullEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeMatchFace</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeOffset</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeStartFromEndEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeStartOnEndEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlatten</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFormedEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFromNonReferenceEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFromReferenceEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFromTo</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFull</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igGroove</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeCenteredLoop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeClosed</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeClosedLoop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeCurl</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeOpen</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeOpenLoop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeSFlange</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igIgnoreBlends</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igInside</td><td class="i-description">Feature Properties - Remove/Add Material Inside</td></tr>
+<tr><td class="i-member-name">igInsideDimension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igIntersect</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLancedEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLeft</td><td class="i-description">Feature Properties - Project to Left</td></tr>
+<tr><td class="i-member-name">igLinear</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLinearCurvatureContinuousExtension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLinearTangentExtension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLip</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLouverFormedEndType</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLouverLancedEndType</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLouverRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLouverRoundNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMaterialInsideOML</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreByAngle</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreByDist</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreManufacturingCut</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreNormalToThickness</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreParallelToThickness</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreRegularCut</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMove</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMultipleEdges</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNatural</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNeutralFactorFromExcel</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNFType</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNoCornerRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNoExtend</td><td class="i-description">Feature Properties - Do Not Extend</td></tr>
+<tr><td class="i-member-name">igNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNonSymmetric</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNormal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNormalSideDummy</td><td class="i-description">Feature Properties - Normal Side</td></tr>
+<tr><td class="i-member-name">igNoRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNullConstant</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igOffset</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igOutside</td><td class="i-description">Feature Properties - Remove/Add Material Outside</td></tr>
+<tr><td class="i-member-name">igOutsideDimension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igOverlapFaces</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igParallelDummy</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igParallelToPlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPartingFromCurve</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPartingFromEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPartingFromPlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPartingFromSurface</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternAlongCurve</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternByTable</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternCircular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternDuplicate</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternFillRegion</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternMirror</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternMountingBoss</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternRectangular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternUserDefined</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPeriodic</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igProfileBasedCrossSection</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igProjectOptionProject</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igProjectOptionWrap</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPunchedEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRadial</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRaisedCounterboreSlot</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRecessedCounterboreSlot</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRecreateBlends</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRectangularBendRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igReflective</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRegularHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRegularSlot</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRegularThread</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRemoveBoundaries</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRemoveExternalBoundaries</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRemoveInternalBoundaries</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igReverseNormal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igReverseNormalSideDummy</td><td class="i-description">Feature Properties - Reverse Normal Side</td></tr>
+<tr><td class="i-member-name">igRight</td><td class="i-description">Feature Properties - Project to Right</td></tr>
+<tr><td class="i-member-name">igRipBendRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRipCornerRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndCapAcrossSharpEdges</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndMiterAtCorner</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndPreserveTopologyOff</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndPreserveTopologyOn</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAcrossSharpEdges</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAcrossTangentEdgesOff</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAcrossTangentEdgesOn</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAlongBlendEdgesOff</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAlongBlendEdgesOn</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAroundCorner</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundAllVertexSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundEndVertexEdgeSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundSetbackIsAbsolute</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundSetbackIsRelative</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundSingleVertexSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundStartVertexEdgeSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundVertexEdgeSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igShowBoundaries</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSideInfoSetSeperator</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSingleEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSlotGroup</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSMClearanceCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSMFaceCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSMMidPlaneCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSplit</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSplitAngle1Left</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSplitAngle1Right</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSplitDraft</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igStart</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igStepDraft</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igStepDraftPerpendicular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igStraightPipeThread</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSubtract</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepAlignArcLength</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepAlignNormal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepAlignParallel</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepAlignParametrically</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepC1Continuity</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepC2Continuity</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepMergeAll</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepMergeAlongPath</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepMergeNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepScaleNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepScaleStartAndEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepTwistNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepTwistStartAndEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepTwistTurns</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepTwistTurnsPerUnitLength</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSymmetric</td><td class="i-description">Feature Properties - Symmetric Extent</td></tr>
+<tr><td class="i-member-name">igTangent</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTangentInterior</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperByAngle</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperByRatio</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperByRLRatio</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperDimAtBottom</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperDimAtTop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperedEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperedHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperedPipeThread</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperedToPlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTappedHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThickness</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThkInProfilePlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThkNormalToProfilePlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThreeHundredAndSixty</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThroughAll</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThroughAxis</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igToEndOfEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igToggleToConstruction</td><td class="i-description">Toggle from Design to Construction</td></tr>
+<tr><td class="i-member-name">igToggleToDesign</td><td class="i-description">Toggle from Construction to Design</td></tr>
+<tr><td class="i-member-name">igToKeyPoint</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igToNext</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentCircleCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentCrown</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentDraft</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentFormedFeatureDisplayAsCenterMark</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentFormedFeatureDisplayAsModeled</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentFormedFeatureDisplayAsSketch</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentFormedFeatureDisplayAsSketchAndCenterMark</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentIntersect</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentMiterRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentOff</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentRectangularCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentUCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentVCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igUnequalOffset</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igUnite</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igUShaped</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igVarRadiusRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igVBottomDimToFlat</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igVBottomDimToV</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igVShaped</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igWeldGrooveCapProject</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igWeldGrooveCapSameAsTop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igWeldGrooveCapSurface</td><td class="i-description"> </td></tr>
+</table>Member of the <A href="SolidEdgePart~FeaturePropertyConstants.html">FeaturePropertyConstants</A> constant set that specifies the type of hole to create. Valid values are igRegularHole, igCounterboreHole, igCountersinkHole, and igCounterdrillHole.</dd>
+<dt><I>HoleDiameter</I></dt>
+<dd>Specifies the diameter of the hole.</dd>
+<dt><I>CounterboreDiameter</I></dt>
+<dd>Defines the diameter of a Counterbore hole.</dd>
+<dt><I>CounterboreDepth</I></dt>
+<dd>Defines the depth of the counterbore of a Counterbore hole.</dd>
+<dt><I>CountersinkDiameter</I></dt>
+<dd>Defines the countersink diameter of a Countersink hole.</dd>
+<dt><I>CountersinkAngle</I></dt>
+<dd>Defines the countersink angle of a Countersink hole.</dd>
+<dt><I>BottomAngle</I></dt>
+<dd>Defines the angle of the bottom of a hole with finite extents. This value is defined in degrees. To define a flat bottom hole, use the value 0. A flat bottom hole is the default.</dd>
+<dt><I>TreatmentType</I></dt>
+<dd>Member of the <A href="SolidEdgePart~FeaturePropertyConstants.html">FeaturePropertyConstants</A> constant set that defines the treatment type of a hole. Valid values are igTappedHole, igTaperedHole, or igNone.</dd>
+<dt><I>TaperMethod</I></dt>
+<dd>Member of the <A href="SolidEdgePart~FeaturePropertyConstants.html">FeaturePropertyConstants</A> constant set that specifies the method used to define the taper of a hole. Valid values are igTaperByAngle and igTaperByRatio.</dd>
+<dt><I>Taper</I></dt>
+<dd>Defines the taper of the hole. If the TaperMethod argument is set to igTaperbyAngle, the Taper argument specifies this is the taper angle in degrees. If TaperMethod is set to igTaperByRatio, Taper is the ratio value.</dd>
+<dt><I>ThreadMinorDiameter</I></dt>
+<dd></dd>
+<dt><I>ThreadDepthMethod</I></dt>
+<dd></dd>
+<dt><I>ThreadDepth</I></dt>
+<dd></dd>
+<dt><I>VBottomDimType</I></dt>
+<dd></dd>
+<dt><I>TaperDimType</I></dt>
+<dd></dd>
+<dt><I>CounterboreProfileLocationType</I></dt>
+<dd></dd>
+<dt><I>TaperLValue</I></dt>
+<dd></dd>
+<dt><I>TaperRValue</I></dt>
+<dd></dd>
+<dt><I>ThreadExternalDiameter</I></dt>
+<dd></dd>
+<dt><I>ThreadDescription</I></dt>
+<dd></dd>
+<dt><I>IgnoreSavedDefaultValues</I></dt>
+<dd></dd>
+</dl></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##RETURNS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=returns,caption=$$Return_Type$$%%<div class=""i-returns-content"">%%comment%%</div></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##REMARKS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=remarks,caption=$$Remarks$$%%%%comment%%</div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="sourcecode" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=source,caption=$$Source_Code$$%%<table border=0 cellpadding=0 cellspacing=0 class=sourcecode><tr><td nowrap>%%sourcecode%%</td></tr></table></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##EXAMPLEINTRO" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=""$$Example$$%%designlist:tagidentifier=##EXAMPLECODE,itemtype=Example%%""%%%%comment%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="EXAMPLEGROUP_LIST" namespace="ExampleGroup" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""="",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><div class="i-section-heading" id="i-example-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Example</span></div><div id="i-example-section-content" class="i-section-content">
+<div class="i-tab-container">
+    <ul>
+        <li class="i-filtered-content-Visual Basic">
+			<a href="#i-tab-content-73ac2f9c-a0f2-4122-89b5-febace711a78">Example (Visual Basic)</a>
+		</li>
+
+    </ul>
+	<div id="i-tab-content-73ac2f9c-a0f2-4122-89b5-febace711a78" class="i-filtered-content-Visual Basic">
+		<pre><span style="color: #0000FF; ">Private</span> <span style="color: #0000FF; ">Sub</span> Form_Load()
+    <span style="color: #0000FF; ">Dim</span> objApp <span style="color: #0000FF; ">As</span> SolidEdgeFramework.Application
+    <span style="color: #0000FF; ">Dim</span> objDoc <span style="color: #0000FF; ">As</span> SolidEdgePart.PartDocument
+    <span style="color: #0000FF; ">Dim</span> objBaseProfile <span style="color: #0000FF; ">As</span> SolidEdgePart.Profile
+    <span style="color: #0000FF; ">Dim</span> objBaseProfArray(1 <span style="color: #0000FF; ">To</span> 2) <span style="color: #0000FF; ">As</span> SolidEdgePart.Profile
+    <span style="color: #0000FF; ">Dim</span> objBase <span style="color: #0000FF; ">As</span> SolidEdgePart.Model
+    <span style="color: #0000FF; ">Dim</span> objRP <span style="color: #0000FF; ">As</span> SolidEdgePart.RefPlane
+    <span style="color: #0000FF; ">Dim</span> objHoleData(1 <span style="color: #0000FF; ">To</span> 6) <span style="color: #0000FF; ">As</span> SolidEdgePart.HoleData
+    <span style="color: #0000FF; ">Dim</span> objHoleProfile(1 <span style="color: #0000FF; ">To</span> 6) <span style="color: #0000FF; ">As</span> SolidEdgePart.Profile
+    <span style="color: #0000FF; ">Dim</span> objHole(1 <span style="color: #0000FF; ">To</span> 6) <span style="color: #0000FF; ">As</span> SolidEdgePart.Hole
+    <span style="color: #0000FF; ">Dim</span> lngStatus <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Long</span>
+    <span style="color: #008000; ">' Report errors
+</span>    <span style="color: #0000FF; ">Const</span> PI = 3.14159265358979
+    <span style="color: #008000; ">' Create/get the application with specific settings
+</span>    <span style="color: #0000FF; ">On</span> <span style="color: #0000FF; ">Error</span> <span style="color: #0000FF; ">Resume</span> <span style="color: #0000FF; ">Next</span>
+    <span style="color: #0000FF; ">Set</span> objApp = <span style="color: #0000FF; ">GetObject</span>(, <span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>)
+    <span style="color: #0000FF; ">If</span> Err <span style="color: #0000FF; ">Then</span>
+        Err.Clear
+        <span style="color: #0000FF; ">Set</span> objApp = <span style="color: #0000FF; ">CreateObject</span>(<span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>)
+        <span style="color: #0000FF; ">Set</span> objDoc = objApp.Documents.Add(<span style="color: #800000; ">&quot;SolidEdge.PartDocument&quot;</span>)
+        objApp.Visible = <span style="color: #0000FF; ">True</span>
+    <span style="color: #0000FF; ">Else</span>
+        <span style="color: #0000FF; ">Set</span> objDoc = objApp.ActiveDocument
+    <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+    <span style="color: #008000; ">' *** creating the an extruded protrusion base feature
+</span>    <span style="color: #008000; ">' creating a circular profile for the base feature and validating it
+</span>    <span style="color: #0000FF; ">Set</span> objBaseProfile = objDoc.ProfileSets.Add.Profiles.Add(pRefPlaneDisp:=objDoc.RefPlanes(1))
+    <span style="color: #0000FF; ">Call</span> objBaseProfile.Circles2d.AddByCenterRadius(x:=0, y:=0, Radius:=0.1)
+    lngStatus = objBaseProfile.End(ValidationCriteria:=igProfileClosed)
+    <span style="color: #0000FF; ">If</span> (lngStatus &lt;&gt; 0) <span style="color: #0000FF; ">Then</span>
+        <span style="color: #0000FF; ">MsgBox</span> <span style="color: #800000; ">&quot;Profile for the base feature is not closed&quot;</span>
+    <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+    <span style="color: #008000; ">' creating the extruded protrusion and validating it
+</span>    <span style="color: #0000FF; ">Set</span> objBaseProfArray(1) = objBaseProfile
+    <span style="color: #0000FF; ">Set</span> objBase = objDoc.Models.AddFiniteExtrudedProtrusion(NumberOfProfiles:=1, _
+                                                            ProfileArray:=objBaseProfArray, ProfilePlaneSide:=igSymmetric, ExtrusionDistance:=0.05)
+    objBaseProfile.Visible = <span style="color: #0000FF; ">False</span>
+    <span style="color: #0000FF; ">If</span> (objBase.ExtrudedProtrusions(1).Status &lt;&gt; igFeatureOK) <span style="color: #0000FF; ">Then</span>
+        <span style="color: #0000FF; ">MsgBox</span> <span style="color: #800000; ">&quot;AddFiniteExtrudedProtrusion method of models object fails&quot;</span>
+    <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+    <span style="color: #008000; ">' *** creating a reference plane coincident on the top face of the base feature
+</span>    <span style="color: #0000FF; ">Set</span> objRP = objDoc.RefPlanes.AddParallelByDistance(ParentPlane:=objBase.ExtrudedProtrusions(1).Faces(facetype:=igQueryAll).Item(2), _
+                                                       Distance:=0, NormalSide:=igRight)
+    <span style="color: #008000; ">' *** creating a Regular Hole using the Holedatacollection object
+</span>    <span style="color: #008000; ">' creating the hole data for a regular hole
+</span>    <span style="color: #0000FF; ">Set</span> objHoleData(1) = objDoc.HoleDataCollection.Add(HoleType:=igRegularHole, _
+                                                       HoleDiameter:=0.01, BottomAngle:=90)
+    <span style="color: #008000; ">' creating a profile for the regular hole and validating it
+</span>    <span style="color: #0000FF; ">Set</span> objHoleProfile(1) = objDoc.ProfileSets.Add.Profiles.Add(pRefPlaneDisp:=objRP)
+    <span style="color: #0000FF; ">Call</span> objHoleProfile(1).Holes2d.Add(xcenter:=0, ycenter:=0)
+    lngStatus = objHoleProfile(1).End(ValidationCriteria:=igProfileClosed)
+    <span style="color: #0000FF; ">If</span> (lngStatus &lt;&gt; 0) <span style="color: #0000FF; ">Then</span>
+        <span style="color: #0000FF; ">MsgBox</span> <span style="color: #800000; ">&quot;Profile for the regular hole is not closed&quot;</span>
+    <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+    <span style="color: #008000; ">' creating the regular hole on the base feature and validating it
+</span>    <span style="color: #0000FF; ">Set</span> objHole(1) = objBase.Holes.AddFinite(Profile:=objHoleProfile(1), _
+                                             ProfilePlaneSide:=igLeft, FiniteDepth:=0.02, Data:=objHoleData(1))
+    <span style="color: #008000; ">'Turn off the profile
+</span>    objHoleProfile(1).Visible = <span style="color: #0000FF; ">False</span>
+    <span style="color: #008000; ">' USER DISPLAY
+</span>    <span style="color: #0000FF; ">Dim</span> i <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Integer</span>
+    <span style="color: #008000; ">' Release objects
+</span>    <span style="color: #0000FF; ">Set</span> objApp = <span style="color: #0000FF; ">Nothing</span>
+    <span style="color: #0000FF; ">Set</span> objDoc = <span style="color: #0000FF; ">Nothing</span>
+    <span style="color: #0000FF; ">Set</span> objBaseProfile = <span style="color: #0000FF; ">Nothing</span>
+    <span style="color: #0000FF; ">Set</span> objBaseProfArray(1) = <span style="color: #0000FF; ">Nothing</span>
+    <span style="color: #0000FF; ">Set</span> objBase = <span style="color: #0000FF; ">Nothing</span>
+    <span style="color: #0000FF; ">Set</span> objRP = <span style="color: #0000FF; ">Nothing</span>
+    <span style="color: #0000FF; ">For</span> i = 1 <span style="color: #0000FF; ">To</span> 6
+        <span style="color: #0000FF; ">Set</span> objHoleData(i) = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Set</span> objHoleProfile(i) = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Set</span> objHole(i) = <span style="color: #0000FF; ">Nothing</span>
+    <span style="color: #0000FF; ">Next</span> i
+<span style="color: #0000FF; ">End Sub</span>
+</pre>
+	</div>
+	
+</div>
+</div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="INLINE_EXAMPLE" namespace="Example" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""<>"",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="MENU_LINK" namespace="example" source="Item" filter="type=linked" NoHeader="True" NoFooter="True" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=examplelinks,caption=$$Example$$%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="FilteredItemList" scrap="CATEGORIZED_LINKS" namespace="linkcategory" source="Item" filter="" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=seealso,caption=""$$See_Also$$%%designlist:tagidentifier=##SEEALSO,itemtype=See Also%%""%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><div class="i-section-heading" id="i-seealso-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">See Also</span></div><div id="i-seealso-section-content" class="i-section-content"><p id=dxseealsocontent><a href="SolidEdgePart~HoleDataCollection.html">HoleDataCollection Collection</a>
+&nbsp;|&nbsp;<a href="SolidEdgePart~HoleDataCollection_members.html">HoleDataCollection Members</a>
+</p>
+</p></div><!--DXMETADATA end -->
+    </div>
+    <div id="i-footer-content" class="i-footer-content">
+        <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_FOOTER" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="CopyrightNotice" format="<p>&nbsp;</p><p>&nbsp;</p><hr style=""height: 1px"" /><p>%%variable%%</p>" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="FeedbackLink" format="" --><!--DXMETADATA end-->
+    </div>
+    
+
+    <!--DXMETADATA start type="IsNew" format="<script type=""text/javascript"">setIsNew = true;</script>" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<script type=""text/javascript"">setIsResponsiveEnabled = true;</script>" --><!--DXMETADATA end-->
+    <script type="text/javascript">
+        $(function() {
+            var documentInstance = new Innovasys.Content.Document(document.body);
+            documentInstance.isNew = !(typeof setIsNew === "undefined");
+            documentInstance.isResponsiveEnabled = !(typeof setIsResponsiveEnabled === "undefined");
+            documentInstance.load();
+        });
+    </script>
+</body>
+</html>

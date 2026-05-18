@@ -1,0 +1,435 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--DXMETADATA start type="MetaCharset" --><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><!--DXMETADATA end-->
+    <meta http-equiv="X-UA-Compatible" value="IE=9" />
+
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Literal" condition="helpversion:value=3" value="<meta name=""Microsoft.Help.SelfBranded"" content=""true"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="PageItemTitle" format="<title>%%PageItemTitle%%</title>" --><title>AddTubeBIDM Method</title><!--DXMETADATA end-->
+    <!--DXMETADATA start type="ItemTitleNoQuotes" format="<meta name=""Title"" content=""%%ItemTitleNoQuotes%%""/>" --><!--DXMETADATA end-->    
+    
+
+    <!--DXMETADATA start type="PackageLink" packagename="jquery" filetype="script" firstlinkattributes="id=""mshs_support_script"""--><script src="template/packages/jquery/script/chm.mshc/jquery-1.7.2.min.js" type="text/javascript" id="mshs_support_script"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="script"--><script src="template/packages/jquery-ui/script/chm.mshc/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/jquery-ui/css/chm.mshc/jquery-ui-1.8.18.custom.css"></link><!--DXMETADATA end-->
+	
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/plugins-ax/css/chm.mshc/jquery-plugins.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="css" firstlinkattributes=" data-mshv2-stylesheet=""/template/packages/core-ax/dx.com.mshv2.css"" data-mshv1-stylesheet=""/template/packages/core-ax/dx.com.mshv1.css"" data-responsive-mobile=""template/packages/core-ax/dx.com.mobile.css"" data-responsive-tablet=""template/packages/core-ax/dx.com.tablet.css"""--><link rel="stylesheet" type="text/css" href="template/packages/core-ax/css/dx.com.css"  data-mshv2-stylesheet="/template/packages/core-ax/dx.com.mshv2.css" data-mshv1-stylesheet="/template/packages/core-ax/dx.com.mshv1.css" data-responsive-mobile="template/packages/core-ax/dx.com.mobile.css" data-responsive-tablet="template/packages/core-ax/dx.com.tablet.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="script"--><script src="template/packages/plugins-ax/script/chm.mshc/jquery-plugins.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="script"--><script src="template/packages/core-ax/script/dx.com.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="TopicId" format="<meta name=""Microsoft.Help.Id"" content=""%%TopicId%%""/>" --><meta name="Microsoft.Help.Id" content="SolidEdgeAssembly~Occurrences~AddTubeBIDM"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Synopsis" StripHtmlTags="True" MaxLength="250" format="<meta name=""Description"" content=""%%Synopsis%%"" />"--><meta name="Description" content="Creates a new Occurrence object in the Assembly document. This occurrence behaves like any other occurrence in the Assembly file, except it successfully returns a Tube object when the Tube property is invoked on the Occurrence." /><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocParentId" format="<meta name=""Microsoft.Help.TocParent"" content=""%%TocParentId%%""/>" --><meta name="Microsoft.Help.TocParent" content="SolidEdgeAssembly~Occurrences_methods"/><!--DXMETADATA end-->
+    <meta name="Microsoft.Help.ContentType" content="Reference" />
+    <!--DXMETADATA start type="MshvKeywords" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="MshvMetaTags" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.Locale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.TopicLocale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="Stylesheets" --><link rel="stylesheet" type="text/css" href="stylesheets/customstyles.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Scripts" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="DesignTime"--><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_PROPERTIES" --><!--DXMETADATA end -->
+
+    <!--DXMETADATA start type="CustomHeadContent" --><!--DXMETADATA end-->
+</head>
+
+<body>
+    <div id="i-before-header-content" class="i-before-header-content">
+        
+    </div>
+    <div id="i-header-content" class="i-header-content">
+        <!--DXMETADATA start type="LogoImage" --><img class="logoimage" src="images/sesdk_header.jpg" border="0"></img><!--DXMETADATA end-->
+            <div class="i-project-title"><!--DXMETADATA start type="ProjectTitle" -->Solid Edge Assembly Type Library<!--DXMETADATA end--></div>
+        <div class="i-page-title"><div class="i-page-title-text"><!--DXMETADATA start type="PageItemTitle" -->AddTubeBIDM Method<!--DXMETADATA end--></div></div>
+    </div>
+    <div id="i-after-header-content" class="i-after-header-content">
+        <!-- Spacing --> <span class="i-toggle-all-sections i-function-link">
+                <label class="i-collapse-all"><!--DXMETADATA start type="Phrase" name="COLLAPSE_ALL" -->Collapse All<!--DXMETADATA end--></label>
+                <label class="i-expand-all" style="display: none;"><!--DXMETADATA start type="Phrase" name="EXPAND_ALL" -->Expand All<!--DXMETADATA end--></label>
+            </span><!--DXMETADATA start type="Literal" condition="communityenabled" value="%%scrap:name=_COMMUNITY_DROPDOWN%%" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="IsWebOutputRootPageLinkEnabled" format="<a href='#' class="i-page-link" class="i-view-in-frame-link" title='$$VIEW_WITH_NAVIGATION_TOOLS_TIP$$' style='display: none' data-root-page='%%WebOutputRootPage%%%%OutputFileExtension%%' target='_top'>$$VIEW_WITH_NAVIGATION_TOOLS_TEXT$$</a>" --><a href='#' class="i-page-link" class="i-view-in-frame-link" title='Open this Topic in a view that includes Navigation tools (Table of Contents, Index, Search)' style='display: none' data-root-page='webframe.html' target='_top'>View with Navigation Tools</a><!--DXMETADATA end-->
+    </div>
+    <!--DXMETADATA start type="Breadcrumbs" scrap="_BREADCRUMBS" --><div class="i-breadcrumbs-container"><table><tr><td>
+<a href="SolidEdgeAssembly_P.html">Solid Edge Assembly Type Library</a>
+ > <a href="SolidEdgeAssembly~Occurrences.html">Occurrences Collection</a>
+ : AddTubeBIDM Method</td></tr></table></div><!--DXMETADATA end -->
+    
+    <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_BUBBLES" namespace="parameter" source="Item" -->
+<div id="TubeSegmentsPopupContent" class="i-popup-content">
+Specifies the objects that will define the tube path. This array can include LineSegment and Layout objects. The order of the elements in the array is significant only to the degree that the elements must form an end-to-end sequence. That is, only the first and last elements will have a free end.
+</div>
+<div id="FilePathPopupContent" class="i-popup-content">
+File path where file to be saved.
+</div>
+<div id="DocumentNumberPopupContent" class="i-popup-content">
+Unique Document number to generate file name using revision.
+</div>
+<div id="RevisionIDPopupContent" class="i-popup-content">
+Revision ID property which will be appended to Document Number to create file name.
+</div>
+<div id="TitlePopupContent" class="i-popup-content">
+Title property which will be saved in newly created file properties.
+</div>
+<div id="NewFileNamePopupContent" class="i-popup-content">
+This API returns the new generated file name when succeeded.
+</div>
+<div id="TemplateFileNamePopupContent" class="i-popup-content">
+Specifies the name of a Part file to be used as a template when creating the Part file. If not specified, normal.par is used as the template.
+</div>
+<div id="IsSolidPopupContent" class="i-popup-content">
+Specifies whether the created tube is solid (True) or hollow (False). If not specified, a hollow tube is created.
+</div>
+<div id="MaterialPopupContent" class="i-popup-content">
+Specifies a material condition to be applied to the tube.
+</div>
+<div id="BendRadiusPopupContent" class="i-popup-content">
+Specifies the bend radius to be applied to the tube. If not specified, the global setting is used. The tube is recomputed as needed if the global setting changes.
+</div>
+<div id="OuterDiameterPopupContent" class="i-popup-content">
+Specifies the outer diameter to be applied to the tube. If not specified, the global setting is used. The tube is recomputed as needed if the global setting changes.
+</div>
+<div id="MinimumFlatLengthPopupContent" class="i-popup-content">
+Specifies the minimum flat length to be applied to the tube. If not specified, the global setting is used. The tube is recomputed as needed if the global setting changes.
+</div>
+<div id="WallThicknessPopupContent" class="i-popup-content">
+Specifies the wall thickness to be applied to the tube. If not specified, the global setting is used. The tube is recomputed as needed if the global setting changes.
+</div>
+<div id="ExtendStartPopupContent" class="i-popup-content">
+Specifies the extension (if a positive value) or setback (if a negative value) of the Tube with respect to the start point of the tube. If not specified, 0.0 is used
+</div>
+<div id="ExtendEndPopupContent" class="i-popup-content">
+Specifies the extension (if a positive value) or setback (if a negative value) of the Tube with respect to the end point of the tube. If not specified, 0.0 is used.
+</div>
+<div id="AddConnectRelationsPopupContent" class="i-popup-content">
+Specifies whether or not connect relationships are placed at all of the points where any two segments meet. If connect relationships are already present, AddConnectRelations should be False.
+</div>
+<div id="StartEndTreatmentTypePopupContent" class="i-popup-content">
+Defines the type of end treatment for the start of the tube. The start of the tube is dictated by the direction of the first segment passed into the TubeSegments array. Valid values are members of the TubeEndTreatmentTypeConstants constant set.
+</div>
+<div id="StartEndTreatmentInsideDiameterPopupContent" class="i-popup-content">
+Specifies the inside diameter of the end treatment at the start of the tube. If not specified, the global default end treatment inside diameter is used.
+</div>
+<div id="StartEndTreatmentOutsideDiameterPopupContent" class="i-popup-content">
+Specifies the outside diameter of the end treatment at the start of the tube. If not specified, the global default end treatment outside diameter is used.
+</div>
+<div id="StartEndTreatmentRadiusPopupContent" class="i-popup-content">
+Specifies the radius of the end treatment at the start of the tube. If not specified, the global default end treatment radius is used.
+</div>
+<div id="StartEndTreatmentDepthPopupContent" class="i-popup-content">
+Specifies the depth of the end treatment at the start of the tube. If not specified, the global default end treatment depth is used.
+</div>
+<div id="StartEndTreatmentAnglePopupContent" class="i-popup-content">
+Specifies the angle of the end treatment at the start of the tube. If not specified, the global default end treatment angle is used.
+</div>
+<div id="EndEndTreatmentTypePopupContent" class="i-popup-content">
+Defines the type of end treatment for the end of the tube. The end of the tube is dictated by the direction of the first segment passed into the TubeSegments array. Valid values are members of the TubeEndTreatmentTypeConstants constant set.
+</div>
+<div id="EndEndTreatmentInsideDiameterPopupContent" class="i-popup-content">
+Specifies the inside diameter of the end treatment at the end of the tube. If not specified, the global default end treatment inside diameter is used.
+</div>
+<div id="EndEndTreatmentOutsideDiameterPopupContent" class="i-popup-content">
+Specifies the outside diameter of the end treatment at the end of the tube. If not specified, the global default end treatment outside diameter is used.
+</div>
+<div id="EndEndTreatmentRadiusPopupContent" class="i-popup-content">
+Specifies the radius of the end treatment at the end of the tube. If not specified, the global default end treatment radius is used.
+</div>
+<div id="EndEndTreatmentDepthPopupContent" class="i-popup-content">
+Specifies the depth of the end treatment at the end of the tube. If not specified, the global default end treatment depth is used.
+</div>
+<div id="EndEndTreatmentAnglePopupContent" class="i-popup-content">
+Specifies the angle of the end treatment at the end of the tube. If not specified, the global default end treatment angle is used.
+</div>
+<!--DXMETADATA end -->
+    <div id="i-body-content" class="i-body-content">
+        <!--DXMETADATA start type="Description" source="Item" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=description,caption=$$Description$$%%<div class=""i-description-content"">%%description%%</div></div>" --><div class="i-section-heading" id="i-description-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Description</span></div><div id="i-description-section-content" class="i-section-content"><div class="i-description-content">Creates a new Occurrence object in the Assembly document. This occurrence behaves like any other occurrence in the Assembly file, except it successfully returns a Tube object when the Tube property is invoked on the Occurrence.</div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="Syntax" lang="VB" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=syntax,caption=$$Syntax$$%%<div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>%%Syntax%%</pre></tr></table></div></div>" --><div class="i-section-heading" id="i-syntax-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Syntax</span></div><div id="i-syntax-section-content" class="i-section-content"><div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>Public Function AddTubeBIDM( _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="TubeSegmentsPopupLink" data-popup-contentsource="#TubeSegmentsPopupContent" data-popup-showevent="click mouseenter">TubeSegments</a></i>() As Object, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="FilePathPopupLink" data-popup-contentsource="#FilePathPopupContent" data-popup-showevent="click mouseenter">FilePath</a></i> As String, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="DocumentNumberPopupLink" data-popup-contentsource="#DocumentNumberPopupContent" data-popup-showevent="click mouseenter">DocumentNumber</a></i> As String, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="RevisionIDPopupLink" data-popup-contentsource="#RevisionIDPopupContent" data-popup-showevent="click mouseenter">RevisionID</a></i> As String, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="TitlePopupLink" data-popup-contentsource="#TitlePopupContent" data-popup-showevent="click mouseenter">Title</a></i> As String, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="NewFileNamePopupLink" data-popup-contentsource="#NewFileNamePopupContent" data-popup-showevent="click mouseenter">NewFileName</a></i> As String, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="TemplateFileNamePopupLink" data-popup-contentsource="#TemplateFileNamePopupContent" data-popup-showevent="click mouseenter">TemplateFileName</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="IsSolidPopupLink" data-popup-contentsource="#IsSolidPopupContent" data-popup-showevent="click mouseenter">IsSolid</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="MaterialPopupLink" data-popup-contentsource="#MaterialPopupContent" data-popup-showevent="click mouseenter">Material</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="BendRadiusPopupLink" data-popup-contentsource="#BendRadiusPopupContent" data-popup-showevent="click mouseenter">BendRadius</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="OuterDiameterPopupLink" data-popup-contentsource="#OuterDiameterPopupContent" data-popup-showevent="click mouseenter">OuterDiameter</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="MinimumFlatLengthPopupLink" data-popup-contentsource="#MinimumFlatLengthPopupContent" data-popup-showevent="click mouseenter">MinimumFlatLength</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="WallThicknessPopupLink" data-popup-contentsource="#WallThicknessPopupContent" data-popup-showevent="click mouseenter">WallThickness</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="ExtendStartPopupLink" data-popup-contentsource="#ExtendStartPopupContent" data-popup-showevent="click mouseenter">ExtendStart</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="ExtendEndPopupLink" data-popup-contentsource="#ExtendEndPopupContent" data-popup-showevent="click mouseenter">ExtendEnd</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="AddConnectRelationsPopupLink" data-popup-contentsource="#AddConnectRelationsPopupContent" data-popup-showevent="click mouseenter">AddConnectRelations</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="StartEndTreatmentTypePopupLink" data-popup-contentsource="#StartEndTreatmentTypePopupContent" data-popup-showevent="click mouseenter">StartEndTreatmentType</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="StartEndTreatmentInsideDiameterPopupLink" data-popup-contentsource="#StartEndTreatmentInsideDiameterPopupContent" data-popup-showevent="click mouseenter">StartEndTreatmentInsideDiameter</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="StartEndTreatmentOutsideDiameterPopupLink" data-popup-contentsource="#StartEndTreatmentOutsideDiameterPopupContent" data-popup-showevent="click mouseenter">StartEndTreatmentOutsideDiameter</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="StartEndTreatmentRadiusPopupLink" data-popup-contentsource="#StartEndTreatmentRadiusPopupContent" data-popup-showevent="click mouseenter">StartEndTreatmentRadius</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="StartEndTreatmentDepthPopupLink" data-popup-contentsource="#StartEndTreatmentDepthPopupContent" data-popup-showevent="click mouseenter">StartEndTreatmentDepth</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="StartEndTreatmentAnglePopupLink" data-popup-contentsource="#StartEndTreatmentAnglePopupContent" data-popup-showevent="click mouseenter">StartEndTreatmentAngle</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="EndEndTreatmentTypePopupLink" data-popup-contentsource="#EndEndTreatmentTypePopupContent" data-popup-showevent="click mouseenter">EndEndTreatmentType</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="EndEndTreatmentInsideDiameterPopupLink" data-popup-contentsource="#EndEndTreatmentInsideDiameterPopupContent" data-popup-showevent="click mouseenter">EndEndTreatmentInsideDiameter</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="EndEndTreatmentOutsideDiameterPopupLink" data-popup-contentsource="#EndEndTreatmentOutsideDiameterPopupContent" data-popup-showevent="click mouseenter">EndEndTreatmentOutsideDiameter</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="EndEndTreatmentRadiusPopupLink" data-popup-contentsource="#EndEndTreatmentRadiusPopupContent" data-popup-showevent="click mouseenter">EndEndTreatmentRadius</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="EndEndTreatmentDepthPopupLink" data-popup-contentsource="#EndEndTreatmentDepthPopupContent" data-popup-showevent="click mouseenter">EndEndTreatmentDepth</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="EndEndTreatmentAnglePopupLink" data-popup-contentsource="#EndEndTreatmentAnglePopupContent" data-popup-showevent="click mouseenter">EndEndTreatmentAngle</a></i> As Variant _
+) As <a href="SolidEdgeAssembly~Occurrence.html">Occurrence</a></pre></tr></table></div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_LIST" namespace="parameter" source="Item" filter="" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=parameters,caption=$$ParameterList$$%%%%filtereditemlist%%</div>" --><div class="i-section-heading" id="i-parameters-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Parameters</span></div><div id="i-parameters-section-content" class="i-section-content"><dl>
+<dt><I>TubeSegments</I></dt>
+<dd>Specifies the objects that will define the tube path. This array can include LineSegment and Layout objects. The order of the elements in the array is significant only to the degree that the elements must form an end-to-end sequence. That is, only the first and last elements will have a free end.</dd>
+<dt><I>FilePath</I></dt>
+<dd>File path where file to be saved.</dd>
+<dt><I>DocumentNumber</I></dt>
+<dd>Unique Document number to generate file name using revision.</dd>
+<dt><I>RevisionID</I></dt>
+<dd>Revision ID property which will be appended to Document Number to create file name.</dd>
+<dt><I>Title</I></dt>
+<dd>Title property which will be saved in newly created file properties.</dd>
+<dt><I>NewFileName</I></dt>
+<dd>This API returns the new generated file name when succeeded.</dd>
+<dt><I>TemplateFileName</I></dt>
+<dd>Specifies the name of a Part file to be used as a template when creating the Part file. If not specified, normal.par is used as the template.</dd>
+<dt><I>IsSolid</I></dt>
+<dd>Specifies whether the created tube is solid (True) or hollow (False). If not specified, a hollow tube is created.</dd>
+<dt><I>Material</I></dt>
+<dd>Specifies a material condition to be applied to the tube.</dd>
+<dt><I>BendRadius</I></dt>
+<dd>Specifies the bend radius to be applied to the tube. If not specified, the global setting is used. The tube is recomputed as needed if the global setting changes.</dd>
+<dt><I>OuterDiameter</I></dt>
+<dd>Specifies the outer diameter to be applied to the tube. If not specified, the global setting is used. The tube is recomputed as needed if the global setting changes.</dd>
+<dt><I>MinimumFlatLength</I></dt>
+<dd>Specifies the minimum flat length to be applied to the tube. If not specified, the global setting is used. The tube is recomputed as needed if the global setting changes.</dd>
+<dt><I>WallThickness</I></dt>
+<dd>Specifies the wall thickness to be applied to the tube. If not specified, the global setting is used. The tube is recomputed as needed if the global setting changes.</dd>
+<dt><I>ExtendStart</I></dt>
+<dd>Specifies the extension (if a positive value) or setback (if a negative value) of the Tube with respect to the start point of the tube. If not specified, 0.0 is used</dd>
+<dt><I>ExtendEnd</I></dt>
+<dd>Specifies the extension (if a positive value) or setback (if a negative value) of the Tube with respect to the end point of the tube. If not specified, 0.0 is used.</dd>
+<dt><I>AddConnectRelations</I></dt>
+<dd>Specifies whether or not connect relationships are placed at all of the points where any two segments meet. If connect relationships are already present, AddConnectRelations should be False.</dd>
+<dt><I>StartEndTreatmentType</I></dt>
+<dd>Defines the type of end treatment for the start of the tube. The start of the tube is dictated by the direction of the first segment passed into the TubeSegments array. Valid values are members of the TubeEndTreatmentTypeConstants constant set.</dd>
+<dt><I>StartEndTreatmentInsideDiameter</I></dt>
+<dd>Specifies the inside diameter of the end treatment at the start of the tube. If not specified, the global default end treatment inside diameter is used.</dd>
+<dt><I>StartEndTreatmentOutsideDiameter</I></dt>
+<dd>Specifies the outside diameter of the end treatment at the start of the tube. If not specified, the global default end treatment outside diameter is used.</dd>
+<dt><I>StartEndTreatmentRadius</I></dt>
+<dd>Specifies the radius of the end treatment at the start of the tube. If not specified, the global default end treatment radius is used.</dd>
+<dt><I>StartEndTreatmentDepth</I></dt>
+<dd>Specifies the depth of the end treatment at the start of the tube. If not specified, the global default end treatment depth is used.</dd>
+<dt><I>StartEndTreatmentAngle</I></dt>
+<dd>Specifies the angle of the end treatment at the start of the tube. If not specified, the global default end treatment angle is used.</dd>
+<dt><I>EndEndTreatmentType</I></dt>
+<dd>Defines the type of end treatment for the end of the tube. The end of the tube is dictated by the direction of the first segment passed into the TubeSegments array. Valid values are members of the TubeEndTreatmentTypeConstants constant set.</dd>
+<dt><I>EndEndTreatmentInsideDiameter</I></dt>
+<dd>Specifies the inside diameter of the end treatment at the end of the tube. If not specified, the global default end treatment inside diameter is used.</dd>
+<dt><I>EndEndTreatmentOutsideDiameter</I></dt>
+<dd>Specifies the outside diameter of the end treatment at the end of the tube. If not specified, the global default end treatment outside diameter is used.</dd>
+<dt><I>EndEndTreatmentRadius</I></dt>
+<dd>Specifies the radius of the end treatment at the end of the tube. If not specified, the global default end treatment radius is used.</dd>
+<dt><I>EndEndTreatmentDepth</I></dt>
+<dd>Specifies the depth of the end treatment at the end of the tube. If not specified, the global default end treatment depth is used.</dd>
+<dt><I>EndEndTreatmentAngle</I></dt>
+<dd>Specifies the angle of the end treatment at the end of the tube. If not specified, the global default end treatment angle is used.</dd>
+</dl></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##RETURNS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=returns,caption=$$Return_Type$$%%<div class=""i-returns-content"">%%comment%%</div></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##REMARKS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=remarks,caption=$$Remarks$$%%%%comment%%</div>" --><div class="i-section-heading" id="i-remarks-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Remarks</span></div><div id="i-remarks-section-content" class="i-section-content">DocumentNumber and File Path are mandatory parameters. They cannot be NULL or empty.</div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="sourcecode" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=source,caption=$$Source_Code$$%%<table border=0 cellpadding=0 cellspacing=0 class=sourcecode><tr><td nowrap>%%sourcecode%%</td></tr></table></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##EXAMPLEINTRO" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=""$$Example$$%%designlist:tagidentifier=##EXAMPLECODE,itemtype=Example%%""%%%%comment%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="EXAMPLEGROUP_LIST" namespace="ExampleGroup" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""="",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><div class="i-section-heading" id="i-example-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Example</span></div><div id="i-example-section-content" class="i-section-content">
+<div class="i-tab-container">
+    <ul>
+        <li class="i-filtered-content-VB.NET">
+			<a href="#i-tab-content-c940b691-cb39-456f-a5e9-07252baf6979">Example (VB.NET)</a>
+		</li>
+        <li class="i-filtered-content-CS">
+			<a href="#i-tab-content-980e4b21-2237-40c8-a3ee-5925f0f50d32">Example (C#)</a>
+		</li>
+
+    </ul>
+	<div id="i-tab-content-c940b691-cb39-456f-a5e9-07252baf6979" class="i-filtered-content-VB.NET">
+		<pre><span style="color: #0000FF; ">Public</span> <span style="color: #0000FF; ">Class</span> Form1
+    <span style="color: #0000FF; ">Private</span> <span style="color: #0000FF; ">Sub</span> Button1_Click(sender <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Object</span>, e <span style="color: #0000FF; ">As</span> EventArgs) <span style="color: #0000FF; ">Handles</span> Button1.Click
+        <span style="color: #0000FF; ">Dim</span> objSEApplication <span style="color: #0000FF; ">As</span> SolidEdgeFramework.Application = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objAsmdoc <span style="color: #0000FF; ">As</span> SolidEdgeAssembly.AssemblyDocument = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> occurrences <span style="color: #0000FF; ">As</span> SolidEdgeAssembly.Occurrences = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> tube <span style="color: #0000FF; ">As</span> SolidEdgeAssembly.Occurrence = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> lineSegments <span style="color: #0000FF; ">As</span> SolidEdgeAssembly.LineSegments = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> lineSegment <span style="color: #0000FF; ">As</span> SolidEdgeAssembly.LineSegment = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> result <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Integer</span> = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> prefix <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">String</span> = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> docNums <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Object</span>() = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> newFileName <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">String</span> = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> RevisionID <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">String</span> = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objectSegments(0) <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Object</span>
+        <span style="color: #0000FF; ">Dim</span> Title <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">String</span> = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> m_sVaultPath <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">String</span> = <span style="color: #800000; ">&quot;C:\Temp\New&quot;</span>
+        <span style="color: #0000FF; ">Dim</span> StartPt(0 <span style="color: #0000FF; ">To</span> 2) <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+        <span style="color: #0000FF; ">Dim</span> EndPt(0 <span style="color: #0000FF; ">To</span> 2) <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+        <span style="color: #0000FF; ">Dim</span> iVal <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Boolean</span> = <span style="color: #0000FF; ">True</span>
+
+        <span style="color: #0000FF; ">Try</span>
+            objSEApplication = <span style="color: #0000FF; ">CType</span>(<span style="color: #0000FF; ">GetObject</span>(, <span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>), SolidEdgeFramework.Application)
+            objSEApplication.Get_Set_UseBiDM_SEOption(<span style="color: #800000; ">&quot;False&quot;</span>, iVal)
+            objSEApplication.Get_Set_FileNamingRule(<span style="color: #800000; ">&quot;False&quot;</span>, iVal)
+            result = objSEApplication.GetNextDocumentNumbers(2, prefix, docNums)
+            <span style="color: #0000FF; ">If</span> result &lt;&gt; 0 <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">Throw</span> <span style="color: #0000FF; ">New</span> Exception
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+
+            objAsmdoc = objSEApplication.Documents.Add(<span style="color: #800000; ">&quot;SolidEdge.AssemblyDocument&quot;</span>)
+
+            occurrences = objAsmdoc.Occurrences
+            lineSegments = objAsmdoc.LineSegments
+            StartPt(0) = 0.0
+            StartPt(1) = 0.0
+            StartPt(2) = 0.0
+            EndPt(0) = 0.0
+            EndPt(1) = 0.0
+            EndPt(2) = 0.1
+            lineSegment = lineSegments.Add(StartPt, EndPt)
+
+            objectSegments(0) = lineSegment
+
+            objAsmdoc.SaveAsBIDM(m_sVaultPath, docNums(0), RevisionID, Title)
+            tube = occurrences.AddTubeBIDM(objectSegments, m_sVaultPath, docNums(1), RevisionID, Title, newFileName)
+            objAsmdoc.Save()
+
+        <span style="color: #0000FF; ">Catch</span> ex <span style="color: #0000FF; ">As</span> Exception
+            occurrences = <span style="color: #0000FF; ">Nothing</span>
+            lineSegments = <span style="color: #0000FF; ">Nothing</span>
+            lineSegment = <span style="color: #0000FF; ">Nothing</span>
+            objectSegments(0) = <span style="color: #0000FF; ">Nothing</span>
+            objectSegments = <span style="color: #0000FF; ">Nothing</span>
+            Array.Clear(docNums, 0, docNums.Count)
+            docNums = <span style="color: #0000FF; ">Nothing</span>
+
+        <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">Try</span>
+
+    <span style="color: #0000FF; ">End Sub</span>
+<span style="color: #0000FF; ">End Class</span>
+</pre>
+	</div>
+	<div id="i-tab-content-980e4b21-2237-40c8-a3ee-5925f0f50d32" class="i-filtered-content-CS">
+		<pre><span style="color: #0000FF; ">using</span> System;
+
+<span style="color: #0000FF; ">public</span> <span style="color: #0000FF; ">class</span> Form1
+{
+    <span style="color: #0000FF; ">private</span> <span style="color: #0000FF; ">void</span> Button1_Click(<span style="color: #0000FF; ">object</span> sender, EventArgs e)
+    {
+        SolidEdgeFramework.Application objSEApplication = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeAssembly.AssemblyDocument objAsmdoc = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeAssembly.Occurrences occurrences = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeAssembly.Occurrence tube = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeAssembly.LineSegments lineSegments = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeAssembly.LineSegment lineSegment = <span style="color: #0000FF; ">null</span>;
+        <span style="color: #0000FF; ">int</span> result = 0;
+        <span style="color: #0000FF; ">string</span> prefix = <span style="color: #0000FF; ">null</span>;
+        <span style="color: #0000FF; ">object</span>[] docNums = <span style="color: #0000FF; ">null</span>;
+        <span style="color: #0000FF; ">string</span> newFileName = <span style="color: #0000FF; ">null</span>;
+        <span style="color: #0000FF; ">string</span> RevisionID = <span style="color: #0000FF; ">null</span>;
+        <span style="color: #0000FF; ">object</span>[] objectSegments = <span style="color: #0000FF; ">new</span> <span style="color: #0000FF; ">object</span>[1];
+        <span style="color: #0000FF; ">string</span> Title = <span style="color: #0000FF; ">null</span>;
+        <span style="color: #0000FF; ">string</span> m_sVaultPath = <span style="color: #800000; ">&quot;C:\\Temp\\New&quot;</span>;
+        <span style="color: #0000FF; ">double</span>[] StartPt = <span style="color: #0000FF; ">new</span> <span style="color: #0000FF; ">double</span>[3];
+        <span style="color: #0000FF; ">double</span>[] EndPt = <span style="color: #0000FF; ">new</span> <span style="color: #0000FF; ">double</span>[3];
+        <span style="color: #0000FF; ">bool</span> iVal = <span style="color: #0000FF; ">true</span>;
+
+        <span style="color: #0000FF; ">try</span>
+        {
+            objSEApplication = (SolidEdgeFramework.Application)Microsoft.VisualBasic.Interaction.GetObject(<span style="color: #0000FF; ">null</span>, <span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>);
+            objSEApplication.Get_Set_UseBiDM_SEOption(<span style="color: #800000; ">&quot;False&quot;</span>, iVal);
+            objSEApplication.Get_Set_FileNamingRule(<span style="color: #800000; ">&quot;False&quot;</span>, iVal);
+            result = objSEApplication.GetNextDocumentNumbers(2, prefix, docNums);
+            <span style="color: #0000FF; ">if</span> (result != 0)
+            {
+                <span style="color: #0000FF; ">throw</span> <span style="color: #0000FF; ">new</span> Exception();
+            }
+
+            objAsmdoc = objSEApplication.Documents.Add(<span style="color: #800000; ">&quot;SolidEdge.AssemblyDocument&quot;</span>);
+
+            occurrences = objAsmdoc.Occurrences;
+            lineSegments = objAsmdoc.LineSegments;
+            StartPt[0] = 0.0;
+            StartPt[1] = 0.0;
+            StartPt[2] = 0.0;
+            EndPt[0] = 0.0;
+            EndPt[1] = 0.0;
+            EndPt[2] = 0.1;
+            lineSegment = lineSegments.Add(StartPt, EndPt);
+
+            objectSegments[0] = lineSegment;
+
+            objAsmdoc.SaveAsBIDM(m_sVaultPath, docNums[0], RevisionID, Title);
+            tube = occurrences.AddTubeBIDM(objectSegments, m_sVaultPath, docNums[1], RevisionID, Title, newFileName);
+            objAsmdoc.Save();
+
+        }
+        <span style="color: #0000FF; ">catch</span> (Exception ex)
+        {
+            occurrences = <span style="color: #0000FF; ">null</span>;
+            lineSegments = <span style="color: #0000FF; ">null</span>;
+            lineSegment = <span style="color: #0000FF; ">null</span>;
+            objectSegments[0] = <span style="color: #0000FF; ">null</span>;
+            objectSegments = <span style="color: #0000FF; ">null</span>;
+            Array.Clear(docNums, 0, docNums.Count());
+            docNums = <span style="color: #0000FF; ">null</span>;
+
+        }
+
+    }
+
+    <span style="color: #0000FF; ">public</span> Form1()
+    {
+        SubscribeToEvents();
+    }
+
+
+    <span style="color: #0000FF; ">private</span> <span style="color: #0000FF; ">bool</span> EventsSubscribed = <span style="color: #0000FF; ">false</span>;
+    <span style="color: #0000FF; ">private</span> <span style="color: #0000FF; ">void</span> SubscribeToEvents()
+    {
+        <span style="color: #0000FF; ">if</span> (EventsSubscribed)
+            <span style="color: #0000FF; ">return</span>;
+        <span style="color: #0000FF; ">else</span>
+            EventsSubscribed = <span style="color: #0000FF; ">true</span>;
+
+        Button1.Click += Button1_Click;
+    }
+
+}
+</pre>
+	</div>
+	
+</div>
+</div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="INLINE_EXAMPLE" namespace="Example" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""<>"",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="MENU_LINK" namespace="example" source="Item" filter="type=linked" NoHeader="True" NoFooter="True" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=examplelinks,caption=$$Example$$%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="FilteredItemList" scrap="CATEGORIZED_LINKS" namespace="linkcategory" source="Item" filter="" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=seealso,caption=""$$See_Also$$%%designlist:tagidentifier=##SEEALSO,itemtype=See Also%%""%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><div class="i-section-heading" id="i-seealso-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">See Also</span></div><div id="i-seealso-section-content" class="i-section-content"><p id=dxseealsocontent><a href="SolidEdgeAssembly~Occurrences.html">Occurrences Collection</a>
+&nbsp;|&nbsp;<a href="SolidEdgeAssembly~Occurrences_members.html">Occurrences Members</a>
+</p>
+</p></div><!--DXMETADATA end -->
+    </div>
+    <div id="i-footer-content" class="i-footer-content">
+        <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_FOOTER" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="CopyrightNotice" format="<p>&nbsp;</p><p>&nbsp;</p><hr style=""height: 1px"" /><p>%%variable%%</p>" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="FeedbackLink" format="" --><!--DXMETADATA end-->
+    </div>
+    
+
+    <!--DXMETADATA start type="IsNew" format="<script type=""text/javascript"">setIsNew = true;</script>" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<script type=""text/javascript"">setIsResponsiveEnabled = true;</script>" --><!--DXMETADATA end-->
+    <script type="text/javascript">
+        $(function() {
+            var documentInstance = new Innovasys.Content.Document(document.body);
+            documentInstance.isNew = !(typeof setIsNew === "undefined");
+            documentInstance.isResponsiveEnabled = !(typeof setIsResponsiveEnabled === "undefined");
+            documentInstance.load();
+        });
+    </script>
+</body>
+</html>

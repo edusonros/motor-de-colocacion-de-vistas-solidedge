@@ -38,7 +38,7 @@ Public Class PersistedAppSettings
     <DataMember> Public Property EnableProductionDvRefCleanEngine As Boolean = False
     <DataMember> Public Property EnableSesdkPostDimensionIntrospection As Boolean = False
     <DataMember> Public Property PreferSweepAllDrawingDimensions As Boolean = False
-    <DataMember> Public Property SuppressDimensionTrackDistanceSpacing As Boolean = True
+    <DataMember> Public Property SuppressDimensionTrackDistanceSpacing As Boolean = False
     <DataMember> Public Property EnableKeypointValueDuplicateCleanup As Boolean = True
 
     <DataMember> Public Property EnableDrawingViewDimensioningLab As Boolean = False

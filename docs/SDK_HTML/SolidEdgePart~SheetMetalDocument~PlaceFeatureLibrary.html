@@ -1,0 +1,912 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--DXMETADATA start type="MetaCharset" --><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><!--DXMETADATA end-->
+    <meta http-equiv="X-UA-Compatible" value="IE=9" />
+
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Literal" condition="helpversion:value=3" value="<meta name=""Microsoft.Help.SelfBranded"" content=""true"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="PageItemTitle" format="<title>%%PageItemTitle%%</title>" --><title>PlaceFeatureLibrary Method</title><!--DXMETADATA end-->
+    <!--DXMETADATA start type="ItemTitleNoQuotes" format="<meta name=""Title"" content=""%%ItemTitleNoQuotes%%""/>" --><!--DXMETADATA end-->    
+    
+
+    <!--DXMETADATA start type="PackageLink" packagename="jquery" filetype="script" firstlinkattributes="id=""mshs_support_script"""--><script src="template/packages/jquery/script/chm.mshc/jquery-1.7.2.min.js" type="text/javascript" id="mshs_support_script"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="script"--><script src="template/packages/jquery-ui/script/chm.mshc/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/jquery-ui/css/chm.mshc/jquery-ui-1.8.18.custom.css"></link><!--DXMETADATA end-->
+	
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/plugins-ax/css/chm.mshc/jquery-plugins.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="css" firstlinkattributes=" data-mshv2-stylesheet=""/template/packages/core-ax/dx.com.mshv2.css"" data-mshv1-stylesheet=""/template/packages/core-ax/dx.com.mshv1.css"" data-responsive-mobile=""template/packages/core-ax/dx.com.mobile.css"" data-responsive-tablet=""template/packages/core-ax/dx.com.tablet.css"""--><link rel="stylesheet" type="text/css" href="template/packages/core-ax/css/dx.com.css"  data-mshv2-stylesheet="/template/packages/core-ax/dx.com.mshv2.css" data-mshv1-stylesheet="/template/packages/core-ax/dx.com.mshv1.css" data-responsive-mobile="template/packages/core-ax/dx.com.mobile.css" data-responsive-tablet="template/packages/core-ax/dx.com.tablet.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="script"--><script src="template/packages/plugins-ax/script/chm.mshc/jquery-plugins.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="script"--><script src="template/packages/core-ax/script/dx.com.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="TopicId" format="<meta name=""Microsoft.Help.Id"" content=""%%TopicId%%""/>" --><meta name="Microsoft.Help.Id" content="SolidEdgePart~SheetMetalDocument~PlaceFeatureLibrary"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Synopsis" StripHtmlTags="True" MaxLength="250" format="<meta name=""Description"" content=""%%Synopsis%%"" />"--><meta name="Description" content="Places features from an existing document into the current document." /><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocParentId" format="<meta name=""Microsoft.Help.TocParent"" content=""%%TocParentId%%""/>" --><meta name="Microsoft.Help.TocParent" content="SolidEdgePart~SheetMetalDocument_methods"/><!--DXMETADATA end-->
+    <meta name="Microsoft.Help.ContentType" content="Reference" />
+    <!--DXMETADATA start type="MshvKeywords" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="MshvMetaTags" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.Locale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.TopicLocale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="Stylesheets" --><link rel="stylesheet" type="text/css" href="stylesheets/customstyles.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Scripts" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="DesignTime"--><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_PROPERTIES" --><!--DXMETADATA end -->
+
+    <!--DXMETADATA start type="CustomHeadContent" --><!--DXMETADATA end-->
+</head>
+
+<body>
+    <div id="i-before-header-content" class="i-before-header-content">
+        
+    </div>
+    <div id="i-header-content" class="i-header-content">
+        <!--DXMETADATA start type="LogoImage" --><img class="logoimage" src="images/sesdk_header.jpg" border="0"></img><!--DXMETADATA end-->
+            <div class="i-project-title"><!--DXMETADATA start type="ProjectTitle" -->Solid Edge Part Type Library<!--DXMETADATA end--></div>
+        <div class="i-page-title"><div class="i-page-title-text"><!--DXMETADATA start type="PageItemTitle" -->PlaceFeatureLibrary Method<!--DXMETADATA end--></div></div>
+    </div>
+    <div id="i-after-header-content" class="i-after-header-content">
+        <!-- Spacing --> <span class="i-toggle-all-sections i-function-link">
+                <label class="i-collapse-all"><!--DXMETADATA start type="Phrase" name="COLLAPSE_ALL" -->Collapse All<!--DXMETADATA end--></label>
+                <label class="i-expand-all" style="display: none;"><!--DXMETADATA start type="Phrase" name="EXPAND_ALL" -->Expand All<!--DXMETADATA end--></label>
+            </span><!--DXMETADATA start type="Literal" condition="communityenabled" value="%%scrap:name=_COMMUNITY_DROPDOWN%%" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="IsWebOutputRootPageLinkEnabled" format="<a href='#' class="i-page-link" class="i-view-in-frame-link" title='$$VIEW_WITH_NAVIGATION_TOOLS_TIP$$' style='display: none' data-root-page='%%WebOutputRootPage%%%%OutputFileExtension%%' target='_top'>$$VIEW_WITH_NAVIGATION_TOOLS_TEXT$$</a>" --><a href='#' class="i-page-link" class="i-view-in-frame-link" title='Open this Topic in a view that includes Navigation tools (Table of Contents, Index, Search)' style='display: none' data-root-page='webframe.html' target='_top'>View with Navigation Tools</a><!--DXMETADATA end-->
+    </div>
+    <!--DXMETADATA start type="Breadcrumbs" scrap="_BREADCRUMBS" --><div class="i-breadcrumbs-container"><table><tr><td>
+<a href="SolidEdgePart_P.html">Solid Edge Part Type Library</a>
+ > <a href="SolidEdgePart~SheetMetalDocument.html">SheetMetalDocument Object</a>
+ : PlaceFeatureLibrary Method</td></tr></table></div><!--DXMETADATA end -->
+    
+    <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_BUBBLES" namespace="parameter" source="Item" -->
+<div id="LibNamePopupContent" class="i-popup-content">
+Source document from which features are to be copied into target document.
+</div>
+<div id="RefPlanePopupContent" class="i-popup-content">
+Destination RefPlace in target document.
+</div>
+<div id="xOriginPopupContent" class="i-popup-content">
+X Origin placement in target document.
+</div>
+<div id="yOriginPopupContent" class="i-popup-content">
+Y Origin placement in target document.
+</div>
+<div id="ZoriginPopupContent" class="i-popup-content">
+Z Origin placement in target document.
+</div>
+<div id="FeaturesPopupContent" class="i-popup-content">
+Returned array of Features that were added to target document.
+</div>
+<!--DXMETADATA end -->
+    <div id="i-body-content" class="i-body-content">
+        <!--DXMETADATA start type="Description" source="Item" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=description,caption=$$Description$$%%<div class=""i-description-content"">%%description%%</div></div>" --><div class="i-section-heading" id="i-description-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Description</span></div><div id="i-description-section-content" class="i-section-content"><div class="i-description-content">Places features from an existing document into the current document.</div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="Syntax" lang="VB" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=syntax,caption=$$Syntax$$%%<div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>%%Syntax%%</pre></tr></table></div></div>" --><div class="i-section-heading" id="i-syntax-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Syntax</span></div><div id="i-syntax-section-content" class="i-section-content"><div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>Public Sub PlaceFeatureLibrary( _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="LibNamePopupLink" data-popup-contentsource="#LibNamePopupContent" data-popup-showevent="click mouseenter">LibName</a></i> As String, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="RefPlanePopupLink" data-popup-contentsource="#RefPlanePopupContent" data-popup-showevent="click mouseenter">RefPlane</a></i> As Object, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="xOriginPopupLink" data-popup-contentsource="#xOriginPopupContent" data-popup-showevent="click mouseenter">xOrigin</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="yOriginPopupLink" data-popup-contentsource="#yOriginPopupContent" data-popup-showevent="click mouseenter">yOrigin</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="ZoriginPopupLink" data-popup-contentsource="#ZoriginPopupContent" data-popup-showevent="click mouseenter">Zorigin</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="FeaturesPopupLink" data-popup-contentsource="#FeaturesPopupContent" data-popup-showevent="click mouseenter">Features</a></i>() As Object _
+) </pre></tr></table></div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_LIST" namespace="parameter" source="Item" filter="" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=parameters,caption=$$ParameterList$$%%%%filtereditemlist%%</div>" --><div class="i-section-heading" id="i-parameters-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Parameters</span></div><div id="i-parameters-section-content" class="i-section-content"><dl>
+<dt><I>LibName</I></dt>
+<dd>Source document from which features are to be copied into target document.</dd>
+<dt><I>RefPlane</I></dt>
+<dd>Destination RefPlace in target document.</dd>
+<dt><I>xOrigin</I></dt>
+<dd>X Origin placement in target document.</dd>
+<dt><I>yOrigin</I></dt>
+<dd>Y Origin placement in target document.</dd>
+<dt><I>Zorigin</I></dt>
+<dd>Z Origin placement in target document.</dd>
+<dt><I>Features</I></dt>
+<dd>Returned array of Features that were added to target document.</dd>
+</dl></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##RETURNS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=returns,caption=$$Return_Type$$%%<div class=""i-returns-content"">%%comment%%</div></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##REMARKS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=remarks,caption=$$Remarks$$%%%%comment%%</div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="sourcecode" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=source,caption=$$Source_Code$$%%<table border=0 cellpadding=0 cellspacing=0 class=sourcecode><tr><td nowrap>%%sourcecode%%</td></tr></table></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##EXAMPLEINTRO" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=""$$Example$$%%designlist:tagidentifier=##EXAMPLECODE,itemtype=Example%%""%%%%comment%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="EXAMPLEGROUP_LIST" namespace="ExampleGroup" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""="",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><div class="i-section-heading" id="i-example-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Example</span></div><div id="i-example-section-content" class="i-section-content">
+<div class="i-tab-container">
+    <ul>
+        <li class="i-filtered-content-VB.NET">
+			<a href="#i-tab-content-ae5cb3d9-acbf-4161-a80f-15deeafe1e30">Example (VB.NET)</a>
+		</li>
+        <li class="i-filtered-content-CS">
+			<a href="#i-tab-content-8356f6b5-252f-486d-85ea-91d6ec1b5649">Example (C#)</a>
+		</li>
+
+    </ul>
+	<div id="i-tab-content-ae5cb3d9-acbf-4161-a80f-15deeafe1e30" class="i-filtered-content-VB.NET">
+		<pre><span style="color: #0000FF; ">Imports</span> System.IO
+<span style="color: #0000FF; ">Imports</span> System.Runtime.InteropServices
+
+<span style="color: #0000FF; ">Module</span> Example
+    &lt;STAThread()&gt; _
+    <span style="color: #0000FF; ">Sub</span> Main()
+        <span style="color: #0000FF; ">Dim</span> objTrainingFolder <span style="color: #0000FF; ">As</span> DirectoryInfo = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objApplication <span style="color: #0000FF; ">As</span> SolidEdgeFramework.Application = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objDocuments <span style="color: #0000FF; ">As</span> SolidEdgeFramework.Documents = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objPartDocument <span style="color: #0000FF; ">As</span> SolidEdgePart.SheetMetalDocument = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objRefPlanes <span style="color: #0000FF; ">As</span> SolidEdgePart.RefPlanes = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objRefPlane <span style="color: #0000FF; ">As</span> SolidEdgePart.RefPlane = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objFeatures <span style="color: #0000FF; ">As</span> Array
+        <span style="color: #0000FF; ">Dim</span> objFeature <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Object</span>
+        <span style="color: #0000FF; ">Dim</span> featureType <span style="color: #0000FF; ">As</span> SolidEdgePart.FeatureTypeConstants
+
+        <span style="color: #0000FF; ">Try</span>
+            OleMessageFilter.Register()
+
+            objTrainingFolder = GetTrainingFolder()
+            objApplication = Activator.CreateInstance(Type.GetTypeFromProgID(<span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>))
+            objApplication.Visible = <span style="color: #0000FF; ">True</span>
+            objDocuments = objApplication.Documents
+            objPartDocument = objDocuments.Add(<span style="color: #800000; ">&quot;SolidEdge.SheetMetalDocument&quot;</span>)
+            objRefPlanes = objPartDocument.RefPlanes
+            objFeatures = Array.CreateInstance(<span style="color: #0000FF; ">GetType</span>(System.Object), 0)
+
+            objRefPlane = objRefPlanes.Item(1)
+            objPartDocument.PlaceFeatureLibrary(Path.Combine(objTrainingFolder.FullName, <span style="color: #800000; ">&quot;bar.par&quot;</span>), objRefPlane, 0.0, 0.0, 0.0, objFeatures)
+
+            <span style="color: #0000FF; ">For</span> <span style="color: #0000FF; ">Each</span> objFeature <span style="color: #0000FF; ">In</span> objFeatures
+                featureType = objFeature.Type
+                <span style="color: #0000FF; ">Select</span> <span style="color: #0000FF; ">Case</span> featureType
+                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igAssemblyWeldmentObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igAssemblyWeldmentObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igBeadFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igBeadFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igBendFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igBendFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igBlueSurfFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igBlueSurfFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igBodyFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igBodyFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igBooleanFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igBooleanFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igBreakCornerFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igBreakCornerFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igChamferFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igChamferFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igCloseCornerFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igCloseCornerFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igContourFlangeFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igContourFlangeFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igCoordinateSystemFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igCoordinateSystemFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igCopiedPartFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igCopiedPartFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igCopyConstructionObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igCopyConstructionObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igCopySurfaceObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igCopySurfaceObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igDeleteBlendFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igDeleteBlendFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igDeleteFaceFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igDeleteFaceFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igDeleteHoleFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igDeleteHoleFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igDeleteRegionFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igDeleteRegionFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igDerivedCurveObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igDerivedCurveObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igDimpleFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igDimpleFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igDraftFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igDraftFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igDrawnCutoutFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igDrawnCutoutFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igEtchFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igEtchFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igExtendSurfaceObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igExtendSurfaceObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igExtrudedCutoutFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igExtrudedCutoutFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igExtrudedProtrusionFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igExtrudedProtrusionFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igExtrudedSurfaceObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igExtrudedSurfaceObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igFaceMoveObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igFaceMoveObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igFaceOffsetObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igFaceOffsetObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igFaceRotateObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igFaceRotateObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igFilletWeldFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igFilletWeldFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igFlangeFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igFlangeFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igGussetFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igGussetFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igHelixCutoutFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igHelixCutoutFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igHelixProtrusionFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igHelixProtrusionFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igHoleFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igHoleFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igInterpartConstructionObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igInterpartConstructionObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igIntersectionCurveObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igIntersectionCurveObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igIntersectionPointObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igIntersectionPointObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igJogFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igJogFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igLabelWeldFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igLabelWeldFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igLipFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igLipFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igLiveSectionObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igLiveSectionObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igLoftedCutoutFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igLoftedCutoutFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igLoftedFlangeFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igLoftedFlangeFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igLoftedProtrusionFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igLoftedProtrusionFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igLoftedSurfaceFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igLoftedSurfaceFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igLouverFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igLouverFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igMatchFlangeFaceFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igMatchFlangeFaceFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igMidSurfaceObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igMidSurfaceObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igMirrorCopyFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igMirrorCopyFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igMirrorCopyGeometryObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igMirrorCopyGeometryObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igMirrorPartFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igMirrorPartFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igModelCopyFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igModelCopyFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igNormalCutoutFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igNormalCutoutFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igNormalToFaceCutoutObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igNormalToFaceCutoutObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igNormalToFaceProtrusionObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igNormalToFaceProtrusionObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igOffsetSurfaceObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igOffsetSurfaceObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igPartingSplitFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igPartingSplitFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igPartingSurfaceFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igPartingSurfaceFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igPatternCopyGeometryObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igPatternCopyGeometryObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igPatternFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igPatternFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igPatternPartFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igPatternPartFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igProjectCurveObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igProjectCurveObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igRebendFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igRebendFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igReplaceFaceFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igReplaceFaceFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igResizeBendObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igResizeBendObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igResizeHoleObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igResizeHoleObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igResizeRoundObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igResizeRoundObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igRevolvedCutoutFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igRevolvedCutoutFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igRevolvedProtrusionFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igRevolvedProtrusionFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igRevolvedSurfaceObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igRevolvedSurfaceObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igRibFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igRibFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igRoundFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igRoundFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igSplitCurveObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igSplitCurveObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igSplitFaceObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igSplitFaceObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igStitchSurfaceObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igStitchSurfaceObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igSurfaceByBoundaryObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igSurfaceByBoundaryObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igSweptCutoutFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igSweptCutoutFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igSweptProtrusionFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igSweptProtrusionFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igSweptSurfaceFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igSweptSurfaceFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igTabFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igTabFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igThickenFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igThickenFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igThinRegionFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igThinRegionFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igThinwallFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igThinwallFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igTrimSurfaceObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igTrimSurfaceObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igTubeFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igTubeFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igUnbendFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igUnbendFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igUserDefinedPatternFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igUserDefinedPatternFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igVentFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igVentFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igWebNetworkFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igWebNetworkFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igWeldBeadByExtrudedProtrusionFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igWeldBeadByExtrudedProtrusionFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igWeldBeadByRevolvedProtrusionFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igWeldBeadByRevolvedProtrusionFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igWeldBeadBySweptProtrusionFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igWeldBeadBySweptProtrusionFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igWeldChamferFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igWeldChamferFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igWeldExtrudedCutoutFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igWeldExtrudedCutoutFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igWeldHoleFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igWeldHoleFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igWeldMirrorFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igWeldMirrorFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igWeldPatternFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igWeldPatternFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igWeldRevolvedCutoutFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igWeldRevolvedCutoutFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igWeldRoundFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igWeldRoundFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igWireFeatureObject
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igWireFeatureObject
+</span>                    <span style="color: #0000FF; ">Case</span> SolidEdgePart.FeatureTypeConstants.igWrapSketch
+                        <span style="color: #008000; ">'Handle type SolidEdgePart.FeatureTypeConstants.igWrapSketch
+</span>                <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">Select</span>
+            <span style="color: #0000FF; ">Next</span>
+        <span style="color: #0000FF; ">Catch</span> ex <span style="color: #0000FF; ">As</span> Exception
+            Console.WriteLine(ex.Message)
+        <span style="color: #0000FF; ">Finally</span>
+            OleMessageFilter.Revoke()
+        <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">Try</span>
+    <span style="color: #0000FF; ">End Sub</span>
+
+    <span style="color: #0000FF; ">Function</span> GetTrainingFolder() <span style="color: #0000FF; ">As</span> DirectoryInfo
+        <span style="color: #0000FF; ">Dim</span> objInstallData <span style="color: #0000FF; ">As</span> SEInstallDataLib.SEInstallData = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objInstallFolder <span style="color: #0000FF; ">As</span> DirectoryInfo = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objTrainingFolder <span style="color: #0000FF; ">As</span> DirectoryInfo = <span style="color: #0000FF; ">Nothing</span>
+
+        <span style="color: #0000FF; ">Try</span>
+            objInstallData = <span style="color: #0000FF; ">New</span> SEInstallDataLib.SEInstallData
+            objInstallFolder = <span style="color: #0000FF; ">New</span> DirectoryInfo(objInstallData.GetInstalledPath())
+            objTrainingFolder = <span style="color: #0000FF; ">New</span> DirectoryInfo(Path.Combine(objInstallFolder.Parent.FullName, <span style="color: #800000; ">&quot;Training&quot;</span>))
+        <span style="color: #0000FF; ">Catch</span>
+        <span style="color: #0000FF; ">Finally</span>
+            <span style="color: #0000FF; ">If</span> <span style="color: #0000FF; ">Not</span> (objInstallData <span style="color: #0000FF; ">Is</span> <span style="color: #0000FF; ">Nothing</span>) <span style="color: #0000FF; ">Then</span>
+                Marshal.FinalReleaseComObject(objInstallData)
+                objInstallData = <span style="color: #0000FF; ">Nothing</span>
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+        <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">Try</span>
+
+        <span style="color: #0000FF; ">Return</span> objTrainingFolder
+    <span style="color: #0000FF; ">End Function</span>
+<span style="color: #0000FF; ">End Module</span></pre>
+	</div>
+	<div id="i-tab-content-8356f6b5-252f-486d-85ea-91d6ec1b5649" class="i-filtered-content-CS">
+		<pre><span style="color: #0000FF; ">using</span> System;
+<span style="color: #0000FF; ">using</span> System.IO;
+<span style="color: #0000FF; ">using</span> System.Runtime.InteropServices;
+
+<span style="color: #0000FF; ">internal</span> <span style="color: #0000FF; ">static</span> <span style="color: #0000FF; ">class</span> Example
+{
+    [STAThread()]
+    <span style="color: #0000FF; ">public</span> <span style="color: #0000FF; ">static</span> <span style="color: #0000FF; ">void</span> Main()
+    {
+        DirectoryInfo objTrainingFolder = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeFramework.Application objApplication = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeFramework.Documents objDocuments = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.SheetMetalDocument objPartDocument = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.RefPlanes objRefPlanes = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.RefPlane objRefPlane = <span style="color: #0000FF; ">null</span>;
+        Array objFeatures = <span style="color: #0000FF; ">null</span>;
+<span style="color: #008000; ">//        dynamic objFeature = null;
+</span>        SolidEdgePart.FeatureTypeConstants featureType = <span style="color: #0000FF; ">null</span>;
+
+        <span style="color: #0000FF; ">try</span>
+        {
+            OleMessageFilter.Register();
+
+            objTrainingFolder = GetTrainingFolder();
+            objApplication = Activator.CreateInstance(Type.GetTypeFromProgID(<span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>));
+            objApplication.Visible = <span style="color: #0000FF; ">true</span>;
+            objDocuments = objApplication.Documents;
+            objPartDocument = objDocuments.Add(<span style="color: #800000; ">&quot;SolidEdge.SheetMetalDocument&quot;</span>);
+            objRefPlanes = objPartDocument.RefPlanes;
+            objFeatures = (Array[])Array.CreateInstance(<span style="color: #0000FF; ">typeof</span>(System.Object), 0);
+
+            objRefPlane = objRefPlanes.Item(1);
+            objPartDocument.PlaceFeatureLibrary(Path.Combine(objTrainingFolder.FullName, <span style="color: #800000; ">&quot;bar.par&quot;</span>), objRefPlane, 0.0, 0.0, 0.0, objFeatures);
+
+            <span style="color: #0000FF; ">foreach</span> (dynamic objFeature <span style="color: #0000FF; ">in</span> objFeatures)
+            {
+                featureType = objFeature.Type;
+                <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igAssemblyWeldmentObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igAssemblyWeldmentObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igBeadFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igBeadFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igBendFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igBendFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igBlueSurfFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igBlueSurfFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igBodyFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igBodyFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igBooleanFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igBooleanFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igBreakCornerFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igBreakCornerFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igChamferFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igChamferFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igCloseCornerFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igCloseCornerFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igContourFlangeFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igContourFlangeFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igCoordinateSystemFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igCoordinateSystemFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igCopiedPartFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igCopiedPartFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igCopyConstructionObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igCopyConstructionObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igCopySurfaceObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igCopySurfaceObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igDeleteBlendFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igDeleteBlendFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igDeleteFaceFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igDeleteFaceFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igDeleteHoleFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igDeleteHoleFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igDeleteRegionFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igDeleteRegionFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igDerivedCurveObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igDerivedCurveObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igDimpleFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igDimpleFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igDraftFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igDraftFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igDrawnCutoutFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igDrawnCutoutFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igEtchFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igEtchFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igExtendSurfaceObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igExtendSurfaceObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igExtrudedCutoutFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igExtrudedCutoutFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igExtrudedProtrusionFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igExtrudedProtrusionFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igExtrudedSurfaceObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igExtrudedSurfaceObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igFaceMoveObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igFaceMoveObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igFaceOffsetObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igFaceOffsetObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igFaceRotateObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igFaceRotateObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igFilletWeldFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igFilletWeldFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igFlangeFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igFlangeFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igGussetFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igGussetFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igHelixCutoutFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igHelixCutoutFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igHelixProtrusionFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igHelixProtrusionFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igHoleFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igHoleFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igInterpartConstructionObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igInterpartConstructionObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igIntersectionCurveObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igIntersectionCurveObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igIntersectionPointObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igIntersectionPointObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igJogFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igJogFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igLabelWeldFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igLabelWeldFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igLipFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igLipFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igLiveSectionObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igLiveSectionObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igLoftedCutoutFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igLoftedCutoutFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igLoftedFlangeFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igLoftedFlangeFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igLoftedProtrusionFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igLoftedProtrusionFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igLoftedSurfaceFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igLoftedSurfaceFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igLouverFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igLouverFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igMatchFlangeFaceFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igMatchFlangeFaceFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igMidSurfaceObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igMidSurfaceObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igMirrorCopyFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igMirrorCopyFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igMirrorCopyGeometryObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igMirrorCopyGeometryObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igMirrorPartFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igMirrorPartFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igModelCopyFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igModelCopyFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igNormalCutoutFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igNormalCutoutFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igNormalToFaceCutoutObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igNormalToFaceCutoutObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igNormalToFaceProtrusionObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igNormalToFaceProtrusionObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igOffsetSurfaceObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igOffsetSurfaceObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igPartingSplitFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igPartingSplitFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igPartingSurfaceFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igPartingSurfaceFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igPatternCopyGeometryObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igPatternCopyGeometryObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igPatternFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igPatternFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igPatternPartFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igPatternPartFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igProjectCurveObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igProjectCurveObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igRebendFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igRebendFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igReplaceFaceFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igReplaceFaceFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igResizeBendObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igResizeBendObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igResizeHoleObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igResizeHoleObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igResizeRoundObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igResizeRoundObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igRevolvedCutoutFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igRevolvedCutoutFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igRevolvedProtrusionFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igRevolvedProtrusionFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igRevolvedSurfaceObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igRevolvedSurfaceObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igRibFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igRibFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igRoundFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igRoundFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igSplitCurveObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igSplitCurveObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igSplitFaceObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igSplitFaceObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igStitchSurfaceObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igStitchSurfaceObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igSurfaceByBoundaryObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igSurfaceByBoundaryObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igSweptCutoutFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igSweptCutoutFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igSweptProtrusionFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igSweptProtrusionFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igSweptSurfaceFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igSweptSurfaceFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igTabFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igTabFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igThickenFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igThickenFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igThinRegionFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igThinRegionFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igThinwallFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igThinwallFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igTrimSurfaceObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igTrimSurfaceObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igTubeFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igTubeFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igUnbendFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igUnbendFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igUserDefinedPatternFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igUserDefinedPatternFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igVentFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igVentFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igWebNetworkFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igWebNetworkFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igWeldBeadByExtrudedProtrusionFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igWeldBeadByExtrudedProtrusionFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igWeldBeadByRevolvedProtrusionFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igWeldBeadByRevolvedProtrusionFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igWeldBeadBySweptProtrusionFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igWeldBeadBySweptProtrusionFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igWeldChamferFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igWeldChamferFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igWeldExtrudedCutoutFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igWeldExtrudedCutoutFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igWeldHoleFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igWeldHoleFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igWeldMirrorFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igWeldMirrorFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igWeldPatternFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igWeldPatternFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igWeldRevolvedCutoutFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igWeldRevolvedCutoutFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igWeldRoundFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igWeldRoundFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igWireFeatureObject)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igWireFeatureObject
+</span>                }
+                <span style="color: #0000FF; ">else</span> <span style="color: #0000FF; ">if</span> (featureType == SolidEdgePart.FeatureTypeConstants.igWrapSketch)
+                {
+                    <span style="color: #008000; ">//Handle type SolidEdgePart.FeatureTypeConstants.igWrapSketch
+</span>                }
+            }
+        }
+        <span style="color: #0000FF; ">catch</span> (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        <span style="color: #0000FF; ">finally</span>
+        {
+            OleMessageFilter.Revoke();
+        }
+    }
+
+    <span style="color: #0000FF; ">public</span> <span style="color: #0000FF; ">static</span> DirectoryInfo GetTrainingFolder()
+    {
+        SEInstallDataLib.SEInstallData objInstallData = <span style="color: #0000FF; ">null</span>;
+        DirectoryInfo objInstallFolder = <span style="color: #0000FF; ">null</span>;
+        DirectoryInfo objTrainingFolder = <span style="color: #0000FF; ">null</span>;
+
+        <span style="color: #0000FF; ">try</span>
+        {
+            objInstallData = <span style="color: #0000FF; ">new</span> SEInstallDataLib.SEInstallData();
+            objInstallFolder = <span style="color: #0000FF; ">new</span> DirectoryInfo(objInstallData.GetInstalledPath());
+            objTrainingFolder = <span style="color: #0000FF; ">new</span> DirectoryInfo(Path.Combine(objInstallFolder.Parent.FullName, <span style="color: #800000; ">&quot;Training&quot;</span>));
+        }
+        <span style="color: #0000FF; ">catch</span>
+        {
+        }
+        <span style="color: #0000FF; ">finally</span>
+        {
+            <span style="color: #0000FF; ">if</span> (objInstallData != <span style="color: #0000FF; ">null</span>)
+            {
+                Marshal.FinalReleaseComObject(objInstallData);
+                objInstallData = <span style="color: #0000FF; ">null</span>;
+            }
+        }
+
+        <span style="color: #0000FF; ">return</span> objTrainingFolder;
+    }
+}</pre>
+	</div>
+	
+</div>
+</div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="INLINE_EXAMPLE" namespace="Example" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""<>"",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="MENU_LINK" namespace="example" source="Item" filter="type=linked" NoHeader="True" NoFooter="True" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=examplelinks,caption=$$Example$$%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="FilteredItemList" scrap="CATEGORIZED_LINKS" namespace="linkcategory" source="Item" filter="" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=seealso,caption=""$$See_Also$$%%designlist:tagidentifier=##SEEALSO,itemtype=See Also%%""%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><div class="i-section-heading" id="i-seealso-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">See Also</span></div><div id="i-seealso-section-content" class="i-section-content"><p id=dxseealsocontent><a href="SolidEdgePart~SheetMetalDocument.html">SheetMetalDocument Object</a>
+&nbsp;|&nbsp;<a href="SolidEdgePart~SheetMetalDocument_members.html">SheetMetalDocument Members</a>
+&nbsp;|&nbsp;<a href="V17-WhatsNew.html">Solid Edge V17 - What's New</a>
+</p>
+</p></div><!--DXMETADATA end -->
+    </div>
+    <div id="i-footer-content" class="i-footer-content">
+        <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_FOOTER" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="CopyrightNotice" format="<p>&nbsp;</p><p>&nbsp;</p><hr style=""height: 1px"" /><p>%%variable%%</p>" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="FeedbackLink" format="" --><!--DXMETADATA end-->
+    </div>
+    
+
+    <!--DXMETADATA start type="IsNew" format="<script type=""text/javascript"">setIsNew = true;</script>" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<script type=""text/javascript"">setIsResponsiveEnabled = true;</script>" --><!--DXMETADATA end-->
+    <script type="text/javascript">
+        $(function() {
+            var documentInstance = new Innovasys.Content.Document(document.body);
+            documentInstance.isNew = !(typeof setIsNew === "undefined");
+            documentInstance.isResponsiveEnabled = !(typeof setIsResponsiveEnabled === "undefined");
+            documentInstance.load();
+        });
+    </script>
+</body>
+</html>

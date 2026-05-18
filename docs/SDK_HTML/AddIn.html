@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--DXMETADATA start type="MetaCharset" --><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><!--DXMETADATA end-->
+    <meta http-equiv="X-UA-Compatible" value="IE=9" />
+
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Literal" condition="helpversion:value=3" value="<meta name=""Microsoft.Help.SelfBranded"" content=""true"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="ItemTitle" format="<title>%%ItemTitle%%</title>" --><title>How to create an AddIn for Solid Edge using C++?</title><!--DXMETADATA end-->
+    <!--DXMETADATA start type="ItemTitle" format="<meta name=""Title"" content=""%%ItemTitleNoQuotes%%""/>" --><meta name="Title" content="How to create an AddIn for Solid Edge using C++?"/><!--DXMETADATA end-->    
+    
+
+    <!--DXMETADATA start type="PackageLink" packagename="jquery" filetype="script" firstlinkattributes="id=""mshs_support_script"""--><script src="template/packages/jquery/script/chm.mshc/jquery-1.7.2.min.js" type="text/javascript" id="mshs_support_script"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="script"--><script src="template/packages/jquery-ui/script/chm.mshc/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/jquery-ui/css/chm.mshc/jquery-ui-1.8.18.custom.css"></link><!--DXMETADATA end-->
+	
+    <!--DXMETADATA start type="Synopsis" StripHtmlTags="True" MaxLength="250" format="<meta name=""Description"" content=""%%Synopsis%%"" />"--><meta name="Description" content="An Add-In is a dll that can help you to add customized commands into Solid Edge. Add-In appears as a tab in Solid Edge and can be created using VB.NET, C# or C++. To build an Add-In there are four major steps as given below. Please note that I am usi" /><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-topics" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/plugins-topics/css/chm.mshc/jquery-plugins.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-topics" filetype="css" firstlinkattributes=" data-mshv2-stylesheet=""/template/packages/core-topics/topics.mshv2.css"" data-mshv1-stylesheet=""/template/packages/core-topics/topics.mshv1.css"" data-responsive-mobile=""template/packages/core-topics/topics.mobile.css"" data-responsive-tablet=""template/packages/core-topics/topics.tablet.css"""--><link rel="stylesheet" type="text/css" href="template/packages/core-topics/css/topics.css"  data-mshv2-stylesheet="/template/packages/core-topics/topics.mshv2.css" data-mshv1-stylesheet="/template/packages/core-topics/topics.mshv1.css" data-responsive-mobile="template/packages/core-topics/topics.mobile.css" data-responsive-tablet="template/packages/core-topics/topics.tablet.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-topics" filetype="script"--><script src="template/packages/plugins-topics/script/chm.mshc/jquery-plugins.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-topics" filetype="script"--><script src="template/packages/core-topics/script/topics.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="TopicId" format="<meta name=""Microsoft.Help.Id"" content=""%%TopicId%%""/>" --><meta name="Microsoft.Help.Id" content="8e533053-4ac6-4b2a-a7dd-f5f3a9178a26"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocParentId" format="<meta name=""Microsoft.Help.TocParent"" content=""%%TocParentId%%""/>" --><meta name="Microsoft.Help.TocParent" content="ca45f3e0-29f8-43e4-916b-e49f5573c12c"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocOrdinal" format="<meta name=""Microsoft.Help.TocOrder"" content=""%%TocOrdinal%%""/>" --><meta name="Microsoft.Help.TocOrder" content="13"/><!--DXMETADATA end-->
+    <meta name="Microsoft.Help.F1" content=""/>
+    <meta name="Microsoft.Help.ContentType" content="Concepts" />
+    <!--DXMETADATA start type="MshvKeywords" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="MshvMetaTags" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.Locale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.TopicLocale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="Stylesheets" --><link rel="stylesheet" type="text/css" href="stylesheets/customstyles.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Scripts" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="DesignTime"--><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_PROPERTIES" --><!--DXMETADATA end -->
+
+    <!--DXMETADATA start type="CustomHeadContent" --><!--DXMETADATA end-->
+</head>
+
+<body>
+    <div id="i-before-header-content" class="i-before-header-content">
+        
+    </div>
+    <div id="i-header-content" class="i-header-content">
+        <!--DXMETADATA start type="LogoImage" --><img class="logoimage" src="images/sesdk_header.jpg" border="0"></img><!--DXMETADATA end-->
+            <div class="i-project-title"><!--DXMETADATA start type="ProjectTitle" -->Solid Edge 2019 SDK<!--DXMETADATA end--></div>
+        <div class="i-page-title"><div class="i-page-title-text"><!--DXMETADATA start type="ItemTitle" -->How to create an AddIn for Solid Edge using C++?<!--DXMETADATA end--></div></div>
+    </div>
+    <div id="i-after-header-content" class="i-after-header-content">
+        <!-- Spacing --> <span class="i-toggle-all-sections i-function-link">
+                <label class="i-collapse-all"><!--DXMETADATA start type="Phrase" name="COLLAPSE_ALL" -->Collapse All<!--DXMETADATA end--></label>
+                <label class="i-expand-all" style="display: none;"><!--DXMETADATA start type="Phrase" name="EXPAND_ALL" -->Expand All<!--DXMETADATA end--></label>
+            </span><!--DXMETADATA start type="Literal" condition="communityenabled" value="%%scrap:name=_COMMUNITY_DROPDOWN%%" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="IsWebOutputRootPageLinkEnabled" format="<a href='#' class="i-page-link" class="i-view-in-frame-link" title='$$VIEW_WITH_NAVIGATION_TOOLS_TIP$$' style='display: none' data-root-page='%%WebOutputRootPage%%%%OutputFileExtension%%' target='_top'>$$VIEW_WITH_NAVIGATION_TOOLS_TEXT$$</a>" --><a href='#' class="i-page-link" class="i-view-in-frame-link" title='Open this Topic in a view that includes Navigation tools (Table of Contents, Index, Search)' style='display: none' data-root-page='webframe.html' target='_top'>View with Navigation Tools</a><!--DXMETADATA end-->
+    </div>
+    <!--DXMETADATA start type="Breadcrumbs" scrap="_BREADCRUMBS" --><div class="i-breadcrumbs-container"><table><tr><td>
+<a href="ProgrammersGuide.html">Programmer's Guide</a>
+ > <a href="SolidEdgeTOC.html">Solid Edge</a>
+ > How to create an AddIn for Solid Edge using C++?</td></tr></table></div><!--DXMETADATA end -->
+    
+    
+    <div id="i-body-content" class="i-body-content">
+        <!--DXMETADATA start type="TopicSection" name="BodyText"--><P>An Add-In is a dll that can help you to add customized commands into Solid Edge. Add-In appears as a tab in Solid Edge and can be created using VB.NET, C# or C++. To build an Add-In there are four major steps as given below. Please note that I am using snapshots from Visual Studio 2015 (Professional Edition) and Solid Edge 2019 in this topic. Hence, Images of dialog box shown in this topic may differ if you are using different version of Visual Studio and/or Solid Edge.</P>
+<P class=i-dropdown-heading><STRONG>1.&nbsp;Collecting the files required to create an Add-In using C++</STRONG></P>
+<DIV class=i-dropdown-content>
+<P>You will need header (.h) files if you are creating an Add-In using C++. These header files are available in Solid Edge setup DVD in SDK &gt; Advanced&nbsp;&gt; Include folder.<BR>You can copy “Advanced” folder at some convenient location on your machine for creating an Add-In using C++. It is recommended to copy “Advanced” folder and paste it in SDK folder which is available at “&lt;installation folder&gt;\SDK”. E.g if you have Solid Edge 2019 installed on your machine then you can copy “Advanced” folder at “C:\Program Files\Siemens\Solid Edge 2019\SDK\”.</P>
+<P><BR>You can create your own Add-In in C++ with the help of the steps given below. I am using Visual Studio 2015 (Professional Edition)<BR><STRONG>1.1</STRONG>&nbsp;Close all the instances of Solid Edge running on your machine. You can also go to task manager and close all the "edge.exe" running on your machine.<BR><STRONG>1.2</STRONG>&nbsp;Copy Advanced folder from DVD to “&lt;installation folder&gt;\SDK” as mentioned above.</P></DIV>
+<P class=i-dropdown-heading><STRONG>2.&nbsp;Setting properties of Visual Studio Solution</STRONG></P>
+<DIV class=i-dropdown-content>
+<P><STRONG>2.1</STRONG>&nbsp;Open “Advanced” folder and then go to “Samples &gt; AddIns &gt; VC” folder. Copy this VC folder to other location so that you can&nbsp;refer&nbsp;an original copy of folder anytime&nbsp;when needed. While copying the folder please make sure that the folder structure doesn’t contain any spaces. There are chances that your Add-In may not get registered if the dll path contains space.<BR><STRONG>2.2</STRONG>&nbsp;Now open “AsmLoc.sln” from VC folder. E.g I have copied the VC folder to “C:\SEWork”<BR><STRONG>2.3</STRONG>&nbsp;First step is to change the configuration to x64. Since Solid Edge is 64-bit please make sure that the configuration for your solution is also x64. You can change this configuration from standard toolbar by clicking on the dropdown menu available to change the configuration as shown in below image.</P>
+<P><IMG style="BORDER-TOP: black thin solid; HEIGHT: 242px; BORDER-RIGHT: black thin solid; WIDTH: 823px; BORDER-BOTTOM: black thin solid; PADDING-BOTTOM: 1px; PADDING-TOP: 1px; PADDING-LEFT: 1px; BORDER-LEFT: black thin solid; PADDING-RIGHT: 1px" border=5 alt="" src="images/Topics/AddIn/Configuration.png" width=1020 height=279></P>
+<P><STRONG>2.4</STRONG>&nbsp;After opening AsmLoc.sln right click on “AsmLoc” solution in “Solution Explorer” and then click on properties. Following dialog box will appear.</P>
+<P><IMG style="HEIGHT: 624px; WIDTH: 822px" border=5 alt="" src="images/Topics/AddIn/Properties.png" width=1063 height=755></P>
+<P><STRONG>2.5</STRONG>&nbsp;In above dialog box click on C/C++ and then click on “Additional Include Libraries” to add below paths. Please edit below paths based on the version of Solid Edge you are using. Remove existing paths (if any).<BR>&nbsp;&nbsp;&nbsp; &nbsp; • C:\Program Files\Siemens\Solid Edge XXXX\SDK\Advanced\include<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; • C:\Program Files\Siemens\Solid Edge XXXX\Program<BR><STRONG>2.6</STRONG>&nbsp;In same dialog box click on MIDL and add below paths as shown in image.<BR>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;• C:\Program Files\Siemens\Solid Edge XXXX\SDK\Advanced\include<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; • C:\Program Files\Siemens\Solid Edge XXXX\Program</P>
+<P><IMG style="HEIGHT: 612px; WIDTH: 841px" border=5 alt="" src="images/Topics/AddIn/Properties_MIDL.png" width=1063 height=754></P>
+<P><STRONG>2.7</STRONG>&nbsp;Now right click on solution and select “Build” to build the dll. You should be able to see the progress in “Output” window at the bottom. To enable “Output” window go to View &gt;&nbsp;Other Windows &gt; Output.<BR><STRONG>2.8</STRONG>&nbsp;In this Output window you will get the path where the dll is built on your machine as shown in below image.</P>
+<P><IMG style="HEIGHT: 247px; WIDTH: 1097px" border=5 alt="" src="images/Topics/AddIn/Output.png" width=1402 height=277></P></DIV>
+<P class=i-dropdown-heading><STRONG>3.&nbsp;Register and unregister the Add-In</STRONG></P>
+<DIV class=i-dropdown-content>
+<P><STRONG>3.1&nbsp;</STRONG>After building the dll successfully now it’s time to register it. You can register the dll by using regsvr32 &lt;Path of dll&gt; to command prompt.<BR><STRONG>3.2&nbsp;</STRONG>Click on start button in windows and type cmd to start command prompt on your machine.<BR><STRONG>3.3&nbsp;</STRONG>Type regsvr32 followed by path of dll as shown in below image. You can copy the path of dll from Output window.</P>
+<P>&nbsp;<IMG style="HEIGHT: 475px; WIDTH: 729px" border=5 alt="" src="images/Topics/AddIn/DOS.png" width=842 height=548> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
+<P><STRONG>3.4</STRONG>&nbsp;You should receive a message as shown in below image once the dll is registered on your machine.</P>
+<P><IMG style="HEIGHT: 149px; WIDTH: 435px" border=5 alt="" src="images/Topics/AddIn/Regsvr32.PNG" width=456 height=162></P>
+<P><STRONG>3.5</STRONG>&nbsp;Now start Solid Edge to see the Add-In on your machine. You will see an Add-In&nbsp; as shown in below image.</P>
+<P><IMG style="BORDER-TOP: rgb(0,0,0) 1px solid; BORDER-RIGHT: rgb(0,0,0) 1px solid; BORDER-BOTTOM: rgb(0,0,0) 1px solid; BORDER-LEFT: rgb(0,0,0) 1px solid" border=5 alt="" src="images/Topics/AddIn/AddIn_SE.png"></P>
+<P><STRONG>3.6</STRONG>&nbsp;To unregister the Add-In&nbsp; type “regsvr32 &lt;Path of dll&gt; -u” on command prompt.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P></DIV>
+<P class=i-dropdown-heading><STRONG>4.&nbsp;Verify installed Add-In</STRONG></P>
+<DIV class=i-dropdown-content>
+<P><STRONG>4.1&nbsp;</STRONG>To konw the Add-In registered on your machine you can go to Solid Edge application menu &gt; Settings &gt; Add-Ins. You will see below dialog box.</P>
+<P><IMG style="HEIGHT: 282px; WIDTH: 656px" border=5 alt="" src="images/Topics/AddIn/AddIn_Mgr.png" width=708 height=299>&nbsp;<BR><STRONG>4.2</STRONG>&nbsp;If there are multiple add-ins with same name you can click on properties to know the location of that add-in so that you can unregister it.<BR></P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
+<P>&nbsp;</P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<P>&nbsp;</P>
+<P>&nbsp;</P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P></DIV><!--DXMETADATA end-->
+            <a name="seealsobookmark"></a>
+            <!--DXMETADATA start type="FilteredItemList" scrap="CATEGORISED_LINKS" namespace="linkcategory" source="Item" filter="" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=seealso,caption=""%%phrase:name=SeeAlso%%%%designlist:tagidentifier=seealso,itemtype=See Also%%""%%%%filtereditemlist%%</div>"--><!--DXMETADATA end-->
+        
+    </div>
+    <div id="i-footer-content" class="i-footer-content">
+        <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_FOOTER" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="CopyrightNotice" format="<p>&nbsp;</p><p>&nbsp;</p><hr style=""height: 1px"" /><p>%%variable%%</p>" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="FeedbackLink" format="" --><!--DXMETADATA end-->
+    </div>
+    
+
+    <!--DXMETADATA start type="IsNew" format="<script type=""text/javascript"">setIsNew = true;</script>" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<script type=""text/javascript"">setIsResponsiveEnabled = true;</script>" --><!--DXMETADATA end-->
+    <script type="text/javascript">
+        $(function() {
+            var documentInstance = new Innovasys.Content.Document(document.body);
+            documentInstance.isNew = !(typeof setIsNew === "undefined");
+            documentInstance.isResponsiveEnabled = !(typeof setIsResponsiveEnabled === "undefined");
+            documentInstance.load();
+        });
+    </script>
+</body>
+</html>

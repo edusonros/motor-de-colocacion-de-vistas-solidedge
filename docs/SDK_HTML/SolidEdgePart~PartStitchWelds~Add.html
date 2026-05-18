@@ -1,0 +1,857 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--DXMETADATA start type="MetaCharset" --><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><!--DXMETADATA end-->
+    <meta http-equiv="X-UA-Compatible" value="IE=9" />
+
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Literal" condition="helpversion:value=3" value="<meta name=""Microsoft.Help.SelfBranded"" content=""true"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="PageItemTitle" format="<title>%%PageItemTitle%%</title>" --><title>Add Method</title><!--DXMETADATA end-->
+    <!--DXMETADATA start type="ItemTitleNoQuotes" format="<meta name=""Title"" content=""%%ItemTitleNoQuotes%%""/>" --><!--DXMETADATA end-->    
+    
+
+    <!--DXMETADATA start type="PackageLink" packagename="jquery" filetype="script" firstlinkattributes="id=""mshs_support_script"""--><script src="template/packages/jquery/script/chm.mshc/jquery-1.7.2.min.js" type="text/javascript" id="mshs_support_script"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="script"--><script src="template/packages/jquery-ui/script/chm.mshc/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/jquery-ui/css/chm.mshc/jquery-ui-1.8.18.custom.css"></link><!--DXMETADATA end-->
+	
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/plugins-ax/css/chm.mshc/jquery-plugins.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="css" firstlinkattributes=" data-mshv2-stylesheet=""/template/packages/core-ax/dx.com.mshv2.css"" data-mshv1-stylesheet=""/template/packages/core-ax/dx.com.mshv1.css"" data-responsive-mobile=""template/packages/core-ax/dx.com.mobile.css"" data-responsive-tablet=""template/packages/core-ax/dx.com.tablet.css"""--><link rel="stylesheet" type="text/css" href="template/packages/core-ax/css/dx.com.css"  data-mshv2-stylesheet="/template/packages/core-ax/dx.com.mshv2.css" data-mshv1-stylesheet="/template/packages/core-ax/dx.com.mshv1.css" data-responsive-mobile="template/packages/core-ax/dx.com.mobile.css" data-responsive-tablet="template/packages/core-ax/dx.com.tablet.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="script"--><script src="template/packages/plugins-ax/script/chm.mshc/jquery-plugins.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="script"--><script src="template/packages/core-ax/script/dx.com.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="TopicId" format="<meta name=""Microsoft.Help.Id"" content=""%%TopicId%%""/>" --><meta name="Microsoft.Help.Id" content="SolidEdgePart~PartStitchWelds~Add"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Synopsis" StripHtmlTags="True" MaxLength="250" format="<meta name=""Description"" content=""%%Synopsis%%"" />"--><meta name="Description" content="Adds a stitch weld." /><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocParentId" format="<meta name=""Microsoft.Help.TocParent"" content=""%%TocParentId%%""/>" --><meta name="Microsoft.Help.TocParent" content="SolidEdgePart~PartStitchWelds_methods"/><!--DXMETADATA end-->
+    <meta name="Microsoft.Help.ContentType" content="Reference" />
+    <!--DXMETADATA start type="MshvKeywords" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="MshvMetaTags" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.Locale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.TopicLocale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="Stylesheets" --><link rel="stylesheet" type="text/css" href="stylesheets/customstyles.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Scripts" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="DesignTime"--><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_PROPERTIES" --><!--DXMETADATA end -->
+
+    <!--DXMETADATA start type="CustomHeadContent" --><!--DXMETADATA end-->
+</head>
+
+<body>
+    <div id="i-before-header-content" class="i-before-header-content">
+        
+    </div>
+    <div id="i-header-content" class="i-header-content">
+        <!--DXMETADATA start type="LogoImage" --><img class="logoimage" src="images/sesdk_header.jpg" border="0"></img><!--DXMETADATA end-->
+            <div class="i-project-title"><!--DXMETADATA start type="ProjectTitle" -->Solid Edge Part Type Library<!--DXMETADATA end--></div>
+        <div class="i-page-title"><div class="i-page-title-text"><!--DXMETADATA start type="PageItemTitle" -->Add Method<!--DXMETADATA end--></div></div>
+    </div>
+    <div id="i-after-header-content" class="i-after-header-content">
+        <!-- Spacing --> <span class="i-toggle-all-sections i-function-link">
+                <label class="i-collapse-all"><!--DXMETADATA start type="Phrase" name="COLLAPSE_ALL" -->Collapse All<!--DXMETADATA end--></label>
+                <label class="i-expand-all" style="display: none;"><!--DXMETADATA start type="Phrase" name="EXPAND_ALL" -->Expand All<!--DXMETADATA end--></label>
+            </span><!--DXMETADATA start type="Literal" condition="communityenabled" value="%%scrap:name=_COMMUNITY_DROPDOWN%%" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="IsWebOutputRootPageLinkEnabled" format="<a href='#' class="i-page-link" class="i-view-in-frame-link" title='$$VIEW_WITH_NAVIGATION_TOOLS_TIP$$' style='display: none' data-root-page='%%WebOutputRootPage%%%%OutputFileExtension%%' target='_top'>$$VIEW_WITH_NAVIGATION_TOOLS_TEXT$$</a>" --><a href='#' class="i-page-link" class="i-view-in-frame-link" title='Open this Topic in a view that includes Navigation tools (Table of Contents, Index, Search)' style='display: none' data-root-page='webframe.html' target='_top'>View with Navigation Tools</a><!--DXMETADATA end-->
+    </div>
+    <!--DXMETADATA start type="Breadcrumbs" scrap="_BREADCRUMBS" --><div class="i-breadcrumbs-container"><table><tr><td>
+<a href="SolidEdgePart_P.html">Solid Edge Part Type Library</a>
+ > <a href="SolidEdgePart~PartStitchWelds.html">PartStitchWelds Collection</a>
+ : Add Method</td></tr></table></div><!--DXMETADATA end -->
+    
+    <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_BUBBLES" namespace="parameter" source="Item" -->
+<div id="NumberOfStitchPathsPopupContent" class="i-popup-content">
+Number of stitch paths
+</div>
+<div id="PartStitchWeldPathsPopupContent" class="i-popup-content">
+Array of edges of fillet or groove feature.
+</div>
+<div id="StartVerticesPopupContent" class="i-popup-content">
+Start vertex of input edge.
+</div>
+<div id="DirectionEdgeForClosedPartStitchWeldPathsPopupContent" class="i-popup-content">
+Edge array for orienting edge. Null for open ones.
+</div>
+<div id="StitchDirectionsPopupContent" class="i-popup-content">
+Direction types.
+</div>
+<div id="PartStitchWeldTypePopupContent" class="i-popup-content">
+Type of stitch weld.
+</div>
+<div id="PartStitchWeldAnnotationFormatPopupContent" class="i-popup-content">
+Annotation format.
+</div>
+<div id="StartOffsetLengthPopupContent" class="i-popup-content">
+Start offset length value.
+</div>
+<div id="EndOffsetLengthPopupContent" class="i-popup-content">
+End offset length value.
+</div>
+<div id="BeadMaterialLengthPopupContent" class="i-popup-content">
+Bead material length for the weld.
+</div>
+<div id="GapLengthPopupContent" class="i-popup-content">
+Length of gap between solid portions of the bead.
+</div>
+<div id="PartStitchWeldStyleNamePopupContent" class="i-popup-content">
+Weld style name as string.
+</div>
+<!--DXMETADATA end -->
+    <div id="i-body-content" class="i-body-content">
+        <!--DXMETADATA start type="Description" source="Item" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=description,caption=$$Description$$%%<div class=""i-description-content"">%%description%%</div></div>" --><div class="i-section-heading" id="i-description-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Description</span></div><div id="i-description-section-content" class="i-section-content"><div class="i-description-content">Adds a stitch weld.</div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="Syntax" lang="VB" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=syntax,caption=$$Syntax$$%%<div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>%%Syntax%%</pre></tr></table></div></div>" --><div class="i-section-heading" id="i-syntax-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Syntax</span></div><div id="i-syntax-section-content" class="i-section-content"><div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>Public Function Add( _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="NumberOfStitchPathsPopupLink" data-popup-contentsource="#NumberOfStitchPathsPopupContent" data-popup-showevent="click mouseenter">NumberOfStitchPaths</a></i> As Long, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="PartStitchWeldPathsPopupLink" data-popup-contentsource="#PartStitchWeldPathsPopupContent" data-popup-showevent="click mouseenter">PartStitchWeldPaths</a></i>() As Object, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="StartVerticesPopupLink" data-popup-contentsource="#StartVerticesPopupContent" data-popup-showevent="click mouseenter">StartVertices</a></i>() As Object, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="DirectionEdgeForClosedPartStitchWeldPathsPopupLink" data-popup-contentsource="#DirectionEdgeForClosedPartStitchWeldPathsPopupContent" data-popup-showevent="click mouseenter">DirectionEdgeForClosedPartStitchWeldPaths</a></i>() As Object, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="StitchDirectionsPopupLink" data-popup-contentsource="#StitchDirectionsPopupContent" data-popup-showevent="click mouseenter">StitchDirections</a></i>() As <a href="SolidEdgePart~FeaturePropertyConstants.html">FeaturePropertyConstants</a>, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="PartStitchWeldTypePopupLink" data-popup-contentsource="#PartStitchWeldTypePopupContent" data-popup-showevent="click mouseenter">PartStitchWeldType</a></i> As <a href="SolidEdgePart~StitchWeldType.html">StitchWeldType</a>, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="PartStitchWeldAnnotationFormatPopupLink" data-popup-contentsource="#PartStitchWeldAnnotationFormatPopupContent" data-popup-showevent="click mouseenter">PartStitchWeldAnnotationFormat</a></i> As <a href="SolidEdgePart~StitchWeldAnnotationFormat.html">StitchWeldAnnotationFormat</a>, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="StartOffsetLengthPopupLink" data-popup-contentsource="#StartOffsetLengthPopupContent" data-popup-showevent="click mouseenter">StartOffsetLength</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="EndOffsetLengthPopupLink" data-popup-contentsource="#EndOffsetLengthPopupContent" data-popup-showevent="click mouseenter">EndOffsetLength</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="BeadMaterialLengthPopupLink" data-popup-contentsource="#BeadMaterialLengthPopupContent" data-popup-showevent="click mouseenter">BeadMaterialLength</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="GapLengthPopupLink" data-popup-contentsource="#GapLengthPopupContent" data-popup-showevent="click mouseenter">GapLength</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="PartStitchWeldStyleNamePopupLink" data-popup-contentsource="#PartStitchWeldStyleNamePopupContent" data-popup-showevent="click mouseenter">PartStitchWeldStyleName</a></i> As String _
+) As <a href="SolidEdgePart~PartStitchWeld.html">PartStitchWeld</a></pre></tr></table></div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_LIST" namespace="parameter" source="Item" filter="" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=parameters,caption=$$ParameterList$$%%%%filtereditemlist%%</div>" --><div class="i-section-heading" id="i-parameters-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Parameters</span></div><div id="i-parameters-section-content" class="i-section-content"><dl>
+<dt><I>NumberOfStitchPaths</I></dt>
+<dd>Number of stitch paths</dd>
+<dt><I>PartStitchWeldPaths</I></dt>
+<dd>Array of edges of fillet or groove feature.</dd>
+<dt><I>StartVertices</I></dt>
+<dd>Start vertex of input edge.</dd>
+<dt><I>DirectionEdgeForClosedPartStitchWeldPaths</I></dt>
+<dd>Edge array for orienting edge. Null for open ones.</dd>
+<dt><I>StitchDirections</I></dt>
+<dd><table class="i-filtered-item-list"><tr><th>Value</th><th>Description</th></tr>
+<tr><td class="i-member-name">igAddRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igAll</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igAlongAnAxis</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igAngularDummy</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igAsConstruction</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igBend</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igBendAndFaceCornerRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igBendOnlyCornerRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igBoth</td><td class="i-description">Feature Properties - Both</td></tr>
+<tr><td class="i-member-name">igChainedCornerRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igChamfer2Setbacks</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igChamfer45degSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igChamferAngleSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCircular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseCornerCircleCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseCornerClosed</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseCornerNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseCornerOpen</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igClosed</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCloseFaces</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igConcave</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igConstantRadiusArc</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igConstRadiusRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igContinuous</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igConvex</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCopy</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCornerRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCounterboreHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCounterboreProfileIsAtBottom</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCounterboreProfileIsAtTop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCounterdrillHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCountersinkHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCurvatureContinuous</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCurvatureContinuousInterior</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igCurveSetSeperator</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDeleteFaceHeal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDelSMFaceBoth</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDelSMFaceNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDelSystemRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDelZeroBendRadius</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDevelopableSurface</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igDinDimension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEdgeBasedCrossSection</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEdgesByLoop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEdgesByVertex</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEndCaps</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEqualOffset</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igEquationType</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igExtend</td><td class="i-description">Feature Properties - Extend</td></tr>
+<tr><td class="i-member-name">igExtendBendRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFacesTouchingCurvesOnly</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFilletBendRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFinite</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeCenterOfEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeEndFromEndEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeEndOnEndEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeFromBothEndsOfEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeFromDefinedStartPoint</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeFullEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeMatchFace</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeOffset</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeStartFromEndEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlangeStartOnEndEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFlatten</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFormedEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFromNonReferenceEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFromReferenceEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFromTo</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igFull</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igGroove</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeCenteredLoop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeClosed</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeClosedLoop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeCurl</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeOpen</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeOpenLoop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igHemTypeSFlange</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igIgnoreBlends</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igInside</td><td class="i-description">Feature Properties - Remove/Add Material Inside</td></tr>
+<tr><td class="i-member-name">igInsideDimension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igIntersect</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLancedEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLeft</td><td class="i-description">Feature Properties - Project to Left</td></tr>
+<tr><td class="i-member-name">igLinear</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLinearCurvatureContinuousExtension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLinearTangentExtension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLip</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLouverFormedEndType</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLouverLancedEndType</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLouverRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igLouverRoundNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMaterialInsideOML</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreByAngle</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreByDist</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreManufacturingCut</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreNormalToThickness</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreParallelToThickness</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMitreRegularCut</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMove</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igMultipleEdges</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNatural</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNeutralFactorFromExcel</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNFType</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNoCornerRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNoExtend</td><td class="i-description">Feature Properties - Do Not Extend</td></tr>
+<tr><td class="i-member-name">igNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNonSymmetric</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNormal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNormalSideDummy</td><td class="i-description">Feature Properties - Normal Side</td></tr>
+<tr><td class="i-member-name">igNoRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igNullConstant</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igOffset</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igOutside</td><td class="i-description">Feature Properties - Remove/Add Material Outside</td></tr>
+<tr><td class="i-member-name">igOutsideDimension</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igOverlapFaces</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igParallelDummy</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igParallelToPlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPartingFromCurve</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPartingFromEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPartingFromPlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPartingFromSurface</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternAlongCurve</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternByTable</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternCircular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternDuplicate</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternFillRegion</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternMirror</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternMountingBoss</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternRectangular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPatternUserDefined</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPeriodic</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igProfileBasedCrossSection</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igProjectOptionProject</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igProjectOptionWrap</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igPunchedEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRadial</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRaisedCounterboreSlot</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRecessedCounterboreSlot</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRecreateBlends</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRectangularBendRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igReflective</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRegularHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRegularSlot</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRegularThread</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRemoveBoundaries</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRemoveExternalBoundaries</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRemoveInternalBoundaries</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igReverseNormal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igReverseNormalSideDummy</td><td class="i-description">Feature Properties - Reverse Normal Side</td></tr>
+<tr><td class="i-member-name">igRight</td><td class="i-description">Feature Properties - Project to Right</td></tr>
+<tr><td class="i-member-name">igRipBendRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRipCornerRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndCapAcrossSharpEdges</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndMiterAtCorner</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndPreserveTopologyOff</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndPreserveTopologyOn</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAcrossSharpEdges</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAcrossTangentEdgesOff</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAcrossTangentEdgesOn</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAlongBlendEdgesOff</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAlongBlendEdgesOn</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRndRollAroundCorner</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundAllVertexSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundEndVertexEdgeSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundSetbackIsAbsolute</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundSetbackIsRelative</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundSingleVertexSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundStartVertexEdgeSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igRoundVertexEdgeSetback</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igShowBoundaries</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSideInfoSetSeperator</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSingleEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSlotGroup</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSMClearanceCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSMFaceCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSMMidPlaneCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSplit</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSplitAngle1Left</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSplitAngle1Right</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSplitDraft</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igStart</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igStepDraft</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igStepDraftPerpendicular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igStraightPipeThread</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSubtract</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepAlignArcLength</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepAlignNormal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepAlignParallel</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepAlignParametrically</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepC1Continuity</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepC2Continuity</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepMergeAll</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepMergeAlongPath</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepMergeNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepScaleNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepScaleStartAndEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepTwistNone</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepTwistStartAndEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepTwistTurns</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSweepTwistTurnsPerUnitLength</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igSymmetric</td><td class="i-description">Feature Properties - Symmetric Extent</td></tr>
+<tr><td class="i-member-name">igTangent</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTangentInterior</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperByAngle</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperByRatio</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperByRLRatio</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperDimAtBottom</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperDimAtTop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperedEnd</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperedHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperedPipeThread</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTaperedToPlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTappedHole</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThickness</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThkInProfilePlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThkNormalToProfilePlane</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThreeHundredAndSixty</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThroughAll</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igThroughAxis</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igToEndOfEdge</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igToggleToConstruction</td><td class="i-description">Toggle from Design to Construction</td></tr>
+<tr><td class="i-member-name">igToggleToDesign</td><td class="i-description">Toggle from Construction to Design</td></tr>
+<tr><td class="i-member-name">igToKeyPoint</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igToNext</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentCircleCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentCrown</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentDraft</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentFormedFeatureDisplayAsCenterMark</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentFormedFeatureDisplayAsModeled</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentFormedFeatureDisplayAsSketch</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentFormedFeatureDisplayAsSketchAndCenterMark</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentIntersect</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentMiterRelief</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentOff</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentRectangularCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentUCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igTreatmentVCutout</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igUnequalOffset</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igUnite</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igUShaped</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igVarRadiusRound</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igVBottomDimToFlat</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igVBottomDimToV</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igVShaped</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igWeldGrooveCapProject</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igWeldGrooveCapSameAsTop</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">igWeldGrooveCapSurface</td><td class="i-description"> </td></tr>
+</table>Direction types.</dd>
+<dt><I>PartStitchWeldType</I></dt>
+<dd><table class="i-filtered-item-list"><tr><th>Value</th><th>Description</th></tr>
+<tr><td class="i-member-name">seOffsetsOnly</td><td class="i-description">The operation is performed on the offsets only.</td></tr>
+<tr><td class="i-member-name">seStitchOnly</td><td class="i-description">The operation is performed on the stitch only.</td></tr>
+<tr><td class="i-member-name">seStitchPlusOffsets</td><td class="i-description">The operation is performed on both the offsets and the stitch.</td></tr>
+</table>Type of stitch weld.</dd>
+<dt><I>PartStitchWeldAnnotationFormat</I></dt>
+<dd><table class="i-filtered-item-list"><tr><th>Value</th><th>Description</th></tr>
+<tr><td class="i-member-name">seLengthPitch</td><td class="i-description">The annotation is formatted as bead length and pitch.</td></tr>
+<tr><td class="i-member-name">seNXL</td><td class="i-description">The annotation is formatted as the number of beads multiplied by the bead length.</td></tr>
+<tr><td class="i-member-name">seNXL_E</td><td class="i-description">The annotation is formatted as the number of beads multiplied by the bead length, plus the gap length.</td></tr>
+</table>Annotation format.</dd>
+<dt><I>StartOffsetLength</I></dt>
+<dd>Start offset length value.</dd>
+<dt><I>EndOffsetLength</I></dt>
+<dd>End offset length value.</dd>
+<dt><I>BeadMaterialLength</I></dt>
+<dd>Bead material length for the weld.</dd>
+<dt><I>GapLength</I></dt>
+<dd>Length of gap between solid portions of the bead.</dd>
+<dt><I>PartStitchWeldStyleName</I></dt>
+<dd>Weld style name as string.</dd>
+</dl></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##RETURNS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=returns,caption=$$Return_Type$$%%<div class=""i-returns-content"">%%comment%%</div></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##REMARKS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=remarks,caption=$$Remarks$$%%%%comment%%</div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="sourcecode" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=source,caption=$$Source_Code$$%%<table border=0 cellpadding=0 cellspacing=0 class=sourcecode><tr><td nowrap>%%sourcecode%%</td></tr></table></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##EXAMPLEINTRO" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=""$$Example$$%%designlist:tagidentifier=##EXAMPLECODE,itemtype=Example%%""%%%%comment%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="EXAMPLEGROUP_LIST" namespace="ExampleGroup" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""="",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><div class="i-section-heading" id="i-example-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Example</span></div><div id="i-example-section-content" class="i-section-content">
+<div class="i-tab-container">
+    <ul>
+        <li class="i-filtered-content-VB.NET">
+			<a href="#i-tab-content-762cbcfb-5edd-4162-a549-8a8cb4a8cd39">Example (VB.NET)</a>
+		</li>
+        <li class="i-filtered-content-CS">
+			<a href="#i-tab-content-b555b1dc-1e5a-4470-9352-088b9b033f77">Example (C#)</a>
+		</li>
+
+    </ul>
+	<div id="i-tab-content-762cbcfb-5edd-4162-a549-8a8cb4a8cd39" class="i-filtered-content-VB.NET">
+		<pre><span style="color: #0000FF; ">Imports</span> System.IO
+<span style="color: #0000FF; ">Imports</span> System.Runtime.InteropServices
+
+<span style="color: #0000FF; ">Public</span> <span style="color: #0000FF; ">Class</span> Form1
+
+    <span style="color: #0000FF; ">Private</span> <span style="color: #0000FF; ">Sub</span> Button1_Click(sender <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Object</span>, e <span style="color: #0000FF; ">As</span> EventArgs) <span style="color: #0000FF; ">Handles</span> Button1.Click
+        <span style="color: #0000FF; ">Dim</span> objFolder <span style="color: #0000FF; ">As</span> DirectoryInfo
+        <span style="color: #0000FF; ">Dim</span> objFileInfo <span style="color: #0000FF; ">As</span> FileInfo
+        <span style="color: #0000FF; ">Dim</span> objApp <span style="color: #0000FF; ">As</span> SolidEdgeFramework.Application = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objPartDoc <span style="color: #0000FF; ">As</span> SolidEdgePart.PartDocument = <span style="color: #0000FF; ">Nothing</span>
+
+        <span style="color: #0000FF; ">Dim</span> FilletWelds <span style="color: #0000FF; ">As</span> SolidEdgePart.PartFilletWelds = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> FilletWeld <span style="color: #0000FF; ">As</span> SolidEdgePart.PartFilletWeld = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objDocuments <span style="color: #0000FF; ">As</span> SolidEdgeFramework.Documents = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> iNumBaseFaces <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Integer</span>
+        <span style="color: #0000FF; ">Dim</span> iNumTargetFaces <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Integer</span>
+        <span style="color: #0000FF; ">Dim</span> dBaseThickness <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+        <span style="color: #0000FF; ">Dim</span> dTargetThickness <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+        <span style="color: #0000FF; ">Dim</span> eSetbackType <span style="color: #0000FF; ">As</span> SolidEdgePart.FilletWeldSetbackConstants
+        <span style="color: #0000FF; ">Dim</span> objBaseFaces(0) <span style="color: #0000FF; ">As</span> SolidEdgeGeometry.Face
+        <span style="color: #0000FF; ">Dim</span> objTargetFaces(0) <span style="color: #0000FF; ">As</span> SolidEdgeGeometry.Face
+        <span style="color: #0000FF; ">Dim</span> objFaceArray(0) <span style="color: #0000FF; ">As</span> SolidEdgeGeometry.Face
+        <span style="color: #0000FF; ">Dim</span> objExtProt1 <span style="color: #0000FF; ">As</span> SolidEdgePart.ExtrudedProtrusion = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objRib <span style="color: #0000FF; ">As</span> SolidEdgePart.Rib = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objFaces <span style="color: #0000FF; ">As</span> SolidEdgeGeometry.Faces = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objFace <span style="color: #0000FF; ">As</span> SolidEdgeGeometry.Face = <span style="color: #0000FF; ">Nothing</span>
+
+        <span style="color: #0000FF; ">Dim</span> objModel <span style="color: #0000FF; ">As</span> SolidEdgePart.Model  
+        <span style="color: #0000FF; ">Dim</span> LabelWeldDC <span style="color: #0000FF; ">As</span> SolidEdgePart.LabelWeldDataCollection
+        <span style="color: #0000FF; ">Dim</span> LabelWeldObject <span style="color: #0000FF; ">As</span> SolidEdgePart.LabelWeldData
+        
+        <span style="color: #0000FF; ">Dim</span> FilletEdges <span style="color: #0000FF; ">As</span> SolidEdgeGeometry.Edges
+        <span style="color: #0000FF; ">Dim</span> FilletEdge(0) <span style="color: #0000FF; ">As</span> SolidEdgeGeometry.Edge
+        <span style="color: #0000FF; ">Dim</span> FilletEdgeVertex(0) <span style="color: #0000FF; ">As</span> SolidEdgeGeometry.Vertex
+
+        <span style="color: #0000FF; ">Dim</span> iNumOfFillets <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Integer</span> = 0
+        <span style="color: #0000FF; ">Dim</span> OrientingEdgeProxy(1) <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Object</span>
+        <span style="color: #0000FF; ">Dim</span> OrientingSides(1) <span style="color: #0000FF; ">As</span> SolidEdgePart.FeaturePropertyConstants
+        <span style="color: #0000FF; ">Dim</span> dStartOffset <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+        <span style="color: #0000FF; ">Dim</span> dEndOffset <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+        <span style="color: #0000FF; ">Dim</span> dGapLength <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+        <span style="color: #0000FF; ">Dim</span> dBeadLength <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Double</span>
+        <span style="color: #0000FF; ">Dim</span> StitchWelds <span style="color: #0000FF; ">As</span> SolidEdgePart.PartStitchWelds
+        <span style="color: #0000FF; ">Dim</span> StitchWeld <span style="color: #0000FF; ">As</span> SolidEdgePart.PartStitchWeld
+        <span style="color: #0000FF; ">Dim</span> eOrientingSide <span style="color: #0000FF; ">As</span> SolidEdgePart.FeaturePropertyConstants
+        <span style="color: #0000FF; ">Dim</span> eWeldType <span style="color: #0000FF; ">As</span> SolidEdgePart.StitchWeldType
+        <span style="color: #0000FF; ">Dim</span> eAnnotFormat <span style="color: #0000FF; ">As</span> SolidEdgePart.StitchWeldAnnotationFormat
+        <span style="color: #0000FF; ">Dim</span> iNumSkipPaths <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">Integer</span>
+        <span style="color: #0000FF; ">Dim</span> strStyleName <span style="color: #0000FF; ">As</span> <span style="color: #0000FF; ">String</span>
+
+        <span style="color: #0000FF; ">Try</span>
+            objFolder = GetTrainingFolder()
+            objFileInfo = <span style="color: #0000FF; ">New</span> FileInfo(Path.Combine(objFolder.FullName, <span style="color: #800000; ">&quot;support1.par&quot;</span>))
+            objApp = Marshal.GetActiveObject(<span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>)      
+            objApp.Visible = <span style="color: #0000FF; ">True</span>
+            objDocuments = objApp.Documents
+            <span style="color: #008000; ">' First open the test case document from training folder
+</span>            objPartDoc = objDocuments.Open(objFileInfo.FullName)
+            objPartDoc.ModelingMode = SolidEdgePart.ModelingModeConstants.seModelingModeOrdered
+            <span style="color: #008000; ">' Get model handle
+</span>            objModel = objPartDoc.Models.Item(1)
+
+            <span style="color: #008000; ">'Get Label Weld Data object
+</span>            LabelWeldDC = objPartDoc.LabelWeldDataCollection
+            LabelWeldObject = LabelWeldDC.Add(ZSymbol:=0, Tail:=0, DashLine:=0, WeldInField:=0, OffsetTopBottom:=0, WeldAllAround:=0, Symmetrical:=0, TopNote1:=<span style="color: #800000; ">&quot;Test1&quot;</span>, TopNote2:=<span style="color: #800000; ">&quot;Test2&quot;</span>, TopTreatmentType:=0, TopType:=0, TopNote3:=<span style="color: #800000; ">&quot;Test3&quot;</span>, TopNoteZ:=<span style="color: #800000; ">&quot;&quot;</span>, TailNote:=<span style="color: #800000; ">&quot;&quot;</span>, BottomNote1:=<span style="color: #800000; ">&quot;&quot;</span>, BottomNote2:=<span style="color: #800000; ">&quot;&quot;</span>, BottomTreatmentType:=0, BottomType:=0, BottomNote3:=<span style="color: #800000; ">&quot;&quot;</span>, BottomNoteZ:=<span style="color: #800000; ">&quot;&quot;</span>, TopTypeCompound:=0, BottomTypeCompound:=0, CenterType:=0, CrossSectionArea:=0, TailNote2:=<span style="color: #800000; ">&quot;&quot;</span>, TopNoteCSize:=<span style="color: #800000; ">&quot;&quot;</span>, BottomNoteCSize:=<span style="color: #800000; ">&quot;&quot;</span>, TopNoteAngle:=<span style="color: #800000; ">&quot;&quot;</span>, BottomNoteAngle:=<span style="color: #800000; ">&quot;&quot;</span>, TopNoteDepth:=<span style="color: #800000; ">&quot;&quot;</span>, BottomNoteDepth:=<span style="color: #800000; ">&quot;&quot;</span>, TopPosOffset:=0, BottomPosOffset:=0)
+
+            <span style="color: #008000; ">'Get Fillet weld collection
+</span>            FilletWelds = objModel.PartFilletWelds
+
+            <span style="color: #008000; ">' Get Protrusion 1
+</span>            objExtProt1 = objModel.ExtrudedProtrusions.Item(2)
+
+            <span style="color: #008000; ">' Get all base faces collection
+</span>            objFaces = objExtProt1.Faces(SolidEdgeGeometry.FeatureTopologyQueryTypeConstants.igQueryAll)
+
+            <span style="color: #008000; ">' Collect INPUT Base faces
+</span>            objBaseFaces(0) = objFaces.Item(3)
+           
+            <span style="color: #008000; ">'Get Rib
+</span>            objRib = objModel.Ribs.Item(2)
+
+            <span style="color: #008000; ">' Get all target faces collection
+</span>            objFaces = objRib.Faces(SolidEdgeGeometry.FeatureTopologyQueryTypeConstants.igQueryAll)
+           
+            <span style="color: #008000; ">' Collect INPUT Target faces
+</span>            objTargetFaces(0) = objFaces.Item(3)
+
+            <span style="color: #008000; ">'Apply face styles to selected faces for identification
+</span>            objBaseFaces(0).Style = objPartDoc.FaceStyles(<span style="color: #800000; ">&quot;red&quot;</span>)
+            objTargetFaces(0).Style = objPartDoc.FaceStyles(<span style="color: #800000; ">&quot;red&quot;</span>)
+
+            <span style="color: #008000; ">' Initialize all inputs
+</span>            iNumBaseFaces = 1
+            iNumTargetFaces = 1
+            eSetbackType = SolidEdgePart.FilletWeldSetbackConstants.seFilletWeldThickness
+            dBaseThickness = 0.00235
+            dTargetThickness = 0.0025
+
+            <span style="color: #008000; ">' Add a  new Fillet weld
+</span>            FilletWeld = FilletWelds.Add(iNumBaseFaces,
+                                         objTargetFaces,
+                                         iNumTargetFaces,
+                                         objBaseFaces,
+                                         LabelWeldObject,
+                                         eSetbackType,
+                                         dBaseThickness,
+                                         dTargetThickness)
+
+            
+            <span style="color: #008000; ">' Get all base faces collection
+</span>            FilletEdges = FilletWeld.Edges(SolidEdgeGeometry.FeatureTopologyQueryTypeConstants.igQueryAll)
+           
+
+            <span style="color: #008000; ">' Collect INPUT edge
+</span>            FilletEdge(0) = FilletEdges.Item(8)
+
+            <span style="color: #008000; ">'Input vertex
+</span>            FilletEdgeVertex(0) = FilletEdge(0).StartVertex
+
+            <span style="color: #008000; ">' Initialize all inputs
+</span>            iNumSkipPaths = 1
+
+            <span style="color: #008000; ">' Orientation side
+</span>            OrientingSides(0) = eOrientingSide
+
+            <span style="color: #008000; ">'Weld Type
+</span>            eWeldType = SolidEdgePart.StitchWeldType.seStitchOnly
+
+            <span style="color: #008000; ">'Annotation type
+</span>            eAnnotFormat = SolidEdgePart.StitchWeldAnnotationFormat.seLengthPitch
+
+            <span style="color: #008000; ">' Distance values
+</span>            dStartOffset = 0.0
+            dEndOffset = 0.0
+            dBeadLength = 0.003
+            dGapLength = 0.004
+
+            <span style="color: #008000; ">' Dimension Style
+</span>            strStyleName = <span style="color: #800000; ">&quot;ISO (mm)&quot;</span>
+            StitchWelds = objModel.PartStitchWelds
+            <span style="color: #008000; ">' Add a  new Fillet weld
+</span>            StitchWeld = StitchWelds.Add(iNumSkipPaths,
+                                         FilletEdge,
+                                         FilletEdgeVertex,
+                                         OrientingEdgeProxy,
+                                         OrientingSides,
+                                         eWeldType,
+                                         eAnnotFormat,
+                                         dStartOffset,
+                                         dEndOffset,
+                                         dBeadLength,
+                                         dGapLength,
+                                         strStyleName)
+
+            <span style="color: #0000FF; ">If</span> Err.Number() <span style="color: #0000FF; ">Or</span> StitchWeld <span style="color: #0000FF; ">Is</span> <span style="color: #0000FF; ">Nothing</span> <span style="color: #0000FF; ">Then</span>
+                <span style="color: #0000FF; ">MsgBox</span>(<span style="color: #800000; ">&quot;Could not create a stitch weld with the inputs.&quot;</span>)
+                
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+
+        <span style="color: #0000FF; ">Catch</span> ex <span style="color: #0000FF; ">As</span> Exception
+            <span style="color: #0000FF; ">MsgBox</span>(ex.ToString)
+        <span style="color: #0000FF; ">Finally</span>
+
+            <span style="color: #0000FF; ">If</span> <span style="color: #0000FF; ">Not</span> objPartDoc <span style="color: #0000FF; ">Is</span> <span style="color: #0000FF; ">Nothing</span> <span style="color: #0000FF; ">Then</span>
+                LabelWeldObject = <span style="color: #0000FF; ">Nothing</span>
+                LabelWeldDC = <span style="color: #0000FF; ">Nothing</span>
+                FilletWeld = <span style="color: #0000FF; ">Nothing</span>
+                FilletWelds = <span style="color: #0000FF; ">Nothing</span>
+                objPartDoc.Close()
+                objPartDoc = <span style="color: #0000FF; ">Nothing</span>
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+
+            objApp = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">Try</span>
+    <span style="color: #0000FF; ">End Sub</span>
+    
+    <span style="color: #0000FF; ">Function</span> GetTrainingFolder() <span style="color: #0000FF; ">As</span> DirectoryInfo
+        <span style="color: #0000FF; ">Dim</span> objInstallData <span style="color: #0000FF; ">As</span> SEInstallDataLib.SEInstallData = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objInstallFolder <span style="color: #0000FF; ">As</span> DirectoryInfo = <span style="color: #0000FF; ">Nothing</span>
+        <span style="color: #0000FF; ">Dim</span> objTrainingFolder <span style="color: #0000FF; ">As</span> DirectoryInfo = <span style="color: #0000FF; ">Nothing</span>
+
+        <span style="color: #0000FF; ">Try</span>
+            objInstallData = <span style="color: #0000FF; ">New</span> SEInstallDataLib.SEInstallData
+            objInstallFolder = <span style="color: #0000FF; ">New</span> DirectoryInfo(objInstallData.GetInstalledPath())
+            objTrainingFolder = <span style="color: #0000FF; ">New</span> DirectoryInfo(Path.Combine(objInstallFolder.Parent.FullName, <span style="color: #800000; ">&quot;Training&quot;</span>))
+        <span style="color: #0000FF; ">Catch</span>
+        <span style="color: #0000FF; ">Finally</span>
+            <span style="color: #0000FF; ">If</span> <span style="color: #0000FF; ">Not</span> (objInstallData <span style="color: #0000FF; ">Is</span> <span style="color: #0000FF; ">Nothing</span>) <span style="color: #0000FF; ">Then</span>
+                Marshal.FinalReleaseComObject(objInstallData)
+                objInstallData = <span style="color: #0000FF; ">Nothing</span>
+            <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">If</span>
+        <span style="color: #0000FF; ">End</span> <span style="color: #0000FF; ">Try</span>
+
+        <span style="color: #0000FF; ">Return</span> objTrainingFolder
+    <span style="color: #0000FF; ">End Function</span>
+<span style="color: #0000FF; ">End Class</span>
+</pre>
+	</div>
+	<div id="i-tab-content-b555b1dc-1e5a-4470-9352-088b9b033f77" class="i-filtered-content-CS">
+		<pre><span style="color: #0000FF; ">using</span> System.Windows.Forms;
+<span style="color: #0000FF; ">using</span> System.IO;
+<span style="color: #0000FF; ">using</span> System.Runtime.InteropServices;
+
+<span style="color: #0000FF; ">public</span> <span style="color: #0000FF; ">class</span> Form1
+{
+
+    <span style="color: #0000FF; ">private</span> <span style="color: #0000FF; ">void</span> Button1_Click(<span style="color: #0000FF; ">object</span> sender, EventArgs e)
+    {
+        DirectoryInfo objFolder = <span style="color: #0000FF; ">null</span>;
+        FileInfo objFileInfo = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeFramework.Application objApp = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.PartDocument objPartDoc = <span style="color: #0000FF; ">null</span>;
+
+        SolidEdgePart.PartFilletWelds FilletWelds = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.PartFilletWeld FilletWeld = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeFramework.Documents objDocuments = <span style="color: #0000FF; ">null</span>;
+        <span style="color: #0000FF; ">int</span> iNumBaseFaces = 0;
+        <span style="color: #0000FF; ">int</span> iNumTargetFaces = 0;
+        <span style="color: #0000FF; ">double</span> dBaseThickness = 0;
+        <span style="color: #0000FF; ">double</span> dTargetThickness = 0;
+        SolidEdgePart.FilletWeldSetbackConstants eSetbackType = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeGeometry.Face[] objBaseFaces = <span style="color: #0000FF; ">new</span> SolidEdgeGeometry.Face[1];
+        SolidEdgeGeometry.Face[] objTargetFaces = <span style="color: #0000FF; ">new</span> SolidEdgeGeometry.Face[1];
+        SolidEdgeGeometry.Face[] objFaceArray = <span style="color: #0000FF; ">new</span> SolidEdgeGeometry.Face[1];
+        SolidEdgePart.ExtrudedProtrusion objExtProt1 = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.Rib objRib = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeGeometry.Faces objFaces = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeGeometry.Face objFace = <span style="color: #0000FF; ">null</span>;
+
+        SolidEdgePart.Model objModel = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.LabelWeldDataCollection LabelWeldDC = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.LabelWeldData LabelWeldObject = <span style="color: #0000FF; ">null</span>;
+
+        SolidEdgeGeometry.Edges FilletEdges = <span style="color: #0000FF; ">null</span>;
+        SolidEdgeGeometry.Edge[] FilletEdge = <span style="color: #0000FF; ">new</span> SolidEdgeGeometry.Edge[1];
+        SolidEdgeGeometry.Vertex[] FilletEdgeVertex = <span style="color: #0000FF; ">new</span> SolidEdgeGeometry.Vertex[1];
+
+        <span style="color: #0000FF; ">int</span> iNumOfFillets = 0;
+        <span style="color: #0000FF; ">object</span>[] OrientingEdgeProxy = <span style="color: #0000FF; ">new</span> <span style="color: #0000FF; ">object</span>[2];
+        SolidEdgePart.FeaturePropertyConstants[] OrientingSides = <span style="color: #0000FF; ">new</span> SolidEdgePart.FeaturePropertyConstants[2];
+        <span style="color: #0000FF; ">double</span> dStartOffset = 0;
+        <span style="color: #0000FF; ">double</span> dEndOffset = 0;
+        <span style="color: #0000FF; ">double</span> dGapLength = 0;
+        <span style="color: #0000FF; ">double</span> dBeadLength = 0;
+        SolidEdgePart.PartStitchWelds StitchWelds = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.PartStitchWeld StitchWeld = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.FeaturePropertyConstants eOrientingSide = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.StitchWeldType eWeldType = <span style="color: #0000FF; ">null</span>;
+        SolidEdgePart.StitchWeldAnnotationFormat eAnnotFormat = <span style="color: #0000FF; ">null</span>;
+        <span style="color: #0000FF; ">int</span> iNumSkipPaths = 0;
+        <span style="color: #0000FF; ">string</span> strStyleName = <span style="color: #0000FF; ">null</span>;
+
+        <span style="color: #0000FF; ">try</span>
+        {
+            objFolder = GetTrainingFolder();
+            objFileInfo = <span style="color: #0000FF; ">new</span> FileInfo(Path.Combine(objFolder.FullName, <span style="color: #800000; ">&quot;support1.par&quot;</span>));
+            objApp = (SolidEdgeFramework.Application)Marshal.GetActiveObject(<span style="color: #800000; ">&quot;SolidEdge.Application&quot;</span>);
+            objApp.Visible = <span style="color: #0000FF; ">true</span>;
+            objDocuments = objApp.Documents;
+            <span style="color: #008000; ">// First open the test case document from training folder
+</span>            objPartDoc = objDocuments.Open(objFileInfo.FullName);
+            objPartDoc.ModelingMode = SolidEdgePart.ModelingModeConstants.seModelingModeOrdered;
+            <span style="color: #008000; ">// Get model handle
+</span>            objModel = objPartDoc.Models.Item(1);
+
+            <span style="color: #008000; ">//Get Label Weld Data object
+</span>            LabelWeldDC = objPartDoc.LabelWeldDataCollection;
+            LabelWeldObject = LabelWeldDC.Add(ZSymbol:0, Tail:0, DashLine:0, WeldInField:0, OffsetTopBottom:0, WeldAllAround:0, Symmetrical:0, TopNote1:<span style="color: #800000; ">&quot;Test1&quot;</span>, TopNote2:<span style="color: #800000; ">&quot;Test2&quot;</span>, TopTreatmentType:0, TopType:0, TopNote3:<span style="color: #800000; ">&quot;Test3&quot;</span>, TopNoteZ:<span style="color: #800000; ">&quot;&quot;</span>, TailNote:<span style="color: #800000; ">&quot;&quot;</span>, BottomNote1:<span style="color: #800000; ">&quot;&quot;</span>, BottomNote2:<span style="color: #800000; ">&quot;&quot;</span>, BottomTreatmentType:0, BottomType:0, BottomNote3:<span style="color: #800000; ">&quot;&quot;</span>, BottomNoteZ:<span style="color: #800000; ">&quot;&quot;</span>, TopTypeCompound:0, BottomTypeCompound:0, CenterType:0, CrossSectionArea:0, TailNote2:<span style="color: #800000; ">&quot;&quot;</span>, TopNoteCSize:<span style="color: #800000; ">&quot;&quot;</span>, BottomNoteCSize:<span style="color: #800000; ">&quot;&quot;</span>, TopNoteAngle:<span style="color: #800000; ">&quot;&quot;</span>, BottomNoteAngle:<span style="color: #800000; ">&quot;&quot;</span>, TopNoteDepth:<span style="color: #800000; ">&quot;&quot;</span>, BottomNoteDepth:<span style="color: #800000; ">&quot;&quot;</span>, TopPosOffset:0, BottomPosOffset:0);
+
+            <span style="color: #008000; ">//Get Fillet weld collection
+</span>            FilletWelds = objModel.PartFilletWelds;
+
+            <span style="color: #008000; ">// Get Protrusion 1
+</span>            objExtProt1 = objModel.ExtrudedProtrusions.Item(2);
+
+            <span style="color: #008000; ">// Get all base faces collection
+</span>            objFaces = objExtProt1.Faces(SolidEdgeGeometry.FeatureTopologyQueryTypeConstants.igQueryAll);
+
+            <span style="color: #008000; ">// Collect INPUT Base faces
+</span>            objBaseFaces[0] = objFaces.Item(3);
+
+            <span style="color: #008000; ">//Get Rib
+</span>            objRib = objModel.Ribs.Item(2);
+
+            <span style="color: #008000; ">// Get all target faces collection
+</span>            objFaces = objRib.Faces(SolidEdgeGeometry.FeatureTopologyQueryTypeConstants.igQueryAll);
+
+            <span style="color: #008000; ">// Collect INPUT Target faces
+</span>            objTargetFaces[0] = objFaces.Item(3);
+
+            <span style="color: #008000; ">//Apply face styles to selected faces for identification
+</span>            objBaseFaces[0].Style = objPartDoc.FaceStyles(<span style="color: #800000; ">&quot;red&quot;</span>);
+            objTargetFaces[0].Style = objPartDoc.FaceStyles(<span style="color: #800000; ">&quot;red&quot;</span>);
+
+            <span style="color: #008000; ">// Initialize all inputs
+</span>            iNumBaseFaces = 1;
+            iNumTargetFaces = 1;
+            eSetbackType = SolidEdgePart.FilletWeldSetbackConstants.seFilletWeldThickness;
+            dBaseThickness = 0.00235;
+            dTargetThickness = 0.0025;
+
+            <span style="color: #008000; ">// Add a  new Fillet weld
+</span>            FilletWeld = FilletWelds.Add(iNumBaseFaces, objTargetFaces, iNumTargetFaces, objBaseFaces, LabelWeldObject, eSetbackType, dBaseThickness, dTargetThickness);
+
+
+            <span style="color: #008000; ">// Get all base faces collection
+</span>            FilletEdges = FilletWeld.Edges(SolidEdgeGeometry.FeatureTopologyQueryTypeConstants.igQueryAll);
+
+
+            <span style="color: #008000; ">// Collect INPUT edge
+</span>            FilletEdge[0] = FilletEdges.Item(8);
+
+            <span style="color: #008000; ">//Input vertex
+</span>            FilletEdgeVertex[0] = FilletEdge[0].StartVertex;
+
+            <span style="color: #008000; ">// Initialize all inputs
+</span>            iNumSkipPaths = 1;
+
+            <span style="color: #008000; ">// Orientation side
+</span>            OrientingSides[0] = eOrientingSide;
+
+            <span style="color: #008000; ">//Weld Type
+</span>            eWeldType = SolidEdgePart.StitchWeldType.seStitchOnly;
+
+            <span style="color: #008000; ">//Annotation type
+</span>            eAnnotFormat = SolidEdgePart.StitchWeldAnnotationFormat.seLengthPitch;
+
+            <span style="color: #008000; ">// Distance values
+</span>            dStartOffset = 0.0;
+            dEndOffset = 0.0;
+            dBeadLength = 0.003;
+            dGapLength = 0.004;
+
+            <span style="color: #008000; ">// Dimension Style
+</span>            strStyleName = <span style="color: #800000; ">&quot;ISO (mm)&quot;</span>;
+            StitchWelds = objModel.PartStitchWelds;
+            <span style="color: #008000; ">// Add a  new Fillet weld
+</span>            StitchWeld = StitchWelds.Add(iNumSkipPaths, FilletEdge, FilletEdgeVertex, OrientingEdgeProxy, OrientingSides, eWeldType, eAnnotFormat, dStartOffset, dEndOffset, dBeadLength, dGapLength, strStyleName);
+
+            <span style="color: #0000FF; ">if</span> (Microsoft.VisualBasic.Information.Err().Number() || StitchWeld == <span style="color: #0000FF; ">null</span>)
+            {
+                MessageBox.Show(<span style="color: #800000; ">&quot;Could not create a stitch weld with the inputs.&quot;</span>);
+
+            }
+
+        }
+        <span style="color: #0000FF; ">catch</span> (Exception ex)
+        {
+            MessageBox.Show(ex.ToString());
+        }
+        <span style="color: #0000FF; ">finally</span>
+        {
+
+            <span style="color: #0000FF; ">if</span> (objPartDoc != <span style="color: #0000FF; ">null</span>)
+            {
+                LabelWeldObject = <span style="color: #0000FF; ">null</span>;
+                LabelWeldDC = <span style="color: #0000FF; ">null</span>;
+                FilletWeld = <span style="color: #0000FF; ">null</span>;
+                FilletWelds = <span style="color: #0000FF; ">null</span>;
+                objPartDoc.Close();
+                objPartDoc = <span style="color: #0000FF; ">null</span>;
+            }
+
+            objApp = <span style="color: #0000FF; ">null</span>;
+        }
+    }
+
+    <span style="color: #0000FF; ">public</span> DirectoryInfo GetTrainingFolder()
+    {
+        SEInstallDataLib.SEInstallData objInstallData = <span style="color: #0000FF; ">null</span>;
+        DirectoryInfo objInstallFolder = <span style="color: #0000FF; ">null</span>;
+        DirectoryInfo objTrainingFolder = <span style="color: #0000FF; ">null</span>;
+
+        <span style="color: #0000FF; ">try</span>
+        {
+            objInstallData = <span style="color: #0000FF; ">new</span> SEInstallDataLib.SEInstallData();
+            objInstallFolder = <span style="color: #0000FF; ">new</span> DirectoryInfo(objInstallData.GetInstalledPath());
+            objTrainingFolder = <span style="color: #0000FF; ">new</span> DirectoryInfo(Path.Combine(objInstallFolder.Parent.FullName, <span style="color: #800000; ">&quot;Training&quot;</span>));
+        }
+        <span style="color: #0000FF; ">catch</span>
+        {
+        }
+        <span style="color: #0000FF; ">finally</span>
+        {
+            <span style="color: #0000FF; ">if</span> (objInstallData != <span style="color: #0000FF; ">null</span>)
+            {
+                Marshal.FinalReleaseComObject(objInstallData);
+                objInstallData = <span style="color: #0000FF; ">null</span>;
+            }
+        }
+
+        <span style="color: #0000FF; ">return</span> objTrainingFolder;
+    }
+
+    <span style="color: #0000FF; ">public</span> Form1()
+    {
+        SubscribeToEvents();
+    }
+
+    <span style="color: #0000FF; ">private</span> <span style="color: #0000FF; ">bool</span> EventsSubscribed = <span style="color: #0000FF; ">false</span>;
+    <span style="color: #0000FF; ">private</span> <span style="color: #0000FF; ">void</span> SubscribeToEvents()
+    {
+        <span style="color: #0000FF; ">if</span> (EventsSubscribed)
+            <span style="color: #0000FF; ">return</span>;
+        <span style="color: #0000FF; ">else</span>
+            EventsSubscribed = <span style="color: #0000FF; ">true</span>;
+
+        Button1.Click += Button1_Click;
+    }
+
+}</pre>
+	</div>
+	
+</div>
+</div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="INLINE_EXAMPLE" namespace="Example" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""<>"",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="MENU_LINK" namespace="example" source="Item" filter="type=linked" NoHeader="True" NoFooter="True" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=examplelinks,caption=$$Example$$%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="FilteredItemList" scrap="CATEGORIZED_LINKS" namespace="linkcategory" source="Item" filter="" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=seealso,caption=""$$See_Also$$%%designlist:tagidentifier=##SEEALSO,itemtype=See Also%%""%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><div class="i-section-heading" id="i-seealso-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">See Also</span></div><div id="i-seealso-section-content" class="i-section-content"><p id=dxseealsocontent><a href="SolidEdgePart~PartStitchWelds.html">PartStitchWelds Collection</a>
+&nbsp;|&nbsp;<a href="SolidEdgePart~PartStitchWelds_members.html">PartStitchWelds Members</a>
+</p>
+</p></div><!--DXMETADATA end -->
+    </div>
+    <div id="i-footer-content" class="i-footer-content">
+        <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_FOOTER" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="CopyrightNotice" format="<p>&nbsp;</p><p>&nbsp;</p><hr style=""height: 1px"" /><p>%%variable%%</p>" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="FeedbackLink" format="" --><!--DXMETADATA end-->
+    </div>
+    
+
+    <!--DXMETADATA start type="IsNew" format="<script type=""text/javascript"">setIsNew = true;</script>" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<script type=""text/javascript"">setIsResponsiveEnabled = true;</script>" --><!--DXMETADATA end-->
+    <script type="text/javascript">
+        $(function() {
+            var documentInstance = new Innovasys.Content.Document(document.body);
+            documentInstance.isNew = !(typeof setIsNew === "undefined");
+            documentInstance.isResponsiveEnabled = !(typeof setIsResponsiveEnabled === "undefined");
+            documentInstance.load();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--DXMETADATA start type="MetaCharset" --><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><!--DXMETADATA end-->
+    <meta http-equiv="X-UA-Compatible" value="IE=9" />
+
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Literal" condition="helpversion:value=3" value="<meta name=""Microsoft.Help.SelfBranded"" content=""true"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="PageItemTitle" format="<title>%%PageItemTitle%%</title>" --><title>GetRayIntersections Method</title><!--DXMETADATA end-->
+    <!--DXMETADATA start type="ItemTitleNoQuotes" format="<meta name=""Title"" content=""%%ItemTitleNoQuotes%%""/>" --><!--DXMETADATA end-->    
+    
+
+    <!--DXMETADATA start type="PackageLink" packagename="jquery" filetype="script" firstlinkattributes="id=""mshs_support_script"""--><script src="template/packages/jquery/script/chm.mshc/jquery-1.7.2.min.js" type="text/javascript" id="mshs_support_script"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="script"--><script src="template/packages/jquery-ui/script/chm.mshc/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/jquery-ui/css/chm.mshc/jquery-ui-1.8.18.custom.css"></link><!--DXMETADATA end-->
+	
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/plugins-ax/css/chm.mshc/jquery-plugins.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="css" firstlinkattributes=" data-mshv2-stylesheet=""/template/packages/core-ax/dx.com.mshv2.css"" data-mshv1-stylesheet=""/template/packages/core-ax/dx.com.mshv1.css"" data-responsive-mobile=""template/packages/core-ax/dx.com.mobile.css"" data-responsive-tablet=""template/packages/core-ax/dx.com.tablet.css"""--><link rel="stylesheet" type="text/css" href="template/packages/core-ax/css/dx.com.css"  data-mshv2-stylesheet="/template/packages/core-ax/dx.com.mshv2.css" data-mshv1-stylesheet="/template/packages/core-ax/dx.com.mshv1.css" data-responsive-mobile="template/packages/core-ax/dx.com.mobile.css" data-responsive-tablet="template/packages/core-ax/dx.com.tablet.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="script"--><script src="template/packages/plugins-ax/script/chm.mshc/jquery-plugins.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="script"--><script src="template/packages/core-ax/script/dx.com.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="TopicId" format="<meta name=""Microsoft.Help.Id"" content=""%%TopicId%%""/>" --><meta name="Microsoft.Help.Id" content="SolidEdgePart~PartDocument~GetRayIntersections"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Synopsis" StripHtmlTags="True" MaxLength="250" format="<meta name=""Description"" content=""%%Synopsis%%"" />"--><meta name="Description" content="Returns intersection points, normal at points, intersection types and intersection information for a set of bodies and set of rays" /><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocParentId" format="<meta name=""Microsoft.Help.TocParent"" content=""%%TocParentId%%""/>" --><meta name="Microsoft.Help.TocParent" content="SolidEdgePart~PartDocument_methods"/><!--DXMETADATA end-->
+    <meta name="Microsoft.Help.ContentType" content="Reference" />
+    <!--DXMETADATA start type="MshvKeywords" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="MshvMetaTags" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.Locale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.TopicLocale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="Stylesheets" --><link rel="stylesheet" type="text/css" href="stylesheets/customstyles.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Scripts" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="DesignTime"--><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_PROPERTIES" --><!--DXMETADATA end -->
+
+    <!--DXMETADATA start type="CustomHeadContent" --><!--DXMETADATA end-->
+</head>
+
+<body>
+    <div id="i-before-header-content" class="i-before-header-content">
+        
+    </div>
+    <div id="i-header-content" class="i-header-content">
+        <!--DXMETADATA start type="LogoImage" --><img class="logoimage" src="images/sesdk_header.jpg" border="0"></img><!--DXMETADATA end-->
+            <div class="i-project-title"><!--DXMETADATA start type="ProjectTitle" -->Solid Edge Part Type Library<!--DXMETADATA end--></div>
+        <div class="i-page-title"><div class="i-page-title-text"><!--DXMETADATA start type="PageItemTitle" -->GetRayIntersections Method<!--DXMETADATA end--></div></div>
+    </div>
+    <div id="i-after-header-content" class="i-after-header-content">
+        <!-- Spacing --> <span class="i-toggle-all-sections i-function-link">
+                <label class="i-collapse-all"><!--DXMETADATA start type="Phrase" name="COLLAPSE_ALL" -->Collapse All<!--DXMETADATA end--></label>
+                <label class="i-expand-all" style="display: none;"><!--DXMETADATA start type="Phrase" name="EXPAND_ALL" -->Expand All<!--DXMETADATA end--></label>
+            </span><!--DXMETADATA start type="Literal" condition="communityenabled" value="%%scrap:name=_COMMUNITY_DROPDOWN%%" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="IsWebOutputRootPageLinkEnabled" format="<a href='#' class="i-page-link" class="i-view-in-frame-link" title='$$VIEW_WITH_NAVIGATION_TOOLS_TIP$$' style='display: none' data-root-page='%%WebOutputRootPage%%%%OutputFileExtension%%' target='_top'>$$VIEW_WITH_NAVIGATION_TOOLS_TEXT$$</a>" --><a href='#' class="i-page-link" class="i-view-in-frame-link" title='Open this Topic in a view that includes Navigation tools (Table of Contents, Index, Search)' style='display: none' data-root-page='webframe.html' target='_top'>View with Navigation Tools</a><!--DXMETADATA end-->
+    </div>
+    <!--DXMETADATA start type="Breadcrumbs" scrap="_BREADCRUMBS" --><div class="i-breadcrumbs-container"><table><tr><td>
+<a href="SolidEdgePart_P.html">Solid Edge Part Type Library</a>
+ > <a href="SolidEdgePart~PartDocument.html">PartDocument Object</a>
+ : GetRayIntersections Method</td></tr></table></div><!--DXMETADATA end -->
+    
+    <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_BUBBLES" namespace="parameter" source="Item" -->
+<div id="BodiesPopupContent" class="i-popup-content">
+Array of body objects to be intersected with the given input rays.
+</div>
+<div id="OriginsPopupContent" class="i-popup-content">
+Array of x,y,z coordinates of the input rays to be used. The number of x,y,z sets must not be less than the NumRays value passed in (see NumRays below).
+</div>
+<div id="DirectionsPopupContent" class="i-popup-content">
+Array of x,y,z coordinates of direction vectors, each corresponding to the respective Origins described above. The number of x,y,z sets must not be less than the NumRays value passed in (see NumRays below).
+</div>
+<div id="NumRaysPopupContent" class="i-popup-content">
+The number of rays defined in the Origins and Directions arrays. This number must not be greater than the number of sets of x,y,z coordinates defined in either of these arrays (i.e 3*NumRays must be less than or equal to the number of elements in both the Origins and Directions arrays). If it is, the function will return an E_INVALIDARG error.
+</div>
+<div id="RadiusPopupContent" class="i-popup-content">
+The (single) radius value to be used for each of the input rays.
+</div>
+<div id="OffsetPopupContent" class="i-popup-content">
+This value is used to determine if intersections with edges or vertices are entry or exit points. The offset is the distance before and after the intersection location at which it is determined whether the intersecting ray is outside of, inside of or on the body. If the point previous to the intersection (intersection - Offset) is outside of the body and the point after the intersection (intersection + Offset) is inside of or on the body that intersection is classified "seEntry". The opposite case (inside or on the body before and outside after) the intersection point is classified as "seExit". If the ray is outside of the body before and after the intersection point and the intersection point under consideration is the only point of intersection for this ray with this body, it is classified as "seSilhouette". If the intersection point does not lie on the centerline of the intersecting ray, no attempt is made to classify the intersection type. The Offset is not used to classify intersections with faces.
+</div>
+<div id="NumIntersectionsPopupContent" class="i-popup-content">
+The total number of intersections found between all of the input body objects and all of the defined rays (matching origin and direction sets). The intersections returned are ordered axially for each input ray with each ray's set of intersections followed by the next, in the order the rays were defined.
+</div>
+<div id="BodyIndexPopupContent" class="i-popup-content">
+Index into the input body object array of the body involved in the intersection.
+</div>
+<div id="IntersectionPointsPopupContent" class="i-popup-content">
+x,y,z coordinates of the location of each intersection result found. If a body is intersected by only the outer part of the defined ray and not its centerline, the returned intersection point will be located on the centerline of the ray and not on the body itself. In this case, the RayIntersectionTypeConstant for the intersection will be set to the value "seTypeUnkown".
+</div>
+<div id="IntersectionNormalsPopupContent" class="i-popup-content">
+x,y,z coordinates of the surface Normal Vector at the point of intersection. This is only applicable if the entity intersected is a face (RayIntersectionEntityConstant = "seFace"), and is set to 0,0,0 for edge and vertex intersections.
+</div>
+<div id="RayIndexPopupContent" class="i-popup-content">
+Index into the input arrays of ray origins and directions of the ray involved in the intersection.
+</div>
+<div id="EntityPopupContent" class="i-popup-content">
+
+</div>
+<div id="TypePopupContent" class="i-popup-content">
+This optional return value indicates the type of intersection where possible. The possible values are:<BR>o seTypeUnkown: If this value is returned, the type of intersection was indeterminate. This can occur when the body is intersected by the radius of the input ray but not the center line or when the tests for the other intersection types do not pass. This is the default return value.<BR>o seSilhouette: This value is returned when it can be determined that the intersection is the only one for this body and that it is tangential to the outline of the body in the viewing direction.<BR>o seEntry: This value is returned when the ray is outside of the body at the distance of the user-provided offset prior to the intersection and is inside or on the body at the distance of the user-provided offset after the intersection.<BR>o seExit: This value is returned when the ray is inside or on the body at the distance of the user-provided offset prior to the intersection and is outside of the body at the distance of the user-provided offset after the intersection.
+</div>
+<!--DXMETADATA end -->
+    <div id="i-body-content" class="i-body-content">
+        <!--DXMETADATA start type="Description" source="Item" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=description,caption=$$Description$$%%<div class=""i-description-content"">%%description%%</div></div>" --><div class="i-section-heading" id="i-description-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Description</span></div><div id="i-description-section-content" class="i-section-content"><div class="i-description-content">Returns intersection points, normal at points, intersection types and intersection information for a set of bodies and set of rays</div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="Syntax" lang="VB" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=syntax,caption=$$Syntax$$%%<div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>%%Syntax%%</pre></tr></table></div></div>" --><div class="i-section-heading" id="i-syntax-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Syntax</span></div><div id="i-syntax-section-content" class="i-section-content"><div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>Public Sub GetRayIntersections( _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="BodiesPopupLink" data-popup-contentsource="#BodiesPopupContent" data-popup-showevent="click mouseenter">Bodies</a></i>() As Object, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="OriginsPopupLink" data-popup-contentsource="#OriginsPopupContent" data-popup-showevent="click mouseenter">Origins</a></i>() As Double, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="DirectionsPopupLink" data-popup-contentsource="#DirectionsPopupContent" data-popup-showevent="click mouseenter">Directions</a></i>() As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="NumRaysPopupLink" data-popup-contentsource="#NumRaysPopupContent" data-popup-showevent="click mouseenter">NumRays</a></i> As Long, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="RadiusPopupLink" data-popup-contentsource="#RadiusPopupContent" data-popup-showevent="click mouseenter">Radius</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="OffsetPopupLink" data-popup-contentsource="#OffsetPopupContent" data-popup-showevent="click mouseenter">Offset</a></i> As Double, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="NumIntersectionsPopupLink" data-popup-contentsource="#NumIntersectionsPopupContent" data-popup-showevent="click mouseenter">NumIntersections</a></i> As Long, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="BodyIndexPopupLink" data-popup-contentsource="#BodyIndexPopupContent" data-popup-showevent="click mouseenter">BodyIndex</a></i>() As Long, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="IntersectionPointsPopupLink" data-popup-contentsource="#IntersectionPointsPopupContent" data-popup-showevent="click mouseenter">IntersectionPoints</a></i>() As Double, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="IntersectionNormalsPopupLink" data-popup-contentsource="#IntersectionNormalsPopupContent" data-popup-showevent="click mouseenter">IntersectionNormals</a></i>() As Double, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="RayIndexPopupLink" data-popup-contentsource="#RayIndexPopupContent" data-popup-showevent="click mouseenter">RayIndex</a></i>() As Long, _
+&nbsp;&nbsp;&nbsp;ByRef <i><a class="i-popup-link" id="EntityPopupLink" data-popup-contentsource="#EntityPopupContent" data-popup-showevent="click mouseenter">Entity</a></i>() As <a href="SolidEdgePart~RayIntersectionEntityConstants.html">RayIntersectionEntityConstants</a>, _
+&nbsp;&nbsp;&nbsp;Optional ByRef <i><a class="i-popup-link" id="TypePopupLink" data-popup-contentsource="#TypePopupContent" data-popup-showevent="click mouseenter">Type</a></i> As Variant _
+) </pre></tr></table></div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_LIST" namespace="parameter" source="Item" filter="" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=parameters,caption=$$ParameterList$$%%%%filtereditemlist%%</div>" --><div class="i-section-heading" id="i-parameters-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Parameters</span></div><div id="i-parameters-section-content" class="i-section-content"><dl>
+<dt><I>Bodies</I></dt>
+<dd>Array of body objects to be intersected with the given input rays.</dd>
+<dt><I>Origins</I></dt>
+<dd>Array of x,y,z coordinates of the input rays to be used. The number of x,y,z sets must not be less than the NumRays value passed in (see NumRays below).</dd>
+<dt><I>Directions</I></dt>
+<dd>Array of x,y,z coordinates of direction vectors, each corresponding to the respective Origins described above. The number of x,y,z sets must not be less than the NumRays value passed in (see NumRays below).</dd>
+<dt><I>NumRays</I></dt>
+<dd>The number of rays defined in the Origins and Directions arrays. This number must not be greater than the number of sets of x,y,z coordinates defined in either of these arrays (i.e 3*NumRays must be less than or equal to the number of elements in both the Origins and Directions arrays). If it is, the function will return an E_INVALIDARG error.</dd>
+<dt><I>Radius</I></dt>
+<dd>The (single) radius value to be used for each of the input rays.</dd>
+<dt><I>Offset</I></dt>
+<dd>This value is used to determine if intersections with edges or vertices are entry or exit points. The offset is the distance before and after the intersection location at which it is determined whether the intersecting ray is outside of, inside of or on the body. If the point previous to the intersection (intersection - Offset) is outside of the body and the point after the intersection (intersection + Offset) is inside of or on the body that intersection is classified "seEntry". The opposite case (inside or on the body before and outside after) the intersection point is classified as "seExit". If the ray is outside of the body before and after the intersection point and the intersection point under consideration is the only point of intersection for this ray with this body, it is classified as "seSilhouette". If the intersection point does not lie on the centerline of the intersecting ray, no attempt is made to classify the intersection type. The Offset is not used to classify intersections with faces.</dd>
+<dt><I>NumIntersections</I></dt>
+<dd>The total number of intersections found between all of the input body objects and all of the defined rays (matching origin and direction sets). The intersections returned are ordered axially for each input ray with each ray's set of intersections followed by the next, in the order the rays were defined.</dd>
+<dt><I>BodyIndex</I></dt>
+<dd>Index into the input body object array of the body involved in the intersection.</dd>
+<dt><I>IntersectionPoints</I></dt>
+<dd>x,y,z coordinates of the location of each intersection result found. If a body is intersected by only the outer part of the defined ray and not its centerline, the returned intersection point will be located on the centerline of the ray and not on the body itself. In this case, the RayIntersectionTypeConstant for the intersection will be set to the value "seTypeUnkown".</dd>
+<dt><I>IntersectionNormals</I></dt>
+<dd>x,y,z coordinates of the surface Normal Vector at the point of intersection. This is only applicable if the entity intersected is a face (RayIntersectionEntityConstant = "seFace"), and is set to 0,0,0 for edge and vertex intersections.</dd>
+<dt><I>RayIndex</I></dt>
+<dd>Index into the input arrays of ray origins and directions of the ray involved in the intersection.</dd>
+<dt><I>Entity</I></dt>
+<dd><table class="i-filtered-item-list"><tr><th>Value</th><th>Description</th></tr>
+<tr><td class="i-member-name">seEdge</td><td class="i-description">Ray Intersection Entity Type - Edge</td></tr>
+<tr><td class="i-member-name">seFace</td><td class="i-description">Ray Intersection Entity Type - Face</td></tr>
+<tr><td class="i-member-name">seVertex</td><td class="i-description">Ray Intersection Entity Type - Vertex</td></tr>
+</table></dd>
+<dt><I>Type</I></dt>
+<dd>This optional return value indicates the type of intersection where possible. The possible values are:<BR>o seTypeUnkown: If this value is returned, the type of intersection was indeterminate. This can occur when the body is intersected by the radius of the input ray but not the center line or when the tests for the other intersection types do not pass. This is the default return value.<BR>o seSilhouette: This value is returned when it can be determined that the intersection is the only one for this body and that it is tangential to the outline of the body in the viewing direction.<BR>o seEntry: This value is returned when the ray is outside of the body at the distance of the user-provided offset prior to the intersection and is inside or on the body at the distance of the user-provided offset after the intersection.<BR>o seExit: This value is returned when the ray is inside or on the body at the distance of the user-provided offset prior to the intersection and is outside of the body at the distance of the user-provided offset after the intersection.</dd>
+</dl></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##RETURNS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=returns,caption=$$Return_Type$$%%<div class=""i-returns-content"">%%comment%%</div></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##REMARKS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=remarks,caption=$$Remarks$$%%%%comment%%</div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="sourcecode" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=source,caption=$$Source_Code$$%%<table border=0 cellpadding=0 cellspacing=0 class=sourcecode><tr><td nowrap>%%sourcecode%%</td></tr></table></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##EXAMPLEINTRO" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=""$$Example$$%%designlist:tagidentifier=##EXAMPLECODE,itemtype=Example%%""%%%%comment%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="EXAMPLEGROUP_LIST" namespace="ExampleGroup" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""="",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="INLINE_EXAMPLE" namespace="Example" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""<>"",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="MENU_LINK" namespace="example" source="Item" filter="type=linked" NoHeader="True" NoFooter="True" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=examplelinks,caption=$$Example$$%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="FilteredItemList" scrap="CATEGORIZED_LINKS" namespace="linkcategory" source="Item" filter="" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=seealso,caption=""$$See_Also$$%%designlist:tagidentifier=##SEEALSO,itemtype=See Also%%""%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><div class="i-section-heading" id="i-seealso-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">See Also</span></div><div id="i-seealso-section-content" class="i-section-content"><p id=dxseealsocontent><a href="SolidEdgePart~PartDocument.html">PartDocument Object</a>
+&nbsp;|&nbsp;<a href="SolidEdgePart~PartDocument_members.html">PartDocument Members</a>
+&nbsp;|&nbsp;<a href="ST5MP1-WhatsNew.html">Solid Edge ST5 MP1 - What's New</a>
+</p>
+</p></div><!--DXMETADATA end -->
+    </div>
+    <div id="i-footer-content" class="i-footer-content">
+        <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_FOOTER" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="CopyrightNotice" format="<p>&nbsp;</p><p>&nbsp;</p><hr style=""height: 1px"" /><p>%%variable%%</p>" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="FeedbackLink" format="" --><!--DXMETADATA end-->
+    </div>
+    
+
+    <!--DXMETADATA start type="IsNew" format="<script type=""text/javascript"">setIsNew = true;</script>" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<script type=""text/javascript"">setIsResponsiveEnabled = true;</script>" --><!--DXMETADATA end-->
+    <script type="text/javascript">
+        $(function() {
+            var documentInstance = new Innovasys.Content.Document(document.body);
+            documentInstance.isNew = !(typeof setIsNew === "undefined");
+            documentInstance.isResponsiveEnabled = !(typeof setIsResponsiveEnabled === "undefined");
+            documentInstance.load();
+        });
+    </script>
+</body>
+</html>

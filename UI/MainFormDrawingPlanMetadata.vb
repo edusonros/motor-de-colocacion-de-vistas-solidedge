@@ -50,8 +50,8 @@ Partial Public Class MainForm
     ''' <summary>DFT elegido explícitamente para cargar/aplicar metadatos (cajetín + PART_LIST) sin depender del archivo de entrada.</summary>
     Private _externalManualDftEditPath As String = ""
 
-    ''' <summary>Ya se insertó la tabla de botones metadatos bajo «Progreso».</summary>
-    Private _planMetadataActionsUnderProgressDone As Boolean
+    ''' <summary>Panel con botones de metadatos (reubicado por reforma UI).</summary>
+    Friend pnlPlanMetaActions As Panel
 
     ''' <summary>Evita marcar campos como «manuales» durante limpieza o carga programática.</summary>
     Private _loadingMetadataProgrammatically As Boolean
@@ -61,46 +61,6 @@ Partial Public Class MainForm
         If tblTracePartInner Is Nothing Then Return rows + 16
         Return rows + tblTracePartInner.Padding.Top + tblTracePartInner.Padding.Bottom + 8
     End Function
-
-    ''' <summary>Ubica los botones de cajetín/PART LIST bajo los indicadores de progreso (más hueco estable que dentro del grupo PART LIST).</summary>
-    Private Sub EnsurePlanMetadataButtonsUnderProgressPanel(metaActions As TableLayoutPanel)
-        If grpProgress Is Nothing OrElse metaActions Is Nothing Then Return
-        If _planMetadataActionsUnderProgressDone Then Return
-
-        grpProgress.SuspendLayout()
-        Try
-            Dim innerProgress As TableLayoutPanel = Nothing
-            For Each c As Control In grpProgress.Controls
-                If TypeOf c Is TableLayoutPanel Then
-                    innerProgress = DirectCast(c, TableLayoutPanel)
-                    Exit For
-                End If
-            Next
-            If innerProgress Is Nothing Then Return
-
-            grpProgress.Controls.Clear()
-
-            Dim outer As New TableLayoutPanel With {
-                .Dock = DockStyle.Fill,
-                .ColumnCount = 1,
-                .RowCount = 2,
-                .Padding = New Padding(2, 2, 2, 4)
-            }
-            outer.RowStyles.Add(New RowStyle(SizeType.Percent, 100.0!))
-            outer.RowStyles.Add(New RowStyle(SizeType.AutoSize))
-
-            innerProgress.Dock = DockStyle.Fill
-            outer.Controls.Add(innerProgress, 0, 0)
-
-            metaActions.Dock = DockStyle.Fill
-            outer.Controls.Add(metaActions, 0, 1)
-
-            grpProgress.Controls.Add(outer)
-            _planMetadataActionsUnderProgressDone = True
-        Finally
-            grpProgress.ResumeLayout(True)
-        End Try
-    End Sub
 
     Private Sub EnsureDrawingPlanMetadataPanel()
         If _unifiedPlanMetadataDone Then Return
@@ -322,7 +282,7 @@ Partial Public Class MainForm
             grpPlanCajetinBox.Controls.Add(tblCaj)
             grpPlanPartListBox.Controls.Add(pnlPartListScrollHost)
 
-            EnsurePlanMetadataButtonsUnderProgressPanel(pnlMetaActions)
+            pnlPlanMetaActions = pnlMetaActions
 
             tblTrace.BeginInvoke(Sub()
                                      SubSyncPartListScrollExtents()

@@ -1,0 +1,257 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--DXMETADATA start type="MetaCharset" --><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><!--DXMETADATA end-->
+    <meta http-equiv="X-UA-Compatible" value="IE=9" />
+
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Literal" condition="helpversion:value=3" value="<meta name=""Microsoft.Help.SelfBranded"" content=""true"" />" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="PageItemTitle" format="<title>%%PageItemTitle%%</title>" --><title>AddFiniteByKeyPoint Method</title><!--DXMETADATA end-->
+    <!--DXMETADATA start type="ItemTitleNoQuotes" format="<meta name=""Title"" content=""%%ItemTitleNoQuotes%%""/>" --><!--DXMETADATA end-->    
+    
+
+    <!--DXMETADATA start type="PackageLink" packagename="jquery" filetype="script" firstlinkattributes="id=""mshs_support_script"""--><script src="template/packages/jquery/script/chm.mshc/jquery-1.7.2.min.js" type="text/javascript" id="mshs_support_script"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="script"--><script src="template/packages/jquery-ui/script/chm.mshc/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="jquery-ui" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/jquery-ui/css/chm.mshc/jquery-ui-1.8.18.custom.css"></link><!--DXMETADATA end-->
+	
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="css"--><link rel="stylesheet" type="text/css" href="template/packages/plugins-ax/css/chm.mshc/jquery-plugins.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="css" firstlinkattributes=" data-mshv2-stylesheet=""/template/packages/core-ax/dx.com.mshv2.css"" data-mshv1-stylesheet=""/template/packages/core-ax/dx.com.mshv1.css"" data-responsive-mobile=""template/packages/core-ax/dx.com.mobile.css"" data-responsive-tablet=""template/packages/core-ax/dx.com.tablet.css"""--><link rel="stylesheet" type="text/css" href="template/packages/core-ax/css/dx.com.css"  data-mshv2-stylesheet="/template/packages/core-ax/dx.com.mshv2.css" data-mshv1-stylesheet="/template/packages/core-ax/dx.com.mshv1.css" data-responsive-mobile="template/packages/core-ax/dx.com.mobile.css" data-responsive-tablet="template/packages/core-ax/dx.com.tablet.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="plugins-ax" filetype="script"--><script src="template/packages/plugins-ax/script/chm.mshc/jquery-plugins.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    <!--DXMETADATA start type="PackageLink" packagename="core-ax" filetype="script"--><script src="template/packages/core-ax/script/dx.com.min.js" type="text/javascript"></script><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="TopicId" format="<meta name=""Microsoft.Help.Id"" content=""%%TopicId%%""/>" --><meta name="Microsoft.Help.Id" content="SolidEdgePart~Jogs~AddFiniteByKeyPoint"/><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Synopsis" StripHtmlTags="True" MaxLength="250" format="<meta name=""Description"" content=""%%Synopsis%%"" />"--><meta name="Description" content="Adds or removes material from a feature starting at a specified surface and extending to a specified keypoint." /><!--DXMETADATA end-->
+    <!--DXMETADATA start type="TocParentId" format="<meta name=""Microsoft.Help.TocParent"" content=""%%TocParentId%%""/>" --><meta name="Microsoft.Help.TocParent" content="SolidEdgePart~Jogs_methods"/><!--DXMETADATA end-->
+    <meta name="Microsoft.Help.ContentType" content="Reference" />
+    <!--DXMETADATA start type="MshvKeywords" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="MshvMetaTags" condition="helpversion:value=3" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.Locale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Help3CatalogLocale" condition="helpversion:value=3" format="<meta name=""Microsoft.Help.TopicLocale"" content=""%%Help3CatalogLocale%%"" />"--><!--DXMETADATA end-->
+    
+    <!--DXMETADATA start type="Stylesheets" --><link rel="stylesheet" type="text/css" href="stylesheets/customstyles.css"></link><!--DXMETADATA end-->
+    <!--DXMETADATA start type="Scripts" --><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="DesignTime"--><!--DXMETADATA end-->
+
+    <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_PROPERTIES" --><!--DXMETADATA end -->
+
+    <!--DXMETADATA start type="CustomHeadContent" --><!--DXMETADATA end-->
+</head>
+
+<body>
+    <div id="i-before-header-content" class="i-before-header-content">
+        
+    </div>
+    <div id="i-header-content" class="i-header-content">
+        <!--DXMETADATA start type="LogoImage" --><img class="logoimage" src="images/sesdk_header.jpg" border="0"></img><!--DXMETADATA end-->
+            <div class="i-project-title"><!--DXMETADATA start type="ProjectTitle" -->Solid Edge Part Type Library<!--DXMETADATA end--></div>
+        <div class="i-page-title"><div class="i-page-title-text"><!--DXMETADATA start type="PageItemTitle" -->AddFiniteByKeyPoint Method<!--DXMETADATA end--></div></div>
+    </div>
+    <div id="i-after-header-content" class="i-after-header-content">
+        <!-- Spacing --> <span class="i-toggle-all-sections i-function-link">
+                <label class="i-collapse-all"><!--DXMETADATA start type="Phrase" name="COLLAPSE_ALL" -->Collapse All<!--DXMETADATA end--></label>
+                <label class="i-expand-all" style="display: none;"><!--DXMETADATA start type="Phrase" name="EXPAND_ALL" -->Expand All<!--DXMETADATA end--></label>
+            </span><!--DXMETADATA start type="Literal" condition="communityenabled" value="%%scrap:name=_COMMUNITY_DROPDOWN%%" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="IsWebOutputRootPageLinkEnabled" format="<a href='#' class="i-page-link" class="i-view-in-frame-link" title='$$VIEW_WITH_NAVIGATION_TOOLS_TIP$$' style='display: none' data-root-page='%%WebOutputRootPage%%%%OutputFileExtension%%' target='_top'>$$VIEW_WITH_NAVIGATION_TOOLS_TEXT$$</a>" --><a href='#' class="i-page-link" class="i-view-in-frame-link" title='Open this Topic in a view that includes Navigation tools (Table of Contents, Index, Search)' style='display: none' data-root-page='webframe.html' target='_top'>View with Navigation Tools</a><!--DXMETADATA end-->
+    </div>
+    <!--DXMETADATA start type="Breadcrumbs" scrap="_BREADCRUMBS" --><div class="i-breadcrumbs-container"><table><tr><td>
+<a href="SolidEdgePart_P.html">Solid Edge Part Type Library</a>
+ > <a href="SolidEdgePart~Jogs.html">Jogs Collection</a>
+ : AddFiniteByKeyPoint Method</td></tr></table></div><!--DXMETADATA end -->
+    
+    <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_BUBBLES" namespace="parameter" source="Item" -->
+<div id="ProfilePopupContent" class="i-popup-content">
+Specifies the Profile on which the Jog feature is to be based. This must be a single linear element that represents the location where the transition tab meets the parent tab as defined by MaterialSide.
+</div>
+<div id="KeyPointOrTangentFacePopupContent" class="i-popup-content">
+Specifies the keypoint or tangent face.
+</div>
+<div id="KeyPointFlagPopupContent" class="i-popup-content">
+Specifies the keypoint on the KeyPointOrTangentFace object that will determine the extent of the feature. Valid values are igInteriorReverseTangentNormal, igInteriorTangentNormal, igReverseTangentNormal, or igTangentNormal.
+</div>
+<div id="MaterialSidePopupContent" class="i-popup-content">
+Specifies the location of the created transition tab and jogged tab with respect to the profile. If set to seJogMtlInside, the inside face of the created transition tab lies on the profile; if set to seJogMtlOutside, the outside face of the created transition lies on profile; if set to seJogMtlExtend, the plastic zone on the parent tab borders the profile.
+</div>
+<div id="MovingSidePopupContent" class="i-popup-content">
+Specifies the side of the parent tab (with respect to the profile) that will move to become the jogged tab. Valid values are seJogMoveRight or seJogMoveLeft.
+</div>
+<div id="JogDirectionPopupContent" class="i-popup-content">
+Specifies the direction (seJogNormal or seJogReverseNormal) of the jog.
+</div>
+<div id="BendRadiusPopupContent" class="i-popup-content">
+Specifies the inside radius of the bend. If omitted, the UseGlobalBendRadius property is set to True, and the global bend radius is associatively applied.
+</div>
+<div id="DimensionTypePopupContent" class="i-popup-content">
+Specifies whether the Depth is measured from the profile plane to the inside or outside material face of the dimple. Valid values are seJogDimensionInside (the default) or seJogDimensionOutside.
+</div>
+<div id="NeutralFactorPopupContent" class="i-popup-content">
+Specifies the neutral factor to be applied to the bend. If omitted, the UseGlobalNeutralFactor property is set to True, and the global NeutralFactor value is associatively applied.
+</div>
+<div id="BendParameterTypePopupContent" class="i-popup-content">
+Specifies the method of specifying the bend neutral factor. Valid values are seJogBendNFT (the default) or seJogBendEqn.
+</div>
+<div id="BendReliefTypePopupContent" class="i-popup-content">
+Specifies the bend relief type. Valid values are seJogBRRectangular (the default) or seJogBRFillet.
+</div>
+<div id="BendReliefWidthPopupContent" class="i-popup-content">
+Specifies the width of the bend relief applied to the bend. If omitted, the UseGlobalBendReliefWidth property is set to True, and the global BendReliefWidth is associatively applied.
+</div>
+<div id="BendReliefDepthPopupContent" class="i-popup-content">
+Specifies the depth of the bend relief applied to the bend. If omitted, the UseGlobalBendReliefDepth property is set to True, and the global BendReliefDepth is associatively applied.
+</div>
+<div id="CornerReliefTypePopupContent" class="i-popup-content">
+Specifies the corner relief type. Valid values are seJogBendOnlyCR (the default) or seJogBendAndFaceCR.
+</div>
+<div id="ExtendMoldLinesPopupContent" class="i-popup-content">
+Specifies whether or not to extend moldlines. Valid values are seJogExtendMoldlines (the default) or seJogNoExtendMoldines.
+</div>
+<!--DXMETADATA end -->
+    <div id="i-body-content" class="i-body-content">
+        <!--DXMETADATA start type="Description" source="Item" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=description,caption=$$Description$$%%<div class=""i-description-content"">%%description%%</div></div>" --><div class="i-section-heading" id="i-description-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Description</span></div><div id="i-description-section-content" class="i-section-content"><div class="i-description-content">Adds or removes material from a feature starting at a specified surface and extending to a specified keypoint.</div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="Syntax" lang="VB" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=syntax,caption=$$Syntax$$%%<div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>%%Syntax%%</pre></tr></table></div></div>" --><div class="i-section-heading" id="i-syntax-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Syntax</span></div><div id="i-syntax-section-content" class="i-section-content"><div class=i-language-specific id=Syntax_VB><table class="syntaxtable" width="100%" cellpadding="0" cellspacing="0"><tr><th>Visual Basic</th></tr><tr><td><pre>Public Function AddFiniteByKeyPoint( _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="ProfilePopupLink" data-popup-contentsource="#ProfilePopupContent" data-popup-showevent="click mouseenter">Profile</a></i> As <a href="SolidEdgePart~Profile.html">Profile</a>, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="KeyPointOrTangentFacePopupLink" data-popup-contentsource="#KeyPointOrTangentFacePopupContent" data-popup-showevent="click mouseenter">KeyPointOrTangentFace</a></i> As Object, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="KeyPointFlagPopupLink" data-popup-contentsource="#KeyPointFlagPopupContent" data-popup-showevent="click mouseenter">KeyPointFlag</a></i> As <a href="SolidEdgePart~KeyPointExtentConstants.html">KeyPointExtentConstants</a>, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="MaterialSidePopupLink" data-popup-contentsource="#MaterialSidePopupContent" data-popup-showevent="click mouseenter">MaterialSide</a></i> As <a href="SolidEdgePart~JogFeatureConstants.html">JogFeatureConstants</a>, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="MovingSidePopupLink" data-popup-contentsource="#MovingSidePopupContent" data-popup-showevent="click mouseenter">MovingSide</a></i> As <a href="SolidEdgePart~JogFeatureConstants.html">JogFeatureConstants</a>, _
+&nbsp;&nbsp;&nbsp;ByVal <i><a class="i-popup-link" id="JogDirectionPopupLink" data-popup-contentsource="#JogDirectionPopupContent" data-popup-showevent="click mouseenter">JogDirection</a></i> As <a href="SolidEdgePart~JogFeatureConstants.html">JogFeatureConstants</a>, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="BendRadiusPopupLink" data-popup-contentsource="#BendRadiusPopupContent" data-popup-showevent="click mouseenter">BendRadius</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="DimensionTypePopupLink" data-popup-contentsource="#DimensionTypePopupContent" data-popup-showevent="click mouseenter">DimensionType</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="NeutralFactorPopupLink" data-popup-contentsource="#NeutralFactorPopupContent" data-popup-showevent="click mouseenter">NeutralFactor</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="BendParameterTypePopupLink" data-popup-contentsource="#BendParameterTypePopupContent" data-popup-showevent="click mouseenter">BendParameterType</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="BendReliefTypePopupLink" data-popup-contentsource="#BendReliefTypePopupContent" data-popup-showevent="click mouseenter">BendReliefType</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="BendReliefWidthPopupLink" data-popup-contentsource="#BendReliefWidthPopupContent" data-popup-showevent="click mouseenter">BendReliefWidth</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="BendReliefDepthPopupLink" data-popup-contentsource="#BendReliefDepthPopupContent" data-popup-showevent="click mouseenter">BendReliefDepth</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="CornerReliefTypePopupLink" data-popup-contentsource="#CornerReliefTypePopupContent" data-popup-showevent="click mouseenter">CornerReliefType</a></i> As Variant, _
+&nbsp;&nbsp;&nbsp;Optional ByVal <i><a class="i-popup-link" id="ExtendMoldLinesPopupLink" data-popup-contentsource="#ExtendMoldLinesPopupContent" data-popup-showevent="click mouseenter">ExtendMoldLines</a></i> As Variant _
+) As <a href="SolidEdgePart~Jog.html">Jog</a></pre></tr></table></div></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="PARAMETERS_LIST" namespace="parameter" source="Item" filter="" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=parameters,caption=$$ParameterList$$%%%%filtereditemlist%%</div>" --><div class="i-section-heading" id="i-parameters-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">Parameters</span></div><div id="i-parameters-section-content" class="i-section-content"><dl>
+<dt><I>Profile</I></dt>
+<dd>Specifies the Profile on which the Jog feature is to be based. This must be a single linear element that represents the location where the transition tab meets the parent tab as defined by MaterialSide.</dd>
+<dt><I>KeyPointOrTangentFace</I></dt>
+<dd>Specifies the keypoint or tangent face.</dd>
+<dt><I>KeyPointFlag</I></dt>
+<dd><table class="i-filtered-item-list"><tr><th>Value</th><th>Description</th></tr>
+<tr><td class="i-member-name">igInteriorReverseTangentNormal</td><td class="i-description">Key-point Extent - Interior Reverse Tangent Normal</td></tr>
+<tr><td class="i-member-name">igInteriorTangentNormal</td><td class="i-description">Key-point Extent - Interior Tangent Normal</td></tr>
+<tr><td class="i-member-name">igReverseTangentNormal</td><td class="i-description">Key-point Extent - Reverse Tangent Normal</td></tr>
+<tr><td class="i-member-name">igTangentNormal</td><td class="i-description">Key-point Extent - Tangent Normal</td></tr>
+</table>Specifies the keypoint on the KeyPointOrTangentFace object that will determine the extent of the feature. Valid values are igInteriorReverseTangentNormal, igInteriorTangentNormal, igReverseTangentNormal, or igTangentNormal.</dd>
+<dt><I>MaterialSide</I></dt>
+<dd><table class="i-filtered-item-list"><tr><th>Value</th><th>Description</th></tr>
+<tr><td class="i-member-name">seJogBendAndFaceCR</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogBendEqn</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogBendNFT</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogBendOnlyCR</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogBRFillet</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogBRRectangular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogDimensionFull</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogDimensionOffset</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogExtendMoldlines</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogExtentFinite</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogExtentFiniteByKeypoint</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogMaterialBendOutside</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogMaterialInside</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogMaterialOutside</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogMoveLeft</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogMoveRight</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogNoExtendMoldines</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogNormal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogReverseNormal</td><td class="i-description"> </td></tr>
+</table>Specifies the location of the created transition tab and jogged tab with respect to the profile. If set to seJogMtlInside, the inside face of the created transition tab lies on the profile; if set to seJogMtlOutside, the outside face of the created transition lies on profile; if set to seJogMtlExtend, the plastic zone on the parent tab borders the profile.</dd>
+<dt><I>MovingSide</I></dt>
+<dd><table class="i-filtered-item-list"><tr><th>Value</th><th>Description</th></tr>
+<tr><td class="i-member-name">seJogBendAndFaceCR</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogBendEqn</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogBendNFT</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogBendOnlyCR</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogBRFillet</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogBRRectangular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogDimensionFull</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogDimensionOffset</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogExtendMoldlines</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogExtentFinite</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogExtentFiniteByKeypoint</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogMaterialBendOutside</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogMaterialInside</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogMaterialOutside</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogMoveLeft</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogMoveRight</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogNoExtendMoldines</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogNormal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogReverseNormal</td><td class="i-description"> </td></tr>
+</table>Specifies the side of the parent tab (with respect to the profile) that will move to become the jogged tab. Valid values are seJogMoveRight or seJogMoveLeft.</dd>
+<dt><I>JogDirection</I></dt>
+<dd><table class="i-filtered-item-list"><tr><th>Value</th><th>Description</th></tr>
+<tr><td class="i-member-name">seJogBendAndFaceCR</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogBendEqn</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogBendNFT</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogBendOnlyCR</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogBRFillet</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogBRRectangular</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogDimensionFull</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogDimensionOffset</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogExtendMoldlines</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogExtentFinite</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogExtentFiniteByKeypoint</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogMaterialBendOutside</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogMaterialInside</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogMaterialOutside</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogMoveLeft</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogMoveRight</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogNoExtendMoldines</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogNormal</td><td class="i-description"> </td></tr>
+<tr><td class="i-member-name">seJogReverseNormal</td><td class="i-description"> </td></tr>
+</table>Specifies the direction (seJogNormal or seJogReverseNormal) of the jog.</dd>
+<dt><I>BendRadius</I></dt>
+<dd>Specifies the inside radius of the bend. If omitted, the UseGlobalBendRadius property is set to True, and the global bend radius is associatively applied.</dd>
+<dt><I>DimensionType</I></dt>
+<dd>Specifies whether the Depth is measured from the profile plane to the inside or outside material face of the dimple. Valid values are seJogDimensionInside (the default) or seJogDimensionOutside.</dd>
+<dt><I>NeutralFactor</I></dt>
+<dd>Specifies the neutral factor to be applied to the bend. If omitted, the UseGlobalNeutralFactor property is set to True, and the global NeutralFactor value is associatively applied.</dd>
+<dt><I>BendParameterType</I></dt>
+<dd>Specifies the method of specifying the bend neutral factor. Valid values are seJogBendNFT (the default) or seJogBendEqn.</dd>
+<dt><I>BendReliefType</I></dt>
+<dd>Specifies the bend relief type. Valid values are seJogBRRectangular (the default) or seJogBRFillet.</dd>
+<dt><I>BendReliefWidth</I></dt>
+<dd>Specifies the width of the bend relief applied to the bend. If omitted, the UseGlobalBendReliefWidth property is set to True, and the global BendReliefWidth is associatively applied.</dd>
+<dt><I>BendReliefDepth</I></dt>
+<dd>Specifies the depth of the bend relief applied to the bend. If omitted, the UseGlobalBendReliefDepth property is set to True, and the global BendReliefDepth is associatively applied.</dd>
+<dt><I>CornerReliefType</I></dt>
+<dd>Specifies the corner relief type. Valid values are seJogBendOnlyCR (the default) or seJogBendAndFaceCR.</dd>
+<dt><I>ExtendMoldLines</I></dt>
+<dd>Specifies whether or not to extend moldlines. Valid values are seJogExtendMoldlines (the default) or seJogNoExtendMoldines.</dd>
+</dl></div><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##RETURNS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=returns,caption=$$Return_Type$$%%<div class=""i-returns-content"">%%comment%%</div></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##REMARKS" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=remarks,caption=$$Remarks$$%%%%comment%%</div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="sourcecode" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=source,caption=$$Source_Code$$%%<table border=0 cellpadding=0 cellspacing=0 class=sourcecode><tr><td nowrap>%%sourcecode%%</td></tr></table></div>" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="TaggedComment" source="Item" id="##EXAMPLEINTRO" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=""$$Example$$%%designlist:tagidentifier=##EXAMPLECODE,itemtype=Example%%""%%%%comment%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="EXAMPLEGROUP_LIST" namespace="ExampleGroup" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""="",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="INLINE_EXAMPLE" namespace="Example" source="Item" filter="type=inline" condition="content:content=""%%GroupExamples%%"",operator=""<>"",value=""True""" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%taggedcomment:source=item,id=##EXAMPLEINTRO,blankformat=""%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=example,caption=$$Example$$%%"",format= %%%%filtereditemlist%%</div>" blankformat="%%taggedcomment:source=item,id=##EXAMPLEINTRO,format=</div>%%" --><!--DXMETADATA end -->
+            <!--DXMETADATA start type="FilteredItemList" scrap="MENU_LINK" namespace="example" source="Item" filter="type=linked" NoHeader="True" NoFooter="True" format="%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=examplelinks,caption=$$Example$$%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><!--DXMETADATA end -->
+        <!--DXMETADATA start type="FilteredItemList" scrap="CATEGORIZED_LINKS" namespace="linkcategory" source="Item" filter="" NoHeader="True" NoFooter="True" format="%%replaceinquotes:value=false%%%%scrap:name=_COLLAPSIBLE_HEADER,idprefix=seealso,caption=""$$See_Also$$%%designlist:tagidentifier=##SEEALSO,itemtype=See Also%%""%%<p id=dxseealsocontent>%%filtereditemlist%%</p></div>" --><div class="i-section-heading" id="i-seealso-section-heading"><span class="i-section-heading-icon"><!-- --></span><span class="i-section-heading-text">See Also</span></div><div id="i-seealso-section-content" class="i-section-content"><p id=dxseealsocontent><a href="SolidEdgePart~Jogs.html">Jogs Collection</a>
+&nbsp;|&nbsp;<a href="SolidEdgePart~Jogs_members.html">Jogs Members</a>
+</p>
+</p></div><!--DXMETADATA end -->
+    </div>
+    <div id="i-footer-content" class="i-footer-content">
+        <!--DXMETADATA start type="Scrap" condition="communityenabled" name="_COMMUNITY_FOOTER" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="CopyrightNotice" format="<p>&nbsp;</p><p>&nbsp;</p><hr style=""height: 1px"" /><p>%%variable%%</p>" --><!--DXMETADATA end -->
+<!--DXMETADATA start type="Variable" name="FeedbackLink" format="" --><!--DXMETADATA end-->
+    </div>
+    
+
+    <!--DXMETADATA start type="IsNew" format="<script type=""text/javascript"">setIsNew = true;</script>" --><!--DXMETADATA end-->
+    <!--DXMETADATA start type="IsTemplateFileFeatureEnabled" name="Responsive" format="<script type=""text/javascript"">setIsResponsiveEnabled = true;</script>" --><!--DXMETADATA end-->
+    <script type="text/javascript">
+        $(function() {
+            var documentInstance = new Innovasys.Content.Document(document.body);
+            documentInstance.isNew = !(typeof setIsNew === "undefined");
+            documentInstance.isResponsiveEnabled = !(typeof setIsResponsiveEnabled === "undefined");
+            documentInstance.load();
+        });
+    </script>
+</body>
+</html>

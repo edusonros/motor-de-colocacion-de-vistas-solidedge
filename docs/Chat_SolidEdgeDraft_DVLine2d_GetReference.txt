@@ -1,0 +1,1296 @@
+SolidEdgeDraft~DVLine2d~GetReferenceKey.html
+Archivo
+SolidEdgeDraft~DVLine2d~ModelMember.html
+Archivo
+SolidEdgeDraft~DVLine2d~Reference.html
+Archivo
+SolidEdgeDraft~DrawingView~GetReferenceToGraphicMember2.html
+Archivo
+SolidEdgeFramework~Reference.html
+Archivo
+SolidEdgeFramework~Reference_members.html
+Archivo
+SolidEdgeDraft~DrawingView~RetrieveDimensions.html
+Archivo
+SolidEdgeDraft~DrawingView~RetrieveDimOnUpdate.html
+Archivo
+SolidEdgeDraft~DrawingView~IncludePMIDimensions.html
+Archivo
+SolidEdgeDraft~DraftDocument~UpdateRetrievedDimensionsAndAnnotations.html
+Archivo
+
+
+Please write in Spanish language.
+run_log_20260504_094406.txt
+Documento
+
+
+Please write in Spanish language.
+run_log_20260504_094922.txt
+Documento
+espera, que te paso otro log co enabledimensioning apagado
+
+Please write in Spanish language.
+run_log_20260504_095442.txt
+Documento
+analiza
+
+Please write in Spanish language.
+run_log_20260504_100658.txt
+Documento
+¿es este valido?
+
+Please write in Spanish language.
+run_log_20260504_100839.txt
+Documento
+me he equivocado de pestaña, espera, ¿y esste?
+
+Please write in Spanish language.
+run_log_20260504_101207.txt
+Documento
+
+
+Please write in Spanish language.
+DIMLAB_20260504_223127.txt
+Documento
+ya tenemos el log de la prueba
+DIMLAB_20260504_224756.txt
+Documento
+run_log_20260504_224948.txt
+Documento
+No hay ninguna cota.  Analiza
+run_log_20260504_232354.txt
+Documento
+DIMLAB_20260504_232224.txt
+Documento
+  nada, ni una cota, analiza
+DIMLAB_20260505_055906.txt
+Documento
+run_log_20260505_060121.txt
+Documento
+solamente aparece una cota.  aanaliza
+run_log_20260505_072058.txt
+Documento
+DIMLAB_20260505_071808.txt
+Documento
+mIRA, HE REPRODUCIDO EL ANALISIS DE CASA, Y EN CASA ME INSERTABA LA COTA Y AQUI NO, A PESAR DE HABER COPIADO TODO EL PROYECTO  NALIZA QUE PASA POR FAVOR
+
+Please write in Spanish language.
+DIMLAB_20260505_074522.txt
+Documento
+AQUI TENEMOS ALGO, CON LOS DOS  "Laboratorio DIMLAB (exclusivo)" y DIMLAB mmodo forense"
+
+Please write in Spanish language.
+DIMLAB_20260505_081440.txt
+Documento
+Solamente aparece la horizontal
+
+Please write in Spanish language.
+Espera que te digo lo que pienso yo:  estas intentando crear un cota vertical "Solo" en la vista principal, pero e esa vista No hay dos puntos verticales extremos con la misma coordenada x.  Prueba a hacer la prueba en la vista de debajo
+
+Please write in Spanish language.
+DIMLAB_20260505_084038.txt
+Documento
+run_log_20260505_084130.txt
+Documento
+yA ESTAN AQUI
+
+Please write in Spanish language.
+de todos modos, veo que en sollid edge aunque elijas puntos que no esten ortogonales, puedes poner la cota en HORIZONTAL o en VERTICAL.  tiene que haber un metodo para eso en el sdk.
+
+Please write in Spanish language.
+DIMLAB_20260505_095213.txt
+Documento
+no hace lo que le pedimos
+
+Please write in Spanish language.
+Thought for 28s
+
+Sí, tienes razón: ha avanzado técnicamente, pero no ha hecho lo que le pedimos como resultado final limpio.
+
+El log dice que la horizontal 354 funciona y que la vertical 90 también funciona mediante AxisMode Default / HorizontalVertical, pero el DFT que genera no cumple todavía con lo que pedimos: estilo U3,5, limpieza, colocación correcta y solo las cotas finales.
+
+Qué sí ha conseguido
+
+La horizontal se crea con valor correcto, visible y materializada. En el log aparece HorizontalTotal_TopPair, con valueOk=True, visibleOk=True, materialized=True, y resultado SUCCESS_CONNECTED / SUCCESS_VALUE_VISIBLE_CONNECTION_UNCERTAIN. Además, el TrackDistance se corrige y el centrado de texto sale como OK.
+
+La vertical también se ha conseguido técnicamente. El log muestra Vertical_Default_HorizontalVertical, con MeasurementAxisEx=igDimAxisModeDefault, MeasurementAxisDirection=True, valor 0.09, delta=0, visible y materializada. Eso confirma que tu intuición era buena: había que controlar el eje de medición de la cota, no solo buscar puntos perfectamente ortogonales.
+
+Qué NO ha hecho bien
+
+Primero: no está usando U3,5. El log lista el estilo U3,5, pero cuando intenta aplicarlo falla con DISP_E_TYPEMISMATCH y termina usando U2,5:
+
+[DIMLAB][STYLE][COLLECTION_APPLY_FAIL] ...
+[DIMLAB][STYLE][APPLY_WARN] ... styleFinal=U2,5
+
+Eso pasa tanto en la horizontal como en la vertical. Por eso visualmente la cota no tiene el estilo que pedimos.
+
+Segundo: no está ejecutando CleanFull, está ejecutando Full. El log dice:
+
+[DIMLAB][MODE][Full]
+
+aunque le pedimos un modo limpio para dejar solo la horizontal 354 y la vertical 90.
+
+Tercero: la colocación todavía no es buena. La horizontal queda pegada al borde/tabla superior y la vertical parece estar colocada como una línea larga o mal posicionada respecto a la vista. El log dice que aplica gap 0.012, pero el resultado gráfico no está controlado como plano final.
+
+Cuarto: el resumen sigue teniendo contradicciones antiguas. Por un lado dice que vertical y horizontal han tenido éxito, pero más abajo todavía aparecen campos heredados como DVRef_VerticalTotal_Create=WRONG_VALUE o datos N/A. Eso significa que Cursor ha añadido lógica nueva, pero no ha limpiado las variables de resumen antiguas.
+
+Diagnóstico claro
+
+Ahora mismo estamos en este punto:
+
+La tecnología ya funciona:
+- horizontal 354: OK
+- vertical 90: OK con AxisMode Default
+
+Pero el modo final está mal:
+- no aplica U3,5
+- no está en CleanFull
+- no controla bien placement
+- no elimina/evita lógica vieja
+- el resumen mezcla resultados viejos y nuevos
+
+No hay que volver a investigar la acotación. Hay que hacer que Cursor deje de trabajar en “modo laboratorio sucio” y pase a un modo CleanFull estricto.
+
+Prompt para Cursor
+
+Copia esto:
+
+El último resultado NO cumple lo pedido como salida final, aunque técnicamente ya ha demostrado que la acotación funciona.
+
+DIAGNÓSTICO DEL ÚLTIMO LOG:
+
+1. Horizontal 354 funciona:
+   - valueOk=True
+   - visibleOk=True
+   - materialized=True
+   - result=SUCCESS_CONNECTED / SUCCESS_VALUE_VISIBLE_CONNECTION_UNCERTAIN
+
+2. Vertical 90 también funciona:
+   - Vertical_Default_HorizontalVertical
+   - AxisMode = igDimAxisModeDefault
+   - MeasurementAxisDirection=True
+   - expected=0.09
+   - actual=0.09
+   - delta=0
+   - visible=True
+   - materialized=True
+   - result=SUCCESS_CONNECTED
+
+3. Pero el resultado visual NO cumple:
+   - sigue en modo Full, no CleanFull;
+   - el estilo U3,5 falla y acaba usando U2,5;
+   - la colocación no está limpia;
+   - el resumen mezcla resultados antiguos y contradictorios;
+   - no quiero un laboratorio sucio, quiero una salida limpia con solo dos cotas.
+
+NO volver a investigar GetStartPoint/GetEndPoint.
+NO volver a investigar ResolveWorkingDrawingSheet.
+NO volver a RetrieveDimensions.
+NO volver a crear pruebas extra si ya hay horizontal y vertical correctas.
+NO seguir creando resultados contradictorios de resumen.
+
+--------------------------------------------------------------------------------
+OBJETIVO
+--------------------------------------------------------------------------------
+
+Crear un modo final estricto:
+
+DimLabMode = CleanFullStrict
+
+Este modo debe generar un DFT con SOLO:
+
+1. cota horizontal 354 en la vista principal;
+2. cota vertical 90 en la vista de debajo, usando AxisMode Default;
+3. ambas con estilo U3,5;
+4. ambas visibles;
+5. ambas con texto centrado si la API lo permite;
+6. ambas con gap exterior controlado;
+7. sin cotas erróneas;
+8. sin VIS0;
+9. sin ghosts;
+10. sin pruebas adicionales;
+11. sin resumen contradictorio.
+
+--------------------------------------------------------------------------------
+CAMBIO 1 — MODO CleanFullStrict REAL
+--------------------------------------------------------------------------------
+
+Ahora el log dice:
+
+[DIMLAB][MODE][Full]
+
+Eso no vale.
+
+Crear y usar explícitamente:
+
+DimLabMode = CleanFullStrict
+
+Comportamiento:
+
+1. limpiar dimensiones previas de Hoja1;
+2. crear horizontal 354;
+3. si horizontal falla, abortar;
+4. crear vertical 90 con AxisMode Default;
+5. si vertical falla, abortar;
+6. no probar Implied;
+7. no probar Explicit;
+8. no probar BestSameX_Keypoints si sabemos que falla;
+9. no probar BottomPair ni BestSameY si TopPair ya funciona;
+10. no conservar cotas fallidas;
+11. no crear VIS0;
+12. guardar como:
+   *_DIMLAB_REF_CLEANFULL_STRICT.dft
+
+Logs esperados:
+
+[DIMLAB][MODE] CleanFullStrict
+[DIMLAB][CLEANFULL_STRICT][START]
+[DIMLAB][CLEANFULL_STRICT][HORIZONTAL] SUCCESS
+[DIMLAB][CLEANFULL_STRICT][VERTICAL] SUCCESS
+[DIMLAB][CLEANFULL_STRICT][STOP] reason=two_required_dimensions_created
+
+--------------------------------------------------------------------------------
+CAMBIO 2 — ESTILO U3,5 OBLIGATORIO
+--------------------------------------------------------------------------------
+
+El log actual lista U3,5 pero falla al aplicarlo:
+
+[DIMLAB][STYLE][COLLECTION_APPLY_FAIL] ...
+[DIMLAB][STYLE][APPLY_WARN] ... styleFinal=U2,5
+
+Esto NO vale.
+
+Hay que corregir la forma de aplicar estilo.
+
+Tareas:
+
+1. Resolver el objeto DimensionStyle real desde draft.DimensionStyles.
+
+Buscar en este orden:
+- "U3,5"
+- "U3.5"
+- "U3"
+- "U2,5" solo como último fallback temporal, pero en CleanFullStrict debe emitir WARN fuerte.
+
+2. No asignar un string a una propiedad que espera objeto COM.
+   El error DISP_E_TYPEMISMATCH indica que probablemente se está haciendo:
+   dim.Style = "U3,5"
+   o dims.ActiveStyle = "U3,5"
+   cuando la API espera un objeto DimensionStyle o un nombre por otro método.
+
+3. Implementar función:
+
+ResolveDimensionStyleObject(draft, "U3,5", lab) As Object
+
+Debe devolver el objeto real del estilo, no solo el nombre.
+
+4. Aplicar estilo probando estas rutas, en orden, todas con Try/Catch:
+
+A)
+dim.Style = styleObject
+
+B)
+CallByName(dim, "Style", CallType.Set, styleObject)
+
+C)
+Si existe propiedad por nombre:
+CallByName(dim, "StyleName", CallType.Set, "U3,5")
+
+D)
+Si existe método:
+CallByName(dim, "SetStyle", CallType.Method, styleObject)
+
+E)
+Si el proyecto ya tenía una función antigua para aplicar estilo U3,5, reutilizarla.
+
+5. Después de aplicar, leer estilo real:
+
+ReadDimensionStyleName(dim)
+
+Log obligatorio:
+
+[DIMLAB][STYLE][RESOLVE] requested=U3,5 found=True objectType=...
+[DIMLAB][STYLE][APPLY_TRY] route=dim.Style_object
+[DIMLAB][STYLE][APPLY_OK] route=...
+[DIMLAB][STYLE][FINAL] name=U3,5
+
+Si no consigue U3,5:
+
+[DIMLAB][STYLE][FATAL] requested=U3,5 final=U2,5 reason=style_apply_failed
+
+En CleanFullStrict, si no se consigue aplicar U3,5, no marcar el resultado como final correcto. Puede dejar el DFT para revisar, pero el resumen debe decir:
+
+StyleResult=FAIL
+
+--------------------------------------------------------------------------------
+CAMBIO 3 — NO CAMBIAR A U2,5 SILENCIOSAMENTE
+--------------------------------------------------------------------------------
+
+Ahora el código hace fallback a U2,5.
+
+Eso solo puede hacerse en modo laboratorio, pero NO en CleanFullStrict.
+
+Regla:
+
+If DimLabMode = CleanFullStrict AndAlso finalStyle <> "U3,5" Then
+    result = STYLE_FAIL
+    log fatal
+End If
+
+No quiero que el resumen diga éxito si las cotas quedan en U2,5.
+
+--------------------------------------------------------------------------------
+CAMBIO 4 — HORIZONTAL ÚNICA
+--------------------------------------------------------------------------------
+
+Para horizontal:
+
+Usar solamente:
+
+HorizontalTotal_TopPair
+
+Vista:
+DrawingView 4503
+
+Puntos:
+leftLine=8
+pLeft=(-0.177, 0.0545)
+rightLine=3
+pRight=(0.177, 0.0545)
+
+Método:
+DVLine2d.Reference + AddDistanceBetweenObjects
+
+Expected:
+0.354
+
+AxisMode:
+puede quedar default/horizontal-vertical, pero no forzar experimentos extra.
+
+Después:
+- aplicar U3,5;
+- gap exterior;
+- centrar texto;
+- validar value+visible+style.
+
+Si SUCCESS:
+no probar BottomPair;
+no probar BestSameY.
+
+Log:
+
+[DIMLAB][HORIZONTAL][CREATE] method=TopPair
+[DIMLAB][HORIZONTAL][VALUE] expected=0.354 actual=0.354 delta=0
+[DIMLAB][HORIZONTAL][STYLE] final=U3,5
+[DIMLAB][HORIZONTAL][VISIBLE] True
+[DIMLAB][HORIZONTAL][RESULT] SUCCESS
+
+--------------------------------------------------------------------------------
+CAMBIO 5 — VERTICAL ÚNICA
+--------------------------------------------------------------------------------
+
+Para vertical:
+
+Usar solamente la estrategia que ya funcionó:
+
+Vista:
+DrawingView 4411
+
+Método:
+Vertical_Default_HorizontalVertical
+
+AxisMode:
+igDimAxisModeDefault
+
+MeasurementAxisDirection:
+True
+
+Expected:
+0.09
+
+Crear con las referencias horizontales superior/inferior que ya dieron éxito.
+
+No probar:
+- Vertical_BestSameX_Keypoints;
+- Vertical_RightSide_Keypoints;
+- Implied;
+- Explicit;
+- otras vistas;
+- flat;
+- right view.
+
+Después:
+- aplicar U3,5;
+- gap exterior;
+- centrar texto;
+- validar value+visible+style.
+
+Log:
+
+[DIMLAB][VERTICAL][CREATE] method=AxisModeDefault_HorizontalVertical view=DrawingView 4411
+[DIMLAB][VERTICAL][VALUE] expected=0.09 actual=0.09 delta=0
+[DIMLAB][VERTICAL][STYLE] final=U3,5
+[DIMLAB][VERTICAL][VISIBLE] True
+[DIMLAB][VERTICAL][RESULT] SUCCESS
+
+--------------------------------------------------------------------------------
+CAMBIO 6 — PLACEMENT / GAP MÁS LIMPIO
+--------------------------------------------------------------------------------
+
+La horizontal está demasiado pegada arriba y se mete visualmente en zona de tabla.
+
+Para CleanFullStrict:
+
+Horizontal:
+- preferir colocar la cota horizontal debajo de la vista principal si arriba invade PartList o borde.
+- Si se mantiene arriba, debe quedar dentro de hoja y sin tocar tabla.
+- gap objetivo: 0.012.
+- permitir side=TOP solo si hay margen suficiente real.
+
+Vertical:
+- colocar a la derecha de la vista de debajo si hay espacio.
+- si invade cajetín o queda fuera, colocar a la izquierda.
+- gap objetivo: 0.012.
+
+Añadir comprobación de colisión simple:
+
+- contra PartList superior;
+- contra title block;
+- contra borde de hoja;
+- contra range de la vista.
+
+Logs:
+
+[DIMLAB][PLACE][COLLISION_CHECK] name=... partList=... titleBlock=... border=... view=...
+[DIMLAB][PLACE][LANE_FINAL] name=... side=... gap=...
+[DIMLAB][PLACE][RESULT] OK/ADJUSTED/FAIL
+
+No necesito una colocación perfecta UNE todavía, pero sí que no quede absurda.
+
+--------------------------------------------------------------------------------
+CAMBIO 7 — CENTRAR TEXTO
+--------------------------------------------------------------------------------
+
+El log dice:
+
+[DIMLAB][TEXT_CENTER][RESULT] OK
+
+Bien, pero quiero que quede separado por cota:
+
+[DIMLAB][TEXT_CENTER][HORIZONTAL] OK/SKIP/FAIL
+[DIMLAB][TEXT_CENTER][VERTICAL] OK/SKIP/FAIL
+
+Si no puede centrar texto, no abortar, pero registrar.
+
+--------------------------------------------------------------------------------
+CAMBIO 8 — BORRAR CUALQUIER COTA FALLIDA
+--------------------------------------------------------------------------------
+
+En CleanFullStrict:
+
+- si se crea una cota y luego valueOk=False, borrarla;
+- si visible=False, borrarla;
+- si styleFail=True, conservar solo si queremos inspección, pero marcar el DFT no válido;
+- borrar ghost dimensions;
+- no conservar líneas de eje auxiliares si no son necesarias.
+
+Al final:
+
+SheetDimensionsFinalCount debe ser 2.
+
+Si no es 2:
+
+[DIMLAB][CLEANFULL_STRICT][FAIL] reason=unexpected_dimension_count count=...
+
+--------------------------------------------------------------------------------
+CAMBIO 9 — RESUMEN SIN CONTRADICCIONES
+--------------------------------------------------------------------------------
+
+Ahora el resumen mezcla:
+- Vertical_Create SUCCESS
+- y luego DVRef_VerticalTotal_Create WRONG_VALUE
+
+Eliminar o desactivar esos campos antiguos en CleanFullStrict.
+
+Resumen final único:
+
+[DIMLAB][SUMMARY][Mode] CleanFullStrict
+[DIMLAB][SUMMARY][DimensionStyleRequested] U3,5
+[DIMLAB][SUMMARY][DimensionStyleFinal_H] U3,5
+[DIMLAB][SUMMARY][DimensionStyleFinal_V] U3,5
+
+[DIMLAB][SUMMARY][Horizontal_Result] SUCCESS/FAIL
+[DIMLAB][SUMMARY][Horizontal_Value] 0.354
+[DIMLAB][SUMMARY][Horizontal_Visible] True
+[DIMLAB][SUMMARY][Horizontal_TextCenter] OK/SKIP
+[DIMLAB][SUMMARY][Horizontal_Placement] OK/ADJUSTED
+
+[DIMLAB][SUMMARY][Vertical_Result] SUCCESS/FAIL
+[DIMLAB][SUMMARY][Vertical_Value] 0.09
+[DIMLAB][SUMMARY][Vertical_Visible] True
+[DIMLAB][SUMMARY][Vertical_TextCenter] OK/SKIP
+[DIMLAB][SUMMARY][Vertical_Placement] OK/ADJUSTED
+[DIMLAB][SUMMARY][Vertical_AxisMode] Default
+
+[DIMLAB][SUMMARY][SheetDimensionsFinalCount] 2
+[DIMLAB][SUMMARY][FinalResult] SUCCESS/FAIL
+
+No quiero ver en CleanFullStrict:
+- DVRef_VerticalTotal_Create WRONG_VALUE
+- Vertical_Value NaN
+- Horizontal_Create FAIL si se ve y mide bien
+- RecommendedNextStep contradictorio
+
+--------------------------------------------------------------------------------
+CONFIG DE PRÓXIMA EJECUCIÓN
+--------------------------------------------------------------------------------
+
+Usar:
+
+EnableDrawingViewDimensioningLab=True
+EnableAutoDimensioning=False
+DimLabMode=CleanFullStrict
+EnableDimLabVisibleProbe=False
+DimLabKeepFailedDimensions=False
+DimLabCleanPreviousLabDimensions=True
+DimensionStylePreferred=U3,5
+DimLabHorizontalGap=0.012
+DimLabVerticalGap=0.012
+DimLabTryCenterText=True
+DimLabTryAxisMode=True
+
+Nombre de salida:
+
+*_DIMLAB_REF_CLEANFULL_STRICT.dft
+
+Resultado visual esperado:
+
+Solo 2 cotas:
+- 354
+- 90
+
+Ambas con estilo U3,5.
+
+Nada más.
+Lectura corta
+
+El código sí sabe crear las cotas. El último log lo demuestra.
+
+Pero Cursor está fallando en tres cosas prácticas:
+
+Está en modo Full, no en CleanFullStrict.
+No aplica U3,5; falla y se va a U2,5.
+Sigue arrastrando lógica/resúmenes viejos y colocación poco limpia.
+
+Ahora el trabajo no es “investigar más”, sino cerrar el laboratorio en un modo final estricto.
+
+[DIMLAB][STYLE][COLLECTION_APPLY_FAIL] name=HorizontalTotal_TopPair Los tipos no coinciden. (Excepción de HRESULT: 0x80020005 (DISP_E_TYPEMISMATCH))
+[DIMLAB][STYLE][APPLY_WARN] name=HorizontalTotal_TopPair styleFinal=U2,5, 
+
+Please write in Spanish language.
+Thought for 20s
+
+Sí. Esa línea significa exactamente esto:
+
+El estilo U3,5 existe en el documento,
+pero Cursor lo está aplicando por una vía incorrecta.
+
+El fallo:
+
+DISP_E_TYPEMISMATCH
+
+quiere decir que está pasando un tipo que la propiedad/método COM no espera. Por ejemplo, probablemente intenta hacer algo como:
+
+dims.Style = styleObject
+
+o:
+
+dim.Style = "U3,5"
+
+cuando esa propiedad espera otro tipo: quizá un objeto DimensionStyle, quizá un nombre String, o quizá debe aplicarse por otra propiedad/método. El log confirma además que, al fallar, está cayendo a U2,5:
+
+styleFinal=U2,5
+
+Eso no debe permitirse en CleanFullStrict. Si pedimos U3,5, debe quedar U3,5 o marcar STYLE_FAIL.
+
+Pásale esto a Cursor:
+
+Tenemos un fallo claro aplicando el estilo de cota.
+
+El log dice:
+
+[DIMLAB][STYLE][COLLECTION_APPLY_FAIL] name=HorizontalTotal_TopPair Los tipos no coinciden. HRESULT 0x80020005 DISP_E_TYPEMISMATCH
+[DIMLAB][STYLE][APPLY_WARN] name=HorizontalTotal_TopPair styleFinal=U2,5
+
+Diagnóstico:
+El estilo U3,5 existe en la colección de estilos, pero lo estamos aplicando por una vía COM incorrecta.
+Además, el código cae silenciosamente a U2,5, y eso NO vale en CleanFullStrict.
+
+OBJETIVO:
+Corregir la aplicación de estilo U3,5.
+
+--------------------------------------------------------------------------------
+TAREA 1 — NO APLICAR EL ESTILO A CIEGAS EN LA COLECCIÓN DIMENSIONS
+--------------------------------------------------------------------------------
+
+Si ahora hay algo como:
+
+dims.Style = styleObject
+dims.Style = "U3,5"
+dims.ActiveStyle = styleObject
+dims.ActiveStyle = "U3,5"
+
+no asumir que es correcto.
+
+El log dice COLLECTION_APPLY_FAIL, así que probablemente el error viene de intentar aplicar estilo sobre la colección Dimensions con el tipo equivocado.
+
+En CleanFullStrict, aplicar estilo principalmente DESPUÉS de crear la dimensión, sobre el objeto Dimension creado.
+
+--------------------------------------------------------------------------------
+TAREA 2 — RESOLVER EL OBJETO DimensionStyle REAL
+--------------------------------------------------------------------------------
+
+Crear función:
+
+Private Shared Function ResolveDimensionStyleObject(
+    draft As SolidEdgeDraft.DraftDocument,
+    preferredName As String,
+    lab As DimLabLogger
+) As Object
+
+Debe recorrer draft.DimensionStyles.
+
+Buscar exactamente:
+
+1. "U3,5"
+2. "U3.5"
+3. "U3"
+4. "ISO (mm)"
+5. "U2,5" solo como último fallback de laboratorio, nunca como éxito de CleanFullStrict.
+
+Log obligatorio:
+
+[DIMLAB][STYLE][SCAN] idx=... name=...
+[DIMLAB][STYLE][RESOLVE] requested=U3,5 found=True resolvedName=U3,5 objectType=...
+
+No basta con guardar el nombre. Hay que guardar:
+- styleName As String
+- styleObject As Object
+
+--------------------------------------------------------------------------------
+TAREA 3 — APLICAR ESTILO CON RUTAS PROBADAS Y READBACK
+--------------------------------------------------------------------------------
+
+Crear función:
+
+Private Shared Function ApplyDimensionStyleStrict(
+    dimObj As Object,
+    styleObj As Object,
+    styleName As String,
+    lab As DimLabLogger,
+    dimLabel As String,
+    cleanFullStrict As Boolean
+) As Boolean
+
+Debe probar varias rutas, una por una, con Try/Catch, y después de cada intento leer el estilo real.
+
+Rutas:
+
+A) Asignar objeto a propiedad Style:
+
+Try
+    CallByName(dimObj, "Style", CallType.Set, styleObj)
+    finalName = ReadDimensionStyleName(dimObj, lab)
+    If finalName = styleName Then Return True
+Catch ex
+    lab.Log("[DIMLAB][STYLE][APPLY_FAIL] route=Style_object name=" & dimLabel & " error=" & ex.Message)
+End Try
+
+B) Asignar nombre a propiedad Style:
+
+Try
+    CallByName(dimObj, "Style", CallType.Set, styleName)
+    finalName = ReadDimensionStyleName(dimObj, lab)
+    If finalName = styleName Then Return True
+Catch ex
+    lab.Log("[DIMLAB][STYLE][APPLY_FAIL] route=Style_string name=" & dimLabel & " error=" & ex.Message)
+End Try
+
+C) Probar propiedad DimensionStyle con objeto:
+
+Try
+    CallByName(dimObj, "DimensionStyle", CallType.Set, styleObj)
+    finalName = ReadDimensionStyleName(dimObj, lab)
+    If finalName = styleName Then Return True
+Catch ex
+    lab.Log("[DIMLAB][STYLE][APPLY_FAIL] route=DimensionStyle_object name=" & dimLabel & " error=" & ex.Message)
+End Try
+
+D) Probar propiedad DimensionStyle con string:
+
+Try
+    CallByName(dimObj, "DimensionStyle", CallType.Set, styleName)
+    finalName = ReadDimensionStyleName(dimObj, lab)
+    If finalName = styleName Then Return True
+Catch ex
+    lab.Log("[DIMLAB][STYLE][APPLY_FAIL] route=DimensionStyle_string name=" & dimLabel & " error=" & ex.Message)
+End Try
+
+E) Probar StyleName:
+
+Try
+    CallByName(dimObj, "StyleName", CallType.Set, styleName)
+    finalName = ReadDimensionStyleName(dimObj, lab)
+    If finalName = styleName Then Return True
+Catch ex
+    lab.Log("[DIMLAB][STYLE][APPLY_FAIL] route=StyleName_string name=" & dimLabel & " error=" & ex.Message)
+End Try
+
+F) Probar SetStyle con objeto:
+
+Try
+    CallByName(dimObj, "SetStyle", CallType.Method, styleObj)
+    finalName = ReadDimensionStyleName(dimObj, lab)
+    If finalName = styleName Then Return True
+Catch ex
+    lab.Log("[DIMLAB][STYLE][APPLY_FAIL] route=SetStyle_object name=" & dimLabel & " error=" & ex.Message)
+End Try
+
+G) Probar SetStyle con string:
+
+Try
+    CallByName(dimObj, "SetStyle", CallType.Method, styleName)
+    finalName = ReadDimensionStyleName(dimObj, lab)
+    If finalName = styleName Then Return True
+Catch ex
+    lab.Log("[DIMLAB][STYLE][APPLY_FAIL] route=SetStyle_string name=" & dimLabel & " error=" & ex.Message)
+End Try
+
+Al final:
+
+finalName = ReadDimensionStyleName(dimObj, lab)
+
+If finalName <> styleName Then
+    lab.Log("[DIMLAB][STYLE][FINAL_FAIL] name=" & dimLabel & " requested=" & styleName & " final=" & finalName)
+
+    If cleanFullStrict Then
+        lab.Log("[DIMLAB][STYLE][FATAL] CleanFullStrict requiere U3,5. No aceptar fallback.")
+        Return False
+    End If
+End If
+
+Return finalName = styleName
+
+--------------------------------------------------------------------------------
+TAREA 4 — READBACK REAL DEL ESTILO
+--------------------------------------------------------------------------------
+
+Crear función:
+
+Private Shared Function ReadDimensionStyleName(
+    dimObj As Object,
+    lab As DimLabLogger
+) As String
+
+Probar estas rutas:
+
+1. dim.Style.Name
+2. dim.DimensionStyle.Name
+3. dim.StyleName
+4. dim.Style
+5. cualquier función existente en el proyecto que lea estilo de cota
+
+Cada ruta con Try/Catch.
+
+Logs:
+
+[DIMLAB][STYLE][READ_TRY] route=Style.Name
+[DIMLAB][STYLE][READ_OK] route=Style.Name name=...
+[DIMLAB][STYLE][READ_FAIL] route=... error=...
+
+Debe devolver el nombre real aplicado, no el nombre que queríamos aplicar.
+
+--------------------------------------------------------------------------------
+TAREA 5 — NO FALLBACK A U2,5 EN CleanFullStrict
+--------------------------------------------------------------------------------
+
+Ahora mismo ocurre esto:
+
+styleFinal=U2,5
+
+Eso debe considerarse fallo en CleanFullStrict.
+
+Regla:
+
+If DimLabMode = CleanFullStrict AndAlso finalStyle <> "U3,5" Then
+    Horizontal_Result = STYLE_FAIL
+    Vertical_Result = STYLE_FAIL
+    FinalResult = FAIL
+End If
+
+En modo laboratorio normal puede aceptarse fallback, pero con log:
+
+[DIMLAB][STYLE][FALLBACK_ALLOWED_ONLY_IN_LAB] requested=U3,5 final=U2,5
+
+En CleanFullStrict, nunca.
+
+--------------------------------------------------------------------------------
+TAREA 6 — APLICAR ESTILO EN EL ORDEN CORRECTO
+--------------------------------------------------------------------------------
+
+Después de crear la cota:
+
+1. Crear Dimension con AddDistanceBetweenObjects.
+2. Leer valor.
+3. Aplicar U3,5 con ApplyDimensionStyleStrict.
+4. UpdateAll / DoIdle.
+5. Leer estilo final.
+6. Aplicar placement/gap.
+7. Centrar texto.
+8. Validar visibilidad.
+
+No aplicar estilo solo antes de crear la dimensión y asumir que quedó aplicado.
+
+Log esperado:
+
+[DIMLAB][STYLE][RESOLVE] requested=U3,5 found=True resolvedName=U3,5
+[DIMLAB][STYLE][APPLY_TRY] route=Style_object name=HorizontalTotal_TopPair
+[DIMLAB][STYLE][APPLY_OK] route=... name=HorizontalTotal_TopPair final=U3,5
+[DIMLAB][STYLE][FINAL] name=HorizontalTotal_TopPair final=U3,5
+
+Y para vertical igual.
+
+--------------------------------------------------------------------------------
+TAREA 7 — RESUMEN
+--------------------------------------------------------------------------------
+
+Añadir al resumen:
+
+[DIMLAB][SUMMARY][DimensionStyleRequested] U3,5
+[DIMLAB][SUMMARY][Horizontal_StyleFinal] U3,5/FAIL
+[DIMLAB][SUMMARY][Vertical_StyleFinal] U3,5/FAIL
+[DIMLAB][SUMMARY][StyleResult] SUCCESS/FAIL
+
+Si finalStyle=U2,5:
+
+[DIMLAB][SUMMARY][StyleResult] FAIL
+
+Aunque el valor y visibilidad sean correctos.
+
+--------------------------------------------------------------------------------
+NO HACER
+--------------------------------------------------------------------------------
+
+No cambiar GetStartPoint/GetEndPoint.
+No cambiar la estrategia horizontal.
+No cambiar la estrategia vertical AxisMode Default, que ya funciona.
+No aceptar U2,5 como éxito en CleanFullStrict.
+No ocultar el error con APPLY_WARN.
+
+La clave es esta: el problema no es encontrar U3,5; el problema es cómo se está asignando al objeto Dimension. El estilo está en la lista, pero Cursor está usando la ruta COM incorrecta o el tipo incorrecto.
+
+DIMLAB_20260505_113637.txt
+Documento
+tengo un promblema con la palicacion del formato de dimension en las cotas que coloca el motor de dos cotas , una horizontal  y otra vertical.  Quiero cambiar les el tipo de formato, y no me deja por que dice que no existe, cuando yo lo estoy viendo en el dibujo.  Ademas quiero ya recolocar las cotas que ponemos en este momento, para que se coloquen a dos centimetros de la pieza y con el texto centrado en la miosma.  Si necesitas documentacion, no ddes en pedirmela, yo ya llevorato intantandolo.
+
+Please write in Spanish language.
+Thought for 20s
+
+Sí, aquí ya se ve bastante claro qué está pasando. No es un único problema; son dos problemas separados:
+
+El estilo U3,5 existe, pero el código está resolviendo/aplicando mal el objeto de estilo.
+La separación/gap que está usando no es 2 cm, sino 12 mm.
+
+En tu log aparece esto:
+
+[DIMLAB][PLACE][GAP_CONFIG] horizontalGap=0.012 verticalGap=0.012
+
+Eso son 12 mm, no 20 mm. Si quieres dos centímetros en hoja, debe ser:
+
+DimLabHorizontalGap = 0.02
+DimLabVerticalGap = 0.02
+
+Además, el log muestra el fallo de estilo:
+
+[DIMLAB][STYLE][RESOLVE] requested=U3,5 found=True resolvedName=ISO (mm)
+
+Eso es contradictorio. Dice que ha encontrado U3,5, pero en realidad resuelve ISO (mm). Luego intenta aplicar ese objeto y falla porque no es del tipo que espera la cota:
+
+No se puede convertir el objeto COM ... al tipo de interfaz 'SolidEdgeFrameworkSupport.DimStyle'
+
+Y al leer la cota final, sigue con:
+
+Style.Name = U2,5
+
+Es decir: no está aplicando U3,5; está dejando el estilo que trae la cota por defecto.
+
+Lo que le tienes que pedir ahora a Cursor
+
+Pásale este prompt:
+
+Tenemos dos problemas concretos en el motor de dos cotas:
+
+1. No aplica el estilo de cota U3,5.
+2. No coloca las cotas a 2 cm de la pieza; ahora está usando 0.012 m, que son 12 mm.
+
+NO tocar la generación de las cotas.
+NO tocar DVLine2d.Reference.
+NO tocar AxisMode Default de la vertical.
+NO tocar lectura de endpoints.
+NO tocar selección de vistas.
+
+La horizontal 354 funciona.
+La vertical 90 funciona.
+Ahora solo hay que corregir:
+- estilo;
+- gap;
+- centrado del texto.
+
+--------------------------------------------------------------------------------
+PROBLEMA 1 — ESTILO U3,5
+--------------------------------------------------------------------------------
+
+El log actual dice:
+
+[DIMLAB][STYLE][RESOLVE] requested=U3,5 found=True resolvedName=ISO (mm)
+
+Esto es un bug. Si requested=U3,5, el resolvedName no puede ser ISO (mm).
+
+Además, luego falla:
+
+No se puede convertir el objeto COM del tipo System.__ComObject al tipo de interfaz SolidEdgeFrameworkSupport.DimStyle.
+
+Diagnóstico:
+Estamos cogiendo el estilo desde una colección equivocada o aplicando un objeto de tipo incorrecto.
+
+Probablemente se está cogiendo un objeto desde draft.DimensionStyles, pero la propiedad Dimension.Style espera un objeto de tipo SolidEdgeFrameworkSupport.DimStyle, no un objeto de otra type library.
+
+--------------------------------------------------------------------------------
+TAREA 1 — HACER UN DIAGNÓSTICO REAL DEL ESTILO ACTUAL DE UNA COTA
+--------------------------------------------------------------------------------
+
+Después de crear la cota horizontal y la vertical, leer y loguear:
+
+- dim.Style
+- dim.Style.Name
+- tipo COM de dim.Style
+- TypeName(dim.Style)
+- Marshal.GetTypeInfoName si ya existe helper
+- todas las propiedades accesibles relacionadas con Style mediante late binding:
+  Style
+  StyleName
+  DimensionStyle
+  DimensionStyleName
+  DimStyle
+  DimStyleName
+
+Crear logs:
+
+[DIMLAB][STYLE_DIAG][DIM_STYLE_OBJECT] name=Horizontal type=...
+[DIMLAB][STYLE_DIAG][DIM_STYLE_NAME] name=Horizontal style=...
+[DIMLAB][STYLE_DIAG][PROPERTY_EXISTS] property=StyleName ok=True/False value=...
+[DIMLAB][STYLE_DIAG][PROPERTY_EXISTS] property=DimensionStyleName ok=True/False value=...
+[DIMLAB][STYLE_DIAG][PROPERTY_EXISTS] property=DimStyleName ok=True/False value=...
+
+No seguir intentando aplicar U3,5 hasta saber qué propiedad real existe.
+
+--------------------------------------------------------------------------------
+TAREA 2 — BUSCAR U3,5 EN TODAS LAS COLECCIONES DE ESTILOS
+--------------------------------------------------------------------------------
+
+Ahora solo está mirando draft.DimensionStyles y encima el scan se corta en ISO (mm).
+
+Necesito que busque en TODAS las posibles colecciones del DraftDocument:
+
+- draft.DimensionStyles
+- draft.DimStyles, si existe
+- draft.LinearStyles, si existe
+- draft.Styles, si existe
+- cualquier colección que ya use el proyecto para estilos de cota
+
+Por cada colección:
+
+[DIMLAB][STYLE_SCAN_COLLECTION] name=DimensionStyles ok=True count=...
+[DIMLAB][STYLE_SCAN] collection=DimensionStyles idx=... name=...
+[DIMLAB][STYLE_SCAN_COLLECTION] name=DimStyles ok=True count=...
+[DIMLAB][STYLE_SCAN] collection=DimStyles idx=... name=...
+
+IMPORTANTE:
+No parar el scan al llegar a ISO (mm).
+Debe listar todos los estilos, hasta U3,5.
+
+En logs anteriores se veía que el documento tiene:
+ANSI (ft), ANSI (in), ISO (mm), ISO (cm), ISO (m), ISO, UNE, 2,5_ISO, U2, U2,5, U1,5, U3, U3,5, U1,75, ISO-2
+
+Por tanto, si solo escanea hasta ISO (mm), el bucle está mal.
+
+--------------------------------------------------------------------------------
+TAREA 3 — RESOLVER U3,5 POR NOMBRE EXACTO
+--------------------------------------------------------------------------------
+
+Crear una función:
+
+ResolveDimStyleForDimension(draft, "U3,5", lab)
+
+Debe devolver:
+
+- styleName = "U3,5"
+- styleObject = objeto real
+- sourceCollection = colección real
+
+Reglas:
+
+1. Coincidencia exacta primero:
+   Normalize("U3,5") = Normalize("U3,5")
+
+2. Normalización:
+   - quitar espacios;
+   - tratar coma y punto como equivalentes:
+     U3,5 = U3.5;
+   - no confundir U3,5 con ISO (mm).
+
+3. No devolver ISO (mm) si se pidió U3,5.
+
+Log:
+
+[DIMLAB][STYLE_RESOLVE_TRY] requested=U3,5 collection=...
+[DIMLAB][STYLE_RESOLVE_MATCH] requested=U3,5 resolved=U3,5 source=...
+[DIMLAB][STYLE_RESOLVE_FAIL] requested=U3,5
+
+Si no encuentra U3,5, abortar aplicación de estilo y pedir revisión, pero NO devolver ISO (mm) como si fuese éxito.
+
+--------------------------------------------------------------------------------
+TAREA 4 — APLICAR ESTILO POR NOMBRE, NO POR OBJETO, SI EL OBJETO FALLA
+--------------------------------------------------------------------------------
+
+El error actual indica que asignar el objeto falla por interfaz incompatible.
+
+Por tanto, probar primero rutas por nombre:
+
+Después de crear cada cota:
+
+A)
+CallByName(dimObj, "StyleName", CallType.Set, "U3,5")
+
+B)
+CallByName(dimObj, "DimensionStyleName", CallType.Set, "U3,5")
+
+C)
+CallByName(dimObj, "DimStyleName", CallType.Set, "U3,5")
+
+D)
+CallByName(dimObj, "Style", CallType.Set, "U3,5")
+
+E)
+CallByName(dimObj, "SetStyle", CallType.Method, "U3,5")
+
+Solo después probar con objeto.
+
+Después de cada intento:
+- draft.UpdateAll(True)
+- app.DoIdle()
+- leer dim.Style.Name
+
+Log:
+
+[DIMLAB][STYLE_APPLY_TRY] dim=Horizontal route=StyleName_string value=U3,5
+[DIMLAB][STYLE_APPLY_OK] dim=Horizontal route=... final=U3,5
+[DIMLAB][STYLE_APPLY_FAIL] dim=Horizontal route=... error=...
+[DIMLAB][STYLE_FINAL] dim=Horizontal final=...
+
+Criterio:
+Si final <> U3,5, entonces STYLE_FAIL.
+
+No permitir fallback silencioso a U2,5.
+
+--------------------------------------------------------------------------------
+TAREA 5 — SI NO HAY API DIRECTA, USAR EL ESTILO DE LA COLECCIÓN DIMENSIONS ANTES DE CREAR
+--------------------------------------------------------------------------------
+
+Si ninguna propiedad de la Dimension permite cambiar estilo después, probar antes de crear la dimensión:
+
+- seleccionar/activar estilo de la colección Sheet.Dimensions;
+- crear la cota;
+- leer estilo final.
+
+Probar rutas:
+
+CallByName(sheet.Dimensions, "StyleName", CallType.Set, "U3,5")
+CallByName(sheet.Dimensions, "DimensionStyleName", CallType.Set, "U3,5")
+CallByName(sheet.Dimensions, "DimStyleName", CallType.Set, "U3,5")
+CallByName(sheet.Dimensions, "ActiveStyleName", CallType.Set, "U3,5")
+CallByName(sheet.Dimensions, "Style", CallType.Set, "U3,5")
+
+Log:
+
+[DIMLAB][STYLE_PRECREATE_TRY] route=...
+[DIMLAB][STYLE_PRECREATE_RESULT] finalCreatedStyle=...
+
+--------------------------------------------------------------------------------
+PROBLEMA 2 — GAP DE 2 CM
+--------------------------------------------------------------------------------
+
+Ahora el log dice:
+
+horizontalGap=0.012
+verticalGap=0.012
+
+Eso son 12 mm, no 20 mm.
+
+Cambiar configuración:
+
+DimLabHorizontalGap = 0.02
+DimLabVerticalGap = 0.02
+DimLabMinGap = 0.02
+DimLabMaxGap = 0.02
+
+Para esta prueba quiero gap fijo, no automático.
+
+Logs esperados:
+
+[DIMLAB][PLACE][GAP_CONFIG] horizontalGap=0.02 verticalGap=0.02 minGap=0.02 maxGap=0.02
+[DIMLAB][PLACE][DESIRED] name=HorizontalTotal_TopPair desiredTrack=0.02
+[DIMLAB][PLACE][DESIRED] name=Vertical_Default_HorizontalVertical desiredTrack=0.02
+
+No quiero que vuelva a calcular:
+desiredTrack=0.01188
+desiredTrack=0.012
+
+Si no hay espacio suficiente arriba, cambiar de lado, pero mantener gap=0.02.
+
+--------------------------------------------------------------------------------
+PROBLEMA 3 — COLOCACIÓN DE LA HORIZONTAL
+--------------------------------------------------------------------------------
+
+La cota horizontal se está colocando arriba:
+
+[DIMLAB][PLACE][LANE_CHOICE] axis=H side=TOP
+
+Pero hay poco espacio por la tabla superior.
+
+Para esta pieza, colocar la cota horizontal debajo de la vista principal.
+
+Regla temporal:
+
+HorizontalTotal_TopPair:
+- valor obtenido desde endpoints superiores, correcto.
+- pero placement visual debajo de la vista.
+
+Usar:
+
+side = BOTTOM
+TrackDistance = 0.02
+
+Log:
+
+[DIMLAB][PLACE][LANE_CHOICE] name=HorizontalTotal_TopPair axis=H side=BOTTOM gap=0.02 reason=user_requested_2cm_clearance
+
+--------------------------------------------------------------------------------
+PROBLEMA 4 — COLOCACIÓN DE LA VERTICAL
+--------------------------------------------------------------------------------
+
+La vertical de 90 funciona con:
+
+Vertical_Default_HorizontalVertical
+AxisMode Default
+MeasurementAxisDirection=True
+
+Colocarla a la derecha de la vista de debajo con 2 cm de gap.
+
+Log:
+
+[DIMLAB][PLACE][LANE_CHOICE] name=Vertical_Default_HorizontalVertical axis=V side=RIGHT gap=0.02 reason=user_requested_2cm_clearance
+
+Si queda fuera de hoja o invade cajetín, probar LEFT, pero mantener gap=0.02.
+
+--------------------------------------------------------------------------------
+PROBLEMA 5 — TEXTO CENTRADO
+--------------------------------------------------------------------------------
+
+El log actual dice:
+
+[DIMLAB][TEXT_CENTER][RESULT] OK
+
+pero quiero comprobarlo mejor.
+
+Después de centrar el texto:
+- leer Range;
+- leer DisplayData;
+- si existe GetTextOffsets, loguear offsets;
+- si existe SetTextOffsets, usarlo.
+
+Logs:
+
+[DIMLAB][TEXT_CENTER][HORIZONTAL] result=OK/SKIP/FAIL
+[DIMLAB][TEXT_CENTER][VERTICAL] result=OK/SKIP/FAIL
+
+Si no se puede controlar al 100%, no marcar fallo, pero dejar el texto lo más centrado posible.
+
+--------------------------------------------------------------------------------
+MODO DE EJECUCIÓN
+--------------------------------------------------------------------------------
+
+Crear modo:
+
+DimLabMode = CleanFullStrict
+
+En ese modo:
+
+1. limpiar cotas previas;
+2. crear horizontal 354;
+3. aplicar U3,5;
+4. colocar a 2 cm debajo de la vista;
+5. centrar texto;
+6. crear vertical 90;
+7. aplicar U3,5;
+8. colocar a 2 cm a la derecha de la vista de debajo;
+9. centrar texto;
+10. guardar DFT;
+11. no crear cotas extra;
+12. no usar VIS0;
+13. no exportar PDF/DXF;
+14. dejar abierto para revisión.
+
+Resultado final esperado:
+solo dos cotas:
+- 354
+- 90
+
+Ambas con estilo U3,5.
+
+--------------------------------------------------------------------------------
+RESUMEN FINAL
+--------------------------------------------------------------------------------
+
+El resumen debe decir:
+
+[DIMLAB][SUMMARY][Mode] CleanFullStrict
+[DIMLAB][SUMMARY][Horizontal_Value] 0.354
+[DIMLAB][SUMMARY][Horizontal_StyleFinal] U3,5
+[DIMLAB][SUMMARY][Horizontal_Gap] 0.02
+[DIMLAB][SUMMARY][Horizontal_TextCenter] OK/SKIP
+
+[DIMLAB][SUMMARY][Vertical_Value] 0.09
+[DIMLAB][SUMMARY][Vertical_StyleFinal] U3,5
+[DIMLAB][SUMMARY][Vertical_Gap] 0.02
+[DIMLAB][SUMMARY][Vertical_TextCenter] OK/SKIP
+
+[DIMLAB][SUMMARY][SheetDimensionsFinalCount] 2
+[DIMLAB][SUMMARY][StyleResult] SUCCESS/FAIL
+[DIMLAB][SUMMARY][FinalResult] SUCCESS/FAIL
+
+Si U3,5 no se aplica:
+FinalResult=FAIL_STYLE
+Y sí: aquí probablemente necesitamos documentación
+
+Para no seguir probando a ciegas, te pediría que me pases los HTML del CHM relacionados con:
+
+Dimension Object Members
+Dimensions Collection Members
+DimStyle Object Members
+DimensionStyle Object Members
+DimensionStyles Collection Members
+DraftDocument Object Members
+
+Especialmente necesito confirmar si el objeto Dimension.Style espera SolidEdgeFrameworkSupport.DimStyle y de qué colección sale ese DimStyle. El log ya nos está diciendo que el objeto que tenemos no implementa esa interfaz, así que seguramente estamos cogiendo el estilo de la colección equivocada.
